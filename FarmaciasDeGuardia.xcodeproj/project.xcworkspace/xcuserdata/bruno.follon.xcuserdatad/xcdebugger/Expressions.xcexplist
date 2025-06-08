@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "PDFViewScreen.loadPharmacies():PDFViewScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pdfDocument.page(1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PDFViewScreen.extractTextWithLayout(from:):PDFViewScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "page.selection(for: pageBounds)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PDFViewScreen.analyzePDFStructure(from:):PDFViewScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "page.selection(for: CGRect(x: 0, y: 0, width: columnWidth, height: 10)).string">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
