@@ -46,23 +46,15 @@ struct PDFViewScreen: View {
         }
     }
 
-    private func analyzePDFStructure(from page: PDFPage) {
-        print("=== Page Analysis ===")
+    private func extractColumnText(from page: PDFPage) -> ([String], [String], [String]) {
         let pageBounds = page.bounds(for: .mediaBox)
-        print("Page size: \(pageBounds)")
         
         // First analyze fonts to determine optimal block heights
         var fontSizes: Set<CGFloat> = []
         if let pageContent = page.attributedString {
             pageContent.enumerateAttribute(.font, in: NSRange(location: 0, length: pageContent.length)) { font, range, _ in
                 if let ctFont = font as! CTFont? {
-                    let pointSize = CTFontGetSize(ctFont)
-                    fontSizes.insert(pointSize)
-                    let text = pageContent.attributedSubstring(from: range).string
-                    print("\nFont Block:")
-                    print("Font: \(String(describing: font))")
-                    print("Size: \(pointSize)pt")
-                    print("Content: \(text)")
+                    fontSizes.insert(CTFontGetSize(ctFont))
                 }
             }
         }
@@ -71,8 +63,6 @@ struct PDFViewScreen: View {
         let baseHeight: CGFloat = fontSizes.min() ?? 5.0
         // Use slightly smaller increment to ensure we don't miss anything
         let scanIncrement: CGFloat = baseHeight / 2
-        
-        print("\n=== Layout Analysis ===")
         
         // Define margins and column layout
         let pageMargin: CGFloat = 40 // Estimated margin from PDF edges
@@ -131,28 +121,59 @@ struct PDFViewScreen: View {
             }
         }
         
-        // Remove duplicate adjacent lines that might have been captured
+        // Remove duplicate adjacent lines
         dateColumn = removeDuplicateAdjacent(blocks: dateColumn)
         dayShiftColumn = removeDuplicateAdjacent(blocks: dayShiftColumn)
         nightShiftColumn = removeDuplicateAdjacent(blocks: nightShiftColumn)
         
-        // Print results in order from top to bottom
+        // Convert to simple string arrays
+        let dates = dateColumn.map { $0.text }
+        let dayShifts = dayShiftColumn.map { $0.text }
+        let nightShifts = nightShiftColumn.map { $0.text }
+        
+        return (dates, dayShifts, nightShifts)
+    }
+
+    private func analyzePDFStructure(from page: PDFPage) {
+        print("=== Page Analysis ===")
+        let pageBounds = page.bounds(for: .mediaBox)
+        print("Page size: \(pageBounds)")
+        
+        // First analyze fonts to determine optimal block heights
+        var fontSizes: Set<CGFloat> = []
+        if let pageContent = page.attributedString {
+            pageContent.enumerateAttribute(.font, in: NSRange(location: 0, length: pageContent.length)) { font, range, _ in
+                if let ctFont = font as! CTFont? {
+                    let pointSize = CTFontGetSize(ctFont)
+                    fontSizes.insert(pointSize)
+                    let text = pageContent.attributedSubstring(from: range).string
+                    print("\nFont Block:")
+                    print("Font: \(String(describing: font))")
+                    print("Size: \(pointSize)pt")
+                    print("Content: \(text)")
+                }
+            }
+        }
+        
+        print("\n=== Layout Analysis ===")
+        
+        // Extract column text
+        let (dates, dayShifts, nightShifts) = extractColumnText(from: page)
+        
+        // Print results
         print("\nDate Column:")
-        for block in dateColumn {
-            print("\nY: \(String(format: "%.2f", block.y))")
-            print(block.text)
+        for text in dates {
+            print("\n\(text)")
         }
         
         print("\nDay Shift Column:")
-        for block in dayShiftColumn {
-            print("\nY: \(String(format: "%.2f", block.y))")
-            print(block.text)
+        for text in dayShifts {
+            print("\n\(text)")
         }
         
         print("\nNight Shift Column:")
-        for block in nightShiftColumn {
-            print("\nY: \(String(format: "%.2f", block.y))")
-            print(block.text)
+        for text in nightShifts {
+            print("\n\(text)")
         }
         
         print("=== End Analysis ===\n")
@@ -172,23 +193,118 @@ struct PDFViewScreen: View {
         return result
     }
 
-    private func extractTextWithLayout(from page: PDFPage) -> String {
-        // First analyze the structure
+    private func extractTextWithLayout(from page: PDFPage) -> [PharmacySchedule] {
+        print("\nAnalyzing PDF structure first:")
         analyzePDFStructure(from: page)
         
-        let pageBounds = page.bounds(for: .mediaBox)
-        var extractedText = ""
+        // Get the column text using our new function
+        let (dates, dayShiftLines, nightShiftLines) = extractColumnText(from: page)
         
-        // Use smaller increments (25pt) for better granularity
-        for y in stride(from: 0, to: pageBounds.height, by: 25) {
-            if let selection = page.selection(for: CGRect(x: 0, y: y, width: pageBounds.width, height: 25)) {
-                if let text = selection.string, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    extractedText += text + "\n"
+        print("\nProcessing text data:")
+        print("Dates found: \(dates.count)")
+        print("Day shift blocks: \(dayShiftLines.count)")
+        print("Night shift blocks: \(nightShiftLines.count)")
+        
+        // Process pharmacy lines in groups of 3
+        var dayPharmacies: [Pharmacy] = []
+        var nightPharmacies: [Pharmacy] = []
+        
+        // Helper function to process lines in reverse groups of 3
+        func processPharmacyLines(_ lines: [String]) -> [Pharmacy] {
+            var pharmacies: [Pharmacy] = []
+            var currentGroup: [String] = []
+            
+            // Process lines in groups of 3
+            for line in lines {
+                currentGroup.append(line)
+                if currentGroup.count == 3 {
+                    // Remember: lines are [Additional info, Address, Name] in this order
+                    let additionalInfo = currentGroup[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let address = currentGroup[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                    let name = currentGroup[2].trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    // Extract phone from additional info if present
+                    var phone = ""
+                    var finalAdditionalInfo = additionalInfo
+                    
+                    if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+                        phone = String(additionalInfo[phoneMatch])
+                            .replacingOccurrences(of: "Tfno:", with: "")
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                        finalAdditionalInfo = additionalInfo
+                            .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                    }
+                    
+                    // Create pharmacy
+                    pharmacies.append(Pharmacy(
+                        name: name,
+                        address: address,
+                        phone: phone,
+                        additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
+                    ))
+                    
+                    // Start new group
+                    currentGroup = []
                 }
+            }
+            
+            return pharmacies
+        }
+        
+        // Process both columns
+        dayPharmacies = processPharmacyLines(dayShiftLines)
+        nightPharmacies = processPharmacyLines(nightShiftLines)
+        
+        // Print size check
+        print("\nSize check:")
+        print("Dates: \(dates.count)")
+        print("Day pharmacies: \(dayPharmacies.count)")
+        print("Night pharmacies: \(nightPharmacies.count)")
+        
+        // Create schedules by matching dates with pharmacies
+        var schedules: [PharmacySchedule] = []
+        for (index, dateString) in dates.enumerated() {
+            if let date = parseDate(dateString),
+               index < dayPharmacies.count && index < nightPharmacies.count {
+                schedules.append(PharmacySchedule(
+                    date: date,
+                    dayShiftPharmacies: [dayPharmacies[index]],
+                    nightShiftPharmacies: [nightPharmacies[index]]
+                ))
             }
         }
         
-        return extractedText
+        // Print the schedules for verification
+        print("\n=== Pharmacy Schedules ===")
+        for schedule in schedules {
+            print("\nDate: \(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month)")
+            print("Day Shift:")
+            for pharmacy in schedule.dayShiftPharmacies {
+                print("  - Name: \(pharmacy.name)")
+                print("  - Address: \(pharmacy.address)")
+                if !pharmacy.phone.isEmpty {
+                    print("  - Phone: \(pharmacy.phone)")
+                }
+                if let info = pharmacy.additionalInfo {
+                    print("  - Additional info: \(info)")
+                }
+            }
+            print("Night Shift:")
+            for pharmacy in schedule.nightShiftPharmacies {
+                print("  - Name: \(pharmacy.name)")
+                print("  - Address: \(pharmacy.address)")
+                if !pharmacy.phone.isEmpty {
+                    print("  - Phone: \(pharmacy.phone)")
+                }
+                if let info = pharmacy.additionalInfo {
+                    print("  - Additional info: \(info)")
+                }
+            }
+        }
+        print("=== End Schedules ===\n")
+        
+        return schedules
     }
 
     private func loadPharmacies() {
@@ -197,18 +313,28 @@ struct PDFViewScreen: View {
             return
         }
 
-        var extractedText = ""
+        var allSchedules: [PharmacySchedule] = []
         print("Total pages in PDF: \(pdfDocument.pageCount)")
+        
         for pageIndex in 0..<pdfDocument.pageCount {
             if let page = pdfDocument.page(at: pageIndex) {
-                print("Extracting text from page \(pageIndex + 1)")
-                extractedText += extractTextWithLayout(from: page) + "\n"
+                print("Processing page \(pageIndex + 1)")
+                let schedules = extractTextWithLayout(from: page)
+                allSchedules.append(contentsOf: schedules)
             }
         }
 
-        print("Extracted Text from PDF:\n\(extractedText)")  // Debug output
-        pharmacies = []
-        // pharmacies = parsePharmacies(from: extractedText)
+        // Update pharmacies array with all unique pharmacies from all schedules
+        var uniquePharmacies: Set<String> = [] // Use pharmacy names as unique identifier
+        pharmacies = allSchedules.flatMap { schedule in
+            schedule.dayShiftPharmacies + schedule.nightShiftPharmacies
+        }.filter { pharmacy in
+            let isNew = !uniquePharmacies.contains(pharmacy.name)
+            uniquePharmacies.insert(pharmacy.name)
+            return isNew
+        }
+        
+        print("\nFound \(pharmacies.count) unique pharmacies across all schedules")
     }
 
     private func extractPharmacyData(from page: PDFPage) -> [PharmacySchedule] {
@@ -240,10 +366,9 @@ struct PDFViewScreen: View {
         }
         
         // Process blocks into schedules
-        var currentDayPharmacies: [Pharmacy] = []
-        var currentNightPharmacies: [Pharmacy] = []
+        var currentDayPharmacyLines: [String] = []
+        var currentNightPharmacyLines: [String] = []
         var currentDate: DutyDate? = nil
-        var currentPharmacyText = ""
         
         // Process left column (day pharmacies)
         for block in leftColumnBlocks {
@@ -252,52 +377,39 @@ struct PDFViewScreen: View {
             if let date = parseDate(text) {
                 // Save previous schedule if exists
                 if let date = currentDate {
-                    schedules.append(PharmacySchedule(
-                        date: date,
-                        dayShiftPharmacies: currentDayPharmacies,
-                        nightShiftPharmacies: currentNightPharmacies
-                    ))
+                    if let dayPharmacy = parsePharmacy(from: currentDayPharmacyLines),
+                       let nightPharmacy = parsePharmacy(from: currentNightPharmacyLines) {
+                        schedules.append(PharmacySchedule(
+                            date: date,
+                            dayShiftPharmacies: [dayPharmacy],
+                            nightShiftPharmacies: [nightPharmacy]
+                        ))
+                    }
                 }
                 
                 // Start new schedule
                 currentDate = date
-                currentDayPharmacies = []
-                currentNightPharmacies = []
-                currentPharmacyText = ""
+                currentDayPharmacyLines = []
+                currentNightPharmacyLines = []
             } else {
-                currentPharmacyText += text + "\n"
-                
-                // Try to parse pharmacy when we have accumulated enough lines
-                if text.contains("\n\n") || text.contains(".") {
-                    if let pharmacy = parsePharmacy(from: currentPharmacyText) {
-                        currentDayPharmacies.append(pharmacy)
-                        currentPharmacyText = ""
-                    }
-                }
+                currentDayPharmacyLines.append(text)
             }
         }
         
         // Process right column (night pharmacies)
-        currentPharmacyText = ""
         for block in rightColumnBlocks {
             let text = block.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            currentPharmacyText += text + "\n"
-            
-            // Try to parse pharmacy when we have accumulated enough lines
-            if text.contains("\n\n") || text.contains(".") {
-                if let pharmacy = parsePharmacy(from: currentPharmacyText) {
-                    currentNightPharmacies.append(pharmacy)
-                    currentPharmacyText = ""
-                }
-            }
+            currentNightPharmacyLines.append(text)
         }
         
         // Add final schedule if exists
-        if let date = currentDate {
+        if let date = currentDate,
+           let dayPharmacy = parsePharmacy(from: currentDayPharmacyLines),
+           let nightPharmacy = parsePharmacy(from: currentNightPharmacyLines) {
             schedules.append(PharmacySchedule(
                 date: date,
-                dayShiftPharmacies: currentDayPharmacies,
-                nightShiftPharmacies: currentNightPharmacies
+                dayShiftPharmacies: [dayPharmacy],
+                nightShiftPharmacies: [nightPharmacy]
             ))
         }
         
@@ -373,31 +485,45 @@ private func parseDate(_ dateString: String) -> DutyDate? {
 }
 
 // Helper for pharmacy parsing
-private func parsePharmacy(from text: String) -> Pharmacy? {
-    let lines = text.split(separator: "\n")
-    guard lines.count >= 2 else { return nil }
+private func parsePharmacy(from lines: [String]) -> Pharmacy? {
+    // Clean up and filter lines
+    let nonEmptyLines = lines.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        .filter { !$0.isEmpty }
     
-    let name = String(lines[0]).trimmingCharacters(in: .whitespaces)
-    let address = String(lines[1]).trimmingCharacters(in: .whitespaces)
+    guard !nonEmptyLines.isEmpty else { return nil }
     
+    // Find the pharmacy name (usually starts with "FARMACIA")
+    let nameIndex = nonEmptyLines.firstIndex { $0.contains("FARMACIA") } ?? 0
+    let name = nonEmptyLines[nameIndex]
+    
+    // Get lines after the name
+    let remainingLines = Array(nonEmptyLines.dropFirst(nameIndex + 1))
+    guard !remainingLines.isEmpty else { return nil }
+    
+    // First line after name is usually the address
+    let address = remainingLines[0]
+    
+    // Remaining lines contain phone and additional info
+    let infoLines = remainingLines.dropFirst().joined(separator: " ")
+    
+    // Extract phone number if present
     var phone = ""
-    var additionalInfo: String? = nil
+    var additionalInfo = infoLines
     
-    if lines.count > 2 {
-        let remainingText = lines[2...].joined(separator: "\n").trimmingCharacters(in: .whitespaces)
-        // Extract phone number - assuming it's in a standard format like "987654321"
-        if let phoneMatch = remainingText.range(of: "\\d{9}", options: .regularExpression) {
-            phone = String(remainingText[phoneMatch])
-            let additionalText = remainingText.replacingOccurrences(of: phone, with: "").trimmingCharacters(in: .whitespaces)
-            if !additionalText.isEmpty {
-                additionalInfo = additionalText
-            }
-        } else {
-            additionalInfo = remainingText
-        }
+    if let phoneMatch = infoLines.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+        phone = String(infoLines[phoneMatch]).replacingOccurrences(of: "Tfno:", with: "").trimmingCharacters(in: .whitespaces)
+        additionalInfo = infoLines.replacingOccurrences(of: String(infoLines[phoneMatch]), with: "").trimmingCharacters(in: .whitespaces)
     }
     
-    return Pharmacy(name: name, address: address, phone: phone, additionalInfo: additionalInfo)
+    // Only keep additional info if it's not empty
+    let finalAdditionalInfo = additionalInfo.isEmpty ? nil : additionalInfo
+    
+    return Pharmacy(
+        name: name,
+        address: address,
+        phone: phone,
+        additionalInfo: finalAdditionalInfo
+    )
 }
 
 struct PDFViewScreen_Previews: PreviewProvider {
