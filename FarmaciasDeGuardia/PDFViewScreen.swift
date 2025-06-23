@@ -31,7 +31,7 @@ struct PDFViewScreen: View {
         NavigationView {
             List(schedules, id: \.date.day) { schedule in
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? 2025))")
+                    Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? getCurrentYear()))")
                         .font(.headline)
                     
                     // Day shift section
@@ -105,6 +105,7 @@ struct PDFViewScreen: View {
         var lastDayText = ""
         var lastNightText = ""
         var pendingYear: String? = nil
+        let currentYear = getCurrentYear()
         
         // Scan from top to bottom with high precision
         for y in stride(from: 0, to: pageBounds.height, by: scanIncrement) {
@@ -114,8 +115,9 @@ struct PDFViewScreen: View {
                let text = selection.string?.trimmingCharacters(in: .whitespacesAndNewlines),
                !text.isEmpty,
                text != lastDateText {
-                // Check if this is a standalone year
-                if text == "2025" || text == "2026" {
+                // Check if this is a standalone year for current or next year
+                let nextYear = currentYear + 1
+                if text == String(currentYear) || text == String(nextYear) {
                     pendingYear = text
                 } else if text.contains(",") { // This is a date line
                     if let year = pendingYear {
@@ -157,8 +159,10 @@ struct PDFViewScreen: View {
         dayShiftColumn = removeDuplicateAdjacent(blocks: dayShiftColumn)
         nightShiftColumn = removeDuplicateAdjacent(blocks: nightShiftColumn)
         
+        let currentYear = getCurrentYear()
+        let nextYear = currentYear + 1
         // Convert to simple string arrays, filtering out standalone year entries
-        let dates = dateColumn.map { $0.text }.filter { $0 != "2025" && $0 != "2026" }
+        let dates = dateColumn.map { $0.text }.filter { $0 != String(currentYear) && $0 != String(nextYear) }
         let dayShifts = dayShiftColumn.map { $0.text }
         let nightShifts = nightShiftColumn.map { $0.text }
         
@@ -362,8 +366,9 @@ struct PDFViewScreen: View {
 
         // Sort schedules by date
         schedules = allSchedules.sorted { first, second in
-            let firstYear = first.date.year ?? 2025
-            let secondYear = second.date.year ?? 2025
+            let currentYear = getCurrentYear()
+            let firstYear = first.date.year ?? currentYear
+            let secondYear = second.date.year ?? currentYear
             
             if firstYear != secondYear {
                 return firstYear < secondYear
@@ -539,13 +544,14 @@ private func parseDate(_ dateString: String) -> DutyDate? {
         year = Int(String(dateString[yearRange]))
         print("Found year in capture group: \(year ?? -1)")
     } else {
-        // Temporary fix: Only January 1st and 2nd are from 2026
+        let currentYear = getCurrentYear()
+        // Temporary fix: Only January 1st and 2nd are from next year
         if month.lowercased() == "enero" && (day == 1 || day == 2) {
-            year = 2026
-            print("Applied temporary fix for January 1st/2nd: setting year to 2026")
+            year = currentYear + 1
+            print("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
         } else {
-            year = 2025
-            print("No year found, defaulting to 2025")
+            year = currentYear
+            print("No year found, defaulting to \(currentYear)")
         }
     }
     
@@ -626,6 +632,12 @@ struct PDFViewScreen_Previews: PreviewProvider {
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!)
     }
+}
+
+// Helper function to get current and next year
+private func getCurrentYear() -> Int {
+    let calendar = Calendar.current
+    return calendar.component(.year, from: Date())
 }
 
 // Helper function to convert month names to numbers for sorting
