@@ -223,26 +223,31 @@ struct PDFViewScreen: View {
                     let address = currentGroup[1].trimmingCharacters(in: .whitespacesAndNewlines)
                     let name = currentGroup[2].trimmingCharacters(in: .whitespacesAndNewlines)
                     
-                    // Extract phone from additional info if present
-                    var phone = ""
-                    var finalAdditionalInfo = additionalInfo
-                    
-                    if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
-                        phone = String(additionalInfo[phoneMatch])
-                            .replacingOccurrences(of: "Tfno:", with: "")
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                        finalAdditionalInfo = additionalInfo
-                            .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                    // Only process if the name contains "FARMACIA"
+                    if name.contains("FARMACIA") {
+                        // Extract phone from additional info if present
+                        var phone = ""
+                        var finalAdditionalInfo = additionalInfo
+                        
+                        if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+                            phone = String(additionalInfo[phoneMatch])
+                                .replacingOccurrences(of: "Tfno:", with: "")
+                                .trimmingCharacters(in: .whitespacesAndNewlines)
+                            finalAdditionalInfo = additionalInfo
+                                .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
+                                .trimmingCharacters(in: .whitespacesAndNewlines)
+                        }
+                        
+                        // Create pharmacy
+                        pharmacies.append(Pharmacy(
+                            name: name,
+                            address: address,
+                            phone: phone,
+                            additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
+                        ))
+                    } else {
+                        print("Skipping non-pharmacy entry: \(name)")
                     }
-                    
-                    // Create pharmacy
-                    pharmacies.append(Pharmacy(
-                        name: name,
-                        address: address,
-                        phone: phone,
-                        additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
-                    ))
                     
                     // Start new group
                     currentGroup = []
