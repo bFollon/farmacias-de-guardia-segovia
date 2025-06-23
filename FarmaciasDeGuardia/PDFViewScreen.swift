@@ -24,22 +24,39 @@ struct Pharmacy: Identifiable {
 }
 
 struct PDFViewScreen: View {
-    @State private var pharmacies: [Pharmacy] = []
+    @State private var schedules: [PharmacySchedule] = []
     var url: URL
 
     var body: some View {
         NavigationView {
-            List(pharmacies) { pharmacy in
-                VStack(alignment: .leading) {
-                    Text(pharmacy.name)
+            List(schedules, id: \.date.day) { schedule in
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? 2025))")
                         .font(.headline)
-                    Text(pharmacy.address)
-                        .font(.subheadline)
-                    Text(pharmacy.phone)
-                        .font(.footnote)
+                    
+                    // Day shift section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Guardia diurna")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        ForEach(schedule.dayShiftPharmacies) { pharmacy in
+                            PharmacyView(pharmacy: pharmacy)
+                        }
+                    }
+                    
+                    // Night shift section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Guardia nocturna")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        ForEach(schedule.nightShiftPharmacies) { pharmacy in
+                            PharmacyView(pharmacy: pharmacy)
+                        }
+                    }
                 }
+                .padding(.vertical, 8)
             }
-            .navigationTitle("Pharmacies on Duty")
+            .navigationTitle("Farmacias de Guardia")
         }
         .onAppear {
             loadPharmacies()
@@ -87,6 +104,7 @@ struct PDFViewScreen: View {
         var lastDateText = ""
         var lastDayText = ""
         var lastNightText = ""
+        var pendingYear: String? = nil
         
         // Scan from top to bottom with high precision
         for y in stride(from: 0, to: pageBounds.height, by: scanIncrement) {
@@ -96,7 +114,20 @@ struct PDFViewScreen: View {
                let text = selection.string?.trimmingCharacters(in: .whitespacesAndNewlines),
                !text.isEmpty,
                text != lastDateText {
-                dateColumn.append((y: y, text: text))
+                // Check if this is a standalone year
+                if text == "2025" || text == "2026" {
+                    pendingYear = text
+                } else if text.contains(",") { // This is a date line
+                    if let year = pendingYear {
+                        // Combine the date with the pending year
+                        dateColumn.append((y: y, text: "\(text) \(year)"))
+                        pendingYear = nil
+                    } else {
+                        dateColumn.append((y: y, text: text))
+                    }
+                } else {
+                    dateColumn.append((y: y, text: text))
+                }
                 lastDateText = text
             }
             
@@ -126,8 +157,8 @@ struct PDFViewScreen: View {
         dayShiftColumn = removeDuplicateAdjacent(blocks: dayShiftColumn)
         nightShiftColumn = removeDuplicateAdjacent(blocks: nightShiftColumn)
         
-        // Convert to simple string arrays
-        let dates = dateColumn.map { $0.text }
+        // Convert to simple string arrays, filtering out standalone year entries
+        let dates = dateColumn.map { $0.text }.filter { $0 != "2025" && $0 != "2026" }
         let dayShifts = dayShiftColumn.map { $0.text }
         let nightShifts = nightShiftColumn.map { $0.text }
         
@@ -314,7 +345,7 @@ struct PDFViewScreen: View {
 
     private func loadPharmacies() {
         guard let pdfDocument = PDFDocument(url: url) else {
-            pharmacies = []
+            schedules = []
             return
         }
 
@@ -324,22 +355,30 @@ struct PDFViewScreen: View {
         for pageIndex in 0..<pdfDocument.pageCount {
             if let page = pdfDocument.page(at: pageIndex) {
                 print("Processing page \(pageIndex + 1)")
-                let schedules = extractTextWithLayout(from: page)
-                allSchedules.append(contentsOf: schedules)
+                let pageSchedules = extractTextWithLayout(from: page)
+                allSchedules.append(contentsOf: pageSchedules)
             }
         }
 
-        // Update pharmacies array with all unique pharmacies from all schedules
-        var uniquePharmacies: Set<String> = [] // Use pharmacy names as unique identifier
-        pharmacies = allSchedules.flatMap { schedule in
-            schedule.dayShiftPharmacies + schedule.nightShiftPharmacies
-        }.filter { pharmacy in
-            let isNew = !uniquePharmacies.contains(pharmacy.name)
-            uniquePharmacies.insert(pharmacy.name)
-            return isNew
+        // Sort schedules by date
+        schedules = allSchedules.sorted { first, second in
+            let firstYear = first.date.year ?? 2025
+            let secondYear = second.date.year ?? 2025
+            
+            if firstYear != secondYear {
+                return firstYear < secondYear
+            }
+            
+            let firstMonth = monthToNumber(first.date.month)
+            let secondMonth = monthToNumber(second.date.month)
+            
+            if firstMonth != secondMonth {
+                return firstMonth < secondMonth
+            }
+            return first.date.day < second.date.day
         }
         
-        print("\nFound \(pharmacies.count) unique pharmacies across all schedules")
+        print("\nLoaded \(schedules.count) schedules")
     }
 
     private func extractPharmacyData(from page: PDFPage) -> [PharmacySchedule] {
@@ -467,11 +506,25 @@ struct PDFViewScreen: View {
 
 // Helper for date parsing
 private func parseDate(_ dateString: String) -> DutyDate? {
+    print("\nAttempting to parse date: '\(dateString)'")
+    
     let datePattern = "\\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\\s(\\d{1,2})\\sde\\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\\s(\\d{4}))?\\b"
+    
+    print("Using pattern: \(datePattern)")
     
     guard let regex = try? NSRegularExpression(pattern: datePattern, options: []),
           let match = regex.firstMatch(in: dateString, options: [], range: NSRange(dateString.startIndex..., in: dateString)) else {
+        print("Failed to match regex pattern")
         return nil
+    }
+    
+    print("Number of capture groups: \(match.numberOfRanges)")
+    for i in 0..<match.numberOfRanges {
+        let range = match.range(at: i)
+        print("Group \(i) - location: \(range.location), length: \(range.length)")
+        if range.location != NSNotFound, let stringRange = Range(range, in: dateString) {
+            print("Group \(i) value: '\(dateString[stringRange])'")
+        }
     }
     
     let dayOfWeek = dateString.split(separator: ",")[0].trimmingCharacters(in: .whitespaces)
@@ -484,7 +537,19 @@ private func parseDate(_ dateString: String) -> DutyDate? {
     if match.numberOfRanges > 3, match.range(at: 3).location != NSNotFound {
         let yearRange = Range(match.range(at: 3), in: dateString)!
         year = Int(String(dateString[yearRange]))
+        print("Found year in capture group: \(year ?? -1)")
+    } else {
+        // Temporary fix: Only January 1st and 2nd are from 2026
+        if month.lowercased() == "enero" && (day == 1 || day == 2) {
+            year = 2026
+            print("Applied temporary fix for January 1st/2nd: setting year to 2026")
+        } else {
+            year = 2025
+            print("No year found, defaulting to 2025")
+        }
     }
+    
+    print("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")
     
     return DutyDate(dayOfWeek: String(dayOfWeek), day: day, month: month, year: year)
 }
@@ -531,10 +596,44 @@ private func parsePharmacy(from lines: [String]) -> Pharmacy? {
     )
 }
 
+// Helper view for displaying pharmacy information
+private struct PharmacyView: View {
+    let pharmacy: Pharmacy
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(pharmacy.name)
+                .font(.system(.body, design: .rounded))
+            Text(pharmacy.address)
+                .font(.subheadline)
+            if !pharmacy.phone.isEmpty {
+                Text("📞 \(pharmacy.phone)")
+                    .font(.footnote)
+            }
+            if let info = pharmacy.additionalInfo {
+                Text(info)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
 struct PDFViewScreen_Previews: PreviewProvider {
     static var previews: some View {
         PDFViewScreen(
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!)
     }
+}
+
+// Helper function to convert month names to numbers for sorting
+private func monthToNumber(_ month: String) -> Int {
+    let months = [
+        "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
+        "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
+        "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
+    ]
+    return months[month.lowercased()] ?? 0
 }
