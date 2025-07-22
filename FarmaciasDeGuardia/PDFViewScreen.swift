@@ -111,6 +111,49 @@ struct Pharmacy: Identifiable {
     let additionalInfo: String?
 }
 
+extension Pharmacy {
+    static func parse(from lines: [String]) -> Pharmacy? {
+        // Clean up and filter lines
+        let nonEmptyLines = lines.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
+        guard !nonEmptyLines.isEmpty else { return nil }
+        
+        // Find the pharmacy name (usually starts with "FARMACIA")
+        let nameIndex = nonEmptyLines.firstIndex { $0.contains("FARMACIA") } ?? 0
+        let name = nonEmptyLines[nameIndex]
+        
+        // Get lines after the name
+        let remainingLines = Array(nonEmptyLines.dropFirst(nameIndex + 1))
+        guard !remainingLines.isEmpty else { return nil }
+        
+        // First line after name is usually the address
+        let address = remainingLines[0]
+        
+        // Remaining lines contain phone and additional info
+        let infoLines = remainingLines.dropFirst().joined(separator: " ")
+        
+        // Extract phone number if present
+        var phone = ""
+        var additionalInfo = infoLines
+        
+        if let phoneMatch = infoLines.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+            phone = String(infoLines[phoneMatch]).replacingOccurrences(of: "Tfno:", with: "").trimmingCharacters(in: .whitespaces)
+            additionalInfo = infoLines.replacingOccurrences(of: String(infoLines[phoneMatch]), with: "").trimmingCharacters(in: .whitespaces)
+        }
+        
+        // Only keep additional info if it's not empty
+        let finalAdditionalInfo = additionalInfo.isEmpty ? nil : additionalInfo
+        
+        return Pharmacy(
+            name: name,
+            address: address,
+            phone: phone,
+            additionalInfo: finalAdditionalInfo
+        )
+    }
+}
+
 struct PDFViewScreen: View {
     @State private var schedules: [PharmacySchedule] = []
     var url: URL
@@ -567,8 +610,8 @@ struct PDFViewScreen: View {
             if let date = DutyDate.parse(text) {
                 // Save previous schedule if exists
                 if let date = currentDate {
-                    if let dayPharmacy = parsePharmacy(from: currentDayPharmacyLines),
-                       let nightPharmacy = parsePharmacy(from: currentNightPharmacyLines) {
+                    if let dayPharmacy = Pharmacy.parse(from: currentDayPharmacyLines),
+                       let nightPharmacy = Pharmacy.parse(from: currentNightPharmacyLines) {
                         schedules.append(PharmacySchedule(
                             date: date,
                             dayShiftPharmacies: [dayPharmacy],
@@ -594,8 +637,8 @@ struct PDFViewScreen: View {
         
         // Add final schedule if exists
         if let date = currentDate,
-           let dayPharmacy = parsePharmacy(from: currentDayPharmacyLines),
-           let nightPharmacy = parsePharmacy(from: currentNightPharmacyLines) {
+           let dayPharmacy = Pharmacy.parse(from: currentDayPharmacyLines),
+           let nightPharmacy = Pharmacy.parse(from: currentNightPharmacyLines) {
             schedules.append(PharmacySchedule(
                 date: date,
                 dayShiftPharmacies: [dayPharmacy],
@@ -610,48 +653,6 @@ struct PDFViewScreen: View {
 }
 
 
-
-// Helper for pharmacy parsing
-private func parsePharmacy(from lines: [String]) -> Pharmacy? {
-    // Clean up and filter lines
-    let nonEmptyLines = lines.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-        .filter { !$0.isEmpty }
-    
-    guard !nonEmptyLines.isEmpty else { return nil }
-    
-    // Find the pharmacy name (usually starts with "FARMACIA")
-    let nameIndex = nonEmptyLines.firstIndex { $0.contains("FARMACIA") } ?? 0
-    let name = nonEmptyLines[nameIndex]
-    
-    // Get lines after the name
-    let remainingLines = Array(nonEmptyLines.dropFirst(nameIndex + 1))
-    guard !remainingLines.isEmpty else { return nil }
-    
-    // First line after name is usually the address
-    let address = remainingLines[0]
-    
-    // Remaining lines contain phone and additional info
-    let infoLines = remainingLines.dropFirst().joined(separator: " ")
-    
-    // Extract phone number if present
-    var phone = ""
-    var additionalInfo = infoLines
-    
-    if let phoneMatch = infoLines.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
-        phone = String(infoLines[phoneMatch]).replacingOccurrences(of: "Tfno:", with: "").trimmingCharacters(in: .whitespaces)
-        additionalInfo = infoLines.replacingOccurrences(of: String(infoLines[phoneMatch]), with: "").trimmingCharacters(in: .whitespaces)
-    }
-    
-    // Only keep additional info if it's not empty
-    let finalAdditionalInfo = additionalInfo.isEmpty ? nil : additionalInfo
-    
-    return Pharmacy(
-        name: name,
-        address: address,
-        phone: phone,
-        additionalInfo: finalAdditionalInfo
-    )
-}
 
 // Helper view for displaying pharmacy information
 private struct PharmacyView: View {
