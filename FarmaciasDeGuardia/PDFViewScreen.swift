@@ -30,7 +30,7 @@ struct PDFViewScreen: View {
     var body: some View {
         NavigationView {
             Group {
-                if let schedule = schedules.first {
+                if let schedule = findTodaysSchedule() {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? getCurrentYear()))")
@@ -62,17 +62,40 @@ struct PDFViewScreen: View {
                     }
                 } else {
                     VStack(spacing: 20) {
-                        Text("No hay farmacias de guardia programadas")
+                        Text("No hay farmacias de guardia programadas para hoy")
                             .font(.headline)
                             .multilineTextAlignment(.center)
+                        
+                        Text("(\(Date().formatted(date: .long, time: .omitted)))")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
                     .padding()
                 }
             }
-            .navigationTitle("Farmacias de Guardia")
+            .navigationTitle("Farmacias de Guardia Hoy")
         }
         .onAppear {
             loadPharmacies()
+        }
+    }
+
+    private func findTodaysSchedule() -> PharmacySchedule? {
+        let calendar = Calendar.current
+        var components = DateComponents()
+        components.year = calendar.component(.year, from: Date())
+        components.month = calendar.component(.month, from: Date())
+        components.day = calendar.component(.day, from: Date())
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        guard let today = calendar.date(from: components) else { return nil }
+        let todayTimestamp = today.timeIntervalSince1970
+        
+        return schedules.first { schedule in
+            guard let scheduleTimestamp = dateToTimestamp(schedule.date) else { return false }
+            return Int(scheduleTimestamp) == Int(todayTimestamp)
         }
     }
 
@@ -702,3 +725,5 @@ private func getCurrentYear() -> Int {
     let calendar = Calendar.current
     return calendar.component(.year, from: Date())
 }
+
+
