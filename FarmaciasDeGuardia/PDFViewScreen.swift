@@ -606,48 +606,7 @@ struct PDFViewScreen: View {
         return schedules
     }
 
-    private func parsePharmacyPair(from line: String) -> [Pharmacy] {
-        return []
-    }
 
-    private func parsePharmacies(from text: String) -> [Pharmacy] {
-        let lines = text.split(separator: "\n")
-        var pharmacyLines: [String] = []
-        var currentPharmacyLine = ""
-        var foundFirstDate = false
-
-        for line in lines {
-            if containsDate(in: String(line)) != nil {
-                if !currentPharmacyLine.isEmpty {
-                    pharmacyLines.append(currentPharmacyLine)
-                }
-                currentPharmacyLine = String(line)
-                foundFirstDate = true
-            } else if foundFirstDate {
-                currentPharmacyLine += "\n" + line
-            }
-        }
-
-        // Don't forget to add the last block
-        if !currentPharmacyLine.isEmpty {
-            pharmacyLines.append(currentPharmacyLine)
-        }
-
-        return pharmacyLines.flatMap { parsePharmacyPair(from: $0) }
-    }
-
-    private func containsDate(in line: String) -> String? {
-        let datePattern =
-            "\\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\\s(\\d{1,2}\\sde\\s(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\\s\\d{4})?)\\b"  // Matches dates like martes, 27 de enero or martes, 27 de enero 2026
-        let regex = try? NSRegularExpression(pattern: datePattern, options: .caseInsensitive)
-        let range = NSRange(location: 0, length: line.utf16.count)
-        if let match = regex?.firstMatch(in: line, options: [], range: range) {
-            if let dateRange = Range(match.range(at: 1), in: line) {
-                return String(line[dateRange])
-            }
-        }
-        return nil
-    }
 }
 
 
