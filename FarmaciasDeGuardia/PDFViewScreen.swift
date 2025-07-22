@@ -386,8 +386,8 @@ struct PDFViewScreen: View {
                 return firstYear < secondYear
             }
             
-            let firstMonth = monthToNumber(first.date.month)
-            let secondMonth = monthToNumber(second.date.month)
+            let firstMonth = monthToNumber(first.date.month) ?? 0
+            let secondMonth = monthToNumber(second.date.month) ?? 0
             
             if firstMonth != secondMonth {
                 return firstMonth < secondMonth
@@ -396,6 +396,24 @@ struct PDFViewScreen: View {
         }
         
         print("\nLoaded \(schedules.count) schedules")
+        
+        // Print timestamps for validation
+        print("\n=== Date Timestamps ===")
+        for schedule in schedules {
+            if let timestamp = dateToTimestamp(schedule.date) {
+                let date = Date(timeIntervalSince1970: timestamp)
+                let formatter = DateFormatter()
+                formatter.dateStyle = .full
+                formatter.timeStyle = .none
+                formatter.locale = Locale(identifier: "es_ES")
+                print("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? getCurrentYear())")
+                print("Timestamp: \(timestamp)")
+                print("Parsed back: \(formatter.string(from: date))\n")
+            } else {
+                print("Failed to convert date: \(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? getCurrentYear())\n")
+            }
+        }
+        print("=== End Timestamps ===\n")
     }
 
     private func extractPharmacyData(from page: PDFPage) -> [PharmacySchedule] {
@@ -646,18 +664,41 @@ struct PDFViewScreen_Previews: PreviewProvider {
     }
 }
 
-// Helper function to get current and next year
-private func getCurrentYear() -> Int {
+// Helper for converting DutyDate to timestamp
+private func dateToTimestamp(_ date: DutyDate) -> TimeInterval? {
     let calendar = Calendar.current
-    return calendar.component(.year, from: Date())
+    let year = date.year ?? getCurrentYear()
+    
+    // Convert Spanish month to number (1-12)
+    guard let month = monthToNumber(date.month) else { return nil }
+    
+    // Create date components
+    var components = DateComponents()
+    components.year = year
+    components.month = month
+    components.day = date.day
+    // Set to start of day
+    components.hour = 0
+    components.minute = 0
+    components.second = 0
+    
+    // Convert to date
+    guard let date = calendar.date(from: components) else { return nil }
+    return date.timeIntervalSince1970
 }
 
 // Helper function to convert month names to numbers for sorting
-private func monthToNumber(_ month: String) -> Int {
+private func monthToNumber(_ month: String) -> Int? {
     let months = [
         "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
         "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
         "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
     ]
-    return months[month.lowercased()] ?? 0
+    return months[month.lowercased()]
+}
+
+// Helper function to get current and next year
+private func getCurrentYear() -> Int {
+    let calendar = Calendar.current
+    return calendar.component(.year, from: Date())
 }
