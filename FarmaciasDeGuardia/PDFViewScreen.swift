@@ -29,32 +29,45 @@ struct PDFViewScreen: View {
 
     var body: some View {
         NavigationView {
-            List(schedules, id: \.date.day) { schedule in
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? getCurrentYear()))")
-                        .font(.headline)
-                    
-                    // Day shift section
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Guardia diurna")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        ForEach(schedule.dayShiftPharmacies) { pharmacy in
-                            PharmacyView(pharmacy: pharmacy)
+            Group {
+                if let schedule = schedules.first {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? getCurrentYear()))")
+                                .font(.title2)
+                                .padding(.bottom, 5)
+                            
+                            // Day shift section
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Guardia diurna")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
+                                ForEach(schedule.dayShiftPharmacies) { pharmacy in
+                                    PharmacyView(pharmacy: pharmacy)
+                                }
+                            }
+                            .padding(.bottom, 10)
+                            
+                            // Night shift section
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Guardia nocturna")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
+                                ForEach(schedule.nightShiftPharmacies) { pharmacy in
+                                    PharmacyView(pharmacy: pharmacy)
+                                }
+                            }
                         }
+                        .padding()
                     }
-                    
-                    // Night shift section
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Guardia nocturna")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        ForEach(schedule.nightShiftPharmacies) { pharmacy in
-                            PharmacyView(pharmacy: pharmacy)
-                        }
+                } else {
+                    VStack(spacing: 20) {
+                        Text("No hay farmacias de guardia programadas")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
                     }
+                    .padding()
                 }
-                .padding(.vertical, 8)
             }
             .navigationTitle("Farmacias de Guardia")
         }
@@ -159,7 +172,6 @@ struct PDFViewScreen: View {
         dayShiftColumn = removeDuplicateAdjacent(blocks: dayShiftColumn)
         nightShiftColumn = removeDuplicateAdjacent(blocks: nightShiftColumn)
         
-        let currentYear = getCurrentYear()
         let nextYear = currentYear + 1
         // Convert to simple string arrays, filtering out standalone year entries
         let dates = dateColumn.map { $0.text }.filter { $0 != String(currentYear) && $0 != String(nextYear) }
