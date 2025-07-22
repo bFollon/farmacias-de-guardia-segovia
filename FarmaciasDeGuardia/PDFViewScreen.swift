@@ -12,7 +12,7 @@ struct DutyDate {
 extension DutyDate {
     func toTimestamp() -> TimeInterval? {
         let calendar = Calendar.current
-        let year = self.year ?? getCurrentYear()
+        let year = self.year ?? DutyDate.getCurrentYear()
         
         // Convert Spanish month to number (1-12)
         guard let month = DutyDate.monthToNumber(self.month) else { return nil }
@@ -40,6 +40,11 @@ extension DutyDate {
         ]
         return months[month.lowercased()]
     }
+    
+    static func getCurrentYear() -> Int {
+        let calendar = Calendar.current
+        return calendar.component(.year, from: Date())
+    }
 }
 
 struct PharmacySchedule {
@@ -66,7 +71,7 @@ struct PDFViewScreen: View {
                 if let schedule = findTodaysSchedule() {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? getCurrentYear()))")
+                            Text("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(String(schedule.date.year ?? DutyDate.getCurrentYear()))")
                                 .font(.title2)
                                 .padding(.bottom, 5)
                             
@@ -174,7 +179,7 @@ struct PDFViewScreen: View {
         var lastDayText = ""
         var lastNightText = ""
         var pendingYear: String? = nil
-        let currentYear = getCurrentYear()
+        let currentYear = DutyDate.getCurrentYear()
         
         // Scan from top to bottom with high precision
         for y in stride(from: 0, to: pageBounds.height, by: scanIncrement) {
@@ -434,7 +439,7 @@ struct PDFViewScreen: View {
 
         // Sort schedules by date
         schedules = allSchedules.sorted { first, second in
-            let currentYear = getCurrentYear()
+            let currentYear = DutyDate.getCurrentYear()
             let firstYear = first.date.year ?? currentYear
             let secondYear = second.date.year ?? currentYear
             
@@ -462,11 +467,11 @@ struct PDFViewScreen: View {
                 formatter.dateStyle = .full
                 formatter.timeStyle = .none
                 formatter.locale = Locale(identifier: "es_ES")
-                print("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? getCurrentYear())")
+                print("\(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? DutyDate.getCurrentYear())")
                 print("Timestamp: \(timestamp)")
                 print("Parsed back: \(formatter.string(from: date))\n")
             } else {
-                print("Failed to convert date: \(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? getCurrentYear())\n")
+                print("Failed to convert date: \(schedule.date.dayOfWeek), \(schedule.date.day) de \(schedule.date.month) \(schedule.date.year ?? DutyDate.getCurrentYear())\n")
             }
         }
         print("=== End Timestamps ===\n")
@@ -630,7 +635,7 @@ private func parseDate(_ dateString: String) -> DutyDate? {
         year = Int(String(dateString[yearRange]))
         print("Found year in capture group: \(year ?? -1)")
     } else {
-        let currentYear = getCurrentYear()
+        let currentYear = DutyDate.getCurrentYear()
         // Temporary fix: Only January 1st and 2nd are from next year
         if month.lowercased() == "enero" && (day == 1 || day == 2) {
             year = currentYear + 1
@@ -720,10 +725,6 @@ struct PDFViewScreen_Previews: PreviewProvider {
     }
 }
 
-// Helper function to get current and next year
-private func getCurrentYear() -> Int {
-    let calendar = Calendar.current
-    return calendar.component(.year, from: Date())
-}
+
 
 
