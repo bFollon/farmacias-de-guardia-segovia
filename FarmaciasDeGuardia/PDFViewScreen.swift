@@ -9,6 +9,30 @@ struct DutyDate {
     let year: Int?
 }
 
+extension DutyDate {
+    func toTimestamp() -> TimeInterval? {
+        let calendar = Calendar.current
+        let year = self.year ?? getCurrentYear()
+        
+        // Convert Spanish month to number (1-12)
+        guard let month = monthToNumber(self.month) else { return nil }
+        
+        // Create date components
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = self.day
+        // Set to start of day
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        // Convert to date
+        guard let date = calendar.date(from: components) else { return nil }
+        return date.timeIntervalSince1970
+    }
+}
+
 struct PharmacySchedule {
     let date: DutyDate
     let dayShiftPharmacies: [Pharmacy]
@@ -94,7 +118,7 @@ struct PDFViewScreen: View {
         let todayTimestamp = today.timeIntervalSince1970
         
         return schedules.first { schedule in
-            guard let scheduleTimestamp = dateToTimestamp(schedule.date) else { return false }
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
             return Int(scheduleTimestamp) == Int(todayTimestamp)
         }
     }
@@ -423,7 +447,7 @@ struct PDFViewScreen: View {
         // Print timestamps for validation
         print("\n=== Date Timestamps ===")
         for schedule in schedules {
-            if let timestamp = dateToTimestamp(schedule.date) {
+            if let timestamp = schedule.date.toTimestamp() {
                 let date = Date(timeIntervalSince1970: timestamp)
                 let formatter = DateFormatter()
                 formatter.dateStyle = .full
@@ -685,29 +709,6 @@ struct PDFViewScreen_Previews: PreviewProvider {
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!)
     }
-}
-
-// Helper for converting DutyDate to timestamp
-private func dateToTimestamp(_ date: DutyDate) -> TimeInterval? {
-    let calendar = Calendar.current
-    let year = date.year ?? getCurrentYear()
-    
-    // Convert Spanish month to number (1-12)
-    guard let month = monthToNumber(date.month) else { return nil }
-    
-    // Create date components
-    var components = DateComponents()
-    components.year = year
-    components.month = month
-    components.day = date.day
-    // Set to start of day
-    components.hour = 0
-    components.minute = 0
-    components.second = 0
-    
-    // Convert to date
-    guard let date = calendar.date(from: components) else { return nil }
-    return date.timeIntervalSince1970
 }
 
 // Helper function to convert month names to numbers for sorting
