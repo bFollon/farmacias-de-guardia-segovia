@@ -45,6 +45,56 @@ extension DutyDate {
         let calendar = Calendar.current
         return calendar.component(.year, from: Date())
     }
+    
+    static func parse(_ dateString: String) -> DutyDate? {
+        print("\nAttempting to parse date: '\(dateString)'")
+        
+        let datePattern = "\\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\\s(\\d{1,2})\\sde\\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\\s(\\d{4}))?\\b"
+        
+        print("Using pattern: \(datePattern)")
+        
+        guard let regex = try? NSRegularExpression(pattern: datePattern, options: []),
+              let match = regex.firstMatch(in: dateString, options: [], range: NSRange(dateString.startIndex..., in: dateString)) else {
+            print("Failed to match regex pattern")
+            return nil
+        }
+        
+        print("Number of capture groups: \(match.numberOfRanges)")
+        for i in 0..<match.numberOfRanges {
+            let range = match.range(at: i)
+            print("Group \(i) - location: \(range.location), length: \(range.length)")
+            if range.location != NSNotFound, let stringRange = Range(range, in: dateString) {
+                print("Group \(i) value: '\(dateString[stringRange])'")
+            }
+        }
+        
+        let dayOfWeek = dateString.split(separator: ",")[0].trimmingCharacters(in: .whitespaces)
+        let dayRange = Range(match.range(at: 1), in: dateString)!
+        let monthRange = Range(match.range(at: 2), in: dateString)!
+        let day = Int(String(dateString[dayRange]))!
+        let month = String(dateString[monthRange])
+        
+        var year: Int? = nil
+        if match.numberOfRanges > 3, match.range(at: 3).location != NSNotFound {
+            let yearRange = Range(match.range(at: 3), in: dateString)!
+            year = Int(String(dateString[yearRange]))
+            print("Found year in capture group: \(year ?? -1)")
+        } else {
+            let currentYear = getCurrentYear()
+            // Temporary fix: Only January 1st and 2nd are from next year
+            if month.lowercased() == "enero" && (day == 1 || day == 2) {
+                year = currentYear + 1
+                print("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
+            } else {
+                year = currentYear
+                print("No year found, defaulting to \(currentYear)")
+            }
+        }
+        
+        print("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")
+        
+        return DutyDate(dayOfWeek: String(dayOfWeek), day: day, month: month, year: year)
+    }
 }
 
 struct PharmacySchedule {
@@ -378,7 +428,7 @@ struct PDFViewScreen: View {
         // Create schedules by matching dates with pharmacies
         var schedules: [PharmacySchedule] = []
         for (index, dateString) in dates.enumerated() {
-            if let date = parseDate(dateString),
+            if let date = DutyDate.parse(dateString),
                index < dayPharmacies.count && index < nightPharmacies.count {
                 schedules.append(PharmacySchedule(
                     date: date,
@@ -514,7 +564,7 @@ struct PDFViewScreen: View {
         for block in leftColumnBlocks {
             let text = block.text.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            if let date = parseDate(text) {
+            if let date = DutyDate.parse(text) {
                 // Save previous schedule if exists
                 if let date = currentDate {
                     if let dayPharmacy = parsePharmacy(from: currentDayPharmacyLines),
@@ -600,56 +650,7 @@ struct PDFViewScreen: View {
     }
 }
 
-// Helper for date parsing
-private func parseDate(_ dateString: String) -> DutyDate? {
-    print("\nAttempting to parse date: '\(dateString)'")
-    
-    let datePattern = "\\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\\s(\\d{1,2})\\sde\\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\\s(\\d{4}))?\\b"
-    
-    print("Using pattern: \(datePattern)")
-    
-    guard let regex = try? NSRegularExpression(pattern: datePattern, options: []),
-          let match = regex.firstMatch(in: dateString, options: [], range: NSRange(dateString.startIndex..., in: dateString)) else {
-        print("Failed to match regex pattern")
-        return nil
-    }
-    
-    print("Number of capture groups: \(match.numberOfRanges)")
-    for i in 0..<match.numberOfRanges {
-        let range = match.range(at: i)
-        print("Group \(i) - location: \(range.location), length: \(range.length)")
-        if range.location != NSNotFound, let stringRange = Range(range, in: dateString) {
-            print("Group \(i) value: '\(dateString[stringRange])'")
-        }
-    }
-    
-    let dayOfWeek = dateString.split(separator: ",")[0].trimmingCharacters(in: .whitespaces)
-    let dayRange = Range(match.range(at: 1), in: dateString)!
-    let monthRange = Range(match.range(at: 2), in: dateString)!
-    let day = Int(String(dateString[dayRange]))!
-    let month = String(dateString[monthRange])
-    
-    var year: Int? = nil
-    if match.numberOfRanges > 3, match.range(at: 3).location != NSNotFound {
-        let yearRange = Range(match.range(at: 3), in: dateString)!
-        year = Int(String(dateString[yearRange]))
-        print("Found year in capture group: \(year ?? -1)")
-    } else {
-        let currentYear = DutyDate.getCurrentYear()
-        // Temporary fix: Only January 1st and 2nd are from next year
-        if month.lowercased() == "enero" && (day == 1 || day == 2) {
-            year = currentYear + 1
-            print("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
-        } else {
-            year = currentYear
-            print("No year found, defaulting to \(currentYear)")
-        }
-    }
-    
-    print("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")
-    
-    return DutyDate(dayOfWeek: String(dayOfWeek), day: day, month: month, year: year)
-}
+
 
 // Helper for pharmacy parsing
 private func parsePharmacy(from lines: [String]) -> Pharmacy? {
