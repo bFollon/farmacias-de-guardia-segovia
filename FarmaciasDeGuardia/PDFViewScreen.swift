@@ -15,7 +15,7 @@ extension DutyDate {
         let year = self.year ?? getCurrentYear()
         
         // Convert Spanish month to number (1-12)
-        guard let month = monthToNumber(self.month) else { return nil }
+        guard let month = DutyDate.monthToNumber(self.month) else { return nil }
         
         // Create date components
         var components = DateComponents()
@@ -30,6 +30,15 @@ extension DutyDate {
         // Convert to date
         guard let date = calendar.date(from: components) else { return nil }
         return date.timeIntervalSince1970
+    }
+    
+    static func monthToNumber(_ month: String) -> Int? {
+        let months = [
+            "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
+            "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
+            "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
+        ]
+        return months[month.lowercased()]
     }
 }
 
@@ -433,8 +442,8 @@ struct PDFViewScreen: View {
                 return firstYear < secondYear
             }
             
-            let firstMonth = monthToNumber(first.date.month) ?? 0
-            let secondMonth = monthToNumber(second.date.month) ?? 0
+            let firstMonth = DutyDate.monthToNumber(first.date.month) ?? 0
+            let secondMonth = DutyDate.monthToNumber(second.date.month) ?? 0
             
             if firstMonth != secondMonth {
                 return firstMonth < secondMonth
@@ -709,16 +718,6 @@ struct PDFViewScreen_Previews: PreviewProvider {
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!)
     }
-}
-
-// Helper function to convert month names to numbers for sorting
-private func monthToNumber(_ month: String) -> Int? {
-    let months = [
-        "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
-        "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
-        "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
-    ]
-    return months[month.lowercased()]
 }
 
 // Helper function to get current and next year
