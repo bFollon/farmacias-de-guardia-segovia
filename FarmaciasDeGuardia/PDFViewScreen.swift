@@ -113,22 +113,46 @@ struct Pharmacy: Identifiable {
 
 extension Pharmacy {
     static func parse(from lines: [String]) -> Pharmacy? {
+        print("\nAttempting to parse single pharmacy from \(lines.count) lines")
+        
         // Clean up and filter lines
         let nonEmptyLines = lines.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
         
-        guard !nonEmptyLines.isEmpty else { return nil }
+        guard !nonEmptyLines.isEmpty else {
+            print("Warning: No valid lines to parse")
+            return nil
+        }
         
-        // Find the pharmacy name (usually starts with "FARMACIA")
-        let nameIndex = nonEmptyLines.firstIndex { $0.contains("FARMACIA") } ?? 0
+        // Print the lines we're working with
+        print("\nInput lines after cleanup:")
+        nonEmptyLines.enumerated().forEach { index, line in
+            print("Line \(index): \(line)")
+        }
+        
+        // Find the pharmacy name (must start with "FARMACIA")
+        guard let nameIndex = nonEmptyLines.firstIndex(where: { $0.contains("FARMACIA") }) else {
+            print("Error: No valid pharmacy name found (must contain 'FARMACIA')")
+            return nil
+        }
+        
         let name = nonEmptyLines[nameIndex]
+        print("\nFound pharmacy name at index \(nameIndex): \(name)")
         
         // Get lines after the name
         let remainingLines = Array(nonEmptyLines.dropFirst(nameIndex + 1))
-        guard !remainingLines.isEmpty else { return nil }
+        guard !remainingLines.isEmpty else {
+            print("Error: No address or additional information found after pharmacy name")
+            return nil
+        }
         
-        // First line after name is usually the address
+        // First line after name is the address
         let address = remainingLines[0]
+        if address.isEmpty {
+            print("Warning: Empty address for pharmacy: \(name)")
+        } else {
+            print("Found address: \(address)")
+        }
         
         // Remaining lines contain phone and additional info
         let infoLines = remainingLines.dropFirst().joined(separator: " ")
@@ -138,12 +162,24 @@ extension Pharmacy {
         var additionalInfo = infoLines
         
         if let phoneMatch = infoLines.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
-            phone = String(infoLines[phoneMatch]).replacingOccurrences(of: "Tfno:", with: "").trimmingCharacters(in: .whitespaces)
-            additionalInfo = infoLines.replacingOccurrences(of: String(infoLines[phoneMatch]), with: "").trimmingCharacters(in: .whitespaces)
+            phone = String(infoLines[phoneMatch])
+                .replacingOccurrences(of: "Tfno:", with: "")
+                .trimmingCharacters(in: .whitespaces)
+            additionalInfo = infoLines
+                .replacingOccurrences(of: String(infoLines[phoneMatch]), with: "")
+                .trimmingCharacters(in: .whitespaces)
+            print("Extracted phone number: \(phone)")
+        } else {
+            print("No phone number found in additional info")
         }
         
         // Only keep additional info if it's not empty
         let finalAdditionalInfo = additionalInfo.isEmpty ? nil : additionalInfo
+        if let info = finalAdditionalInfo {
+            print("Additional info found: \(info)")
+        }
+        
+        print("Successfully parsed pharmacy: \(name)")
         
         return Pharmacy(
             name: name,
