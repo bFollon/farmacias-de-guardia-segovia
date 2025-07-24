@@ -152,6 +152,53 @@ extension Pharmacy {
             additionalInfo: finalAdditionalInfo
         )
     }
+    
+    static func parseBatch(from lines: [String]) -> [Pharmacy] {
+        var pharmacies: [Pharmacy] = []
+        var currentGroup: [String] = []
+        
+        // Process lines in groups of 3
+        for line in lines {
+            currentGroup.append(line)
+            if currentGroup.count == 3 {
+                // Remember: lines are [Additional info, Address, Name] in this order
+                let additionalInfo = currentGroup[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                let address = currentGroup[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                let name = currentGroup[2].trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                // Only process if the name contains "FARMACIA"
+                if name.contains("FARMACIA") {
+                    // Extract phone from additional info if present
+                    var phone = ""
+                    var finalAdditionalInfo = additionalInfo
+                    
+                    if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+                        phone = String(additionalInfo[phoneMatch])
+                            .replacingOccurrences(of: "Tfno:", with: "")
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                        finalAdditionalInfo = additionalInfo
+                            .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                    }
+                    
+                    // Create pharmacy
+                    pharmacies.append(Pharmacy(
+                        name: name,
+                        address: address,
+                        phone: phone,
+                        additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
+                    ))
+                } else {
+                    print("Skipping non-pharmacy entry: \(name)")
+                }
+                
+                // Start new group
+                currentGroup = []
+            }
+        }
+        
+        return pharmacies
+    }
 }
 
 struct PDFViewScreen: View {
@@ -410,57 +457,9 @@ struct PDFViewScreen: View {
         var dayPharmacies: [Pharmacy] = []
         var nightPharmacies: [Pharmacy] = []
         
-        // Helper function to process lines in reverse groups of 3
-        func processPharmacyLines(_ lines: [String]) -> [Pharmacy] {
-            var pharmacies: [Pharmacy] = []
-            var currentGroup: [String] = []
-            
-            // Process lines in groups of 3
-            for line in lines {
-                currentGroup.append(line)
-                if currentGroup.count == 3 {
-                    // Remember: lines are [Additional info, Address, Name] in this order
-                    let additionalInfo = currentGroup[0].trimmingCharacters(in: .whitespacesAndNewlines)
-                    let address = currentGroup[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                    let name = currentGroup[2].trimmingCharacters(in: .whitespacesAndNewlines)
-                    
-                    // Only process if the name contains "FARMACIA"
-                    if name.contains("FARMACIA") {
-                        // Extract phone from additional info if present
-                        var phone = ""
-                        var finalAdditionalInfo = additionalInfo
-                        
-                        if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
-                            phone = String(additionalInfo[phoneMatch])
-                                .replacingOccurrences(of: "Tfno:", with: "")
-                                .trimmingCharacters(in: .whitespacesAndNewlines)
-                            finalAdditionalInfo = additionalInfo
-                                .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
-                                .trimmingCharacters(in: .whitespacesAndNewlines)
-                        }
-                        
-                        // Create pharmacy
-                        pharmacies.append(Pharmacy(
-                            name: name,
-                            address: address,
-                            phone: phone,
-                            additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
-                        ))
-                    } else {
-                        print("Skipping non-pharmacy entry: \(name)")
-                    }
-                    
-                    // Start new group
-                    currentGroup = []
-                }
-            }
-            
-            return pharmacies
-        }
-        
-        // Process both columns
-        dayPharmacies = processPharmacyLines(dayShiftLines)
-        nightPharmacies = processPharmacyLines(nightShiftLines)
+        // Process both columns using the static method
+        dayPharmacies = Pharmacy.parseBatch(from: dayShiftLines)
+        nightPharmacies = Pharmacy.parseBatch(from: nightShiftLines)
         
         // Print size check
         print("\nSize check:")
