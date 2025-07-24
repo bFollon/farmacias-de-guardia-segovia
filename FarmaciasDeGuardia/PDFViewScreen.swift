@@ -154,43 +154,75 @@ extension Pharmacy {
     }
     
     static func parseBatch(from lines: [String]) -> [Pharmacy] {
+        print("\nParsing batch of \(lines.count) lines")
+        
+        // Clean up and filter lines first
+        let cleanLines = lines.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
+        guard !cleanLines.isEmpty else {
+            print("Warning: No valid lines to parse")
+            return []
+        }
+        
+        if cleanLines.count % 3 != 0 {
+            print("Warning: Number of lines (\(cleanLines.count)) is not divisible by 3. Some entries may be incomplete.")
+        }
+        
         var pharmacies: [Pharmacy] = []
         var currentGroup: [String] = []
         
         // Process lines in groups of 3
-        for line in lines {
+        for (index, line) in cleanLines.enumerated() {
             currentGroup.append(line)
+            
             if currentGroup.count == 3 {
                 // Remember: lines are [Additional info, Address, Name] in this order
-                let additionalInfo = currentGroup[0].trimmingCharacters(in: .whitespacesAndNewlines)
-                let address = currentGroup[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                let name = currentGroup[2].trimmingCharacters(in: .whitespacesAndNewlines)
+                let additionalInfo = currentGroup[0]
+                let address = currentGroup[1]
+                let name = currentGroup[2]
                 
-                // Only process if the name contains "FARMACIA"
-                if name.contains("FARMACIA") {
-                    // Extract phone from additional info if present
-                    var phone = ""
-                    var finalAdditionalInfo = additionalInfo
-                    
-                    if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
-                        phone = String(additionalInfo[phoneMatch])
-                            .replacingOccurrences(of: "Tfno:", with: "")
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                        finalAdditionalInfo = additionalInfo
-                            .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                    }
-                    
-                    // Create pharmacy
-                    pharmacies.append(Pharmacy(
-                        name: name,
-                        address: address,
-                        phone: phone,
-                        additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
-                    ))
-                } else {
-                    print("Skipping non-pharmacy entry: \(name)")
+                print("\nProcessing pharmacy group at index \(index - 2):")
+                print("Name: \(name)")
+                print("Address: \(address)")
+                print("Info: \(additionalInfo)")
+                
+                // Validate pharmacy name format
+                if !name.contains("FARMACIA") {
+                    print("Warning: Skipping entry - Invalid pharmacy name format: \(name)")
+                    currentGroup = []
+                    continue
                 }
+                
+                // Extract phone from additional info if present
+                var phone = ""
+                var finalAdditionalInfo = additionalInfo
+                
+                if let phoneMatch = additionalInfo.range(of: "Tfno:\\s*\\d{3}\\s*\\d{6}", options: .regularExpression) {
+                    phone = String(additionalInfo[phoneMatch])
+                        .replacingOccurrences(of: "Tfno:", with: "")
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    finalAdditionalInfo = additionalInfo
+                        .replacingOccurrences(of: String(additionalInfo[phoneMatch]), with: "")
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    print("Extracted phone: \(phone)")
+                } else {
+                    print("No phone number found in additional info")
+                }
+                
+                // Validate address
+                if address.isEmpty {
+                    print("Warning: Empty address for pharmacy: \(name)")
+                }
+                
+                // Create pharmacy
+                pharmacies.append(Pharmacy(
+                    name: name,
+                    address: address,
+                    phone: phone,
+                    additionalInfo: finalAdditionalInfo.isEmpty ? nil : finalAdditionalInfo
+                ))
+                print("Successfully parsed pharmacy: \(name)")
                 
                 // Start new group
                 currentGroup = []
