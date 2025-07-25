@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PharmacyView: View {
     let pharmacy: Pharmacy
@@ -15,12 +16,24 @@ struct PharmacyView: View {
             .font(.system(.body, design: .rounded))
             
             // Address with location icon
-            HStack(spacing: ViewConstants.iconSpacing) {
-                Image(systemName: "location.fill")
-                    .foregroundColor(.secondary.opacity(0.7))
-                    .frame(width: ViewConstants.iconColumnWidth)
-                Text(pharmacy.address)
-                    .font(.subheadline)
+            Button {
+                if let query = "\(pharmacy.name), \(pharmacy.address), Segovia"
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                   let url = URL(string: "maps://?q=\(query)") {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                HStack(spacing: ViewConstants.iconSpacing) {
+                    Image(systemName: "location.fill")
+                        .foregroundColor(.secondary.opacity(0.7))
+                        .frame(width: ViewConstants.iconColumnWidth)
+                    Text(pharmacy.address)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
+                    Image(systemName: "arrow.up.forward.app.fill")
+                        .font(.caption)
+                        .foregroundColor(.blue.opacity(0.7))
+                }
             }
             
             // Phone with phone icon
