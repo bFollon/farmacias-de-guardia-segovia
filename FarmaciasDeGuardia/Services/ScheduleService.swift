@@ -5,15 +5,18 @@ class ScheduleService {
     static private let pdfService = PDFProcessingService()
     static private var cacheInvalidationTimer: Timer?
     
-    static func loadSchedules(from url: URL) -> [PharmacySchedule] {
-        // Return cached schedules if available and timer is still valid
-        if let cached = cachedSchedules {
+    static func loadSchedules(from url: URL, forceRefresh: Bool = false) -> [PharmacySchedule] {
+        // Return cached schedules if available and not forcing refresh
+        if let cached = cachedSchedules, !forceRefresh {
+            print("ScheduleService: Using cached schedules")
             return cached
         }
         
-        // Load and cache if not available
+        // Load and cache if not available or force refresh requested
+        print("ScheduleService: Loading schedules from PDF...")
         let schedules = pdfService.loadPharmacies(from: url)
         cachedSchedules = schedules
+        print("ScheduleService: Successfully cached \(schedules.count) schedules")
         scheduleNextInvalidation()
         return schedules
     }
@@ -31,6 +34,8 @@ class ScheduleService {
         // Get current timestamp
         let now = Date()
         let currentTimestamp = now.timeIntervalSince1970
+        
+        print("ScheduleService: Setting up cache invalidation...")
         
         // Get the duty time info for current timestamp
         let dutyInfo = DutyDate.dutyTimeInfoForTimestamp(currentTimestamp)
@@ -63,9 +68,12 @@ class ScheduleService {
         // Create date for next shift change
         if let nextShiftChange = calendar.date(from: components) {
             // Schedule cache invalidation
-            cacheInvalidationTimer = Timer.scheduledTimer(withTimeInterval: nextShiftChange.timeIntervalSince(now), repeats: false) { _ in
+            let timeInterval = nextShiftChange.timeIntervalSince(now)
+            cacheInvalidationTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { _ in
+                print("ScheduleService: Cache invalidated due to shift change")
                 clearCache()
             }
+            print("ScheduleService: Cache will be invalidated in \(Int(timeInterval/60)) minutes (\(nextShiftChange.formatted(.dateTime)))")
         }
     }
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {

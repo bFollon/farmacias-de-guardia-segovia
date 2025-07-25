@@ -4,6 +4,7 @@ import PDFKit
 struct PDFViewScreen: View {
     @State private var schedules: [PharmacySchedule] = []
     @State private var isPresentingInfo = false
+    @State private var isRefreshing = false
     var url: URL
     
     var body: some View {
@@ -36,6 +37,17 @@ struct PDFViewScreen: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        refreshData()
+                    }) {
+                        Image(systemName: isRefreshing ? "arrow.clockwise.circle.fill" : "arrow.clockwise.circle")
+                            .imageScale(.large)
+                    }
+                    .disabled(isRefreshing)
+                }
+            }
         }
         .onAppear {
             loadPharmacies()
@@ -43,6 +55,21 @@ struct PDFViewScreen: View {
     }
     private func loadPharmacies() {
         schedules = ScheduleService.loadSchedules(from: url)
+    }
+    
+    private func refreshData() {
+        isRefreshing = true
+        
+        // Use GCD to prevent UI blocking
+        DispatchQueue.global(qos: .userInitiated).async {
+            let refreshedSchedules = ScheduleService.loadSchedules(from: url, forceRefresh: true)
+            
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                schedules = refreshedSchedules
+                isRefreshing = false
+            }
+        }
     }
 }
 
