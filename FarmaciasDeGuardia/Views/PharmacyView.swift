@@ -5,7 +5,7 @@ struct PharmacyView: View {
     let pharmacy: Pharmacy
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             // Name with pharmacy cross
             HStack(spacing: ViewConstants.iconSpacing) {
                 Image(systemName: "cross.case.fill")
@@ -59,6 +59,6 @@ struct PharmacyView: View {
                 }
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 16)
     }
 }
