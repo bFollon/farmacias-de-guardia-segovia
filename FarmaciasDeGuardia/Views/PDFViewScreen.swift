@@ -36,16 +36,7 @@ struct PDFViewScreen: View {
                         .padding()
                     }
                 } else {
-                    VStack(spacing: 20) {
-                        Text("No hay farmacias de guardia programadas para hoy")
-                            .font(.headline)
-                            .multilineTextAlignment(.center)
-                        
-                        Text("(\(Date().formatted(date: .long, time: .omitted)))")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding()
+                    NoScheduleView()
                 }
             }
             .navigationTitle("Farmacias de Guardia Hoy")
