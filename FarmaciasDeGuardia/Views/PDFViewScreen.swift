@@ -5,12 +5,30 @@ struct PDFViewScreen: View {
     @State private var schedules: [PharmacySchedule] = []
     @State private var isPresentingInfo = false
     @State private var isRefreshing = false
+    @State private var isLoading = true
     var url: URL
     
     var body: some View {
         NavigationView {
             Group {
-                if let (schedule, shiftType) = ScheduleService.findCurrentSchedule(in: schedules) {
+                if isLoading || isRefreshing {
+                    VStack(spacing: 0) {
+                        VStack(spacing: 16) {
+                            Text("Farmacia de Guardia en Segovia Capital")
+                                .font(.title)
+                                .padding(.horizontal)
+                                .padding(.top, 16)
+                                .multilineTextAlignment(.center)
+                            
+                            Divider()
+                                .background(Color.gray.opacity(0.3))
+                                .padding(.horizontal)
+                        }
+                        .background(Color(.systemBackground))
+                        
+                        LoadingView()
+                    }
+                } else if let (schedule, shiftType) = ScheduleService.findCurrentSchedule(in: schedules) {
                     VStack(spacing: 0) {
                         VStack(spacing: 16) {
                             Text("Farmacia de Guardia en Segovia Capital")
@@ -54,7 +72,14 @@ struct PDFViewScreen: View {
         }
     }
     private func loadPharmacies() {
-        schedules = ScheduleService.loadSchedules(from: url)
+        isLoading = true
+        DispatchQueue.global(qos: .userInitiated).async {
+            let loadedSchedules = ScheduleService.loadSchedules(from: url)
+            DispatchQueue.main.async {
+                schedules = loadedSchedules
+                isLoading = false
+            }
+        }
     }
     
     private func refreshData() {
