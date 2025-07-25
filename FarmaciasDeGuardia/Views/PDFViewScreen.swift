@@ -42,17 +42,9 @@ struct PDFViewScreen: View {
                                 }
                             }
                             
-                            // Show pharmacy list
-                            VStack(alignment: .leading, spacing: 8) {
-                                if shiftType == .day {
-                                    ForEach(schedule.dayShiftPharmacies) { pharmacy in
-                                        PharmacyView(pharmacy: pharmacy)
-                                    }
-                                } else {
-                                    ForEach(schedule.nightShiftPharmacies) { pharmacy in
-                                        PharmacyView(pharmacy: pharmacy)
-                                    }
-                                }
+                            // Show active pharmacy
+                            if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
+                                PharmacyView(pharmacy: pharmacy)
                             }
                         }
                         .padding()
