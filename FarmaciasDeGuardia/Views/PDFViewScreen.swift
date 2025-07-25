@@ -26,21 +26,7 @@ struct PDFViewScreen: View {
                                 .padding(.bottom, 5)
                             
                             // Show the active shift with context help
-                            HStack(alignment: .center, spacing: 8) {
-                                Text(shiftType == .day ? "Guardia diurna (10:15 - 22:00)" : "Guardia nocturna (22:00 - 10:15)")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
-                                
-                                Button {
-                                    isPresentingInfo = true
-                                } label: {
-                                    Image(systemName: "info.circle")
-                                        .foregroundColor(.secondary)
-                                }
-                                .sheet(isPresented: $isPresentingInfo) {
-                                    GuardiaInfoSheet(shiftType: shiftType)
-                                }
-                            }
+                            ShiftHeaderView(shiftType: shiftType, isPresentingInfo: $isPresentingInfo)
                             
                             // Show active pharmacy
                             if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
