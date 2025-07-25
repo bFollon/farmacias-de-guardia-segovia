@@ -4,7 +4,6 @@ import PDFKit
 struct PDFViewScreen: View {
     @State private var schedules: [PharmacySchedule] = []
     @State private var isPresentingInfo = false
-    private let pdfService = PDFProcessingService()
     var url: URL
     
     var body: some View {
@@ -43,7 +42,7 @@ struct PDFViewScreen: View {
         }
     }
     private func loadPharmacies() {
-        schedules = pdfService.loadPharmacies(from: url)
+        schedules = ScheduleService.loadSchedules(from: url)
     }
 }
 

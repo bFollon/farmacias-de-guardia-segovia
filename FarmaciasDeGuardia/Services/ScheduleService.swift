@@ -1,6 +1,24 @@
 import Foundation
 
 class ScheduleService {
+    static private var cachedSchedules: [PharmacySchedule]?
+    static private let pdfService = PDFProcessingService()
+    
+    static func loadSchedules(from url: URL) -> [PharmacySchedule] {
+        // Return cached schedules if available
+        if let cached = cachedSchedules {
+            return cached
+        }
+        
+        // Load and cache if not available
+        let schedules = pdfService.loadPharmacies(from: url)
+        cachedSchedules = schedules
+        return schedules
+    }
+    
+    static func clearCache() {
+        cachedSchedules = nil
+    }
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {
         let now = Date()
         let currentTimestamp = now.timeIntervalSince1970
