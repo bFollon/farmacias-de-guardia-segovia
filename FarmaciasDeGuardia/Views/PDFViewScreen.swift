@@ -21,7 +21,7 @@ struct PDFViewScreen: View {
                     NoScheduleView()
                 }
             }
-            .navigationTitle("Farmacias de Guardia Hoy")
+            .navigationTitle("Farmacia de Guardia")
         }
         .onAppear {
             loadPharmacies()
