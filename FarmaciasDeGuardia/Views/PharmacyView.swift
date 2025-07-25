@@ -5,8 +5,12 @@ struct PharmacyView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(pharmacy.name)
-                .font(.system(.body, design: .rounded))
+            HStack(spacing: 8) {
+                Image(systemName: "cross.case.fill")
+                    .foregroundColor(.secondary.opacity(0.7))
+                Text(pharmacy.name)
+            }
+            .font(.system(.body, design: .rounded))
             Text(pharmacy.address)
                 .font(.subheadline)
             if !pharmacy.phone.isEmpty {

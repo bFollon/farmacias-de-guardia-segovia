@@ -6,6 +6,9 @@ struct ShiftHeaderView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
+            Image(systemName: shiftType == .day ? "sun.max.fill" : "moon.stars.fill")
+                .foregroundColor(.secondary.opacity(0.7))
+            
             Text(shiftType == .day ? "Guardia diurna (10:15 - 22:00)" : "Guardia nocturna (22:00 - 10:15)")
                 .font(.headline)
                 .foregroundColor(.secondary)
