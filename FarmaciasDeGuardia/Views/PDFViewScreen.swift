@@ -3,6 +3,7 @@ import PDFKit
 
 struct PDFViewScreen: View {
     @State private var schedules: [PharmacySchedule] = []
+    @State private var isPresentingInfo = false
     private let pdfService = PDFProcessingService()
     var url: URL
 
@@ -20,7 +21,7 @@ struct PDFViewScreen: View {
                     
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Para hoy, \(dateFormatter.string(from: today)) a las \(today.formatted(.dateTime.hour().minute()))")
+                            Text("\(dateFormatter.string(from: today)) · \(today.formatted(.dateTime.hour().minute()))")
                                 .font(.title2)
                                 .padding(.bottom, 5)
                             
@@ -30,11 +31,27 @@ struct PDFViewScreen: View {
                                     .font(.headline)
                                     .foregroundColor(.secondary)
                                 
-                                Button(action: {}) {
+                                Button {
+                                    isPresentingInfo = true
+                                } label: {
                                     Image(systemName: "info.circle")
+                                        .foregroundColor(.secondary)
                                 }
-                                .help(shiftType == .day ? "Farmacia de guardia para el horario diurno de hoy" : "Farmacia que comenzó su guardia nocturna el \(schedule.date.dayOfWeek) \(schedule.date.day) a las 22:00 y continúa hasta las 10:15 de hoy")
-                                .foregroundColor(.secondary)
+                                .sheet(isPresented: $isPresentingInfo) {
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        Text("Información de Guardia")
+                                            .font(.headline)
+                                        
+                                        Text(shiftType == .day 
+                                            ? "Farmacia de guardia para el horario diurno de hoy"
+                                            : "Farmacia que comenzó su guardia nocturna el \(schedule.date.dayOfWeek) \(schedule.date.day) a las 22:00 y continúa hasta las 10:15 de hoy")
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .presentationDetents([.medium])
+                                }
                             }
                             
                             // Show pharmacy list
