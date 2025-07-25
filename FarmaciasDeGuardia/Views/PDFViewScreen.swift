@@ -11,17 +11,25 @@ struct PDFViewScreen: View {
         NavigationView {
             Group {
                 if let (schedule, shiftType) = ScheduleService.findCurrentSchedule(in: schedules) {
-                    ScheduleContentView(
-                        schedule: schedule,
-                        shiftType: shiftType,
-                        isPresentingInfo: $isPresentingInfo,
-                        formattedDateTime: ScheduleService.getCurrentDateTime()
-                    )
+                    VStack(spacing: 0) {
+                        Text("Farmacia de Guardia en Segovia Capital")
+                            .font(.title)
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+                            .multilineTextAlignment(.center)
+                        
+                        ScheduleContentView(
+                            schedule: schedule,
+                            shiftType: shiftType,
+                            isPresentingInfo: $isPresentingInfo,
+                            formattedDateTime: ScheduleService.getCurrentDateTime()
+                        )
+                    }
                 } else {
                     NoScheduleView()
                 }
             }
-            .navigationTitle("Farmacia de Guardia")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             loadPharmacies()
