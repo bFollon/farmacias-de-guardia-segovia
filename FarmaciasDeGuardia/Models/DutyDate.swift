@@ -101,3 +101,75 @@ extension DutyDate {
         return DutyDate(dayOfWeek: String(dayOfWeek), day: day, month: month, year: year)
     }
 }
+
+extension DutyDate {
+    public enum ShiftType {
+        case day    // 10:15 to 22:00 same day
+        case night  // 22:00 to 10:15 next day
+    }
+    
+    public struct DutyTimeInfo {
+        public let date: DutyDate
+        public let shiftType: ShiftType
+    }
+    
+    /// Determines which duty schedule should be active for a given timestamp
+    /// For example, at 00:05 on July 26th, we need the night shift from July 25th
+    public static func dutyTimeInfoForTimestamp(_ timestamp: TimeInterval) -> DutyTimeInfo {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let calendar = Calendar.current
+        
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        guard let hour = components.hour, let minute = components.minute else {
+            fatalError("Could not extract time components")
+        }
+        
+        // Convert current time to minutes since midnight for easier comparison
+        let currentTimeInMinutes = hour * 60 + minute
+        let morningTransitionInMinutes = 10 * 60 + 15  // 10:15
+        let eveningTransitionInMinutes = 22 * 60       // 22:00
+        
+        // If we're between 00:00 and 10:15, we need previous day's night shift
+        if currentTimeInMinutes < morningTransitionInMinutes {
+            // Get previous day's date
+            guard let previousDay = calendar.date(byAdding: .day, value: -1, to: date) else {
+                fatalError("Could not calculate previous day")
+            }
+            
+            let prevComponents = calendar.dateComponents([.year, .month, .day], from: previousDay)
+            return DutyTimeInfo(
+                date: DutyDate(
+                    dayOfWeek: "", // This will be filled in by the data
+                    day: prevComponents.day ?? 0,
+                    month: "", // This will be matched by timestamp
+                    year: prevComponents.year
+                ),
+                shiftType: .night
+            )
+        }
+        
+        // If we're between 10:15 and 22:00, we need current day's day shift
+        if currentTimeInMinutes < eveningTransitionInMinutes {
+            return DutyTimeInfo(
+                date: DutyDate(
+                    dayOfWeek: "", // This will be filled in by the data
+                    day: components.day ?? 0,
+                    month: "", // This will be matched by timestamp
+                    year: components.year
+                ),
+                shiftType: .day
+            )
+        }
+        
+        // If we're between 22:00 and 23:59, we need current day's night shift
+        return DutyTimeInfo(
+            date: DutyDate(
+                dayOfWeek: "", // This will be filled in by the data
+                day: components.day ?? 0,
+                month: "", // This will be matched by timestamp
+                year: components.year
+            ),
+            shiftType: .night
+        )
+    }
+}
