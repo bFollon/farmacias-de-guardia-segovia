@@ -9,9 +9,11 @@ struct ScheduleContentView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                HStack(spacing: 8) {
+                // Date and time with calendar icon
+                HStack(spacing: ViewConstants.iconSpacing) {
                     Image(systemName: "calendar")
                         .foregroundColor(.secondary.opacity(0.7))
+                        .frame(width: ViewConstants.iconColumnWidth)
                     Text(formattedDateTime)
                 }
                 .font(.title2)

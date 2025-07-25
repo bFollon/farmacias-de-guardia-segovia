@@ -5,9 +5,10 @@ struct ShiftHeaderView: View {
     @Binding var isPresentingInfo: Bool
     
     var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .center, spacing: ViewConstants.iconSpacing) {
             Image(systemName: shiftType == .day ? "sun.max.fill" : "moon.stars.fill")
                 .foregroundColor(.secondary.opacity(0.7))
+                .frame(width: ViewConstants.iconColumnWidth)
             
             Text(shiftType == .day ? "Guardia diurna (10:15 - 22:00)" : "Guardia nocturna (22:00 - 10:15)")
                 .font(.headline)
