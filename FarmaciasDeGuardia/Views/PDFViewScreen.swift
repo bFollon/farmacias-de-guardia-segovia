@@ -6,22 +6,22 @@ struct PDFViewScreen: View {
     @State private var isPresentingInfo = false
     private let pdfService = PDFProcessingService()
     var url: URL
+    
+    private var formattedDateTime: String {
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
+        return "\(dateFormatter.string(from: today)) · \(today.formatted(.dateTime.hour().minute()))"
+    }
 
     var body: some View {
         NavigationView {
             Group {
                 if let (schedule, shiftType) = findTodaysSchedule() {
-                    let today = Date()
-                    let dateFormatter: DateFormatter = {
-                        let formatter = DateFormatter()
-                        formatter.locale = Locale(identifier: "es_ES")
-                        formatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
-                        return formatter
-                    }()
-                    
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("\(dateFormatter.string(from: today)) · \(today.formatted(.dateTime.hour().minute()))")
+                            Text(formattedDateTime)
                                 .font(.title2)
                                 .padding(.bottom, 5)
                             
