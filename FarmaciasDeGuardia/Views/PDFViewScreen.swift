@@ -39,13 +39,27 @@ struct PDFViewScreen: View {
                                 }
                                 .sheet(isPresented: $isPresentingInfo) {
                                     VStack(alignment: .leading, spacing: 16) {
-                                        Text("Información de Guardia")
+                                        Text("Horarios de Guardia")
                                             .font(.headline)
                                         
-                                        Text(shiftType == .day 
-                                            ? "Farmacia de guardia para el horario diurno de hoy"
-                                            : "Farmacia que comenzó su guardia nocturna el \(schedule.date.dayOfWeek) \(schedule.date.day) a las 22:00 y continúa hasta las 10:15 de hoy")
-                                            .multilineTextAlignment(.leading)
+                                        if shiftType == .day {
+                                            Text("El turno diurno empieza a las 10:15 y se extiende hasta las 22:00 del mismo día.")
+                                                .multilineTextAlignment(.leading)
+                                        } else {
+                                            VStack(alignment: .leading, spacing: 8) {
+                                                Text("El turno nocturno empieza a las 22:00 y se extiende hasta las 10:15 del día siguiente.")
+                                                    .multilineTextAlignment(.leading)
+                                                
+                                                // Only show this extra context if we're between 00:00 and 10:15
+                                                if Calendar.current.component(.hour, from: Date()) < 10 || 
+                                                   (Calendar.current.component(.hour, from: Date()) == 10 && 
+                                                    Calendar.current.component(.minute, from: Date()) < 15) {
+                                                    Text("Por ello, la farmacia que está de guardia ahora comenzó su turno ayer a las 22:00.")
+                                                        .foregroundColor(.secondary)
+                                                        .multilineTextAlignment(.leading)
+                                                }
+                                            }
+                                        }
                                         
                                         Spacer()
                                     }
