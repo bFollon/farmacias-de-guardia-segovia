@@ -12,11 +12,18 @@ struct PDFViewScreen: View {
             Group {
                 if let (schedule, shiftType) = ScheduleService.findCurrentSchedule(in: schedules) {
                     VStack(spacing: 0) {
-                        Text("Farmacia de Guardia en Segovia Capital")
-                            .font(.title)
-                            .padding(.horizontal)
-                            .padding(.top, 8)
-                            .multilineTextAlignment(.center)
+                        VStack(spacing: 16) {
+                            Text("Farmacia de Guardia en Segovia Capital")
+                                .font(.title)
+                                .padding(.horizontal)
+                                .padding(.top, 16)
+                                .multilineTextAlignment(.center)
+                            
+                            Divider()
+                                .background(Color.gray.opacity(0.3))
+                                .padding(.horizontal)
+                        }
+                        .background(Color(.systemBackground))
                         
                         ScheduleContentView(
                             schedule: schedule,
