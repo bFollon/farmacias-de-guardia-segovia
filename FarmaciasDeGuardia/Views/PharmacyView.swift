@@ -1,8 +1,30 @@
 import SwiftUI
 import UIKit
+import MapKit
+import CoreLocation
 
 struct PharmacyView: View {
     let pharmacy: Pharmacy
+    @State private var showingMapOptions = false
+    
+    private func openInMaps(using app: MapApp) {
+        let query = "\(pharmacy.name), \(pharmacy.address), Segovia, Spain"
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        var urlString: String
+        switch app {
+        case .apple:
+            urlString = "maps://?q=\(query)"
+        case .google:
+            urlString = "comgooglemaps://?q=\(query)"
+        case .waze:
+            urlString = "waze://?q=\(query)"
+        }
+        
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -17,11 +39,7 @@ struct PharmacyView: View {
             
             // Address with location icon
             Button {
-                if let query = "\(pharmacy.name), \(pharmacy.address), Segovia"
-                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                   let url = URL(string: "maps://?q=\(query)") {
-                    UIApplication.shared.open(url)
-                }
+                showingMapOptions = true
             } label: {
                 HStack(spacing: ViewConstants.iconSpacing) {
                     Image(systemName: "location.fill")
@@ -60,5 +78,15 @@ struct PharmacyView: View {
             }
         }
         .padding(.vertical, 16)
+        .confirmationDialog("Abrir en Maps", isPresented: $showingMapOptions) {
+            ForEach(MapApp.availableApps(), id: \.self) { app in
+                Button(app.rawValue) {
+                    openInMaps(using: app)
+                }
+            }
+            Button("Cancelar", role: .cancel) { }
+        } message: {
+            Text("Elije una aplicación de mapas")
+        }
     }
 }
