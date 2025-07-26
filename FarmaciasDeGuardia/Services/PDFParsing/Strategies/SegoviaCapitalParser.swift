@@ -2,23 +2,58 @@ import Foundation
 import PDFKit
 
 /// Parser implementation for Segovia Capital pharmacy schedules.
-/// Currently wraps the existing PDFProcessingService parsing logic to maintain compatibility.
+/// Wraps our new SegoviaPDFParser to maintain compatibility while we transition.
 public class SegoviaCapitalParser: PDFParsingStrategy {
-    public init() {}
+    private let parser: SegoviaPDFParser
+    
+    public init() {
+        self.parser = SegoviaPDFParser()
+    }
     
     public func parseSchedules(from pdf: PDFDocument) -> [PharmacySchedule] {
-        // For now, just delegate to the existing service to maintain current functionality
-        let service = PDFProcessingService()
         var allSchedules: [PharmacySchedule] = []
         
-        // Replicate the existing page-by-page parsing logic
+        // Process each page
         for pageIndex in 0..<pdf.pageCount {
-            if let page = pdf.page(at: pageIndex) {
-                let pageSchedules = service.extractTextWithLayout(from: page)
-                allSchedules.append(contentsOf: pageSchedules)
+            guard let page = pdf.page(at: pageIndex) else { continue }
+            
+            // Get the column text from our new parser
+            let (dates, dayShiftLines, nightShiftLines) = parser.extractColumnText(from: page)
+            
+            // Convert pharmacy lines to Pharmacy objects
+            let dayPharmacies = Pharmacy.parseBatch(from: dayShiftLines)
+            let nightPharmacies = Pharmacy.parseBatch(from: nightShiftLines)
+            
+            // Create schedules by matching dates with pharmacies
+            for (index, dateString) in dates.enumerated() {
+                if let date = DutyDate.parse(dateString),
+                   index < dayPharmacies.count && index < nightPharmacies.count {
+                    allSchedules.append(PharmacySchedule(
+                        date: date,
+                        dayShiftPharmacies: [dayPharmacies[index]],
+                        nightShiftPharmacies: [nightPharmacies[index]]
+                    ))
+                }
             }
         }
         
-        return allSchedules
+        // Sort schedules by date
+        return allSchedules.sorted { first, second in
+            let currentYear = DutyDate.getCurrentYear()
+            let firstYear = first.date.year ?? currentYear
+            let secondYear = second.date.year ?? currentYear
+            
+            if firstYear != secondYear {
+                return firstYear < secondYear
+            }
+            
+            let firstMonth = DutyDate.monthToNumber(first.date.month) ?? 0
+            let secondMonth = DutyDate.monthToNumber(second.date.month) ?? 0
+            
+            if firstMonth != secondMonth {
+                return firstMonth < secondMonth
+            }
+            return first.date.day < second.date.day
+        }
     }
 }
