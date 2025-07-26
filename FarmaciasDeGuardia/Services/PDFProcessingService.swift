@@ -14,7 +14,17 @@ public class PDFProcessingService {
         static let columnGap: CGFloat = 5
     }
     
-    public init() {}
+    /// Current active region. For now, always Segovia Capital.
+    private let region: Region
+    
+    public init(region: Region = .segoviaCapital) {
+        self.region = region
+    }
+    
+    /// Loads pharmacy schedules for the current region
+    public func loadPharmacies() -> [PharmacySchedule] {
+        return loadPharmacies(from: region.pdfURL)
+    }
     
     private func removeDuplicateAdjacent(blocks: [(y: CGFloat, text: String)]) -> [(y: CGFloat, text: String)] {
         guard !blocks.isEmpty else { return [] }
@@ -243,7 +253,8 @@ public class PDFProcessingService {
         return schedules
     }
     
-    public func loadPharmacies(from url: URL) -> [PharmacySchedule] {
+    // Internal method, kept for backward compatibility and testing
+    func loadPharmacies(from url: URL) -> [PharmacySchedule] {
         guard let pdfDocument = PDFDocument(url: url) else {
             return []
         }
