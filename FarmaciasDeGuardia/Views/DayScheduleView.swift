@@ -29,7 +29,7 @@ struct DayScheduleView: View {
                 
                 // Day shift section
                 VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .day, isPresentingInfo: $isPresentingDayInfo)
+                    ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
                     if let pharmacy = schedule.dayShiftPharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
                     }
@@ -40,7 +40,7 @@ struct DayScheduleView: View {
                 
                 // Night shift section
                 VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .night, isPresentingInfo: $isPresentingNightInfo)
+                    ShiftHeaderView(shiftType: .night, date: date, isPresentingInfo: $isPresentingNightInfo)
                     if let pharmacy = schedule.nightShiftPharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
                     }

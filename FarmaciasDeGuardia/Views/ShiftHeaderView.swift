@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ShiftHeaderView: View {
     let shiftType: DutyDate.ShiftType
+    let date: Date
     @Binding var isPresentingInfo: Bool
     
     var body: some View {
@@ -21,7 +22,7 @@ struct ShiftHeaderView: View {
                     .foregroundColor(.secondary)
             }
             .sheet(isPresented: $isPresentingInfo) {
-                GuardiaInfoSheet(shiftType: shiftType)
+                GuardiaInfoSheet(shiftType: shiftType, date: date)
             }
         }
     }

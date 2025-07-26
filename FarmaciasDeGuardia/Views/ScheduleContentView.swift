@@ -20,7 +20,7 @@ struct ScheduleContentView: View {
                 .padding(.bottom, 5)
                 
                 // Show the active shift with context help
-                ShiftHeaderView(shiftType: shiftType, isPresentingInfo: $isPresentingInfo)
+                ShiftHeaderView(shiftType: shiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
                 
                 // Show active pharmacy
                 if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
