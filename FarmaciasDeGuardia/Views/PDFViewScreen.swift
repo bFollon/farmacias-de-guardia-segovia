@@ -106,7 +106,7 @@ struct PDFViewScreen: View {
                     )
                     .datePickerStyle(.graphical)
                     .padding()
-                    .onChange(of: selectedDate) { _ in
+                    .onChange(of: selectedDate) { oldDate, newDate in
                         isShowingDatePicker = false
                     }
                     .navigationTitle("Seleccionar fecha")
