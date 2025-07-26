@@ -43,8 +43,24 @@ struct ScheduleContentView: View {
                          destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!)
                         .font(.footnote)
                     
+                    let emailBody = """
+                        Hola,
+                        
+                        He encontrado un error en la farmacia de guardia mostrada para:
+                        
+                        Fecha y hora: \(formattedDateTime)
+                        Turno: \(shiftType == .day ? "Diurno" : "Nocturno")
+                        Farmacia mostrada: \((shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first)?.name ?? "")
+                        Dirección: \((shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first)?.address ?? "")
+                        
+                        La farmacia correcta es:
+                        
+                        
+                        Gracias.
+                        """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    
                     Link("¿Has encontrado algún error? Repórtalo aquí",
-                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia")!)
+                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia&body=\(emailBody)")!)
                         .font(.footnote)
                         .padding(.top, 8)
                 }
