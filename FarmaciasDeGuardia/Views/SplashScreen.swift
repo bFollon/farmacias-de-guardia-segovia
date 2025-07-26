@@ -9,7 +9,8 @@ struct SplashScreen: View {
                 .foregroundColor(.blue)
             Spacer()
         }
-        .background(Color.white)
+        .background(Color(.systemBackground))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
