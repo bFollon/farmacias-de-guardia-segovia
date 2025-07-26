@@ -39,7 +39,12 @@ struct PharmacyView: View {
             
             // Address with location icon
             Button {
-                showingMapOptions = true
+                let availableApps = MapApp.availableApps()
+                if availableApps.count == 1 {
+                    openInMaps(using: availableApps[0])
+                } else {
+                    showingMapOptions = true
+                }
             } label: {
                 HStack(spacing: ViewConstants.iconSpacing) {
                     Image(systemName: "location.fill")
