@@ -2,7 +2,9 @@ import SwiftUI
 
 struct DayScheduleView: View {
     let schedule: PharmacySchedule
-    @Binding var isPresentingInfo: Bool
+    @Binding var isPresentingInfo: Bool // Keep for backward compatibility
+    @State private var isPresentingDayInfo: Bool = false
+    @State private var isPresentingNightInfo: Bool = false
     let date: Date
     
     private var formattedDate: String {
@@ -27,7 +29,7 @@ struct DayScheduleView: View {
                 
                 // Day shift section
                 VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .day, isPresentingInfo: $isPresentingInfo)
+                    ShiftHeaderView(shiftType: .day, isPresentingInfo: $isPresentingDayInfo)
                     if let pharmacy = schedule.dayShiftPharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
                     }
@@ -38,7 +40,7 @@ struct DayScheduleView: View {
                 
                 // Night shift section
                 VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .night, isPresentingInfo: $isPresentingInfo)
+                    ShiftHeaderView(shiftType: .night, isPresentingInfo: $isPresentingNightInfo)
                     if let pharmacy = schedule.nightShiftPharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
                     }
