@@ -68,7 +68,7 @@ struct PharmacyView: View {
                         Image(systemName: "phone.fill")
                             .foregroundColor(.secondary.opacity(0.7))
                             .frame(width: ViewConstants.iconColumnWidth)
-                        Text(pharmacy.phone)
+                        Text(pharmacy.formattedPhone)
                             .font(.footnote)
                             .foregroundColor(.primary)
                             .underline()

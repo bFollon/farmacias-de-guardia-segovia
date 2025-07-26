@@ -7,6 +7,22 @@ public struct Pharmacy: Identifiable {
     public let phone: String
     public let additionalInfo: String?
     
+    public var formattedPhone: String {
+        let cleanNumber = phone.replacingOccurrences(of: " ", with: "")
+        var result = ""
+        var count = 0
+        
+        for char in cleanNumber {
+            if count > 0 && count % 3 == 0 {
+                result += " "
+            }
+            result += String(char)
+            count += 1
+        }
+        
+        return result.trimmingCharacters(in: .whitespaces)
+    }
+    
     public init(name: String, address: String, phone: String, additionalInfo: String?) {
         self.name = name
         self.address = address
