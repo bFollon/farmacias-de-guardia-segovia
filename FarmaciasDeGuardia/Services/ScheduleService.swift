@@ -103,4 +103,12 @@ class ScheduleService {
         dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
         return "\(dateFormatter.string(from: today)) · \(today.formatted(.dateTime.hour().minute()))"
     }
+    static func findSchedule(for date: Date, in schedules: [PharmacySchedule]) -> PharmacySchedule? {
+        let calendar = Calendar.current
+        return schedules.first { schedule in
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+            return calendar.isDate(scheduleDate, inSameDayAs: date)
+        }
+    }
 }

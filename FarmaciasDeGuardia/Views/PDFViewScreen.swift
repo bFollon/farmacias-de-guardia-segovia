@@ -6,7 +6,19 @@ struct PDFViewScreen: View {
     @State private var isPresentingInfo = false
     @State private var isRefreshing = false
     @State private var isLoading = true
+    @State private var selectedDate: Date = Date()
+    @State private var isShowingDatePicker = false
     var url: URL
+    
+    private var dateButtonText: String {
+        if Calendar.current.isDateInToday(selectedDate) {
+            return "Hoy"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter.string(from: selectedDate)
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -28,7 +40,7 @@ struct PDFViewScreen: View {
                         
                         LoadingView()
                     }
-                } else if let (schedule, shiftType) = ScheduleService.findCurrentSchedule(in: schedules) {
+                } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
                     VStack(spacing: 0) {
                         VStack(spacing: 16) {
                             Text("Farmacia de Guardia en Segovia Capital")
@@ -43,12 +55,21 @@ struct PDFViewScreen: View {
                         }
                         .background(Color(.systemBackground))
                         
-                        ScheduleContentView(
-                            schedule: schedule,
-                            shiftType: shiftType,
-                            isPresentingInfo: $isPresentingInfo,
-                            formattedDateTime: ScheduleService.getCurrentDateTime()
-                        )
+                        if Calendar.current.isDateInToday(selectedDate),
+                           let current = ScheduleService.findCurrentSchedule(in: schedules) {
+                            ScheduleContentView(
+                                schedule: current.0,
+                                shiftType: current.1,
+                                isPresentingInfo: $isPresentingInfo,
+                                formattedDateTime: ScheduleService.getCurrentDateTime()
+                            )
+                        } else {
+                            DayScheduleView(
+                                schedule: schedule,
+                                isPresentingInfo: $isPresentingInfo,
+                                date: selectedDate
+                            )
+                        }
                     }
                 } else {
                     NoScheduleView()
@@ -56,6 +77,16 @@ struct PDFViewScreen: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        isShowingDatePicker = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "calendar")
+                            Text(dateButtonText)
+                        }
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         refreshData()
@@ -65,6 +96,30 @@ struct PDFViewScreen: View {
                     }
                     .disabled(isRefreshing)
                 }
+            }
+            .sheet(isPresented: $isShowingDatePicker) {
+                NavigationView {
+                    DatePicker("Seleccionar fecha",
+                             selection: $selectedDate,
+                             in: ...Date().addingTimeInterval(86400 * 365), // Up to 1 year in the future
+                             displayedComponents: .date
+                    )
+                    .datePickerStyle(.graphical)
+                    .padding()
+                    .onChange(of: selectedDate) { _ in
+                        isShowingDatePicker = false
+                    }
+                    .navigationTitle("Seleccionar fecha")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Listo") {
+                                isShowingDatePicker = false
+                            }
+                        }
+                    }
+                }
+                .presentationDetents([.medium])
             }
         }
         .onAppear {
