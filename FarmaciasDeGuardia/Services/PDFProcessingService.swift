@@ -2,6 +2,18 @@ import Foundation
 import PDFKit
 
 public class PDFProcessingService {
+    // Segovia Capital PDF layout constants
+    private enum SegoviaLayout {
+        /// The estimated margin from PDF edges
+        static let pageMargin: CGFloat = 40
+        
+        /// Width ratio for the date column (just enough for "miércoles, 19 de febrero")
+        static let dateColumnWidthRatio: CGFloat = 0.22
+        
+        /// Gap between columns to prevent overlap
+        static let columnGap: CGFloat = 5
+    }
+    
     public init() {}
     
     private func removeDuplicateAdjacent(blocks: [(y: CGFloat, text: String)]) -> [(y: CGFloat, text: String)] {
@@ -37,20 +49,16 @@ public class PDFProcessingService {
         let scanIncrement: CGFloat = baseHeight / 2
         
         // Define margins and column layout
-        let pageMargin: CGFloat = 40 // Estimated margin from PDF edges
-        let contentWidth = pageBounds.width - (2 * pageMargin)
+        let contentWidth = pageBounds.width - (2 * SegoviaLayout.pageMargin)
         
         // Column positions and widths - adjusted to be more precise
-        let dateColumnWidth = contentWidth * 0.22 // Just enough for "miércoles, 19 de febrero"
+        let dateColumnWidth = contentWidth * SegoviaLayout.dateColumnWidthRatio
         let pharmacyColumnWidth = (contentWidth - dateColumnWidth) / 2 // Split remaining space evenly
         
-        // Add small gaps between columns to prevent overlap
-        let columnGap: CGFloat = 5
-        
         // Column X positions
-        let dateColumnX = pageMargin
-        let dayColumnX = dateColumnX + dateColumnWidth + columnGap
-        let nightColumnX = dayColumnX + pharmacyColumnWidth + columnGap
+        let dateColumnX = SegoviaLayout.pageMargin
+        let dayColumnX = dateColumnX + dateColumnWidth + SegoviaLayout.columnGap
+        let nightColumnX = dayColumnX + pharmacyColumnWidth + SegoviaLayout.columnGap
         
         var dateColumn: [(y: CGFloat, text: String)] = []
         var dayShiftColumn: [(y: CGFloat, text: String)] = []
