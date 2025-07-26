@@ -101,7 +101,7 @@ class ScheduleService {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "es_ES")
         dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
-        return "\(dateFormatter.string(from: today)) · \(today.formatted(.dateTime.hour().minute()))"
+        return "\(dateFormatter.string(from: today)) · Ahora"
     }
     static func findSchedule(for date: Date, in schedules: [PharmacySchedule]) -> PharmacySchedule? {
         let calendar = Calendar.current
