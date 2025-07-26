@@ -53,20 +53,26 @@ struct PharmacyView: View {
                     Text(pharmacy.address)
                         .font(.subheadline)
                         .foregroundColor(.primary)
-                    Image(systemName: "arrow.up.forward.app.fill")
-                        .font(.caption)
-                        .foregroundColor(.blue.opacity(0.7))
+                        .underline()
                 }
             }
             
             // Phone with phone icon
             if !pharmacy.phone.isEmpty {
-                HStack(spacing: ViewConstants.iconSpacing) {
-                    Image(systemName: "phone.fill")
-                        .foregroundColor(.secondary.opacity(0.7))
-                        .frame(width: ViewConstants.iconColumnWidth)
-                    Text(pharmacy.phone)
-                        .font(.footnote)
+                Button {
+                    if let phoneURL = URL(string: "tel://\(pharmacy.phone.replacingOccurrences(of: " ", with: ""))") {
+                        UIApplication.shared.open(phoneURL)
+                    }
+                } label: {
+                    HStack(spacing: ViewConstants.iconSpacing) {
+                        Image(systemName: "phone.fill")
+                            .foregroundColor(.secondary.opacity(0.7))
+                            .frame(width: ViewConstants.iconColumnWidth)
+                        Text(pharmacy.phone)
+                            .font(.footnote)
+                            .foregroundColor(.primary)
+                            .underline()
+                    }
                 }
             }
             
