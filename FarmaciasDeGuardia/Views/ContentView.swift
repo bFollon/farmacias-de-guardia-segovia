@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showPDFScreen = false
+    @State private var selectedPDFURL: URL?
 
     var body: some View {
         VStack {
@@ -13,14 +13,8 @@ struct ContentView: View {
                 ForEach(buttonData, id: \.self) { button in
                     Button(action: {
                         if button.title == "Segovia Capital" {
-                            if let pdfURL = Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf") {
-                                print("PDF URL: \(pdfURL)") // Debug statement
-                                showPDFScreen = true
-                            } else {
-                                print("PDF file not found in bundle.")
-                            }
+                            selectedPDFURL = Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")
                         }
-                        // Add actions for other buttons here
                     }) {
                         VStack {
                             Text(button.image)
@@ -37,10 +31,15 @@ struct ContentView: View {
             }
             Spacer()
         }
-        .sheet(isPresented: $showPDFScreen) {
-            PDFViewScreen(url: Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!)
+        .sheet(item: $selectedPDFURL) { url in
+            PDFViewScreen(url: url)
         }
     }
+}
+
+// Make URL conform to Identifiable so we can use sheet(item:)
+extension URL: Identifiable {
+    public var id: String { self.absoluteString }
 }
 
 let buttonData: [ButtonData] = [

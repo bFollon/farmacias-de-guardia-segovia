@@ -3,7 +3,7 @@ import PDFKit
 
 public class PDFProcessingService {
     /// Current active region. For now, always Segovia Capital.
-    private let region: Region
+    private var region: Region
     
     /// Registry of parsing strategies for each region
     private var parsingStrategies: [String: PDFParsingStrategy] = [:]
@@ -41,6 +41,14 @@ public class PDFProcessingService {
         
         print("Loading schedules for \(region.name)")
         return parser.parseSchedules(from: pdfDocument)
+    }
+    
+    /// Updates the current region and returns schedules for that region
+    /// - Parameter newRegion: The new region to update to
+    /// - Returns: An array of `PharmacySchedule` for the new region
+    public func loadPharmacies(for newRegion: Region) -> [PharmacySchedule] {
+        self.region = newRegion
+        return loadPharmacies()
     }
     
     /// Internal method, kept for backward compatibility and testing
