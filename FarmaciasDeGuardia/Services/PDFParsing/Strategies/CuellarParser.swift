@@ -228,8 +228,9 @@ class CuellarParser: PDFParsingStrategy {
         // "JUEVES 4 Y VIERNES 5 de SEPTIEMBRE" followed by pharmacy
         // "SABADO 6 Y DOMINGO 7 de Septiembre" followed by pharmacy
         
-        // Match patterns like "31 DE AGOSTO" and "1 DE SEPTIEMBRE"
-        let datePattern = #"(\d+)\s+DE\s+(AGOSTO|SEPTIEMBRE|Septiembre)"#
+        // Handle different September transition patterns
+        // Like "31 DE AGOSTO" or just "2" in "MARTES 2"
+        let datePattern = #"(?:(\d+)\s+DE\s+(AGOSTO|SEPTIEMBRE|Septiembre)|(?:LUNES|MARTES|MIERCOLES|JUEVES|VIERNES|SABADO|DOMINGO)\s+(\d+)(?:\s+[Dd][Ee]\s+(?:SEPTIEMBRE|Septiembre))?)"#
         let regex = try? NSRegularExpression(pattern: datePattern)
         
         guard let matches = regex?.matches(in: line, range: NSRange(line.startIndex..., in: line)) else {
@@ -241,10 +242,22 @@ class CuellarParser: PDFParsingStrategy {
         
         var dates: [String] = []
         for match in matches {
+            var day: String?
+            var month: String?
+            
+            // Try first pattern: "31 DE AGOSTO"
             if let dayRange = Range(match.range(at: 1), in: line),
                let monthRange = Range(match.range(at: 2), in: line) {
-                let day = String(line[dayRange])
-                let month = line[monthRange].lowercased()
+                day = String(line[dayRange])
+                month = String(line[monthRange].lowercased())
+            }
+            // Try second pattern: "MARTES 2"
+            else if let dayRange = Range(match.range(at: 3), in: line) {
+                day = String(line[dayRange])
+                month = line.contains("SEPTIEMBRE") || line.contains("Septiembre") ? "septiembre" : "agosto"
+            }
+            
+            if let day = day, let month = month {
                 let monthAbbr = String(month.prefix(3))
                 dates.append("\(String(format: "%02d", Int(day) ?? 0))-\(monthAbbr)")
             }
