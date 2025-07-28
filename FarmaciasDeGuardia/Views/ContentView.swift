@@ -1,7 +1,8 @@
 import SwiftUI
+import PDFKit
 
 struct ContentView: View {
-    @State private var selectedPDFURL: URL?
+    @State private var selectedRegion: Region?
 
     var body: some View {
         VStack {
@@ -12,8 +13,13 @@ struct ContentView: View {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                 ForEach(buttonData, id: \.self) { button in
                     Button(action: {
-                        if button.title == "Segovia Capital" {
-                            selectedPDFURL = Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")
+                        switch button.title {
+                        case "Segovia Capital":
+                            selectedRegion = .segoviaCapital
+                        case "Cuéllar":
+                            selectedRegion = .cuellar
+                        default:
+                            break
                         }
                     }) {
                         VStack {
@@ -31,16 +37,14 @@ struct ContentView: View {
             }
             Spacer()
         }
-        .sheet(item: $selectedPDFURL) { url in
-            PDFViewScreen(url: url)
+        .sheet(item: $selectedRegion) { region in
+            PDFViewScreen(url: region.pdfURL, region: region)
         }
     }
 }
 
-// Make URL conform to Identifiable so we can use sheet(item:)
-extension URL: Identifiable {
-    public var id: String { self.absoluteString }
-}
+// Make Region conform to Identifiable
+extension Region: Identifiable {}
 
 let buttonData: [ButtonData] = [
     ButtonData(title: "Segovia Capital", image: "🏙"),

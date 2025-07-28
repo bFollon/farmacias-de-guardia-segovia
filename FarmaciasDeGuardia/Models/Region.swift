@@ -57,15 +57,14 @@ extension Region {
         )
     )
     
-    /// Example: Cuéllar region (to be implemented)
+    /// Cuéllar region
     public static let cuellar = Region(
         id: "cuellar",
         name: "Cuéllar",
-        pdfURL: Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-CUELLAR-2025", withExtension: "pdf") ?? URL(string: "https://example.com/cuellar-schedule.pdf")!,
+        pdfURL: Bundle.main.url(forResource: "GUARDIAS-CUELLAR_2025", withExtension: "pdf")!,
         metadata: RegionMetadata(
-            has24HourPharmacies: false,
-            isMonthlySchedule: true,
-            notes: "Monthly schedule with single daily shift"
+            isMonthlySchedule: false,  // Cuéllar uses weekly schedules
+            notes: "Servicios semanales excepto primera semana de septiembre"
         )
     )
 }

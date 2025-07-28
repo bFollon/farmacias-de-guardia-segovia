@@ -17,6 +17,8 @@ public class PDFProcessingService {
     private func registerDefaultParsers() {
         // Register Segovia Capital parser
         register(parser: SegoviaCapitalParser(), for: "segovia-capital")
+        // Register Cuellar parser
+        register(parser: CuellarParser(), for: "cuellar")
     }
     
     /// Registers a parsing strategy for a specific region

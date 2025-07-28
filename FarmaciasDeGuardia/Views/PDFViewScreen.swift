@@ -9,6 +9,7 @@ struct PDFViewScreen: View {
     @State private var selectedDate: Date = Date()
     @State private var isShowingDatePicker = false
     var url: URL
+    var region: Region
     
     private var dateButtonText: String {
         if Calendar.current.isDateInToday(selectedDate) {
@@ -26,7 +27,7 @@ struct PDFViewScreen: View {
                 if isLoading || isRefreshing {
                     VStack(spacing: 0) {
                         VStack(spacing: 16) {
-                            Text("Farmacia de Guardia en Segovia Capital")
+                            Text("Farmacia de Guardia en \(region.name)")
                                 .font(.title)
                                 .padding(.horizontal)
                                 .padding(.top, 16)
@@ -43,7 +44,7 @@ struct PDFViewScreen: View {
                 } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
                     VStack(spacing: 0) {
                         VStack(spacing: 16) {
-                            Text("Farmacia de Guardia en Segovia Capital")
+                            Text("Farmacia de Guardia en \(region.name)")
                                 .font(.title)
                                 .padding(.horizontal)
                                 .padding(.top, 16)
@@ -129,7 +130,8 @@ struct PDFViewScreen: View {
     private func loadPharmacies() {
         isLoading = true
         DispatchQueue.global(qos: .userInitiated).async {
-            let loadedSchedules = ScheduleService.loadSchedules(from: url)
+            let service = PDFProcessingService(region: region)
+            let loadedSchedules = service.loadPharmacies()
             DispatchQueue.main.async {
                 schedules = loadedSchedules
                 isLoading = false
@@ -142,7 +144,8 @@ struct PDFViewScreen: View {
         
         // Use GCD to prevent UI blocking
         DispatchQueue.global(qos: .userInitiated).async {
-            let refreshedSchedules = ScheduleService.loadSchedules(from: url, forceRefresh: true)
+            let service = PDFProcessingService(region: region)
+            let refreshedSchedules = service.loadPharmacies()
             
             // Update UI on main thread
             DispatchQueue.main.async {
@@ -158,6 +161,8 @@ struct PDFViewScreen_Previews: PreviewProvider {
         PDFViewScreen(
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025",
-                withExtension: "pdf")!)
+                withExtension: "pdf")!,
+            region: .segoviaCapital
+        )
     }
 }
