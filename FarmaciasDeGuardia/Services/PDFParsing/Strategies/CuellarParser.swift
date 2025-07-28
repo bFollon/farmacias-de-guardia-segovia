@@ -107,6 +107,7 @@ class CuellarParser: PDFParsingStrategy {
     private func processPageTable(lines: [String]) -> [PharmacySchedule]? {
         var schedules: [PharmacySchedule] = []
         var year = 2025 // Default year
+        var pendingDates: [String]? = nil
         
         // Skip the header lines (first 2 lines)
         let dataLines = Array(lines.dropFirst(2))
@@ -117,36 +118,25 @@ class CuellarParser: PDFParsingStrategy {
                 continue
             }
             
+            // Check if we have pending dates from a special format line
+            if let dates = pendingDates {
+                // This line should be just the pharmacy name
+                let pharmacy = line.trimmingCharacters(in: .whitespaces)
+                if !pharmacy.isEmpty && pharmacyInfo.keys.contains(pharmacy) {
+                    processDateSet(dates: dates, pharmacy: pharmacy, year: year, into: &schedules)
+                    pendingDates = nil
+                    continue
+                }
+            }
+            
             // Extract dates and pharmacy from the line
             if let (dates, pharmacy) = extractDatesAndPharmacy(from: line) {
-                // Create schedules for each date in the week
-                for date in dates {
-                    // If we cross into January and we're not in December, we're in the next year
-                    if date.contains("-ene") && !dates.first!.contains("-dic") {
-                        year += 1
-                    }
-                    
-                    if let dutyDate = parseDutyDate(date, year: year) {                    let info = pharmacyInfo[pharmacy] ?? (
-                        name: pharmacy,
-                        address: "Dirección no disponible"
-                    )
-                        
-                        let pharmacyInstance = Pharmacy(
-                            name: info.name,
-                            address: info.address,
-                            phone: "No disponible",
-                            additionalInfo: nil
-                        )
-                        
-                        let schedule = PharmacySchedule(
-                            date: dutyDate,
-                            dayShiftPharmacies: [pharmacyInstance],
-                            nightShiftPharmacies: [pharmacyInstance]
-                        )
-                        
-                        schedules.append(schedule)
-                    }
+                if pharmacy.isEmpty {
+                    // This is a special format line, store the dates for the next line
+                    pendingDates = dates
+                    continue
                 }
+                processDateSet(dates: dates, pharmacy: pharmacy, year: year, into: &schedules)
             }
         }
         
@@ -155,6 +145,22 @@ class CuellarParser: PDFParsingStrategy {
     
     /// Extract dates and pharmacy from a line
     private func extractDatesAndPharmacy(from line: String) -> ([String], String)? {
+        // First, try to handle special format for September transition
+        if line.contains("DOMINGO") || line.contains("MARTES") || line.contains("JUEVES") || line.contains("SABADO") {
+            // This line is a description, skip it and wait for the pharmacy line
+            return nil
+        }
+        
+        // If this is just a pharmacy name following a special format line, skip it
+        if pharmacyInfo.keys.contains(line.trimmingCharacters(in: .whitespaces)) {
+            return nil
+        }
+        
+        // Handle special cases for September transition
+        if let specialDates = parseSeptemberTransition(from: line) {
+            return specialDates
+        }
+        
         // Remove any leading month indicators or year markers
         let cleanLine = line.replacingOccurrences(of: "^(ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)\\s+", with: "", options: .regularExpression)
             .replacingOccurrences(of: "^\\d{4}\\s+\\d{4}\\s+", with: "", options: .regularExpression)
@@ -176,6 +182,37 @@ class CuellarParser: PDFParsingStrategy {
         
         guard !dates.isEmpty && !pharmacy.isEmpty else { return nil }
         return (dates, pharmacy)
+    }
+    
+    /// Parse special format for September transition period
+    private func parseSeptemberTransition(from line: String) -> ([String], String)? {
+        // Patterns we need to handle:
+        // "DOMINGO 31 DE AGOSTO Y LUNES 1 DE SEPTIEMBRE" followed by pharmacy
+        // "MARTES 2 Y MIERCOLES 3 de SEPTIEMBRE" followed by pharmacy
+        // "JUEVES 4 Y VIERNES 5 de SEPTIEMBRE" followed by pharmacy
+        // "SABADO 6 Y DOMINGO 7 de Septiembre" followed by pharmacy
+        
+        // Match patterns like "31 DE AGOSTO" and "1 DE SEPTIEMBRE"
+        let datePattern = #"(\d+)\s+DE\s+(AGOSTO|SEPTIEMBRE|Septiembre)"#
+        let regex = try? NSRegularExpression(pattern: datePattern)
+        
+        guard let matches = regex?.matches(in: line, range: NSRange(line.startIndex..., in: line)) else {
+            return nil
+        }
+        
+        var dates: [String] = []
+        for match in matches {
+            if let dayRange = Range(match.range(at: 1), in: line),
+               let monthRange = Range(match.range(at: 2), in: line) {
+                let day = String(line[dayRange])
+                let month = line[monthRange].lowercased()
+                let monthAbbr = String(month.prefix(3))
+                dates.append("\(String(format: "%02d", Int(day) ?? 0))-\(monthAbbr)")
+            }
+        }
+        
+        // We'll get the pharmacy name from the next line in processPageTable
+        return dates.isEmpty ? nil : (dates, "")
     }
     /// Converts a Spanish abbreviated month to a month number
     private func monthNumber(from abbreviation: String) -> Int? {
@@ -261,4 +298,34 @@ class CuellarParser: PDFParsingStrategy {
     }
     
     
+    /// Process a set of dates with a pharmacy
+    private func processDateSet(dates: [String], pharmacy: String, year: Int, into schedules: inout [PharmacySchedule]) {
+        // Create schedules for each date in the set
+        for date in dates {
+            // If we cross into January and we're not in December, we're in the next year
+            let currentYear = date.contains("-ene") && !dates.first!.contains("-dic") ? year + 1 : year
+            
+            if let dutyDate = parseDutyDate(date, year: currentYear) {
+                let info = pharmacyInfo[pharmacy] ?? (
+                    name: pharmacy,
+                    address: "Dirección no disponible"
+                )
+                
+                let pharmacyInstance = Pharmacy(
+                    name: info.name,
+                    address: info.address,
+                    phone: "No disponible",
+                    additionalInfo: nil
+                )
+                
+                let schedule = PharmacySchedule(
+                    date: dutyDate,
+                    dayShiftPharmacies: [pharmacyInstance],
+                    nightShiftPharmacies: [pharmacyInstance]
+                )
+                
+                schedules.append(schedule)
+            }
+        }
+    }
 }
