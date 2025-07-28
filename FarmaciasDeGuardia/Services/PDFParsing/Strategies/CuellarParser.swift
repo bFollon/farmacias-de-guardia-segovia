@@ -154,49 +154,60 @@ class CuellarParser: PDFParsingStrategy {
     
     /// Extract dates and pharmacy from a line
     private func extractDatesAndPharmacy(from line: String) -> ([String], String)? {
-        // First, try to handle special format for September transition
-        if line.contains("DOMINGO") || line.contains("MARTES") || line.contains("JUEVES") || line.contains("SABADO") {
-            if debug { print("🎯 Found special format line") }
-            // Parse special format dates
-            if let specialTransition = parseSeptemberTransition(from: line) {
-                if debug { print("✅ Parsed special dates: \(specialTransition.0)") }
-                return specialTransition
-            }
-            return nil
-        }
-        
         // If this is just a pharmacy name following a special format line, skip it
         if pharmacyInfo.keys.contains(line.trimmingCharacters(in: .whitespaces)) {
             if debug { print("🏥 Found standalone pharmacy line") }
             return nil
         }
         
-        // Handle special cases for September transition
-        if let specialDates = parseSeptemberTransitionDates(from: line) {
-            return (specialDates, "")
-        }
-        
         // Remove any leading month indicators or year markers
         let cleanLine = line.replacingOccurrences(of: "^(ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)\\s+", with: "", options: .regularExpression)
             .replacingOccurrences(of: "^\\d{4}\\s+\\d{4}\\s+", with: "", options: .regularExpression)
         
-        // Split line into components
-        let components = cleanLine.split(separator: " ")
+        // Regular expression to match dates in format dd-mmm
+        let datePattern = #"\d{1,2}[-‐]\w{3}"#
+        let regex = try? NSRegularExpression(pattern: datePattern)
+        let range = NSRange(cleanLine.startIndex..., in: cleanLine)
+        let matches = regex?.matches(in: cleanLine, range: range) ?? []
         
-        // Check if we have enough components and the last part is a pharmacy
-        guard components.count >= 2 else { return nil }
+        if debug { print("🔍 Found \(matches.count) regular dates in line") }
         
-        // Collect all date components (they should be in format dd-mmm)
-        let dates = components.prefix(while: { $0.contains("-") })
-            .map(String.init)
+        // If we found regular dates, parse them
+        if !matches.isEmpty {
+            var dates: [String] = []
+            for match in matches {
+                if let range = Range(match.range, in: cleanLine) {
+                    let date = String(cleanLine[range])
+                    dates.append(date)
+                }
+            }
+            
+            // Get everything after the last date as the pharmacy name
+            let lastDate = dates.last ?? ""
+            if let pharmacyStartRange = cleanLine.range(of: lastDate)?.upperBound {
+                let pharmacy = String(cleanLine[pharmacyStartRange...])
+                    .trimmingCharacters(in: .whitespaces)
+                
+                if debug { print("📅 Regular dates: \(dates)") }
+                if debug { print("🏥 Pharmacy: \(pharmacy)") }
+                
+                if !dates.isEmpty && !pharmacy.isEmpty {
+                    return (dates, pharmacy)
+                }
+            }
+        }
         
-        // Get the pharmacy name (everything after the dates)
-        let pharmacy = components.dropFirst(dates.count)
-            .joined(separator: " ")
-            .trimmingCharacters(in: .whitespaces)
+        // If no regular dates found, try special format (September transition)
+        if line.contains("DOMINGO") || line.contains("MARTES") || line.contains("JUEVES") || line.contains("SABADO") {
+            if debug { print("🎯 Found special format line") }
+            if let specialTransition = parseSeptemberTransition(from: line) {
+                if debug { print("✅ Parsed special dates: \(specialTransition.0)") }
+                return specialTransition
+            }
+        }
         
-        guard !dates.isEmpty && !pharmacy.isEmpty else { return nil }
-        return (dates, pharmacy)
+        // If we get here, we couldn't parse the line
+        return nil
     }
     
     /// Parse special format for September transition period and return dates with empty pharmacy
