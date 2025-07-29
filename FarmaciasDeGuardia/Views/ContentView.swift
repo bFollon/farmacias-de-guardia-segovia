@@ -18,6 +18,8 @@ struct ContentView: View {
                             selectedRegion = .segoviaCapital
                         case "Cuéllar":
                             selectedRegion = .cuellar
+                        case "El espinar / San Rafael":
+                            selectedRegion = .elEspinar
                         default:
                             break
                         }

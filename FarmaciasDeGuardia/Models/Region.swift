@@ -67,4 +67,15 @@ extension Region {
             notes: "Servicios semanales excepto primera semana de septiembre"
         )
     )
+    
+    /// El Espinar region
+    public static let elEspinar = Region(
+        id: "el-espinar",
+        name: "El Espinar / San Rafael",
+        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf")!,
+        metadata: RegionMetadata(
+            isMonthlySchedule: false,  // Uses weekly schedules like Cuéllar
+            notes: "Servicios semanales"
+        )
+    )
 }
