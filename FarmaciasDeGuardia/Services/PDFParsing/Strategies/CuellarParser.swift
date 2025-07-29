@@ -5,6 +5,9 @@ class CuellarParser: PDFParsingStrategy {
     /// Debug flag - when true, prints detailed parsing information
     private let debug = true
     
+    /// Current year being processed, incremented when January 1st is found
+    private var currentYear = 2024
+    
     // Lookup tables for Spanish names
     private let weekdays = [
         1: "Domingo",
@@ -106,7 +109,6 @@ class CuellarParser: PDFParsingStrategy {
     /// Process the table structure for a single page
     private func processPageTable(lines: [String]) -> [PharmacySchedule]? {
         var schedules: [PharmacySchedule] = []
-        var year = 2025 // Default year
         var pendingDates: [String]? = nil
         
         // Skip the header lines (first 2 lines)
@@ -128,7 +130,7 @@ class CuellarParser: PDFParsingStrategy {
                 let pharmacy = line.trimmingCharacters(in: .whitespaces)
                 if !pharmacy.isEmpty && pharmacyInfo.keys.contains(pharmacy) {
                     if debug { print("🏥 Found matching pharmacy: \(pharmacy)") }
-                    processDateSet(dates: dates, pharmacy: pharmacy, year: year, into: &schedules)
+                    processDateSet(dates: dates, pharmacy: pharmacy, into: &schedules)
                     pendingDates = nil
                     continue
                 } else {
@@ -145,7 +147,7 @@ class CuellarParser: PDFParsingStrategy {
                     pendingDates = dates
                     continue
                 }
-                processDateSet(dates: dates, pharmacy: pharmacy, year: year, into: &schedules)
+                processDateSet(dates: dates, pharmacy: pharmacy, into: &schedules)
             }
         }
         
@@ -160,32 +162,38 @@ class CuellarParser: PDFParsingStrategy {
             return nil
         }
         
-        // Remove any leading month indicators or year markers
-        let cleanLine = line.replacingOccurrences(of: "^(ENE|FEB|MAR|ABR|MAY|JUN|JUL|AGO|SEP|OCT|NOV|DIC)\\s+", with: "", options: .regularExpression)
-            .replacingOccurrences(of: "^\\d{4}\\s+\\d{4}\\s+", with: "", options: .regularExpression)
-        
-        // Regular expression to match dates in format dd-mmm
-        let datePattern = #"\d{1,2}[-‐]\w{3}"#
+        // Regular expression to match dates in format dd-mmm (with figure dash)
+        let datePattern = #"\d{1,2}[‐-]\w{3}"#
         let regex = try? NSRegularExpression(pattern: datePattern)
-        let range = NSRange(cleanLine.startIndex..., in: cleanLine)
-        let matches = regex?.matches(in: cleanLine, range: range) ?? []
+        let range = NSRange(line.startIndex..., in: line)
+        let matches = regex?.matches(in: line, range: range) ?? []
         
-        if debug { print("🔍 Found \(matches.count) regular dates in line") }
+        if debug {
+            print("🔍 Found \(matches.count) regular dates in line")
+            // Print each character's Unicode value to help debug dash types
+            print("📝 Line characters:")
+            for (i, char) in line.unicodeScalars.enumerated() {
+                print("   \(i): '\(char)' (Unicode: U+\(String(format:"%04X", char.value)))")
+                if i > 20 { break } // Only show first few characters
+            }
+        }
         
         // If we found regular dates, parse them
         if !matches.isEmpty {
             var dates: [String] = []
+            if debug { print("🔍 Date matches found:") }
             for match in matches {
-                if let range = Range(match.range, in: cleanLine) {
-                    let date = String(cleanLine[range])
+                if let range = Range(match.range, in: line) {
+                    let date = String(line[range])
+                    if debug { print("   - Found date: '\(date)'") }
                     dates.append(date)
                 }
             }
             
             // Get everything after the last date as the pharmacy name
             let lastDate = dates.last ?? ""
-            if let pharmacyStartRange = cleanLine.range(of: lastDate)?.upperBound {
-                let pharmacy = String(cleanLine[pharmacyStartRange...])
+            if let pharmacyStartRange = line.range(of: lastDate)?.upperBound {
+                let pharmacy = String(line[pharmacyStartRange...])
                     .trimmingCharacters(in: .whitespaces)
                 
                 if debug { print("📅 Regular dates: \(dates)") }
@@ -277,11 +285,14 @@ class CuellarParser: PDFParsingStrategy {
     }
     
     /// Converts a date string like "01-ene" to a DutyDate
-    private func parseDutyDate(_ dateString: String, year: Int = 2025) -> DutyDate? {
-        let components = dateString.components(separatedBy: "-")
-        guard components.count == 2,
-              let day = Int(components[0]),
-              let month = monthNumber(from: components[1]) else {
+    private func parseDutyDate(_ dateString: String, year: Int) -> DutyDate? {
+        let pattern = #"(\d{1,2})[‐-](\w{3})"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: dateString, range: NSRange(dateString.startIndex..., in: dateString)),
+              let dayRange = Range(match.range(at: 1), in: dateString),
+              let monthRange = Range(match.range(at: 2), in: dateString),
+              let day = Int(String(dateString[dayRange])),
+              let month = monthNumber(from: String(dateString[monthRange])) else {
             return nil
         }
         
@@ -352,16 +363,22 @@ class CuellarParser: PDFParsingStrategy {
     
     
     /// Process a set of dates with a pharmacy
-    private func processDateSet(dates: [String], pharmacy: String, year: Int, into schedules: inout [PharmacySchedule]) {
+    private func processDateSet(dates: [String], pharmacy: String, into schedules: inout [PharmacySchedule]) {
         if debug { print("\n📋 Processing date set:") }
         if debug { print("📅 Dates: \(dates)") }
         if debug { print("🏥 Pharmacy: \(pharmacy)") }
-        if debug { print("📆 Year: \(year)") }
+        if debug { print("📆 Current year: \(currentYear)") }
         
         // Create schedules for each date in the set
         for date in dates {
-            // If we cross into January and we're not in December, we're in the next year
-            let currentYear = date.contains("-ene") && !dates.first!.contains("-dic") ? year + 1 : year
+            // If this is January 1st, increment the year
+            let pattern = #"01[‐-]ene"#
+            if let regex = try? NSRegularExpression(pattern: pattern),
+               regex.firstMatch(in: date, range: NSRange(date.startIndex..., in: date)) != nil {
+                currentYear += 1
+                if debug { print("🎊 New year detected! Now processing year \(currentYear)") }
+            }
+
             if debug { print("📆 Processing date: \(date) (year: \(currentYear))") }
             
             if let dutyDate = parseDutyDate(date, year: currentYear) {
