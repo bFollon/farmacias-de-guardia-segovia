@@ -49,7 +49,7 @@ extension Region {
     public static let segoviaCapital = Region(
         id: "segovia-capital",
         name: "Segovia Capital",
-        pdfURL: Bundle.main.url(forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025", withExtension: "pdf")!,
+        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!,
         metadata: RegionMetadata(
             has24HourPharmacies: false,
             isMonthlySchedule: false,
@@ -61,7 +61,7 @@ extension Region {
     public static let cuellar = Region(
         id: "cuellar",
         name: "Cuéllar",
-        pdfURL: Bundle.main.url(forResource: "GUARDIAS-CUELLAR_2025", withExtension: "pdf")!,
+        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf")!,
         metadata: RegionMetadata(
             isMonthlySchedule: false,  // Cuéllar uses weekly schedules
             notes: "Servicios semanales excepto primera semana de septiembre"

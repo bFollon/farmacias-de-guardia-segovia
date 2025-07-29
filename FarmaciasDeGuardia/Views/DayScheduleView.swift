@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DayScheduleView: View {
     let schedule: PharmacySchedule
+    let region: Region
     @Binding var isPresentingInfo: Bool // Keep for backward compatibility
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
@@ -60,8 +61,8 @@ struct DayScheduleView: View {
                         .font(.footnote)
                         .foregroundColor(.secondary)
                     
-                    Link("Calendario de Guardias - COF Segovia",
-                         destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!)
+                    Link("Calendario de Guardias - \(region.name)",
+                         destination: region.pdfURL)
                         .font(.footnote)
                     
                     let emailBody = """

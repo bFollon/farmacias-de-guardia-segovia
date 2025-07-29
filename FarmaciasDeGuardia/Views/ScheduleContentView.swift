@@ -3,6 +3,7 @@ import SwiftUI
 struct ScheduleContentView: View {
     let schedule: PharmacySchedule
     let shiftType: DutyDate.ShiftType
+    let region: Region
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
     
@@ -39,8 +40,8 @@ struct ScheduleContentView: View {
                         .font(.footnote)
                         .foregroundColor(.secondary)
                     
-                    Link("Calendario de Guardias - COF Segovia",
-                         destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!)
+                    Link("Calendario de Guardias - \(region.name)",
+                         destination: region.pdfURL)
                         .font(.footnote)
                     
                     let emailBody = """

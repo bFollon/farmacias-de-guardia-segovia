@@ -61,12 +61,14 @@ struct PDFViewScreen: View {
                             ScheduleContentView(
                                 schedule: current.0,
                                 shiftType: current.1,
+                                region: region,
                                 isPresentingInfo: $isPresentingInfo,
                                 formattedDateTime: ScheduleService.getCurrentDateTime()
                             )
                         } else {
                             DayScheduleView(
                                 schedule: schedule,
+                                region: region,
                                 isPresentingInfo: $isPresentingInfo,
                                 date: selectedDate
                             )
