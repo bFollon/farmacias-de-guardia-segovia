@@ -72,10 +72,9 @@ class ElEspinarParser: PDFParsingStrategy {
     }
     
     /// Process a set of dates with a pharmacy
-    private func processDateSet(dates: [String], location: String, address: String, into schedules: inout [PharmacySchedule]) {
+    private func processDateSet(dates: [String], address: String, into schedules: inout [PharmacySchedule]) {
         if debug { print("\n📋 Processing date set:") }
         if debug { print("📅 Dates: \(dates)") }
-        if debug { print("📍 Location: \(location)") }
         if debug { print("🏠 Address: \(address)") }
         if debug { print("📆 Current year: \(currentYear)") }
         
@@ -123,18 +122,8 @@ class ElEspinarParser: PDFParsingStrategy {
                     year: currentYear
                 )
                 
-                // Map location and address to pharmacy ID
-                let pharmacyId: String?
-                if location == "EL ESPINAR." {
-                    pharmacyId = address.contains("HONTANILLA") ? "AV. HONTANILLA 18" : "C/ MARQUES PERALES"
-                } else if location == "SAN RAFAEL" {
-                    pharmacyId = "SAN RAFAEL"
-                } else {
-                    pharmacyId = nil
-                }
-                
-                if let pharmacyId = pharmacyId,
-                   let info = pharmacyInfo[pharmacyId] {
+                // Use address directly to look up pharmacy info
+                if let info = pharmacyInfo[address] {
                     let pharmacy = Pharmacy(
                         name: info.name,
                         address: info.address,
@@ -178,7 +167,6 @@ class ElEspinarParser: PDFParsingStrategy {
                 .filter { !$0.isEmpty }
 
             var dates: [String] = []
-            var currentLocation: String?
             var currentAddress: String?
 
             for line in lines {
@@ -189,59 +177,56 @@ class ElEspinarParser: PDFParsingStrategy {
                     continue
                 }
                 
-                // If this line starts with a month abbreviation (e.g., "ENE", "FEB"), skip it
-                if line.count <= 3 && ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"].contains(line.uppercased()) {
-                    continue
-                }
+                // Extract dates using regex
+                let datePattern = #"\d{1,2}[‐-]\w{3}"#
+                let regex = try? NSRegularExpression(pattern: datePattern)
+                let range = NSRange(line.startIndex..., in: line)
+                let matches = regex?.matches(in: line, range: range) ?? []
                 
-                // Extract dates and location from line
-                let components = line.components(separatedBy: " ")
                 var lineDates: [String] = []
-                
-                // Process each component
-                for component in components {
-                    let trimmed = component.trimmingCharacters(in: .whitespaces)
-                    if trimmed.range(of: #"^\d{1,2}[‐-][a-zé]{3}"#, options: .regularExpression) != nil {
-                        lineDates.append(trimmed)
+                for match in matches {
+                    if let range = Range(match.range, in: line) {
+                        lineDates.append(String(line[range]))
                     }
                 }
                 
-                // Check if line ends with location
-                if line.hasSuffix("EL ESPINAR.") {
-                    if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
-                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                // First, collect any dates we find
+                if !lineDates.isEmpty {
+                    dates = lineDates
+                }
+                
+                // Then check for pharmacy addresses
+                if line.contains("HONTANILLA") {
+                    currentAddress = "AV. HONTANILLA 18"
+                    // Process the dates we've collected with this pharmacy
+                    if !dates.isEmpty {
+                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
                         dates = []
                     }
-                    dates = lineDates
-                    currentLocation = "EL ESPINAR."
-                    currentAddress = nil
-                } else if line.hasSuffix("SAN RAFAEL") {
-                    if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
-                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
-                    }
-                    // Process San Rafael dates immediately since we know the address
-                    currentLocation = "SAN RAFAEL"
-                    currentAddress = "SAN RAFAEL"
-                    processDateSet(dates: lineDates, location: currentLocation!, address: currentAddress!, into: &schedules)
-                    dates = []
-                    currentLocation = nil
-                    currentAddress = nil
-                } else if line.contains("HONTANILLA") {
-                    currentAddress = "AV. HONTANILLA 18"
                 } else if line.contains("MARQUES PERALES") {
                     currentAddress = "C/ MARQUES PERALES"
-                    if !dates.isEmpty && currentLocation != nil {
-                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                    // Process the dates we've collected with this pharmacy
+                    if !dates.isEmpty {
+                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
                         dates = []
                     }
-                } else if !lineDates.isEmpty {
-                    dates = lineDates
+                } else if line.hasSuffix("SAN RAFAEL") {
+                    currentAddress = "SAN RAFAEL"
+                    // Process both any previous dates and the current line dates
+                    if !dates.isEmpty {
+                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
+                    }
+                    if !lineDates.isEmpty {
+                        processDateSet(dates: lineDates, address: currentAddress!, into: &schedules)
+                    }
+                    dates = []
+                    currentAddress = nil
                 }
             }
             
             // Process any remaining dates
-            if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
-                processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+            if !dates.isEmpty && currentAddress != nil {
+                processDateSet(dates: dates, address: currentAddress!, into: &schedules)
             }
         }
 
