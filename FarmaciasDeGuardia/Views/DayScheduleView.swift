@@ -28,22 +28,32 @@ struct DayScheduleView: View {
                 .font(.title2)
                 .padding(.bottom, 5)
                 
-                // Day shift section
+                // Pharmacy section
                 VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
-                    if let pharmacy = schedule.dayShiftPharmacies.first {
-                        PharmacyView(pharmacy: pharmacy)
-                    }
-                }
-                .padding(.vertical)
-                
-                Divider()
-                
-                // Night shift section
-                VStack(alignment: .leading, spacing: 12) {
-                    ShiftHeaderView(shiftType: .night, date: date, isPresentingInfo: $isPresentingNightInfo)
-                    if let pharmacy = schedule.nightShiftPharmacies.first {
-                        PharmacyView(pharmacy: pharmacy)
+                    if region.id == "segovia-capital" {
+                        // Show day/night shifts for Segovia Capital
+                        VStack(alignment: .leading, spacing: 12) {
+                            ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
+                            if let pharmacy = schedule.dayShiftPharmacies.first {
+                                PharmacyView(pharmacy: pharmacy)
+                            }
+                        }
+                        .padding(.vertical)
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 12) {
+                            ShiftHeaderView(shiftType: .night, date: date, isPresentingInfo: $isPresentingNightInfo)
+                            if let pharmacy = schedule.nightShiftPharmacies.first {
+                                PharmacyView(pharmacy: pharmacy)
+                            }
+                        }
+                        .padding(.vertical)
+                    } else {
+                        // Show single pharmacy for Cuéllar
+                        if let pharmacy = schedule.dayShiftPharmacies.first {
+                            PharmacyView(pharmacy: pharmacy)
+                        }
                     }
                 }
                 .padding(.vertical)

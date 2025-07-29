@@ -20,12 +20,20 @@ struct ScheduleContentView: View {
                 .font(.title2)
                 .padding(.bottom, 5)
                 
-                // Show the active shift with context help
-                ShiftHeaderView(shiftType: shiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
-                
-                // Show active pharmacy
-                if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
-                    PharmacyView(pharmacy: pharmacy)
+                // Show shift info if applicable
+                if region.id == "segovia-capital" {
+                    // Show shift type for Segovia Capital
+                    ShiftHeaderView(shiftType: shiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
+                    
+                    // Show active pharmacy for current shift
+                    if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
+                        PharmacyView(pharmacy: pharmacy)
+                    }
+                } else {
+                    // Show pharmacy for Cuéllar (no shift distinction)
+                    if let pharmacy = schedule.dayShiftPharmacies.first {
+                        PharmacyView(pharmacy: pharmacy)
+                    }
                 }
                 
                 Divider()

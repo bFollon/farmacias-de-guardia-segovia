@@ -402,7 +402,7 @@ class CuellarParser: PDFParsingStrategy {
                 let schedule = PharmacySchedule(
                     date: dutyDate,
                     dayShiftPharmacies: [pharmacyInstance],
-                    nightShiftPharmacies: [pharmacyInstance]
+                    nightShiftPharmacies: [] // Cuéllar doesn't use separate night shifts
                 )
                 
                 schedules.append(schedule)
