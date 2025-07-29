@@ -1,28 +1,35 @@
 import Foundation
 
 class ScheduleService {
-    static private var cachedSchedules: [PharmacySchedule]?
+    // Cache by region ID
+    static private var cachedSchedules: [String: [PharmacySchedule]] = [:]
     static private let pdfService = PDFProcessingService()
     static private var cacheInvalidationTimer: Timer?
     
-    static func loadSchedules(from url: URL, forceRefresh: Bool = false) -> [PharmacySchedule] {
+    static func loadSchedules(for region: Region, forceRefresh: Bool = false) -> [PharmacySchedule] {
         // Return cached schedules if available and not forcing refresh
-        if let cached = cachedSchedules, !forceRefresh {
-            print("ScheduleService: Using cached schedules")
+        if let cached = cachedSchedules[region.id], !forceRefresh {
+            print("ScheduleService: Using cached schedules for region \(region.name)")
             return cached
         }
         
         // Load and cache if not available or force refresh requested
-        print("ScheduleService: Loading schedules from PDF...")
-        let schedules = pdfService.loadPharmacies(from: url)
-        cachedSchedules = schedules
-        print("ScheduleService: Successfully cached \(schedules.count) schedules")
+        print("ScheduleService: Loading schedules from PDF for region \(region.name)...")
+        let schedules = pdfService.loadPharmacies(for: region)
+        cachedSchedules[region.id] = schedules
+        print("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         scheduleNextInvalidation()
         return schedules
     }
     
+    // Keep backward compatibility for direct URL loading
+    static func loadSchedules(from url: URL, forceRefresh: Bool = false) -> [PharmacySchedule] {
+        // For direct URL loading, treat as Segovia Capital
+        return loadSchedules(for: .segoviaCapital, forceRefresh: forceRefresh)
+    }
+    
     static func clearCache() {
-        cachedSchedules = nil
+        cachedSchedules.removeAll()
         cacheInvalidationTimer?.invalidate()
         cacheInvalidationTimer = nil
     }

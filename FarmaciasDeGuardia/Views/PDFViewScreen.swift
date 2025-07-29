@@ -130,8 +130,7 @@ struct PDFViewScreen: View {
     private func loadPharmacies() {
         isLoading = true
         DispatchQueue.global(qos: .userInitiated).async {
-            let service = PDFProcessingService(region: region)
-            let loadedSchedules = service.loadPharmacies()
+            let loadedSchedules = ScheduleService.loadSchedules(for: region)
             DispatchQueue.main.async {
                 schedules = loadedSchedules
                 isLoading = false
@@ -144,8 +143,7 @@ struct PDFViewScreen: View {
         
         // Use GCD to prevent UI blocking
         DispatchQueue.global(qos: .userInitiated).async {
-            let service = PDFProcessingService(region: region)
-            let refreshedSchedules = service.loadPharmacies()
+            let refreshedSchedules = ScheduleService.loadSchedules(for: region, forceRefresh: true)
             
             // Update UI on main thread
             DispatchQueue.main.async {
