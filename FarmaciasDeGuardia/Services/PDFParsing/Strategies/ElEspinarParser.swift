@@ -37,20 +37,20 @@ class ElEspinarParser: PDFParsingStrategy {
     // Pharmacy information lookup table
     private let pharmacyInfo: [String: (name: String, address: String, phone: String)] = [
         // El Espinar pharmacies - TODO: Update with real data
-        "FRAILE": (
-            name: "Farmacia Fraile",
-            address: "Av. Hontanilla 10, El Espinar",
-            phone: "921 18 21 09"
+        "AV. HONTANILLA 18": (
+            name: "FARMACIA ANA MARÍA APARICIO HERNAN",
+            address: "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            phone: "921 181 011"
         ),
-        "BARRIO SAN RAFAEL": (
+        "C/ MARQUES PERALES": (
+            name: "Farmacia Lda M J. Bartolomé Sánchez",
+            address: "Calle del, C. Marqués de Perales, 2, 40400, Segovia",
+            phone: "921 181 171"
+        ),
+        "SAN RAFAEL": (
             name: "Farmacia San Rafael",
-            address: "Av. Alto del León 7, San Rafael",
-            phone: "921 17 12 57"
-        ),
-        "BARRIO ESTACIÓN": (
-            name: "Farmacia Estación",
-            address: "Plaza Estación 1, El Espinar",
-            phone: "921 18 23 45"
+            address: "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            phone: "921 171 105"
         )
     ]
     
@@ -71,66 +71,91 @@ class ElEspinarParser: PDFParsingStrategy {
         return line.range(of: pattern, options: .regularExpression) != nil
     }
     
-    /// Extracts day and month from a date line
-    private func extractDayMonth(from line: String) -> (day: Int, month: Int)? {
-        let pattern = #"^\s*(\d{1,2})\s*[‐-]\s*([A-Za-zé]{3,})\s*$"#
-        guard let match = line.range(of: pattern, options: .regularExpression) else { return nil }
+    /// Process a set of dates with a pharmacy
+    private func processDateSet(dates: [String], location: String, address: String, into schedules: inout [PharmacySchedule]) {
+        if debug { print("\n📋 Processing date set:") }
+        if debug { print("📅 Dates: \(dates)") }
+        if debug { print("📍 Location: \(location)") }
+        if debug { print("🏠 Address: \(address)") }
+        if debug { print("📆 Current year: \(currentYear)") }
         
-        let lineSubstring = line[match]
-        let components = lineSubstring.split(whereSeparator: { " -‐".contains($0) })
-        
-        guard let dayStr = components.first,
-              let day = Int(dayStr),
-              let monthAbbrev = components.last?.trimmingCharacters(in: .whitespaces).lowercased() else {
-            return nil
-        }
-        
-        // Map Spanish month abbreviation to number
-        let month: Int
-        switch monthAbbrev.prefix(3) {
-        case "ene": month = 1
-        case "feb": month = 2
-        case "mar": month = 3
-        case "abr": month = 4
-        case "may": month = 5
-        case "jun": month = 6
-        case "jul": month = 7
-        case "ago": month = 8
-        case "sep": month = 9
-        case "oct": month = 10
-        case "nov": month = 11
-        case "dic": month = 12
-        default: return nil
-        }
-        
-        return (day, month)
-    }
-    
-    /// Returns pharmacy keys based on the location (EL ESPINAR or SAN RAFAEL) and their address
-    private func extractPharmacyKey(from location: String, address: String?) -> String? {
-        let normalizedLocation = location.trimmingCharacters(in: .whitespaces).uppercased()
-        let normalizedAddress = address?.trimmingCharacters(in: .whitespaces).uppercased() ?? ""
-        
-        if normalizedLocation.contains("EL ESPINAR") {
-            if normalizedAddress.contains("HONTANILLA") {
-                return "FRAILE"
-            } else if normalizedAddress.contains("MARQUES") {
-                return "BARRIO ESTACIÓN"
+        for date in dates {
+            // If this is January 1st, increment the year
+            let pattern = #"01[‐-]ene"#
+            if let regex = try? NSRegularExpression(pattern: pattern),
+               regex.firstMatch(in: date, range: NSRange(date.startIndex..., in: date)) != nil {
+                currentYear += 1
+                if debug { print("🎊 New year detected! Now processing year \(currentYear)") }
             }
-        } else if normalizedLocation.contains("SAN RAFAEL") {
-            return "BARRIO SAN RAFAEL"
-        }
-        return nil
-    }
-
-    /// Returns pharmacies mentioned in a line, combining with the next line if it's an address
-    private func extractPharmacies(from line: String, nextLine: String?) -> [String] {
-        if line.hasSuffix("EL ESPINAR.") || line.hasSuffix("SAN RAFAEL") {
-            if let key = extractPharmacyKey(from: line, address: nextLine) {
-                return [key]
+            
+            if debug { print("📆 Processing date: \(date) (year: \(currentYear))") }
+            
+            // Extract day and month from the date
+            let datePattern = #"(\d{1,2})[‐-](\w{3})"#
+            guard let regex = try? NSRegularExpression(pattern: datePattern),
+                  let match = regex.firstMatch(in: date, range: NSRange(date.startIndex..., in: date)),
+                  let dayRange = Range(match.range(at: 1), in: date),
+                  let monthRange = Range(match.range(at: 2), in: date),
+                  let day = Int(String(date[dayRange])) else {
+                continue
+            }
+            
+            let monthAbbrev = String(date[monthRange]).lowercased()
+            let monthMapping = [
+                "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+                "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12
+            ]
+            
+            guard let month = monthMapping[monthAbbrev] else { continue }
+            
+            // Create date components to get weekday
+            var dateComponents = DateComponents()
+            dateComponents.year = currentYear
+            dateComponents.month = month
+            dateComponents.day = day
+            
+            if let date = Calendar.current.date(from: dateComponents) {
+                let weekday = Calendar.current.component(.weekday, from: date)
+                let dutyDate = DutyDate(
+                    dayOfWeek: weekdayName(from: weekday),
+                    day: day,
+                    month: monthName(from: month),
+                    year: currentYear
+                )
+                
+                // Map location and address to pharmacy ID
+                let pharmacyId: String?
+                if location == "EL ESPINAR." {
+                    pharmacyId = address.contains("HONTANILLA") ? "AV. HONTANILLA 18" : "C/ MARQUES PERALES"
+                } else if location == "SAN RAFAEL" {
+                    pharmacyId = "SAN RAFAEL"
+                } else {
+                    pharmacyId = nil
+                }
+                
+                if let pharmacyId = pharmacyId,
+                   let info = pharmacyInfo[pharmacyId] {
+                    let pharmacy = Pharmacy(
+                        name: info.name,
+                        address: info.address,
+                        phone: info.phone,
+                        additionalInfo: nil
+                    )
+                    
+                    let schedule = PharmacySchedule(
+                        date: dutyDate,
+                        dayShiftPharmacies: [pharmacy],
+                        nightShiftPharmacies: [] // El Espinar doesn't distinguish between day/night shifts
+                    )
+                    
+                    schedules.append(schedule)
+                    
+                    if debug {
+                        print("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year)")
+                    }
+                }
             }
         }
-        return []
     }
 
     func parseSchedules(from pdfDocument: PDFDocument) -> [PharmacySchedule] {
@@ -152,72 +177,71 @@ class ElEspinarParser: PDFParsingStrategy {
                 .map { $0.trimmingCharacters(in: .whitespaces) }
                 .filter { !$0.isEmpty }
 
-            // Process each line
-            var currentDutyDate: DutyDate?
+            var dates: [String] = []
+            var currentLocation: String?
+            var currentAddress: String?
 
             for line in lines {
                 if debug { print("📝 Processing line: \(line)") }
-
-                if isDateLine(line) {
-                    // Extract date information
-                    guard let (day, month) = extractDayMonth(from: line) else { continue }
-                    
-                    // Handle year transition
-                    if month == 1 && day == 1 {
-                        currentYear += 1
-                    }
-                    
-                    // Create date components to get weekday
-                    var dateComponents = DateComponents()
-                    dateComponents.year = currentYear
-                    dateComponents.month = month
-                    dateComponents.day = day
-                    
-                    if let date = Calendar.current.date(from: dateComponents) {
-                        let weekday = Calendar.current.component(.weekday, from: date)
-                        currentDutyDate = DutyDate(
-                            dayOfWeek: weekdayName(from: weekday),
-                            day: day,
-                            month: monthName(from: month),
-                            year: currentYear
-                        )
-                        if debug { print("📅 Found date: \(day)-\(monthName(from: month))-\(currentYear)") }
-                    }
-                } else {
-                    // Extract pharmacies from the line, looking ahead at the next line for the address
-                    let nextLineIndex = lines.firstIndex(of: line)?.advanced(by: 1)
-                    let nextLine = nextLineIndex.flatMap { lines.indices.contains($0) ? lines[$0] : nil }
-                    let pharmacies = extractPharmacies(from: line, nextLine: nextLine)
-                    if !pharmacies.isEmpty, let dutyDate = currentDutyDate {
-                        // Create pharmacy schedules
-                        for pharmacyId in pharmacies {
-                            if let info = pharmacyInfo[pharmacyId] {
-                                let pharmacy = Pharmacy(
-                                    name: info.name,
-                                    address: info.address,
-                                    phone: info.phone,
-                                    additionalInfo: nil
-                                )
-                                
-                                let schedule = PharmacySchedule(
-                                    date: dutyDate,
-                                    dayShiftPharmacies: [pharmacy],
-                                    nightShiftPharmacies: [] // El Espinar doesn't distinguish between day/night shifts
-                                )
-                                
-                                schedules.append(schedule)
-                                
-                                if debug {
-                                    print("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year)")
-                                }
-                            }
-                        }
+                
+                // Skip header lines
+                if line.contains("COLEGIO") || line.contains("TURNOS") || line.contains("LUNES MARTES") {
+                    continue
+                }
+                
+                // If this line starts with a month abbreviation (e.g., "ENE", "FEB"), skip it
+                if line.count <= 3 && ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"].contains(line.uppercased()) {
+                    continue
+                }
+                
+                // Extract dates and location from line
+                let components = line.components(separatedBy: " ")
+                var lineDates: [String] = []
+                
+                // Process each component
+                for component in components {
+                    let trimmed = component.trimmingCharacters(in: .whitespaces)
+                    if trimmed.range(of: #"^\d{1,2}[‐-][a-zé]{3}"#, options: .regularExpression) != nil {
+                        lineDates.append(trimmed)
                     }
                 }
+                
+                // Check if line ends with location
+                if line.hasSuffix("EL ESPINAR.") {
+                    if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
+                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                        dates = []
+                    }
+                    dates = lineDates
+                    currentLocation = "EL ESPINAR."
+                    currentAddress = nil
+                } else if line.hasSuffix("SAN RAFAEL") {
+                    if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
+                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                        dates = []
+                    }
+                    dates = lineDates
+                    currentLocation = "SAN RAFAEL"
+                    currentAddress = nil
+                } else if line.contains("HONTANILLA") {
+                    currentAddress = "AV. HONTANILLA 18"
+                } else if line.contains("MARQUES PERALES") {
+                    currentAddress = "C/ MARQUES PERALES"
+                    if !dates.isEmpty && currentLocation != nil {
+                        processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                        dates = []
+                    }
+                } else if !lineDates.isEmpty {
+                    dates = lineDates
+                }
+            }
+            
+            // Process any remaining dates
+            if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
+                processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
             }
         }
 
-        // Return schedules in chronological order
         return schedules
     }
 }
