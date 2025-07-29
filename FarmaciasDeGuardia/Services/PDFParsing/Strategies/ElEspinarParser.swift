@@ -218,10 +218,13 @@ class ElEspinarParser: PDFParsingStrategy {
                 } else if line.hasSuffix("SAN RAFAEL") {
                     if !dates.isEmpty && currentLocation != nil && currentAddress != nil {
                         processDateSet(dates: dates, location: currentLocation!, address: currentAddress!, into: &schedules)
-                        dates = []
                     }
-                    dates = lineDates
+                    // Process San Rafael dates immediately since we know the address
                     currentLocation = "SAN RAFAEL"
+                    currentAddress = "SAN RAFAEL"
+                    processDateSet(dates: lineDates, location: currentLocation!, address: currentAddress!, into: &schedules)
+                    dates = []
+                    currentLocation = nil
                     currentAddress = nil
                 } else if line.contains("HONTANILLA") {
                     currentAddress = "AV. HONTANILLA 18"
