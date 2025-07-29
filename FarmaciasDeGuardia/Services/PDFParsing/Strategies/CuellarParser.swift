@@ -35,22 +35,26 @@ class CuellarParser: PDFParsingStrategy {
     ]
     
     // Pharmacy information lookup table
-    private let pharmacyInfo: [String: (name: String, address: String)] = [
+    private let pharmacyInfo: [String: (name: String, address: String, phone: String)] = [
         "Av C.J. CELA": (
-            name: "Farmacia Av. Camilo José Cela",
-            address: "Av. Camilo José Cela, Cuéllar"
+            name: "Farmacia Fernando Redondo",
+            address: "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            phone: "No disponible"
         ),
         "Ctra. BAHABON": (
-            name: "Farmacia Ctra. Bahabón",
-            address: "Ctra. Bahabón, Cuéllar"
+            name: "Farmacia San Andrés",
+            address: "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            phone: "921144794"
         ),
         "C/ RESINA": (
-            name: "Farmacia C/ Resina",
-            address: "Calle Resina, Cuéllar"
+            name: "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            address: "C. Resina, 14, 40200 Cuéllar, Segovia",
+            phone: "921144812"
         ),
         "STA. MARINA": (
-            name: "Farmacia Santa Marina",
-            address: "Santa Marina, Cuéllar"
+            name: "Farmacia Ldo. César Cabrerizo Izquierdo",
+            address: "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            phone: "921140606"
         )
     ]
     
@@ -384,13 +388,14 @@ class CuellarParser: PDFParsingStrategy {
             if let dutyDate = parseDutyDate(date, year: currentYear) {
                 let info = pharmacyInfo[pharmacy] ?? (
                     name: pharmacy,
-                    address: "Dirección no disponible"
+                    address: "Dirección no disponible",
+                    phone: "No disponible"
                 )
                 
                 let pharmacyInstance = Pharmacy(
                     name: info.name,
                     address: info.address,
-                    phone: "No disponible",
+                    phone: info.phone,
                     additionalInfo: nil
                 )
                 
