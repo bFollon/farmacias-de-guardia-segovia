@@ -25,10 +25,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let baseHeight = 10.0  // Base height for a single line of text
             
             // Define scanning areas:
-            // - Very narrow date column just for dd-mm-yy format
-            // - Wide pharmacy data column after the sideways text
+            // - Date column for dd-mm-yy format
+            // - ZBS column for the region names (RIAZA SEPÚLVEDA)
+            // - Pharmacy data column after the sideways weekly schedule text
             let dateColumn = TextColumn(x: 40, width: 45)     // Just wide enough for "dd-mmm-yy"
-            let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Pharmacy data after sideways text
+            let zbsColumn = TextColumn(x: 200, width: 60)     // For ZBS RIAZA SEPÚLVEDA text
+            let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Main pharmacy data after weekly schedule
             
             if debug {
                 print("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
@@ -41,23 +43,37 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             
             if debug { 
                 print("\n📍 Scanning date column from x: \(dateColumn.x), width: \(dateColumn.width)")
-                print("📍 Scanning data column from x: \(dataColumn.x), width: \(dataColumn.width)")
+                print("📍 Scanning ZBS column from x: \(zbsColumn.x), width: \(zbsColumn.width)")
+                print("📍 Scanning pharmacy column from x: \(dataColumn.x), width: \(dataColumn.width)")
             }
             
-            // Scan both columns with the same height parameters
+            // Scan all three columns with the same height parameters
             let dates = scanColumn(page, column: dateColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let zbsData = scanColumn(page, column: zbsColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let pharmacyData = scanColumn(page, column: dataColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             // Print found text for debugging
             if debug {
-                print("\n📅 Dates found:")
-                for (y, text) in dates {
-                    print("📝 At y=\(y): \(text)")
-                }
+                print("\n� Combined data by line:")
                 
-                print("\n🏥 Pharmacy data found:")
-                for (y, text) in pharmacyData {
-                    print("📝 At y=\(y): \(text)")
+                // Convert arrays to dictionaries for easier lookup
+                let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
+                let zbsDict = Dictionary(uniqueKeysWithValues: zbsData.map { ($0.y, $0.text) })
+                let pharmacyDict = Dictionary(uniqueKeysWithValues: pharmacyData.map { ($0.y, $0.text) })
+                
+                // Get all y-coordinates
+                let allYCoords = Set(datesDict.keys).union(zbsDict.keys).union(pharmacyDict.keys).sorted()
+                
+                // Print aligned columns
+                for y in allYCoords {
+                    let date = datesDict[y] ?? "        "  // 8 spaces
+                    let zbs = zbsDict[y] ?? "        "    // 8 spaces
+                    let pharmacy = pharmacyDict[y] ?? ""
+                    print(String(format: "📝 y=%.1f | %@ | %@ | %@", 
+                               y,
+                               date.padding(toLength: 12, withPad: " ", startingAt: 0),
+                               zbs.padding(toLength: 8, withPad: " ", startingAt: 0),
+                               pharmacy))
                 }
             }
         }
