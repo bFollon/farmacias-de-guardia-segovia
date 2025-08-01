@@ -25,9 +25,9 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let baseHeight = 10.0  // Base height for a single line of text
             
             // Define scanning areas:
-            // - Narrow date column before the sideways text
+            // - Very narrow date column just for dd-mm-yy format
             // - Wide pharmacy data column after the sideways text
-            let dateColumn = TextColumn(x: 40, width: 70)     // Narrow column just for dates
+            let dateColumn = TextColumn(x: 40, width: 45)     // Just wide enough for "dd-mmm-yy"
             let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Pharmacy data after sideways text
             
             if debug {
@@ -36,8 +36,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             }
             
             // Use same scanning height for both columns since text height is consistent
-            let scanHeight = baseHeight * 0.5      // Very small height to ensure we get just one date
-            let scanIncrement = baseHeight * 0.4   // Small increment to catch each line
+            let scanHeight = baseHeight * 0.6      // Smaller height to separate adjacent dates
+            let scanIncrement = baseHeight * 0.5   // Smaller increment to catch each individual date
             
             if debug { 
                 print("\n📍 Scanning date column from x: \(dateColumn.x), width: \(dateColumn.width)")
