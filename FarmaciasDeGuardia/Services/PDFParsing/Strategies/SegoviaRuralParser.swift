@@ -26,10 +26,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             
             // Define scanning areas:
             // - Date column for dd-mm-yy format
-            // - ZBS column for the region names (RIAZA SEPÚLVEDA)
+            // - ZBS column for RIAZA SEPÚLVEDA (after sideways text)
             // - Pharmacy data column after the sideways weekly schedule text
             let dateColumn = TextColumn(x: 40, width: 45)     // Just wide enough for "dd-mmm-yy"
-            let zbsColumn = TextColumn(x: 200, width: 60)     // For ZBS RIAZA SEPÚLVEDA text
+            let zbsColumn = TextColumn(x: 171.1, width: 200)     // Wide enough for RIAZA SEPÚLVEDA
             let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Main pharmacy data after weekly schedule
             
             if debug {
