@@ -26,8 +26,9 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             
             // Define scanning areas for all ZBS (Zonas Básicas de Salud)
             // Common columns
-            let dateColumn = TextColumn(x: 40, width: 45)     // Just wide enough for "dd-mmm-yy"
+            let dateColumn = TextColumn(x: 40, width: 200)     // Just wide enough for "dd-mmm-yy"
             let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Main pharmacy data after weekly schedule
+            let fullLineColumn = TextColumn(x: 0, width: pageWidth)      // Full width to see all text in the line
             
             // ZBS columns - each represents a healthcare zone
             let carboneroColumn = TextColumn(x: 90, width: 35)    // CARBONERO
@@ -44,7 +45,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             
             // Use same scanning height for both columns since text height is consistent
             let scanHeight = baseHeight * 0.6      // Smaller height to separate adjacent dates
-            let scanIncrement = baseHeight * 0.5   // Smaller increment to catch each individual date
+            let scanIncrement = baseHeight * 0.5   // Move down the page in small steps
             
             if debug { 
                 print("\n📍 Scanning columns:")
@@ -59,6 +60,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             }
             
             // Scan all columns with the same height parameters
+            let fullLineData = scanColumn(page, column: fullLineColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let dates = scanColumn(page, column: dateColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let cantalejoData = scanColumn(page, column: cantalejoColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
@@ -82,7 +84,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 let navasDict = Dictionary(uniqueKeysWithValues: navasData.map { ($0.y, $0.text) })
                 let pharmacyDict = Dictionary(uniqueKeysWithValues: pharmacyData.map { ($0.y, $0.text) })
                 
-                // Get all y-coordinates
+                // Get all y-coordinates and sort them in descending order
+                // We want higher Y values first since the PDF has dates from bottom to top
                 let allYCoords = Set(datesDict.keys)
                     .union(carboneroDict.keys)
                     .union(cantalejoDict.keys)
@@ -91,32 +94,46 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     .union(villacastinDict.keys)
                     .union(navasDict.keys)
                     .union(pharmacyDict.keys)
-                    .sorted()
+                    .sorted(by: >)  // Sort in descending order to show Feb 1st first
                 
                 // Print aligned columns with full zone names
-                print("Y-Coord  | Date     | Carbonero | Cantalejo | Riaza | Sepúlveda | Villacastín | Navas | Pharmacy")
-                print("---------+----------+-----------+-----------+-------+-----------+------------+-------+---------")
+                print("\n📝 Combined data by line:")
+                print("Y-Coord  | Date         | Carbonero | Cantalejo | Riaza | Sepúlveda | Villacastín | Navas | Pharmacy | RAW")
+                print("---------+-------------+-----------+-----------+-------+-----------+------------+-------+---------+----")
+                
+                // Create dictionary for full line data for easier lookup
+                let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
+                print("\n📝 Column data:")
                 
                 for y in allYCoords {
-                    let date = datesDict[y] ?? "        "
-                    let carbonero = carboneroDict[y] ?? "   "
-                    let cantalejo = cantalejoDict[y] ?? "   "
-                    let riaza = riazaDict[y] ?? "   "
-                    let sepulveda = sepulvedaDict[y] ?? "   "
-                    let villacastin = villacastinDict[y] ?? "   "
-                    let navas = navasDict[y] ?? "   "
+                    let date = datesDict[y] ?? ""
+                    let carbonero = carboneroDict[y] ?? ""
+                    let cantalejo = cantalejoDict[y] ?? ""
+                    let riaza = riazaDict[y] ?? ""
+                    let sepulveda = sepulvedaDict[y] ?? ""
+                    let villacastin = villacastinDict[y] ?? ""
+                    let navas = navasDict[y] ?? ""
                     let pharmacy = pharmacyDict[y] ?? ""
+                    let rawLine = fullLineDict[y] ?? ""
                     
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@",
+                    // Skip empty rows
+                    if date.isEmpty && carbonero.isEmpty && cantalejo.isEmpty && 
+                       riaza.isEmpty && sepulveda.isEmpty && villacastin.isEmpty && 
+                       navas.isEmpty && pharmacy.isEmpty {
+                        continue
+                    }
+                    
+                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                y,
-                               date.padding(toLength: 8, withPad: " ", startingAt: 0),
-                               carbonero.padding(toLength: 9, withPad: " ", startingAt: 0),
-                               cantalejo.padding(toLength: 9, withPad: " ", startingAt: 0),
-                               riaza.padding(toLength: 5, withPad: " ", startingAt: 0),
-                               sepulveda.padding(toLength: 9, withPad: " ", startingAt: 0),
-                               villacastin.padding(toLength: 10, withPad: " ", startingAt: 0),
-                               navas.padding(toLength: 5, withPad: " ", startingAt: 0),
-                               pharmacy))
+                               date,
+                               carbonero,
+                               cantalejo,
+                               riaza,
+                               sepulveda,
+                               villacastin,
+                               navas,
+                               pharmacy,
+                               rawLine))
                 }
             }
         }
