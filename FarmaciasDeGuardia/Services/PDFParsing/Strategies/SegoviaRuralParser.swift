@@ -26,14 +26,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             
             // Define scanning areas for all ZBS (Zonas Básicas de Salud)
             // Common columns
-            let dateColumn = TextColumn(x: 40, width: 200)     // Just wide enough for "dd-mmm-yy"
+            let dateColumn = TextColumn(x: 42, width: 42)     // Just wide enough for "dd-mmm-yy"
             let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Main pharmacy data after weekly schedule
             let fullLineColumn = TextColumn(x: 0, width: pageWidth)      // Full width to see all text in the line
             
             // ZBS columns - each represents a healthcare zone
+            let riazaColumn = TextColumn(x: 175, width: 110)       // ZBS RIAZA SEPÚLVEDA
             let carboneroColumn = TextColumn(x: 90, width: 35)    // CARBONERO
             let cantalejoColumn = TextColumn(x: 130, width: 35)   // CANTALEJO
-            let riazaColumn = TextColumn(x: 170, width: 35)       // RIAZA
             let sepulvedaColumn = TextColumn(x: 210, width: 45)   // SEPÚLVEDA - wider to catch "(Soria)" text
             let villacastinColumn = TextColumn(x: 260, width: 35) // VILLACASTÍN
             let navasColumn = TextColumn(x: 300, width: 35)       // NAVA
@@ -44,8 +44,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             }
             
             // Use same scanning height for both columns since text height is consistent
-            let scanHeight = baseHeight * 0.6      // Smaller height to separate adjacent dates
-            let scanIncrement = baseHeight * 0.5   // Move down the page in small steps
+            let scanHeight = baseHeight * 0.8     // Smaller height to separate adjacent dates
+            let scanIncrement = baseHeight * 0.8   // Move down the page in small steps
             
             if debug { 
                 print("\n📍 Scanning columns:")
@@ -70,9 +70,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let navasData = scanColumn(page, column: navasColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let pharmacyData = scanColumn(page, column: dataColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
+            
             // Print found text for debugging
             if debug {
-                print("\n📝 Combined data by line:")
+                
+                // print("RIAZA DATA:")
+                // riazaData.forEach({ print($0.text) })
                 
                 // Convert arrays to dictionaries for easier lookup
                 let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
@@ -123,17 +126,29 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                         continue
                     }
                     
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
-                               y,
-                               date,
-                               carbonero,
-                               cantalejo,
-                               riaza,
-                               sepulveda,
-                               villacastin,
-                               navas,
-                               pharmacy,
-                               rawLine))
+                    // Replace newlines and carriage returns with spaces in all fields
+                    let sanitize = { (text: String) -> String in
+                        text.replacingOccurrences(of: "\n", with: " ")
+                            .replacingOccurrences(of: "\r", with: " ")
+                    }
+                    
+                    // print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
+                    //            y,
+                    //            sanitize(date),
+                    //            sanitize(carbonero),
+                    //            sanitize(cantalejo),
+                    //            sanitize(riaza),
+                    //            sanitize(sepulveda),
+                    //            sanitize(villacastin),
+                    //            sanitize(navas),
+                    //            sanitize(pharmacy),
+                    //            sanitize(rawLine)))
+
+                    print(String(format: "%.1f | %@ | %@ | RAW: %@",
+                                 y,
+                                 sanitize(date),
+                                 sanitize(riaza),
+                                 sanitize(rawLine)))
                 }
             }
         }
