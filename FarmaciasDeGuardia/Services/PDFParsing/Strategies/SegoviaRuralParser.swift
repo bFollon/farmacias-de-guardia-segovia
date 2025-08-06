@@ -35,7 +35,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let laGranjaColumn = TextColumn(x: 390, width: 100)    // ZBS LA GRANJA
             let laSierraColumn = TextColumn(x: 500, width: 70)    // ZBS LA SIERRA
             let fuentiduenaColumn = TextColumn(x: 570, width: 50)  // ZBS FUENTIDUEÑA
-            let carboneroColumn = TextColumn(x: 90, width: 35)    // CARBONERO
+            let carboneroColumn = TextColumn(x: 620, width: 80)    // ZBS CARBONERO
             let cantalejoColumn = TextColumn(x: 130, width: 35)   // CANTALEJO
             let sepulvedaColumn = TextColumn(x: 210, width: 45)   // SEPÚLVEDA - wider to catch "(Soria)" text
             let villacastinColumn = TextColumn(x: 260, width: 35) // VILLACASTÍN
@@ -157,13 +157,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     //            sanitize(pharmacy),
                     //            sanitize(rawLine)))
 
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | RAW: %@",
+                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                  y,
                                  sanitize(date),
                                  sanitize(riaza),
                                  sanitize(laGranja),
                                  sanitize(laSierraDict[y] ?? ""),
                                  sanitize(fuentiduenaDict[y] ?? ""),
+                                 sanitize(carboneroDict[y] ?? ""),
                                  sanitize(rawLine)))
                 }
             }
