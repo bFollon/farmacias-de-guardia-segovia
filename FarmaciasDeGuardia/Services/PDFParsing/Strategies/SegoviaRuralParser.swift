@@ -31,7 +31,9 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let fullLineColumn = TextColumn(x: 0, width: pageWidth)      // Full width to see all text in the line
             
             // ZBS columns - each represents a healthcare zone
-            let riazaColumn = TextColumn(x: 175, width: 110)       // ZBS RIAZA SEPÚLVEDA
+            let riazaColumn = TextColumn(x: 175, width: 200)       // ZBS RIAZA SEPÚLVEDA
+            let laGranjaColumn = TextColumn(x: 390, width: 100)    // ZBS LA GRANJA
+            let laSierraColumn = TextColumn(x: 500, width: 70)    // ZBS LA SIERRA
             let carboneroColumn = TextColumn(x: 90, width: 35)    // CARBONERO
             let cantalejoColumn = TextColumn(x: 130, width: 35)   // CANTALEJO
             let sepulvedaColumn = TextColumn(x: 210, width: 45)   // SEPÚLVEDA - wider to catch "(Soria)" text
@@ -62,9 +64,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             // Scan all columns with the same height parameters
             let fullLineData = scanColumn(page, column: fullLineColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let dates = scanColumn(page, column: dateColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let riazaData = scanColumn(page, column: riazaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let laGranjaData = scanColumn(page, column: laGranjaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let cantalejoData = scanColumn(page, column: cantalejoColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let riazaData = scanColumn(page, column: riazaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let sepulvedaData = scanColumn(page, column: sepulvedaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let navasData = scanColumn(page, column: navasColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
@@ -79,9 +82,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 
                 // Convert arrays to dictionaries for easier lookup
                 let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
+                let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
+                let laGranjaDict = Dictionary(uniqueKeysWithValues: laGranjaData.map { ($0.y, $0.text) })
                 let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
                 let cantalejoDict = Dictionary(uniqueKeysWithValues: cantalejoData.map { ($0.y, $0.text) })
-                let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
                 let sepulvedaDict = Dictionary(uniqueKeysWithValues: sepulvedaData.map { ($0.y, $0.text) })
                 let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
                 let navasDict = Dictionary(uniqueKeysWithValues: navasData.map { ($0.y, $0.text) })
@@ -90,9 +94,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 // Get all y-coordinates and sort them in descending order
                 // We want higher Y values first since the PDF has dates from bottom to top
                 let allYCoords = Set(datesDict.keys)
+                    .union(riazaDict.keys)
+                    .union(laGranjaDict.keys)
                     .union(carboneroDict.keys)
                     .union(cantalejoDict.keys)
-                    .union(riazaDict.keys)
                     .union(sepulvedaDict.keys)
                     .union(villacastinDict.keys)
                     .union(navasDict.keys)
@@ -110,9 +115,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 
                 for y in allYCoords {
                     let date = datesDict[y] ?? ""
+                    let riaza = riazaDict[y] ?? ""
+                    let laGranja = laGranjaDict[y] ?? ""
                     let carbonero = carboneroDict[y] ?? ""
                     let cantalejo = cantalejoDict[y] ?? ""
-                    let riaza = riazaDict[y] ?? ""
                     let sepulveda = sepulvedaDict[y] ?? ""
                     let villacastin = villacastinDict[y] ?? ""
                     let navas = navasDict[y] ?? ""
@@ -120,8 +126,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     let rawLine = fullLineDict[y] ?? ""
                     
                     // Skip empty rows
-                    if date.isEmpty && carbonero.isEmpty && cantalejo.isEmpty && 
-                       riaza.isEmpty && sepulveda.isEmpty && villacastin.isEmpty && 
+                    if date.isEmpty && riaza.isEmpty  && laGranja.isEmpty && carbonero.isEmpty && 
+                       cantalejo.isEmpty && sepulveda.isEmpty && villacastin.isEmpty && 
                        navas.isEmpty && pharmacy.isEmpty {
                         continue
                     }
@@ -144,10 +150,11 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     //            sanitize(pharmacy),
                     //            sanitize(rawLine)))
 
-                    print(String(format: "%.1f | %@ | %@ | RAW: %@",
+                    print(String(format: "%.1f | %@ | %@ | %@ | RAW: %@",
                                  y,
                                  sanitize(date),
                                  sanitize(riaza),
+                                 sanitize(laGranja),
                                  sanitize(rawLine)))
                 }
             }
