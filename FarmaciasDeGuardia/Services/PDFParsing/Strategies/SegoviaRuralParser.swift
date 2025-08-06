@@ -34,6 +34,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let riazaColumn = TextColumn(x: 175, width: 200)       // ZBS RIAZA SEPÚLVEDA
             let laGranjaColumn = TextColumn(x: 390, width: 100)    // ZBS LA GRANJA
             let laSierraColumn = TextColumn(x: 500, width: 70)    // ZBS LA SIERRA
+            let fuentiduenaColumn = TextColumn(x: 570, width: 50)  // ZBS FUENTIDUEÑA
             let carboneroColumn = TextColumn(x: 90, width: 35)    // CARBONERO
             let cantalejoColumn = TextColumn(x: 130, width: 35)   // CANTALEJO
             let sepulvedaColumn = TextColumn(x: 210, width: 45)   // SEPÚLVEDA - wider to catch "(Soria)" text
@@ -67,6 +68,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let riazaData = scanColumn(page, column: riazaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let laGranjaData = scanColumn(page, column: laGranjaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let laSierraData = scanColumn(page, column: laSierraColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let fuentiduenaData = scanColumn(page, column: fuentiduenaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let cantalejoData = scanColumn(page, column: cantalejoColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let sepulvedaData = scanColumn(page, column: sepulvedaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
@@ -86,6 +88,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
                 let laGranjaDict = Dictionary(uniqueKeysWithValues: laGranjaData.map { ($0.y, $0.text) })
                 let laSierraDict = Dictionary(uniqueKeysWithValues: laSierraData.map { ($0.y, $0.text) })
+                let fuentiduenaDict = Dictionary(uniqueKeysWithValues: fuentiduenaData.map { ($0.y, $0.text) })
                 let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
                 let cantalejoDict = Dictionary(uniqueKeysWithValues: cantalejoData.map { ($0.y, $0.text) })
                 let sepulvedaDict = Dictionary(uniqueKeysWithValues: sepulvedaData.map { ($0.y, $0.text) })
@@ -99,6 +102,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     .union(riazaDict.keys)
                     .union(laGranjaDict.keys)
                     .union(laSierraDict.keys)
+                    .union(fuentiduenaDict.keys)
                     .union(carboneroDict.keys)
                     .union(cantalejoDict.keys)
                     .union(sepulvedaDict.keys)
@@ -153,12 +157,13 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     //            sanitize(pharmacy),
                     //            sanitize(rawLine)))
 
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | RAW: %@",
+                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                  y,
                                  sanitize(date),
                                  sanitize(riaza),
                                  sanitize(laGranja),
                                  sanitize(laSierraDict[y] ?? ""),
+                                 sanitize(fuentiduenaDict[y] ?? ""),
                                  sanitize(rawLine)))
                 }
             }
