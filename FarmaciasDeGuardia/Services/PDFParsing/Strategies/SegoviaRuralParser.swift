@@ -27,7 +27,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             // Define scanning areas for all ZBS (Zonas Básicas de Salud)
             // Common columns
             let dateColumn = TextColumn(x: 42, width: 42)     // Just wide enough for "dd-mmm-yy"
-            let dataColumn = TextColumn(x: 300, width: pageWidth - 350)  // Main pharmacy data after weekly schedule
             let fullLineColumn = TextColumn(x: 0, width: pageWidth)      // Full width to see all text in the line
             
             // ZBS columns - each represents a healthcare zone
@@ -51,11 +50,13 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             if debug { 
                 print("\n📍 Scanning columns:")
                 print("  Date (x: \(dateColumn.x), width: \(dateColumn.width))")
-                print("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
                 print("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
+                print("  La Granja (x: \(laGranjaColumn.x), width: \(laGranjaColumn.width))")
+                print("  La Sierra (x: \(laSierraColumn.x), width: \(laSierraColumn.width))")
+                print("  Fuentidueña (x: \(fuentiduenaColumn.x), width: \(fuentiduenaColumn.width))")
+                print("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
                 print("  Navas de la Asunción (x: \(navasDeLaAsuncionColumn.x), width: \(navasDeLaAsuncionColumn.width))")
                 print("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
-                print("  Pharmacy (x: \(dataColumn.x), width: \(dataColumn.width))")
             }
             
             // Scan all columns with the same height parameters
@@ -68,15 +69,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let navasDeLaAsuncionData = scanColumn(page, column: navasDeLaAsuncionColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let pharmacyData = scanColumn(page, column: dataColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             
             // Print found text for debugging
             if debug {
-                
-                // print("RIAZA DATA:")
-                // riazaData.forEach({ print($0.text) })
-                
                 // Convert arrays to dictionaries for easier lookup
                 let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
                 let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
@@ -86,7 +82,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
                 let navasDeLaAsuncionDict = Dictionary(uniqueKeysWithValues: navasDeLaAsuncionData.map { ($0.y, $0.text) })
                 let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
-                let pharmacyDict = Dictionary(uniqueKeysWithValues: pharmacyData.map { ($0.y, $0.text) })
                 
                 // Get all y-coordinates and sort them in descending order
                 // We want higher Y values first since the PDF has dates from bottom to top
@@ -98,7 +93,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     .union(carboneroDict.keys)
                     .union(navasDeLaAsuncionDict.keys)
                     .union(villacastinDict.keys)
-                    .union(pharmacyDict.keys)
                     .sorted(by: >)  // Sort in descending order to show Feb 1st first
                 
                 // Print aligned columns with full zone names
@@ -114,13 +108,16 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     let date = datesDict[y] ?? ""
                     let riaza = riazaDict[y] ?? ""
                     let laGranja = laGranjaDict[y] ?? ""
+                    let laSierra = laSierraDict[y] ?? ""
+                    let fuentidueña = fuentiduenaDict[y] ?? ""
                     let carbonero = carboneroDict[y] ?? ""
-
-                    let pharmacy = pharmacyDict[y] ?? ""
+                    let navasAsuncion = navasDeLaAsuncionDict[y] ?? ""
+                    let villacastin = villacastinDict[y] ?? ""
                     let rawLine = fullLineDict[y] ?? ""
                     
                     // Skip empty rows
-                    if date.isEmpty && riaza.isEmpty && laGranja.isEmpty && carbonero.isEmpty && pharmacy.isEmpty {
+                    if date.isEmpty && riaza.isEmpty && laGranja.isEmpty && laSierra.isEmpty && 
+                       fuentidueña.isEmpty && carbonero.isEmpty && navasAsuncion.isEmpty && villacastin.isEmpty {
                         continue
                     }
                     
@@ -130,28 +127,16 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                             .replacingOccurrences(of: "\r", with: " ")
                     }
                     
-                    // print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
-                    //            y,
-                    //            sanitize(date),
-                    //            sanitize(carbonero),
-                    //            sanitize(cantalejo),
-                    //            sanitize(riaza),
-                    //            sanitize(sepulveda),
-                    //            sanitize(villacastin),
-                    //            sanitize(navas),
-                    //            sanitize(pharmacy),
-                    //            sanitize(rawLine)))
-
                     print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                  y,
                                  sanitize(date),
                                  sanitize(riaza),
                                  sanitize(laGranja),
-                                 sanitize(laSierraDict[y] ?? ""),
-                                 sanitize(fuentiduenaDict[y] ?? ""),
-                                 sanitize(carboneroDict[y] ?? ""),
-                                 sanitize(navasDeLaAsuncionDict[y] ?? ""),
-                                 sanitize(villacastinDict[y] ?? ""),
+                                 sanitize(laSierra),
+                                 sanitize(fuentidueña),
+                                 sanitize(carbonero),
+                                 sanitize(navasAsuncion),
+                                 sanitize(villacastin),
                                  sanitize(rawLine)))
                 }
             }

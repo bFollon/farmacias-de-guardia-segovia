@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "appIcon.png",
+      "filename" : "farmacias de guardia icon V1_gimp.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -13,6 +13,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "ios_icon_dark_1024_gimp.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
