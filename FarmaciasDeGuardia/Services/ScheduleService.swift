@@ -18,6 +18,34 @@ class ScheduleService {
         let schedules = pdfService.loadPharmacies(for: region)
         cachedSchedules[region.id] = schedules
         print("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
+        
+        // Print a sample schedule for verification
+        if let sampleSchedule = schedules.first {
+            print("\nSample schedule for \(region.name):")
+            print("Date: \(sampleSchedule.date)")
+            
+            print("\nDay Shift Pharmacies:")
+            for pharmacy in sampleSchedule.dayShiftPharmacies {
+                print("- \(pharmacy.name)")
+                print("  Address: \(pharmacy.address)")
+                print("  Phone: \(pharmacy.formattedPhone)")
+                if let info = pharmacy.additionalInfo {
+                    print("  Additional Info: \(info)")
+                }
+            }
+            
+            print("\nNight Shift Pharmacies:")
+            for pharmacy in sampleSchedule.nightShiftPharmacies {
+                print("- \(pharmacy.name)")
+                print("  Address: \(pharmacy.address)")
+                print("  Phone: \(pharmacy.formattedPhone)")
+                if let info = pharmacy.additionalInfo {
+                    print("  Additional Info: \(info)")
+                }
+            }
+            print("")
+        }
+        
         scheduleNextInvalidation()
         return schedules
     }
