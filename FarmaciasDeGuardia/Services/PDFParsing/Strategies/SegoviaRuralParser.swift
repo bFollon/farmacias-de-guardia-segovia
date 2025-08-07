@@ -37,6 +37,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let fuentiduenaColumn = TextColumn(x: 570, width: 50)  // ZBS FUENTIDUEÑA
             let carboneroColumn = TextColumn(x: 620, width: 80)    // ZBS CARBONERO
             let navasDeLaAsuncionColumn = TextColumn(x: 700, width: 65)  // ZBS NAVAS DE LA ASUNCIÓN
+            let villacastinColumn = TextColumn(x: 770, width: 60)  // ZBS VILLACASTÍN
             
             if debug {
                 print("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
@@ -53,6 +54,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 print("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
                 print("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
                 print("  Navas de la Asunción (x: \(navasDeLaAsuncionColumn.x), width: \(navasDeLaAsuncionColumn.width))")
+                print("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
                 print("  Pharmacy (x: \(dataColumn.x), width: \(dataColumn.width))")
             }
             
@@ -65,6 +67,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let fuentiduenaData = scanColumn(page, column: fuentiduenaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let navasDeLaAsuncionData = scanColumn(page, column: navasDeLaAsuncionColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let pharmacyData = scanColumn(page, column: dataColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             
@@ -82,6 +85,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 let fuentiduenaDict = Dictionary(uniqueKeysWithValues: fuentiduenaData.map { ($0.y, $0.text) })
                 let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
                 let navasDeLaAsuncionDict = Dictionary(uniqueKeysWithValues: navasDeLaAsuncionData.map { ($0.y, $0.text) })
+                let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
                 let pharmacyDict = Dictionary(uniqueKeysWithValues: pharmacyData.map { ($0.y, $0.text) })
                 
                 // Get all y-coordinates and sort them in descending order
@@ -93,13 +97,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     .union(fuentiduenaDict.keys)
                     .union(carboneroDict.keys)
                     .union(navasDeLaAsuncionDict.keys)
+                    .union(villacastinDict.keys)
                     .union(pharmacyDict.keys)
                     .sorted(by: >)  // Sort in descending order to show Feb 1st first
                 
                 // Print aligned columns with full zone names
                 print("\n📝 Combined data by line:")
-                print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | RAW")
-                print("---------+-------------+-------+-----------+-----------+------------+-----------+-------+----")
+                print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | Villacastín | RAW")
+                print("---------+-------------+-------+-----------+-----------+------------+-----------+-------+------------+----")
                 
                 // Create dictionary for full line data for easier lookup
                 let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
@@ -137,7 +142,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     //            sanitize(pharmacy),
                     //            sanitize(rawLine)))
 
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
+                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                  y,
                                  sanitize(date),
                                  sanitize(riaza),
@@ -146,6 +151,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                                  sanitize(fuentiduenaDict[y] ?? ""),
                                  sanitize(carboneroDict[y] ?? ""),
                                  sanitize(navasDeLaAsuncionDict[y] ?? ""),
+                                 sanitize(villacastinDict[y] ?? ""),
                                  sanitize(rawLine)))
                 }
             }
