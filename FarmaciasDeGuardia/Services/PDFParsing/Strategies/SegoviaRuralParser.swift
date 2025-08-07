@@ -36,10 +36,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let laSierraColumn = TextColumn(x: 500, width: 70)    // ZBS LA SIERRA
             let fuentiduenaColumn = TextColumn(x: 570, width: 50)  // ZBS FUENTIDUEÑA
             let carboneroColumn = TextColumn(x: 620, width: 80)    // ZBS CARBONERO
-            let cantalejoColumn = TextColumn(x: 130, width: 35)   // CANTALEJO
-            let sepulvedaColumn = TextColumn(x: 210, width: 45)   // SEPÚLVEDA - wider to catch "(Soria)" text
-            let villacastinColumn = TextColumn(x: 260, width: 35) // VILLACASTÍN
-            let navasColumn = TextColumn(x: 300, width: 35)       // NAVA
             
             if debug {
                 print("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
@@ -54,11 +50,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 print("\n📍 Scanning columns:")
                 print("  Date (x: \(dateColumn.x), width: \(dateColumn.width))")
                 print("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
-                print("  Cantalejo (x: \(cantalejoColumn.x), width: \(cantalejoColumn.width))")
                 print("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
-                print("  Sepúlveda (x: \(sepulvedaColumn.x), width: \(sepulvedaColumn.width))")
-                print("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
-                print("  Navas (x: \(navasColumn.x), width: \(navasColumn.width))")
                 print("  Pharmacy (x: \(dataColumn.x), width: \(dataColumn.width))")
             }
             
@@ -70,10 +62,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let laSierraData = scanColumn(page, column: laSierraColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let fuentiduenaData = scanColumn(page, column: fuentiduenaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let cantalejoData = scanColumn(page, column: cantalejoColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let sepulvedaData = scanColumn(page, column: sepulvedaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let navasData = scanColumn(page, column: navasColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let pharmacyData = scanColumn(page, column: dataColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             
@@ -90,10 +78,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 let laSierraDict = Dictionary(uniqueKeysWithValues: laSierraData.map { ($0.y, $0.text) })
                 let fuentiduenaDict = Dictionary(uniqueKeysWithValues: fuentiduenaData.map { ($0.y, $0.text) })
                 let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
-                let cantalejoDict = Dictionary(uniqueKeysWithValues: cantalejoData.map { ($0.y, $0.text) })
-                let sepulvedaDict = Dictionary(uniqueKeysWithValues: sepulvedaData.map { ($0.y, $0.text) })
-                let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
-                let navasDict = Dictionary(uniqueKeysWithValues: navasData.map { ($0.y, $0.text) })
                 let pharmacyDict = Dictionary(uniqueKeysWithValues: pharmacyData.map { ($0.y, $0.text) })
                 
                 // Get all y-coordinates and sort them in descending order
@@ -104,17 +88,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     .union(laSierraDict.keys)
                     .union(fuentiduenaDict.keys)
                     .union(carboneroDict.keys)
-                    .union(cantalejoDict.keys)
-                    .union(sepulvedaDict.keys)
-                    .union(villacastinDict.keys)
-                    .union(navasDict.keys)
+
                     .union(pharmacyDict.keys)
                     .sorted(by: >)  // Sort in descending order to show Feb 1st first
                 
                 // Print aligned columns with full zone names
                 print("\n📝 Combined data by line:")
-                print("Y-Coord  | Date         | Carbonero | Cantalejo | Riaza | Sepúlveda | Villacastín | Navas | Pharmacy | RAW")
-                print("---------+-------------+-----------+-----------+-------+-----------+------------+-------+---------+----")
+                print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | RAW")
+                print("---------+-------------+-------+-----------+-----------+------------+-----------+----")
                 
                 // Create dictionary for full line data for easier lookup
                 let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
@@ -125,17 +106,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     let riaza = riazaDict[y] ?? ""
                     let laGranja = laGranjaDict[y] ?? ""
                     let carbonero = carboneroDict[y] ?? ""
-                    let cantalejo = cantalejoDict[y] ?? ""
-                    let sepulveda = sepulvedaDict[y] ?? ""
-                    let villacastin = villacastinDict[y] ?? ""
-                    let navas = navasDict[y] ?? ""
+
                     let pharmacy = pharmacyDict[y] ?? ""
                     let rawLine = fullLineDict[y] ?? ""
                     
                     // Skip empty rows
-                    if date.isEmpty && riaza.isEmpty  && laGranja.isEmpty && carbonero.isEmpty && 
-                       cantalejo.isEmpty && sepulveda.isEmpty && villacastin.isEmpty && 
-                       navas.isEmpty && pharmacy.isEmpty {
+                    if date.isEmpty && riaza.isEmpty && laGranja.isEmpty && carbonero.isEmpty && pharmacy.isEmpty {
                         continue
                     }
                     
