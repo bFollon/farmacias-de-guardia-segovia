@@ -5,9 +5,95 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     /// Debug flag - when true, prints detailed parsing information
     private let debug = true
     
+    // Lookup tables for Spanish names
+    private let weekdays = [
+        1: "Domingo",
+        2: "Lunes",
+        3: "Martes",
+        4: "Miércoles",
+        5: "Jueves",
+        6: "Viernes",
+        7: "Sábado"
+    ]
+    
+    private let months = [
+        1: "Enero",
+        2: "Febrero",
+        3: "Marzo",
+        4: "Abril",
+        5: "Mayo",
+        6: "Junio",
+        7: "Julio",
+        8: "Agosto",
+        9: "Septiembre",
+        10: "Octubre",
+        11: "Noviembre",
+        12: "Diciembre"
+    ]
+    
+    // ZBS Schedule types
+    private enum ScheduleType {
+        case fullDay     // 24h
+        case extended    // 10-22h
+        case standard    // 10-20h
+        
+        var hours: String {
+            switch self {
+            case .fullDay: return "24h"
+            case .extended: return "10h-22h"
+            case .standard: return "10h-20h"
+            }
+        }
+    }
+    
+    private let zbsSchedules: [String: ScheduleType] = [
+        "RIAZA SEPÚLVEDA": .fullDay,
+        "LA GRANJA": .extended,
+        "LA SIERRA": .standard,
+        "FUENTIDUEÑA": .standard,
+        "CARBONERO": .standard,
+        "NAVAS DE LA ASUNCIÓN": .standard,
+        "VILLACASTÍN": .standard
+    ]
+    
+    private func parseDate(_ text: String) -> DutyDate? {
+        // Date format: "dd-mmm-yy"
+        let components = text.components(separatedBy: "-")
+        guard components.count == 3,
+              let day = Int(components[0]),
+              let year = Int(components[2]) else {
+            return nil
+        }
+        
+        // For now, assume the day of week doesn't matter since we can calculate it
+        // We'll use "Unknown" as a placeholder
+        return DutyDate(
+            dayOfWeek: "Unknown",
+            day: day,
+            month: components[1],
+            year: 2000 + year  // Convert YY to YYYY
+        )
+    }
+    
+    private func createPharmacy(name: String, zbs: String) -> Pharmacy {
+        // For now, use placeholder address and phone
+        // The schedule type can be determined from the ZBS
+        let scheduleInfo = zbsSchedules[zbs]?.hours ?? "unknown"
+        let additionalInfo = "Horario: \(scheduleInfo)"
+        
+        return Pharmacy(
+            name: name,
+            address: "Address pending",
+            phone: "Phone pending",
+            additionalInfo: additionalInfo
+        )
+    }
+    
     func parseSchedules(from pdfDocument: PDFDocument) -> [PharmacySchedule] {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
+        
+        if debug { print("\n=== Segovia Rural Schedules ===") }
         
         if debug { print("📄 Processing \(pageCount) pages of Segovia Rural PDF...") }
 
@@ -105,7 +191,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 print("\n📝 Column data:")
                 
                 for y in allYCoords {
-                    let date = datesDict[y] ?? ""
+                    let dateStr = datesDict[y] ?? ""
                     let riaza = riazaDict[y] ?? ""
                     let laGranja = laGranjaDict[y] ?? ""
                     let laSierra = laSierraDict[y] ?? ""
@@ -115,21 +201,53 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     let villacastin = villacastinDict[y] ?? ""
                     let rawLine = fullLineDict[y] ?? ""
                     
-                    // Skip empty rows
-                    if date.isEmpty && riaza.isEmpty && laGranja.isEmpty && laSierra.isEmpty && 
-                       fuentidueña.isEmpty && carbonero.isEmpty && navasAsuncion.isEmpty && villacastin.isEmpty {
-                        continue
-                    }
-                    
                     // Replace newlines and carriage returns with spaces in all fields
                     let sanitize = { (text: String) -> String in
                         text.replacingOccurrences(of: "\n", with: " ")
                             .replacingOccurrences(of: "\r", with: " ")
                     }
                     
+                    let sanitizedDateStr = sanitize(dateStr)
+                    
+                    // Skip if there's no valid date
+                    guard !sanitizedDateStr.isEmpty,
+                          let date = parseDate(sanitizedDateStr) else {
+                        continue
+                    }
+                    
+                    // Create pharmacies for each non-empty cell
+                    var pharmacies: [Pharmacy] = []
+                    
+                    let zbsData = [
+                        ("RIAZA SEPÚLVEDA", sanitize(riaza)),
+                        ("LA GRANJA", sanitize(laGranja)),
+                        ("LA SIERRA", sanitize(laSierra)),
+                        ("FUENTIDUEÑA", sanitize(fuentidueña)),
+                        ("CARBONERO", sanitize(carbonero)),
+                        ("NAVAS DE LA ASUNCIÓN", sanitize(navasAsuncion)),
+                        ("VILLACASTÍN", sanitize(villacastin))
+                    ]
+                    
+                    for (zbs, pharmacyName) in zbsData {
+                        if !pharmacyName.isEmpty {
+                            pharmacies.append(createPharmacy(name: pharmacyName, zbs: zbs))
+                        }
+                    }
+                    
+                    // Create the schedule (using same pharmacies for both shifts since
+                    // the PDF doesn't distinguish between day/night shifts)
+                    if !pharmacies.isEmpty {
+                        let schedule = PharmacySchedule(
+                            date: date,
+                            dayShiftPharmacies: pharmacies,
+                            nightShiftPharmacies: pharmacies
+                        )
+                        schedules.append(schedule)
+                    }
+                    
                     print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                                  y,
-                                 sanitize(date),
+                                 sanitizedDateStr,
                                  sanitize(riaza),
                                  sanitize(laGranja),
                                  sanitize(laSierra),
