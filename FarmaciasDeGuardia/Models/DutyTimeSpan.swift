@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DutyTimeSpan: Equatable {
+public struct DutyTimeSpan: Equatable, Hashable {
     public let start: Date
     public let end: Date
     

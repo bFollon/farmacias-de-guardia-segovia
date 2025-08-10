@@ -42,8 +42,10 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
             for (index, date) in parsedDates.enumerated() where index < dayPharmacies.count && index < nightPharmacies.count {
                 allSchedules.append(PharmacySchedule(
                     date: date,
-                    dayShiftPharmacies: [dayPharmacies[index]],
-                    nightShiftPharmacies: [nightPharmacies[index]]
+                    shifts: [
+                        .capitalDay: [dayPharmacies[index]],
+                        .capitalNight: [nightPharmacies[index]]
+                    ]
                 ))
             }
         }
