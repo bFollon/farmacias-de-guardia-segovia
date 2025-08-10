@@ -24,16 +24,27 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
             let dayPharmacies = Pharmacy.parseBatch(from: dayShiftLines)
             let nightPharmacies = Pharmacy.parseBatch(from: nightShiftLines)
             
-            // Create schedules by matching dates with pharmacies
-            for (index, dateString) in dates.enumerated() {
-                if let date = DutyDate.parse(dateString),
-                   index < dayPharmacies.count && index < nightPharmacies.count {
-                    allSchedules.append(PharmacySchedule(
-                        date: date,
-                        dayShiftPharmacies: [dayPharmacies[index]],
-                        nightShiftPharmacies: [nightPharmacies[index]]
-                    ))
+            // Parse dates and remove duplicates while preserving order
+            var seen = Set<TimeInterval>()
+            let parsedDates = dates
+                .compactMap { DutyDate.parse($0) }
+                .filter { date in
+                    guard let timestamp = date.toTimestamp() else { return false }
+                    return seen.insert(timestamp).inserted
                 }
+
+            print("DEBUG: Array lengths - parsedDates: \(parsedDates.count), dayPharmacies: \(dayPharmacies.count), nightPharmacies: \(nightPharmacies.count)")
+            print("DEBUG: All parsed dates: \(parsedDates)")
+            print("DEBUG: All day pharmacies: \(dayPharmacies)")
+            print("DEBUG: All night pharmacies: \(nightPharmacies)")
+            
+            // Create schedules for valid dates with available pharmacies
+            for (index, date) in parsedDates.enumerated() where index < dayPharmacies.count && index < nightPharmacies.count {
+                allSchedules.append(PharmacySchedule(
+                    date: date,
+                    dayShiftPharmacies: [dayPharmacies[index]],
+                    nightShiftPharmacies: [nightPharmacies[index]]
+                ))
             }
         }
         

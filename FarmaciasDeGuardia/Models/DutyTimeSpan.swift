@@ -46,3 +46,15 @@ public struct DutyTimeSpan: Equatable {
         return "\(formatter.string(from: start)) - \(formatter.string(from: end))"
     }
 }
+
+// MARK: - Common Time Spans
+public extension DutyTimeSpan {
+    /// Segovia Capital daytime shift (10:15 - 22:00)
+    static let capitalDay = DutyTimeSpan(startHour: 10, startMinute: 15, endHour: 22, endMinute: 0)
+    
+    /// Segovia Capital nighttime shift (22:00 - 10:15 next day)
+    static let capitalNight = DutyTimeSpan(startHour: 22, startMinute: 0, endHour: 10, endMinute: 15)
+    
+    /// 24-hour shift used by Cuéllar and El Espinar (00:00 - 23:59)
+    static let fullDay = DutyTimeSpan(startHour: 0, startMinute: 0, endHour: 23, endMinute: 59)
+}

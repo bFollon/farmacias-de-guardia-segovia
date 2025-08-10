@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "PDFViewScreen.analyzePDFStructure(from:):PDFViewScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "page.selection(for: CGRect(x: 0, y: 0, width: columnWidth, height: 10)).string">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SegoviaPDFParser.extractColumnText(from:):SegoviaPDFParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "text.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "PDFViewScreen.loadPharmacies():PDFViewScreen.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,18 +27,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PDFViewScreen.extractTextWithLayout(from:):PDFViewScreen.swift">
+         contextName = "SegoviaCapitalParser.parseSchedules(from:):SegoviaCapitalParser.swift">
          <PersistentStrings>
             <PersistentString
-               value = "page.selection(for: pageBounds)">
+               value = "dates.enumerated()">
+            </PersistentString>
+            <PersistentString
+               value = "dayPharmacies.count">
+            </PersistentString>
+            <PersistentString
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PDFViewScreen.analyzePDFStructure(from:):PDFViewScreen.swift">
+         contextName = "PDFViewScreen.extractTextWithLayout(from:):PDFViewScreen.swift">
          <PersistentStrings>
             <PersistentString
-               value = "page.selection(for: CGRect(x: 0, y: 0, width: columnWidth, height: 10)).string">
+               value = "page.selection(for: pageBounds)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
