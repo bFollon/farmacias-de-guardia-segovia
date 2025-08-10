@@ -3,26 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "RowBasedPDFParser.findFirstCoherentRow(_:cellScanAreas:startY:endY:searchIncrement:validator:):RowBasedPDFParser.swift">
+      </ContextState>
+      <ContextState
          contextName = "PDFViewScreen.analyzePDFStructure(from:):PDFViewScreen.swift">
          <PersistentStrings>
             <PersistentString
                value = "page.selection(for: CGRect(x: 0, y: 0, width: columnWidth, height: 10)).string">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in SegoviaPDFParser.extractColumnText(from:):SegoviaPDFParser.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "text.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PDFViewScreen.loadPharmacies():PDFViewScreen.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "pdfDocument.page(1)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -45,6 +32,33 @@
          <PersistentStrings>
             <PersistentString
                value = "page.selection(for: pageBounds)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PDFViewScreen.loadPharmacies():PDFViewScreen.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pdfDocument.page(1)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SegoviaPDFParser.extractColumnText(from:):SegoviaPDFParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "text.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SegoviaPDFParser.isCoherentSegoviaRow(_:):SegoviaPDFParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "nightCell[2].contains(&quot;FARMACIA&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "dayCell[2].contains(&quot;FARMACIA&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

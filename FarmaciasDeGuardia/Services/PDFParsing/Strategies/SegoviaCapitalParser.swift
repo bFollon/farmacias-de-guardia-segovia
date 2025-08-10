@@ -18,7 +18,7 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
             guard let page = pdf.page(at: pageIndex) else { continue }
             
             // Get the column text from our new parser
-            let (dates, dayShiftLines, nightShiftLines) = parser.extractColumnText(from: page)
+            let (dates, dayShiftLines, nightShiftLines) = parser.extractColumnTextFlattened(from: page)
             
             // Convert pharmacy lines to Pharmacy objects
             let dayPharmacies = Pharmacy.parseBatch(from: dayShiftLines)
