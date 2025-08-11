@@ -306,6 +306,17 @@ class PDFCacheManager {
         return try await downloadAndCache(region: region)
     }
     
+    /// Clear both PDF cache and parsing cache for a region (complete refresh)
+    func clearAllCaches(for region: Region) {
+        // Clear PDF cache
+        clearCache(for: region)
+        
+        // Clear parsing cache from ScheduleService
+        ScheduleService.clearCache()
+        
+        print("🗑️ PDFCacheManager: Cleared all caches for \(region.name)")
+    }
+    
     // MARK: - Public Interface (Non-breaking)
     
     /// Initialize cache manager (call on app launch)

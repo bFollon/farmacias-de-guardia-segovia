@@ -4,7 +4,6 @@ class ScheduleService {
     // Cache by region ID
     static private var cachedSchedules: [String: [PharmacySchedule]] = [:]
     static private let pdfService = PDFProcessingService()
-    static private var cacheInvalidationTimer: Timer?
     
     static func loadSchedules(for region: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // Return cached schedules if available and not forcing refresh
@@ -15,7 +14,7 @@ class ScheduleService {
         
         // Load and cache if not available or force refresh requested
         print("ScheduleService: Loading schedules from PDF for region \(region.name)...")
-        let schedules = await pdfService.loadPharmacies(for: region)
+        let schedules = await pdfService.loadPharmacies(for: region, forceRefresh: forceRefresh)
         cachedSchedules[region.id] = schedules
         print("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         
@@ -46,7 +45,6 @@ class ScheduleService {
             print("")
         }
         
-        scheduleNextInvalidation()
         return schedules
     }
     
@@ -58,58 +56,6 @@ class ScheduleService {
     
     static func clearCache() {
         cachedSchedules.removeAll()
-        cacheInvalidationTimer?.invalidate()
-        cacheInvalidationTimer = nil
-    }
-    
-    private static func scheduleNextInvalidation() {
-        // Cancel any existing timer
-        cacheInvalidationTimer?.invalidate()
-        
-        // Get current timestamp
-        let now = Date()
-        let currentTimestamp = now.timeIntervalSince1970
-        
-        print("ScheduleService: Setting up cache invalidation...")
-        
-        // Get the duty time info for current timestamp
-        let dutyInfo = DutyDate.dutyTimeInfoForTimestamp(currentTimestamp)
-        
-        // Calculate next shift change time
-        let calendar = Calendar.current
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: now)
-        
-        // Set components for next shift change
-        if dutyInfo.shiftType == .day {
-            // If we're in day shift, next change is at 22:00
-            components.hour = 22
-            components.minute = 0
-        } else {
-            // If we're in night shift, next change is at 10:15
-            // If it's after midnight, it's the same day, if before midnight, it's next day
-            if calendar.component(.hour, from: now) < 10 || 
-               (calendar.component(.hour, from: now) == 10 && calendar.component(.minute, from: now) < 15) {
-                // Same day at 10:15
-                components.hour = 10
-                components.minute = 15
-            } else {
-                // Next day at 10:15
-                components.day! += 1
-                components.hour = 10
-                components.minute = 15
-            }
-        }
-        
-        // Create date for next shift change
-        if let nextShiftChange = calendar.date(from: components) {
-            // Schedule cache invalidation
-            let timeInterval = nextShiftChange.timeIntervalSince(now)
-            cacheInvalidationTimer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { _ in
-                print("ScheduleService: Cache invalidated due to shift change")
-                clearCache()
-            }
-            print("ScheduleService: Cache will be invalidated in \(Int(timeInterval/60)) minutes (\(nextShiftChange.formatted(.dateTime)))")
-        }
     }
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {
         let now = Date()

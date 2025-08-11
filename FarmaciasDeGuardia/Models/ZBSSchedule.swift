@@ -28,15 +28,16 @@ public struct ZBSSchedule {
 public class ZBSScheduleService {
     /// Get schedules organized by ZBS for a specific region
     /// - Parameter region: The region to get schedules for
+    /// - Parameter forceRefresh: Whether to force re-download the PDF and re-parse
     /// - Returns: Array of ZBS schedules, or nil if not applicable
-    public static func getZBSSchedules(for region: Region) async -> [ZBSSchedule]? {
+    public static func getZBSSchedules(for region: Region, forceRefresh: Bool = false) async -> [ZBSSchedule]? {
         // Only applicable for Segovia Rural
         guard region == .segoviaRural else { return nil }
         
         print("ZBSScheduleService: Loading schedules for \(region.name)")
         
         // First, ensure schedules are loaded by calling the regular service
-        _ = await ScheduleService.loadSchedules(for: region)
+        _ = await ScheduleService.loadSchedules(for: region, forceRefresh: forceRefresh)
         
         // Then get the ZBS schedules from the parser cache
         let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()

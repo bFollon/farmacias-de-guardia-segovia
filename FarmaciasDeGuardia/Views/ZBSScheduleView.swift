@@ -298,11 +298,11 @@ struct ZBSScheduleView: View {
         }
     }
     
-    private func loadZBSSchedules() {
+    private func loadZBSSchedules(forceRefresh: Bool = false) {
         isLoading = true
         
         Task {
-            let schedules = await ZBSScheduleService.getZBSSchedules(for: .segoviaRural) ?? []
+            let schedules = await ZBSScheduleService.getZBSSchedules(for: .segoviaRural, forceRefresh: forceRefresh) ?? []
             
             await MainActor.run {
                 self.zbsSchedules = schedules

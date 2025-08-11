@@ -34,9 +34,21 @@ public class PDFProcessingService {
     }
     
     /// Loads pharmacy schedules for the current region
-    public func loadPharmacies() async -> [PharmacySchedule] {
-        // Get the effective PDF URL (cached or remote)
-        let effectiveURL = await region.getEffectivePDFURL()
+    public func loadPharmacies(forceRefresh: Bool = false) async -> [PharmacySchedule] {
+        // Get the effective PDF URL (cached or remote, force download if requested)
+        let effectiveURL: URL
+        if forceRefresh {
+            do {
+                effectiveURL = try await PDFCacheManager.shared.forceDownload(for: region)
+                print("✅ Force downloaded fresh PDF for \(region.name)")
+            } catch {
+                print("❌ Failed to force download PDF for \(region.name): \(error)")
+                // Fallback to regular effective URL
+                effectiveURL = await region.getEffectivePDFURL()
+            }
+        } else {
+            effectiveURL = await region.getEffectivePDFURL()
+        }
         
         guard let pdfDocument = PDFDocument(url: effectiveURL) else {
             print("Failed to load PDF from \(effectiveURL)")
@@ -54,10 +66,11 @@ public class PDFProcessingService {
 
     /// Updates the current region and returns schedules for that region
     /// - Parameter newRegion: The new region to update to
+    /// - Parameter forceRefresh: Whether to force re-download the PDF
     /// - Returns: An array of `PharmacySchedule` for the new region
-    public func loadPharmacies(for newRegion: Region) async -> [PharmacySchedule] {
+    public func loadPharmacies(for newRegion: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         self.region = newRegion
-        return await loadPharmacies()
+        return await loadPharmacies(forceRefresh: forceRefresh)
     }    /// Internal method, kept for backward compatibility and testing
     func loadPharmacies(from url: URL) -> [PharmacySchedule] {
         guard let pdfDocument = PDFDocument(url: url) else {
