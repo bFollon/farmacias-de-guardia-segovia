@@ -38,6 +38,27 @@ public struct DutyTimeSpan: Equatable, Hashable {
         date >= start && date <= end
     }
     
+    /// Checks if a given time of day (hour and minute) falls within this duty time span
+    /// This method handles cross-midnight spans correctly
+    public func containsTimeOfDay(hour: Int, minute: Int) -> Bool {
+        let calendar = Calendar.current
+        let timeInMinutes = hour * 60 + minute
+        
+        let startComponents = calendar.dateComponents([.hour, .minute], from: start)
+        let endComponents = calendar.dateComponents([.hour, .minute], from: end)
+        
+        let startMinutes = (startComponents.hour ?? 0) * 60 + (startComponents.minute ?? 0)
+        let endMinutes = (endComponents.hour ?? 0) * 60 + (endComponents.minute ?? 0)
+        
+        if spansMultipleDays {
+            // For spans that cross midnight (e.g., 22:00 - 10:15)
+            return timeInMinutes >= startMinutes || timeInMinutes <= endMinutes
+        } else {
+            // For spans within the same day (e.g., 10:15 - 22:00)
+            return timeInMinutes >= startMinutes && timeInMinutes <= endMinutes
+        }
+    }
+    
     /// A human-readable representation of the time span (e.g. "10:15 - 22:00")
     public var displayName: String {
         let formatter = DateFormatter()

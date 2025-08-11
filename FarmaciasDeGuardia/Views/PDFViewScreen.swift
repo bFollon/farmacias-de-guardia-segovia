@@ -57,10 +57,10 @@ struct PDFViewScreen: View {
                         .background(Color(.systemBackground))
                         
                         if Calendar.current.isDateInToday(selectedDate),
-                           let current = ScheduleService.findCurrentSchedule(in: schedules) {
+                           let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
                             ScheduleContentView(
                                 schedule: current.0,
-                                shiftType: current.1,
+                                activeShift: current.1,
                                 region: region,
                                 isPresentingInfo: $isPresentingInfo,
                                 formattedDateTime: ScheduleService.getCurrentDateTime()

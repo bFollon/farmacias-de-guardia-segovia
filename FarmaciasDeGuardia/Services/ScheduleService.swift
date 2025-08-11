@@ -131,6 +131,48 @@ class ScheduleService {
         return (schedule, dutyInfo.shiftType)
     }
     
+    /// Region-aware version that detects shift pattern from schedule data
+    static func findCurrentSchedule(in schedules: [PharmacySchedule], for region: Region) -> (PharmacySchedule, DutyTimeSpan)? {
+        let now = Date()
+        let calendar = Calendar.current
+        
+        // First, find a sample schedule to determine the shift pattern for this region
+        guard let sampleSchedule = schedules.first else { return nil }
+        
+        // Detect shift pattern based on what shifts are available in the schedule
+        let has24HourShifts = sampleSchedule.shifts[.fullDay] != nil
+        let hasDayNightShifts = sampleSchedule.shifts[.capitalDay] != nil || sampleSchedule.shifts[.capitalNight] != nil
+        
+        if has24HourShifts {
+            // For 24-hour regions, always use current day and full-day shift
+            guard let schedule = schedules.first(where: { schedule in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+                return calendar.isDate(scheduleDate, inSameDayAs: now)
+            }) else {
+                return nil
+            }
+            return (schedule, .fullDay)
+        } else if hasDayNightShifts {
+            // For day/night regions, use the existing logic
+            if let legacyResult = findCurrentSchedule(in: schedules) {
+                let timeSpan: DutyTimeSpan = legacyResult.1 == .day ? .capitalDay : .capitalNight
+                return (legacyResult.0, timeSpan)
+            }
+            return nil
+        } else {
+            // Fallback: treat as 24-hour if we can't determine
+            guard let schedule = schedules.first(where: { schedule in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+                return calendar.isDate(scheduleDate, inSameDayAs: now)
+            }) else {
+                return nil
+            }
+            return (schedule, .fullDay)
+        }
+    }
+    
     static func getCurrentDateTime() -> String {
         let today = Date()
         let dateFormatter = DateFormatter()
