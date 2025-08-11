@@ -27,6 +27,7 @@ class PDFCacheManager {
     
     // Version storage key
     private let versionStorageKey = "PDFCacheVersions"
+    private let lastUpdateCheckKey = "PDFCacheLastUpdateCheck"
     
     // MARK: - Storage Locations
     
@@ -158,35 +159,61 @@ class PDFCacheManager {
     }
     
     /// Check if cached version is up to date
-    func isCacheUpToDate(for region: Region) async -> Bool {
+    func isCacheUpToDate(for region: Region, debugMode: Bool = false) async -> Bool {
         guard hasCachedFile(for: region),
               let cachedVersion = getStoredVersion(for: region) else {
+            print("🔍 PDFCacheManager: No cached file or version for \(region.name)")
             return false
         }
         
         do {
             let remoteVersion = try await checkRemoteVersion(for: region)
             
-            // Compare versions using multiple criteria
-            if let cachedEtag = cachedVersion.etag,
-               let remoteEtag = remoteVersion.etag {
-                return cachedEtag == remoteEtag
+            print("🔍 PDFCacheManager: Comparing versions for \(region.name):")
+            if debugMode {
+                print("   Cached ETag: \(cachedVersion.etag ?? "nil")")
+                print("   Remote ETag: \(remoteVersion.etag ?? "nil")")
+                print("   Cached Last-Modified: \(cachedVersion.lastModified?.description ?? "nil")")
+                print("   Remote Last-Modified: \(remoteVersion.lastModified?.description ?? "nil")")
+                print("   Cached Size: \(cachedVersion.contentLength?.description ?? "nil")")
+                print("   Remote Size: \(remoteVersion.contentLength?.description ?? "nil")")
             }
             
+            // 1. First try Last-Modified (most reliable for this server)
             if let cachedLastModified = cachedVersion.lastModified,
                let remoteLastModified = remoteVersion.lastModified {
-                return cachedLastModified == remoteLastModified
+                let isMatch = cachedLastModified == remoteLastModified
+                if debugMode {
+                    print("   ✅ Last-Modified comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                }
+                return isMatch
             }
             
+            // 2. Then try Content-Length as backup
             if let cachedLength = cachedVersion.contentLength,
                let remoteLength = remoteVersion.contentLength {
-                return cachedLength == remoteLength
+                let isMatch = cachedLength == remoteLength
+                if debugMode {
+                    print("   ✅ Content-Length comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                }
+                return isMatch
+            }
+            
+            // 3. Finally try ETag (least reliable for this server)
+            if let cachedEtag = cachedVersion.etag,
+               let remoteEtag = remoteVersion.etag {
+                let isMatch = cachedEtag == remoteEtag
+                if debugMode {
+                    print("   ✅ ETag comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                }
+                return isMatch
             }
             
             // If no comparison criteria available, consider outdated
+            print("   ❌ No comparison criteria available, assuming outdated")
             return false
         } catch {
-            print("PDFCacheManager: Failed to check remote version for \(region.name): \(error)")
+            print("❌ PDFCacheManager: Failed to check remote version for \(region.name): \(error)")
             // If we can't check remote, assume cache is valid for now
             return true
         }
@@ -355,6 +382,116 @@ class PDFCacheManager {
         }
         
         return info
+    }
+    
+    // MARK: - Automatic Update Checking
+    
+    /// Check if we should perform automatic PDF update check
+    private func shouldCheckForUpdates() -> Bool {
+        guard let lastCheck = userDefaults.object(forKey: lastUpdateCheckKey) as? Date else {
+            return true // Never checked before
+        }
+        
+        // Check once per day
+        let oneDayAgo = Date().addingTimeInterval(-24 * 60 * 60)
+        return lastCheck < oneDayAgo
+    }
+    
+    /// Record that we performed an update check
+    private func recordUpdateCheck() {
+        userDefaults.set(Date(), forKey: lastUpdateCheckKey)
+    }
+    
+    /// Check all regions for PDF updates and download if needed
+    func checkForUpdatesIfNeeded() async {
+        guard shouldCheckForUpdates() else {
+            print("📅 PDFCacheManager: Skipping update check - already checked today")
+            return
+        }
+        
+        print("🔍 PDFCacheManager: Checking for PDF updates...")
+        recordUpdateCheck()
+        
+        let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+        
+        for region in allRegions {
+            await checkAndUpdateIfNeeded(region: region)
+        }
+        
+        print("✅ PDFCacheManager: Update check completed")
+    }
+    
+    /// Check a specific region and update if needed
+    private func checkAndUpdateIfNeeded(region: Region, debugMode: Bool = false) async {
+        let isCacheValid = await isCacheUpToDate(for: region, debugMode: debugMode)
+        
+        if !isCacheValid {
+            do {
+                let _ = try await downloadAndCache(region: region)
+                print("📥 PDFCacheManager: Updated PDF for \(region.name)")
+            } catch {
+                print("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
+            }
+        } else {
+            print("✅ PDFCacheManager: PDF for \(region.name) is up to date")
+        }
+    }
+    
+    /// Force check for updates (ignores daily limit)
+    func forceCheckForUpdates() async {
+        print("🔄 PDFCacheManager: Force checking for PDF updates...")
+        recordUpdateCheck() // Update the timestamp
+        
+        let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+        
+        for region in allRegions {
+            await checkAndUpdateIfNeeded(region: region, debugMode: true)
+        }
+        
+        print("✅ PDFCacheManager: Force update check completed")
+    }
+    
+    /// Print current cache status for all regions
+    func printCacheStatus() {
+        print("\nPDFCacheManager Status:")
+        print("Cache Directory: \(cacheDirectory.path)")
+        print("")
+        
+        let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+        
+        for region in allRegions {
+            let filename = cacheFileName(for: region)
+            let localURL = cacheDirectory.appendingPathComponent(filename)
+            
+            if fileManager.fileExists(atPath: localURL.path) {
+                do {
+                    let attributes = try fileManager.attributesOfItem(atPath: localURL.path)
+                    let fileSize = attributes[FileAttributeKey.size] as? Int64 ?? 0
+                    let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date ?? Date()
+                    
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .short
+                    formatter.timeStyle = .short
+                    
+                    print("📄 \(region.name): ✅")
+                    print("   Downloaded: \(formatter.string(from: modificationDate))")
+                    print("   Size: \(ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file))")
+                    print("")
+                } catch {
+                    print("📄 \(region.name): ❌ Error reading file info")
+                    print("")
+                }
+            } else {
+                print("📄 \(region.name): ❌ Not cached")
+                print("")
+            }
+        }
+    }
+    
+    /// Clear the last update check timestamp (for debugging)
+    func clearLastUpdateCheck() {
+        userDefaults.removeObject(forKey: lastUpdateCheckKey)
+        print("🗑️ PDFCacheManager: Cleared last update check timestamp")
     }
 }
 

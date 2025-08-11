@@ -8,6 +8,7 @@ struct PDFViewScreen: View {
     @State private var isLoading = true
     @State private var selectedDate: Date = Date()
     @State private var isShowingDatePicker = false
+    @State private var refreshTrigger = false // For triggering UI refresh
     var url: URL
     var region: Region
     
@@ -78,6 +79,7 @@ struct PDFViewScreen: View {
                     NoScheduleView()
                 }
             }
+            .id(refreshTrigger) // Force refresh when trigger changes
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -92,12 +94,11 @@ struct PDFViewScreen: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        refreshData()
+                        refreshCurrentView()
                     }) {
-                        Image(systemName: isRefreshing ? "arrow.clockwise.circle.fill" : "arrow.clockwise.circle")
+                        Image(systemName: "arrow.clockwise.circle")
                             .imageScale(.large)
                     }
-                    .disabled(isRefreshing)
                 }
             }
             .sheet(isPresented: $isShowingDatePicker) {
@@ -135,7 +136,11 @@ struct PDFViewScreen: View {
         .onAppear {
             loadPharmacies()
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            refreshCurrentView()
+        }
     }
+    
     private func loadPharmacies() {
         isLoading = true
         Task {
@@ -145,6 +150,19 @@ struct PDFViewScreen: View {
                 isLoading = false
             }
         }
+    }
+    
+    private func refreshCurrentView() {
+        // Just re-evaluate what should be shown based on current time
+        // Uses existing cached schedules, no re-downloading
+        // This handles the 23:55 -> 00:05 day rollover scenario
+        
+        print("🔄 Refreshing current view for \(region.name)")
+        
+        // Toggle refresh trigger to force SwiftUI re-evaluation
+        // The views will automatically re-evaluate ScheduleService.findCurrentSchedule 
+        // based on current time
+        refreshTrigger.toggle()
     }
     
     private func refreshData() {
