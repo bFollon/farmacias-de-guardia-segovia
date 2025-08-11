@@ -234,13 +234,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                         }
                     }
                     
-                    // Create the schedule (using same pharmacies for both shifts since
-                    // the PDF doesn't distinguish between day/night shifts)
+                    // Create the schedule using fullDay shift since the PDF doesn't 
+                    // distinguish between day/night shifts
                     if !pharmacies.isEmpty {
                         let schedule = PharmacySchedule(
                             date: date,
-                            dayShiftPharmacies: pharmacies,
-                            nightShiftPharmacies: pharmacies
+                            shifts: [
+                                .fullDay: pharmacies
+                            ]
                         )
                         schedules.append(schedule)
                     }

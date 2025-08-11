@@ -133,8 +133,9 @@ class ElEspinarParser: PDFParsingStrategy {
                     
                     let schedule = PharmacySchedule(
                         date: dutyDate,
-                        dayShiftPharmacies: [pharmacy],
-                        nightShiftPharmacies: [] // El Espinar doesn't distinguish between day/night shifts
+                        shifts: [
+                            .fullDay: [pharmacy]
+                        ]
                     )
                     
                     schedules.append(schedule)

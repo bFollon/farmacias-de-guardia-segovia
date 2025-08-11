@@ -20,10 +20,12 @@ public struct PharmacySchedule {
     
     // Backward compatibility properties (can be removed after UI is updated)
     public var dayShiftPharmacies: [Pharmacy] {
-        shifts[.capitalDay] ?? []
+        // Try capital-specific shifts first, then fall back to full day
+        shifts[.capitalDay] ?? shifts[.fullDay] ?? []
     }
     
     public var nightShiftPharmacies: [Pharmacy] {
-        shifts[.capitalNight] ?? []
+        // Try capital-specific shifts first, then fall back to full day (for 24-hour regions)
+        shifts[.capitalNight] ?? shifts[.fullDay] ?? []
     }
 }
