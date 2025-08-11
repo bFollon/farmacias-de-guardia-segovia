@@ -15,6 +15,10 @@ struct FarmaciasDeGuardiaApp: App {
                     }
             } else {
                 ContentView()
+                    .onAppear {
+                        // Initialize PDF cache manager on first app load
+                        PDFCacheManager.shared.initialize()
+                    }
             }
         }
     }
