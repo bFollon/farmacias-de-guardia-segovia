@@ -87,8 +87,7 @@ extension Region {
     public static let segoviaRural = Region(
         id: "segovia-rural",
         name: "Segovia Rural",
-        pdfURL: Bundle.main.url(forResource: "SERVICIOS-DE-URGENCIA-RURALES-2025", withExtension: "pdf") ?? 
-                URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!,
+        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!,
         metadata: RegionMetadata(
             isMonthlySchedule: false,
             notes: "Servicios de urgencia rurales"
