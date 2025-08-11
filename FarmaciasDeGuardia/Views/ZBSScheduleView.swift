@@ -9,11 +9,48 @@ struct ZBSScheduleView: View {
     
     private var todaySchedule: ZBSSchedule? {
         let calendar = Calendar.current
-        return zbsSchedules.first { schedule in
-            // For now, find the first available schedule
-            // In the future, match by actual date
-            return !schedule.pharmacies(for: selectedZBS.id).isEmpty
+        
+        // First try to find today's schedule
+        let today = Date()
+        let todayComponents = calendar.dateComponents([.day, .month, .year], from: today)
+        
+        print("🔍 ZBSScheduleView DEBUG: Looking for schedule on \(todayComponents.day!)/\(todayComponents.month!)/\(todayComponents.year!) for ZBS '\(selectedZBS.id)'")
+        print("🔍 ZBSScheduleView DEBUG: Available schedules count: \(zbsSchedules.count)")
+        
+        // Try to find today's exact schedule
+        if let todaySchedule = zbsSchedules.first(where: { schedule in
+            let scheduleDay = schedule.date.day
+            let scheduleMonth = monthNameToNumber(schedule.date.month) ?? 0
+            let scheduleYear = schedule.date.year ?? Calendar.current.component(.year, from: today)
+            
+            return scheduleDay == todayComponents.day &&
+                   scheduleMonth == todayComponents.month &&
+                   scheduleYear == todayComponents.year
+        }) {
+            print("🔍 ZBSScheduleView DEBUG: Found today's schedule")
+            let pharmacies = todaySchedule.pharmacies(for: selectedZBS.id)
+            print("🔍 ZBSScheduleView DEBUG: Pharmacies for ZBS '\(selectedZBS.id)': \(pharmacies.map { $0.name })")
+            return todaySchedule
         }
+        
+        // Fallback: find the first available schedule with pharmacies
+        let fallbackSchedule = zbsSchedules.first { schedule in
+            let pharmacies = schedule.pharmacies(for: selectedZBS.id)
+            let hasPharmacies = !pharmacies.isEmpty
+            if hasPharmacies {
+                print("🔍 ZBSScheduleView DEBUG: Using fallback schedule for date \(schedule.date.day)/\(schedule.date.month)/\(schedule.date.year ?? 0)")
+                print("🔍 ZBSScheduleView DEBUG: Pharmacies: \(pharmacies.map { $0.name })")
+            }
+            return hasPharmacies
+        }
+        
+        return fallbackSchedule
+    }
+    
+    private func monthNameToNumber(_ monthName: String) -> Int? {
+        let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+                         "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
+        return monthNames[monthName]
     }
     
     private var formattedDate: String {
@@ -61,19 +98,36 @@ struct ZBSScheduleView: View {
                             
                             // Pharmacies for this ZBS
                             let pharmacies = schedule.pharmacies(for: selectedZBS.id)
-                            if !pharmacies.isEmpty {
-                                VStack(alignment: .leading, spacing: 12) {
-                                    Text("Farmacias de Guardia")
-                                        .font(.headline)
-                                    
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Farmacias de Guardia")
+                                    .font(.headline)
+                                
+                                if !pharmacies.isEmpty {
                                     ForEach(pharmacies.indices, id: \.self) { index in
                                         PharmacyView(pharmacy: pharmacies[index])
                                     }
-                                }
-                            } else {
-                                Text("No hay farmacias de guardia disponibles para esta zona hoy.")
-                                    .foregroundColor(.secondary)
+                                } else {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        HStack {
+                                            Image(systemName: "exclamationmark.triangle")
+                                                .foregroundColor(.orange)
+                                            Text("Sin farmacia de guardia")
+                                                .font(.headline)
+                                                .foregroundColor(.orange)
+                                        }
+                                        
+                                        Text("No hay farmacia de guardia asignada para \(selectedZBS.name) en esta fecha.")
+                                            .font(.body)
+                                            .foregroundColor(.secondary)
+                                        
+                                        Text("Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial.")
+                                            .font(.footnote)
+                                            .foregroundColor(.secondary)
+                                    }
                                     .padding()
+                                    .background(Color.orange.opacity(0.1))
+                                    .cornerRadius(8)
+                                }
                             }
                             
                             Divider()

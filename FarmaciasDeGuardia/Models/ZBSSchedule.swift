@@ -33,10 +33,25 @@ public class ZBSScheduleService {
         // Only applicable for Segovia Rural
         guard region == .segoviaRural else { return nil }
         
-        // Get regular schedules and reorganize by ZBS
-        let schedules = ScheduleService.loadSchedules(for: region)
+        print("ZBSScheduleService: Loading schedules for \(region.name)")
         
-        return convertToZBSSchedules(schedules)
+        // First, ensure schedules are loaded by calling the regular service
+        _ = ScheduleService.loadSchedules(for: region)
+        
+        // Then get the ZBS schedules from the parser cache
+        let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()
+        print("ZBSScheduleService: Retrieved \(zbsSchedules.count) ZBS schedules from cache")
+        
+        // Debug: print first few schedules
+        for (index, schedule) in zbsSchedules.prefix(3).enumerated() {
+            print("ZBS Schedule \(index): Date \(schedule.date)")
+            for (zbsId, pharmacies) in schedule.schedulesByZBS {
+                let pharmacyNames = pharmacies.map { $0.name }.joined(separator: ", ")
+                print("  \(zbsId): \(pharmacyNames.isEmpty ? "NO PHARMACY" : pharmacyNames)")
+            }
+        }
+        
+        return zbsSchedules
     }
     
     private static func convertToZBSSchedules(_ schedules: [PharmacySchedule]) -> [ZBSSchedule] {

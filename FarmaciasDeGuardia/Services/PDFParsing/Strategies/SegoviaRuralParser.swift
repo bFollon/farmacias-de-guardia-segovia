@@ -5,6 +5,9 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     /// Debug flag - when true, prints detailed parsing information
     private let debug = true
     
+    /// Store ZBS schedules separately for access by ZBSScheduleService
+    static private var cachedZBSSchedules: [ZBSSchedule] = []
+    
     // Lookup tables for Spanish names
     private let weekdays = [
         1: "Domingo",
@@ -75,11 +78,22 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     }
     
-    private func createPharmacy(name: String, zbs: String) -> Pharmacy {
-        // For now, use placeholder address and phone
-        // The schedule type can be determined from the ZBS
-        let scheduleInfo = zbsSchedules[zbs]?.hours ?? "unknown"
-        let additionalInfo = "Horario: \(scheduleInfo)"
+    private func createPharmacy(name: String, zbsId: String) -> Pharmacy {
+        // Map ZBS ID to display name for schedule info
+        let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
+        
+        // Determine schedule type based on ZBS
+        let scheduleInfo: String
+        switch zbsId {
+        case "riaza-sepulveda":
+            scheduleInfo = "24h"
+        case "la-granja":
+            scheduleInfo = "10h-22h"
+        default:
+            scheduleInfo = "10h-20h"
+        }
+        
+        let additionalInfo = "Horario: \(scheduleInfo) - ZBS: \(zbsDisplayName)"
         
         return Pharmacy(
             name: name,
@@ -89,8 +103,20 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     }
     
+    
+    /// Get cached ZBS schedules
+    static func getCachedZBSSchedules() -> [ZBSSchedule] {
+        return cachedZBSSchedules
+    }
+    
+    /// Clear cached ZBS schedules
+    static func clearZBSCache() {
+        cachedZBSSchedules = []
+    }
+    
     func parseSchedules(from pdfDocument: PDFDocument) -> [PharmacySchedule] {
         var schedules: [PharmacySchedule] = []
+        var zbsSchedules: [ZBSSchedule] = []
         let pageCount = pdfDocument.pageCount
         
         if debug { print("\n=== Segovia Rural Schedules ===") }
@@ -215,33 +241,58 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                         continue
                     }
                     
-                    // Create pharmacies for each non-empty cell
-                    var pharmacies: [Pharmacy] = []
-                    
+                    // Create a comprehensive ZBS schedule for this date
+                    // Include ALL ZBS, even if some have no pharmacy on duty
                     let zbsData = [
-                        ("RIAZA SEPÚLVEDA", sanitize(riaza)),
-                        ("LA GRANJA", sanitize(laGranja)),
-                        ("LA SIERRA", sanitize(laSierra)),
-                        ("FUENTIDUEÑA", sanitize(fuentidueña)),
-                        ("CARBONERO", sanitize(carbonero)),
-                        ("NAVAS DE LA ASUNCIÓN", sanitize(navasAsuncion)),
-                        ("VILLACASTÍN", sanitize(villacastin))
+                        ("riaza-sepulveda", sanitize(riaza)),
+                        ("la-granja", sanitize(laGranja)),
+                        ("la-sierra", sanitize(laSierra)),
+                        ("fuentidueña", sanitize(fuentidueña)),
+                        ("carbonero", sanitize(carbonero)),
+                        ("navas-asuncion", sanitize(navasAsuncion)),
+                        ("villacastin", sanitize(villacastin))
                     ]
                     
-                    for (zbs, pharmacyName) in zbsData {
+                    var schedulesByZBS: [String: [Pharmacy]] = [:]
+                    
+                    // Initialize all ZBS with empty arrays
+                    for (zbsId, _) in zbsData {
+                        schedulesByZBS[zbsId] = []
+                    }
+                    
+                    // Add pharmacies where they exist
+                    for (zbsId, pharmacyName) in zbsData {
                         if !pharmacyName.isEmpty {
-                            pharmacies.append(createPharmacy(name: pharmacyName, zbs: zbs))
+                            let pharmacy = createPharmacy(name: pharmacyName, zbsId: zbsId)
+                            schedulesByZBS[zbsId]?.append(pharmacy)
+                        }
+                        // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
+                    }
+                    
+                    // Create ZBS schedule (always create one for each date)
+                    let zbsSchedule = ZBSSchedule(date: date, schedulesByZBS: schedulesByZBS)
+                    zbsSchedules.append(zbsSchedule)
+                    
+                    // Debug: print the ZBS schedule we just created
+                    if debug && sanitizedDateStr == "11-ago-25" {
+                        print("🔍 DEBUG: Created ZBS schedule for \(sanitizedDateStr):")
+                        for (zbsId, pharmacies) in schedulesByZBS {
+                            let names = pharmacies.map { $0.name }.joined(separator: ", ")
+                            print("  \(zbsId): \(names.isEmpty ? "NO PHARMACY" : names)")
                         }
                     }
                     
-                    // Create the schedule using fullDay shift since the PDF doesn't 
-                    // distinguish between day/night shifts
-                    if !pharmacies.isEmpty {
+                    // For backwards compatibility, also create a regular PharmacySchedule
+                    // with all pharmacies that have a name
+                    var allPharmacies: [Pharmacy] = []
+                    for (_, pharmacies) in schedulesByZBS {
+                        allPharmacies.append(contentsOf: pharmacies)
+                    }
+                    
+                    if !allPharmacies.isEmpty {
                         let schedule = PharmacySchedule(
                             date: date,
-                            shifts: [
-                                .fullDay: pharmacies
-                            ]
+                            shifts: [.fullDay: allPharmacies]
                         )
                         schedules.append(schedule)
                     }
@@ -260,6 +311,10 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 }
             }
         }
+        
+        // Store ZBS schedules for later access
+        Self.cachedZBSSchedules = zbsSchedules
+        if debug { print("📦 Stored \(zbsSchedules.count) ZBS schedules in cache") }
         
         // For now, return empty array until we implement the full parsing logic
         return schedules
