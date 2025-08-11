@@ -249,6 +249,13 @@ struct ZBSScheduleView: View {
                 .navigationTitle("Seleccionar fecha")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Hoy") {
+                            selectedDate = Date()
+                        }
+                        .disabled(Calendar.current.isDate(selectedDate, inSameDayAs: Date()))
+                    }
+                    
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Listo") {
                             isShowingDatePicker = false
