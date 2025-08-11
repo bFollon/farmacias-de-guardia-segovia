@@ -201,9 +201,13 @@ struct ZBSScheduleView: View {
                                     .font(.footnote)
                                     .fontWeight(.semibold)
                                 
-                                Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial.")
+                                Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:")
                                     .font(.footnote)
                                     .foregroundColor(.secondary)
+                                
+                                Link("Calendario de Guardias - Segovia Rural",
+                                     destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!)
+                                    .font(.footnote)
                             }
                         }
                         .padding()
