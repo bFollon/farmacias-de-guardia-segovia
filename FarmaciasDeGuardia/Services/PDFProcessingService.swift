@@ -21,6 +21,8 @@ public class PDFProcessingService {
         register(parser: CuellarParser(), for: "cuellar")
         // Register El Espinar parser
         register(parser: ElEspinarParser(), for: "el-espinar")
+        // Register Segovia Rural parser
+        register(parser: SegoviaRuralParser(), for: "segovia-rural")
     }
     
     /// Registers a parsing strategy for a specific region

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ScheduleContentView: View {
     let schedule: PharmacySchedule
-    let shiftType: DutyDate.ShiftType
+    let activeShift: DutyTimeSpan
     let region: Region
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
@@ -20,17 +20,18 @@ struct ScheduleContentView: View {
                 .font(.title2)
                 .padding(.bottom, 5)
                 
-                // Show shift info if applicable
-                if region.id == "segovia-capital" {
-                    // Show shift type for Segovia Capital
-                    ShiftHeaderView(shiftType: shiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
-                    
-                    // Show active pharmacy for current shift
-                    if let pharmacy = (shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first) {
-                        PharmacyView(pharmacy: pharmacy)
-                    }
+                // Show shift info if applicable (for day/night regions)
+                if activeShift == .capitalDay || activeShift == .capitalNight {
+                    // Convert DutyTimeSpan back to ShiftType for ShiftHeaderView compatibility
+                    let legacyShiftType: DutyDate.ShiftType = activeShift == .capitalDay ? .day : .night
+                    ShiftHeaderView(shiftType: legacyShiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
+                }
+                
+                // Show active pharmacy for current shift
+                if let pharmacies = schedule.shifts[activeShift], let pharmacy = pharmacies.first {
+                    PharmacyView(pharmacy: pharmacy)
                 } else {
-                    // Show pharmacy for Cuéllar (no shift distinction)
+                    // Fallback to legacy properties if shift-specific data isn't available
                     if let pharmacy = schedule.dayShiftPharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
                     }
@@ -52,15 +53,18 @@ struct ScheduleContentView: View {
                          destination: region.pdfURL)
                         .font(.footnote)
                     
+                    let currentPharmacy = schedule.shifts[activeShift]?.first ?? schedule.dayShiftPharmacies.first
+                    let shiftName = activeShift == .fullDay ? "24 horas" : (activeShift == .capitalDay ? "Diurno" : "Nocturno")
+                    
                     let emailBody = """
                         Hola,
                         
                         He encontrado un error en la farmacia de guardia mostrada para:
                         
                         Fecha y hora: \(formattedDateTime)
-                        Turno: \(shiftType == .day ? "Diurno" : "Nocturno")
-                        Farmacia mostrada: \((shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first)?.name ?? "")
-                        Dirección: \((shiftType == .day ? schedule.dayShiftPharmacies.first : schedule.nightShiftPharmacies.first)?.address ?? "")
+                        Turno: \(shiftName)
+                        Farmacia mostrada: \(currentPharmacy?.name ?? "")
+                        Dirección: \(currentPharmacy?.address ?? "")
                         
                         La farmacia correcta es:
                         

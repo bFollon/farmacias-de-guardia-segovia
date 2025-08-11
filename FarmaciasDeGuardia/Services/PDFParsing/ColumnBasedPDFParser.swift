@@ -35,21 +35,18 @@ public class ColumnBasedPDFParser {
     /// Scans a column in the PDF page and extracts text
     func scanColumn(_ page: PDFPage, column: TextColumn, baseHeight: CGFloat, scanIncrement: CGFloat) -> [(y: CGFloat, text: String)] {
         var texts: [(y: CGFloat, text: String)] = []
-        var lastText = ""
         
         // Scan from top to bottom with high precision
         for y in stride(from: 0, to: page.bounds(for: .mediaBox).height, by: scanIncrement) {
             let rect = CGRect(x: column.x, y: y, width: column.width, height: baseHeight)
             if let selection = page.selection(for: rect),
                let text = selection.string?.trimmingCharacters(in: .whitespacesAndNewlines),
-               !text.isEmpty,
-               text != lastText {
+               !text.isEmpty {
                 texts.append((y: y, text: text))
-                lastText = text
             }
         }
         
-        return removeDuplicateAdjacent(blocks: texts)
+        return texts
     }
     
     /// Gets the smallest font size used in the PDF, useful for determining scan height
