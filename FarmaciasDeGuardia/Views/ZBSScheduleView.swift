@@ -208,6 +208,33 @@ struct ZBSScheduleView: View {
                                 Link("Calendario de Guardias - Segovia Rural",
                                      destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!)
                                     .font(.footnote)
+                                
+                                // Error reporting section
+                                if let schedule = selectedSchedule {
+                                    let pharmacies = schedule.pharmacies(for: selectedZBS.id)
+                                    let currentPharmacy = pharmacies.first
+                                    
+                                    let emailBody = """
+                                        Hola,
+                                        
+                                        He encontrado un error en la farmacia de guardia mostrada para:
+                                        
+                                        Fecha: \(formattedDate)
+                                        ZBS: \(selectedZBS.name)
+                                        Farmacia mostrada: \(currentPharmacy?.name ?? "Sin farmacia asignada")
+                                        Dirección: \(currentPharmacy?.address ?? "")
+                                        
+                                        La farmacia correcta es:
+                                        
+                                        
+                                        Gracias.
+                                        """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                                    
+                                    Link("¿Has encontrado algún error? Repórtalo aquí",
+                                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia&body=\(emailBody)")!)
+                                        .font(.footnote)
+                                        .padding(.top, 8)
+                                }
                             }
                         }
                         .padding()
