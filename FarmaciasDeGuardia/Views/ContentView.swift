@@ -3,6 +3,7 @@ import PDFKit
 
 struct ContentView: View {
     @State private var selectedRegion: Region?
+    @State private var showingZBSSelection = false
 
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct ContentView: View {
                         case "El espinar / San Rafael":
                             selectedRegion = .elEspinar
                         case "Segovia Rural":
-                            selectedRegion = .segoviaRural
+                            showingZBSSelection = true
                         default:
                             break
                         }
@@ -43,6 +44,9 @@ struct ContentView: View {
         }
         .sheet(item: $selectedRegion) { region in
             PDFViewScreen(url: region.pdfURL, region: region)
+        }
+        .sheet(isPresented: $showingZBSSelection) {
+            ZBSSelectionView(selectedRegion: $selectedRegion)
         }
     }
 }
