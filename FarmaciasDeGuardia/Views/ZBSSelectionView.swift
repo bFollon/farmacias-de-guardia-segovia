@@ -3,6 +3,7 @@ import SwiftUI
 struct ZBSSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selectedRegion: Region?
+    @State private var selectedZBS: ZBS?
     
     var body: some View {
         NavigationView {
@@ -25,10 +26,7 @@ struct ZBSSelectionView: View {
                 ], spacing: 16) {
                     ForEach(ZBS.availableZBS, id: \.id) { zbs in
                         Button(action: {
-                            // For now, all ZBS use the same Segovia Rural region
-                            // In the future, you could create separate regions per ZBS
-                            selectedRegion = .segoviaRural
-                            dismiss()
+                            selectedZBS = zbs
                         }) {
                             VStack(spacing: 8) {
                                 Text(zbs.icon)
@@ -60,7 +58,7 @@ struct ZBSSelectionView: View {
                         .font(.footnote)
                         .fontWeight(.semibold)
                     
-                    Text("Todas las zonas rurales comparten el mismo calendario de guardias de urgencia.")
+                    Text("Cada zona básica de salud tiene sus farmacias asignadas según el calendario oficial.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -77,6 +75,9 @@ struct ZBSSelectionView: View {
                     }
                 }
             }
+        }
+        .sheet(item: $selectedZBS) { zbs in
+            ZBSScheduleView(selectedZBS: zbs)
         }
     }
 }

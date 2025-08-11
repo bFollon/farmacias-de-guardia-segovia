@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a geographical region or location that has its own pharmacy duty schedule
-public struct Region {
+public struct Region: Equatable {
     /// Unique identifier for the region, used to match with PDF parsing strategies
     public let id: String
     
@@ -20,10 +20,14 @@ public struct Region {
         self.pdfURL = pdfURL
         self.metadata = metadata
     }
+    
+    public static func == (lhs: Region, rhs: Region) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 /// Additional configuration and metadata for a region
-public struct RegionMetadata {
+public struct RegionMetadata: Equatable {
     /// Whether this region has 24-hour pharmacies that are always open
     public let has24HourPharmacies: Bool
     
