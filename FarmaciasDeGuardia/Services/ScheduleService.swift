@@ -6,7 +6,7 @@ class ScheduleService {
     static private let pdfService = PDFProcessingService()
     static private var cacheInvalidationTimer: Timer?
     
-    static func loadSchedules(for region: Region, forceRefresh: Bool = false) -> [PharmacySchedule] {
+    static func loadSchedules(for region: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // Return cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[region.id], !forceRefresh {
             print("ScheduleService: Using cached schedules for region \(region.name)")
@@ -15,7 +15,7 @@ class ScheduleService {
         
         // Load and cache if not available or force refresh requested
         print("ScheduleService: Loading schedules from PDF for region \(region.name)...")
-        let schedules = pdfService.loadPharmacies(for: region)
+        let schedules = await pdfService.loadPharmacies(for: region)
         cachedSchedules[region.id] = schedules
         print("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         
@@ -51,9 +51,9 @@ class ScheduleService {
     }
     
     // Keep backward compatibility for direct URL loading
-    static func loadSchedules(from url: URL, forceRefresh: Bool = false) -> [PharmacySchedule] {
+    static func loadSchedules(from url: URL, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // For direct URL loading, treat as Segovia Capital
-        return loadSchedules(for: .segoviaCapital, forceRefresh: forceRefresh)
+        return await loadSchedules(for: .segoviaCapital, forceRefresh: forceRefresh)
     }
     
     static func clearCache() {

@@ -29,14 +29,14 @@ public class ZBSScheduleService {
     /// Get schedules organized by ZBS for a specific region
     /// - Parameter region: The region to get schedules for
     /// - Returns: Array of ZBS schedules, or nil if not applicable
-    public static func getZBSSchedules(for region: Region) -> [ZBSSchedule]? {
+    public static func getZBSSchedules(for region: Region) async -> [ZBSSchedule]? {
         // Only applicable for Segovia Rural
         guard region == .segoviaRural else { return nil }
         
         print("ZBSScheduleService: Loading schedules for \(region.name)")
         
         // First, ensure schedules are loaded by calling the regular service
-        _ = ScheduleService.loadSchedules(for: region)
+        _ = await ScheduleService.loadSchedules(for: region)
         
         // Then get the ZBS schedules from the parser cache
         let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()

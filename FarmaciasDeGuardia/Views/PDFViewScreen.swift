@@ -138,9 +138,9 @@ struct PDFViewScreen: View {
     }
     private func loadPharmacies() {
         isLoading = true
-        DispatchQueue.global(qos: .userInitiated).async {
-            let loadedSchedules = ScheduleService.loadSchedules(for: region)
-            DispatchQueue.main.async {
+        Task {
+            let loadedSchedules = await ScheduleService.loadSchedules(for: region)
+            await MainActor.run {
                 schedules = loadedSchedules
                 isLoading = false
             }
@@ -150,12 +150,11 @@ struct PDFViewScreen: View {
     private func refreshData() {
         isRefreshing = true
         
-        // Use GCD to prevent UI blocking
-        DispatchQueue.global(qos: .userInitiated).async {
-            let refreshedSchedules = ScheduleService.loadSchedules(for: region, forceRefresh: true)
+        Task {
+            let refreshedSchedules = await ScheduleService.loadSchedules(for: region, forceRefresh: true)
             
             // Update UI on main thread
-            DispatchQueue.main.async {
+            await MainActor.run {
                 schedules = refreshedSchedules
                 isRefreshing = false
             }
