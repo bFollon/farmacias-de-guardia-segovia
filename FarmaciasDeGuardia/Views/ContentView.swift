@@ -4,10 +4,24 @@ import PDFKit
 struct ContentView: View {
     @State private var selectedRegion: Region?
     @State private var showingZBSSelection = false
+    @State private var showingSettings = false
 
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        showingSettings = true
+                    }) {
+                        Image(systemName: "gearshape")
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                
                 Text("Farmacias de Guardia")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -84,6 +98,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingZBSSelection) {
             ZBSSelectionView(selectedRegion: $selectedRegion)
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
         }
     }
 }

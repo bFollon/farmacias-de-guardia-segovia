@@ -15,7 +15,15 @@ struct FarmaciasDeGuardiaApp: App {
                     }
             } else {
                 ContentView()
+                    .onAppear {
+                        initializeApp()
+                    }
             }
         }
+    }
+    
+    private func initializeApp() {
+        // Initialize PDF cache manager
+        PDFCacheManager.shared.initialize()
     }
 }

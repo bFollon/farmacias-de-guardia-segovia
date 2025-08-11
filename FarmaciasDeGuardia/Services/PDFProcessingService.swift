@@ -34,30 +34,44 @@ public class PDFProcessingService {
     }
     
     /// Loads pharmacy schedules for the current region
-    public func loadPharmacies() -> [PharmacySchedule] {
-        guard let pdfDocument = PDFDocument(url: region.pdfURL) else {
-            print("Failed to load PDF from \(region.pdfURL)")
-            return []
+    public func loadPharmacies(forceRefresh: Bool = false) async -> [PharmacySchedule] {
+        // Get the effective PDF URL (cached or remote, force download if requested)
+        let effectiveURL: URL
+        if forceRefresh {
+            do {
+                effectiveURL = try await PDFCacheManager.shared.forceDownload(for: region)
+                print("✅ Force downloaded fresh PDF for \(region.name)")
+            } catch {
+                print("❌ Failed to force download PDF for \(region.name): \(error)")
+                // Fallback to regular effective URL
+                effectiveURL = await region.getEffectivePDFURL()
+            }
+        } else {
+            effectiveURL = await region.getEffectivePDFURL()
         }
         
+        guard let pdfDocument = PDFDocument(url: effectiveURL) else {
+            print("Failed to load PDF from \(effectiveURL)")
+            return []
+        }
+
         guard let parser = parsingStrategies[region.id] else {
             print("No parser found for region: \(region.name) (id: \(region.id))")
             return []
         }
-        
-        print("Loading schedules for \(region.name)")
+
+        print("Loading schedules for \(region.name) from \(effectiveURL)")
         return parser.parseSchedules(from: pdfDocument)
     }
-    
+
     /// Updates the current region and returns schedules for that region
     /// - Parameter newRegion: The new region to update to
+    /// - Parameter forceRefresh: Whether to force re-download the PDF
     /// - Returns: An array of `PharmacySchedule` for the new region
-    public func loadPharmacies(for newRegion: Region) -> [PharmacySchedule] {
+    public func loadPharmacies(for newRegion: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         self.region = newRegion
-        return loadPharmacies()
-    }
-    
-    /// Internal method, kept for backward compatibility and testing
+        return await loadPharmacies(forceRefresh: forceRefresh)
+    }    /// Internal method, kept for backward compatibility and testing
     func loadPharmacies(from url: URL) -> [PharmacySchedule] {
         guard let pdfDocument = PDFDocument(url: url) else {
             print("Failed to load PDF from \(url)")
