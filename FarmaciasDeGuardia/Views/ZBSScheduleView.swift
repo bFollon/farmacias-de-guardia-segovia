@@ -5,46 +5,45 @@ struct ZBSScheduleView: View {
     @State private var zbsSchedules: [ZBSSchedule] = []
     @State private var selectedDate = Date()
     @State private var isLoading = true
+    @State private var isShowingDatePicker = false
     @Environment(\.presentationMode) var presentationMode
     
-    private var todaySchedule: ZBSSchedule? {
+    private var dateButtonText: String {
+        if Calendar.current.isDateInToday(selectedDate) {
+            return "Hoy"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.locale = Locale(identifier: "es_ES")
+            return formatter.string(from: selectedDate)
+        }
+    }
+    
+    private var selectedSchedule: ZBSSchedule? {
         let calendar = Calendar.current
+        let selectedComponents = calendar.dateComponents([.day, .month, .year], from: selectedDate)
         
-        // First try to find today's schedule
-        let today = Date()
-        let todayComponents = calendar.dateComponents([.day, .month, .year], from: today)
-        
-        print("🔍 ZBSScheduleView DEBUG: Looking for schedule on \(todayComponents.day!)/\(todayComponents.month!)/\(todayComponents.year!) for ZBS '\(selectedZBS.id)'")
+        print("🔍 ZBSScheduleView DEBUG: Looking for schedule on \(selectedComponents.day!)/\(selectedComponents.month!)/\(selectedComponents.year!) for ZBS '\(selectedZBS.id)'")
         print("🔍 ZBSScheduleView DEBUG: Available schedules count: \(zbsSchedules.count)")
         
-        // Try to find today's exact schedule
-        if let todaySchedule = zbsSchedules.first(where: { schedule in
+        // Try to find the selected date's schedule
+        if let schedule = zbsSchedules.first(where: { schedule in
             let scheduleDay = schedule.date.day
             let scheduleMonth = monthNameToNumber(schedule.date.month) ?? 0
-            let scheduleYear = schedule.date.year ?? Calendar.current.component(.year, from: today)
+            let scheduleYear = schedule.date.year ?? Calendar.current.component(.year, from: selectedDate)
             
-            return scheduleDay == todayComponents.day &&
-                   scheduleMonth == todayComponents.month &&
-                   scheduleYear == todayComponents.year
+            return scheduleDay == selectedComponents.day &&
+                   scheduleMonth == selectedComponents.month &&
+                   scheduleYear == selectedComponents.year
         }) {
-            print("🔍 ZBSScheduleView DEBUG: Found today's schedule")
-            let pharmacies = todaySchedule.pharmacies(for: selectedZBS.id)
-            print("🔍 ZBSScheduleView DEBUG: Pharmacies for ZBS '\(selectedZBS.id)': \(pharmacies.map { $0.name })")
-            return todaySchedule
-        }
-        
-        // Fallback: find the first available schedule with pharmacies
-        let fallbackSchedule = zbsSchedules.first { schedule in
+            print("🔍 ZBSScheduleView DEBUG: Found schedule for selected date")
             let pharmacies = schedule.pharmacies(for: selectedZBS.id)
-            let hasPharmacies = !pharmacies.isEmpty
-            if hasPharmacies {
-                print("🔍 ZBSScheduleView DEBUG: Using fallback schedule for date \(schedule.date.day)/\(schedule.date.month)/\(schedule.date.year ?? 0)")
-                print("🔍 ZBSScheduleView DEBUG: Pharmacies: \(pharmacies.map { $0.name })")
-            }
-            return hasPharmacies
+            print("🔍 ZBSScheduleView DEBUG: Pharmacies for ZBS '\(selectedZBS.id)': \(pharmacies.map { $0.name })")
+            return schedule
         }
         
-        return fallbackSchedule
+        print("🔍 ZBSScheduleView DEBUG: No schedule found for selected date")
+        return nil
     }
     
     private func monthNameToNumber(_ monthName: String) -> Int? {
@@ -60,6 +59,44 @@ struct ZBSScheduleView: View {
         return formatter.string(from: selectedDate)
     }
     
+    private var dateRange: ClosedRange<Date> {
+        let calendar = Calendar.current
+        
+        // Find the earliest and latest dates from available schedules
+        guard !zbsSchedules.isEmpty else {
+            // Default range: today ± 1 year
+            let today = Date()
+            let yearAgo = calendar.date(byAdding: .year, value: -1, to: today) ?? today
+            let yearFromNow = calendar.date(byAdding: .year, value: 1, to: today) ?? today
+            return yearAgo...yearFromNow
+        }
+        
+        var earliestDate = Date()
+        var latestDate = Date()
+        
+        for schedule in zbsSchedules {
+            if let year = schedule.date.year,
+               let month = monthNameToNumber(schedule.date.month) {
+                var components = DateComponents()
+                components.year = year
+                components.month = month
+                components.day = schedule.date.day
+                
+                if let date = calendar.date(from: components) {
+                    if zbsSchedules.firstIndex(where: { $0.date.day == schedule.date.day && $0.date.month == schedule.date.month && $0.date.year == schedule.date.year }) == 0 {
+                        earliestDate = date
+                        latestDate = date
+                    } else {
+                        if date < earliestDate { earliestDate = date }
+                        if date > latestDate { latestDate = date }
+                    }
+                }
+            }
+        }
+        
+        return earliestDate...latestDate
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -67,17 +104,18 @@ struct ZBSScheduleView: View {
                     LoadingView()
                 } else if zbsSchedules.isEmpty {
                     NoScheduleView()
-                } else if let schedule = todaySchedule {
+                } else {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
-                            // Date with calendar icon
+                            // Selected date display
                             HStack(spacing: 8) {
-                                Image(systemName: "calendar")
-                                    .foregroundColor(.secondary.opacity(0.7))
+                                Image(systemName: "calendar.circle.fill")
+                                    .foregroundColor(.blue)
                                     .frame(width: 20)
                                 Text(formattedDate)
+                                    .font(.title2)
+                                    .fontWeight(.medium)
                             }
-                            .font(.title2)
                             .padding(.bottom, 5)
                             
                             // ZBS Info
@@ -96,36 +134,60 @@ struct ZBSScheduleView: View {
                             }
                             .padding(.bottom)
                             
-                            // Pharmacies for this ZBS
-                            let pharmacies = schedule.pharmacies(for: selectedZBS.id)
+                            // Pharmacies for this ZBS on selected date
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Farmacias de Guardia")
                                     .font(.headline)
                                 
-                                if !pharmacies.isEmpty {
-                                    ForEach(pharmacies.indices, id: \.self) { index in
-                                        PharmacyView(pharmacy: pharmacies[index])
+                                if let schedule = selectedSchedule {
+                                    let pharmacies = schedule.pharmacies(for: selectedZBS.id)
+                                    
+                                    if !pharmacies.isEmpty {
+                                        ForEach(pharmacies.indices, id: \.self) { index in
+                                            PharmacyView(pharmacy: pharmacies[index])
+                                        }
+                                    } else {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            HStack {
+                                                Image(systemName: "exclamationmark.triangle")
+                                                    .foregroundColor(.orange)
+                                                Text("Sin farmacia de guardia")
+                                                    .font(.headline)
+                                                    .foregroundColor(.orange)
+                                            }
+                                            
+                                            Text("No hay farmacia de guardia asignada para \(selectedZBS.name) en esta fecha.")
+                                                .font(.body)
+                                                .foregroundColor(.secondary)
+                                            
+                                            Text("Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial.")
+                                                .font(.footnote)
+                                                .foregroundColor(.secondary)
+                                        }
+                                        .padding()
+                                        .background(Color.orange.opacity(0.1))
+                                        .cornerRadius(8)
                                     }
                                 } else {
                                     VStack(alignment: .leading, spacing: 8) {
                                         HStack {
-                                            Image(systemName: "exclamationmark.triangle")
-                                                .foregroundColor(.orange)
-                                            Text("Sin farmacia de guardia")
+                                            Image(systemName: "calendar.badge.exclamationmark")
+                                                .foregroundColor(.red)
+                                            Text("Fecha no disponible")
                                                 .font(.headline)
-                                                .foregroundColor(.orange)
+                                                .foregroundColor(.red)
                                         }
                                         
-                                        Text("No hay farmacia de guardia asignada para \(selectedZBS.name) en esta fecha.")
+                                        Text("No hay información disponible para la fecha seleccionada.")
                                             .font(.body)
                                             .foregroundColor(.secondary)
                                         
-                                        Text("Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial.")
+                                        Text("Por favor, seleccione una fecha diferente del calendario de guardias.")
                                             .font(.footnote)
                                             .foregroundColor(.secondary)
                                     }
                                     .padding()
-                                    .background(Color.orange.opacity(0.1))
+                                    .background(Color.red.opacity(0.1))
                                     .cornerRadius(8)
                                 }
                             }
@@ -146,16 +208,23 @@ struct ZBSScheduleView: View {
                         }
                         .padding()
                     }
-                } else {
-                    Text("No se encontraron farmacias para esta zona.")
-                        .foregroundColor(.secondary)
-                        .padding()
                 }
             }
             .navigationTitle("\(selectedZBS.icon) \(selectedZBS.name)")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        isShowingDatePicker = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "calendar")
+                            Text(dateButtonText)
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Cerrar") {
                         presentationMode.wrappedValue.dismiss()
                     }
@@ -164,6 +233,30 @@ struct ZBSScheduleView: View {
         }
         .onAppear {
             loadZBSSchedules()
+        }
+        .sheet(isPresented: $isShowingDatePicker) {
+            NavigationView {
+                DatePicker("Seleccionar fecha",
+                         selection: $selectedDate,
+                         in: dateRange,
+                         displayedComponents: .date
+                )
+                .datePickerStyle(.graphical)
+                .padding()
+                .onChange(of: selectedDate) { oldDate, newDate in
+                    isShowingDatePicker = false
+                }
+                .navigationTitle("Seleccionar fecha")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Listo") {
+                            isShowingDatePicker = false
+                        }
+                    }
+                }
+            }
+            .presentationDetents([.medium])
         }
     }
     
