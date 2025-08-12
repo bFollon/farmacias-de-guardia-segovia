@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var selectedRegion: Region?
     @State private var showingZBSSelection = false
     @State private var showingSettings = false
+    @State private var showingAbout = false
 
     var body: some View {
         NavigationView {
@@ -79,19 +80,22 @@ struct ContentView: View {
                 Spacer()
                 
                 VStack(spacing: 8) {
-                    Text("Información")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                    
-                    Text("Consulta siempre la fuente oficial para confirmar la información mostrada.")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
+                    Button(action: {
+                        showingAbout = true
+                    }) {
+                        Text("Acerca de")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
             }
             .navigationBarHidden(true)
+            .sheet(isPresented: $showingAbout) {
+                AboutView()
+            }
         }
         .sheet(item: $selectedRegion) { region in
             PDFViewScreen(url: region.pdfURL, region: region)
