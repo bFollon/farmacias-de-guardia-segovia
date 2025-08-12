@@ -101,19 +101,33 @@ struct PharmacyView: View {
             
             // Phone with green phone icon (clickable)
             if !pharmacy.phone.isEmpty {
-                Button {
-                    if let phoneURL = URL(string: "tel://\(pharmacy.phone.replacingOccurrences(of: " ", with: ""))") {
-                        UIApplication.shared.open(phoneURL)
+                let isPhoneAvailable = pharmacy.phone != "No disponible"
+                
+                if isPhoneAvailable {
+                    Button {
+                        if let phoneURL = URL(string: "tel://\(pharmacy.phone.replacingOccurrences(of: " ", with: ""))") {
+                            UIApplication.shared.open(phoneURL)
+                        }
+                    } label: {
+                        HStack {
+                            Image(systemName: "phone")
+                                .foregroundColor(.green)
+                                .frame(width: 20)
+                            Text(pharmacy.formattedPhone)
+                                .font(.body)
+                                .foregroundColor(.primary)
+                                .underline()
+                        }
                     }
-                } label: {
+                } else {
+                    // Non-clickable phone number (not available)
                     HStack {
                         Image(systemName: "phone")
                             .foregroundColor(.green)
                             .frame(width: 20)
-                        Text(pharmacy.formattedPhone)
+                        Text("No disponible")
                             .font(.body)
-                            .foregroundColor(.primary)
-                            .underline()
+                            .foregroundColor(.secondary)
                     }
                 }
             }
