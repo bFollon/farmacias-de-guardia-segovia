@@ -7,6 +7,28 @@ struct PharmacyView: View {
     let pharmacy: Pharmacy
     @State private var showingMapOptions = false
     
+    /// Determine if pharmacy should show closed warning based on additionalInfo
+    private var shouldShowClosedWarning: Bool {
+        guard let info = pharmacy.additionalInfo else { return false }
+        
+        // Only apply to Segovia Rural pharmacies (those with "ZBS:" in additionalInfo)
+        guard info.contains("ZBS:") else { return false }
+        
+        let now = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        
+        if info.contains("24h") {
+            return false // 24h pharmacies never show warning
+        } else if info.contains("10h-22h") {
+            return hour < 10 || hour >= 22 // Extended hours
+        } else if info.contains("10h-20h") {
+            return hour < 10 || hour >= 20 // Standard hours
+        }
+        
+        return false // Default: no warning
+    }
+    
     private func openInMaps(using app: MapApp) {
         let query = "\(pharmacy.name), \(pharmacy.address), Segovia, Spain"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -28,6 +50,26 @@ struct PharmacyView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            // Warning banner for closed pharmacies
+            if shouldShowClosedWarning {
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.orange)
+                    Text("Esta farmacia está cerrada ahora")
+                        .font(.caption)
+                        .fontWeight(.medium)
+                    Spacer()
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.yellow.opacity(0.15))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                )
+            }
+            
             // Name with pharmacy cross
             HStack(spacing: ViewConstants.iconSpacing) {
                 Image(systemName: "cross.case.fill")

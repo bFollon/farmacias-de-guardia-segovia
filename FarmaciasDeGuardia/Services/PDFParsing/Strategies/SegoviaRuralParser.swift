@@ -287,6 +287,34 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     }
     
+    /// Get the schedule type for a given ZBS ID
+    private func getScheduleType(for zbsId: String) -> ScheduleType {
+        switch zbsId {
+        case "riaza-sepulveda":
+            return .fullDay
+        case "la-granja":
+            return .extended
+        default:
+            return .standard
+        }
+    }
+    
+    /// Check if a pharmacy with given schedule type is currently open
+    private func isPharmacyCurrentlyOpen(_ scheduleType: ScheduleType) -> Bool {
+        let now = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        
+        switch scheduleType {
+        case .fullDay:
+            return true // 24h pharmacies are always open
+        case .extended:
+            return hour >= 10 && hour < 22 // 10h-22h
+        case .standard:
+            return hour >= 10 && hour < 20 // 10h-20h
+        }
+    }
+    
     /// Handle the specific case where the PDF contains "S.E. GORMAZ (SORIA) SEPÚLVEDA" as a single string
     /// but we want to treat it as two separate pharmacies
     private func createPharmacies(from pharmacyName: String, zbsId: String) -> [Pharmacy] {
@@ -309,16 +337,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         // Map ZBS ID to display name for schedule info
         let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
         
-        // Determine schedule type based on ZBS
-        let scheduleInfo: String
-        switch zbsId {
-        case "riaza-sepulveda":
-            scheduleInfo = "24h"
-        case "la-granja":
-            scheduleInfo = "10h-22h"
-        default:
-            scheduleInfo = "10h-20h"
-        }
+        // Get schedule type
+        let scheduleType = getScheduleType(for: zbsId)
         
         // Look up pharmacy information using the parsed name as key
         let lookupKey = name.uppercased()
@@ -335,7 +355,13 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             )
         }()
         
-        let additionalInfo = "Horario: \(scheduleInfo) - ZBS: \(zbsDisplayName)"
+        // Keep original additionalInfo format
+        let additionalInfo = "Horario: \(scheduleType.hours) - ZBS: \(zbsDisplayName)"
+        
+        // Debug logging for shift status
+        if debug && !isPharmacyCurrentlyOpen(scheduleType) {
+            print("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(scheduleType.hours))")
+        }
         
         return Pharmacy(
             name: info.name,
