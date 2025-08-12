@@ -9,15 +9,17 @@ struct CacheRefreshView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
+            VStack(spacing: 0) {
                 regionsList
                 
-                completionView
-                    .opacity(isCompleted ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.3), value: isCompleted)
+                if isCompleted {
+                    completionView
+                        .background(Color(UIColor.systemGroupedBackground))
+                }
                 
                 Spacer()
             }
+            .background(Color(UIColor.systemGroupedBackground))
             .navigationTitle("Actualizar caché")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -31,6 +33,21 @@ struct CacheRefreshView: View {
         }
         .onAppear {
             startRefresh()
+        }
+    }
+    
+    private var regionsList: some View {
+        List {
+            Section {
+                ForEach(regions, id: \.id) { region in
+                    CacheRefreshRow(
+                        region: region,
+                        state: refreshStates[region.id] ?? .pending
+                    )
+                }
+            } header: {
+                Text("Estado de Actualización")
+            }
         }
     }
     
@@ -49,21 +66,6 @@ struct CacheRefreshView: View {
         .animation(.easeInOut(duration: 0.3), value: isCompleted)
     }
     
-    private var regionsList: some View {
-        List {
-            Section {
-                ForEach(regions, id: \.id) { region in
-                    CacheRefreshRow(
-                        region: region,
-                        state: refreshStates[region.id] ?? .pending
-                    )
-                }
-            } header: {
-                Text("Estado de Actualización")
-            }
-        }
-    }
-    
     private var completionView: some View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
@@ -77,7 +79,8 @@ struct CacheRefreshView: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
         }
-        .padding()
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
     }
     
     private func startRefresh() {
