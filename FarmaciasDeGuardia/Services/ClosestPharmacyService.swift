@@ -92,12 +92,15 @@ class ClosestPharmacyService {
                             // Filter by actual operating hours before geocoding
                             var actuallyOpenPharmacies = 0
                             for pharmacy in zbsPharmacies {
-                                if isPharmacyCurrentlyOpen(pharmacy, at: date) {
-                                    allOnDutyPharmacies.append((pharmacy, region, zbs, .fullDay))
+                                // Determine the actual timespan for this pharmacy based on its operating hours
+                                let pharmacyTimeSpan = getPharmacyTimeSpan(pharmacy)
+                                
+                                if pharmacyTimeSpan.contains(date) {
+                                    allOnDutyPharmacies.append((pharmacy, region, zbs, pharmacyTimeSpan))
                                     actuallyOpenPharmacies += 1
-                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW")
+                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW (\(pharmacyTimeSpan.displayName))")
                                 } else {
-                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (outside operating hours)")
+                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (\(pharmacyTimeSpan.displayName))")
                                 }
                             }
                             DebugConfig.debugPrint("   📊 \(actuallyOpenPharmacies)/\(zbsPharmacies.count) are actually open")
@@ -129,12 +132,13 @@ class ClosestPharmacyService {
                             // Filter by actual operating hours before geocoding  
                             var actuallyOpenPharmacies = 0
                             for pharmacy in onDutyPharmacies {
-                                if isPharmacyCurrentlyOpen(pharmacy, at: date) {
+                                // For regular regions, the timespan already represents the operating hours
+                                if timeSpan.contains(date) {
                                     allOnDutyPharmacies.append((pharmacy, region, nil, timeSpan))
                                     actuallyOpenPharmacies += 1
-                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW")
+                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW (\(timeSpan.displayName))")
                                 } else {
-                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (outside operating hours)")
+                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (\(timeSpan.displayName))")
                                 }
                             }
                             DebugConfig.debugPrint("   📊 \(actuallyOpenPharmacies)/\(onDutyPharmacies.count) are actually open")
@@ -206,24 +210,21 @@ class ClosestPharmacyService {
         return monthNames[monthName.lowercased()]
     }
     
-    /// Check if a pharmacy is currently open based on its operating hours
-    private static func isPharmacyCurrentlyOpen(_ pharmacy: Pharmacy, at date: Date) -> Bool {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        
+    /// Get the appropriate DutyTimeSpan for a pharmacy based on its operating hours
+    private static func getPharmacyTimeSpan(_ pharmacy: Pharmacy) -> DutyTimeSpan {
         let info = pharmacy.additionalInfo ?? ""
         
-        // Check operating hours based on additional info
+        // Check operating hours based on additional info and return proper DutyTimeSpan
         if info.contains("24h") {
-            return true // 24h pharmacies are always open
+            return .fullDay // 24h pharmacies use full day span
         } else if info.contains("10h-22h") {
-            return hour >= 10 && hour < 22 // Extended hours
+            return DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 22, endMinute: 0) // Extended hours
         } else if info.contains("10h-20h") {
-            return hour >= 10 && hour < 20 // Standard hours
+            return DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 20, endMinute: 0) // Standard hours
         }
         
         // Default assumption for pharmacies without specific hours info
         // Most non-rural pharmacies are 24h
-        return true
+        return .fullDay
     }
 }
