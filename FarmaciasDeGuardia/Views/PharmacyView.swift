@@ -49,7 +49,7 @@ struct PharmacyView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 8) {
             // Warning banner for closed pharmacies
             if shouldShowClosedWarning {
                 HStack {
@@ -70,16 +70,15 @@ struct PharmacyView: View {
                 )
             }
             
-            // Name with pharmacy cross
-            HStack(spacing: ViewConstants.iconSpacing) {
-                Image(systemName: "cross.case.fill")
-                    .foregroundColor(.secondary.opacity(0.7))
-                    .frame(width: ViewConstants.iconColumnWidth)
+            // Pharmacy name with red cross icon
+            HStack {
+                Image(systemName: "cross.circle.fill")
+                    .foregroundColor(.red)
                 Text(pharmacy.name)
+                    .font(.headline)
             }
-            .font(.system(.body, design: .rounded))
             
-            // Address with location icon
+            // Address with blue location icon (clickable)
             Button {
                 let availableApps = MapApp.availableApps()
                 if availableApps.count == 1 {
@@ -88,50 +87,50 @@ struct PharmacyView: View {
                     showingMapOptions = true
                 }
             } label: {
-                HStack(spacing: ViewConstants.iconSpacing) {
-                    Image(systemName: "location.fill")
-                        .foregroundColor(.secondary.opacity(0.7))
-                        .frame(width: ViewConstants.iconColumnWidth)
+                HStack {
+                    Image(systemName: "location")
+                        .foregroundColor(.blue)
+                        .frame(width: 20)
                     Text(pharmacy.address)
-                        .font(.subheadline)
+                        .font(.body)
                         .foregroundColor(.primary)
-                        .underline()
                         .multilineTextAlignment(.leading)
                 }
             }
             
-            // Phone with phone icon
+            // Phone with green phone icon (clickable)
             if !pharmacy.phone.isEmpty {
                 Button {
                     if let phoneURL = URL(string: "tel://\(pharmacy.phone.replacingOccurrences(of: " ", with: ""))") {
                         UIApplication.shared.open(phoneURL)
                     }
                 } label: {
-                    HStack(spacing: ViewConstants.iconSpacing) {
-                        Image(systemName: "phone.fill")
-                            .foregroundColor(.secondary.opacity(0.7))
-                            .frame(width: ViewConstants.iconColumnWidth)
+                    HStack {
+                        Image(systemName: "phone")
+                            .foregroundColor(.green)
+                            .frame(width: 20)
                         Text(pharmacy.formattedPhone)
-                            .font(.footnote)
+                            .font(.body)
                             .foregroundColor(.primary)
-                            .underline()
                     }
                 }
             }
             
-            // Additional info with info icon
+            // Additional info with blue info icon
             if let info = pharmacy.additionalInfo {
-                HStack(spacing: ViewConstants.iconSpacing) {
-                    Image(systemName: "info.circle.fill")
-                        .foregroundColor(.secondary.opacity(0.7))
-                        .frame(width: ViewConstants.iconColumnWidth)
+                HStack {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.blue)
+                        .frame(width: 20)
                     Text(info)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             }
         }
-        .padding(.vertical, 16)
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
         .confirmationDialog("Abrir en Maps", isPresented: $showingMapOptions) {
             ForEach(MapApp.availableApps(), id: \.self) { app in
                 Button(app.rawValue) {
