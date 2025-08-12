@@ -31,19 +31,11 @@ struct ScheduleContentView: View {
                 }
                 .padding(.bottom, 5)
                 
-                // Region Info section
+                // Region Info section (just the label, no duplicate name)
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Región")
                         .font(.headline)
                         .foregroundColor(.secondary)
-                    
-                    HStack {
-                        Text(region.icon)
-                            .font(.title)
-                        Text(region.name)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                    }
                 }
                 .padding(.bottom)
                 

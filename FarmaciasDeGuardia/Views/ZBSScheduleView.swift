@@ -107,6 +107,16 @@ struct ZBSScheduleView: View {
                 } else {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 12) {
+                            // ZBS name at the top (matching main view style)
+                            HStack {
+                                Text(selectedZBS.icon)
+                                    .font(.title)
+                                Text(selectedZBS.name)
+                                    .font(.title)
+                                    .fontWeight(.medium)
+                            }
+                            .padding(.bottom, 5)
+                            
                             // Selected date display
                             HStack(spacing: 8) {
                                 Image(systemName: "calendar.circle.fill")
@@ -118,19 +128,11 @@ struct ZBSScheduleView: View {
                             }
                             .padding(.bottom, 5)
                             
-                            // ZBS Info
+                            // ZBS Info (just the label, no duplicate name)
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Zona Básica de Salud")
                                     .font(.headline)
                                     .foregroundColor(.secondary)
-                                
-                                HStack {
-                                    Text(selectedZBS.icon)
-                                        .font(.title)
-                                    Text(selectedZBS.name)
-                                        .font(.title2)
-                                        .fontWeight(.semibold)
-                                }
                             }
                             .padding(.bottom)
                             
@@ -241,8 +243,8 @@ struct ZBSScheduleView: View {
                     }
                 }
             }
-            .navigationTitle("\(selectedZBS.icon) \(selectedZBS.name)")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
