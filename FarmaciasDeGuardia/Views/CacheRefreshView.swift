@@ -153,7 +153,7 @@ struct CacheRefreshRow: View {
                         .font(.caption)
                         .foregroundColor(.green)
                     
-                case .error(let message):
+                case .error(_):
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.red)
                     Text("Error")

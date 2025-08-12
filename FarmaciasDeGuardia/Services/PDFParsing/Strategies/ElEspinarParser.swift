@@ -137,7 +137,7 @@ class ElEspinarParser: PDFParsingStrategy {
                     
                     schedules.append(schedule)
                     
-                    DebugConfig.debugPrint("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year)")
+                    DebugConfig.debugPrint("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year ?? DutyDate.getCurrentYear())")
                 }
             }
         }

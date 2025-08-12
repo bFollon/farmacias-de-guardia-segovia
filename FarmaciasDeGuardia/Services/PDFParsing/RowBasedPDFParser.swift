@@ -80,12 +80,11 @@ public class RowBasedPDFParser {
     
     /// Gets the smallest font size in the page for determining appropriate scan heights
     func getSmallestFontSize(from page: PDFPage) -> CGFloat {
-        guard let pageContent = page.string else { return 12.0 }
+        guard page.string != nil else { return 12.0 }
         
         // This is a simplified approach - in practice you might want to
         // analyze the PDF's font information more thoroughly
         let pageBounds = page.bounds(for: .mediaBox)
-        let testRect = CGRect(x: 0, y: 0, width: pageBounds.width, height: 20)
         
         // Test with different heights to find the smallest that captures text
         for height in stride(from: 8.0, to: 20.0, by: 1.0) {
