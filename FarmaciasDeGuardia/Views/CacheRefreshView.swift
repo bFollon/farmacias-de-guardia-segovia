@@ -89,6 +89,9 @@ struct CacheRefreshView: View {
             refreshStates[region.id] = .pending
         }
         
+        // Clear coordinate caches at the start of refresh
+        GeocodingService.clearAllCaches()
+        
         Task {
             // Use the existing forceCheckForUpdates logic but with visual progress
             await PDFCacheManager.shared.forceCheckForUpdatesWithProgress { region, state in
