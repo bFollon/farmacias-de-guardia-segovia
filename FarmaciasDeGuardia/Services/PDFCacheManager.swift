@@ -1,5 +1,14 @@
 import Foundation
 
+/// Progress state for update operations
+enum UpdateProgressState {
+    case checking
+    case upToDate
+    case downloading
+    case downloaded
+    case error(String)
+}
+
 /// PDF version information for tracking updates
 struct PDFVersion: Codable {
     let url: URL
@@ -512,6 +521,45 @@ class PDFCacheManager {
         }
         
         print("✅ PDFCacheManager: Force update check completed")
+    }
+    
+    /// Force check for updates with progress callbacks for UI
+    func forceCheckForUpdatesWithProgress(progressCallback: @escaping (Region, UpdateProgressState) async -> Void) async {
+        print("🔄 PDFCacheManager: Force checking for PDF updates with progress...")
+        recordUpdateCheck() // Update the timestamp
+        
+        let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+        
+        for region in allRegions {
+            await checkAndUpdateIfNeededWithProgress(region: region, progressCallback: progressCallback)
+        }
+        
+        print("✅ PDFCacheManager: Force update check with progress completed")
+    }
+    
+    /// Check a specific region and update if needed with progress callbacks
+    private func checkAndUpdateIfNeededWithProgress(region: Region, progressCallback: @escaping (Region, UpdateProgressState) async -> Void) async {
+        // Notify checking started
+        await progressCallback(region, .checking)
+        
+        let isCacheValid = await isCacheUpToDate(for: region, debugMode: true)
+        
+        if !isCacheValid {
+            // Notify download starting
+            await progressCallback(region, .downloading)
+            
+            do {
+                let _ = try await downloadAndCache(region: region)
+                print("📥 PDFCacheManager: Updated PDF for \(region.name)")
+                await progressCallback(region, .downloaded)
+            } catch {
+                print("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
+                await progressCallback(region, .error(error.localizedDescription))
+            }
+        } else {
+            print("✅ PDFCacheManager: PDF for \(region.name) is up to date")
+            await progressCallback(region, .upToDate)
+        }
     }
     
     /// Print current cache status for all regions

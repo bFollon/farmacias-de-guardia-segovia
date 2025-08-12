@@ -2,10 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var isCheckingForUpdates = false
-    @State private var updateCheckMessage = ""
-    @State private var showingUpdateResult = false
     @State private var showingCacheStatus = false
+    @State private var showingCacheRefresh = false
     
     var body: some View {
         NavigationView {
@@ -21,20 +19,14 @@ struct SettingsView: View {
                     }
                     .padding(.vertical, 4)
                     
-                    Button(action: checkForUpdates) {
+                    Button(action: { showingCacheRefresh = true }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
                             Text("Buscar Actualizaciones")
                             
                             Spacer()
-                            
-                            if isCheckingForUpdates {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                            }
                         }
                     }
-                    .disabled(isCheckingForUpdates)
                     
                     Button(action: { showingCacheStatus = true }) {
                         HStack {
@@ -70,44 +62,19 @@ struct SettingsView: View {
                 }
             }
         }
-        .alert("Búsqueda de Actualizaciones", isPresented: $showingUpdateResult) {
-            Button("OK") { }
-        } message: {
-            Text(updateCheckMessage)
-        }
         .sheet(isPresented: $showingCacheStatus) {
             NavigationView {
                 CacheStatusView()
             }
         }
-    }
-    
-    private func checkForUpdates() {
-        isCheckingForUpdates = true
-        updateCheckMessage = ""
-        
-        Task {
-            do {
-                await PDFCacheManager.shared.forceCheckForUpdates()
-                
-                await MainActor.run {
-                    updateCheckMessage = "Búsqueda de actualizaciones completada. Consulta el estado del caché para más detalles."
-                    showingUpdateResult = true
-                    isCheckingForUpdates = false
-                }
-            } catch {
-                await MainActor.run {
-                    updateCheckMessage = "Error al buscar actualizaciones: \(error.localizedDescription)"
-                    showingUpdateResult = true
-                    isCheckingForUpdates = false
-                }
-            }
+        .sheet(isPresented: $showingCacheRefresh) {
+            CacheRefreshView()
         }
     }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
+    
+    struct SettingsView_Previews: PreviewProvider {
+        static var previews: some View {
+            SettingsView()
+        }
     }
 }
