@@ -40,9 +40,9 @@ public class PDFProcessingService {
         if forceRefresh {
             do {
                 effectiveURL = try await PDFCacheManager.shared.forceDownload(for: region)
-                print("✅ Force downloaded fresh PDF for \(region.name)")
+                DebugConfig.debugPrint("✅ Force downloaded fresh PDF for \(region.name)")
             } catch {
-                print("❌ Failed to force download PDF for \(region.name): \(error)")
+                DebugConfig.debugPrint("❌ Failed to force download PDF for \(region.name): \(error)")
                 // Fallback to regular effective URL
                 effectiveURL = await region.getEffectivePDFURL()
             }
@@ -51,16 +51,16 @@ public class PDFProcessingService {
         }
         
         guard let pdfDocument = PDFDocument(url: effectiveURL) else {
-            print("Failed to load PDF from \(effectiveURL)")
+            DebugConfig.debugPrint("Failed to load PDF from \(effectiveURL)")
             return []
         }
 
         guard let parser = parsingStrategies[region.id] else {
-            print("No parser found for region: \(region.name) (id: \(region.id))")
+            DebugConfig.debugPrint("No parser found for region: \(region.name) (id: \(region.id))")
             return []
         }
 
-        print("Loading schedules for \(region.name) from \(effectiveURL)")
+        DebugConfig.debugPrint("Loading schedules for \(region.name) from \(effectiveURL)")
         return parser.parseSchedules(from: pdfDocument)
     }
 
@@ -74,13 +74,13 @@ public class PDFProcessingService {
     }    /// Internal method, kept for backward compatibility and testing
     func loadPharmacies(from url: URL) -> [PharmacySchedule] {
         guard let pdfDocument = PDFDocument(url: url) else {
-            print("Failed to load PDF from \(url)")
+            DebugConfig.debugPrint("Failed to load PDF from \(url)")
             return []
         }
         
         // For direct URL loading, use Segovia parser as default
         let parser = parsingStrategies["segovia-capital"] ?? SegoviaCapitalParser()
-        print("Loading schedules from \(url)")
+        DebugConfig.debugPrint("Loading schedules from \(url)")
         return parser.parseSchedules(from: pdfDocument)
     }
 }

@@ -69,7 +69,7 @@ class SegoviaPDFParser: RowBasedPDFParser {
                 return self.isCoherentSegoviaRow(rowData)
             }
         ) else {
-            print("Could not find first coherent row")
+            DebugConfig.debugPrint("Could not find first coherent row")
             return ([], [], [])
         }
         
@@ -202,7 +202,7 @@ extension SegoviaPDFParser {
                 return self.isCoherentSegoviaRow(rowData)
             }
         ) else {
-            print("Could not find first coherent row")
+            DebugConfig.debugPrint("Could not find first coherent row")
             return ([], [], [])
         }
         

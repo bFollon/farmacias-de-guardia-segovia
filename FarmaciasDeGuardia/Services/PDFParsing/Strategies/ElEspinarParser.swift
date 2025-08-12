@@ -2,9 +2,6 @@ import Foundation
 import PDFKit
 
 class ElEspinarParser: PDFParsingStrategy {
-    /// Debug flag - when true, prints detailed parsing information
-    private let debug = true
-    
     /// Current year being processed, incremented when January 1st is found
     private var currentYear = 2024
     
@@ -73,10 +70,10 @@ class ElEspinarParser: PDFParsingStrategy {
     
     /// Process a set of dates with a pharmacy
     private func processDateSet(dates: [String], address: String, into schedules: inout [PharmacySchedule]) {
-        if debug { print("\n📋 Processing date set:") }
-        if debug { print("📅 Dates: \(dates)") }
-        if debug { print("🏠 Address: \(address)") }
-        if debug { print("📆 Current year: \(currentYear)") }
+        DebugConfig.debugPrint("\n📋 Processing date set:")
+        DebugConfig.debugPrint("📅 Dates: \(dates)")
+        DebugConfig.debugPrint("🏠 Address: \(address)")
+        DebugConfig.debugPrint("📆 Current year: \(currentYear)")
         
         for date in dates {
             // If this is January 1st, increment the year
@@ -84,10 +81,10 @@ class ElEspinarParser: PDFParsingStrategy {
             if let regex = try? NSRegularExpression(pattern: pattern),
                regex.firstMatch(in: date, range: NSRange(date.startIndex..., in: date)) != nil {
                 currentYear += 1
-                if debug { print("🎊 New year detected! Now processing year \(currentYear)") }
+                DebugConfig.debugPrint("🎊 New year detected! Now processing year \(currentYear)")
             }
             
-            if debug { print("📆 Processing date: \(date) (year: \(currentYear))") }
+            DebugConfig.debugPrint("📆 Processing date: \(date) (year: \(currentYear))")
             
             // Extract day and month from the date
             let datePattern = #"(\d{1,2})[‐-](\w{3})"#
@@ -140,9 +137,7 @@ class ElEspinarParser: PDFParsingStrategy {
                     
                     schedules.append(schedule)
                     
-                    if debug {
-                        print("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year)")
-                    }
+                    DebugConfig.debugPrint("💊 Added schedule for \(pharmacy.name) on \(dutyDate.day)-\(dutyDate.month)-\(dutyDate.year)")
                 }
             }
         }
@@ -152,7 +147,7 @@ class ElEspinarParser: PDFParsingStrategy {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
         
-        if debug { print("📄 Processing \(pageCount) pages...") }
+        DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
 
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex),
@@ -160,7 +155,7 @@ class ElEspinarParser: PDFParsingStrategy {
                 continue
             }
 
-            if debug { print("📃 Processing page \(pageIndex + 1)") }
+            DebugConfig.debugPrint("📃 Processing page \(pageIndex + 1)")
 
             // Split content into lines and process
             let lines = content.components(separatedBy: .newlines)
@@ -171,7 +166,7 @@ class ElEspinarParser: PDFParsingStrategy {
             var currentAddress: String?
 
             for line in lines {
-                if debug { print("📝 Processing line: \(line)") }
+                DebugConfig.debugPrint("📝 Processing line: \(line)")
                 
                 // Skip header lines
                 if line.contains("COLEGIO") || line.contains("TURNOS") || line.contains("LUNES MARTES") {

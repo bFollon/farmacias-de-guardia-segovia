@@ -34,21 +34,21 @@ public class ZBSScheduleService {
         // Only applicable for Segovia Rural
         guard region == .segoviaRural else { return nil }
         
-        print("ZBSScheduleService: Loading schedules for \(region.name)")
+        DebugConfig.debugPrint("ZBSScheduleService: Loading schedules for \(region.name)")
         
         // First, ensure schedules are loaded by calling the regular service
         _ = await ScheduleService.loadSchedules(for: region, forceRefresh: forceRefresh)
         
         // Then get the ZBS schedules from the parser cache
         let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()
-        print("ZBSScheduleService: Retrieved \(zbsSchedules.count) ZBS schedules from cache")
+        DebugConfig.debugPrint("ZBSScheduleService: Retrieved \(zbsSchedules.count) ZBS schedules from cache")
         
         // Debug: print first few schedules
         for (index, schedule) in zbsSchedules.prefix(3).enumerated() {
-            print("ZBS Schedule \(index): Date \(schedule.date)")
+            DebugConfig.debugPrint("ZBS Schedule \(index): Date \(schedule.date)")
             for (zbsId, pharmacies) in schedule.schedulesByZBS {
                 let pharmacyNames = pharmacies.map { $0.name }.joined(separator: ", ")
-                print("  \(zbsId): \(pharmacyNames.isEmpty ? "NO PHARMACY" : pharmacyNames)")
+                DebugConfig.debugPrint("  \(zbsId): \(pharmacyNames.isEmpty ? "NO PHARMACY" : pharmacyNames)")
             }
         }
         

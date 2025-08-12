@@ -24,8 +24,8 @@ struct ZBSScheduleView: View {
         let calendar = Calendar.current
         let selectedComponents = calendar.dateComponents([.day, .month, .year], from: selectedDate)
         
-        print("🔍 ZBSScheduleView DEBUG: Looking for schedule on \(selectedComponents.day!)/\(selectedComponents.month!)/\(selectedComponents.year!) for ZBS '\(selectedZBS.id)'")
-        print("🔍 ZBSScheduleView DEBUG: Available schedules count: \(zbsSchedules.count)")
+        DebugConfig.debugPrint("🔍 ZBSScheduleView DEBUG: Looking for schedule on \(selectedComponents.day!)/\(selectedComponents.month!)/\(selectedComponents.year!) for ZBS '\(selectedZBS.id)'")
+        DebugConfig.debugPrint("🔍 ZBSScheduleView DEBUG: Available schedules count: \(zbsSchedules.count)")
         
         // Try to find the selected date's schedule
         if let schedule = zbsSchedules.first(where: { schedule in
@@ -37,13 +37,13 @@ struct ZBSScheduleView: View {
                    scheduleMonth == selectedComponents.month &&
                    scheduleYear == selectedComponents.year
         }) {
-            print("🔍 ZBSScheduleView DEBUG: Found schedule for selected date")
+            DebugConfig.debugPrint("🔍 ZBSScheduleView DEBUG: Found schedule for selected date")
             let pharmacies = schedule.pharmacies(for: selectedZBS.id)
-            print("🔍 ZBSScheduleView DEBUG: Pharmacies for ZBS '\(selectedZBS.id)': \(pharmacies.map { $0.name })")
+            DebugConfig.debugPrint("🔍 ZBSScheduleView DEBUG: Pharmacies for ZBS '\(selectedZBS.id)': \(pharmacies.map { $0.name })")
             return schedule
         }
         
-        print("🔍 ZBSScheduleView DEBUG: No schedule found for selected date")
+        DebugConfig.debugPrint("🔍 ZBSScheduleView DEBUG: No schedule found for selected date")
         return nil
     }
     
