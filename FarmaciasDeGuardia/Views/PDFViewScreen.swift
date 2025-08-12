@@ -26,54 +26,24 @@ struct PDFViewScreen: View {
         NavigationView {
             Group {
                 if isLoading || isRefreshing {
-                    VStack(spacing: 0) {
-                        VStack(spacing: 16) {
-                            Text("Farmacia de Guardia en \(region.name)")
-                                .font(.title)
-                                .padding(.horizontal)
-                                .padding(.top, 16)
-                                .multilineTextAlignment(.center)
-                            
-                            Divider()
-                                .background(Color.gray.opacity(0.3))
-                                .padding(.horizontal)
-                        }
-                        .background(Color(.systemBackground))
-                        
-                        LoadingView()
-                    }
+                    LoadingView()
                 } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
-                    VStack(spacing: 0) {
-                        VStack(spacing: 16) {
-                            Text("Farmacia de Guardia en \(region.name)")
-                                .font(.title)
-                                .padding(.horizontal)
-                                .padding(.top, 16)
-                                .multilineTextAlignment(.center)
-                            
-                            Divider()
-                                .background(Color.gray.opacity(0.3))
-                                .padding(.horizontal)
-                        }
-                        .background(Color(.systemBackground))
-                        
-                        if Calendar.current.isDateInToday(selectedDate),
-                           let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
-                            ScheduleContentView(
-                                schedule: current.0,
-                                activeShift: current.1,
-                                region: region,
-                                isPresentingInfo: $isPresentingInfo,
-                                formattedDateTime: ScheduleService.getCurrentDateTime()
-                            )
-                        } else {
-                            DayScheduleView(
-                                schedule: schedule,
-                                region: region,
-                                isPresentingInfo: $isPresentingInfo,
-                                date: selectedDate
-                            )
-                        }
+                    if Calendar.current.isDateInToday(selectedDate),
+                       let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
+                        ScheduleContentView(
+                            schedule: current.0,
+                            activeShift: current.1,
+                            region: region,
+                            isPresentingInfo: $isPresentingInfo,
+                            formattedDateTime: ScheduleService.getCurrentDateTime()
+                        )
+                    } else {
+                        DayScheduleView(
+                            schedule: schedule,
+                            region: region,
+                            isPresentingInfo: $isPresentingInfo,
+                            date: selectedDate
+                        )
                     }
                 } else {
                     NoScheduleView()

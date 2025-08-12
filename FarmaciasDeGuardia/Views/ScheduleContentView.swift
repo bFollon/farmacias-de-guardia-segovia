@@ -10,30 +10,55 @@ struct ScheduleContentView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                // Date and time with calendar icon
-                HStack(spacing: ViewConstants.iconSpacing) {
-                    Image(systemName: "calendar")
-                        .foregroundColor(.secondary.opacity(0.7))
-                        .frame(width: ViewConstants.iconColumnWidth)
-                    Text(formattedDateTime)
+                // Region name at the top (matching ZBS style)
+                HStack {
+                    Text(region.icon)
+                        .font(.title)
+                    Text(region.name)
+                        .font(.title)
+                        .fontWeight(.medium)
                 }
-                .font(.title2)
                 .padding(.bottom, 5)
                 
-                // Show shift info if applicable (for day/night regions)
-                if activeShift == .capitalDay || activeShift == .capitalNight {
-                    // Convert DutyTimeSpan back to ShiftType for ShiftHeaderView compatibility
-                    let legacyShiftType: DutyDate.ShiftType = activeShift == .capitalDay ? .day : .night
-                    ShiftHeaderView(shiftType: legacyShiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
+                // Date and time with calendar icon
+                HStack(spacing: 8) {
+                    Image(systemName: "calendar.circle.fill")
+                        .foregroundColor(.blue)
+                        .frame(width: 20)
+                    Text(formattedDateTime)
+                        .font(.title2)
+                        .fontWeight(.medium)
                 }
+                .padding(.bottom, 5)
                 
-                // Show active pharmacy for current shift
-                if let pharmacies = schedule.shifts[activeShift], let pharmacy = pharmacies.first {
-                    PharmacyView(pharmacy: pharmacy)
-                } else {
-                    // Fallback to legacy properties if shift-specific data isn't available
-                    if let pharmacy = schedule.dayShiftPharmacies.first {
+                // Region Info section (just the label, no duplicate name)
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Región")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.bottom)
+                
+                // Pharmacy section with header
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Farmacias de Guardia")
+                        .font(.headline)
+                    
+                    // Show shift info if applicable (for day/night regions)
+                    if activeShift == .capitalDay || activeShift == .capitalNight {
+                        // Convert DutyTimeSpan back to ShiftType for ShiftHeaderView compatibility
+                        let legacyShiftType: DutyDate.ShiftType = activeShift == .capitalDay ? .day : .night
+                        ShiftHeaderView(shiftType: legacyShiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
+                    }
+                    
+                    // Show active pharmacy for current shift
+                    if let pharmacies = schedule.shifts[activeShift], let pharmacy = pharmacies.first {
                         PharmacyView(pharmacy: pharmacy)
+                    } else {
+                        // Fallback to legacy properties if shift-specific data isn't available
+                        if let pharmacy = schedule.dayShiftPharmacies.first {
+                            PharmacyView(pharmacy: pharmacy)
+                        }
                     }
                 }
                 
