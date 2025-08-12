@@ -52,24 +52,24 @@ extension DutyDate {
     }
     
     public static func parse(_ dateString: String) -> DutyDate? {
-        print("\nAttempting to parse date: '\(dateString)'")
+        DebugConfig.debugPrint("\nAttempting to parse date: '\(dateString)'")
         
         let datePattern = "\\b(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\\s(\\d{1,2})\\sde\\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\\s(\\d{4}))?\\b"
         
-        print("Using pattern: \(datePattern)")
+        DebugConfig.debugPrint("Using pattern: \(datePattern)")
         
         guard let regex = try? NSRegularExpression(pattern: datePattern, options: []),
               let match = regex.firstMatch(in: dateString, options: [], range: NSRange(dateString.startIndex..., in: dateString)) else {
-            print("Failed to match regex pattern")
+            DebugConfig.debugPrint("Failed to match regex pattern")
             return nil
         }
         
-        print("Number of capture groups: \(match.numberOfRanges)")
+        DebugConfig.debugPrint("Number of capture groups: \(match.numberOfRanges)")
         for i in 0..<match.numberOfRanges {
             let range = match.range(at: i)
-            print("Group \(i) - location: \(range.location), length: \(range.length)")
+            DebugConfig.debugPrint("Group \(i) - location: \(range.location), length: \(range.length)")
             if range.location != NSNotFound, let stringRange = Range(range, in: dateString) {
-                print("Group \(i) value: '\(dateString[stringRange])'")
+                DebugConfig.debugPrint("Group \(i) value: '\(dateString[stringRange])'")
             }
         }
         
@@ -83,20 +83,20 @@ extension DutyDate {
         if match.numberOfRanges > 3, match.range(at: 3).location != NSNotFound {
             let yearRange = Range(match.range(at: 3), in: dateString)!
             year = Int(String(dateString[yearRange]))
-            print("Found year in capture group: \(year ?? -1)")
+            DebugConfig.debugPrint("Found year in capture group: \(year ?? -1)")
         } else {
             let currentYear = getCurrentYear()
             // Temporary fix: Only January 1st and 2nd are from next year
             if month.lowercased() == "enero" && (day == 1 || day == 2) {
                 year = currentYear + 1
-                print("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
+                DebugConfig.debugPrint("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
             } else {
                 year = currentYear
-                print("No year found, defaulting to \(currentYear)")
+                DebugConfig.debugPrint("No year found, defaulting to \(currentYear)")
             }
         }
         
-        print("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")
+        DebugConfig.debugPrint("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")
         
         return DutyDate(dayOfWeek: String(dayOfWeek), day: day, month: month, year: year)
     }

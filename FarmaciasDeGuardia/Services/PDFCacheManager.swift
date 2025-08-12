@@ -119,7 +119,7 @@ class PDFCacheManager {
     private func createCacheDirectoryIfNeeded() {
         do {
             try fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
-            print("📁 PDFCacheManager: Cache directory ready at \(cacheDirectory.path)")
+            DebugConfig.debugPrint("📁 PDFCacheManager: Cache directory ready at \(cacheDirectory.path)")
         } catch {
         }
     }
@@ -134,7 +134,7 @@ class PDFCacheManager {
             let versions = try JSONDecoder().decode([String: PDFVersion].self, from: data)
             return versions[region.name]
         } catch {
-            print("❌ PDFCacheManager: Failed to decode version data: \(error)")
+            DebugConfig.debugPrint("❌ PDFCacheManager: Failed to decode version data: \(error)")
             return nil
         }
     }
@@ -148,7 +148,7 @@ class PDFCacheManager {
             do {
                 versions = try JSONDecoder().decode([String: PDFVersion].self, from: data)
             } catch {
-                print("⚠️ PDFCacheManager: Failed to decode existing versions, starting fresh")
+                DebugConfig.debugPrint("⚠️ PDFCacheManager: Failed to decode existing versions, starting fresh")
             }
         }
         
@@ -159,9 +159,9 @@ class PDFCacheManager {
         do {
             let data = try JSONEncoder().encode(versions)
             userDefaults.set(data, forKey: versionStorageKey)
-            print("💾 PDFCacheManager: Stored version info for \(region.name)")
+            DebugConfig.debugPrint("💾 PDFCacheManager: Stored version info for \(region.name)")
         } catch {
-            print("❌ PDFCacheManager: Failed to store version data: \(error)")
+            DebugConfig.debugPrint("❌ PDFCacheManager: Failed to store version data: \(error)")
         }
     }
     
@@ -233,21 +233,21 @@ class PDFCacheManager {
     func isCacheUpToDate(for region: Region, debugMode: Bool = false) async -> Bool {
         guard hasCachedFile(for: region),
               let cachedVersion = getStoredVersion(for: region) else {
-            print("🔍 PDFCacheManager: No cached file or version for \(region.name)")
+            DebugConfig.debugPrint("🔍 PDFCacheManager: No cached file or version for \(region.name)")
             return false
         }
         
         do {
             let remoteVersion = try await checkRemoteVersion(for: region)
             
-            print("🔍 PDFCacheManager: Comparing versions for \(region.name):")
+            DebugConfig.debugPrint("🔍 PDFCacheManager: Comparing versions for \(region.name):")
             if debugMode {
-                print("   Cached ETag: \(cachedVersion.etag ?? "nil")")
-                print("   Remote ETag: \(remoteVersion.etag ?? "nil")")
-                print("   Cached Last-Modified: \(cachedVersion.lastModified?.description ?? "nil")")
-                print("   Remote Last-Modified: \(remoteVersion.lastModified?.description ?? "nil")")
-                print("   Cached Size: \(cachedVersion.contentLength?.description ?? "nil")")
-                print("   Remote Size: \(remoteVersion.contentLength?.description ?? "nil")")
+                DebugConfig.debugPrint("   Cached ETag: \(cachedVersion.etag ?? "nil")")
+                DebugConfig.debugPrint("   Remote ETag: \(remoteVersion.etag ?? "nil")")
+                DebugConfig.debugPrint("   Cached Last-Modified: \(cachedVersion.lastModified?.description ?? "nil")")
+                DebugConfig.debugPrint("   Remote Last-Modified: \(remoteVersion.lastModified?.description ?? "nil")")
+                DebugConfig.debugPrint("   Cached Size: \(cachedVersion.contentLength?.description ?? "nil")")
+                DebugConfig.debugPrint("   Remote Size: \(remoteVersion.contentLength?.description ?? "nil")")
             }
             
             // 1. First try Last-Modified (most reliable for this server)
@@ -255,7 +255,7 @@ class PDFCacheManager {
                let remoteLastModified = remoteVersion.lastModified {
                 let isMatch = cachedLastModified == remoteLastModified
                 if debugMode {
-                    print("   ✅ Last-Modified comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                    DebugConfig.debugPrint("   ✅ Last-Modified comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
                 }
                 return isMatch
             }
@@ -265,7 +265,7 @@ class PDFCacheManager {
                let remoteLength = remoteVersion.contentLength {
                 let isMatch = cachedLength == remoteLength
                 if debugMode {
-                    print("   ✅ Content-Length comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                    DebugConfig.debugPrint("   ✅ Content-Length comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
                 }
                 return isMatch
             }
@@ -275,16 +275,16 @@ class PDFCacheManager {
                let remoteEtag = remoteVersion.etag {
                 let isMatch = cachedEtag == remoteEtag
                 if debugMode {
-                    print("   ✅ ETag comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
+                    DebugConfig.debugPrint("   ✅ ETag comparison: \(isMatch ? "MATCH" : "DIFFERENT")")
                 }
                 return isMatch
             }
             
             // If no comparison criteria available, consider outdated
-            print("   ❌ No comparison criteria available, assuming outdated")
+            DebugConfig.debugPrint("   ❌ No comparison criteria available, assuming outdated")
             return false
         } catch {
-            print("❌ PDFCacheManager: Failed to check remote version for \(region.name): \(error)")
+            DebugConfig.debugPrint("❌ PDFCacheManager: Failed to check remote version for \(region.name): \(error)")
             // If we can't check remote, assume cache is valid for now
             return true
         }
@@ -336,7 +336,7 @@ class PDFCacheManager {
         
         storeVersion(version, for: region)
         
-        print("✅ PDFCacheManager: Successfully cached PDF for \(region.name)")
+        DebugConfig.debugPrint("✅ PDFCacheManager: Successfully cached PDF for \(region.name)")
         return cacheFileURL
     }
     
@@ -352,7 +352,7 @@ class PDFCacheManager {
             do {
                 return try await downloadAndCache(region: region)
             } catch {
-                print("❌ PDFCacheManager: Failed to download PDF for \(region.name): \(error)")
+                DebugConfig.debugPrint("❌ PDFCacheManager: Failed to download PDF for \(region.name): \(error)")
                 // Fall back to remote URL
                 return region.remotePDFURL
             }
@@ -368,20 +368,20 @@ class PDFCacheManager {
         for region in allRegions {
             if let cachedURL = cachedFileURL(for: region) {
                 try? fileManager.removeItem(at: cachedURL)
-                print("🗑️ PDFCacheManager: Removed cached file for \(region.name)")
+                DebugConfig.debugPrint("🗑️ PDFCacheManager: Removed cached file for \(region.name)")
             }
         }
         
         // Clear version info
         userDefaults.removeObject(forKey: versionStorageKey)
-        print("🗑️ PDFCacheManager: Cleared all version info")
+        DebugConfig.debugPrint("🗑️ PDFCacheManager: Cleared all version info")
     }
     
     /// Clear cache for a specific region
     func clearCache(for region: Region) {
         if let cachedURL = cachedFileURL(for: region) {
             try? fileManager.removeItem(at: cachedURL)
-            print("🗑️ PDFCacheManager: Removed cached file for \(region.name)")
+            DebugConfig.debugPrint("🗑️ PDFCacheManager: Removed cached file for \(region.name)")
         }
         
         // Remove version info for this region
@@ -412,15 +412,15 @@ class PDFCacheManager {
         // Clear parsing cache from ScheduleService
         ScheduleService.clearCache()
         
-        print("🗑️ PDFCacheManager: Cleared all caches for \(region.name)")
+        DebugConfig.debugPrint("🗑️ PDFCacheManager: Cleared all caches for \(region.name)")
     }
     
     // MARK: - Public Interface (Non-breaking)
     
     /// Initialize cache manager (call on app launch)
     func initialize() {
-        print("🚀 PDFCacheManager: Initialized")
-        print(getCacheInfo())
+        DebugConfig.debugPrint("🚀 PDFCacheManager: Initialized")
+        DebugConfig.debugPrint(getCacheInfo())
     }
     
     /// Check if a cached file exists for the region
@@ -476,11 +476,11 @@ class PDFCacheManager {
     /// Check all regions for PDF updates and download if needed
     func checkForUpdatesIfNeeded() async {
         guard shouldCheckForUpdates() else {
-            print("📅 PDFCacheManager: Skipping update check - already checked today")
+            DebugConfig.debugPrint("📅 PDFCacheManager: Skipping update check - already checked today")
             return
         }
         
-        print("🔍 PDFCacheManager: Checking for PDF updates...")
+        DebugConfig.debugPrint("🔍 PDFCacheManager: Checking for PDF updates...")
         recordUpdateCheck()
         
         let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
@@ -489,7 +489,7 @@ class PDFCacheManager {
             await checkAndUpdateIfNeeded(region: region)
         }
         
-        print("✅ PDFCacheManager: Update check completed")
+        DebugConfig.debugPrint("✅ PDFCacheManager: Update check completed")
     }
     
     /// Check a specific region and update if needed
@@ -499,18 +499,18 @@ class PDFCacheManager {
         if !isCacheValid {
             do {
                 let _ = try await downloadAndCache(region: region)
-                print("📥 PDFCacheManager: Updated PDF for \(region.name)")
+                DebugConfig.debugPrint("📥 PDFCacheManager: Updated PDF for \(region.name)")
             } catch {
-                print("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
+                DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
             }
         } else {
-            print("✅ PDFCacheManager: PDF for \(region.name) is up to date")
+            DebugConfig.debugPrint("✅ PDFCacheManager: PDF for \(region.name) is up to date")
         }
     }
     
     /// Force check for updates (ignores daily limit)
     func forceCheckForUpdates() async {
-        print("🔄 PDFCacheManager: Force checking for PDF updates...")
+        DebugConfig.debugPrint("🔄 PDFCacheManager: Force checking for PDF updates...")
         recordUpdateCheck() // Update the timestamp
         
         let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
@@ -519,12 +519,12 @@ class PDFCacheManager {
             await checkAndUpdateIfNeeded(region: region, debugMode: true)
         }
         
-        print("✅ PDFCacheManager: Force update check completed")
+        DebugConfig.debugPrint("✅ PDFCacheManager: Force update check completed")
     }
     
     /// Force check for updates with progress callbacks for UI
     func forceCheckForUpdatesWithProgress(progressCallback: @escaping (Region, UpdateProgressState) async -> Void) async {
-        print("🔄 PDFCacheManager: Force checking for PDF updates with progress...")
+        DebugConfig.debugPrint("🔄 PDFCacheManager: Force checking for PDF updates with progress...")
         recordUpdateCheck() // Update the timestamp
         
         let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
@@ -533,7 +533,7 @@ class PDFCacheManager {
             await checkAndUpdateIfNeededWithProgress(region: region, progressCallback: progressCallback)
         }
         
-        print("✅ PDFCacheManager: Force update check with progress completed")
+        DebugConfig.debugPrint("✅ PDFCacheManager: Force update check with progress completed")
     }
     
     /// Check a specific region and update if needed with progress callbacks
@@ -549,23 +549,23 @@ class PDFCacheManager {
             
             do {
                 let _ = try await downloadAndCache(region: region)
-                print("📥 PDFCacheManager: Updated PDF for \(region.name)")
+                DebugConfig.debugPrint("📥 PDFCacheManager: Updated PDF for \(region.name)")
                 await progressCallback(region, .downloaded)
             } catch {
-                print("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
+                DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
                 await progressCallback(region, .error(error.localizedDescription))
             }
         } else {
-            print("✅ PDFCacheManager: PDF for \(region.name) is up to date")
+            DebugConfig.debugPrint("✅ PDFCacheManager: PDF for \(region.name) is up to date")
             await progressCallback(region, .upToDate)
         }
     }
     
     /// Print current cache status for all regions
     func printCacheStatus() {
-        print("\nPDFCacheManager Status:")
-        print("Cache Directory: \(cacheDirectory.path)")
-        print("")
+        DebugConfig.debugPrint("\nPDFCacheManager Status:")
+        DebugConfig.debugPrint("Cache Directory: \(cacheDirectory.path)")
+        DebugConfig.debugPrint("")
         
         let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
         
@@ -583,17 +583,17 @@ class PDFCacheManager {
                     formatter.dateStyle = .short
                     formatter.timeStyle = .short
                     
-                    print("📄 \(region.name): ✅")
-                    print("   Downloaded: \(formatter.string(from: modificationDate))")
-                    print("   Size: \(ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file))")
-                    print("")
+                    DebugConfig.debugPrint("📄 \(region.name): ✅")
+                    DebugConfig.debugPrint("   Downloaded: \(formatter.string(from: modificationDate))")
+                    DebugConfig.debugPrint("   Size: \(ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file))")
+                    DebugConfig.debugPrint("")
                 } catch {
-                    print("📄 \(region.name): ❌ Error reading file info")
-                    print("")
+                    DebugConfig.debugPrint("📄 \(region.name): ❌ Error reading file info")
+                    DebugConfig.debugPrint("")
                 }
             } else {
-                print("📄 \(region.name): ❌ Not cached")
-                print("")
+                DebugConfig.debugPrint("📄 \(region.name): ❌ Not cached")
+                DebugConfig.debugPrint("")
             }
         }
     }
@@ -627,7 +627,7 @@ class PDFCacheManager {
                     needsUpdate = await checkIfUpdateNeeded(for: region, storedVersion: storedVersion)
                     
                 } catch {
-                    print("❌ PDFCacheManager: Error reading file attributes for \(region.name): \(error)")
+                    DebugConfig.debugPrint("❌ PDFCacheManager: Error reading file attributes for \(region.name): \(error)")
                 }
             }
             
@@ -674,7 +674,7 @@ class PDFCacheManager {
             
             return false // Assume up-to-date if we can't determine
         } catch {
-            print("⚠️ PDFCacheManager: Could not check update status for \(region.name): \(error)")
+            DebugConfig.debugPrint("⚠️ PDFCacheManager: Could not check update status for \(region.name): \(error)")
             return false // Don't assume update needed on network error
         }
     }
@@ -682,7 +682,7 @@ class PDFCacheManager {
     /// Clear the last update check timestamp (for debugging)
     func clearLastUpdateCheck() {
         userDefaults.removeObject(forKey: lastUpdateCheckKey)
-        print("🗑️ PDFCacheManager: Cleared last update check timestamp")
+        DebugConfig.debugPrint("🗑️ PDFCacheManager: Cleared last update check timestamp")
     }
     
     /// Parse HTTP date string to Date

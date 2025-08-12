@@ -2,9 +2,6 @@ import Foundation
 import PDFKit
 
 class CuellarParser: PDFParsingStrategy {
-    /// Debug flag - when true, prints detailed parsing information
-    private let debug = true
-    
     /// Current year being processed, incremented when January 1st is found
     private var currentYear = 2024
     
@@ -72,25 +69,25 @@ class CuellarParser: PDFParsingStrategy {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
         
-        if debug { print("📄 Processing \(pageCount) pages...") }
+        DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
         
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else {
-                if debug { print("❌ Could not get page \(pageIndex) of PDF") }
+                DebugConfig.debugPrint("❌ Could not get page \(pageIndex) of PDF")
                 continue
             }
             
-            if debug { print("\n📃 Processing page \(pageIndex + 1) of \(pageCount)") }
+            DebugConfig.debugPrint("\n📃 Processing page \(pageIndex + 1) of \(pageCount)")
             
             let content = page.string ?? ""
             let lines = content.components(separatedBy: .newlines)
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
                 .filter { !$0.isEmpty }
             
-            if debug {
-                print("\n📊 Page content structure:")
+            if lines.count > 0 {
+                DebugConfig.debugPrint("\n📊 Page content structure:")
                 for (index, line) in lines.enumerated() {
-                    print("Line \(index): '\(line)'")
+                    DebugConfig.debugPrint("Line \(index): '\(line)'")
                 }
             }
             
@@ -119,35 +116,35 @@ class CuellarParser: PDFParsingStrategy {
         let dataLines = Array(lines.dropFirst(2))
         
         for line in dataLines {
-            if debug { print("\n🔍 Processing line: '\(line)'") }
+            DebugConfig.debugPrint("\n🔍 Processing line: '\(line)'")
             
             // Skip month indicator lines and empty lines
             if line.isEmpty || (try? NSRegularExpression(pattern: "^[A-Z]{3}\\s*$").firstMatch(in: line, range: NSRange(line.startIndex..., in: line))) != nil {
-                if debug { print("⏭️ Skipping empty or month indicator line") }
+                DebugConfig.debugPrint("⏭️ Skipping empty or month indicator line")
                 continue
             }
             
             // Check if we have pending dates from a special format line
             if let dates = pendingDates {
-                if debug { print("📅 Have pending dates: \(dates)") }
+                DebugConfig.debugPrint("📅 Have pending dates: \(dates)")
                 // This line should be just the pharmacy name
                 let pharmacy = line.trimmingCharacters(in: .whitespaces)
                 if !pharmacy.isEmpty && pharmacyInfo.keys.contains(pharmacy) {
-                    if debug { print("🏥 Found matching pharmacy: \(pharmacy)") }
+                    DebugConfig.debugPrint("🏥 Found matching pharmacy: \(pharmacy)")
                     processDateSet(dates: dates, pharmacy: pharmacy, into: &schedules)
                     pendingDates = nil
                     continue
                 } else {
-                    if debug { print("⚠️ Line doesn't match expected pharmacy format: '\(pharmacy)'") }
+                    DebugConfig.debugPrint("⚠️ Line doesn't match expected pharmacy format: '\(pharmacy)'")
                 }
             }
             
             // Extract dates and pharmacy from the line
             if let (dates, pharmacy) = extractDatesAndPharmacy(from: line) {
-                if debug { print("📆 Extracted dates: \(dates), pharmacy: '\(pharmacy)'") }
+                DebugConfig.debugPrint("📆 Extracted dates: \(dates), pharmacy: '\(pharmacy)'")
                 if pharmacy.isEmpty {
                     // This is a special format line, store the dates for the next line
-                    if debug { print("⏳ Storing dates for next line") }
+                    DebugConfig.debugPrint("⏳ Storing dates for next line")
                     pendingDates = dates
                     continue
                 }
@@ -162,7 +159,7 @@ class CuellarParser: PDFParsingStrategy {
     private func extractDatesAndPharmacy(from line: String) -> ([String], String)? {
         // If this is just a pharmacy name following a special format line, skip it
         if pharmacyInfo.keys.contains(line.trimmingCharacters(in: .whitespaces)) {
-            if debug { print("🏥 Found standalone pharmacy line") }
+            DebugConfig.debugPrint("🏥 Found standalone pharmacy line")
             return nil
         }
         
@@ -172,24 +169,22 @@ class CuellarParser: PDFParsingStrategy {
         let range = NSRange(line.startIndex..., in: line)
         let matches = regex?.matches(in: line, range: range) ?? []
         
-        if debug {
-            print("🔍 Found \(matches.count) regular dates in line")
-            // Print each character's Unicode value to help debug dash types
-            print("📝 Line characters:")
-            for (i, char) in line.unicodeScalars.enumerated() {
-                print("   \(i): '\(char)' (Unicode: U+\(String(format:"%04X", char.value)))")
-                if i > 20 { break } // Only show first few characters
-            }
+        DebugConfig.debugPrint("🔍 Found \(matches.count) regular dates in line")
+        // Print each character's Unicode value to help debug dash types
+        DebugConfig.debugPrint("📝 Line characters:")
+        for (i, char) in line.unicodeScalars.enumerated() {
+            DebugConfig.debugPrint("   \(i): '\(char)' (Unicode: U+\(String(format:"%04X", char.value)))")
+            if i > 20 { break } // Only show first few characters
         }
         
         // If we found regular dates, parse them
         if !matches.isEmpty {
             var dates: [String] = []
-            if debug { print("🔍 Date matches found:") }
+            DebugConfig.debugPrint("🔍 Date matches found:")
             for match in matches {
                 if let range = Range(match.range, in: line) {
                     let date = String(line[range])
-                    if debug { print("   - Found date: '\(date)'") }
+                    DebugConfig.debugPrint("   - Found date: '\(date)'")
                     dates.append(date)
                 }
             }
@@ -200,8 +195,8 @@ class CuellarParser: PDFParsingStrategy {
                 let pharmacy = String(line[pharmacyStartRange...])
                     .trimmingCharacters(in: .whitespaces)
                 
-                if debug { print("📅 Regular dates: \(dates)") }
-                if debug { print("🏥 Pharmacy: \(pharmacy)") }
+                DebugConfig.debugPrint("📅 Regular dates: \(dates)")
+                DebugConfig.debugPrint("🏥 Pharmacy: \(pharmacy)")
                 
                 if !dates.isEmpty && !pharmacy.isEmpty {
                     return (dates, pharmacy)
@@ -211,9 +206,9 @@ class CuellarParser: PDFParsingStrategy {
         
         // If no regular dates found, try special format (September transition)
         if line.contains("DOMINGO") || line.contains("MARTES") || line.contains("JUEVES") || line.contains("SABADO") {
-            if debug { print("🎯 Found special format line") }
+            DebugConfig.debugPrint("🎯 Found special format line")
             if let specialTransition = parseSeptemberTransition(from: line) {
-                if debug { print("✅ Parsed special dates: \(specialTransition.0)") }
+                DebugConfig.debugPrint("✅ Parsed special dates: \(specialTransition.0)")
                 return specialTransition
             }
         }
@@ -232,7 +227,7 @@ class CuellarParser: PDFParsingStrategy {
     
     /// Parse special format for September transition period and return just the dates
     private func parseSeptemberTransitionDates(from line: String) -> [String]? {
-        if debug { print("\n🔄 Parsing special format dates only: '\(line)'") }
+        DebugConfig.debugPrint("\n🔄 Parsing special format dates only: '\(line)'")
         
         // Patterns we need to handle:
         // "DOMINGO 31 DE AGOSTO Y LUNES 1 DE SEPTIEMBRE" followed by pharmacy
@@ -246,11 +241,11 @@ class CuellarParser: PDFParsingStrategy {
         let regex = try? NSRegularExpression(pattern: datePattern)
         
         guard let matches = regex?.matches(in: line, range: NSRange(line.startIndex..., in: line)) else {
-            if debug { print("❌ No matches found in line") }
+            DebugConfig.debugPrint("❌ No matches found in line")
             return nil
         }
         
-        if debug { print("✅ Found \(matches.count) date matches") }
+        DebugConfig.debugPrint("✅ Found \(matches.count) date matches")
         
         var dates: [String] = []
         for match in matches {
@@ -275,7 +270,7 @@ class CuellarParser: PDFParsingStrategy {
             }
         }
         
-        if debug { print("📅 Parsed dates: \(dates)") }
+        DebugConfig.debugPrint("📅 Parsed dates: \(dates)")
         return dates.isEmpty ? nil : dates
     }
     
@@ -368,10 +363,10 @@ class CuellarParser: PDFParsingStrategy {
     
     /// Process a set of dates with a pharmacy
     private func processDateSet(dates: [String], pharmacy: String, into schedules: inout [PharmacySchedule]) {
-        if debug { print("\n📋 Processing date set:") }
-        if debug { print("📅 Dates: \(dates)") }
-        if debug { print("🏥 Pharmacy: \(pharmacy)") }
-        if debug { print("📆 Current year: \(currentYear)") }
+        DebugConfig.debugPrint("\n📋 Processing date set:")
+        DebugConfig.debugPrint("📅 Dates: \(dates)")
+        DebugConfig.debugPrint("🏥 Pharmacy: \(pharmacy)")
+        DebugConfig.debugPrint("📆 Current year: \(currentYear)")
         
         // Create schedules for each date in the set
         for date in dates {
@@ -380,10 +375,10 @@ class CuellarParser: PDFParsingStrategy {
             if let regex = try? NSRegularExpression(pattern: pattern),
                regex.firstMatch(in: date, range: NSRange(date.startIndex..., in: date)) != nil {
                 currentYear += 1
-                if debug { print("🎊 New year detected! Now processing year \(currentYear)") }
+                DebugConfig.debugPrint("🎊 New year detected! Now processing year \(currentYear)")
             }
 
-            if debug { print("📆 Processing date: \(date) (year: \(currentYear))") }
+            DebugConfig.debugPrint("📆 Processing date: \(date) (year: \(currentYear))")
             
             if let dutyDate = parseDutyDate(date, year: currentYear) {
                 let info = pharmacyInfo[pharmacy] ?? (

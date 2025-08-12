@@ -8,41 +8,41 @@ class ScheduleService {
     static func loadSchedules(for region: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // Return cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[region.id], !forceRefresh {
-            print("ScheduleService: Using cached schedules for region \(region.name)")
+            DebugConfig.debugPrint("ScheduleService: Using cached schedules for region \(region.name)")
             return cached
         }
         
         // Load and cache if not available or force refresh requested
-        print("ScheduleService: Loading schedules from PDF for region \(region.name)...")
+        DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(region.name)...")
         let schedules = await pdfService.loadPharmacies(for: region, forceRefresh: forceRefresh)
         cachedSchedules[region.id] = schedules
-        print("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
+        DebugConfig.debugPrint("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         
         // Print a sample schedule for verification
         if let sampleSchedule = schedules.first {
-            print("\nSample schedule for \(region.name):")
-            print("Date: \(sampleSchedule.date)")
+            DebugConfig.debugPrint("\nSample schedule for \(region.name):")
+            DebugConfig.debugPrint("Date: \(sampleSchedule.date)")
             
-            print("\nDay Shift Pharmacies:")
+            DebugConfig.debugPrint("\nDay Shift Pharmacies:")
             for pharmacy in sampleSchedule.dayShiftPharmacies {
-                print("- \(pharmacy.name)")
-                print("  Address: \(pharmacy.address)")
-                print("  Phone: \(pharmacy.formattedPhone)")
+                DebugConfig.debugPrint("- \(pharmacy.name)")
+                DebugConfig.debugPrint("  Address: \(pharmacy.address)")
+                DebugConfig.debugPrint("  Phone: \(pharmacy.formattedPhone)")
                 if let info = pharmacy.additionalInfo {
-                    print("  Additional Info: \(info)")
+                    DebugConfig.debugPrint("  Additional Info: \(info)")
                 }
             }
             
-            print("\nNight Shift Pharmacies:")
+            DebugConfig.debugPrint("\nNight Shift Pharmacies:")
             for pharmacy in sampleSchedule.nightShiftPharmacies {
-                print("- \(pharmacy.name)")
-                print("  Address: \(pharmacy.address)")
-                print("  Phone: \(pharmacy.formattedPhone)")
+                DebugConfig.debugPrint("- \(pharmacy.name)")
+                DebugConfig.debugPrint("  Address: \(pharmacy.address)")
+                DebugConfig.debugPrint("  Phone: \(pharmacy.formattedPhone)")
                 if let info = pharmacy.additionalInfo {
-                    print("  Additional Info: \(info)")
+                    DebugConfig.debugPrint("  Additional Info: \(info)")
                 }
             }
-            print("")
+            DebugConfig.debugPrint("")
         }
         
         return schedules

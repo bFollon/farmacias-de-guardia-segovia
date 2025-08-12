@@ -33,10 +33,10 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
                     return seen.insert(timestamp).inserted
                 }
 
-            print("DEBUG: Array lengths - parsedDates: \(parsedDates.count), dayPharmacies: \(dayPharmacies.count), nightPharmacies: \(nightPharmacies.count)")
-            print("DEBUG: All parsed dates: \(parsedDates)")
-            print("DEBUG: All day pharmacies: \(dayPharmacies)")
-            print("DEBUG: All night pharmacies: \(nightPharmacies)")
+            DebugConfig.debugPrint("DEBUG: Array lengths - parsedDates: \(parsedDates.count), dayPharmacies: \(dayPharmacies.count), nightPharmacies: \(nightPharmacies.count)")
+            DebugConfig.debugPrint("DEBUG: All parsed dates: \(parsedDates)")
+            DebugConfig.debugPrint("DEBUG: All day pharmacies: \(dayPharmacies)")
+            DebugConfig.debugPrint("DEBUG: All night pharmacies: \(nightPharmacies)")
             
             // Create schedules for valid dates with available pharmacies
             for (index, date) in parsedDates.enumerated() where index < dayPharmacies.count && index < nightPharmacies.count {

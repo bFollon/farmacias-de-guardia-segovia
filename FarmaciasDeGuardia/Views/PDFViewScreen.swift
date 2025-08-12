@@ -127,7 +127,7 @@ struct PDFViewScreen: View {
         // Uses existing cached schedules, no re-downloading
         // This handles the 23:55 -> 00:05 day rollover scenario
         
-        print("🔄 Refreshing current view for \(region.name)")
+        DebugConfig.debugPrint("🔄 Refreshing current view for \(region.name)")
         
         // Toggle refresh trigger to force SwiftUI re-evaluation
         // The views will automatically re-evaluate ScheduleService.findCurrentSchedule 

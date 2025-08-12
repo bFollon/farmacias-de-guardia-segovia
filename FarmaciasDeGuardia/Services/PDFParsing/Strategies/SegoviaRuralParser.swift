@@ -2,9 +2,6 @@ import Foundation
 import PDFKit
 
 class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
-    /// Debug flag - when true, prints detailed parsing information
-    private let debug = false
-    
     /// Store ZBS schedules separately for access by ZBSScheduleService
     static private var cachedZBSSchedules: [ZBSSchedule] = []
     
@@ -312,9 +309,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     private func createPharmacies(from pharmacyName: String, zbsId: String, date: DutyDate) -> [Pharmacy] {
         // Hard-coded specific case: "S.E. GORMAZ (SORIA) SEPÚLVEDA"
         if pharmacyName.contains("S.E. GORMAZ") && pharmacyName.contains("SEPÚLVEDA") {
-            if debug {
-                print("🏥🏥 Splitting combined pharmacy: '\(pharmacyName)' → ['S.E. GORMAZ (SORIA)', 'SEPÚLVEDA']")
-            }
+            DebugConfig.debugPrint("🏥🏥 Splitting combined pharmacy: '\(pharmacyName)' → ['S.E. GORMAZ (SORIA)', 'SEPÚLVEDA']")
             return [
                 createPharmacy(name: "S.E. GORMAZ (SORIA)", zbsId: zbsId, date: date),
                 createPharmacy(name: "SEPÚLVEDA", zbsId: zbsId, date: date)
@@ -338,7 +333,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         referenceComponents.day = 30
         
         guard let referenceDate = calendar.date(from: referenceComponents) else {
-            if debug { print("⚠️ Could not create reference date, defaulting to DOLORES") }
+            DebugConfig.debugPrint("⚠️ Could not create reference date, defaulting to DOLORES")
             return "LA GRANJA - DOLORES"
         }
         
@@ -354,7 +349,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         currentComponents.day = date.day
         
         guard let currentDate = calendar.date(from: currentComponents) else {
-            if debug { print("⚠️ Could not create current date from \(date), defaulting to DOLORES") }
+            DebugConfig.debugPrint("⚠️ Could not create current date from \(date), defaulting to DOLORES")
             return "LA GRANJA - DOLORES"
         }
         
@@ -365,9 +360,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         // Even weeks (0, 2, 4...) = DOLORES, Odd weeks (1, 3, 5...) = VALENCIANA
         let pharmacy = (weeksDifference % 2 == 0) ? "LA GRANJA - DOLORES" : "LA GRANJA - VALENCIANA"
         
-        if debug {
-            print("🗓️ La Granja alternation: \(date.day)-\(date.month)-\(date.year ?? 2025) → \(weeksDifference) weeks from reference → \(pharmacy)")
-        }
+        DebugConfig.debugPrint("🗓️ La Granja alternation: \(date.day)-\(date.month)-\(date.year ?? 2025) → \(weeksDifference) weeks from reference → \(pharmacy)")
         
         return pharmacy
     }
@@ -384,9 +377,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         if zbsId == "la-granja" && name.uppercased().contains("LA GRANJA") {
             // Use weekly alternation to determine which pharmacy
             lookupKey = getLaGranjaPharmacyKey(for: date)
-            if debug {
-                print("🔄 La Granja alternation: '\(name)' → '\(lookupKey)' for \(date.day)-\(date.month)-\(date.year ?? 2025)")
-            }
+            DebugConfig.debugPrint("🔄 La Granja alternation: '\(name)' → '\(lookupKey)' for \(date.day)-\(date.month)-\(date.year ?? 2025)")
         } else {
             // Use original name for lookup
             lookupKey = name.uppercased()
@@ -394,10 +385,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         
         let info = pharmacyInfo[lookupKey] ?? {
             // Log when no match is found
-            if debug {
-                print("⚠️ No pharmacy info found for key: '\(lookupKey)' (original: '\(name)')")
-                print("📋 Available keys: \(Array(pharmacyInfo.keys).sorted())")
-            }
+            DebugConfig.debugPrint("⚠️ No pharmacy info found for key: '\(lookupKey)' (original: '\(name)')")
+            DebugConfig.debugPrint("📋 Available keys: \(Array(pharmacyInfo.keys).sorted())")
             return (
                 name: name, // Use the parsed name as fallback
                 address: "Dirección no disponible",
@@ -409,8 +398,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         let additionalInfo = "Horario: \(scheduleType.hours) - ZBS: \(zbsDisplayName)"
         
         // Debug logging for shift status
-        if debug && !isPharmacyCurrentlyOpen(scheduleType) {
-            print("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(scheduleType.hours))")
+        if !isPharmacyCurrentlyOpen(scheduleType) {
+            DebugConfig.debugPrint("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(scheduleType.hours))")
         }
         
         return Pharmacy(
@@ -436,14 +425,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         var zbsSchedules: [ZBSSchedule] = []
         let pageCount = pdfDocument.pageCount
         
-        if debug { print("\n=== Segovia Rural Schedules ===") }
+        DebugConfig.debugPrint("\n=== Segovia Rural Schedules ===")
         
-        if debug { print("📄 Processing \(pageCount) pages of Segovia Rural PDF...") }
+        DebugConfig.debugPrint("📄 Processing \(pageCount) pages of Segovia Rural PDF...")
         
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else { continue }
             
-            if debug { print("\n📃 Processing page \(pageIndex + 1)") }
+            DebugConfig.debugPrint("\n📃 Processing page \(pageIndex + 1)")
             
             // Get page dimensions
             let pageRect = page.bounds(for: .mediaBox)
@@ -467,26 +456,22 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let navasDeLaAsuncionColumn = TextColumn(x: 700, width: 65)  // ZBS NAVAS DE LA ASUNCIÓN
             let villacastinColumn = TextColumn(x: 770, width: 60)  // ZBS VILLACASTÍN
             
-            if debug {
-                print("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
-                print("📏 Using base height: \(baseHeight)")
-            }
+            DebugConfig.debugPrint("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
+            DebugConfig.debugPrint("📏 Using base height: \(baseHeight)")
             
             // Use same scanning height for both columns since text height is consistent
             let scanHeight = baseHeight * 0.8     // Smaller height to separate adjacent dates
             let scanIncrement = baseHeight * 0.8   // Move down the page in small steps
             
-            if debug {
-                print("\n📍 Scanning columns:")
-                print("  Date (x: \(dateColumn.x), width: \(dateColumn.width))")
-                print("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
-                print("  La Granja (x: \(laGranjaColumn.x), width: \(laGranjaColumn.width))")
-                print("  La Sierra (x: \(laSierraColumn.x), width: \(laSierraColumn.width))")
-                print("  Fuentidueña (x: \(fuentiduenaColumn.x), width: \(fuentiduenaColumn.width))")
-                print("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
-                print("  Navas de la Asunción (x: \(navasDeLaAsuncionColumn.x), width: \(navasDeLaAsuncionColumn.width))")
-                print("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
-            }
+            DebugConfig.debugPrint("\n📍 Scanning columns:")
+            DebugConfig.debugPrint("  Date (x: \(dateColumn.x), width: \(dateColumn.width))")
+            DebugConfig.debugPrint("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
+            DebugConfig.debugPrint("  La Granja (x: \(laGranjaColumn.x), width: \(laGranjaColumn.width))")
+            DebugConfig.debugPrint("  La Sierra (x: \(laSierraColumn.x), width: \(laSierraColumn.width))")
+            DebugConfig.debugPrint("  Fuentidueña (x: \(fuentiduenaColumn.x), width: \(fuentiduenaColumn.width))")
+            DebugConfig.debugPrint("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
+            DebugConfig.debugPrint("  Navas de la Asunción (x: \(navasDeLaAsuncionColumn.x), width: \(navasDeLaAsuncionColumn.width))")
+            DebugConfig.debugPrint("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
             
             // Scan all columns with the same height parameters
             let fullLineData = scanColumn(page, column: fullLineColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
@@ -523,13 +508,13 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 .sorted(by: >)  // Sort in descending order to show Feb 1st first
             
             // Print aligned columns with full zone names
-            print("\n📝 Combined data by line:")
-            print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | Villacastín | RAW")
-            print("---------+-------------+-------+-----------+-----------+------------+-----------+-------+------------+----")
+            DebugConfig.debugPrint("\n📝 Combined data by line:")
+            DebugConfig.debugPrint("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | Villacastín | RAW")
+            DebugConfig.debugPrint("---------+-------------+-------+-----------+-----------+------------+-----------+-------+------------+----")
             
             // Create dictionary for full line data for easier lookup
             let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
-            print("\n📝 Column data:")
+            DebugConfig.debugPrint("\n📝 Column data:")
             
             for y in allYCoords {
                 let dateStr = datesDict[y] ?? ""
@@ -598,11 +583,11 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 zbsSchedules.append(zbsSchedule)
                 
                 // Debug: print the ZBS schedule we just created
-                if debug && sanitizedDateStr == "11-ago-25" {
-                    print("🔍 DEBUG: Created ZBS schedule for \(sanitizedDateStr):")
+                if sanitizedDateStr == "11-ago-25" {
+                    DebugConfig.debugPrint("🔍 DEBUG: Created ZBS schedule for \(sanitizedDateStr):")
                     for (zbsId, pharmacies) in schedulesByZBS {
                         let names = pharmacies.map { $0.name }.joined(separator: ", ")
-                        print("  \(zbsId): \(names.isEmpty ? "NO PHARMACY" : names)")
+                        DebugConfig.debugPrint("  \(zbsId): \(names.isEmpty ? "NO PHARMACY" : names)")
                     }
                 }
                 
@@ -621,7 +606,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     schedules.append(schedule)
                 }
                 
-                print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
+                DebugConfig.debugPrint(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
                              y,
                              sanitizedDateStr,
                              sanitize(riaza),
@@ -637,7 +622,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         
         // Store ZBS schedules for later access
         Self.cachedZBSSchedules = zbsSchedules
-        if debug { print("📦 Stored \(zbsSchedules.count) ZBS schedules in cache") }
+        DebugConfig.debugPrint("📦 Stored \(zbsSchedules.count) ZBS schedules in cache")
         
         // For now, return empty array until we implement the full parsing logic
         return schedules
