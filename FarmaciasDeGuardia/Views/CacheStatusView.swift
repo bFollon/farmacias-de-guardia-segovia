@@ -10,7 +10,7 @@ struct CacheStatusView: View {
             if isLoading {
                 VStack {
                     ProgressView()
-                    Text("Comprobando estado del caché...")
+                    Text("Comprobando estado de la caché...")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.top, 8)
@@ -23,14 +23,14 @@ struct CacheStatusView: View {
                         }
                     } header: {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Estado del Caché de PDFs")
+                            Text("Estado de la caché de PDFs")
                             if let lastChecked = cacheStatuses.first?.lastChecked {
                                 Text("Última búsqueda de actualizaciones: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .textCase(nil)
                             } else {
-                                Text("El caché nunca se ha comprobado para actualizaciones")
+                                Text("La caché nunca se ha comprobado para actualizaciones")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .textCase(nil)
@@ -45,7 +45,7 @@ struct CacheStatusView: View {
                             HStack {
                                 Image(systemName: "info.circle.fill")
                                     .foregroundColor(.blue)
-                                Text("Información del Caché")
+                                Text("Información de la caché")
                                     .font(.headline)
                             }
                             
@@ -58,7 +58,7 @@ struct CacheStatusView: View {
                 }
             }
         }
-        .navigationTitle("Estado del Caché")
+        .navigationTitle("Estado de la caché")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

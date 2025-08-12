@@ -18,7 +18,7 @@ struct CacheRefreshView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Actualizar Caché")
+            .navigationTitle("Actualizar caché")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -36,7 +36,7 @@ struct CacheRefreshView: View {
     
     private var headerView: some View {
         VStack(spacing: 16) {
-            Text("Actualizando Caché de PDFs")
+            Text("Actualizando caché de PDFs")
                 .font(.headline)
             
             Text("Comprobando actualizaciones para cada región...")

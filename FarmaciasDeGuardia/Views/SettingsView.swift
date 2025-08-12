@@ -10,7 +10,7 @@ struct SettingsView: View {
             List {
                 Section("Caché de PDFs") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("PDFs en Caché")
+                        Text("PDFs en caché")
                             .font(.headline)
                         
                         Text("Los horarios PDF se almacenan localmente para una carga más rápida y acceso sin conexión.")
@@ -31,7 +31,7 @@ struct SettingsView: View {
                     Button(action: { showingCacheStatus = true }) {
                         HStack {
                             Image(systemName: "info.circle")
-                            Text("Ver Estado del Caché")
+                            Text("Ver Estado de la caché")
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .font(.caption)
