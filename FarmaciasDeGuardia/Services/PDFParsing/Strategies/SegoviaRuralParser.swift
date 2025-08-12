@@ -73,7 +73,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             address: "Pl. España, 16, 40300 Sepúlveda, Segovia", 
             phone: "921540018"
         ),
-        "S.E. GORMAZ (Soria)": (
+        "S.E. GORMAZ (SORIA)": (
             name: "Farmacia Irigoyen",
             address: "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria", 
             phone: "975350208"
@@ -88,7 +88,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             address: "C. Bayona, 21, 40560 Boceguillas, Segovia", 
             phone: "921543849"
         ),
-        "AYLLON": (
+        "AYLLÓN": (
             name: "Farmacia Luis de la Peña Buquerin",
             address: "Plaza Mayor, 12, 40520 Ayllón, Segovia", 
             phone: "921553003"
@@ -134,6 +134,11 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             phone: "No disponible"
         ),
+        "TORRECELLA": (
+            name: "Farmacia Lcdo Gallego Esteban Fernando",
+            address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
+            phone: "No disponible"
+        ),
         "OLOMBRADA": (
             name: "Dr. Jesús Santos del Cura",
             address: "C. Real, 3, 40220 Olombrada, Segovia",
@@ -143,6 +148,11 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             name: "Farmacia Fuentidueña",
             address: "C. Real, 40, 40357 Fuentidueña, Segovia",
             phone: "921533630"
+        ),
+        "SACRAMENIA": (
+            name: "Farmacia Gloria Hernando Bayón",
+            address: "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
+            phone: "921527501"
         ),
         "FUENTESAUCO": (
             name: "Farmacia Paloma María Prieto Pérez",
@@ -221,7 +231,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             address: "C. Libertad, 1, 40470 Navas de Oro, Segovia",
             phone: "921591585"
         ),
-        "NAVAS DE LA ASUNCIÓN": (
+        "NAVA DE LA A": (
             name: "Farmacia Ldo. Vicente Rebollo Antolín Javier",
             address: "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
             phone: "921580533"
@@ -241,10 +251,20 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             address: "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             phone: "921198297"
         ),
-        "NAVAS DE SAN ANTONIO": (
+        "NAVAS DE SA": (
             name: "Farmacia María José Martín Barguilla",
             address: "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             phone: "921193128"
+        ),
+        "MAELLO (ÁVILA)": (
+            name: "Farmacia Noelia Guerra García",
+            address: "Calle Vilorio, 8, 05291 Maello, Ávila",
+            phone: "921192126"
+        ),
+        "ESCALONA": (
+            name: "Farmacia Matilde García García",
+            address: "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            phone: "921570026"
         )
     ]
     
@@ -265,6 +285,24 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             month: components[1],
             year: 2000 + year  // Convert YY to YYYY
         )
+    }
+    
+    /// Handle the specific case where the PDF contains "S.E. GORMAZ (SORIA) SEPÚLVEDA" as a single string
+    /// but we want to treat it as two separate pharmacies
+    private func createPharmacies(from pharmacyName: String, zbsId: String) -> [Pharmacy] {
+        // Hard-coded specific case: "S.E. GORMAZ (SORIA) SEPÚLVEDA"
+        if pharmacyName.contains("S.E. GORMAZ") && pharmacyName.contains("SEPÚLVEDA") {
+            if debug {
+                print("🏥🏥 Splitting combined pharmacy: '\(pharmacyName)' → ['S.E. GORMAZ (SORIA)', 'SEPÚLVEDA']")
+            }
+            return [
+                createPharmacy(name: "S.E. GORMAZ (SORIA)", zbsId: zbsId),
+                createPharmacy(name: "SEPÚLVEDA", zbsId: zbsId)
+            ]
+        }
+        
+        // Default: single pharmacy
+        return [createPharmacy(name: pharmacyName, zbsId: zbsId)]
     }
     
     private func createPharmacy(name: String, zbsId: String) -> Pharmacy {
@@ -467,8 +505,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     // Add pharmacies where they exist
                     for (zbsId, pharmacyName) in zbsData {
                         if !pharmacyName.isEmpty {
-                            let pharmacy = createPharmacy(name: pharmacyName, zbsId: zbsId)
-                            schedulesByZBS[zbsId]?.append(pharmacy)
+                            let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId)
+                            schedulesByZBS[zbsId]?.append(contentsOf: pharmacies)
                         }
                         // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
                     }
