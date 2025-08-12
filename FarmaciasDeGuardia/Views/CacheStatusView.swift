@@ -6,72 +6,64 @@ struct CacheStatusView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
-            Group {
-                if isLoading {
-                    VStack {
-                        ProgressView()
-                        Text("Checking cache status...")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.top, 8)
-                    }
-                } else {
-                    List {
-                        Section {
-                            ForEach(cacheStatuses, id: \.region.id) { status in
-                                CacheStatusRow(status: status)
-                            }
-                        } header: {
+        Group {
+            if isLoading {
+                VStack {
+                    ProgressView()
+                    Text("Checking cache status...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.top, 8)
+                }
+            } else {
+                List {
+                    Section {
+                        ForEach(cacheStatuses, id: \.region.id) { status in
+                            CacheStatusRow(status: status)
+                        }
+                    } header: {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("PDF Cache Status")
-                        } footer: {
-                            Text("PDFs are cached locally for faster loading and offline access.")
-                        }
-                        
-                        Section {
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Image(systemName: "info.circle.fill")
-                                        .foregroundColor(.blue)
-                                    Text("Cache Information")
-                                        .font(.headline)
-                                }
-                                
-                                Text("• Green: PDF is downloaded and up to date")
-                                Text("• Orange: PDF update is available")
-                                Text("• Red: PDF is not downloaded")
-                                
-                                if let lastChecked = cacheStatuses.first?.lastChecked {
-                                    Text("Last checked: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                        .padding(.top, 4)
-                                } else {
-                                    Text("Cache has never been checked")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                        .padding(.top, 4)
-                                }
+                            if let lastChecked = cacheStatuses.first?.lastChecked {
+                                Text("Last checked for updates: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .textCase(nil)
+                            } else {
+                                Text("Cache has never been checked for updates")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .textCase(nil)
                             }
-                            .padding(.vertical, 8)
                         }
+                    } footer: {
+                        Text("PDFs are cached locally for faster loading and offline access.")
+                    }
+                    
+                    Section {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(.blue)
+                                Text("Cache Information")
+                                    .font(.headline)
+                            }
+                            
+                            Text("• Green: PDF is downloaded and up to date")
+                            Text("• Orange: PDF update is available")
+                            Text("• Red: PDF is not downloaded")
+                        }
+                        .padding(.vertical, 8)
                     }
                 }
             }
-            .navigationTitle("Cache Status")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Close") {
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Refresh") {
-                        loadCacheStatus()
-                    }
-                    .disabled(isLoading)
+        }
+        .navigationTitle("Cache Status")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
+                    dismiss()
                 }
             }
         }

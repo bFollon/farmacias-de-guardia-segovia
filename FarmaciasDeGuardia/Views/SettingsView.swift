@@ -78,15 +78,6 @@ struct SettingsView: View {
         .sheet(isPresented: $showingCacheStatus) {
             NavigationView {
                 CacheStatusView()
-                    .navigationTitle("Cache Status")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button("Done") {
-                                showingCacheStatus = false
-                            }
-                        }
-                    }
             }
         }
     }
