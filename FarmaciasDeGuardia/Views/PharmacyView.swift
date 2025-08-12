@@ -129,6 +129,7 @@ struct PharmacyView: View {
             }
         }
         .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
         .confirmationDialog("Abrir en Maps", isPresented: $showingMapOptions) {
