@@ -111,9 +111,16 @@ struct AboutView: View {
                             .foregroundColor(.secondary)
                             .italic()
                         
-                        Text("Desarrollado por @bFollon")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        Button(action: {
+                            if let url = URL(string: "https://github.com/bFollon") {
+                                openURL(url)
+                            }
+                        }) {
+                            Text("Desarrollado por @bFollon")
+                                .font(.caption)
+                                .foregroundColor(.blue)
+                                .underline()
+                        }
                     }
                     
                     Spacer(minLength: 50)
