@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showingCacheStatus = false
     @State private var showingCacheRefresh = false
+    @State private var showingAbout = false
     
     var body: some View {
         NavigationView {
@@ -40,16 +41,18 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("About") {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Farmacias de Guardia")
-                            .font(.headline)
-                        
-                        Text("Consulta las farmacias de guardia de Segovia. Los datos se obtienen de los PDFs oficiales del Colegio de Farmacéuticos.")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                Section("Información") {
+                    Button(action: { showingAbout = true }) {
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text("Acerca de")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
-                    .padding(.vertical, 4)
+                    .foregroundColor(.primary)
                 }
             }
             .navigationTitle("Configuración")
@@ -69,6 +72,9 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showingCacheRefresh) {
             CacheRefreshView()
+        }
+        .sheet(isPresented: $showingAbout) {
+            AboutView()
         }
     }
     
