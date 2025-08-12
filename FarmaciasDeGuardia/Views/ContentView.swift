@@ -35,6 +35,10 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
+                // Closest pharmacy finder
+                ClosestPharmacyView()
+                    .padding(.horizontal)
+                
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
                     GridItem(.flexible())

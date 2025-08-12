@@ -35,7 +35,15 @@ public struct DutyTimeSpan: Equatable, Hashable {
     
     /// Checks if the given date falls within this duty time span
     public func contains(_ date: Date) -> Bool {
-        date >= start && date <= end
+        if spansMultipleDays {
+            // For cross-midnight spans, we need to check time of day, not absolute dates
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.hour, .minute], from: date)
+            return containsTimeOfDay(hour: components.hour ?? 0, minute: components.minute ?? 0)
+        } else {
+            // For same-day spans, simple date comparison works
+            return date >= start && date <= end
+        }
     }
     
     /// Checks if a given time of day (hour and minute) falls within this duty time span
@@ -78,4 +86,10 @@ public extension DutyTimeSpan {
     
     /// 24-hour shift used by Cuéllar and El Espinar (00:00 - 23:59)
     static let fullDay = DutyTimeSpan(startHour: 0, startMinute: 0, endHour: 23, endMinute: 59)
+    
+    /// Rural daytime shift for standard hours (10:00 - 20:00)
+    static let ruralDaytime = DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 20, endMinute: 0)
+    
+    /// Rural extended daytime shift (10:00 - 22:00)
+    static let ruralExtendedDaytime = DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 22, endMinute: 0)
 }

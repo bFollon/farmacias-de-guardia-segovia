@@ -28,6 +28,9 @@ struct FarmaciasDeGuardiaApp: App {
     private func initializeApp() {
         // Initialize PDF cache manager
         PDFCacheManager.shared.initialize()
+        
+        // Perform coordinate cache maintenance
+        GeocodingService.performMaintenanceCleanup()
     }
 }
 

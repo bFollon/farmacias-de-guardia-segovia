@@ -1,4 +1,5 @@
 import Foundation
+import CoreLocation
 
 public struct Pharmacy: Identifiable {
     public let id = UUID()
@@ -186,5 +187,25 @@ extension Pharmacy {
         }
         
         return pharmacies
+    }
+}
+
+// MARK: - Location Extensions
+extension Pharmacy {
+    /// Calculate distance from user location to this pharmacy
+    func distance(from userLocation: CLLocation) async -> CLLocationDistance? {
+        guard let pharmacyLocation = await GeocodingService.getCoordinatesForPharmacy(self) else {
+            DebugConfig.debugPrint("❌ Could not geocode pharmacy address: \(self.address)")
+            return nil
+        }
+        
+        let distance = userLocation.distance(from: pharmacyLocation)
+        DebugConfig.debugPrint("📏 Distance to \(self.name): \(Int(distance))m")
+        return distance
+    }
+    
+    /// Get coordinates for this pharmacy
+    func coordinates() async -> CLLocation? {
+        return await GeocodingService.getCoordinatesForPharmacy(self)
     }
 }
