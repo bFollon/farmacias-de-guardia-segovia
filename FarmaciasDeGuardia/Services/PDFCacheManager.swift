@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Progress state for update operations
 enum UpdateProgressState {
@@ -86,8 +87,6 @@ struct RegionCacheStatus {
         }
     }
 }
-
-import SwiftUI
 
 /// Manages local caching and updating of PDF files
 class PDFCacheManager {

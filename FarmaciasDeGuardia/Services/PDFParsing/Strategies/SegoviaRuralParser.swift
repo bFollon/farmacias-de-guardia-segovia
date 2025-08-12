@@ -3,36 +3,10 @@ import PDFKit
 
 class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     /// Debug flag - when true, prints detailed parsing information
-    private let debug = true
+    private let debug = false
     
     /// Store ZBS schedules separately for access by ZBSScheduleService
     static private var cachedZBSSchedules: [ZBSSchedule] = []
-    
-    // Lookup tables for Spanish names
-    private let weekdays = [
-        1: "Domingo",
-        2: "Lunes",
-        3: "Martes",
-        4: "Miércoles",
-        5: "Jueves",
-        6: "Viernes",
-        7: "Sábado"
-    ]
-    
-    private let months = [
-        1: "Enero",
-        2: "Febrero",
-        3: "Marzo",
-        4: "Abril",
-        5: "Mayo",
-        6: "Junio",
-        7: "Julio",
-        8: "Agosto",
-        9: "Septiembre",
-        10: "Octubre",
-        11: "Noviembre",
-        12: "Diciembre"
-    ]
     
     // ZBS Schedule types
     private enum ScheduleType {
@@ -71,7 +45,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         ),
         "SEPÚLVEDA": (
             name: "Farmacia Francisco Ruiz Carrasco",
-            address: "Pl. España, 16, 40300 Sepúlveda, Segovia", 
+            address: "Pl. España, 16, 40300 Sepúlveda, Segovia",
             phone: "921540018"
         ),
         
@@ -83,27 +57,27 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         ),
         "CANTALEJO-2": (
             name: "Farmacia Carmen Bautista",
-            address: "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia", 
+            address: "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
             phone: "921520005"
         ),
         "S.E. GORMAZ (SORIA)": (
             name: "Farmacia Irigoyen",
-            address: "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria", 
+            address: "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
             phone: "975350208"
         ),
         "CEREZO ABAJO": (
             name: "Farmacia Mario Caballero Serrano",
-            address: "C. Real, 2, 40591 Cerezo de Abajo, Segovia", 
+            address: "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
             phone: "921557110"
         ),
         "BOCEGUILLAS": (
             name: "Farmacia Lcda Mª del Pilar Villas Miguel",
-            address: "C. Bayona, 21, 40560 Boceguillas, Segovia", 
+            address: "C. Bayona, 21, 40560 Boceguillas, Segovia",
             phone: "921543849"
         ),
         "AYLLÓN": (
             name: "Farmacia Luis de la Peña Buquerin",
-            address: "Plaza Mayor, 12, 40520 Ayllón, Segovia", 
+            address: "Plaza Mayor, 12, 40520 Ayllón, Segovia",
             phone: "921553003"
         ),
         
@@ -374,7 +348,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         currentComponents.month = {
             // Convert month name to number
             let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
-                             "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
+                              "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
             return monthNames[date.month] ?? 1
         }()
         currentComponents.day = date.day
@@ -465,7 +439,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         if debug { print("\n=== Segovia Rural Schedules ===") }
         
         if debug { print("📄 Processing \(pageCount) pages of Segovia Rural PDF...") }
-
+        
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else { continue }
             
@@ -502,7 +476,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let scanHeight = baseHeight * 0.8     // Smaller height to separate adjacent dates
             let scanIncrement = baseHeight * 0.8   // Move down the page in small steps
             
-            if debug { 
+            if debug {
                 print("\n📍 Scanning columns:")
                 print("  Date (x: \(dateColumn.x), width: \(dateColumn.width))")
                 print("  Riaza (x: \(riazaColumn.x), width: \(riazaColumn.width))")
@@ -526,141 +500,138 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             
-            // Print found text for debugging
-            if debug {
-                // Convert arrays to dictionaries for easier lookup
-                let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
-                let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
-                let laGranjaDict = Dictionary(uniqueKeysWithValues: laGranjaData.map { ($0.y, $0.text) })
-                let laSierraDict = Dictionary(uniqueKeysWithValues: laSierraData.map { ($0.y, $0.text) })
-                let fuentiduenaDict = Dictionary(uniqueKeysWithValues: fuentiduenaData.map { ($0.y, $0.text) })
-                let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
-                let navasDeLaAsuncionDict = Dictionary(uniqueKeysWithValues: navasDeLaAsuncionData.map { ($0.y, $0.text) })
-                let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
+            // Convert arrays to dictionaries for easier lookup
+            let datesDict = Dictionary(uniqueKeysWithValues: dates.map { ($0.y, $0.text) })
+            let riazaDict = Dictionary(uniqueKeysWithValues: riazaData.map { ($0.y, $0.text) })
+            let laGranjaDict = Dictionary(uniqueKeysWithValues: laGranjaData.map { ($0.y, $0.text) })
+            let laSierraDict = Dictionary(uniqueKeysWithValues: laSierraData.map { ($0.y, $0.text) })
+            let fuentiduenaDict = Dictionary(uniqueKeysWithValues: fuentiduenaData.map { ($0.y, $0.text) })
+            let carboneroDict = Dictionary(uniqueKeysWithValues: carboneroData.map { ($0.y, $0.text) })
+            let navasDeLaAsuncionDict = Dictionary(uniqueKeysWithValues: navasDeLaAsuncionData.map { ($0.y, $0.text) })
+            let villacastinDict = Dictionary(uniqueKeysWithValues: villacastinData.map { ($0.y, $0.text) })
+            
+            // Get all y-coordinates and sort them in descending order
+            // We want higher Y values first since the PDF has dates from bottom to top
+            let allYCoords = Set(datesDict.keys)
+                .union(riazaDict.keys)
+                .union(laGranjaDict.keys)
+                .union(laSierraDict.keys)
+                .union(fuentiduenaDict.keys)
+                .union(carboneroDict.keys)
+                .union(navasDeLaAsuncionDict.keys)
+                .union(villacastinDict.keys)
+                .sorted(by: >)  // Sort in descending order to show Feb 1st first
+            
+            // Print aligned columns with full zone names
+            print("\n📝 Combined data by line:")
+            print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | Villacastín | RAW")
+            print("---------+-------------+-------+-----------+-----------+------------+-----------+-------+------------+----")
+            
+            // Create dictionary for full line data for easier lookup
+            let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
+            print("\n📝 Column data:")
+            
+            for y in allYCoords {
+                let dateStr = datesDict[y] ?? ""
+                let riaza = riazaDict[y] ?? ""
+                let laGranja = laGranjaDict[y] ?? ""
+                let laSierra = laSierraDict[y] ?? ""
+                let fuentidueña = fuentiduenaDict[y] ?? ""
+                let carbonero = carboneroDict[y] ?? ""
+                let navasAsuncion = navasDeLaAsuncionDict[y] ?? ""
+                let villacastin = villacastinDict[y] ?? ""
+                let rawLine = fullLineDict[y] ?? ""
                 
-                // Get all y-coordinates and sort them in descending order
-                // We want higher Y values first since the PDF has dates from bottom to top
-                let allYCoords = Set(datesDict.keys)
-                    .union(riazaDict.keys)
-                    .union(laGranjaDict.keys)
-                    .union(laSierraDict.keys)
-                    .union(fuentiduenaDict.keys)
-                    .union(carboneroDict.keys)
-                    .union(navasDeLaAsuncionDict.keys)
-                    .union(villacastinDict.keys)
-                    .sorted(by: >)  // Sort in descending order to show Feb 1st first
-                
-                // Print aligned columns with full zone names
-                print("\n📝 Combined data by line:")
-                print("Y-Coord  | Date         | Riaza | La Granja | La Sierra | Fuentidueña | Carbonero | Navas | Villacastín | RAW")
-                print("---------+-------------+-------+-----------+-----------+------------+-----------+-------+------------+----")
-                
-                // Create dictionary for full line data for easier lookup
-                let fullLineDict = Dictionary(uniqueKeysWithValues: fullLineData.map { ($0.y, $0.text) })
-                print("\n📝 Column data:")
-                
-                for y in allYCoords {
-                    let dateStr = datesDict[y] ?? ""
-                    let riaza = riazaDict[y] ?? ""
-                    let laGranja = laGranjaDict[y] ?? ""
-                    let laSierra = laSierraDict[y] ?? ""
-                    let fuentidueña = fuentiduenaDict[y] ?? ""
-                    let carbonero = carboneroDict[y] ?? ""
-                    let navasAsuncion = navasDeLaAsuncionDict[y] ?? ""
-                    let villacastin = villacastinDict[y] ?? ""
-                    let rawLine = fullLineDict[y] ?? ""
-                    
-                    // Replace newlines and carriage returns with spaces in all fields
-                    let sanitize = { (text: String) -> String in
-                        text.replacingOccurrences(of: "\n", with: " ")
-                            .replacingOccurrences(of: "\r", with: " ")
-                    }
-                    
-                    let sanitizedDateStr = sanitize(dateStr)
-                    
-                    // Skip if there's no valid date
-                    guard !sanitizedDateStr.isEmpty,
-                          let date = parseDate(sanitizedDateStr) else {
-                        continue
-                    }
-                    
-                    // Create a comprehensive ZBS schedule for this date
-                    // Include ALL ZBS, even if some have no pharmacy on duty
-                    let zbsData = [
-                        ("riaza-sepulveda", sanitize(riaza)),
-                        ("la-granja", sanitize(laGranja)),
-                        ("la-sierra", sanitize(laSierra)),
-                        ("fuentidueña", sanitize(fuentidueña)),
-                        ("carbonero", sanitize(carbonero)),
-                        ("navas-asuncion", sanitize(navasAsuncion)),
-                        ("villacastin", sanitize(villacastin))
-                    ]
-                    
-                    var schedulesByZBS: [String: [Pharmacy]] = [:]
-                    
-                    // Initialize all ZBS with empty arrays (including those from PDF)
-                    for (zbsId, _) in zbsData {
-                        schedulesByZBS[zbsId] = []
-                    }
-                    
-                    // Also initialize CANTALEJO (not in PDF, but we want it in the final results)
-                    schedulesByZBS["cantalejo"] = []
-                    
-                    // Add pharmacies where they exist (from PDF data)
-                    for (zbsId, pharmacyName) in zbsData {
-                        if !pharmacyName.isEmpty {
-                            let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId, date: date)
-                            schedulesByZBS[zbsId]?.append(contentsOf: pharmacies)
-                        }
-                        // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
-                    }
-                    
-                    // Special handling for CANTALEJO - always add both pharmacies since rotation is unknown
-                    // This is hardcoded data because PDF doesn't contain CANTALEJO information
-                    let cantalejoPharmacy1 = createPharmacy(name: "CANTALEJO-1", zbsId: "cantalejo", date: date)
-                    let cantalejoPharmacy2 = createPharmacy(name: "CANTALEJO-2", zbsId: "cantalejo", date: date)
-                    schedulesByZBS["cantalejo"] = [cantalejoPharmacy1, cantalejoPharmacy2]
-                    
-                    // Create ZBS schedule (always create one for each date)
-                    let zbsSchedule = ZBSSchedule(date: date, schedulesByZBS: schedulesByZBS)
-                    zbsSchedules.append(zbsSchedule)
-                    
-                    // Debug: print the ZBS schedule we just created
-                    if debug && sanitizedDateStr == "11-ago-25" {
-                        print("🔍 DEBUG: Created ZBS schedule for \(sanitizedDateStr):")
-                        for (zbsId, pharmacies) in schedulesByZBS {
-                            let names = pharmacies.map { $0.name }.joined(separator: ", ")
-                            print("  \(zbsId): \(names.isEmpty ? "NO PHARMACY" : names)")
-                        }
-                    }
-                    
-                    // For backwards compatibility, also create a regular PharmacySchedule
-                    // with all pharmacies that have a name
-                    var allPharmacies: [Pharmacy] = []
-                    for (_, pharmacies) in schedulesByZBS {
-                        allPharmacies.append(contentsOf: pharmacies)
-                    }
-                    
-                    if !allPharmacies.isEmpty {
-                        let schedule = PharmacySchedule(
-                            date: date,
-                            shifts: [.fullDay: allPharmacies]
-                        )
-                        schedules.append(schedule)
-                    }
-                    
-                    print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
-                                 y,
-                                 sanitizedDateStr,
-                                 sanitize(riaza),
-                                 sanitize(laGranja),
-                                 sanitize(laSierra),
-                                 sanitize(fuentidueña),
-                                 sanitize(carbonero),
-                                 sanitize(navasAsuncion),
-                                 sanitize(villacastin),
-                                 sanitize(rawLine)))
+                // Replace newlines and carriage returns with spaces in all fields
+                let sanitize = { (text: String) -> String in
+                    text.replacingOccurrences(of: "\n", with: " ")
+                        .replacingOccurrences(of: "\r", with: " ")
                 }
+                
+                let sanitizedDateStr = sanitize(dateStr)
+                
+                // Skip if there's no valid date
+                guard !sanitizedDateStr.isEmpty,
+                      let date = parseDate(sanitizedDateStr) else {
+                    continue
+                }
+                
+                // Create a comprehensive ZBS schedule for this date
+                // Include ALL ZBS, even if some have no pharmacy on duty
+                let zbsData = [
+                    ("riaza-sepulveda", sanitize(riaza)),
+                    ("la-granja", sanitize(laGranja)),
+                    ("la-sierra", sanitize(laSierra)),
+                    ("fuentidueña", sanitize(fuentidueña)),
+                    ("carbonero", sanitize(carbonero)),
+                    ("navas-asuncion", sanitize(navasAsuncion)),
+                    ("villacastin", sanitize(villacastin))
+                ]
+                
+                var schedulesByZBS: [String: [Pharmacy]] = [:]
+                
+                // Initialize all ZBS with empty arrays (including those from PDF)
+                for (zbsId, _) in zbsData {
+                    schedulesByZBS[zbsId] = []
+                }
+                
+                // Also initialize CANTALEJO (not in PDF, but we want it in the final results)
+                schedulesByZBS["cantalejo"] = []
+                
+                // Add pharmacies where they exist (from PDF data)
+                for (zbsId, pharmacyName) in zbsData {
+                    if !pharmacyName.isEmpty {
+                        let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId, date: date)
+                        schedulesByZBS[zbsId]?.append(contentsOf: pharmacies)
+                    }
+                    // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
+                }
+                
+                // Special handling for CANTALEJO - always add both pharmacies since rotation is unknown
+                // This is hardcoded data because PDF doesn't contain CANTALEJO information
+                let cantalejoPharmacy1 = createPharmacy(name: "CANTALEJO-1", zbsId: "cantalejo", date: date)
+                let cantalejoPharmacy2 = createPharmacy(name: "CANTALEJO-2", zbsId: "cantalejo", date: date)
+                schedulesByZBS["cantalejo"] = [cantalejoPharmacy1, cantalejoPharmacy2]
+                
+                // Create ZBS schedule (always create one for each date)
+                let zbsSchedule = ZBSSchedule(date: date, schedulesByZBS: schedulesByZBS)
+                zbsSchedules.append(zbsSchedule)
+                
+                // Debug: print the ZBS schedule we just created
+                if debug && sanitizedDateStr == "11-ago-25" {
+                    print("🔍 DEBUG: Created ZBS schedule for \(sanitizedDateStr):")
+                    for (zbsId, pharmacies) in schedulesByZBS {
+                        let names = pharmacies.map { $0.name }.joined(separator: ", ")
+                        print("  \(zbsId): \(names.isEmpty ? "NO PHARMACY" : names)")
+                    }
+                }
+                
+                // For backwards compatibility, also create a regular PharmacySchedule
+                // with all pharmacies that have a name
+                var allPharmacies: [Pharmacy] = []
+                for (_, pharmacies) in schedulesByZBS {
+                    allPharmacies.append(contentsOf: pharmacies)
+                }
+                
+                if !allPharmacies.isEmpty {
+                    let schedule = PharmacySchedule(
+                        date: date,
+                        shifts: [.fullDay: allPharmacies]
+                    )
+                    schedules.append(schedule)
+                }
+                
+                print(String(format: "%.1f | %@ | %@ | %@ | %@ | %@ | %@ | %@ | %@ | RAW: %@",
+                             y,
+                             sanitizedDateStr,
+                             sanitize(riaza),
+                             sanitize(laGranja),
+                             sanitize(laSierra),
+                             sanitize(fuentidueña),
+                             sanitize(carbonero),
+                             sanitize(navasAsuncion),
+                             sanitize(villacastin),
+                             sanitize(rawLine)))
             }
         }
         
