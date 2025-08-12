@@ -55,7 +55,7 @@ struct PharmacyView: View {
                 HStack {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.orange)
-                    Text("Esta farmacia está cerrada ahora")
+                    Text("Fuera del horario de guardia")
                         .font(.caption)
                         .fontWeight(.medium)
                     Spacer()
@@ -96,6 +96,7 @@ struct PharmacyView: View {
                         .font(.subheadline)
                         .foregroundColor(.primary)
                         .underline()
+                        .multilineTextAlignment(.leading)
                 }
             }
             
