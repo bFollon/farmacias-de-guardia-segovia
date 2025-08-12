@@ -218,9 +218,9 @@ class ClosestPharmacyService {
         if info.contains("24h") {
             return .fullDay // 24h pharmacies use full day span
         } else if info.contains("10h-22h") {
-            return DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 22, endMinute: 0) // Extended hours
+            return .ruralExtendedDaytime // Extended hours (10:00 - 22:00)
         } else if info.contains("10h-20h") {
-            return DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 20, endMinute: 0) // Standard hours
+            return .ruralDaytime // Standard hours (10:00 - 20:00)
         }
         
         // Default assumption for pharmacies without specific hours info
