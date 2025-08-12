@@ -17,6 +17,69 @@ struct PDFVersion: Codable {
     }
 }
 
+/// Cache status information for a specific region
+struct RegionCacheStatus {
+    let region: Region
+    let isCached: Bool
+    let downloadDate: Date?
+    let fileSize: Int64?
+    let lastChecked: Date?
+    let needsUpdate: Bool
+    
+    var formattedFileSize: String {
+        guard let fileSize = fileSize else { return "Unknown" }
+        return ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file)
+    }
+    
+    var formattedDownloadDate: String {
+        guard let downloadDate = downloadDate else { return "Never" }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: downloadDate)
+    }
+    
+    var formattedLastChecked: String {
+        guard let lastChecked = lastChecked else { return "Never" }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: lastChecked)
+    }
+    
+    var statusIcon: String {
+        if !isCached {
+            return "xmark.circle.fill"
+        } else if needsUpdate {
+            return "arrow.triangle.2.circlepath"
+        } else {
+            return "checkmark.circle.fill"
+        }
+    }
+    
+    var statusColor: Color {
+        if !isCached {
+            return .red
+        } else if needsUpdate {
+            return .orange
+        } else {
+            return .green
+        }
+    }
+    
+    var statusText: String {
+        if !isCached {
+            return "Not Downloaded"
+        } else if needsUpdate {
+            return "Update Available"
+        } else {
+            return "Up to Date"
+        }
+    }
+}
+
+import SwiftUI
+
 /// Manages local caching and updating of PDF files
 class PDFCacheManager {
     static let shared = PDFCacheManager()
@@ -488,10 +551,114 @@ class PDFCacheManager {
         }
     }
     
+    /// Get structured cache status for all regions
+    func getCacheStatus() async -> [RegionCacheStatus] {
+        let allRegions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+        let lastUpdateCheck = userDefaults.object(forKey: lastUpdateCheckKey) as? Date
+        
+        var statuses: [RegionCacheStatus] = []
+        
+        for region in allRegions {
+            let filename = cacheFileName(for: region)
+            let localURL = cacheDirectory.appendingPathComponent(filename)
+            let storedVersion = getStoredVersion(for: region)
+            
+            var isCached = false
+            var downloadDate: Date?
+            var fileSize: Int64?
+            var needsUpdate = false
+            
+            if fileManager.fileExists(atPath: localURL.path) {
+                isCached = true
+                
+                do {
+                    let attributes = try fileManager.attributesOfItem(atPath: localURL.path)
+                    fileSize = attributes[FileAttributeKey.size] as? Int64
+                    downloadDate = storedVersion?.downloadDate ?? (attributes[FileAttributeKey.modificationDate] as? Date)
+                    
+                    // Check if update is needed (simplified check)
+                    needsUpdate = await checkIfUpdateNeeded(for: region, storedVersion: storedVersion)
+                    
+                } catch {
+                    print("❌ PDFCacheManager: Error reading file attributes for \(region.name): \(error)")
+                }
+            }
+            
+            let status = RegionCacheStatus(
+                region: region,
+                isCached: isCached,
+                downloadDate: downloadDate,
+                fileSize: fileSize,
+                lastChecked: lastUpdateCheck,
+                needsUpdate: needsUpdate
+            )
+            
+            statuses.append(status)
+        }
+        
+        return statuses
+    }
+    
+    /// Check if a region needs an update (lightweight version)
+    private func checkIfUpdateNeeded(for region: Region, storedVersion: PDFVersion?) async -> Bool {
+        guard let storedVersion = storedVersion else { return true }
+        
+        do {
+            var request = URLRequest(url: region.remotePDFURL)
+            request.httpMethod = "HEAD"  // Use HEAD request for lightweight check
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+            
+            let (_, response) = try await urlSession.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                // Quick check using Last-Modified header
+                if let lastModifiedString = httpResponse.value(forHTTPHeaderField: "Last-Modified"),
+                   let serverLastModified = parseHTTPDate(lastModifiedString),
+                   let cachedLastModified = storedVersion.lastModified {
+                    return serverLastModified > cachedLastModified
+                }
+                
+                // Fallback to ETag if available
+                if let serverETag = httpResponse.value(forHTTPHeaderField: "ETag"),
+                   let cachedETag = storedVersion.etag {
+                    return serverETag != cachedETag
+                }
+            }
+            
+            return false // Assume up-to-date if we can't determine
+        } catch {
+            print("⚠️ PDFCacheManager: Could not check update status for \(region.name): \(error)")
+            return false // Don't assume update needed on network error
+        }
+    }
+    
     /// Clear the last update check timestamp (for debugging)
     func clearLastUpdateCheck() {
         userDefaults.removeObject(forKey: lastUpdateCheckKey)
         print("🗑️ PDFCacheManager: Cleared last update check timestamp")
+    }
+    
+    /// Parse HTTP date string to Date
+    private func parseHTTPDate(_ dateString: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
+        
+        // Try common HTTP date formats
+        let formats = [
+            "EEE, dd MMM yyyy HH:mm:ss 'GMT'",     // RFC 1123
+            "EEEE, dd-MMM-yy HH:mm:ss 'GMT'",     // RFC 850
+            "EEE MMM d HH:mm:ss yyyy"             // ANSI C asctime()
+        ]
+        
+        for format in formats {
+            formatter.dateFormat = format
+            if let date = formatter.date(from: dateString) {
+                return date
+            }
+        }
+        
+        return nil
     }
 }
 

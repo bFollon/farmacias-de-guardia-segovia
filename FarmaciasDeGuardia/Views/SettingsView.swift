@@ -5,6 +5,7 @@ struct SettingsView: View {
     @State private var isCheckingForUpdates = false
     @State private var updateCheckMessage = ""
     @State private var showingUpdateResult = false
+    @State private var showingCacheStatus = false
     
     var body: some View {
         NavigationView {
@@ -35,10 +36,14 @@ struct SettingsView: View {
                     }
                     .disabled(isCheckingForUpdates)
                     
-                    Button(action: showCacheStatus) {
+                    Button(action: { showingCacheStatus = true }) {
                         HStack {
                             Image(systemName: "info.circle")
-                            Text("Show Cache Status")
+                            Text("View Cache Status")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -70,6 +75,20 @@ struct SettingsView: View {
         } message: {
             Text(updateCheckMessage)
         }
+        .sheet(isPresented: $showingCacheStatus) {
+            NavigationView {
+                CacheStatusView()
+                    .navigationTitle("Cache Status")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                showingCacheStatus = false
+                            }
+                        }
+                    }
+            }
+        }
     }
     
     private func checkForUpdates() {
@@ -81,7 +100,7 @@ struct SettingsView: View {
                 await PDFCacheManager.shared.forceCheckForUpdates()
                 
                 await MainActor.run {
-                    updateCheckMessage = "Update check completed. See console for details."
+                    updateCheckMessage = "Update check completed. Check cache status for details."
                     showingUpdateResult = true
                     isCheckingForUpdates = false
                 }
@@ -93,12 +112,6 @@ struct SettingsView: View {
                 }
             }
         }
-    }
-    
-    private func showCacheStatus() {
-        PDFCacheManager.shared.printCacheStatus()
-        updateCheckMessage = "Cache status printed to console."
-        showingUpdateResult = true
     }
 }
 
