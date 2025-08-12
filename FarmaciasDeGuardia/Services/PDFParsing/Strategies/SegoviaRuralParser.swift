@@ -59,6 +59,215 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         "VILLACASTÍN": .standard
     ]
     
+    // Pharmacy information lookup table for Segovia Rural
+    // TODO: Fill in the actual pharmacy details for each location
+    private let pharmacyInfo: [String: (name: String, address: String, phone: String)] = [
+        // Riaza-Sepúlveda ZBS pharmacies
+        "RIAZA": (
+            name: "Farmacia César Fernando Gutiérrez Miguel",
+            address: "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            phone: "921550131"
+        ),
+        "SEPÚLVEDA": (
+            name: "Farmacia Francisco Ruiz Carrasco",
+            address: "Pl. España, 16, 40300 Sepúlveda, Segovia", 
+            phone: "921540018"
+        ),
+        "S.E. GORMAZ (SORIA)": (
+            name: "Farmacia Irigoyen",
+            address: "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria", 
+            phone: "975350208"
+        ),
+        "CEREZO ABAJO": (
+            name: "Farmacia Mario Caballero Serrano",
+            address: "C. Real, 2, 40591 Cerezo de Abajo, Segovia", 
+            phone: "921557110"
+        ),
+        "BOCEGUILLAS": (
+            name: "Farmacia Lcda Mª del Pilar Villas Miguel",
+            address: "C. Bayona, 21, 40560 Boceguillas, Segovia", 
+            phone: "921543849"
+        ),
+        "AYLLÓN": (
+            name: "Farmacia Luis de la Peña Buquerin",
+            address: "Plaza Mayor, 12, 40520 Ayllón, Segovia", 
+            phone: "921553003"
+        ),
+        
+        // La Granja ZBS pharmacies
+        "LA GRANJA": (
+            name: "Farmacia Cristina Mínguez Del Pozo",
+            address: "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            phone: "921470038"
+        ),
+        
+        // La Sierra ZBS pharmacies
+        "PRÁDENA": (
+            name: "Farmacia Ana Belén Tomero Díez",
+            address: "Calle Pl., 18, 40165 Prádena, Segovia",
+            phone: "921507050"
+        ),
+        "ARCONES": (
+            name: "Farmacia Teresa Laporta Sánchez",
+            address: "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            phone: "921504134"
+        ),
+        "NAVAFRÍA": (
+            name: "Farmacia Martín Cuesta",
+            address: "C. la Reina, 0, 40161 Navafría, Segovia",
+            phone: "921506113"
+        ),
+        "TORREVAL": (
+            name: "Farmacia Lda. Mónica Carrasco Herrero",
+            address: "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            phone: "921506028"
+        ),
+        
+        // Fuentidueña ZBS pharmacies
+        "HONTALBILLA": (
+            name: "Farmacia Lcdo Burgos Burgos Isabel",
+            address: "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
+            phone: "921148190"
+        ),
+        "TORRECILLA": (
+            name: "Farmacia Lcdo Gallego Esteban Fernando",
+            address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
+            phone: "No disponible"
+        ),
+        "TORRECELLA": (
+            name: "Farmacia Lcdo Gallego Esteban Fernando",
+            address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
+            phone: "No disponible"
+        ),
+        "OLOMBRADA": (
+            name: "Dr. Jesús Santos del Cura",
+            address: "C. Real, 3, 40220 Olombrada, Segovia",
+            phone: "921164327"
+        ),
+        "FUENTIDUEÑA": (
+            name: "Farmacia Fuentidueña",
+            address: "C. Real, 40, 40357 Fuentidueña, Segovia",
+            phone: "921533630"
+        ),
+        "SACRAMENIA": (
+            name: "Farmacia Gloria Hernando Bayón",
+            address: "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
+            phone: "921527501"
+        ),
+        "FUENTESAUCO": (
+            name: "Farmacia Paloma María Prieto Pérez",
+            address: "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
+            phone: "No disponible"
+        ),
+        
+        // Carbonero ZBS pharmacies
+        "NAVALMANZANO": (
+            name: "Farmacia Carmen I. Tomero Díez",
+            address: "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            phone: "921575109"
+        ),
+        "CARBONERO M": (
+            name: "Farmacia Carbonero",
+            address: "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            phone: "921560427"
+        ),
+        "ZARZUELA PINAR": (
+            name: "Farmacia Maria Sol Benito Sanz",
+            address: "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            phone: "921574621"
+        ),
+        "ESCARABAJOSA": (
+            name: "Farmacia GILSANZ",
+            address: "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            phone: "921562159"
+        ),
+        "LASTRAS DE CUÉLLAR": (
+            name: "Farmacia Mª Antonia Sacristán Rodríguez",
+            address: "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            phone: "921169250"
+        ),
+        "FUENTEPELAYO": (
+            name: "Farmacia Lda. Patricia Avellón Senovilla",
+            address: "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            phone: "921574392"
+        ),
+        "CANTIMPALOS": (
+            name: "Farmacia Enrique Covisa Nager",
+            address: "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            phone: "921496025"
+        ),
+        "AGUILAFUENTE": (
+            name: "Farmacia Miriam Chamorro García",
+            address: "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            phone: "921572445"
+        ),
+        "MOZONCILLO": (
+            name: "Farmacia Isabel Frías López",
+            address: "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            phone: "921577273"
+        ),
+        "COCA": (
+            name: "Farmacia Ana Isabel Maroto Arenas",
+            address: "Pl. Arco, 2, 40480 Coca, Segovia",
+            phone: "921586677"
+        ),
+        "STA. Mª REAL": (
+            name: "Farmacia Pilar Tribiño Mendiola",
+            address: "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            phone: "921594013"
+        ),
+        "NIEVA": (
+            name: "Farmacia María Dolores Gómez Roán",
+            address: "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            phone: "921594727"
+        ),
+        "SANTIUSTE": (
+            name: "Farmacia Lda Amparo Maroto Gomez",
+            address: "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            phone: "921596259"
+        ),
+        "NAVAS DE ORO": (
+            name: "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            address: "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            phone: "921591585"
+        ),
+        "NAVA DE LA A": (
+            name: "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            address: "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            phone: "921580533"
+        ),
+        "BERNARDOS": (
+            name: "Farmacia Lcdo Casado Rata Coral",
+            address: "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            phone: "921566012"
+        ),
+        "VILLACASTÍN": (
+            name: "Farmacia Cristina Herradón Gil-Gallardo",
+            address: "Calle Iglesia, 18, 40150 Villacastín, Segovia",
+            phone: "921198173"
+        ),
+        "ZARZUELA M.": (
+            name: "Farmacia María A. Reviriego Morcuende",
+            address: "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
+            phone: "921198297"
+        ),
+        "NAVAS DE SA": (
+            name: "Farmacia María José Martín Barguilla",
+            address: "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
+            phone: "921193128"
+        ),
+        "MAELLO (ÁVILA)": (
+            name: "Farmacia Noelia Guerra García",
+            address: "Calle Vilorio, 8, 05291 Maello, Ávila",
+            phone: "921192126"
+        ),
+        "ESCALONA": (
+            name: "Farmacia Matilde García García",
+            address: "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            phone: "921570026"
+        )
+    ]
+    
     private func parseDate(_ text: String) -> DutyDate? {
         // Date format: "dd-mmm-yy"
         let components = text.components(separatedBy: "-")
@@ -78,6 +287,24 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     }
     
+    /// Handle the specific case where the PDF contains "S.E. GORMAZ (SORIA) SEPÚLVEDA" as a single string
+    /// but we want to treat it as two separate pharmacies
+    private func createPharmacies(from pharmacyName: String, zbsId: String) -> [Pharmacy] {
+        // Hard-coded specific case: "S.E. GORMAZ (SORIA) SEPÚLVEDA"
+        if pharmacyName.contains("S.E. GORMAZ") && pharmacyName.contains("SEPÚLVEDA") {
+            if debug {
+                print("🏥🏥 Splitting combined pharmacy: '\(pharmacyName)' → ['S.E. GORMAZ (SORIA)', 'SEPÚLVEDA']")
+            }
+            return [
+                createPharmacy(name: "S.E. GORMAZ (SORIA)", zbsId: zbsId),
+                createPharmacy(name: "SEPÚLVEDA", zbsId: zbsId)
+            ]
+        }
+        
+        // Default: single pharmacy
+        return [createPharmacy(name: pharmacyName, zbsId: zbsId)]
+    }
+    
     private func createPharmacy(name: String, zbsId: String) -> Pharmacy {
         // Map ZBS ID to display name for schedule info
         let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
@@ -93,12 +320,27 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             scheduleInfo = "10h-20h"
         }
         
+        // Look up pharmacy information using the parsed name as key
+        let lookupKey = name.uppercased()
+        let info = pharmacyInfo[lookupKey] ?? {
+            // Log when no match is found
+            if debug {
+                print("⚠️ No pharmacy info found for key: '\(lookupKey)' (original: '\(name)')")
+                print("📋 Available keys: \(Array(pharmacyInfo.keys).sorted())")
+            }
+            return (
+                name: name, // Use the parsed name as fallback
+                address: "Dirección no disponible",
+                phone: "No disponible"
+            )
+        }()
+        
         let additionalInfo = "Horario: \(scheduleInfo) - ZBS: \(zbsDisplayName)"
         
         return Pharmacy(
-            name: name,
-            address: "Address pending",
-            phone: "Phone pending",
+            name: info.name,
+            address: info.address,
+            phone: info.phone,
             additionalInfo: additionalInfo
         )
     }
@@ -263,8 +505,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     // Add pharmacies where they exist
                     for (zbsId, pharmacyName) in zbsData {
                         if !pharmacyName.isEmpty {
-                            let pharmacy = createPharmacy(name: pharmacyName, zbsId: zbsId)
-                            schedulesByZBS[zbsId]?.append(pharmacy)
+                            let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId)
+                            schedulesByZBS[zbsId]?.append(contentsOf: pharmacies)
                         }
                         // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
                     }
