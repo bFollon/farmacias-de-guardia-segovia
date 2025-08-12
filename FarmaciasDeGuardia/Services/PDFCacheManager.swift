@@ -27,12 +27,12 @@ struct RegionCacheStatus {
     let needsUpdate: Bool
     
     var formattedFileSize: String {
-        guard let fileSize = fileSize else { return "Unknown" }
+        guard let fileSize = fileSize else { return "Desconocido" }
         return ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file)
     }
     
     var formattedDownloadDate: String {
-        guard let downloadDate = downloadDate else { return "Never" }
+        guard let downloadDate = downloadDate else { return "Nunca" }
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
@@ -40,7 +40,7 @@ struct RegionCacheStatus {
     }
     
     var formattedLastChecked: String {
-        guard let lastChecked = lastChecked else { return "Never" }
+        guard let lastChecked = lastChecked else { return "Nunca" }
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
@@ -69,11 +69,11 @@ struct RegionCacheStatus {
     
     var statusText: String {
         if !isCached {
-            return "Not Downloaded"
+            return "No Descargado"
         } else if needsUpdate {
-            return "Update Available"
+            return "Actualización Disponible"
         } else {
-            return "Up to Date"
+            return "Actualizado"
         }
     }
 }

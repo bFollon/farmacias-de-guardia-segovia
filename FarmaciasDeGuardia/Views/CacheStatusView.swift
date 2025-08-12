@@ -10,7 +10,7 @@ struct CacheStatusView: View {
             if isLoading {
                 VStack {
                     ProgressView()
-                    Text("Checking cache status...")
+                    Text("Comprobando estado del caché...")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.top, 8)
@@ -23,21 +23,21 @@ struct CacheStatusView: View {
                         }
                     } header: {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("PDF Cache Status")
+                            Text("Estado del Caché de PDFs")
                             if let lastChecked = cacheStatuses.first?.lastChecked {
-                                Text("Last checked for updates: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
+                                Text("Última búsqueda de actualizaciones: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .textCase(nil)
                             } else {
-                                Text("Cache has never been checked for updates")
+                                Text("El caché nunca se ha comprobado para actualizaciones")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .textCase(nil)
                             }
                         }
                     } footer: {
-                        Text("PDFs are cached locally for faster loading and offline access.")
+                        Text("Los PDFs se almacenan localmente para una carga más rápida y acceso sin conexión.")
                     }
                     
                     Section {
@@ -45,24 +45,24 @@ struct CacheStatusView: View {
                             HStack {
                                 Image(systemName: "info.circle.fill")
                                     .foregroundColor(.blue)
-                                Text("Cache Information")
+                                Text("Información del Caché")
                                     .font(.headline)
                             }
                             
-                            Text("• Green: PDF is downloaded and up to date")
-                            Text("• Orange: PDF update is available")
-                            Text("• Red: PDF is not downloaded")
+                            Text("• Verde: PDF descargado y actualizado")
+                            Text("• Naranja: Actualización del PDF disponible")
+                            Text("• Rojo: PDF no descargado")
                         }
                         .padding(.vertical, 8)
                     }
                 }
             }
         }
-        .navigationTitle("Cache Status")
+        .navigationTitle("Estado del Caché")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
+                Button("Cerrar") {
                     dismiss()
                 }
             }
@@ -116,7 +116,7 @@ struct CacheStatusRow: View {
             if status.isCached {
                 VStack(spacing: 6) {
                     HStack {
-                        Text("Downloaded:")
+                        Text("Descargado:")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Spacer()
@@ -126,7 +126,7 @@ struct CacheStatusRow: View {
                     }
                     
                     HStack {
-                        Text("File Size:")
+                        Text("Tamaño:")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Spacer()
@@ -140,7 +140,7 @@ struct CacheStatusRow: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(.orange)
                                 .font(.caption)
-                            Text("An update is available for this PDF")
+                            Text("Hay una actualización disponible para este PDF")
                                 .font(.caption)
                                 .foregroundColor(.orange)
                             Spacer()
@@ -153,7 +153,7 @@ struct CacheStatusRow: View {
                     Image(systemName: "arrow.down.circle")
                         .foregroundColor(.blue)
                         .font(.caption)
-                    Text("PDF not downloaded - will be fetched when needed")
+                    Text("PDF no descargado - se obtendrá cuando sea necesario")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Spacer()
