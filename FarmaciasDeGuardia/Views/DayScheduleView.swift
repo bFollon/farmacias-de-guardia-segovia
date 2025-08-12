@@ -18,18 +18,48 @@ struct DayScheduleView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                // Date with calendar icon
-                HStack(spacing: ViewConstants.iconSpacing) {
-                    Image(systemName: "calendar")
-                        .foregroundColor(.secondary.opacity(0.7))
-                        .frame(width: ViewConstants.iconColumnWidth)
-                    Text(formattedDate)
+                // Region name at the top (matching ZBS style)
+                HStack {
+                    Text(region.icon)
+                        .font(.title)
+                    Text(region.name)
+                        .font(.title)
+                        .fontWeight(.medium)
                 }
-                .font(.title2)
                 .padding(.bottom, 5)
                 
-                // Pharmacy section
+                // Date with calendar icon
+                HStack(spacing: 8) {
+                    Image(systemName: "calendar.circle.fill")
+                        .foregroundColor(.blue)
+                        .frame(width: 20)
+                    Text(formattedDate)
+                        .font(.title2)
+                        .fontWeight(.medium)
+                }
+                .padding(.bottom, 5)
+                
+                // Region Info section
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Región")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Text(region.icon)
+                            .font(.title)
+                        Text(region.name)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                    }
+                }
+                .padding(.bottom)
+                
+                // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
+                    Text("Farmacias de Guardia")
+                        .font(.headline)
+                    
                     if region.id == "segovia-capital" {
                         // Show day/night shifts for Segovia Capital
                         VStack(alignment: .leading, spacing: 12) {
@@ -50,13 +80,12 @@ struct DayScheduleView: View {
                         }
                         .padding(.vertical)
                     } else {
-                        // Show single pharmacy for Cuéllar
+                        // Show single pharmacy for other regions
                         if let pharmacy = schedule.dayShiftPharmacies.first {
                             PharmacyView(pharmacy: pharmacy)
                         }
                     }
                 }
-                .padding(.vertical)
                 
                 Divider()
                     .padding(.vertical)

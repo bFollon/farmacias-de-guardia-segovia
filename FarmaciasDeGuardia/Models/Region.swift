@@ -8,15 +8,19 @@ public struct Region: Equatable {
     /// Display name of the region (e.g., "Segovia Capital", "Cuéllar")
     public let name: String
     
+    /// Emoji icon representing the region
+    public let icon: String
+    
     /// URL to the PDF file containing the schedule for this region
     public let pdfURL: URL
     
     /// Additional metadata about the region
     public let metadata: RegionMetadata
     
-    public init(id: String, name: String, pdfURL: URL, metadata: RegionMetadata = .init()) {
+    public init(id: String, name: String, icon: String, pdfURL: URL, metadata: RegionMetadata = .init()) {
         self.id = id
         self.name = name
+        self.icon = icon
         self.pdfURL = pdfURL
         self.metadata = metadata
     }
@@ -53,6 +57,7 @@ extension Region {
     public static let segoviaCapital = Region(
         id: "segovia-capital",
         name: "Segovia Capital",
+        icon: "🏙",
         pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!,
         metadata: RegionMetadata(
             has24HourPharmacies: false,
@@ -65,6 +70,7 @@ extension Region {
     public static let cuellar = Region(
         id: "cuellar",
         name: "Cuéllar",
+        icon: "🌳",
         pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf")!,
         metadata: RegionMetadata(
             isMonthlySchedule: false,  // Cuéllar uses weekly schedules
@@ -76,6 +82,7 @@ extension Region {
     public static let elEspinar = Region(
         id: "el-espinar",
         name: "El Espinar / San Rafael",
+        icon: "⛰",
         pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf")!,
         metadata: RegionMetadata(
             isMonthlySchedule: false,  // Uses weekly schedules like Cuéllar
@@ -87,6 +94,7 @@ extension Region {
     public static let segoviaRural = Region(
         id: "segovia-rural",
         name: "Segovia Rural",
+        icon: "🚜",
         pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!,
         metadata: RegionMetadata(
             isMonthlySchedule: false,
