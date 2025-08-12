@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct FarmaciasDeGuardiaApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showSplashScreen = true
 
     var body: some Scene {
@@ -13,11 +14,13 @@ struct FarmaciasDeGuardiaApp: App {
                             showSplashScreen = false
                         }
                     }
+                    .supportedOrientations(.portrait)
             } else {
                 ContentView()
                     .onAppear {
                         initializeApp()
                     }
+                    .supportedOrientations(.portrait)
             }
         }
     }
@@ -25,5 +28,21 @@ struct FarmaciasDeGuardiaApp: App {
     private func initializeApp() {
         // Initialize PDF cache manager
         PDFCacheManager.shared.initialize()
+    }
+}
+
+extension View {
+    func supportedOrientations(_ orientations: UIInterfaceOrientationMask) -> some View {
+        self.onAppear {
+            AppDelegate.orientationLock = orientations
+        }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    static var orientationLock = UIInterfaceOrientationMask.all
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return AppDelegate.orientationLock
     }
 }
