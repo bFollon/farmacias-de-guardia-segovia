@@ -147,10 +147,17 @@ struct ClosestPharmacyResultView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.green)
                         
-                        Text("Farmacia más cercana")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
+                        VStack(spacing: 4) {
+                            Text("Farmacia más cercana")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                            
+                            Text("De guardia y abierta ahora")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top)
