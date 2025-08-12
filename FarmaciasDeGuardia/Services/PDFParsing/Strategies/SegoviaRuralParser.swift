@@ -95,10 +95,15 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         ),
         
         // La Granja ZBS pharmacies
-        "LA GRANJA": (
+        "LA GRANJA - VALENCIANA": (
             name: "Farmacia Cristina Mínguez Del Pozo",
             address: "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
             phone: "921470038"
+        ),
+        "LA GRANJA - DOLORES": (
+            name: "Farmacia Almudena Martínez Pardo del Valle",
+            address: "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            phone: "921472391"
         ),
         
         // La Sierra ZBS pharmacies
@@ -317,31 +322,89 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     
     /// Handle the specific case where the PDF contains "S.E. GORMAZ (SORIA) SEPÚLVEDA" as a single string
     /// but we want to treat it as two separate pharmacies
-    private func createPharmacies(from pharmacyName: String, zbsId: String) -> [Pharmacy] {
+    private func createPharmacies(from pharmacyName: String, zbsId: String, date: DutyDate) -> [Pharmacy] {
         // Hard-coded specific case: "S.E. GORMAZ (SORIA) SEPÚLVEDA"
         if pharmacyName.contains("S.E. GORMAZ") && pharmacyName.contains("SEPÚLVEDA") {
             if debug {
                 print("🏥🏥 Splitting combined pharmacy: '\(pharmacyName)' → ['S.E. GORMAZ (SORIA)', 'SEPÚLVEDA']")
             }
             return [
-                createPharmacy(name: "S.E. GORMAZ (SORIA)", zbsId: zbsId),
-                createPharmacy(name: "SEPÚLVEDA", zbsId: zbsId)
+                createPharmacy(name: "S.E. GORMAZ (SORIA)", zbsId: zbsId, date: date),
+                createPharmacy(name: "SEPÚLVEDA", zbsId: zbsId, date: date)
             ]
         }
         
         // Default: single pharmacy
-        return [createPharmacy(name: pharmacyName, zbsId: zbsId)]
+        return [createPharmacy(name: pharmacyName, zbsId: zbsId, date: date)]
     }
     
-    private func createPharmacy(name: String, zbsId: String) -> Pharmacy {
+    /// Determine which La Granja pharmacy should be on duty for a given date
+    /// Based on weekly alternation starting from 30-dic-2024 (Plaza de los Dolores)
+    private func getLaGranjaPharmacyKey(for date: DutyDate) -> String {
+        // Reference date: 30-dic-2024 (Plaza de los Dolores week)
+        let calendar = Calendar.current
+        
+        // Create the reference date (30-dic-2024)
+        var referenceComponents = DateComponents()
+        referenceComponents.year = 2024
+        referenceComponents.month = 12
+        referenceComponents.day = 30
+        
+        guard let referenceDate = calendar.date(from: referenceComponents) else {
+            if debug { print("⚠️ Could not create reference date, defaulting to DOLORES") }
+            return "LA GRANJA - DOLORES"
+        }
+        
+        // Create the current date from DutyDate
+        var currentComponents = DateComponents()
+        currentComponents.year = date.year
+        currentComponents.month = {
+            // Convert month name to number
+            let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+                             "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
+            return monthNames[date.month] ?? 1
+        }()
+        currentComponents.day = date.day
+        
+        guard let currentDate = calendar.date(from: currentComponents) else {
+            if debug { print("⚠️ Could not create current date from \(date), defaulting to DOLORES") }
+            return "LA GRANJA - DOLORES"
+        }
+        
+        // Calculate the number of weeks since the reference date
+        let daysDifference = calendar.dateComponents([.day], from: referenceDate, to: currentDate).day ?? 0
+        let weeksDifference = daysDifference / 7
+        
+        // Even weeks (0, 2, 4...) = DOLORES, Odd weeks (1, 3, 5...) = VALENCIANA
+        let pharmacy = (weeksDifference % 2 == 0) ? "LA GRANJA - DOLORES" : "LA GRANJA - VALENCIANA"
+        
+        if debug {
+            print("🗓️ La Granja alternation: \(date.day)-\(date.month)-\(date.year ?? 2025) → \(weeksDifference) weeks from reference → \(pharmacy)")
+        }
+        
+        return pharmacy
+    }
+    
+    private func createPharmacy(name: String, zbsId: String, date: DutyDate) -> Pharmacy {
         // Map ZBS ID to display name for schedule info
         let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
         
         // Get schedule type
         let scheduleType = getScheduleType(for: zbsId)
         
-        // Look up pharmacy information using the parsed name as key
-        let lookupKey = name.uppercased()
+        // Handle La Granja alternation - override the name with the correct pharmacy
+        let lookupKey: String
+        if zbsId == "la-granja" && name.uppercased().contains("LA GRANJA") {
+            // Use weekly alternation to determine which pharmacy
+            lookupKey = getLaGranjaPharmacyKey(for: date)
+            if debug {
+                print("🔄 La Granja alternation: '\(name)' → '\(lookupKey)' for \(date.day)-\(date.month)-\(date.year ?? 2025)")
+            }
+        } else {
+            // Use original name for lookup
+            lookupKey = name.uppercased()
+        }
+        
         let info = pharmacyInfo[lookupKey] ?? {
             // Log when no match is found
             if debug {
@@ -370,7 +433,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             additionalInfo: additionalInfo
         )
     }
-    
     
     /// Get cached ZBS schedules
     static func getCachedZBSSchedules() -> [ZBSSchedule] {
@@ -531,7 +593,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     // Add pharmacies where they exist
                     for (zbsId, pharmacyName) in zbsData {
                         if !pharmacyName.isEmpty {
-                            let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId)
+                            let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId, date: date)
                             schedulesByZBS[zbsId]?.append(contentsOf: pharmacies)
                         }
                         // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
