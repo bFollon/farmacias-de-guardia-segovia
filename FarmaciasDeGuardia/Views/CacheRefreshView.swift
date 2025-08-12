@@ -10,13 +10,11 @@ struct CacheRefreshView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                headerView
-                
                 regionsList
                 
-                if isCompleted {
-                    completionView
-                }
+                completionView
+                    .opacity(isCompleted ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3), value: isCompleted)
                 
                 Spacer()
             }
@@ -37,23 +35,18 @@ struct CacheRefreshView: View {
     }
     
     private var headerView: some View {
-        Group {
-            if !isCompleted {
-                VStack(spacing: 16) {
-                    ProgressView()
-                        .scaleEffect(1.2)
-                    
-                    Text("Actualizando Caché de PDFs")
-                        .font(.headline)
-                    
-                    Text("Comprobando actualizaciones para cada región...")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(.top, 40)
-            }
+        VStack(spacing: 16) {
+            Text("Actualizando Caché de PDFs")
+                .font(.headline)
+            
+            Text("Comprobando actualizaciones para cada región...")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
         }
+        .padding(.top, 40)
+        .opacity(isCompleted ? 0 : 1)
+        .animation(.easeInOut(duration: 0.3), value: isCompleted)
     }
     
     private var regionsList: some View {
