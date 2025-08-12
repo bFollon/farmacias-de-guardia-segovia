@@ -2,43 +2,40 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var isCheckingForUpdates = false
-    @State private var updateCheckMessage = ""
-    @State private var showingUpdateResult = false
+    @State private var showingCacheStatus = false
+    @State private var showingCacheRefresh = false
     
     var body: some View {
         NavigationView {
             List {
-                Section("PDF Cache") {
+                Section("Caché de PDFs") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Cached PDFs")
+                        Text("PDFs en Caché")
                             .font(.headline)
                         
-                        Text("PDF schedules are cached locally for faster loading and offline access.")
+                        Text("Los horarios PDF se almacenan localmente para una carga más rápida y acceso sin conexión.")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                     .padding(.vertical, 4)
                     
-                    Button(action: checkForUpdates) {
+                    Button(action: { showingCacheRefresh = true }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
-                            Text("Check for Updates")
+                            Text("Buscar Actualizaciones")
                             
                             Spacer()
-                            
-                            if isCheckingForUpdates {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                            }
                         }
                     }
-                    .disabled(isCheckingForUpdates)
                     
-                    Button(action: showCacheStatus) {
+                    Button(action: { showingCacheStatus = true }) {
                         HStack {
                             Image(systemName: "info.circle")
-                            Text("Show Cache Status")
+                            Text("Ver Estado del Caché")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -55,55 +52,29 @@ struct SettingsView: View {
                     .padding(.vertical, 4)
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("Configuración")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button("Listo") {
                         dismiss()
                     }
                 }
             }
         }
-        .alert("Update Check", isPresented: $showingUpdateResult) {
-            Button("OK") { }
-        } message: {
-            Text(updateCheckMessage)
-        }
-    }
-    
-    private func checkForUpdates() {
-        isCheckingForUpdates = true
-        updateCheckMessage = ""
-        
-        Task {
-            do {
-                await PDFCacheManager.shared.forceCheckForUpdates()
-                
-                await MainActor.run {
-                    updateCheckMessage = "Update check completed. See console for details."
-                    showingUpdateResult = true
-                    isCheckingForUpdates = false
-                }
-            } catch {
-                await MainActor.run {
-                    updateCheckMessage = "Error checking for updates: \(error.localizedDescription)"
-                    showingUpdateResult = true
-                    isCheckingForUpdates = false
-                }
+        .sheet(isPresented: $showingCacheStatus) {
+            NavigationView {
+                CacheStatusView()
             }
         }
+        .sheet(isPresented: $showingCacheRefresh) {
+            CacheRefreshView()
+        }
     }
     
-    private func showCacheStatus() {
-        PDFCacheManager.shared.printCacheStatus()
-        updateCheckMessage = "Cache status printed to console."
-        showingUpdateResult = true
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
+    struct SettingsView_Previews: PreviewProvider {
+        static var previews: some View {
+            SettingsView()
+        }
     }
 }
