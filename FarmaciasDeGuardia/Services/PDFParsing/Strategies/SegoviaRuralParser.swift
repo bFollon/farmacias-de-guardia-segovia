@@ -56,7 +56,8 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         "FUENTIDUEÑA": .standard,
         "CARBONERO": .standard,
         "NAVAS DE LA ASUNCIÓN": .standard,
-        "VILLACASTÍN": .standard
+        "VILLACASTÍN": .standard,
+        "CANTALEJO": .standard
     ]
     
     // Pharmacy information lookup table for Segovia Rural
@@ -72,6 +73,18 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             name: "Farmacia Francisco Ruiz Carrasco",
             address: "Pl. España, 16, 40300 Sepúlveda, Segovia", 
             phone: "921540018"
+        ),
+        
+        // Cantalejo ZBS pharmacies (hardcoded - not in official rotation)
+        "CANTALEJO-1": (
+            name: "Farmacia en Cantalejo",
+            address: "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            phone: "921520053"
+        ),
+        "CANTALEJO-2": (
+            name: "Farmacia Carmen Bautista",
+            address: "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia", 
+            phone: "921520005"
         ),
         "S.E. GORMAZ (SORIA)": (
             name: "Farmacia Irigoyen",
@@ -585,12 +598,15 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                     
                     var schedulesByZBS: [String: [Pharmacy]] = [:]
                     
-                    // Initialize all ZBS with empty arrays
+                    // Initialize all ZBS with empty arrays (including those from PDF)
                     for (zbsId, _) in zbsData {
                         schedulesByZBS[zbsId] = []
                     }
                     
-                    // Add pharmacies where they exist
+                    // Also initialize CANTALEJO (not in PDF, but we want it in the final results)
+                    schedulesByZBS["cantalejo"] = []
+                    
+                    // Add pharmacies where they exist (from PDF data)
                     for (zbsId, pharmacyName) in zbsData {
                         if !pharmacyName.isEmpty {
                             let pharmacies = createPharmacies(from: pharmacyName, zbsId: zbsId, date: date)
@@ -598,6 +614,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                         }
                         // If pharmacyName is empty, the ZBS has no pharmacy on duty (already initialized as empty array)
                     }
+                    
+                    // Special handling for CANTALEJO - always add both pharmacies since rotation is unknown
+                    // This is hardcoded data because PDF doesn't contain CANTALEJO information
+                    let cantalejoPharmacy1 = createPharmacy(name: "CANTALEJO-1", zbsId: "cantalejo", date: date)
+                    let cantalejoPharmacy2 = createPharmacy(name: "CANTALEJO-2", zbsId: "cantalejo", date: date)
+                    schedulesByZBS["cantalejo"] = [cantalejoPharmacy1, cantalejoPharmacy2]
                     
                     // Create ZBS schedule (always create one for each date)
                     let zbsSchedule = ZBSSchedule(date: date, schedulesByZBS: schedulesByZBS)

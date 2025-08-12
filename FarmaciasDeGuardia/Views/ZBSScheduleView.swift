@@ -6,6 +6,7 @@ struct ZBSScheduleView: View {
     @State private var selectedDate = Date()
     @State private var isLoading = true
     @State private var isShowingDatePicker = false
+    @State private var showCantalejoInfo = false
     @Environment(\.presentationMode) var presentationMode
     
     private var dateButtonText: String {
@@ -111,9 +112,17 @@ struct ZBSScheduleView: View {
                             HStack {
                                 Text(selectedZBS.icon)
                                     .font(.title)
-                                Text(selectedZBS.name)
-                                    .font(.title)
-                                    .fontWeight(.medium)
+                                
+                                if selectedZBS.id == "cantalejo" {
+                                    // Special CANTALEJO header without info icon
+                                    Text("Guardias en \(selectedZBS.name)")
+                                        .font(.title)
+                                        .fontWeight(.medium)
+                                } else {
+                                    Text(selectedZBS.name)
+                                        .font(.title)
+                                        .fontWeight(.medium)
+                                }
                             }
                             .padding(.bottom, 5)
                             
@@ -145,6 +154,25 @@ struct ZBSScheduleView: View {
                                     let pharmacies = schedule.pharmacies(for: selectedZBS.id)
                                     
                                     if !pharmacies.isEmpty {
+                                        // Special message for CANTALEJO
+                                        if selectedZBS.id == "cantalejo" {
+                                            Button(action: {
+                                                showCantalejoInfo = true
+                                            }) {
+                                                HStack {
+                                                    Image(systemName: "info.circle")
+                                                        .foregroundColor(.blue)
+                                                    Text("Se muestran ambas farmacias. Llama antes de ir para confirmar cuál está de guardia.")
+                                                        .font(.caption)
+                                                        .foregroundColor(.blue)
+                                                }
+                                                .padding()
+                                                .background(Color.blue.opacity(0.1))
+                                                .cornerRadius(8)
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                        }
+                                        
                                         ForEach(pharmacies.indices, id: \.self) { index in
                                             PharmacyView(pharmacy: pharmacies[index])
                                         }
@@ -266,6 +294,9 @@ struct ZBSScheduleView: View {
         }
         .onAppear {
             loadZBSSchedules()
+        }
+        .sheet(isPresented: $showCantalejoInfo) {
+            CantalejoInfoView()
         }
         .sheet(isPresented: $isShowingDatePicker) {
             NavigationView {
