@@ -44,53 +44,90 @@ class ClosestPharmacyService {
         }
     }
     
+    /// Optimized version that leverages existing UI logic to find only currently on-duty pharmacies
     static func findClosestOnDutyPharmacy(
         userLocation: CLLocation,
         at date: Date = Date()
     ) async throws -> ClosestPharmacyResult {
         
-        DebugConfig.debugPrint("🔍 Starting search for closest on-duty pharmacy at \(date)")
+        DebugConfig.debugPrint("🎯 OPTIMIZED search for closest on-duty pharmacy at \(date)")
+        DebugConfig.debugPrint("📍 User location: \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)")
         
         var allOnDutyPharmacies: [(pharmacy: Pharmacy, region: Region, zbs: ZBS?, timeSpan: DutyTimeSpan)] = []
         
-        // Get all regions to search
+        // Get all regions to search (same as existing UI)
         let allRegions: [Region] = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
         
         for region in allRegions {
-            DebugConfig.debugPrint("📍 Checking region: \(region.name)")
+            DebugConfig.debugPrint("🌍 Checking region: \(region.name)")
             
             if region.id == "segovia-rural" {
-                // Handle rural areas with ZBS
-                let zbsSchedules = await ZBSScheduleService.getZBSSchedules(for: region) ?? []
+                // Handle rural areas using existing ZBS logic from ZBSScheduleView
+                DebugConfig.debugPrint("🏘️ Processing rural ZBS areas")
                 
-                for zbs in ZBS.availableZBS {
-                    DebugConfig.debugPrint("🏘️ Checking ZBS: \(zbs.name)")
+                let zbsSchedules = await ZBSScheduleService.getZBSSchedules(for: region) ?? []
+                DebugConfig.debugPrint("📅 Found \(zbsSchedules.count) ZBS schedules")
+                
+                // Find today's ZBS schedule (same logic as ZBSScheduleView)
+                let calendar = Calendar.current
+                let selectedComponents = calendar.dateComponents([.day, .month, .year], from: date)
+                
+                if let todaySchedule = zbsSchedules.first(where: { schedule in
+                    let scheduleDay = schedule.date.day
+                    let scheduleMonth = monthNameToNumber(schedule.date.month) ?? 0
+                    let scheduleYear = schedule.date.year ?? calendar.component(.year, from: date)
                     
-                    // Find schedules for this ZBS
-                    for zbsSchedule in zbsSchedules {
-                        let zbsPharmacies = zbsSchedule.pharmacies(for: zbs.id)
+                    return scheduleDay == selectedComponents.day &&
+                           scheduleMonth == selectedComponents.month &&
+                           scheduleYear == selectedComponents.year
+                }) {
+                    DebugConfig.debugPrint("✅ Found today's ZBS schedule")
+                    
+                    // Get all ZBS areas and their pharmacies
+                    for zbs in ZBS.availableZBS {
+                        let zbsPharmacies = todaySchedule.pharmacies(for: zbs.id)
+                        DebugConfig.debugPrint("💊 \(zbs.name): \(zbsPharmacies.count) pharmacies")
                         
-                        if !zbsPharmacies.isEmpty {
-                            // Check if this schedule matches the current date
-                            if let scheduleTimestamp = zbsSchedule.date.toTimestamp() {
-                                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
-                                if Calendar.current.isDate(scheduleDate, inSameDayAs: date) {
-                                    // For rural areas, pharmacies are typically on duty all day
-                                    for pharmacy in zbsPharmacies {
-                                        allOnDutyPharmacies.append((pharmacy, region, zbs, .fullDay))
-                                    }
-                                }
-                            }
+                        for pharmacy in zbsPharmacies {
+                            allOnDutyPharmacies.append((pharmacy, region, zbs, .fullDay))
+                            DebugConfig.debugPrint("   ✅ \(pharmacy.name)")
                         }
                     }
+                } else {
+                    DebugConfig.debugPrint("❌ No ZBS schedule found for today")
                 }
             } else {
-                // Handle regular regions
+                // Handle regular regions using existing ScheduleService logic
                 let schedules = await ScheduleService.loadSchedules(for: region)
-                let onDutyPharmacies = findOnDutyPharmacies(in: schedules, at: date)
+                DebugConfig.debugPrint("📋 Loaded \(schedules.count) schedules for \(region.name)")
                 
-                for (pharmacy, timeSpan) in onDutyPharmacies {
-                    allOnDutyPharmacies.append((pharmacy, region, nil, timeSpan))
+                // Use the existing ScheduleService.findCurrentSchedule logic
+                if let (currentSchedule, timeSpan) = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .short
+                    let scheduleDate = Date(timeIntervalSince1970: currentSchedule.date.toTimestamp() ?? 0)
+                    DebugConfig.debugPrint("⏰ Found current schedule: \(formatter.string(from: scheduleDate)), timespan: \(timeSpan)")
+                    
+                    // Get on-duty pharmacies for this timespan
+                    if let onDutyPharmacies = currentSchedule.shifts[timeSpan] {
+                        DebugConfig.debugPrint("💊 Found \(onDutyPharmacies.count) on-duty pharmacies")
+                        
+                        // Double-check they're on duty right now (same as existing UI logic)
+                        if timeSpan.contains(date) {
+                            DebugConfig.debugPrint("✅ Timespan \(timeSpan) is active now")
+                            
+                            for pharmacy in onDutyPharmacies {
+                                allOnDutyPharmacies.append((pharmacy, region, nil, timeSpan))
+                                DebugConfig.debugPrint("   ✅ \(pharmacy.name)")
+                            }
+                        } else {
+                            DebugConfig.debugPrint("❌ Timespan \(timeSpan) is NOT active now")
+                        }
+                    } else {
+                        DebugConfig.debugPrint("❌ No pharmacies found for timespan \(timeSpan)")
+                    }
+                } else {
+                    DebugConfig.debugPrint("❌ No current schedule found for \(region.name)")
                 }
             }
         }
@@ -100,13 +137,18 @@ class ClosestPharmacyService {
             throw ClosestPharmacyError.noPharmaciesOnDuty
         }
         
-        DebugConfig.debugPrint("✅ Found \(allOnDutyPharmacies.count) on-duty pharmacies")
+        DebugConfig.debugPrint("✅ Found \(allOnDutyPharmacies.count) total on-duty pharmacies (vs scanning hundreds)")
         
         // Calculate distances and find the closest
-        var closestResult: ClosestPharmacyResult?
+        var distanceResults: [(result: ClosestPharmacyResult, distance: CLLocationDistance)] = []
         
         for (pharmacy, region, zbs, timeSpan) in allOnDutyPharmacies {
-            if let distance = await pharmacy.distance(from: userLocation) {
+            DebugConfig.debugPrint("📏 Calculating distance to: \(pharmacy.name)")
+            
+            // Use the enhanced geocoding service
+            if let coordinates = await GeocodingService.getCoordinatesForPharmacy(pharmacy) {
+                let distance = userLocation.distance(from: coordinates)
+                
                 let result = ClosestPharmacyResult(
                     pharmacy: pharmacy,
                     distance: distance,
@@ -114,44 +156,34 @@ class ClosestPharmacyService {
                     zbs: zbs,
                     timeSpan: timeSpan
                 )
-                
-                if closestResult == nil || distance < closestResult!.distance {
-                    closestResult = result
-                }
+                distanceResults.append((result, distance))
+                DebugConfig.debugPrint("   📏 \(pharmacy.name): \(result.formattedDistance) (\(result.regionDisplayName))")
+            } else {
+                DebugConfig.debugPrint("   ❌ Could not get coordinates for: \(pharmacy.name)")
             }
         }
         
-        guard let result = closestResult else {
-            DebugConfig.debugPrint("❌ Could not calculate distances to pharmacies")
+        // Sort by distance and log top candidates
+        distanceResults.sort { $0.distance < $1.distance }
+        
+        DebugConfig.debugPrint("🏆 Top 5 closest pharmacies:")
+        for (index, (result, distance)) in distanceResults.prefix(5).enumerated() {
+            DebugConfig.debugPrint("   \(index + 1). \(result.pharmacy.name): \(result.formattedDistance) (\(result.regionDisplayName))")
+        }
+        
+        guard let closest = distanceResults.first else {
+            DebugConfig.debugPrint("❌ Could not calculate distances to any pharmacies")
             throw ClosestPharmacyError.geocodingFailed
         }
         
-        DebugConfig.debugPrint("🎯 Closest pharmacy: \(result.pharmacy.name) at \(result.formattedDistance)")
-        return result
+        DebugConfig.debugPrint("🎯 OPTIMIZED WINNER: \(closest.result.pharmacy.name) at \(closest.result.formattedDistance) from \(closest.result.regionDisplayName)")
+        return closest.result
     }
     
-    private static func findOnDutyPharmacies(
-        in schedules: [PharmacySchedule],
-        at date: Date
-    ) -> [(pharmacy: Pharmacy, timeSpan: DutyTimeSpan)] {
-        
-        var onDutyPharmacies: [(pharmacy: Pharmacy, timeSpan: DutyTimeSpan)] = []
-        
-        // Find schedule for the current date
-        if let todaySchedule = ScheduleService.findSchedule(for: date, in: schedules) {
-            DebugConfig.debugPrint("📅 Found schedule for today")
-            
-            // Check each time span in the schedule
-            for (timeSpan, pharmacies) in todaySchedule.shifts {
-                if timeSpan.contains(date) {
-                    DebugConfig.debugPrint("⏰ Found \(pharmacies.count) pharmacies on duty for timespan \(timeSpan.displayName)")
-                    for pharmacy in pharmacies {
-                        onDutyPharmacies.append((pharmacy, timeSpan))
-                    }
-                }
-            }
-        }
-        
-        return onDutyPharmacies
+    /// Helper function to convert month names to numbers (from ZBSScheduleView)
+    private static func monthNameToNumber(_ monthName: String) -> Int? {
+        let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+                         "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
+        return monthNames[monthName.lowercased()]
     }
 }

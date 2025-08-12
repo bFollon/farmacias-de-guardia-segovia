@@ -194,7 +194,7 @@ extension Pharmacy {
 extension Pharmacy {
     /// Calculate distance from user location to this pharmacy
     func distance(from userLocation: CLLocation) async -> CLLocationDistance? {
-        guard let pharmacyLocation = await GeocodingService.getCoordinates(for: self.address) else {
+        guard let pharmacyLocation = await GeocodingService.getCoordinatesForPharmacy(self) else {
             DebugConfig.debugPrint("❌ Could not geocode pharmacy address: \(self.address)")
             return nil
         }
@@ -206,6 +206,6 @@ extension Pharmacy {
     
     /// Get coordinates for this pharmacy
     func coordinates() async -> CLLocation? {
-        return await GeocodingService.getCoordinates(for: self.address)
+        return await GeocodingService.getCoordinatesForPharmacy(self)
     }
 }

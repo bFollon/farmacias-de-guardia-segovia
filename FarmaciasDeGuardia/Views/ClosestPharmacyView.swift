@@ -301,8 +301,10 @@ struct ClosestPharmacyResultView: View {
     }
     
     private func openMaps() {
-        let encodedAddress = result.pharmacy.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "http://maps.apple.com/?q=\(encodedAddress),Segovia,España"
+        // Use enhanced query with pharmacy name (same as PharmacyView.swift)
+        let query = "\(result.pharmacy.name), \(result.pharmacy.address), Segovia, España"
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "http://maps.apple.com/?q=\(encodedQuery)"
         
         if let url = URL(string: urlString) {
             openURL(url)

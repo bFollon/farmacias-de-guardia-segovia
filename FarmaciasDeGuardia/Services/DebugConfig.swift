@@ -10,9 +10,9 @@ struct DebugConfig {
             return envValue.lowercased() == "true" || envValue == "1"
         }
         
-        // Default to false for release builds, true for debug builds
+        // Default to true for debugging the closest pharmacy feature
         #if DEBUG
-        return false  // Set to true during development if needed
+        return true  // Enabled for debugging
         #else
         return false
         #endif
@@ -22,7 +22,7 @@ struct DebugConfig {
     /// - Parameter message: The message to print
     static func debugPrint(_ message: String) {
         if isDebugEnabled {
-            DebugConfig.debugPrint(message)
+            print("[DEBUG] \(message)")
         }
     }
     
@@ -32,7 +32,7 @@ struct DebugConfig {
     ///   - arguments: The arguments for the format string
     static func debugPrint(_ format: String, _ arguments: CVarArg...) {
         if isDebugEnabled {
-            DebugConfig.debugPrint(String(format: format, arguments: arguments))
+            print("[DEBUG] \(String(format: format, arguments: arguments))")
         }
     }
     

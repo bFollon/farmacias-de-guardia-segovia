@@ -35,7 +35,15 @@ public struct DutyTimeSpan: Equatable, Hashable {
     
     /// Checks if the given date falls within this duty time span
     public func contains(_ date: Date) -> Bool {
-        date >= start && date <= end
+        if spansMultipleDays {
+            // For cross-midnight spans, we need to check time of day, not absolute dates
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.hour, .minute], from: date)
+            return containsTimeOfDay(hour: components.hour ?? 0, minute: components.minute ?? 0)
+        } else {
+            // For same-day spans, simple date comparison works
+            return date >= start && date <= end
+        }
     }
     
     /// Checks if a given time of day (hour and minute) falls within this duty time span
