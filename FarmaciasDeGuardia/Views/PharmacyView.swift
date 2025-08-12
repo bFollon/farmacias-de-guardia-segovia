@@ -94,6 +94,7 @@ struct PharmacyView: View {
                     Text(pharmacy.address)
                         .font(.body)
                         .foregroundColor(.primary)
+                        .underline()
                         .multilineTextAlignment(.leading)
                 }
             }
@@ -112,6 +113,7 @@ struct PharmacyView: View {
                         Text(pharmacy.formattedPhone)
                             .font(.body)
                             .foregroundColor(.primary)
+                            .underline()
                     }
                 }
             }
