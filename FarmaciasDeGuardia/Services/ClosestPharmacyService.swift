@@ -81,16 +81,26 @@ class ClosestPharmacyService {
                            scheduleMonth == selectedComponents.month &&
                            scheduleYear == selectedComponents.year
                 }) {
-                    DebugConfig.debugPrint("✅ Found today's ZBS schedule")
+                    DebugConfig.debugPrint("✅ Found today's ZBS schedule - getting pharmacies")
                     
                     // Get all ZBS areas and their pharmacies
                     for zbs in ZBS.availableZBS {
                         let zbsPharmacies = todaySchedule.pharmacies(for: zbs.id)
-                        DebugConfig.debugPrint("💊 \(zbs.name): \(zbsPharmacies.count) pharmacies")
-                        
-                        for pharmacy in zbsPharmacies {
-                            allOnDutyPharmacies.append((pharmacy, region, zbs, .fullDay))
-                            DebugConfig.debugPrint("   ✅ \(pharmacy.name)")
+                        if !zbsPharmacies.isEmpty {
+                            DebugConfig.debugPrint("💊 \(zbs.name): \(zbsPharmacies.count) pharmacies on duty")
+                            
+                            // Filter by actual operating hours before geocoding
+                            var actuallyOpenPharmacies = 0
+                            for pharmacy in zbsPharmacies {
+                                if isPharmacyCurrentlyOpen(pharmacy, at: date) {
+                                    allOnDutyPharmacies.append((pharmacy, region, zbs, .fullDay))
+                                    actuallyOpenPharmacies += 1
+                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW")
+                                } else {
+                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (outside operating hours)")
+                                }
+                            }
+                            DebugConfig.debugPrint("   📊 \(actuallyOpenPharmacies)/\(zbsPharmacies.count) are actually open")
                         }
                     }
                 } else {
@@ -108,23 +118,31 @@ class ClosestPharmacyService {
                     let scheduleDate = Date(timeIntervalSince1970: currentSchedule.date.toTimestamp() ?? 0)
                     DebugConfig.debugPrint("⏰ Found current schedule: \(formatter.string(from: scheduleDate)), timespan: \(timeSpan)")
                     
-                    // Get on-duty pharmacies for this timespan
-                    if let onDutyPharmacies = currentSchedule.shifts[timeSpan] {
-                        DebugConfig.debugPrint("💊 Found \(onDutyPharmacies.count) on-duty pharmacies")
+                    // OPTIMIZATION: Check if timespan is active BEFORE getting pharmacy list
+                    if timeSpan.contains(date) {
+                        DebugConfig.debugPrint("✅ Timespan \(timeSpan) is active now - getting pharmacies")
                         
-                        // Double-check they're on duty right now (same as existing UI logic)
-                        if timeSpan.contains(date) {
-                            DebugConfig.debugPrint("✅ Timespan \(timeSpan) is active now")
+                        // Get on-duty pharmacies for this timespan (only if active)
+                        if let onDutyPharmacies = currentSchedule.shifts[timeSpan] {
+                            DebugConfig.debugPrint("💊 Found \(onDutyPharmacies.count) pharmacies on duty")
                             
+                            // Filter by actual operating hours before geocoding  
+                            var actuallyOpenPharmacies = 0
                             for pharmacy in onDutyPharmacies {
-                                allOnDutyPharmacies.append((pharmacy, region, nil, timeSpan))
-                                DebugConfig.debugPrint("   ✅ \(pharmacy.name)")
+                                if isPharmacyCurrentlyOpen(pharmacy, at: date) {
+                                    allOnDutyPharmacies.append((pharmacy, region, nil, timeSpan))
+                                    actuallyOpenPharmacies += 1
+                                    DebugConfig.debugPrint("   ✅ \(pharmacy.name) - OPEN NOW")
+                                } else {
+                                    DebugConfig.debugPrint("   ❌ \(pharmacy.name) - CLOSED (outside operating hours)")
+                                }
                             }
+                            DebugConfig.debugPrint("   📊 \(actuallyOpenPharmacies)/\(onDutyPharmacies.count) are actually open")
                         } else {
-                            DebugConfig.debugPrint("❌ Timespan \(timeSpan) is NOT active now")
+                            DebugConfig.debugPrint("❌ No pharmacies found for active timespan \(timeSpan)")
                         }
                     } else {
-                        DebugConfig.debugPrint("❌ No pharmacies found for timespan \(timeSpan)")
+                        DebugConfig.debugPrint("❌ Timespan \(timeSpan) is NOT active now - skipping geocoding")
                     }
                 } else {
                     DebugConfig.debugPrint("❌ No current schedule found for \(region.name)")
@@ -137,13 +155,14 @@ class ClosestPharmacyService {
             throw ClosestPharmacyError.noPharmaciesOnDuty
         }
         
-        DebugConfig.debugPrint("✅ Found \(allOnDutyPharmacies.count) total on-duty pharmacies (vs scanning hundreds)")
+        DebugConfig.debugPrint("✅ Found \(allOnDutyPharmacies.count) pharmacies that are actually OPEN right now")
+        DebugConfig.debugPrint("🚀 REAL OPTIMIZATION: Only geocoding \(allOnDutyPharmacies.count) open pharmacies (filtered from on-duty list)")
         
         // Calculate distances and find the closest
         var distanceResults: [(result: ClosestPharmacyResult, distance: CLLocationDistance)] = []
         
         for (pharmacy, region, zbs, timeSpan) in allOnDutyPharmacies {
-            DebugConfig.debugPrint("📏 Calculating distance to: \(pharmacy.name)")
+            DebugConfig.debugPrint("📏 Geocoding and calculating distance to: \(pharmacy.name)")
             
             // Use the enhanced geocoding service
             if let coordinates = await GeocodingService.getCoordinatesForPharmacy(pharmacy) {
@@ -185,5 +204,26 @@ class ClosestPharmacyService {
         let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
                          "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
         return monthNames[monthName.lowercased()]
+    }
+    
+    /// Check if a pharmacy is currently open based on its operating hours
+    private static func isPharmacyCurrentlyOpen(_ pharmacy: Pharmacy, at date: Date) -> Bool {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        
+        let info = pharmacy.additionalInfo ?? ""
+        
+        // Check operating hours based on additional info
+        if info.contains("24h") {
+            return true // 24h pharmacies are always open
+        } else if info.contains("10h-22h") {
+            return hour >= 10 && hour < 22 // Extended hours
+        } else if info.contains("10h-20h") {
+            return hour >= 10 && hour < 20 // Standard hours
+        }
+        
+        // Default assumption for pharmacies without specific hours info
+        // Most non-rural pharmacies are 24h
+        return true
     }
 }
