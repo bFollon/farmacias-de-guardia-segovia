@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import Foundation
 
 struct ClosestPharmacyView: View {
     @StateObject private var locationManager = LocationManager()
@@ -134,6 +135,7 @@ struct ClosestPharmacyResultView: View {
     let result: ClosestPharmacyResult
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @State private var showingMapOptions = false
     
     var body: some View {
         NavigationView {
@@ -179,7 +181,12 @@ struct ClosestPharmacyResultView: View {
                                 .foregroundColor(.primary)
                             
                             Button(action: {
-                                openMaps()
+                                let availableApps = MapApp.availableApps()
+                                if availableApps.count == 1 {
+                                    openInMaps(using: availableApps[0])
+                                } else {
+                                    showingMapOptions = true
+                                }
                             }) {
                                 Text(result.pharmacy.address)
                                     .font(.body)
@@ -196,13 +203,19 @@ struct ClosestPharmacyResultView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                 
-                                Button(action: {
-                                    callPharmacy()
-                                }) {
-                                    Text(result.pharmacy.formattedPhone)
+                                if result.pharmacy.phone != "No disponible" {
+                                    Button(action: {
+                                        callPharmacy()
+                                    }) {
+                                        Text(result.pharmacy.formattedPhone)
+                                            .font(.body)
+                                            .foregroundColor(.blue)
+                                            .underline()
+                                    }
+                                } else {
+                                    Text("No disponible")
                                         .font(.body)
-                                        .foregroundColor(.blue)
-                                        .underline()
+                                        .foregroundColor(.secondary)
                                 }
                             }
                         }
@@ -249,7 +262,12 @@ struct ClosestPharmacyResultView: View {
                         // Action buttons
                         VStack(spacing: 12) {
                             Button(action: {
-                                openMaps()
+                                let availableApps = MapApp.availableApps()
+                                if availableApps.count == 1 {
+                                    openInMaps(using: availableApps[0])
+                                } else {
+                                    showingMapOptions = true
+                                }
                             }) {
                                 HStack {
                                     Image(systemName: "map.fill")
@@ -262,7 +280,7 @@ struct ClosestPharmacyResultView: View {
                                 .cornerRadius(10)
                             }
                             
-                            if !result.pharmacy.phone.isEmpty {
+                            if !result.pharmacy.phone.isEmpty && result.pharmacy.phone != "No disponible" {
                                 Button(action: {
                                     callPharmacy()
                                 }) {
@@ -297,14 +315,33 @@ struct ClosestPharmacyResultView: View {
                     }
                 }
             }
+            .confirmationDialog("Abrir en Maps", isPresented: $showingMapOptions) {
+                ForEach(MapApp.availableApps(), id: \.self) { app in
+                    Button(app.rawValue) {
+                        openInMaps(using: app)
+                    }
+                }
+                Button("Cancelar", role: .cancel) { }
+            } message: {
+                Text("Elije una aplicación de mapas")
+            }
         }
     }
     
-    private func openMaps() {
+    private func openInMaps(using app: MapApp) {
         // Use enhanced query with pharmacy name (same as PharmacyView.swift)
         let query = "\(result.pharmacy.name), \(result.pharmacy.address), Segovia, España"
         let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "http://maps.apple.com/?q=\(encodedQuery)"
+        
+        var urlString: String
+        switch app {
+        case .apple:
+            urlString = "http://maps.apple.com/?q=\(encodedQuery)"
+        case .google:
+            urlString = "comgooglemaps://?q=\(encodedQuery)"
+        case .waze:
+            urlString = "waze://?q=\(encodedQuery)"
+        }
         
         if let url = URL(string: urlString) {
             openURL(url)
