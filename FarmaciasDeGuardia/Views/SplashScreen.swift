@@ -46,17 +46,11 @@ struct SplashScreen: View {
             Spacer()
             
             // Subtle loading indicator
-            VStack(spacing: 12) {
-                ProgressView()
-                    .scaleEffect(1.2)
-                    .tint(.blue)
-                
-                Text("Cargando...")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .opacity(isAnimating ? 1.0 : 0.0)
-            .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
+            ProgressView()
+                .scaleEffect(1.2)
+                .tint(.blue)
+                .opacity(isAnimating ? 1.0 : 0.0)
+                .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
             
             Spacer()
         }
