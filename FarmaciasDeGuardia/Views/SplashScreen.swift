@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var isAnimating = false
+    @StateObject private var preloadService = PreloadService.shared
     
     var body: some View {
         VStack(spacing: 30) {
@@ -45,12 +46,35 @@ struct SplashScreen: View {
             
             Spacer()
             
-            // Subtle loading indicator
-            ProgressView()
-                .scaleEffect(1.2)
-                .tint(.blue)
-                .opacity(isAnimating ? 1.0 : 0.0)
-                .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
+            // Loading indicator with icon progression
+            VStack(spacing: 16) {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .tint(.blue)
+                
+                if preloadService.isLoading && preloadService.totalRegions > 0 {
+                    // Icon progression for each region
+                    HStack(spacing: 8) {
+                        ForEach(0..<preloadService.totalRegions, id: \.self) { index in
+                            HStack(spacing: 8) {
+                                Text(getRegionIcon(for: index))
+                                    .font(.title2)
+                                    .opacity(index < preloadService.completedRegions ? 1.0 : 0.3)
+                                    .scaleEffect(index < preloadService.completedRegions ? 1.1 : 0.9)
+                                    .animation(.spring(duration: 0.4), value: preloadService.completedRegions)
+                                
+                                if index < preloadService.totalRegions - 1 {
+                                    Text("—")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary.opacity(0.5))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .opacity(isAnimating ? 1.0 : 0.0)
+            .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
             
             Spacer()
         }
@@ -70,6 +94,20 @@ struct SplashScreen: View {
         .onAppear {
             isAnimating = true
         }
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func getRegionIcon(for index: Int) -> String {
+        let regions = [
+            Region.segoviaCapital,
+            Region.cuellar,
+            Region.elEspinar,
+            Region.segoviaRural
+        ]
+        
+        guard index < regions.count else { return "💊" }
+        return regions[index].icon
     }
 }
 
