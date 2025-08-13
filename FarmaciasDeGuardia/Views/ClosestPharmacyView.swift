@@ -253,6 +253,17 @@ struct ClosestPharmacyResultView: View {
                                         .foregroundColor(.orange)
                                 }
                             }
+                            
+                            // Walking time if available
+                            if !result.formattedWalkingTime.isEmpty {
+                                HStack {
+                                    Image(systemName: "figure.walk")
+                                        .foregroundColor(.green)
+                                    Text(result.formattedWalkingTime)
+                                        .font(.subheadline)
+                                        .foregroundColor(.green)
+                                }
+                            }
                         }
                         
                         Divider()

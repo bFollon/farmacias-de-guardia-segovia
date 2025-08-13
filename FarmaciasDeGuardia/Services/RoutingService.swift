@@ -3,23 +3,54 @@ import MapKit
 import CoreLocation
 
 struct RouteResult {
-    let distance: CLLocationDistance // in meters
-    let estimatedTravelTime: TimeInterval // in seconds
+    let distance: Double
+    let travelTime: TimeInterval
+    let walkingTime: TimeInterval
+    let isEstimated: Bool
     
     var formattedDistance: String {
         if distance < 1000 {
-            return "\(Int(distance)) m"
+            return String(format: "%.0f m", distance)
         } else {
             return String(format: "%.1f km", distance / 1000)
         }
     }
     
     var formattedTravelTime: String {
-        let minutes = Int(estimatedTravelTime / 60)
-        if minutes < 1 {
-            return "< 1 min"
-        } else {
+        if isEstimated || travelTime <= 0 {
+            return ""
+        }
+        
+        let minutes = Int(travelTime / 60)
+        if minutes < 60 {
             return "\(minutes) min"
+        } else {
+            let hours = minutes / 60
+            let remainingMinutes = minutes % 60
+            if remainingMinutes == 0 {
+                return "\(hours)h"
+            } else {
+                return "\(hours)h \(remainingMinutes)m"
+            }
+        }
+    }
+    
+    var formattedWalkingTime: String {
+        if isEstimated || walkingTime <= 0 {
+            return ""
+        }
+        
+        let minutes = Int(walkingTime / 60)
+        if minutes < 60 {
+            return "\(minutes) min"
+        } else {
+            let hours = minutes / 60
+            let remainingMinutes = minutes % 60
+            if remainingMinutes == 0 {
+                return "\(hours)h"
+            } else {
+                return "\(hours)h \(remainingMinutes)m"
+            }
         }
     }
 }
@@ -28,28 +59,38 @@ class RoutingService {
     
     /// Calculate driving route from user location to destination
     static func calculateDrivingRoute(from userLocation: CLLocation, to destination: CLLocation) async -> RouteResult? {
-        let request = MKDirections.Request()
+        // Create requests for both driving and walking routes
+        let drivingRequest = MKDirections.Request()
+        drivingRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
+        drivingRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination.coordinate))
+        drivingRequest.transportType = .automobile
+        drivingRequest.requestsAlternateRoutes = false
         
-        // Set source and destination
-        request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination.coordinate))
-        
-        // Request driving directions
-        request.transportType = .automobile
-        request.requestsAlternateRoutes = false // We only need the best route
-        
-        let directions = MKDirections(request: request)
+        let walkingRequest = MKDirections.Request()
+        walkingRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
+        walkingRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination.coordinate))
+        walkingRequest.transportType = .walking
+        walkingRequest.requestsAlternateRoutes = false
         
         do {
-            DebugConfig.debugPrint("🗺️ Calculating route from \(userLocation.coordinate) to \(destination.coordinate)")
-            let response = try await directions.calculate()
+            DebugConfig.debugPrint("🗺️ Calculating routes from \(userLocation.coordinate) to \(destination.coordinate)")
             
-            if let route = response.routes.first {
+            // Calculate both routes concurrently
+            async let drivingResponse = MKDirections(request: drivingRequest).calculate()
+            async let walkingResponse = MKDirections(request: walkingRequest).calculate()
+            
+            let (drivingResult, walkingResult) = try await (drivingResponse, walkingResponse)
+            
+            if let drivingRoute = drivingResult.routes.first,
+               let walkingRoute = walkingResult.routes.first {
                 let result = RouteResult(
-                    distance: route.distance,
-                    estimatedTravelTime: route.expectedTravelTime
+                    distance: drivingRoute.distance,
+                    travelTime: drivingRoute.expectedTravelTime,
+                    walkingTime: walkingRoute.expectedTravelTime,
+                    isEstimated: false
                 )
-                DebugConfig.debugPrint("🚗 Route calculated: \(result.formattedDistance), \(result.formattedTravelTime)")
+                DebugConfig.debugPrint("🚗 Driving: \(result.formattedDistance), \(result.formattedTravelTime)")
+                DebugConfig.debugPrint("🚶 Walking: \(result.formattedWalkingTime)")
                 return result
             }
         } catch {
@@ -59,7 +100,9 @@ class RoutingService {
             DebugConfig.debugPrint("📏 Falling back to straight-line distance: \(String(format: "%.1f km", straightLineDistance / 1000))")
             return RouteResult(
                 distance: straightLineDistance,
-                estimatedTravelTime: straightLineDistance / 1000 * 60 // Rough estimate: 1 km/min
+                travelTime: 0,
+                walkingTime: 0,
+                isEstimated: true
             )
         }
         

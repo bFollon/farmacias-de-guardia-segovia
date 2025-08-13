@@ -6,6 +6,7 @@ struct ClosestPharmacyResult {
     let pharmacy: Pharmacy
     let distance: CLLocationDistance
     let estimatedTravelTime: TimeInterval?
+    let estimatedWalkingTime: TimeInterval?
     let region: Region
     let zbs: ZBS?
     let timeSpan: DutyTimeSpan
@@ -25,6 +26,22 @@ struct ClosestPharmacyResult {
             return "< 1 min"
         } else {
             return "\(minutes) min"
+        }
+    }
+    
+    var formattedWalkingTime: String {
+        guard let walkingTime = estimatedWalkingTime else { return "" }
+        let minutes = Int(walkingTime / 60)
+        if minutes < 60 {
+            return "\(minutes) min"
+        } else {
+            let hours = minutes / 60
+            let remainingMinutes = minutes % 60
+            if remainingMinutes == 0 {
+                return "\(hours)h"
+            } else {
+                return "\(hours)h \(remainingMinutes)m"
+            }
         }
     }
     
@@ -201,13 +218,14 @@ class ClosestPharmacyService {
                 let result = ClosestPharmacyResult(
                     pharmacy: pharmacy,
                     distance: routeResult.distance,
-                    estimatedTravelTime: routeResult.estimatedTravelTime,
+                    estimatedTravelTime: routeResult.travelTime > 0 ? routeResult.travelTime : nil,
+                    estimatedWalkingTime: routeResult.walkingTime > 0 ? routeResult.walkingTime : nil,
                     region: region,
                     zbs: zbs,
                     timeSpan: timeSpan
                 )
                 routeResults.append((result, routeResult.distance))
-                DebugConfig.debugPrint("   � \(pharmacy.name): \(result.formattedDistance), \(result.formattedTravelTime) (\(result.regionDisplayName))")
+                DebugConfig.debugPrint("   🏆 \(pharmacy.name): \(result.formattedDistance), 🚗\(result.formattedTravelTime) 🚶\(result.formattedWalkingTime) (\(result.regionDisplayName))")
             } else {
                 DebugConfig.debugPrint("   ❌ Could not calculate route to: \(pharmacy.name)")
             }
