@@ -72,6 +72,25 @@ Gracias.
 """
         }
         
+        /// Generate error report email body for schedule content errors
+        static func scheduleContentErrorBody(dateTime: String, shiftName: String, pharmacyName: String, pharmacyAddress: String) -> String {
+            return """
+Hola,
+
+He encontrado un error en la farmacia de guardia mostrada para:
+
+Fecha y hora: \(dateTime)
+Turno: \(shiftName)
+Farmacia mostrada: \(pharmacyName)
+Dirección: \(pharmacyAddress)
+
+La farmacia correcta es:
+
+
+Gracias.
+"""
+        }
+        
         /// Default body template for error reports
         private static let defaultErrorReportBody = """
 Hola,

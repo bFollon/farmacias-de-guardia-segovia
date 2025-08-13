@@ -104,10 +104,12 @@ struct DayScheduleView: View {
                         nightPharmacyAddress: schedule.nightShiftPharmacies.first?.address ?? ""
                     )
                     
-                    Link("¿Ha encontrado algún error? Repórtelo aquí",
-                         destination: AppConfig.EmailLinks.errorReport(body: emailBody) ?? URL(string: "mailto:\(AppConfig.contactEmail)")!)
-                        .font(.footnote)
-                        .padding(.top, 8)
+                    if let errorURL = AppConfig.EmailLinks.errorReport(body: emailBody) {
+                        Link("¿Ha encontrado algún error? Repórtelo aquí",
+                             destination: errorURL)
+                            .font(.footnote)
+                            .padding(.top, 8)
+                    }
                 }
             }
             .padding()
