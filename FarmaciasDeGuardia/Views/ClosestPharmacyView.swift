@@ -8,6 +8,35 @@ struct ClosestPharmacyView: View {
     @State private var isSearching = false
     @State private var errorMessage: String?
     @State private var showingResult = false
+    @State private var searchStep: SearchStep = .idle
+    
+    enum SearchStep {
+        case idle
+        case gettingLocation
+        case findingPharmacies
+        case calculatingDistances
+        case completed
+        
+        var description: String {
+            switch self {
+            case .idle: return ""
+            case .gettingLocation: return "Obteniendo ubicación..."
+            case .findingPharmacies: return "Buscando farmacias abiertas..."
+            case .calculatingDistances: return "Calculando distancias..."
+            case .completed: return "¡Encontrada!"
+            }
+        }
+        
+        var icon: String {
+            switch self {
+            case .idle: return "location.circle.fill"
+            case .gettingLocation: return "location.fill"
+            case .findingPharmacies: return "cross.circle.fill"
+            case .calculatingDistances: return "ruler.fill"
+            case .completed: return "checkmark.circle.fill"
+            }
+        }
+    }
     
     var body: some View {
         VStack(spacing: 16) {
@@ -15,14 +44,15 @@ struct ClosestPharmacyView: View {
                 findClosestPharmacy()
             }) {
                 HStack {
-                    Image(systemName: "location.circle.fill")
+                    Image(systemName: searchStep.icon)
                         .font(.title2)
+                        .foregroundColor(isSearching ? .blue : .primary)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Encuentra la más cercana")
+                        Text(isSearching ? "Buscando..." : "Encuentra la más cercana")
                             .font(.headline)
                             .multilineTextAlignment(.leading)
-                        Text("Buscar farmacia de guardia abierta")
+                        Text(isSearching ? searchStep.description : "Buscar farmacia de guardia abierta")
                             .font(.caption)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.leading)
@@ -70,6 +100,7 @@ struct ClosestPharmacyView: View {
     private func findClosestPharmacy() {
         errorMessage = nil
         isSearching = true
+        searchStep = .gettingLocation
         
         // Request location first
         locationManager.requestLocationOnce()
@@ -84,6 +115,7 @@ struct ClosestPharmacyView: View {
         // Check if we have location permission and location
         if let error = locationManager.error {
             isSearching = false
+            searchStep = .idle
             errorMessage = error.localizedDescription
             return
         }
@@ -96,21 +128,54 @@ struct ClosestPharmacyView: View {
                 }
             } else {
                 isSearching = false
+                searchStep = .idle
                 errorMessage = "No se pudo obtener tu ubicación"
             }
             return
         }
         
+        // Step 2: Finding pharmacies (show this step for at least 500ms)
+        searchStep = .findingPharmacies
+        
         // We have location, now search for closest pharmacy
         Task {
-            do {
-                let result = try await ClosestPharmacyService.findClosestOnDutyPharmacy(
+            // Add minimum delay to show the "finding pharmacies" step
+            let searchTask = Task {
+                try await ClosestPharmacyService.findClosestOnDutyPharmacy(
                     userLocation: userLocation
                 )
+            }
+            
+            // Ensure minimum 500ms for finding pharmacies step
+            let minDelay = Task {
+                try await Task.sleep(nanoseconds: 500_000_000) // 500ms
+            }
+            
+            do {
+                // Step 3: Calculating distances
+                await MainActor.run {
+                    searchStep = .calculatingDistances
+                }
+                
+                // Wait for both the search and minimum delay
+                _ = try await minDelay.value
+                let result = try await searchTask.value
+                
+                // Add a brief delay to show calculating step
+                try await Task.sleep(nanoseconds: 300_000_000) // 300ms
+                
+                // Step 4: Completed
+                await MainActor.run {
+                    searchStep = .completed
+                }
+                
+                // Brief pause to show completion
+                try await Task.sleep(nanoseconds: 200_000_000) // 200ms
                 
                 await MainActor.run {
                     self.closestPharmacy = result
                     self.isSearching = false
+                    self.searchStep = .idle
                     self.showingResult = true
                     
                     // Provide haptic feedback for success
@@ -120,6 +185,7 @@ struct ClosestPharmacyView: View {
             } catch {
                 await MainActor.run {
                     self.isSearching = false
+                    self.searchStep = .idle
                     self.errorMessage = error.localizedDescription
                     
                     // Provide haptic feedback for error
