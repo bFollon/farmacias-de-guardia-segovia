@@ -81,26 +81,18 @@ struct ScheduleContentView: View {
                     let currentPharmacy = schedule.shifts[activeShift]?.first ?? schedule.dayShiftPharmacies.first
                     let shiftName = activeShift == .fullDay ? "24 horas" : (activeShift == .capitalDay ? "Diurno" : "Nocturno")
                     
-                    let emailBody = """
-                        Hola,
-                        
-                        He encontrado un error en la farmacia de guardia mostrada para:
-                        
-                        Fecha y hora: \(formattedDateTime)
-                        Turno: \(shiftName)
-                        Farmacia mostrada: \(currentPharmacy?.name ?? "")
-                        Dirección: \(currentPharmacy?.address ?? "")
-                        
-                        La farmacia correcta es:
-                        
-                        
-                        Gracias.
-                        """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let emailBody = AppConfig.EmailLinks.currentScheduleContentErrorBody(
+                        shiftName: shiftName,
+                        pharmacyName: currentPharmacy?.name ?? "",
+                        pharmacyAddress: currentPharmacy?.address ?? ""
+                    )
                     
-                    Link("¿Has encontrado algún error? Repórtalo aquí",
-                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia&body=\(emailBody)")!)
-                        .font(.footnote)
-                        .padding(.top, 8)
+                    if let errorURL = AppConfig.EmailLinks.errorReport(body: emailBody) {
+                        Link("¿Ha encontrado algún error? Repórtelo aquí",
+                             destination: errorURL)
+                            .font(.footnote)
+                            .padding(.top, 8)
+                    }
                 }
             }
             .padding()

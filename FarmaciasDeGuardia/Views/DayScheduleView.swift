@@ -96,31 +96,20 @@ struct DayScheduleView: View {
                          destination: region.pdfURL)
                         .font(.footnote)
                     
-                    let emailBody = """
-                        Hola,
-                        
-                        He encontrado un error en las farmacias de guardia mostradas para:
-                        
-                        Fecha: \(formattedDate)
-                        
-                        Turno diurno:
-                        Farmacia mostrada: \(schedule.dayShiftPharmacies.first?.name ?? "")
-                        Dirección: \(schedule.dayShiftPharmacies.first?.address ?? "")
-                        
-                        Turno nocturno:
-                        Farmacia mostrada: \(schedule.nightShiftPharmacies.first?.name ?? "")
-                        Dirección: \(schedule.nightShiftPharmacies.first?.address ?? "")
-                        
-                        La información correcta es:
-                        
-                        
-                        Gracias.
-                        """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let emailBody = AppConfig.EmailLinks.dayScheduleErrorBody(
+                        date: formattedDate,
+                        dayPharmacyName: schedule.dayShiftPharmacies.first?.name ?? "",
+                        dayPharmacyAddress: schedule.dayShiftPharmacies.first?.address ?? "",
+                        nightPharmacyName: schedule.nightShiftPharmacies.first?.name ?? "",
+                        nightPharmacyAddress: schedule.nightShiftPharmacies.first?.address ?? ""
+                    )
                     
-                    Link("¿Has encontrado algún error? Repórtalo aquí",
-                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia&body=\(emailBody)")!)
-                        .font(.footnote)
-                        .padding(.top, 8)
+                    if let errorURL = AppConfig.EmailLinks.errorReport(body: emailBody) {
+                        Link("¿Ha encontrado algún error? Repórtelo aquí",
+                             destination: errorURL)
+                            .font(.footnote)
+                            .padding(.top, 8)
+                    }
                 }
             }
             .padding()
