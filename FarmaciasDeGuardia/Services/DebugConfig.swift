@@ -2,6 +2,10 @@ import Foundation
 
 /// Global debug configuration for the entire application
 struct DebugConfig {
+    /// Default debug setting when no environment variable is set
+    /// Change this value to enable/disable debug logging by default
+    private static let defaultDebugEnabled = false
+    
     /// Master debug flag - controls all debug output in the application
     /// Can be overridden by the DEBUG_ENABLED environment variable
     static var isDebugEnabled: Bool = {
@@ -10,12 +14,8 @@ struct DebugConfig {
             return envValue.lowercased() == "true" || envValue == "1"
         }
         
-        // Default to true for debugging the closest pharmacy feature
-        #if DEBUG
-        return true  // Enabled for debugging
-        #else
-        return false
-        #endif
+        // Use the clearly defined default value
+        return defaultDebugEnabled
     }()
     
     /// Conditional debug print - only prints when debug is enabled
