@@ -37,15 +37,7 @@ struct DayScheduleView: View {
                         .font(.title2)
                         .fontWeight(.medium)
                 }
-                .padding(.bottom, 5)
-                
-                // Region Info section (just the label, no duplicate name)
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Región")
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.bottom)
+                .padding(.bottom, 20)
                 
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
