@@ -91,6 +91,30 @@ Gracias.
 """
         }
         
+        /// Get current date and time formatted for email reporting
+        private static func getCurrentEmailDateTime() -> String {
+            let today = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "es_ES")
+            dateFormatter.setLocalizedDateFormatFromTemplate("EEEE d MMMM")
+            
+            let timeFormatter = DateFormatter()
+            timeFormatter.locale = Locale(identifier: "es_ES")
+            timeFormatter.timeStyle = .short
+            
+            return "\(dateFormatter.string(from: today)) · \(timeFormatter.string(from: today))"
+        }
+        
+        /// Generate error report email body for current schedule content errors (uses current time)
+        static func currentScheduleContentErrorBody(shiftName: String, pharmacyName: String, pharmacyAddress: String) -> String {
+            return scheduleContentErrorBody(
+                dateTime: getCurrentEmailDateTime(),
+                shiftName: shiftName,
+                pharmacyName: pharmacyName,
+                pharmacyAddress: pharmacyAddress
+            )
+        }
+        
         /// Default body template for error reports
         private static let defaultErrorReportBody = """
 Hola,

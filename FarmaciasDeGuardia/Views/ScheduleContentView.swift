@@ -81,8 +81,7 @@ struct ScheduleContentView: View {
                     let currentPharmacy = schedule.shifts[activeShift]?.first ?? schedule.dayShiftPharmacies.first
                     let shiftName = activeShift == .fullDay ? "24 horas" : (activeShift == .capitalDay ? "Diurno" : "Nocturno")
                     
-                    let emailBody = AppConfig.EmailLinks.scheduleContentErrorBody(
-                        dateTime: formattedDateTime,
+                    let emailBody = AppConfig.EmailLinks.currentScheduleContentErrorBody(
                         shiftName: shiftName,
                         pharmacyName: currentPharmacy?.name ?? "",
                         pharmacyAddress: currentPharmacy?.address ?? ""
