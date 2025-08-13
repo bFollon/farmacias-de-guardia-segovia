@@ -29,7 +29,7 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top)
                 
-                Text("Selecciona tu región para consultar las farmacias de guardia.")
+                Text("Seleccione su región para consultar las farmacias de guardia.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

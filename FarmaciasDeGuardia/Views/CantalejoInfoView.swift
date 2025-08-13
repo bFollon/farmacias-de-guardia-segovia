@@ -96,10 +96,15 @@ struct CantalejoInfoView: View {
                             .foregroundColor(.secondary)
                         
                         // Contact link
-                        Link("Contactar para actualizar información",
-                             destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Información%20Cantalejo%20Guardias&body=Tengo%20información%20actualizada%20sobre%20las%20guardias%20en%20Cantalejo:")!)
-                            .font(.footnote)
-                            .padding(.top, 4)
+                        if let contactURL = AppConfig.EmailLinks.general(
+                            subject: "Información Cantalejo Guardias",
+                            body: "Tengo información actualizada sobre las guardias en Cantalejo:"
+                        ) {
+                            Link("Contactar para actualizar información",
+                                 destination: contactURL)
+                                .font(.footnote)
+                                .padding(.top, 4)
+                        }
                     }
                 }
                 .padding()

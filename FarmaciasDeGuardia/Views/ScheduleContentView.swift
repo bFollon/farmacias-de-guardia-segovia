@@ -97,8 +97,8 @@ struct ScheduleContentView: View {
                         Gracias.
                         """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                     
-                    Link("¿Has encontrado algún error? Repórtalo aquí",
-                         destination: URL(string: "mailto:alive.intake_0b@icloud.com?subject=Error%20en%20Farmacias%20de%20Guardia&body=\(emailBody)")!)
+                    Link("¿Ha encontrado algún error? Repórtelo aquí",
+                         destination: AppConfig.EmailLinks.errorReport(body: emailBody) ?? URL(string: "mailto:\(AppConfig.contactEmail)")!)
                         .font(.footnote)
                         .padding(.top, 8)
                 }

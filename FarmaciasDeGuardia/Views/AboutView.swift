@@ -29,11 +29,11 @@ struct AboutView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("Esta aplicación te permite consultar las farmacias de guardia en la provincia de Segovia de forma rápida y sencilla.")
+                        Text("Esta aplicación le permite consultar las farmacias de guardia en la provincia de Segovia de forma rápida y sencilla.")
                             .font(.body)
                             .foregroundColor(.secondary)
                         
-                        Text("La app es completamente gratuita, sin publicidad y siempre lo será. Ha sido desarrollada como un proyecto personal para ayudar a la comunidad.")
+                        Text("La app es completamente gratuita, sin publicidad y así se va a quedar. Ha sido desarrollada como un proyecto personal para ayudar a la comunidad.")
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
@@ -46,7 +46,7 @@ struct AboutView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("Si la aplicación te resulta útil y quieres apoyar su desarrollo, puedes invitarme a un café:")
+                        Text("Si la aplicación le resulta útil y quiere apoyar su desarrollo, puede invitarme a un café:")
                             .font(.body)
                             .foregroundColor(.secondary)
                         
@@ -96,6 +96,59 @@ struct AboutView: View {
                             .cornerRadius(25)
                         }
                         .buttonStyle(PlainButtonStyle())
+                    }
+                    
+                    Divider()
+                    
+                    // Contact & Feedback Section
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Contacto y sugerencias")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        
+                        Text("¿Has encontrado algún error o tienes ideas para mejorar la app?")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                        
+                        VStack(spacing: 12) {
+                            // Error reporting button
+                            if let errorURL = AppConfig.EmailLinks.errorReport() {
+                                Link(destination: errorURL) {
+                                    HStack {
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .foregroundColor(.orange)
+                                        Text("Reportar error")
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.secondary)
+                                            .font(.caption)
+                                    }
+                                    .padding()
+                                    .background(Color(.secondarySystemGroupedBackground))
+                                    .cornerRadius(8)
+                                }
+                            }
+                            
+                            // Suggestions button
+                            if let feedbackURL = AppConfig.EmailLinks.feedback() {
+                                Link(destination: feedbackURL) {
+                                    HStack {
+                                        Image(systemName: "lightbulb")
+                                            .foregroundColor(.blue)
+                                        Text("Enviar sugerencia")
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.secondary)
+                                            .font(.caption)
+                                    }
+                                    .padding()
+                                    .background(Color(.secondarySystemGroupedBackground))
+                                    .cornerRadius(8)
+                                }
+                            }
+                        }
                     }
                     
                     Divider()
