@@ -393,7 +393,7 @@ struct ClosestPharmacyResultView: View {
                         .padding(.top)
                     }
                     .padding()
-                    .background(Color(.systemGray6))
+                    .background(Color(.secondarySystemGroupedBackground))
                     .cornerRadius(12)
                     
                     Spacer()
