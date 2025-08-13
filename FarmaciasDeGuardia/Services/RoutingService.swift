@@ -2,6 +2,11 @@ import Foundation
 import MapKit
 import CoreLocation
 
+// Note: MapKit may generate harmless system warnings about RenderBox.framework/default.metallib
+// on first use. This is a known iOS system issue related to Metal shader loading and doesn't
+// affect app functionality. The warning typically appears as:
+// "Unable to open mach-O at path: /Library/Caches/com.apple.xbs/Binaries/RenderBox/..."
+
 struct RouteResult {
     let distance: Double
     let travelTime: TimeInterval
