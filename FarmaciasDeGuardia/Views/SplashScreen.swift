@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var isAnimating = false
+    @StateObject private var preloadService = PreloadService.shared
     
     var body: some View {
         VStack(spacing: 30) {
@@ -45,12 +46,26 @@ struct SplashScreen: View {
             
             Spacer()
             
-            // Subtle loading indicator
-            ProgressView()
-                .scaleEffect(1.2)
-                .tint(.blue)
-                .opacity(isAnimating ? 1.0 : 0.0)
-                .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
+            // Loading indicator with progress
+            VStack(spacing: 8) {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .tint(.blue)
+                
+                if preloadService.isLoading && !preloadService.loadingProgress.isEmpty {
+                    Text(preloadService.loadingProgress)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                if preloadService.totalRegions > 0 {
+                    Text("\(preloadService.completedRegions)/\(preloadService.totalRegions)")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .opacity(isAnimating ? 1.0 : 0.0)
+            .animation(.easeOut(duration: 0.8).delay(0.6), value: isAnimating)
             
             Spacer()
         }
