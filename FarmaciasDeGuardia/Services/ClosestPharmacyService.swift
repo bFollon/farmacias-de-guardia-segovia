@@ -1,9 +1,11 @@
 import Foundation
 import CoreLocation
+import MapKit
 
 struct ClosestPharmacyResult {
     let pharmacy: Pharmacy
     let distance: CLLocationDistance
+    let estimatedTravelTime: TimeInterval?
     let region: Region
     let zbs: ZBS?
     let timeSpan: DutyTimeSpan
@@ -13,6 +15,16 @@ struct ClosestPharmacyResult {
             return "\(Int(distance)) m"
         } else {
             return String(format: "%.1f km", distance / 1000)
+        }
+    }
+    
+    var formattedTravelTime: String {
+        guard let travelTime = estimatedTravelTime else { return "" }
+        let minutes = Int(travelTime / 60)
+        if minutes < 1 {
+            return "< 1 min"
+        } else {
+            return "\(minutes) min"
         }
     }
     
@@ -160,46 +172,61 @@ class ClosestPharmacyService {
         }
         
         DebugConfig.debugPrint("✅ Found \(allOnDutyPharmacies.count) pharmacies that are actually OPEN right now")
-        DebugConfig.debugPrint("🚀 REAL OPTIMIZATION: Only geocoding \(allOnDutyPharmacies.count) open pharmacies (filtered from on-duty list)")
+        DebugConfig.debugPrint("🚀 REAL OPTIMIZATION: Only calculating routes for \(allOnDutyPharmacies.count) open pharmacies")
         
-        // Calculate distances and find the closest
-        var distanceResults: [(result: ClosestPharmacyResult, distance: CLLocationDistance)] = []
+        // Calculate driving routes and find the closest
+        var routeResults: [(result: ClosestPharmacyResult, distance: CLLocationDistance)] = []
+        
+        // Get coordinates for all pharmacies first
+        var pharmacyCoordinates: [(pharmacy: Pharmacy, region: Region, zbs: ZBS?, timeSpan: DutyTimeSpan, coordinates: CLLocation)] = []
         
         for (pharmacy, region, zbs, timeSpan) in allOnDutyPharmacies {
-            DebugConfig.debugPrint("📏 Geocoding and calculating distance to: \(pharmacy.name)")
+            DebugConfig.debugPrint("� Getting coordinates for: \(pharmacy.name)")
             
-            // Use the enhanced geocoding service
             if let coordinates = await GeocodingService.getCoordinatesForPharmacy(pharmacy) {
-                let distance = userLocation.distance(from: coordinates)
-                
-                let result = ClosestPharmacyResult(
-                    pharmacy: pharmacy,
-                    distance: distance,
-                    region: region,
-                    zbs: zbs,
-                    timeSpan: timeSpan
-                )
-                distanceResults.append((result, distance))
-                DebugConfig.debugPrint("   📏 \(pharmacy.name): \(result.formattedDistance) (\(result.regionDisplayName))")
+                pharmacyCoordinates.append((pharmacy, region, zbs, timeSpan, coordinates))
+                DebugConfig.debugPrint("   ✅ Coordinates obtained for \(pharmacy.name)")
             } else {
                 DebugConfig.debugPrint("   ❌ Could not get coordinates for: \(pharmacy.name)")
             }
         }
         
-        // Sort by distance and log top candidates
-        distanceResults.sort { $0.distance < $1.distance }
+        DebugConfig.debugPrint("🗺️ Calculating driving routes to \(pharmacyCoordinates.count) pharmacies...")
         
-        DebugConfig.debugPrint("🏆 Top 5 closest pharmacies:")
-        for (index, (result, distance)) in distanceResults.prefix(5).enumerated() {
-            DebugConfig.debugPrint("   \(index + 1). \(result.pharmacy.name): \(result.formattedDistance) (\(result.regionDisplayName))")
+        // Calculate driving routes to all pharmacies
+        for (pharmacy, region, zbs, timeSpan, coordinates) in pharmacyCoordinates {
+            DebugConfig.debugPrint("🚗 Calculating route to: \(pharmacy.name)")
+            
+            if let routeResult = await RoutingService.calculateDrivingRoute(from: userLocation, to: coordinates) {
+                let result = ClosestPharmacyResult(
+                    pharmacy: pharmacy,
+                    distance: routeResult.distance,
+                    estimatedTravelTime: routeResult.estimatedTravelTime,
+                    region: region,
+                    zbs: zbs,
+                    timeSpan: timeSpan
+                )
+                routeResults.append((result, routeResult.distance))
+                DebugConfig.debugPrint("   � \(pharmacy.name): \(result.formattedDistance), \(result.formattedTravelTime) (\(result.regionDisplayName))")
+            } else {
+                DebugConfig.debugPrint("   ❌ Could not calculate route to: \(pharmacy.name)")
+            }
         }
         
-        guard let closest = distanceResults.first else {
-            DebugConfig.debugPrint("❌ Could not calculate distances to any pharmacies")
+        // Sort by driving distance and log top candidates
+        routeResults.sort { $0.distance < $1.distance }
+        
+        DebugConfig.debugPrint("🏆 Top 5 closest pharmacies by driving distance:")
+        for (index, (result, distance)) in routeResults.prefix(5).enumerated() {
+            DebugConfig.debugPrint("   \(index + 1). \(result.pharmacy.name): \(result.formattedDistance), \(result.formattedTravelTime) (\(result.regionDisplayName))")
+        }
+        
+        guard let closest = routeResults.first else {
+            DebugConfig.debugPrint("❌ Could not calculate routes to any pharmacies")
             throw ClosestPharmacyError.geocodingFailed
         }
         
-        DebugConfig.debugPrint("🎯 OPTIMIZED WINNER: \(closest.result.pharmacy.name) at \(closest.result.formattedDistance) from \(closest.result.regionDisplayName)")
+        DebugConfig.debugPrint("🎯 DRIVING WINNER: \(closest.result.pharmacy.name) at \(closest.result.formattedDistance), \(closest.result.formattedTravelTime) from \(closest.result.regionDisplayName)")
         return closest.result
     }
     

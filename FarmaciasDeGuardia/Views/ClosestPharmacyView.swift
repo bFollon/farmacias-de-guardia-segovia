@@ -237,11 +237,21 @@ struct ClosestPharmacyResultView: View {
                                 .fontWeight(.semibold)
                             
                             HStack {
-                                Image(systemName: "location.fill")
+                                Image(systemName: "car.fill")
                                     .foregroundColor(.blue)
                                 Text(result.formattedDistance)
                                     .font(.headline)
                                     .foregroundColor(.blue)
+                                
+                                if !result.formattedTravelTime.isEmpty {
+                                    Text("•")
+                                        .foregroundColor(.secondary)
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.orange)
+                                    Text(result.formattedTravelTime)
+                                        .font(.headline)
+                                        .foregroundColor(.orange)
+                                }
                             }
                         }
                         
