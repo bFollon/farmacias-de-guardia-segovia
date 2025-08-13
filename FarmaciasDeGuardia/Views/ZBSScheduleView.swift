@@ -135,15 +135,7 @@ struct ZBSScheduleView: View {
                                     .font(.title2)
                                     .fontWeight(.medium)
                             }
-                            .padding(.bottom, 5)
-                            
-                            // ZBS Info (just the label, no duplicate name)
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Zona Básica de Salud")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(.bottom)
+                            .padding(.bottom, 20)
                             
                             // Pharmacies for this ZBS on selected date
                             VStack(alignment: .leading, spacing: 12) {
