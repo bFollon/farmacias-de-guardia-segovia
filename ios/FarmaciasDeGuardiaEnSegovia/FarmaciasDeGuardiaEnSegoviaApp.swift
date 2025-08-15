@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct FarmaciasDeGuardiaApp: App {
+struct FarmaciasDeGuardiaEnSegoviaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showSplashScreen = true
     @State private var isPreloading = false
