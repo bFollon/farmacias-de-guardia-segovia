@@ -1,6 +1,13 @@
 # Farmacias de Guardia Segovia
 
-An iOS app that provides easy access to duty pharmacy schedules in Segovia, Spain.
+A cross-platform app that provides easy access to duty pharmacy schedules in Segovia, Spain.
+
+## Project Structure
+
+This repository contains both iOS and Android versions of the app:
+
+- `ios/` - Native iOS app built with SwiftUI
+- `android/` - Native Android app built with Kotlin + Jetpack Compose (coming soon)
 
 ## What the app does
 
@@ -12,7 +19,7 @@ This app helps residents and visitors of Segovia find which pharmacies are on du
 - **El Espinar / San Rafael**: Mountain area pharmacies
 - **Segovia Rural**: Rural areas with ZBS (Basic Health Area) selection
 - **PDF integration** with official duty schedules
-- **Clean, native iOS interface** optimized for quick access
+- **Clean, native interface** optimized for quick access
 
 The app processes official PDF documents from health authorities to provide up-to-date pharmacy duty information in a mobile-friendly format.
 
