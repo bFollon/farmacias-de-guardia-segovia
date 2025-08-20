@@ -45,6 +45,9 @@ If you're an actual iOS developer and want to help improve this vibe-coded creat
 
 If you find this app useful and want to support its development, you can [buy me a coffee on Ko-fi](https://ko-fi.com/bfollon) ☕️
 
+## License
+This project is licensed under the [GNU GPLv3](./LICENSE).
+
 ---
 
 Built with ❤️ (and lots of AI) by [@bFollon](https://github.com/bFollon)
