@@ -40,8 +40,8 @@ struct SplashScreen: View {
                         .foregroundColor(.secondary)
                 }
                 .opacity(isAnimating ? 1.0 : 0.0)
-                .offset(y: isAnimating ? 0 : 20)
-                .animation(.easeOut(duration: 0.8).delay(0.3), value: isAnimating)
+                .scaleEffect(isAnimating ? 1.0 : 0.9)
+                .animation(.easeOut(duration: 0.8).delay(0.5), value: isAnimating)
             }
             
             Spacer()
@@ -51,8 +51,11 @@ struct SplashScreen: View {
                 ProgressView()
                     .scaleEffect(1.2)
                     .tint(.blue)
+                    .opacity(preloadService.isLoading ? 1.0 : 0.0)
+                    .animation(.easeInOut(duration: 0.3), value: preloadService.isLoading)
                 
-                if preloadService.isLoading && preloadService.totalRegions > 0 {
+                // Always show icon progression once we know the total regions
+                if preloadService.totalRegions > 0 {
                     // Icon progression for each region
                     HStack(spacing: 8) {
                         ForEach(0..<preloadService.totalRegions, id: \.self) { index in
