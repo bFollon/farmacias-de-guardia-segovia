@@ -18,6 +18,7 @@
 package com.farmaciasdeGuardia.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.farmaciasdeGuardia.database.AppDatabase
 import com.farmaciasdeGuardia.database.dao.CachedCoordinateDao
@@ -30,41 +31,41 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
- * Hilt module for database dependencies
- * Provides Room database and DAO instances
+ * Hilt module for database-related dependencies
  */
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-    
-    /**
-     * Provides the main Room database instance
-     */
+
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+    fun provideAppDatabase(
+        @ApplicationContext context: Context
+    ): AppDatabase {
         return Room.databaseBuilder(
-            context.applicationContext,
+            context,
             AppDatabase::class.java,
-            "farmacias_de_guardia_db"
+            "farmacias_database"
         )
-        .fallbackToDestructiveMigration() // For development - remove in production
+        .fallbackToDestructiveMigration()
         .build()
     }
-    
-    /**
-     * Provides CachedPDFDao
-     */
+
     @Provides
     fun provideCachedPDFDao(database: AppDatabase): CachedPDFDao {
         return database.cachedPDFDao()
     }
-    
-    /**
-     * Provides CachedCoordinateDao
-     */
+
     @Provides
     fun provideCachedCoordinateDao(database: AppDatabase): CachedCoordinateDao {
         return database.cachedCoordinateDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context
+    ): SharedPreferences {
+        return context.getSharedPreferences("farmacias_prefs", Context.MODE_PRIVATE)
     }
 }
