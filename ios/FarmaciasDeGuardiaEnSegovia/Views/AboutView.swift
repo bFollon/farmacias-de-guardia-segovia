@@ -42,7 +42,7 @@ struct AboutView: View {
                     
                     // Support Section
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Apoya el proyecto")
+                        Text("Apoye el proyecto")
                             .font(.headline)
                             .foregroundColor(.primary)
                         
@@ -56,7 +56,7 @@ struct AboutView: View {
                             HStack {
                                 Image(systemName: "cup.and.saucer.fill")
                                     .foregroundColor(.white)
-                                Text("Cómprame un Ko-fi ☕")
+                                Text("Cómpreme un Ko-fi ☕")
                                     .fontWeight(.medium)
                                     .foregroundColor(.white)
                             }
@@ -106,7 +106,7 @@ struct AboutView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("¿Has encontrado algún error o tienes ideas para mejorar la app?")
+                        Text("¿Ha encontrado algún error o tiene ideas para mejorar la app?")
                             .font(.body)
                             .foregroundColor(.secondary)
                         
