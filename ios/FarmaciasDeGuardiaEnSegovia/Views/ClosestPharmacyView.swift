@@ -66,7 +66,7 @@ struct ClosestPharmacyView: View {
                         .foregroundColor(isSearching ? .blue : .primary)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(isSearching ? "Buscando..." : "Encuentra la más cercana")
+                        Text(isSearching ? "Buscando..." : "Encuentre la más cercana")
                             .font(.headline)
                             .multilineTextAlignment(.leading)
                         Text(isSearching ? searchStep.description : "Buscar farmacia de guardia abierta")
