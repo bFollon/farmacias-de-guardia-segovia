@@ -17,11 +17,19 @@
 
 package com.farmaciasdeGuardia.di
 
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.room.Room
+import com.farmaciasdeGuardia.data.database.FarmaciasDatabase
 import com.farmaciasdeGuardia.services.*
+import com.farmaciasdeGuardia.services.pdfparsing.PDFParsingStrategyFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
 
 /**
@@ -61,8 +69,18 @@ object ServiceModule {
 
     @Provides
     @Singleton
-    fun providePDFProcessingService(): PDFProcessingService {
-        return PDFProcessingService()
+    fun providePDFProcessingService(
+        @ApplicationContext context: Context,
+        geocodingService: GeocodingService,
+        parsingStrategyFactory: PDFParsingStrategyFactory
+    ): PDFProcessingService {
+        return PDFProcessingService(context, geocodingService, parsingStrategyFactory)
+    }
+
+    @Provides
+    @Singleton
+    fun providePDFParsingStrategyFactory(): PDFParsingStrategyFactory {
+        return PDFParsingStrategyFactory()
     }
 
     @Provides

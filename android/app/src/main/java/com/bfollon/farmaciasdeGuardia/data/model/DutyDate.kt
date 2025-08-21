@@ -50,6 +50,23 @@ data class DutyDate(
         return calendar.timeInMillis
     }
     
+    /**
+     * Convert to Java Date for compatibility with PharmacySchedule
+     */
+    fun toDate(): Date {
+        val calendar = Calendar.getInstance()
+        val actualYear = year ?: getCurrentYear()
+        
+        // Convert Spanish month to number (1-12)
+        val monthNumber = monthToNumber(month) ?: 1
+        
+        // Create calendar instance with the date
+        calendar.set(actualYear, monthNumber - 1, day, 0, 0, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        
+        return calendar.time
+    }
+    
     companion object {
         private val MONTH_MAP = mapOf(
             "enero" to 1, "febrero" to 2, "marzo" to 3, "abril" to 4,

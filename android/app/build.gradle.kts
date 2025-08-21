@@ -101,6 +101,11 @@ dependencies {
     
     // PDF Processing
     implementation(libs.pdfbox.android)
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
+    
+    // Date and Time processing
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
     
     // Image Loading
     implementation(libs.coil.compose)
