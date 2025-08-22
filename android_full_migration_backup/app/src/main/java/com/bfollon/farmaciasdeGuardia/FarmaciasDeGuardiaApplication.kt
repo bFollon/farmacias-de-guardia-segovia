@@ -19,7 +19,7 @@ package com.bfollon.farmaciasdeGuardia
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import com.bfollon.farmaciasdeGuardia.utils.DebugConfig
+import com.bfollon.farmaciasdeGuardia.util.DebugConfig
 
 /**
  * Application class for Farmacias de Guardia

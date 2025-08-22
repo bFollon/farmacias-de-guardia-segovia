@@ -1,39 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material 3 Color scheme -->
-    <!-- Light theme colors -->
-    <color name="md_theme_primary">#006D3A</color>
-    <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_primaryContainer">#8DF8B2</color>
-    <color name="md_theme_onPrimaryContainer">#002110</color>
-    <color name="md_theme_secondary">#506352</color>
-    <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_secondaryContainer">#D3E8D3</color>
-    <color name="md_theme_onSecondaryContainer">#0E1F12</color>
-    <color name="md_theme_tertiary">#3D616E</color>
-    <color name="md_theme_onTertiary">#FFFFFF</color>
-    <color name="md_theme_tertiaryContainer">#C1E7F5</color>
-    <color name="md_theme_onTertiaryContainer">#001F28</color>
-    <color name="md_theme_error">#BA1A1A</color>
-    <color name="md_theme_onError">#FFFFFF</color>
-    <color name="md_theme_errorContainer">#FFDAD6</color>
-    <color name="md_theme_onErrorContainer">#410002</color>
-    <color name="md_theme_outline">#737672</color>
-    <color name="md_theme_outlineVariant">#C3C8BC</color>
-    <color name="md_theme_surface">#F8FDF8</color>
-    <color name="md_theme_onSurface">#1A1C19</color>
-    <color name="md_theme_surfaceVariant">#DDE5D9</color>
-    <color name="md_theme_onSurfaceVariant">#414941</color>
-    <color name="md_theme_inverseSurface">#2F312E</color>
-    <color name="md_theme_inverseOnSurface">#F0F1EC</color>
-    <color name="md_theme_inversePrimary">#71DB97</color>
-    
-    <!-- Additional colors -->
-    <color name="green_primary">#006D3A</color>
-    <color name="green_secondary">#8DF8B2</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="gray_light">#F5F5F5</color>
-    <color name="gray_medium">#CCCCCC</color>
-    <color name="gray_dark">#666666</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

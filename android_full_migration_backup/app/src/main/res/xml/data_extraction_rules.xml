@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- This app allows data backup -->
+        <include domain="file" path="."/>
+    </cloud-backup>
+    <device-transfer>
+        <!-- This app allows device transfer -->
+        <include domain="file" path="."/>
+    </device-transfer>
+</data-extraction-rules>
