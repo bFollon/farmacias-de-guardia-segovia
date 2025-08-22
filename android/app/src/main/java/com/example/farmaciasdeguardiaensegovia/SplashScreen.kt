@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 data class RegionIcon(
     val emoji: String,
@@ -119,23 +120,29 @@ fun SplashScreen(
         delay(100)
         progressVisible = true
         
-        // Start progress animation
-        progress.animateTo(1f, animationSpec = tween(1400, easing = LinearEasing))
-        
-        // Regions appear after 0.8s  
-        delay(200)
+        // Regions appear after 0.7s (while progress is running)
+        delay(100)
         regionsVisible = true
         
-        // Animate region completion
+        // Start progress animation (runs concurrently with region animations)
+        val progressJob = launch {
+            progress.animateTo(1f, animationSpec = tween(1200, easing = LinearEasing))
+        }
+        
+        // Animate region completion while progress is running
+        delay(200) // Small delay before starting region animations
         repeat(regions.size) { index ->
-            delay(200)
+            delay(250) // Slightly slower for better visual effect
             regions = regions.mapIndexed { i, region ->
                 if (i == index) region.copy(isCompleted = true) else region
             }
         }
         
+        // Wait for progress to complete
+        progressJob.join()
+        
         // Hold final state briefly then navigate
-        delay(800)
+        delay(500)
         onSplashFinished()
     }
 
