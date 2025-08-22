@@ -100,7 +100,7 @@ dependencies {
     implementation(libs.datastore.preferences)
     
     // PDF Processing
-    implementation(libs.pdfbox.android)
+    implementation("org.apache.pdfbox:pdfbox:3.0.2")
     implementation("org.bouncycastle:bcprov-jdk15on:1.70")
     implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
     
