@@ -16,6 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,13 +27,42 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FarmaciasDeGuardiaEnSegoviaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PharmacyTitle(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppNavigation()
             }
         }
+    }
+}
+
+@Composable
+fun AppNavigation() {
+    val navController = rememberNavController()
+    
+    NavHost(
+        navController = navController,
+        startDestination = "splash"
+    ) {
+        composable("splash") {
+            SplashScreen(
+                onSplashFinished = {
+                    navController.navigate("main") {
+                        popUpTo("splash") { inclusive = true }
+                    }
+                }
+            )
+        }
+        
+        composable("main") {
+            MainScreen()
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        PharmacyTitle(
+            modifier = Modifier.padding(innerPadding)
+        )
     }
 }
 
