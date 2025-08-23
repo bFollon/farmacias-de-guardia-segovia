@@ -66,7 +66,7 @@ data class Region(
         val elEspinar = Region(
             id = "el-espinar",
             name = "El Espinar / San Rafael",
-            icon = "⛰",
+            icon = "🏔️",
             pdfURL = "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf",
             metadata = RegionMetadata(
                 isMonthlySchedule = false,  // Uses weekly schedules like Cuéllar

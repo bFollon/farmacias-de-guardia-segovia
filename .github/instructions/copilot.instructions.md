@@ -10,9 +10,13 @@ This project's goal is to create an application that displays the pharmacies on 
 ## Current Status
 - ✅ **iOS App**: Fully functional with all features implemented in SwiftUI. **DO NOT MODIFY UNLESS SPECIFICALLY ASKED TO.**
 - ✅ **Android Basic Structure**: Basic working app with navigation using Jetpack Compose + Material3
-- ✅ **Android Splash Screen**: Enhanced splash screen with iOS-matching animations, gradient text, progress indicator, and region emoji progression (🏙🌳⛰🚜)
+- ✅ **Android Splash Screen**: Enhanced splash screen with iOS-matching animations, gradient text, progress indicator, and region emoji progression (🏙🌳🏔️🚜)
+- ✅ **Android Main Screen**: Complete main screen with region selection grid (4 regions: Segovia Capital, Cuéllar, El Espinar, Segovia Rural)
+- ✅ **Android ZBS Selection**: ZBS (Zona Básica de Salud) selection screen for Segovia Rural with 8 sub-areas
+- ✅ **Android Navigation**: Navigation between splash → main → ZBS selection screens
+- ✅ **Android Theme**: iOS-matching color scheme (blue/green) and Material3 design
 - 🔄 **Android Migration**: Currently migrating iOS features to Android incrementally
-- 📍 **Next Steps**: Implement main screen with region selection (4 regions: Segovia Capital, Cuéllar, El Espinar, Segovia Rural)
+- 📍 **Next Steps**: Implement PDF view screen and pharmacy schedule parsing
 - 🎯 **Goal**: Feature parity between iOS and Android apps
 
 ## Core functionalities
@@ -68,6 +72,10 @@ This project's goal is to create an application that displays the pharmacies on 
   - Development should be done in small testable increments.
 	- Tasks should always limit their scope to a single feature or bug fix.
 	- Avoid modifying things that fall outside the scope of the task.
+- **Status Updates**
+	- After completing any feature or significant development milestone, update the "Current Status" section in this instructions file.
+	- Mark completed features with ✅ and update the "Next Steps" section accordingly.
+	- This ensures the instructions always reflect the current state of the project.
 - **Refactoring**
 	- Refactoring should be done in small, incremental steps.
 	- Each refactoring step should be tested to ensure it doesn't break existing functionality.
