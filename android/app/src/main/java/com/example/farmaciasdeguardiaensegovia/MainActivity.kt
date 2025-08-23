@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.farmaciasdeguardiaensegovia.ui.screens.MainScreen
+import com.example.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,39 +54,32 @@ fun AppNavigation() {
         }
         
         composable("main") {
-            MainScreen()
+            MainScreen(
+                onRegionSelected = { region ->
+                    // TODO: Navigate to PDF view
+                },
+                onZBSSelectionRequested = {
+                    navController.navigate("zbs_selection")
+                },
+                onSettingsClick = {
+                    // TODO: Navigate to settings
+                },
+                onAboutClick = {
+                    // TODO: Navigate to about
+                }
+            )
         }
-    }
-}
-
-@Composable
-fun MainScreen() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        PharmacyTitle(
-            modifier = Modifier.padding(innerPadding)
-        )
-    }
-}
-
-@Composable
-fun PharmacyTitle(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Farmacias de Guardia - Segovia",
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PharmacyTitlePreview() {
-    FarmaciasDeGuardiaEnSegoviaTheme {
-        PharmacyTitle()
+        
+        composable("zbs_selection") {
+            ZBSSelectionScreen(
+                onZBSSelected = { zbs ->
+                    // TODO: Navigate to ZBS schedule view
+                    navController.popBackStack()
+                },
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
+        }
     }
 }
