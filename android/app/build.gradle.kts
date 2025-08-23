@@ -56,8 +56,8 @@ dependencies {
     // ViewModel support
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     
-    // PDF parsing
-    implementation(libs.pdfbox.android)
+        // PDF Processing
+    implementation(libs.itext.kernel)
     
     // HTTP client for PDF downloads
     implementation(libs.okhttp)

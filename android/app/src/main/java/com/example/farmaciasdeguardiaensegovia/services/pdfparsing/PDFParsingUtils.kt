@@ -19,6 +19,7 @@ package com.example.farmaciasdeguardiaensegovia.services.pdfparsing
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import java.util.*
 
 /**
@@ -35,10 +36,16 @@ object PDFParsingUtils {
     }
     
     /**
-     * Parse pharmacy list from text lines
+     * Parse pharmacy lines into Pharmacy objects
      */
     fun parsePharmacies(lines: List<String>): List<Pharmacy> {
-        return Pharmacy.parseBatch(lines)
+        DebugConfig.debugPrint("🏥 PDFParsingUtils.parsePharmacies: Processing ${lines.size} lines")
+        if (lines.isNotEmpty()) {
+            DebugConfig.debugPrint("🏥 Sample lines: ${lines.take(3)}")
+        }
+        val result = Pharmacy.parseBatch(lines)
+        DebugConfig.debugPrint("🏥 PDFParsingUtils.parsePharmacies: Parsed ${result.size} pharmacies")
+        return result
     }
     
     /**

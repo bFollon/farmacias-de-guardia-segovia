@@ -18,22 +18,23 @@
 package com.example.farmaciasdeguardiaensegovia.services.pdfparsing
 
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
-import com.tom_roush.pdfbox.pdmodel.PDDocument
+import java.io.File
 
 /**
  * Interface for PDF parsing strategies
- * Equivalent to iOS PDFParsingStrategy protocol
+ * Now using File instead of PDDocument for iText compatibility
  */
 interface PDFParsingStrategy {
-    /**
-     * Parse schedules from a PDF document
-     * @param pdf The PDF document to parse
-     * @return List of parsed pharmacy schedules
-     */
-    fun parseSchedules(pdf: PDDocument): List<PharmacySchedule>
     
     /**
-     * Get the name of this parsing strategy for debugging
+     * Parse schedules from a PDF file
+     * @param pdfFile The PDF file to parse
+     * @return List of parsed pharmacy schedules
+     */
+    fun parseSchedules(pdfFile: File): List<PharmacySchedule>
+    
+    /**
+     * Get the name of this parsing strategy (for debugging)
      */
     fun getStrategyName(): String
 }

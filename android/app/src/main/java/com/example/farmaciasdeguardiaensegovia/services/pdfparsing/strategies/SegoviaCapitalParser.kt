@@ -19,10 +19,13 @@ package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.ColumnBasedPDFParser
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
-import com.tom_roush.pdfbox.pdmodel.PDDocument
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfReader
+import java.io.File
 import java.util.*
 
 /**
@@ -33,24 +36,49 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
     
     override fun getStrategyName(): String = "SegoviaCapitalParser"
     
-    override fun parseSchedules(pdf: PDDocument): List<PharmacySchedule> {
+    override fun parseSchedules(pdfFile: File): List<PharmacySchedule> {
         val allSchedules = mutableListOf<PharmacySchedule>()
         
+        DebugConfig.debugPrint("\n=== Segovia Capital Schedules ===")
+        
         try {
+            val reader = PdfReader(pdfFile)
+            val pdfDoc = PdfDocument(reader)
+            val pageCount = pdfDoc.numberOfPages
+            
+            DebugConfig.debugPrint("📄 Processing $pageCount pages of Segovia Capital PDF...")
+            
             // Process each page
-            for (pageIndex in 0 until pdf.numberOfPages) {
-                val page = pdf.getPage(pageIndex)
-                
-                println("Processing page ${pageIndex + 1} of ${pdf.numberOfPages}")
+            for (pageIndex in 1..pageCount) { // iText uses 1-based indexing
+                DebugConfig.debugPrint("\n📃 Processing page $pageIndex of $pageCount")
                 
                 // Extract column text from the page
-                val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattened(page, 3)
+                val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattened(pdfFile, pageIndex, 3)
+                
+                DebugConfig.debugPrint("📊 Extracted data from page $pageIndex:")
+                DebugConfig.debugPrint("   📅 Dates: ${dates.size} entries")
+                DebugConfig.debugPrint("   ☀️ Day shift lines: ${dayShiftLines.size} entries")
+                DebugConfig.debugPrint("   🌙 Night shift lines: ${nightShiftLines.size} entries")
+                
+                if (dates.isNotEmpty()) {
+                    DebugConfig.debugPrint("📅 Sample dates: ${dates.take(5)}")
+                }
+                if (dayShiftLines.isNotEmpty()) {
+                    DebugConfig.debugPrint("☀️ Sample day shift: ${dayShiftLines.take(3)}")
+                }
+                if (nightShiftLines.isNotEmpty()) {
+                    DebugConfig.debugPrint("🌙 Sample night shift: ${nightShiftLines.take(3)}")
+                }
                 
                 // Convert pharmacy lines to Pharmacy objects
+                DebugConfig.debugPrint("🏥 Parsing pharmacy objects...")
                 val dayPharmacies = PDFParsingUtils.parsePharmacies(dayShiftLines)
                 val nightPharmacies = PDFParsingUtils.parsePharmacies(nightShiftLines)
                 
+                DebugConfig.debugPrint("✅ Parsed ${dayPharmacies.size} day pharmacies, ${nightPharmacies.size} night pharmacies")
+                
                 // Parse dates and remove duplicates while preserving order
+                DebugConfig.debugPrint("📅 Parsing dates...")
                 val seen = mutableSetOf<String>()
                 val parsedDates = dates
                     .mapNotNull { dateString ->
@@ -58,13 +86,16 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                         if (date != null) {
                             val key = "${date.day}-${date.month}-${date.year}"
                             if (seen.add(key)) date else null
-                        } else null
+                        } else {
+                            DebugConfig.debugWarn("⚠️ Could not parse date: '$dateString'")
+                            null
+                        }
                     }
                 
-                println("Array lengths - parsedDates: ${parsedDates.size}, dayPharmacies: ${dayPharmacies.size}, nightPharmacies: ${nightPharmacies.size}")
-                println("Parsed dates: ${parsedDates.map { "${it.day} ${it.month}" }}")
-                println("Day pharmacies: ${dayPharmacies.map { it.name }}")
-                println("Night pharmacies: ${nightPharmacies.map { it.name }}")
+                DebugConfig.debugPrint("📊 Array lengths - parsedDates: ${parsedDates.size}, dayPharmacies: ${dayPharmacies.size}, nightPharmacies: ${nightPharmacies.size}")
+                DebugConfig.debugPrint("📅 Parsed dates: ${parsedDates.map { "${it.day} ${it.month}" }}")
+                DebugConfig.debugPrint("☀️ Day pharmacies: ${dayPharmacies.map { it.name }}")
+                DebugConfig.debugPrint("🌙 Night pharmacies: ${nightPharmacies.map { it.name }}")
                 
                 // Create schedules for valid dates with available pharmacies
                 val minSize = minOf(parsedDates.size, dayPharmacies.size, nightPharmacies.size)
@@ -90,12 +121,13 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                 compareSchedulesByDate(first, second)
             }
             
-            println("Successfully parsed ${sortedSchedules.size} schedules for Segovia Capital")
+            pdfDoc.close()
+            
+            DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for Segovia Capital")
             return sortedSchedules
             
         } catch (e: Exception) {
-            println("Error parsing Segovia Capital PDF: ${e.message}")
-            e.printStackTrace()
+            DebugConfig.debugError("❌ Error parsing Segovia Capital PDF: ${e.message}", e)
             return emptyList()
         }
     }

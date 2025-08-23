@@ -21,7 +21,6 @@ import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaCapitalParser
-import com.tom_roush.pdfbox.pdmodel.PDDocument
 import java.io.File
 
 /**
@@ -56,55 +55,49 @@ class PDFProcessingService {
         
         // Check cache first (unless force refresh is requested)
         if (!forceRefresh && processingCache.containsKey(cacheKey)) {
-            println("PDFProcessingService: Returning cached results for ${region.name}")
+            DebugConfig.debugPrint("PDFProcessingService: Returning cached results for ${region.name}")
             return processingCache[cacheKey] ?: emptyList()
         }
         
-        println("PDFProcessingService: Processing PDF for ${region.name}")
-        println("PDF file: ${pdfFile.absolutePath}")
-        println("File size: ${pdfFile.length()} bytes")
-        println("File exists: ${pdfFile.exists()}")
-        println("Force refresh: $forceRefresh")
+        DebugConfig.debugPrint("\n=== PDF Processing Started ===")
+        DebugConfig.debugPrint("PDFProcessingService: Processing PDF for ${region.name}")
+        DebugConfig.debugPrint("📁 PDF file: ${pdfFile.absolutePath}")
+        DebugConfig.debugPrint("📏 File size: ${pdfFile.length()} bytes")
+        DebugConfig.debugPrint("📄 File exists: ${pdfFile.exists()}")
+        DebugConfig.debugPrint("🔄 Force refresh: $forceRefresh")
         
         if (!pdfFile.exists() || pdfFile.length() == 0L) {
-            println("PDFProcessingService: PDF file does not exist or is empty")
+            DebugConfig.debugError("PDFProcessingService: PDF file does not exist or is empty")
             return emptyList()
         }
         
         return try {
-            // Load PDF document
-            val document = PDDocument.load(pdfFile)
+            // Get the appropriate parsing strategy for this region
+            val parsingStrategy = getParsingStrategy(region)
+            DebugConfig.debugPrint("📋 Using parsing strategy: ${parsingStrategy::class.simpleName}")
             
-            try {
-                println("PDFProcessingService: PDF loaded successfully, ${document.numberOfPages} pages")
+            // Parse the schedules using the strategy
+            DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
+            val schedules = parsingStrategy.parseSchedules(pdfFile)
+            
+            // Cache the results
+            processingCache[cacheKey] = schedules
                 
-                // Get the appropriate parsing strategy for this region
-                val parsingStrategy = getParsingStrategy(region)
-                
-                // Parse the schedules using the strategy
-                val schedules = parsingStrategy.parseSchedules(document)
-                
-                // Cache the results
-                processingCache[cacheKey] = schedules
-                
-                println("PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
+                DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
                 
                 // Log some sample data for debugging
                 if (schedules.isNotEmpty()) {
-                    println("Sample schedule dates: ${schedules.take(3).map { "${it.date.day} ${it.date.month}" }}")
-                    println("First schedule shifts: ${schedules.first().shifts.keys.map { it.displayName }}")
+                    DebugConfig.debugPrint("📄 Sample schedule dates: ${schedules.take(3).map { "${it.date.day} ${it.date.month}" }}")
+                    DebugConfig.debugPrint("📄 First schedule shifts: ${schedules.first().shifts.keys.map { it.displayName }}")
+                } else {
+                    DebugConfig.debugWarn("⚠️ No schedules were parsed from the PDF!")
                 }
                 
+                DebugConfig.debugPrint("=== PDF Processing Complete ===\n")
                 schedules
                 
-            } finally {
-                // Always close the document to free memory
-                document.close()
-            }
-            
         } catch (e: Exception) {
-            println("PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}")
-            e.printStackTrace()
+            DebugConfig.debugError("❌ PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}", e)
             emptyList()
         }
     }
