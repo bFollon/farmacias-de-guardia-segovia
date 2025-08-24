@@ -108,18 +108,22 @@ data class Pharmacy(
 
         /**
          * Parse multiple pharmacies from a batch of text lines
-         * Equivalent to iOS Pharmacy.parseBatch(from:)
+         * Following iOS implementation - groups of 3 lines: [additionalInfo, address, name]
          */
         fun parseBatch(lines: List<String>): List<Pharmacy> {
-            println("Parsing batch of ${lines.size} lines")
+            println("🏥 Parsing batch of ${lines.size} lines")
             
             // Clean up and filter lines first
             val cleanLines = lines.map { it.trim() }
                 .filter { it.isNotEmpty() }
             
             if (cleanLines.isEmpty()) {
-                println("Warning: No valid lines to parse")
+                println("⚠️ Warning: No valid lines to parse")
                 return emptyList()
+            }
+            
+            if (cleanLines.size % 3 != 0) {
+                println("⚠️ Warning: Number of lines (${cleanLines.size}) is not divisible by 3. Some entries may be incomplete.")
             }
             
             val pharmacies = mutableListOf<Pharmacy>()
@@ -130,18 +134,19 @@ data class Pharmacy(
                 currentGroup.add(line)
                 
                 if (currentGroup.size == 3) {
-                    // Lines are [Additional info, Address, Name] in this order
+                    // iOS order: [additionalInfo, address, name]
                     val additionalInfo = currentGroup[0]
                     val address = currentGroup[1]
                     val name = currentGroup[2]
                     
-                    println("Processing pharmacy group at index ${index - 2}:")
-                    println("Name: $name")
-                    println("Address: $address")
+                    println("\n🔍 Processing pharmacy group at index ${index - 2}:")
+                    println("   📛 Name: $name")
+                    println("   📍 Address: $address")  
+                    println("   ℹ️ Info: $additionalInfo")
                     
                     // Validate pharmacy name format
                     if (!name.contains("FARMACIA", ignoreCase = true)) {
-                        println("Warning: Skipping entry - Invalid pharmacy name format: $name")
+                        println("⚠️ Warning: Skipping entry - Invalid pharmacy name format: $name")
                         currentGroup.clear()
                         continue
                     }
@@ -150,34 +155,39 @@ data class Pharmacy(
                     var phone = ""
                     var finalAdditionalInfo = additionalInfo
                     
-                    val phoneRegex = Regex("Tfno:\\s*\\d{3}\\s*\\d{6}")
+                    val phoneRegex = Regex("Tfno:\\s*(\\d{3}\\s*\\d{6})")
                     val phoneMatch = phoneRegex.find(additionalInfo)
                     
                     if (phoneMatch != null) {
-                        phone = phoneMatch.value
-                            .replace("Tfno:", "")
-                            .trim()
+                        phone = phoneMatch.groupValues[1].trim()
                         finalAdditionalInfo = additionalInfo
                             .replace(phoneMatch.value, "")
                             .trim()
-                        println("Extracted phone: $phone")
+                        println("   📞 Extracted phone: $phone")
+                    } else {
+                        println("   📞 No phone number found in additional info")
+                    }
+                    
+                    // Validate address
+                    if (address.isEmpty()) {
+                        println("⚠️ Warning: Empty address for pharmacy: $name")
                     }
                     
                     // Create pharmacy
-                    pharmacies.add(
-                        Pharmacy(
-                            name = name,
-                            address = address,
-                            phone = phone,
-                            additionalInfo = if (finalAdditionalInfo.isEmpty()) null else finalAdditionalInfo
-                        )
-                    )
+                    pharmacies.add(Pharmacy(
+                        name = name,
+                        address = address,
+                        phone = phone,
+                        additionalInfo = if (finalAdditionalInfo.isEmpty()) null else finalAdditionalInfo
+                    ))
+                    println("✅ Successfully parsed pharmacy: $name")
                     
                     // Start new group
                     currentGroup.clear()
                 }
             }
             
+            println("🏥 Final result: parsed ${pharmacies.size} pharmacies")
             return pharmacies
         }
     }

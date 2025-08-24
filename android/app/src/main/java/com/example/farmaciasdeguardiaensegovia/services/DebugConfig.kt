@@ -47,8 +47,6 @@ object DebugConfig {
     fun debugPrint(message: String) {
         if (isDebugEnabled) {
             Log.d(TAG, "[DEBUG] $message")
-            // Also print to console for immediate visibility
-            println("[DEBUG] $message")
         }
     }
     
@@ -60,7 +58,6 @@ object DebugConfig {
     fun debugPrint(tag: String, message: String) {
         if (isDebugEnabled) {
             Log.d("$TAG-$tag", "[DEBUG] $message")
-            println("[DEBUG][$tag] $message")
         }
     }
     
@@ -71,8 +68,6 @@ object DebugConfig {
      */
     fun debugError(message: String, throwable: Throwable? = null) {
         Log.e(TAG, "[ERROR] $message", throwable)
-        println("[ERROR] $message")
-        throwable?.printStackTrace()
     }
     
     /**
@@ -82,7 +77,6 @@ object DebugConfig {
     fun debugWarn(message: String) {
         if (isDebugEnabled) {
             Log.w(TAG, "[WARN] $message")
-            println("[WARN] $message")
         }
     }
     
@@ -99,7 +93,7 @@ object DebugConfig {
      */
     fun disableDebug() {
         isDebugEnabled = false
-        println("Debug mode disabled") // Use println since debug is disabled
+        Log.i(TAG, "Debug mode disabled") // Use Log since debug is disabled
     }
     
     /**
