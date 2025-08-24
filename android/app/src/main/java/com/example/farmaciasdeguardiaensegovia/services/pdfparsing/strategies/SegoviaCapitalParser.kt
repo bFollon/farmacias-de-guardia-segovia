@@ -17,6 +17,7 @@
 
 package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
 
+import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
@@ -51,52 +52,35 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             
             // Process each page with the same PDF document instance
             for (pageIndex in 1..pageCount) { // iText uses 1-based indexing
-                DebugConfig.debugPrint("\n📃 Processing page $pageIndex of $pageCount")
+                DebugConfig.debugPrint("📃 Processing page $pageIndex of $pageCount")
                 
                 // OPTIMIZED: Use the shared PDF document instance
                 val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattenedOptimized(pdfDoc, pageIndex, 3)
                 
-                DebugConfig.debugPrint("📊 Extracted data from page $pageIndex:")
-                DebugConfig.debugPrint("   📅 Dates: ${dates.size} entries")
-                DebugConfig.debugPrint("   ☀️ Day shift lines: ${dayShiftLines.size} entries")
-                DebugConfig.debugPrint("   🌙 Night shift lines: ${nightShiftLines.size} entries")
-                
-                if (dates.isNotEmpty()) {
-                    DebugConfig.debugPrint("📅 Sample dates: ${dates.take(5)}")
-                }
-                if (dayShiftLines.isNotEmpty()) {
-                    DebugConfig.debugPrint("☀️ Sample day shift: ${dayShiftLines.take(3)}")
-                }
-                if (nightShiftLines.isNotEmpty()) {
-                    DebugConfig.debugPrint("🌙 Sample night shift: ${nightShiftLines.take(3)}")
-                }
-                
-                // Convert pharmacy lines to Pharmacy objects
-                DebugConfig.debugPrint("🏥 Parsing pharmacy objects...")
-                val dayPharmacies = PDFParsingUtils.parsePharmacies(dayShiftLines)
-                val nightPharmacies = PDFParsingUtils.parsePharmacies(nightShiftLines)
-                
-                DebugConfig.debugPrint("✅ Parsed ${dayPharmacies.size} day pharmacies, ${nightPharmacies.size} night pharmacies")
-                
-                // Parse dates and remove duplicates while preserving order
-                DebugConfig.debugPrint("📅 Parsing dates...")
-                val seen = mutableSetOf<String>()
-                val parsedDates = dates
-                    .mapNotNull { dateString ->
-                        val date = PDFParsingUtils.parseDate(dateString)
-                        if (date != null) {
-                            val key = "${date.day}-${date.month}-${date.year}"
-                            if (seen.add(key)) date else null
-                        } else {
-                            DebugConfig.debugWarn("⚠️ Could not parse date: '$dateString'")
-                            null
-                        }
+                // OPTIMIZATION: Skip detailed logging for performance in production-like scenarios
+                if (DebugConfig.isDetailedLoggingEnabled) {
+                    DebugConfig.debugPrint("📊 Extracted data from page $pageIndex:")
+                    DebugConfig.debugPrint("   📅 Dates: ${dates.size} entries")
+                    DebugConfig.debugPrint("   ☀️ Day shift lines: ${dayShiftLines.size} entries")
+                    DebugConfig.debugPrint("   🌙 Night shift lines: ${nightShiftLines.size} entries")
+                    
+                    if (dates.isNotEmpty()) {
+                        DebugConfig.debugPrint("📅 Sample dates: ${dates.take(3)}")
                     }
+                    if (dayShiftLines.isNotEmpty()) {
+                        DebugConfig.debugPrint("☀️ Sample day shift: ${dayShiftLines.take(2)}")
+                    }
+                    if (nightShiftLines.isNotEmpty()) {
+                        DebugConfig.debugPrint("🌙 Sample night shift: ${nightShiftLines.take(2)}")
+                    }
+                }
                 
-                DebugConfig.debugPrint("📊 Array lengths - parsedDates: ${parsedDates.size}, dayPharmacies: ${dayPharmacies.size}, nightPharmacies: ${nightPharmacies.size}")
-                DebugConfig.debugPrint("📅 Parsed dates: ${parsedDates.map { "${it.day} ${it.month}" }}")
-                DebugConfig.debugPrint("☀️ Day pharmacies: ${dayPharmacies.map { it.name }}")
-                DebugConfig.debugPrint("🌙 Night pharmacies: ${nightPharmacies.map { it.name }}")
+                // OPTIMIZATION: Batch process pharmacies more efficiently
+                val dayPharmacies = PDFParsingUtils.parsePharmaciesOptimized(dayShiftLines)
+                val nightPharmacies = PDFParsingUtils.parsePharmaciesOptimized(nightShiftLines)
+                
+                // OPTIMIZATION: Batch parse dates with pre-filtering
+                val parsedDates = parseDatesOptimized(dates)
                 
                 // Create schedules for valid dates with available pharmacies
                 val minSize = minOf(parsedDates.size, dayPharmacies.size, nightPharmacies.size)
@@ -117,10 +101,8 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                 }
             }
             
-            // Sort schedules by date
-            val sortedSchedules = allSchedules.sortedWith { first, second ->
-                compareSchedulesByDate(first, second)
-            }
+            // Sort schedules by date efficiently
+            val sortedSchedules = allSchedules.sortedWith(dateComparator)
             
             DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for Segovia Capital")
             sortedSchedules
@@ -132,6 +114,33 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             // CRITICAL: Always close the PDF document once we're completely done
             pdfDoc.close()
         }
+    }
+    
+    /**
+     * OPTIMIZATION: Efficient date parsing with pre-filtering and caching
+     */
+    private fun parseDatesOptimized(dates: List<String>): List<DutyDate> {
+        val seen = mutableSetOf<String>()
+        val result = mutableListOf<DutyDate>()
+        
+        for (dateString in dates) {
+            // Quick pre-filter: skip obviously invalid dates
+            if (dateString.length < 10 || 
+                !dateString.contains("de") ||
+                dateString == "FECHA") {
+                continue
+            }
+            
+            val date = PDFParsingUtils.parseDate(dateString)
+            if (date != null) {
+                val key = "${date.day}-${date.month}-${date.year}"
+                if (seen.add(key)) {
+                    result.add(date)
+                }
+            }
+        }
+        
+        return result
     }
     
     /**
@@ -222,32 +231,38 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
     companion object {
         // OPTIMIZATION: Pre-compiled regex for performance
         private val SEPARATOR_LINE_REGEX by lazy { Regex("^[\\s\\-_=]+$") }
-    }
-    
-    /**
-     * Compare two pharmacy schedules by date for sorting
-     */
-    private fun compareSchedulesByDate(first: PharmacySchedule, second: PharmacySchedule): Int {
-        val currentYear = PDFParsingUtils.getCurrentYear()
         
-        // Extract year, month, day from dates
-        val firstYear = first.date.year ?: currentYear
-        val secondYear = second.date.year ?: currentYear
-        
-        if (firstYear != secondYear) {
-            return firstYear.compareTo(secondYear)
+        // OPTIMIZATION: Cached date comparator to avoid lambda creation overhead
+        private val dateComparator = Comparator<PharmacySchedule> { first, second ->
+            compareSchedulesByDate(first, second)
         }
         
-        val firstMonth = PDFParsingUtils.monthToNumber(first.date.month) ?: 0
-        val secondMonth = PDFParsingUtils.monthToNumber(second.date.month) ?: 0
-        
-        if (firstMonth != secondMonth) {
-            return firstMonth.compareTo(secondMonth)
+        /**
+         * Compare two pharmacy schedules by date for sorting
+         * OPTIMIZED: Static method to avoid repeated closures
+         */
+        private fun compareSchedulesByDate(first: PharmacySchedule, second: PharmacySchedule): Int {
+            val currentYear = PDFParsingUtils.getCurrentYear()
+            
+            // Extract year, month, day from dates
+            val firstYear = first.date.year ?: currentYear
+            val secondYear = second.date.year ?: currentYear
+            
+            if (firstYear != secondYear) {
+                return firstYear.compareTo(secondYear)
+            }
+            
+            val firstMonth = PDFParsingUtils.monthToNumber(first.date.month) ?: 0
+            val secondMonth = PDFParsingUtils.monthToNumber(second.date.month) ?: 0
+            
+            if (firstMonth != secondMonth) {
+                return firstMonth.compareTo(secondMonth)
+            }
+            
+            val firstDay = first.date.day
+            val secondDay = second.date.day
+            
+            return firstDay.compareTo(secondDay)
         }
-        
-        val firstDay = first.date.day
-        val secondDay = second.date.day
-        
-        return firstDay.compareTo(secondDay)
     }
 }

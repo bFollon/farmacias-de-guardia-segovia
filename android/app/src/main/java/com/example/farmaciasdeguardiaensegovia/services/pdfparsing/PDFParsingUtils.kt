@@ -49,6 +49,19 @@ object PDFParsingUtils {
     }
     
     /**
+     * OPTIMIZED: Parse pharmacy lines with reduced logging for performance
+     */
+    fun parsePharmaciesOptimized(lines: List<String>): List<Pharmacy> {
+        // Skip detailed logging for performance unless debugging is enabled
+        if (DebugConfig.isDetailedLoggingEnabled) {
+            return parsePharmacies(lines)
+        }
+        
+        // Fast path: parse without detailed logging
+        return Pharmacy.parseBatch(lines)
+    }
+    
+    /**
      * Convert Spanish month name to number (1-12)
      */
     fun monthToNumber(month: String): Int? {

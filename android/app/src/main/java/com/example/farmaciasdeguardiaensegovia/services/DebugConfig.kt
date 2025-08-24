@@ -40,6 +40,13 @@ object DebugConfig {
     var isDebugEnabled: Boolean = DEFAULT_DEBUG_ENABLED
     
     /**
+     * Detailed logging flag - controls verbose debug output that might impact performance
+     * Should be used for detailed parsing logs, coordinate extractions, etc.
+     * Disabled by default to avoid performance impact in production
+     */
+    var isDetailedLoggingEnabled: Boolean = false
+    
+    /**
      * Conditional debug print - only prints when debug is enabled
      * Uses Android Log.d() for debug level logging
      * @param message The message to print
@@ -94,6 +101,22 @@ object DebugConfig {
     fun disableDebug() {
         isDebugEnabled = false
         Log.i(TAG, "Debug mode disabled") // Use Log since debug is disabled
+    }
+    
+    /**
+     * Enable detailed logging mode (verbose output that may impact performance)
+     */
+    fun enableDetailedLogging() {
+        isDetailedLoggingEnabled = true
+        debugPrint("Detailed logging enabled")
+    }
+    
+    /**
+     * Disable detailed logging mode
+     */
+    fun disableDetailedLogging() {
+        isDetailedLoggingEnabled = false
+        debugPrint("Detailed logging disabled")
     }
     
     /**
