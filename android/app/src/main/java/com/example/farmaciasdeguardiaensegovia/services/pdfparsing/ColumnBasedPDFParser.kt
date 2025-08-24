@@ -30,8 +30,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * Base class for column-based PDF parsers using coordinate-based extraction
- * Now mirrors iOS approach with CellScanArea concept
+ * OPTIMIZED Base class for column-based PDF parsers using coordinate-based extraction
+ * Now mirrors iOS approach with CellScanArea concept AND reuses PDF document across extractions
  */
 abstract class ColumnBasedPDFParser {
     
@@ -58,18 +58,13 @@ abstract class ColumnBasedPDFParser {
     
     /**
      * Extract text from specific rectangular region on a PDF page
-     * Mirrors iOS coordinate-based text extraction
+     * OPTIMIZED: Now takes an already-open PdfDocument instead of opening/closing repeatedly
      */
-    private fun extractTextFromRegion(pdfFile: File, pageNumber: Int, region: Rectangle): String {
+    private fun extractTextFromRegion(pdfDoc: PdfDocument, pageNumber: Int, region: Rectangle): String {
         return try {
-            val reader = PdfReader(pdfFile)
-            val pdfDoc = PdfDocument(reader)
-            
             val filter = TextRegionEventFilter(region)
             val strategy = FilteredTextEventListener(LocationTextExtractionStrategy(), filter)
             val text = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(pageNumber), strategy)
-            
-            pdfDoc.close()
             text
         } catch (e: Exception) {
             DebugConfig.debugError("Error extracting text from region: ${e.message}", e)
@@ -79,10 +74,10 @@ abstract class ColumnBasedPDFParser {
     
     /**
      * Scan a row of cells using coordinate-based extraction
-     * Mirrors iOS scanRow functionality
+     * OPTIMIZED: Now takes an already-open PdfDocument instead of opening/closing repeatedly
      */
     private fun scanRowWithCoordinates(
-        pdfFile: File, 
+        pdfDoc: PdfDocument, 
         pageNumber: Int, 
         cellScanAreas: List<CellScanArea>, 
         rowY: Float,
@@ -109,7 +104,7 @@ abstract class ColumnBasedPDFParser {
                     scanArea.increment
                 )
                 
-                val text = extractTextFromRegion(pdfFile, pageNumber, region)
+                val text = extractTextFromRegion(pdfDoc, pageNumber, region)
                 val lines = text.split("\n").map { it.trim() }.filter { it.isNotEmpty() }
                 cellLines.addAll(lines)
             }
@@ -122,16 +117,14 @@ abstract class ColumnBasedPDFParser {
     
     /**
      * Get page dimensions for coordinate calculations
+     * OPTIMIZED: Now takes an already-open PdfDocument instead of opening/closing repeatedly
      */
-    private fun getPageDimensions(pdfFile: File, pageNumber: Int): Pair<Float, Float> {
+    private fun getPageDimensions(pdfDoc: PdfDocument, pageNumber: Int): Pair<Float, Float> {
         return try {
-            val reader = PdfReader(pdfFile)
-            val pdfDoc = PdfDocument(reader)
             val page = pdfDoc.getPage(pageNumber)
             val pageSize = page.getPageSize()
             val width = pageSize.width
             val height = pageSize.height
-            pdfDoc.close()
             Pair(width, height)
         } catch (e: Exception) {
             DebugConfig.debugError("Error getting page dimensions: ${e.message}", e)
@@ -141,99 +134,109 @@ abstract class ColumnBasedPDFParser {
     
     /**
      * Extract column text using coordinate-based scanning (mirrors iOS approach)
-     * Replaces the old text-based parsing with precise coordinate extraction
+     * OPTIMIZED: Now opens PDF once and reuses it for all extractions - MASSIVE PERFORMANCE IMPROVEMENT
      */
     fun extractColumnText(pdfFile: File, pageNumber: Int, columns: List<CellScanArea>): List<List<String>> {
         DebugConfig.debugPrint("🔍 ColumnBasedPDFParser: Coordinate-based extraction from page $pageNumber")
         
-        val (pageWidth, pageHeight) = getPageDimensions(pdfFile, pageNumber)
-        DebugConfig.debugPrint("📏 Page dimensions: ${pageWidth}x${pageHeight}")
+        // OPTIMIZATION: Open PDF once and reuse for all extractions
+        val reader = PdfReader(pdfFile)
+        val pdfDoc = PdfDocument(reader)
         
-        // Define cell scan areas for Segovia Capital format (mirrors iOS)
-        val contentWidth = pageWidth - (2 * Layout.pageMargin)
-        val dateColumnWidth = contentWidth * Layout.dateColumnWidthRatio
-        val pharmacyColumnWidth = (contentWidth - dateColumnWidth) / 2
-        
-        val cellScanAreas = listOf(
-            // Date column: single line per cell (but taller to capture whole date)
-            CellScanArea(
-                x = Layout.pageMargin,
-                width = dateColumnWidth,
-                increment = 15f, // Estimate base font height - will be refined
-                rows = 1
-            ),
-            // Day pharmacy column: three lines per cell
-            CellScanArea(
-                x = Layout.pageMargin + dateColumnWidth + Layout.columnGap,
-                width = pharmacyColumnWidth,
-                increment = 15f,
-                rows = 3
-            ),
-            // Night pharmacy column: three lines per cell  
-            CellScanArea(
-                x = Layout.pageMargin + dateColumnWidth + Layout.columnGap + pharmacyColumnWidth + Layout.columnGap,
-                width = pharmacyColumnWidth,
-                increment = 15f,
-                rows = 3
-            )
-        )
-        
-        DebugConfig.debugPrint("� Cell scan areas defined:")
-        cellScanAreas.forEachIndexed { index, area ->
-            val columnName = when(index) { 
-                0 -> "Date" 
-                1 -> "Day Pharmacy" 
-                2 -> "Night Pharmacy"
-                else -> "Unknown"
-            }
-            DebugConfig.debugPrint("  $columnName: x=${area.x}, width=${area.width}, rows=${area.rows}")
-        }
-        
-        // Find coherent rows and extract data
-        val allDates = mutableListOf<String>()
-        val allDayPharmacies = mutableListOf<String>()
-        val allNightPharmacies = mutableListOf<String>()
-        
-        // Scan from top of page looking for coherent rows
-        var currentY = 100f // Start below header area
-        val rowHeight = 45f   // Approximate height of each logical row (3 text lines)
-        
-        while (currentY < pageHeight - 100f) { // Stop before footer
-            val rowData = scanRowWithCoordinates(pdfFile, pageNumber, cellScanAreas, currentY, pageHeight)
+        return try {
+            val (pageWidth, pageHeight) = getPageDimensions(pdfDoc, pageNumber)
+            DebugConfig.debugPrint("📏 Page dimensions: ${pageWidth}x${pageHeight}")
             
-            // Check if this is a coherent row (has date + pharmacy data)
-            if (isCoherentSegoviaRow(rowData)) {
-                DebugConfig.debugPrint("✅ Found coherent row at Y=$currentY")
-                
-                // Extract date (first column)
-                val dateCell = rowData.getOrNull(0) ?: emptyList()
-                if (dateCell.isNotEmpty()) {
-                    val dateText = dateCell.joinToString(" ").trim()
-                    if (dateText.isNotEmpty()) {
-                        allDates.add(dateText)
-                        DebugConfig.debugPrint("� Extracted date: $dateText")
-                    }
+            // Define cell scan areas for Segovia Capital format (mirrors iOS)
+            val contentWidth = pageWidth - (2 * Layout.pageMargin)
+            val dateColumnWidth = contentWidth * Layout.dateColumnWidthRatio
+            val pharmacyColumnWidth = (contentWidth - dateColumnWidth) / 2
+            
+            val cellScanAreas = listOf(
+                // Date column: single line per cell (but taller to capture whole date)
+                CellScanArea(
+                    x = Layout.pageMargin,
+                    width = dateColumnWidth,
+                    increment = 15f, // Estimate base font height - will be refined
+                    rows = 1
+                ),
+                // Day pharmacy column: three lines per cell
+                CellScanArea(
+                    x = Layout.pageMargin + dateColumnWidth + Layout.columnGap,
+                    width = pharmacyColumnWidth,
+                    increment = 15f,
+                    rows = 3
+                ),
+                // Night pharmacy column: three lines per cell  
+                CellScanArea(
+                    x = Layout.pageMargin + dateColumnWidth + Layout.columnGap + pharmacyColumnWidth + Layout.columnGap,
+                    width = pharmacyColumnWidth,
+                    increment = 15f,
+                    rows = 3
+                )
+            )
+            
+            DebugConfig.debugPrint("📱 Cell scan areas defined:")
+            cellScanAreas.forEachIndexed { index, area ->
+                val columnName = when(index) { 
+                    0 -> "Date" 
+                    1 -> "Day Pharmacy" 
+                    2 -> "Night Pharmacy"
+                    else -> "Unknown"
                 }
-                
-                // Extract day pharmacy (second column)  
-                val dayCell = rowData.getOrNull(1) ?: emptyList()
-                allDayPharmacies.addAll(dayCell)
-                DebugConfig.debugPrint("☀️ Extracted day pharmacy lines: ${dayCell.size}")
-                
-                // Extract night pharmacy (third column)
-                val nightCell = rowData.getOrNull(2) ?: emptyList()
-                allNightPharmacies.addAll(nightCell)
-                DebugConfig.debugPrint("🌙 Extracted night pharmacy lines: ${nightCell.size}")
-                
-                currentY += rowHeight // Move to next logical row
-            } else {
-                currentY += 5f // Small increment to continue searching
+                DebugConfig.debugPrint("  $columnName: x=${area.x}, width=${area.width}, rows=${area.rows}")
             }
+            
+            // Find coherent rows and extract data
+            val allDates = mutableListOf<String>()
+            val allDayPharmacies = mutableListOf<String>()
+            val allNightPharmacies = mutableListOf<String>()
+            
+            // Scan from top of page looking for coherent rows
+            var currentY = 100f // Start below header area
+            val rowHeight = 45f   // Approximate height of each logical row (3 text lines)
+            
+            while (currentY < pageHeight - 100f) { // Stop before footer
+                val rowData = scanRowWithCoordinates(pdfDoc, pageNumber, cellScanAreas, currentY, pageHeight)
+                
+                // Check if this is a coherent row (has date + pharmacy data)
+                if (isCoherentSegoviaRow(rowData)) {
+                    DebugConfig.debugPrint("✅ Found coherent row at Y=$currentY")
+                    
+                    // Extract date (first column)
+                    val dateCell = rowData.getOrNull(0) ?: emptyList()
+                    if (dateCell.isNotEmpty()) {
+                        val dateText = dateCell.joinToString(" ").trim()
+                        if (dateText.isNotEmpty()) {
+                            allDates.add(dateText)
+                            DebugConfig.debugPrint("📅 Extracted date: $dateText")
+                        }
+                    }
+                    
+                    // Extract day pharmacy (second column)  
+                    val dayCell = rowData.getOrNull(1) ?: emptyList()
+                    allDayPharmacies.addAll(dayCell)
+                    DebugConfig.debugPrint("☀️ Extracted day pharmacy lines: ${dayCell.size}")
+                    
+                    // Extract night pharmacy (third column)
+                    val nightCell = rowData.getOrNull(2) ?: emptyList()
+                    allNightPharmacies.addAll(nightCell)
+                    DebugConfig.debugPrint("🌙 Extracted night pharmacy lines: ${nightCell.size}")
+                    
+                    currentY += rowHeight // Move to next logical row
+                } else {
+                    currentY += 5f // Small increment to continue searching
+                }
+            }
+            
+            DebugConfig.debugPrint("📊 Coordinate extraction result: ${allDates.size} dates, ${allDayPharmacies.size} day lines, ${allNightPharmacies.size} night lines")
+            
+            listOf(allDates, allDayPharmacies, allNightPharmacies)
+            
+        } finally {
+            // CRITICAL: Always close the PDF document once we're done
+            pdfDoc.close()
         }
-        
-        DebugConfig.debugPrint("📊 Coordinate extraction result: ${allDates.size} dates, ${allDayPharmacies.size} day lines, ${allNightPharmacies.size} night lines")
-        
-        return listOf(allDates, allDayPharmacies, allNightPharmacies)
     }
     
     /**
@@ -260,12 +263,12 @@ abstract class ColumnBasedPDFParser {
     
     /**
      * Extract column text flattened into arrays (for batch processing)
-     * Now using coordinate-based extraction instead of text parsing
+     * OPTIMIZED: Uses the updated extractColumnText method with PDF reuse
      */
     fun extractColumnTextFlattened(pdfFile: File, pageNumber: Int, columnCount: Int): Triple<List<String>, List<String>, List<String>> {
         DebugConfig.debugPrint("🔍 ColumnBasedPDFParser: Coordinate-based extraction from page $pageNumber with $columnCount columns")
         
-        // Use the new coordinate-based extraction
+        // Use the new optimized coordinate-based extraction
         val columnTexts = extractColumnText(pdfFile, pageNumber, emptyList()) // cellScanAreas defined internally
         
         return Triple(

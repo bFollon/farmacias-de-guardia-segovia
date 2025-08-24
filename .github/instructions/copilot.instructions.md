@@ -31,6 +31,7 @@ This project's goal is to create an application that displays the pharmacies on 
 - Location services integration for proximity-based pharmacy suggestions.
 - Dark/light mode support following system preferences.
 - Each region has it's own schedule particularities, which is parsed by the app and standardized into shifts or time spans.
+- PDF parsing using coordinates that extracts information in areas.
 
 ## Region Details
 - **🏙 Segovia Capital**: Urban area  
