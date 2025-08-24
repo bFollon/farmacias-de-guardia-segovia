@@ -5,9 +5,42 @@ applyTo: '**'
 # Farmacias de Guardia - Segovia
 
 ## About the project
-This project's goal is to create an application that displays the pharmacies on duty in Segovia, which is a province and a city in Spain.
+This project creates cross-platform apps that display pharmacy duty schedules for Segovia, Spain. The iOS app is fully functional; Android is currently in incremental migration to achieve feature parity.
 
-## Current Status
+## Architecture Overview
+
+### Multi-Platform Structure
+- **iOS**: Swift/SwiftUI app in `ios/` (complete, stable)
+- **Android**: Kotlin/Jetpack Compose app in `android/` (in development)
+- **Migration Backup**: Reference implementation in `android_full_migration_backup/` (failed attempt, use with caution)
+
+### Core Service Pattern (Strategy-based PDF Processing)
+The app uses a **Strategy Pattern** for region-specific PDF parsing:
+
+```
+PDFProcessingService
+├── PDFParsingStrategy (protocol/interface)
+├── ColumnBasedPDFParser (base class)
+└── Region-specific parsers:
+    ├── SegoviaCapitalParser (3-column: dates, day shifts, night shifts)
+    ├── CuellarParser (2-column: dates, pharmacies)
+    ├── ElEspinarParser (2-column: dates, pharmacies) 
+    └── SegoviaRuralParser (complex ZBS handling)
+```
+
+### Key Data Models
+- **Region**: Core entity with `id`, `name`, `icon`, `pdfURL`, `metadata`
+- **PharmacySchedule**: Links dates to shift-based pharmacy assignments
+- **Pharmacy**: Extracted from PDF text with name/address parsing
+- **DutyTimeSpan/DutyDate**: Time and date representations
+
+### PDF Processing Architecture
+1. **Strategy Registration**: Each region has a dedicated parser class
+2. **Column-based Extraction**: Uses coordinate-based text extraction from PDF areas
+3. **Caching**: Results cached to avoid re-parsing the same PDF
+4. **Optimization**: Batch processing and pre-compiled regex patterns
+
+### Current Status
 - ✅ **iOS App**: Fully functional with all features implemented in SwiftUI. **DO NOT MODIFY UNLESS SPECIFICALLY ASKED TO.**
 - ✅ **Android Basic Structure**: Basic working app with navigation using Jetpack Compose + Material3
 - ✅ **Android Splash Screen**: Enhanced splash screen with iOS-matching animations, gradient text, progress indicator, and region emoji progression (🏙🌳🏔️🚜)
@@ -20,44 +53,62 @@ This project's goal is to create an application that displays the pharmacies on 
 - 🎯 **Goal**: Feature parity between iOS and Android apps
 
 ## WORKING INSTRUCTIONS FOR COPILOT AGENT **FOLLOW THESE**
-- **Development**
-  - Before implementing changes, explain the purpose and scope of the changes to be made, and ask for user confirmation every time. Reason through any significant design decisions or changes.
-  - Development should be done in small testable increments.
-	- Tasks should always limit their scope to a single feature or bug fix.
-	- Avoid modifying things that fall outside the scope of the task.
-  - When developing, follow SOLID principles.
-  - When developing, ensure that code is modular and reusable.
-  - When developing, avoid magic numbers and strings.
-  - When developing, make constants configurable.
-- **Status Updates**
-	- After completing any feature or significant development milestone, update the "Current Status" section in this instructions file.
-	- Mark completed features with ✅ and update the "Next Steps" section accordingly.
-	- This ensures the instructions always reflect the current state of the project.
-- **Refactoring**
-	- Refactoring should be done in small, incremental steps.
-	- Each refactoring step should be tested to ensure it doesn't break existing functionality.
-- **Compiling**
-	- Swift code should be compiled manually and copilot should prompt the user to compile the code and report any errors.
-	- Kotlin code should be compiled manually and copilot should prompt the user to compile the code and report any errors.
-- **Migration**
-	- When migrating features from iOS to Android, ensure that the Android implementation matches the iOS functionality as closely as possible.
-	- Document any discrepancies between the iOS and Android implementations.
-	- There is some pre-made migration work in `./android_full_migration_backup`. You may use it as a reference or starting point for your migration efforts, although iOS implementation will always take precedence.
-  - Note that the migration backup did not work due to different kind of errors with themes and configuration, so be careful when using it.
+
+### Development Workflow
+- **Before implementing changes**, explain the purpose and scope of the changes to be made, and ask for user confirmation every time. Reason through any significant design decisions or changes.
+- **Small incremental changes**: Development should be done in small testable increments. Tasks should always limit their scope to a single feature or bug fix.
+- **SOLID principles**: When developing, follow SOLID principles, ensure that code is modular and reusable, avoid magic numbers and strings, and make constants configurable.
+
+### Platform-Specific Guidelines
+
+#### iOS Development (Swift/SwiftUI)
+- **Location**: All code in `ios/FarmaciasDeGuardiaEnSegovia/`
+- **Key patterns**: Strategy pattern for PDF parsing, ObservableObject for state management, environmental values for theming
+- **Testing**: Use `xcodebuild test -scheme FarmaciasDeGuardiaEnSegovia -destination 'platform=iOS Simulator,name=iPhone 16 Pro'`
+- **Debug control**: Use `DebugConfig.debugPrint()` for conditional logging
+
+#### Android Development (Kotlin/Jetpack Compose)
+- **Location**: Main code in `android/app/src/main/java/com/example/farmaciasdeguardiaensegovia/`
+- **Key patterns**: Mimic iOS architecture - Strategy pattern for PDF parsing, Repository pattern for data access
+- **PDF Libraries**: Current Android uses iText7, migration backup used PDFBox (both valid approaches)
+- **Build**: `./gradlew assembleDebug` from `android/` directory
+- **Debug control**: Mirror iOS `DebugConfig` class patterns
+
+### PDF Processing Strategy Architecture
+When working with PDF parsing:
+1. **Strategy Registration**: Register parsers in `PDFProcessingService` constructor using region IDs
+2. **Column-based Extraction**: Use coordinate-based extraction - define page margins, column widths, and extraction areas
+3. **Parser Implementation**: Extend `ColumnBasedPDFParser`, implement region-specific layout handling
+4. **Caching**: Always implement caching to avoid re-parsing same files
+5. **Error Handling**: Graceful degradation when PDF structure changes
+
+### Status Updates
+- After completing any feature or significant development milestone, update the "Current Status" section in this instructions file.
+- Mark completed features with ✅ and update the "Next Steps" section accordingly.
+- This ensures the instructions always reflect the current state of the project.
+
+### Migration Guidelines
+- When migrating features from iOS to Android, ensure that the Android implementation matches the iOS functionality as closely as possible.
+- Use `./android_full_migration_backup` as a reference or starting point, although **iOS implementation always takes precedence**.
+- Note that the migration backup had theme and configuration errors, so be careful when using it.
+- **Focus on architecture patterns**: Strategy pattern for PDF parsing, service-based architecture, similar data models
+
+### Build & Test Commands
+- **iOS**: `xcodebuild test -scheme FarmaciasDeGuardiaEnSegovia -destination 'platform=iOS Simulator,name=iPhone 16 Pro'`
+- **Android**: `cd android && ./gradlew assembleDebug`
+- **Android Test**: `cd android && ./gradlew test`
 
 ## Core functionalities
-- A splash screen that displays the app logo and a loading indicator.
-- A home screen that shows 4 possible locations: `Segovia`, `Cuéllar`, `El espinar`, and `Segovia Rural`.
-- Each region displays pharmacy duty schedules parsed from official PDF files.
-- Date picker to select the desired date for pharmacy schedules.
-- Map integration showing pharmacy locations with directions via Apple Maps (on iOS) /Google Maps/Waze.
-- Closest pharmacy service using location services to find the nearest on-duty pharmacy.
-- Link to official pharmacy PDFs for more information.
-- Caching system for offline access and performance optimization of previously loaded schedules.
-- Location services integration for proximity-based pharmacy suggestions.
-- Dark/light mode support following system preferences.
-- Each region has it's own schedule particularities, which is parsed by the app and standardized into shifts or time spans.
-- PDF parsing using coordinates that extracts information in areas.
+- **Multi-region support**: 4 regions (Segovia Capital, Cuéllar, El Espinar, Segovia Rural) with different PDF formats and parsing strategies
+- **Strategy-based PDF processing**: Each region uses dedicated parser classes with coordinate-based text extraction 
+- **ZBS (Zona Básica de Salud) support**: Segovia Rural subdivides into 8 healthcare areas with specialized schedule handling
+- **Shift-based scheduling**: Day/night shifts for Segovia Capital, full-day for other regions, time spans for rural areas
+- **Caching system**: PDF parsing results cached to avoid reprocessing, with cache invalidation support
+- **Location services**: Closest pharmacy detection using device GPS with proximity-based pharmacy suggestions
+- **Map integration**: Pharmacy locations with routing via Apple Maps (iOS) / Google Maps/Waze (Android)
+- **Date picker navigation**: Select specific dates for pharmacy schedule viewing
+- **Dark/light mode**: Theme support following system preferences
+- **Performance optimizations**: Batch processing, pre-compiled regex patterns, optimized PDF column extraction
 
 ## Region Details
 - **🏙 Segovia Capital**: Urban area  
