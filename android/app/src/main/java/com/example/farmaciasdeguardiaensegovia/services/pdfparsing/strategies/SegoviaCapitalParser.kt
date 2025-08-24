@@ -41,19 +41,20 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
         
         DebugConfig.debugPrint("\n=== Segovia Capital Schedules ===")
         
-        try {
-            val reader = PdfReader(pdfFile)
-            val pdfDoc = PdfDocument(reader)
+        // MAJOR OPTIMIZATION: Open PDF once and reuse across all pages
+        val reader = PdfReader(pdfFile)
+        val pdfDoc = PdfDocument(reader)
+        
+        return try {
             val pageCount = pdfDoc.numberOfPages
-            
             DebugConfig.debugPrint("📄 Processing $pageCount pages of Segovia Capital PDF...")
             
-            // Process each page
+            // Process each page with the same PDF document instance
             for (pageIndex in 1..pageCount) { // iText uses 1-based indexing
                 DebugConfig.debugPrint("\n📃 Processing page $pageIndex of $pageCount")
                 
-                // Extract column text from the page
-                val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattened(pdfFile, pageIndex, 3)
+                // OPTIMIZED: Use the shared PDF document instance
+                val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattenedOptimized(pdfDoc, pageIndex, 3)
                 
                 DebugConfig.debugPrint("📊 Extracted data from page $pageIndex:")
                 DebugConfig.debugPrint("   📅 Dates: ${dates.size} entries")
@@ -121,15 +122,106 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                 compareSchedulesByDate(first, second)
             }
             
-            pdfDoc.close()
-            
             DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for Segovia Capital")
-            return sortedSchedules
+            sortedSchedules
             
         } catch (e: Exception) {
             DebugConfig.debugError("❌ Error parsing Segovia Capital PDF: ${e.message}", e)
-            return emptyList()
+            emptyList()
+        } finally {
+            // CRITICAL: Always close the PDF document once we're completely done
+            pdfDoc.close()
         }
+    }
+    
+    /**
+     * OPTIMIZED: Extract column text flattened into arrays using shared PDF document
+     * This eliminates the repeated opening/closing of PDF documents
+     */
+    private fun extractColumnTextFlattenedOptimized(pdfDoc: PdfDocument, pageNumber: Int, columnCount: Int): Triple<List<String>, List<String>, List<String>> {
+        DebugConfig.debugPrint("🔍 SegoviaCapitalParser: Optimized extraction from page $pageNumber with $columnCount columns")
+        
+        return try {
+            val (pageWidth, pageHeight) = getPageDimensionsOptimized(pdfDoc, pageNumber)
+            
+            // OPTIMIZATION: Use large column extractions instead of many small ones
+            val contentWidth = pageWidth - (2 * 40f) // pageMargin = 40f
+            val dateColumnWidth = contentWidth * 0.22f // dateColumnWidthRatio = 0.22f
+            val pharmacyColumnWidth = (contentWidth - dateColumnWidth) / 2
+            
+            // Extract text from large column areas in single operations
+            val allDates = extractColumnTextOptimizedForParser(pdfDoc, pageNumber, pageHeight,
+                40f, dateColumnWidth, 100f, pageHeight - 100f)
+            
+            val allDayPharmacies = extractColumnTextOptimizedForParser(pdfDoc, pageNumber, pageHeight,
+                40f + dateColumnWidth + 5f, pharmacyColumnWidth, 100f, pageHeight - 100f)
+            
+            val allNightPharmacies = extractColumnTextOptimizedForParser(pdfDoc, pageNumber, pageHeight,
+                40f + dateColumnWidth + 5f + pharmacyColumnWidth + 5f, pharmacyColumnWidth, 100f, pageHeight - 100f)
+            
+            Triple(allDates, allDayPharmacies, allNightPharmacies)
+            
+        } catch (e: Exception) {
+            DebugConfig.debugError("Error in optimized extraction: ${e.message}", e)
+            Triple(emptyList(), emptyList(), emptyList())
+        }
+    }
+    
+    /**
+     * Get page dimensions from an already-open PDF document
+     */
+    private fun getPageDimensionsOptimized(pdfDoc: PdfDocument, pageNumber: Int): Pair<Float, Float> {
+        return try {
+            val page = pdfDoc.getPage(pageNumber)
+            val pageSize = page.getPageSize()
+            Pair(pageSize.width, pageSize.height)
+        } catch (e: Exception) {
+            DebugConfig.debugError("Error getting page dimensions: ${e.message}", e)
+            Pair(595f, 842f) // A4 default
+        }
+    }
+    
+    /**
+     * Extract text from entire column in one operation using shared PDF document
+     * OPTIMIZED: Uses pre-compiled regex to reduce object allocations
+     */
+    private fun extractColumnTextOptimizedForParser(
+        pdfDoc: PdfDocument, 
+        pageNumber: Int, 
+        pageHeight: Float,
+        x: Float, 
+        width: Float, 
+        startY: Float, 
+        endY: Float
+    ): List<String> {
+        return try {
+            val region = com.itextpdf.kernel.geom.Rectangle(x, pageHeight - endY, width, endY - startY)
+            val filter = com.itextpdf.kernel.pdf.canvas.parser.filter.TextRegionEventFilter(region)
+            val strategy = com.itextpdf.kernel.pdf.canvas.parser.listener.FilteredTextEventListener(
+                com.itextpdf.kernel.pdf.canvas.parser.listener.LocationTextExtractionStrategy(), filter)
+            val rawText = com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor.getTextFromPage(pdfDoc.getPage(pageNumber), strategy)
+            
+            // Parse the extracted text into meaningful lines using optimized filtering
+            rawText
+                .split('\n')
+                .asSequence()
+                .map { it.trim() }
+                .filter { line ->
+                    line.isNotEmpty() && 
+                    line.length > 2 && 
+                    !line.matches(SEPARATOR_LINE_REGEX) // Use pre-compiled regex
+                }
+                .distinctBy { it.lowercase() }
+                .toList()
+        } catch (e: Exception) {
+            DebugConfig.debugError("Error in parser column extraction: ${e.message}", e)
+            emptyList()
+        }
+    }
+    
+    companion object {
+        // OPTIMIZATION: Pre-compiled regex for performance
+        private val SEPARATOR_LINE_REGEX by lazy { Regex("^[\\s\\-_=]+$") }
     }
     
     /**
