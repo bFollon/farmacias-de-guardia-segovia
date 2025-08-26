@@ -17,6 +17,7 @@
 
 package com.example.farmaciasdeguardiaensegovia.data
 
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
@@ -111,23 +112,31 @@ data class Pharmacy(
          * Following iOS implementation - groups of 3 lines: [additionalInfo, address, name]
          */
         fun parseBatch(lines: List<String>): List<Pharmacy> {
-            println("🏥 Parsing batch of ${lines.size} lines")
+            // PERFORMANCE: Avoid logging unless debugging is enabled
+            if (DebugConfig.isDetailedLoggingEnabled) {
+                println("🏥 Parsing batch of ${lines.size} lines")
+            }
             
             // Clean up and filter lines first
             val cleanLines = lines.map { it.trim() }
                 .filter { it.isNotEmpty() }
             
             if (cleanLines.isEmpty()) {
-                println("⚠️ Warning: No valid lines to parse")
+                if (DebugConfig.isDetailedLoggingEnabled) {
+                    println("⚠️ Warning: No valid lines to parse")
+                }
                 return emptyList()
             }
             
-            if (cleanLines.size % 3 != 0) {
+            if (cleanLines.size % 3 != 0 && DebugConfig.isDetailedLoggingEnabled) {
                 println("⚠️ Warning: Number of lines (${cleanLines.size}) is not divisible by 3. Some entries may be incomplete.")
             }
             
             val pharmacies = mutableListOf<Pharmacy>()
             val currentGroup = mutableListOf<String>()
+            
+            // PERFORMANCE: Pre-compile regex to avoid repeated compilation
+            val phoneRegex = Regex("Tfno:\\s*(\\d{3}\\s*\\d{6})")
             
             // Process lines in groups of 3
             for ((index, line) in cleanLines.withIndex()) {
@@ -139,14 +148,19 @@ data class Pharmacy(
                     val address = currentGroup[1]
                     val name = currentGroup[2]
                     
-                    println("\n🔍 Processing pharmacy group at index ${index - 2}:")
-                    println("   📛 Name: $name")
-                    println("   📍 Address: $address")  
-                    println("   ℹ️ Info: $additionalInfo")
+                    // PERFORMANCE: Only log in debug mode
+                    if (DebugConfig.isDetailedLoggingEnabled) {
+                        println("\n🔍 Processing pharmacy group at index ${index - 2}:")
+                        println("   📛 Name: $name")
+                        println("   📍 Address: $address")  
+                        println("   ℹ️ Info: $additionalInfo")
+                    }
                     
                     // Validate pharmacy name format
                     if (!name.contains("FARMACIA", ignoreCase = true)) {
-                        println("⚠️ Warning: Skipping entry - Invalid pharmacy name format: $name")
+                        if (DebugConfig.isDetailedLoggingEnabled) {
+                            println("⚠️ Warning: Skipping entry - Invalid pharmacy name format: $name")
+                        }
                         currentGroup.clear()
                         continue
                     }
@@ -155,7 +169,6 @@ data class Pharmacy(
                     var phone = ""
                     var finalAdditionalInfo = additionalInfo
                     
-                    val phoneRegex = Regex("Tfno:\\s*(\\d{3}\\s*\\d{6})")
                     val phoneMatch = phoneRegex.find(additionalInfo)
                     
                     if (phoneMatch != null) {
@@ -163,13 +176,15 @@ data class Pharmacy(
                         finalAdditionalInfo = additionalInfo
                             .replace(phoneMatch.value, "")
                             .trim()
-                        println("   📞 Extracted phone: $phone")
-                    } else {
+                        if (DebugConfig.isDetailedLoggingEnabled) {
+                            println("   📞 Extracted phone: $phone")
+                        }
+                    } else if (DebugConfig.isDetailedLoggingEnabled) {
                         println("   📞 No phone number found in additional info")
                     }
                     
                     // Validate address
-                    if (address.isEmpty()) {
+                    if (address.isEmpty() && DebugConfig.isDetailedLoggingEnabled) {
                         println("⚠️ Warning: Empty address for pharmacy: $name")
                     }
                     
@@ -180,14 +195,19 @@ data class Pharmacy(
                         phone = phone,
                         additionalInfo = if (finalAdditionalInfo.isEmpty()) null else finalAdditionalInfo
                     ))
-                    println("✅ Successfully parsed pharmacy: $name")
+                    
+                    if (DebugConfig.isDetailedLoggingEnabled) {
+                        println("✅ Successfully parsed pharmacy: $name")
+                    }
                     
                     // Start new group
                     currentGroup.clear()
                 }
             }
             
-            println("🏥 Final result: parsed ${pharmacies.size} pharmacies")
+            if (DebugConfig.isDetailedLoggingEnabled) {
+                println("🏥 Final result: parsed ${pharmacies.size} pharmacies")
+            }
             return pharmacies
         }
     }

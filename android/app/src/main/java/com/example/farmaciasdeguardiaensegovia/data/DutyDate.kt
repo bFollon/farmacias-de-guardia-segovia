@@ -17,6 +17,7 @@
 
 package com.example.farmaciasdeguardiaensegovia.data
 
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import kotlinx.serialization.Serializable
 import java.util.*
 
@@ -72,6 +73,9 @@ data class DutyDate(
             "septiembre" to 9, "octubre" to 10, "noviembre" to 11, "diciembre" to 12
         )
         
+        // PERFORMANCE: Pre-compiled regex pattern to avoid repeated compilation
+        private val datePattern = """(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\s(\d{1,2})\sde\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\sde\s(\d{4}))?""".toRegex()
+        
         fun monthToNumber(month: String): Int? {
             return MONTH_MAP[month.lowercase()]
         }
@@ -84,13 +88,17 @@ data class DutyDate(
          * Parse a date string like "lunes, 15 de julio de 2025"
          */
         fun parse(dateString: String): DutyDate? {
-            println("Attempting to parse date: '$dateString'")
+            // PERFORMANCE: Only log when detailed debugging is enabled
+            if (DebugConfig.isDetailedLoggingEnabled) {
+                println("Attempting to parse date: '$dateString'")
+            }
             
-            val datePattern = """(?:lunes|martes|miércoles|jueves|viernes|sábado|domingo),\s(\d{1,2})\sde\s(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\sde\s(\d{4}))?""".toRegex()
-            
+            // PERFORMANCE: Use pre-compiled regex pattern
             val match = datePattern.find(dateString)
             if (match == null) {
-                println("Failed to match regex pattern")
+                if (DebugConfig.isDetailedLoggingEnabled) {
+                    println("Failed to match regex pattern")
+                }
                 return null
             }
             
