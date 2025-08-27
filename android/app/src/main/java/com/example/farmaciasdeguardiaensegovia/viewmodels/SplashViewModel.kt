@@ -78,10 +78,15 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                         return@withContext
                     }
                     
+                    // Start preloading - this will continue even if ViewModel is destroyed
+                    // because the repository manages its own lifecycle
                     preloadSegoviaCapitalPDF()
                 }
             } catch (e: Exception) {
-                DebugConfig.debugError("SplashViewModel: Error during background loading", e)
+                // Only log if not a cancellation exception (which is expected during navigation)
+                if (e !is kotlinx.coroutines.CancellationException) {
+                    DebugConfig.debugError("SplashViewModel: Error during background loading", e)
+                }
                 // Still mark as complete to not block the UI
                 _loadingProgress.value = 1f
                 _isLoading.value = false
@@ -119,7 +124,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             }
             
         } catch (e: Exception) {
-            DebugConfig.debugError("SplashViewModel: Error preloading Segovia Capital PDF", e)
+            // Only log if not a cancellation exception (which is expected during navigation)
+            if (e !is kotlinx.coroutines.CancellationException) {
+                DebugConfig.debugError("SplashViewModel: Error preloading Segovia Capital PDF", e)
+            }
             withContext(Dispatchers.Main) { _loadingProgress.value = 1f }
         } finally {
             withContext(Dispatchers.Main) { _isLoading.value = false }

@@ -165,27 +165,40 @@ fun SplashScreen(
         delay(800) // Wait a bit for Segovia Capital to load
         
         // Animate remaining regions (visual only - not tied to actual loading)
+        // But wait for Segovia Capital to finish loading first
         val remainingRegions = listOf("Cuéllar", "El Espinar", "Segovia Rural")
         remainingRegions.forEach { regionName ->
-            delay(400) // Stagger the animations
-            if (!segoviaCapitalLoaded || regionName != "Segovia Capital") {
-                regions = regions.map { region ->
-                    if (region.name == regionName) region.copy(isCompleted = true) else region
+            // If this is the first region and Segovia Capital is still loading, wait a bit longer
+            if (regionName == "Cuéllar" && !segoviaCapitalLoaded) {
+                var waitTime = 0L
+                while (!segoviaCapitalLoaded && waitTime < 2000L) { // Max 2 seconds wait
+                    delay(200)
+                    waitTime += 200
                 }
+            }
+            
+            delay(400) // Stagger the animations
+            regions = regions.map { region ->
+                if (region.name == regionName) region.copy(isCompleted = true) else region
             }
         }
         
-        // Wait for loading to complete (minimum 2 seconds, or until loading is done)
-        val minSplashTime = 2000L
+        // Wait for loading to complete (minimum 3 seconds, or until loading is done)
+        val minSplashTime = 3000L // Increased from 2 seconds to 3 seconds
         val startTime = System.currentTimeMillis()
         
-        while (isLoading && (System.currentTimeMillis() - startTime) < minSplashTime) {
+        // Wait for either loading to complete OR minimum time to pass
+        while ((System.currentTimeMillis() - startTime) < minSplashTime) {
             delay(100)
+            // If loading is done and we've waited at least 2 seconds, we can exit early
+            if (!isLoading && (System.currentTimeMillis() - startTime) >= 2000L) {
+                break
+            }
         }
         
         // Ensure minimum splash time even if loading finishes quickly
         val elapsedTime = System.currentTimeMillis() - startTime
-        if (elapsedTime < minSplashTime) {
+        if (elapsedTime < minSplashTime && !isLoading) {
             delay(minSplashTime - elapsedTime)
         }
         
