@@ -18,8 +18,6 @@
 package com.example.farmaciasdeguardiaensegovia.services.pdfparsing
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
-import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
-import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import java.util.*
 
 /**
@@ -27,13 +25,6 @@ import java.util.*
  * Equivalent to iOS PDFParsingUtils
  */
 object PDFParsingUtils {
-    
-    /**
-     * Parse a date string like "lunes, 15 de julio de 2025"
-     */
-    fun parseDate(dateString: String): DutyDate? {
-        return DutyDate.parse(dateString)
-    }
     
     /**
      * Convert Spanish month name to number (1-12)
