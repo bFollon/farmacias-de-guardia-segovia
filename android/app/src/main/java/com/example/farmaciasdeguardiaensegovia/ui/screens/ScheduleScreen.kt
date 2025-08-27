@@ -259,35 +259,63 @@ private fun ScheduleContent(
                 )
             }
             
-            // Day shift
-            schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                item {
-                    ShiftHeaderCard(
-                        shiftType = DutyDate.ShiftType.DAY,
-                        isActive = uiState.activeTimeSpan == DutyTimeSpan.CapitalDay
-                    )
+            // Show only the active shift pharmacy for Segovia Capital
+            when (uiState.activeTimeSpan) {
+                DutyTimeSpan.CapitalDay -> {
+                    // Day shift is active
+                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
+                        item {
+                            ShiftHeaderCard(
+                                shiftType = DutyDate.ShiftType.DAY,
+                                isActive = true
+                            )
+                        }
+                        item {
+                            PharmacyCard(
+                                pharmacy = pharmacy,
+                                isActive = true
+                            )
+                        }
+                    }
                 }
-                item {
-                    PharmacyCard(
-                        pharmacy = pharmacy,
-                        isActive = uiState.activeTimeSpan == DutyTimeSpan.CapitalDay
-                    )
+                DutyTimeSpan.CapitalNight -> {
+                    // Night shift is active
+                    schedule.nightShiftPharmacies.firstOrNull()?.let { pharmacy ->
+                        item {
+                            ShiftHeaderCard(
+                                shiftType = DutyDate.ShiftType.NIGHT,
+                                isActive = true
+                            )
+                        }
+                        item {
+                            PharmacyCard(
+                                pharmacy = pharmacy,
+                                isActive = true
+                            )
+                        }
+                    }
                 }
-            }
-            
-            // Night shift
-            schedule.nightShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                item {
-                    ShiftHeaderCard(
-                        shiftType = DutyDate.ShiftType.NIGHT,
-                        isActive = uiState.activeTimeSpan == DutyTimeSpan.CapitalNight
-                    )
+                DutyTimeSpan.FullDay -> {
+                    // For 24-hour regions, show single pharmacy
+                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
+                        item {
+                            PharmacyCard(
+                                pharmacy = pharmacy,
+                                isActive = true
+                            )
+                        }
+                    }
                 }
-                item {
-                    PharmacyCard(
-                        pharmacy = pharmacy,
-                        isActive = uiState.activeTimeSpan == DutyTimeSpan.CapitalNight
-                    )
+                else -> {
+                    // Fallback: show day shift pharmacy if no active timespan is determined
+                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
+                        item {
+                            PharmacyCard(
+                                pharmacy = pharmacy,
+                                isActive = false
+                            )
+                        }
+                    }
                 }
             }
         }
