@@ -22,19 +22,17 @@ import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
+import com.example.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import java.util.*
 
 /**
  * Service for loading and managing pharmacy schedules
  * Equivalent to iOS ScheduleService
+ * Now uses PharmacyScheduleRepository for centralized caching
  */
 class ScheduleService(context: Context) {
     
-    private val pdfDownloadService = PDFDownloadService(context)
-    private val pdfProcessingService = PDFProcessingService()
-    
-    // Cache for loaded schedules
-    private val cachedSchedules = mutableMapOf<String, List<PharmacySchedule>>()
+    private val repository = PharmacyScheduleRepository.getInstance(context)
     
     /**
      * Load schedules for a specific region
@@ -43,49 +41,22 @@ class ScheduleService(context: Context) {
      * @return List of pharmacy schedules for the region
      */
     suspend fun loadSchedules(region: Region, forceRefresh: Boolean = false): List<PharmacySchedule> {
-        val cacheKey = region.id
+        DebugConfig.debugPrint("ScheduleService: Loading schedules for ${region.name} (forceRefresh: $forceRefresh)")
         
-        // Check cache first unless force refresh
-        if (!forceRefresh && cachedSchedules.containsKey(cacheKey)) {
-            println("ScheduleService: Returning cached schedules for ${region.name}")
-            return cachedSchedules[cacheKey] ?: emptyList()
+        // Use the shared repository for loading
+        val schedules = repository.loadSchedules(region, forceRefresh)
+        
+        DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${region.name}")
+        
+        // Log sample data for debugging
+        if (schedules.isNotEmpty()) {
+            val sampleSchedule = schedules.first()
+            DebugConfig.debugPrint("Sample schedule: ${sampleSchedule.date.day} ${sampleSchedule.date.month}")
+            DebugConfig.debugPrint("Day shift pharmacies: ${sampleSchedule.dayShiftPharmacies.map { it.name }}")
+            DebugConfig.debugPrint("Night shift pharmacies: ${sampleSchedule.nightShiftPharmacies.map { it.name }}")
         }
         
-        try {
-            println("ScheduleService: Loading schedules for ${region.name}")
-            
-            // Download the PDF file
-            val fileName = "${region.id}.pdf"
-            val pdfFile = pdfDownloadService.downloadPDF(region.pdfURL, fileName)
-            
-            if (pdfFile == null) {
-                println("ScheduleService: Failed to download PDF for ${region.name}")
-                return emptyList()
-            }
-            
-            // Process the PDF file
-            val schedules = pdfProcessingService.loadPharmacies(pdfFile, region, forceRefresh)
-            
-            // Cache the results
-            cachedSchedules[cacheKey] = schedules
-            
-            println("ScheduleService: Successfully loaded ${schedules.size} schedules for ${region.name}")
-            
-            // Log sample data for debugging
-            if (schedules.isNotEmpty()) {
-                val sampleSchedule = schedules.first()
-                println("Sample schedule: ${sampleSchedule.date.day} ${sampleSchedule.date.month}")
-                println("Day shift pharmacies: ${sampleSchedule.dayShiftPharmacies.map { it.name }}")
-                println("Night shift pharmacies: ${sampleSchedule.nightShiftPharmacies.map { it.name }}")
-            }
-            
-            return schedules
-            
-        } catch (e: Exception) {
-            println("ScheduleService: Error loading schedules for ${region.name}: ${e.message}")
-            e.printStackTrace()
-            return emptyList()
-        }
+        return schedules
     }
     
     /**
@@ -179,20 +150,27 @@ class ScheduleService(context: Context) {
      * Clear all cached schedules
      */
     suspend fun clearCache() {
-        cachedSchedules.clear()
-        pdfProcessingService.clearCache()
-        pdfDownloadService.clearCache()
-        println("ScheduleService: All caches cleared")
+        repository.clearAllCache()
+        DebugConfig.debugPrint("ScheduleService: All caches cleared via repository")
     }
     
     /**
      * Clear cache for a specific region
      */
     suspend fun clearCacheForRegion(region: Region) {
-        cachedSchedules.remove(region.id)
-        pdfProcessingService.clearCacheForRegion(region)
-        println("ScheduleService: Cleared cache for ${region.name}")
+        repository.clearCacheForRegion(region)
+        DebugConfig.debugPrint("ScheduleService: Cleared cache for ${region.name} via repository")
     }
+    
+    /**
+     * Check if schedules are already loaded for a region
+     */
+    fun isLoaded(region: Region): Boolean = repository.isLoaded(region)
+    
+    /**
+     * Get cache statistics for debugging
+     */
+    fun getCacheStats(): String = repository.getCacheStats()
     
     /**
      * Get current date and time formatted for display

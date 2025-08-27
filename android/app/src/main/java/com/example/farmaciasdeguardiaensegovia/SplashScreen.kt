@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +26,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+import com.example.farmaciasdeguardiaensegovia.viewmodels.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,6 +43,14 @@ fun SplashScreen(
     onSplashFinished: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val splashViewModel: SplashViewModel = viewModel { SplashViewModel(context) }
+    
+    // Observe loading states from ViewModel
+    val segoviaCapitalLoaded by splashViewModel.segoviaCapitalLoaded.collectAsState()
+    val loadingProgress by splashViewModel.loadingProgress.collectAsState()
+    val isLoading by splashViewModel.isLoading.collectAsState()
+    
     // Animation states
     var logoVisible by remember { mutableStateOf(false) }
     var textVisible by remember { mutableStateOf(false) }
@@ -49,15 +60,35 @@ fun SplashScreen(
     // Region icons with emojis matching iOS
     var regions by remember {
         mutableStateOf(listOf(
-            RegionIcon("🏙", "Segovia Capital"),
-            RegionIcon("🌳", "Cuéllar"),  
-            RegionIcon("⛰", "El Espinar"),
-            RegionIcon("🚜", "Segovia Rural")
+            RegionIcon("🏙", "Segovia Capital", false),
+            RegionIcon("🌳", "Cuéllar", false),  
+            RegionIcon("⛰", "El Espinar", false),
+            RegionIcon("🚜", "Segovia Rural", false)
         ))
     }
     
-    // Progress animation
+    // Update regions when Segovia Capital is loaded
+    LaunchedEffect(segoviaCapitalLoaded) {
+        if (segoviaCapitalLoaded) {
+            regions = regions.map { region ->
+                if (region.name == "Segovia Capital") {
+                    region.copy(isCompleted = true)
+                } else region
+            }
+        }
+    }
+    
+    // Progress animation - combines manual animation with actual loading progress
     val progress = remember { Animatable(0f) }
+    
+    // Update progress based on actual loading progress
+    LaunchedEffect(loadingProgress) {
+        // Animate smoothly to the actual loading progress
+        progress.animateTo(
+            loadingProgress,
+            animationSpec = tween(300, easing = EaseOut)
+        )
+    }
     
     // Logo animations - matching iOS easeOut 0.8s
     val logoScale by animateFloatAsState(
@@ -109,6 +140,9 @@ fun SplashScreen(
     
     // Launch animations with iOS-matching timing
     LaunchedEffect(Unit) {
+        // Start PDF loading immediately in background
+        splashViewModel.startBackgroundLoading()
+        
         // Logo appears immediately
         logoVisible = true
         
@@ -124,22 +158,38 @@ fun SplashScreen(
         delay(100)
         regionsVisible = true
         
-        // Start progress animation (runs concurrently with region animations)
-        val progressJob = launch {
-            progress.animateTo(1f, animationSpec = tween(1200, easing = LinearEasing))
-        }
+        // Simulate other region completion animations for visual effect
+        delay(800) // Wait a bit for Segovia Capital to load
         
-        // Animate region completion while progress is running
-        delay(200) // Small delay before starting region animations
-        repeat(regions.size) { index ->
-            delay(250) // Slightly slower for better visual effect
-            regions = regions.mapIndexed { i, region ->
-                if (i == index) region.copy(isCompleted = true) else region
+        // Animate remaining regions (visual only - not tied to actual loading)
+        val remainingRegions = listOf("Cuéllar", "El Espinar", "Segovia Rural")
+        remainingRegions.forEach { regionName ->
+            delay(400) // Stagger the animations
+            if (!segoviaCapitalLoaded || regionName != "Segovia Capital") {
+                regions = regions.map { region ->
+                    if (region.name == regionName) region.copy(isCompleted = true) else region
+                }
             }
         }
         
-        // Wait for progress to complete
-        progressJob.join()
+        // Wait for loading to complete (minimum 2 seconds, or until loading is done)
+        val minSplashTime = 2000L
+        val startTime = System.currentTimeMillis()
+        
+        while (isLoading && (System.currentTimeMillis() - startTime) < minSplashTime) {
+            delay(100)
+        }
+        
+        // Ensure minimum splash time even if loading finishes quickly
+        val elapsedTime = System.currentTimeMillis() - startTime
+        if (elapsedTime < minSplashTime) {
+            delay(minSplashTime - elapsedTime)
+        }
+        
+        // Final progress to 100% if not already there
+        if (progress.value < 1f) {
+            progress.animateTo(1f, animationSpec = tween(300, easing = EaseOut))
+        }
         
         // Hold final state briefly then navigate
         delay(500)
