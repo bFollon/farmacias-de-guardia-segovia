@@ -19,6 +19,7 @@ package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
+import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.ColumnBasedPDFParser
@@ -27,7 +28,6 @@ import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUti
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfReader
 import java.io.File
-import java.util.*
 
 /**
  * Parser implementation for Segovia Capital pharmacy schedules.
@@ -55,50 +55,40 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                 DebugConfig.debugPrint("📃 Processing page $pageIndex of $pageCount")
                 
                 // OPTIMIZED: Use the shared PDF document instance
-                val (dates, dayShiftLines, nightShiftLines) = extractColumnTextFlattenedOptimized(pdfDoc, pageIndex, 3)
+                val (dates, dayShiftPharmacies, nightShiftPharmacies) = extractColumnTextFlattenedOptimized(pdfDoc, pageIndex)
                 
                 // OPTIMIZATION: Skip detailed logging for performance in production-like scenarios
                 if (DebugConfig.isDetailedLoggingEnabled) {
                     DebugConfig.debugPrint("📊 Extracted data from page $pageIndex:")
                     DebugConfig.debugPrint("   📅 Dates: ${dates.size} entries")
-                    DebugConfig.debugPrint("   ☀️ Day shift lines: ${dayShiftLines.size} entries")
-                    DebugConfig.debugPrint("   🌙 Night shift lines: ${nightShiftLines.size} entries")
+                    DebugConfig.debugPrint("   ☀️ Day shift lines: ${dayShiftPharmacies.size} entries")
+                    DebugConfig.debugPrint("   🌙 Night shift lines: ${nightShiftPharmacies.size} entries")
                     
                     if (dates.isNotEmpty()) {
                         DebugConfig.debugPrint("📅 Sample dates: ${dates.take(3)}")
                     }
-                    if (dayShiftLines.isNotEmpty()) {
-                        DebugConfig.debugPrint("☀️ Sample day shift: ${dayShiftLines.take(2)}")
+                    if (dayShiftPharmacies.isNotEmpty()) {
+                        DebugConfig.debugPrint("☀️ Sample day shift: ${dayShiftPharmacies.take(2)}")
                     }
-                    if (nightShiftLines.isNotEmpty()) {
-                        DebugConfig.debugPrint("🌙 Sample night shift: ${nightShiftLines.take(2)}")
+                    if (nightShiftPharmacies.isNotEmpty()) {
+                        DebugConfig.debugPrint("🌙 Sample night shift: ${nightShiftPharmacies.take(2)}")
                     }
                 }
-                
-                // OPTIMIZATION: Batch process pharmacies more efficiently
-                val dayPharmacies = PDFParsingUtils.parsePharmaciesOptimized(dayShiftLines)
-                val nightPharmacies = PDFParsingUtils.parsePharmaciesOptimized(nightShiftLines)
                 
                 // OPTIMIZATION: Batch parse dates with pre-filtering
                 val parsedDates = parseDatesOptimized(dates)
-                
-                // Create schedules for valid dates with available pharmacies
-                val minSize = minOf(parsedDates.size, dayPharmacies.size, nightPharmacies.size)
-                for (index in 0 until minSize) {
-                    val date = parsedDates[index]
-                    val dayPharmacy = dayPharmacies[index]
-                    val nightPharmacy = nightPharmacies[index]
-                    
-                    allSchedules.add(
-                        PharmacySchedule(
-                            date = date,
-                            shifts = mapOf(
-                                DutyTimeSpan.CapitalDay to listOf(dayPharmacy),
-                                DutyTimeSpan.CapitalNight to listOf(nightPharmacy)
-                            )
+
+                allSchedules.addAll(parsedDates.zip(dayShiftPharmacies).zip(nightShiftPharmacies).map { (pair, nightShifts) ->
+                    Triple(pair.first, pair.second, nightShifts)
+                }.map {
+                    PharmacySchedule(
+                        it.first,
+                        shifts = mapOf(
+                            DutyTimeSpan.CapitalDay to listOf(it.second),
+                            DutyTimeSpan.CapitalNight to listOf(it.third)
                         )
                     )
-                }
+                })
             }
             
             // Sort schedules by date efficiently
@@ -120,34 +110,16 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
      * OPTIMIZATION: Efficient date parsing with pre-filtering and caching
      */
     private fun parseDatesOptimized(dates: List<String>): List<DutyDate> {
-        val seen = mutableSetOf<String>()
-        val result = mutableListOf<DutyDate>()
-        
-        for (dateString in dates) {
-            // Quick pre-filter: skip obviously invalid dates
-            if (dateString.length < 10 || 
-                !dateString.contains("de") ||
-                dateString == "FECHA") {
-                continue
-            }
-            
-            val date = PDFParsingUtils.parseDate(dateString)
-            if (date != null) {
-                val key = "${date.day}-${date.month}-${date.year}"
-                if (seen.add(key)) {
-                    result.add(date)
-                }
-            }
+        return dates.fold(emptyList()) { acc, dateString ->
+            DutyDate.parse(dateString)?.let { date -> acc + date } ?: acc
         }
-        
-        return result
     }
     
     /**
      * ULTRA-HIGH PERFORMANCE: Single-pass column extraction eliminating 95% of object creation
      * Uses one large text extraction per column instead of hundreds of small extractions
      */
-    private fun extractColumnTextFlattenedOptimized(pdfDoc: PdfDocument, pageNumber: Int, columnCount: Int): Triple<List<String>, List<String>, List<String>> {
+    private fun extractColumnTextFlattenedOptimized(pdfDoc: PdfDocument, pageNumber: Int): Triple<List<String>, List<Pharmacy>, List<Pharmacy>> {
         DebugConfig.debugPrint("� SegoviaCapitalParser: Ultra-performance single-pass extraction from page $pageNumber")
         
         return try {
@@ -169,7 +141,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             
             // REVOLUTIONARY APPROACH: Extract entire columns in one operation each
             val contentStartY = 100f
-            val contentEndY = pageHeight - 100f
+            val contentEndY = pageHeight
             val contentHeight = contentEndY - contentStartY
             
             DebugConfig.debugPrint("📊 Extracting entire columns: contentHeight=$contentHeight")
@@ -256,7 +228,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
     /**
      * ULTRA-OPTIMIZED: Parse pharmacy column into groups of 3 lines
      */
-    private fun parsePharmacyColumn(columnText: String): List<String> {
+    private fun parsePharmacyColumn(columnText: String): List<Pharmacy> {
         if (columnText.isEmpty()) return emptyList()
         
         val allLines = columnText
@@ -270,36 +242,30 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                 !line.matches(Regex("^[\\d\\s\\-]+$"))
             }
             .toList()
-        
-        // Group lines into pharmacy entries (groups of 3)
-        val groupedLines = mutableListOf<String>()
-        var currentGroup = mutableListOf<String>()
-        
-        for (line in allLines) {
-            if (line.contains("FARMACIA", ignoreCase = true)) {
+
+        val (pharmacyInfo, _) = allLines.fold(Pair(emptyList<Pharmacy>(), emptyList<String>())) { (acc, group), line ->
+            if(line.contains("FARMACIA", ignoreCase = true)) {
                 // Start new pharmacy group
-                if (currentGroup.isNotEmpty()) {
-                    // Add previous group as flat list
-                    groupedLines.addAll(currentGroup.take(3))
-                    currentGroup.clear()
+                if(group.size != 3) {
+                    DebugConfig.debugPrint("Discarding incoherent pharmacy group: [${group.joinToString(",")}]")
+                    Pair(acc, listOf(line))
+                } else {
+                    val (pharmacyName, address, additionalInfo) = group
+                    Pair(acc + Pharmacy.parse(pharmacyName, address, additionalInfo), listOf(line))
                 }
-                currentGroup.add(line)
-            } else if (currentGroup.isNotEmpty()) {
-                currentGroup.add(line)
-                if (currentGroup.size >= 3) {
-                    // Complete group found
-                    groupedLines.addAll(currentGroup.take(3))
-                    currentGroup.clear()
+            } else {
+                val newGroup = group + line
+                if(newGroup.size == 3) {
+                    val (pharmacyName, address, additionalInfo) = newGroup
+                    Pair(acc + Pharmacy.parse(pharmacyName, address, additionalInfo), emptyList())
+                } else {
+                    Pair(acc, newGroup)
                 }
+
             }
         }
         
-        // Add final group if exists
-        if (currentGroup.isNotEmpty()) {
-            groupedLines.addAll(currentGroup.take(3))
-        }
-        
-        return groupedLines
+        return pharmacyInfo
     }
     
     /**
@@ -321,7 +287,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
      */
     private fun isValidDateString(text: String): Boolean {
         // Quick length and content checks first
-        if (text.length < 15 || !text.contains("de") || text == "FECHA") {
+        if (text.length < 15 || !text.contains("de")) {
             return false
         }
         

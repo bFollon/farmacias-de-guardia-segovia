@@ -20,6 +20,7 @@ package com.example.farmaciasdeguardiaensegovia.data
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import kotlinx.serialization.Serializable
 import java.util.UUID
+import kotlin.collections.plus
 
 @Serializable
 data class Pharmacy(
@@ -39,176 +40,34 @@ data class Pharmacy(
         }
 
     companion object {
-        /**
-         * Parse a single pharmacy from a list of text lines
-         * Equivalent to iOS Pharmacy.parse(from:)
-         */
-        fun parse(lines: List<String>): Pharmacy? {
-            println("Attempting to parse single pharmacy from ${lines.size} lines")
-            
-            // Clean up and filter lines
-            val nonEmptyLines = lines.map { it.trim() }
-                .filter { it.isNotEmpty() }
-            
-            if (nonEmptyLines.isEmpty()) {
-                println("Warning: No valid lines to parse")
-                return null
-            }
-            
-            // Find the pharmacy name (must contain "FARMACIA")
-            val nameIndex = nonEmptyLines.indexOfFirst { it.contains("FARMACIA", ignoreCase = true) }
-            if (nameIndex == -1) {
-                println("Error: No valid pharmacy name found (must contain 'FARMACIA')")
-                return null
-            }
-            
-            val name = nonEmptyLines[nameIndex]
-            println("Found pharmacy name at index $nameIndex: $name")
-            
-            // Get lines after the name
-            val remainingLines = nonEmptyLines.drop(nameIndex + 1)
-            if (remainingLines.isEmpty()) {
-                println("Error: No address or additional information found after pharmacy name")
-                return null
-            }
-            
-            // First line after name is the address
-            val address = remainingLines[0]
-            println("Found address: $address")
-            
-            // Remaining lines contain phone and additional info
-            val infoLines = remainingLines.drop(1).joinToString(" ")
-            
-            // Extract phone number if present
-            var phone = ""
-            var additionalInfo = infoLines
-            
-            val phoneRegex = Regex("Tfno:\\s*\\d{3}\\s*\\d{6}")
-            val phoneMatch = phoneRegex.find(infoLines)
-            
-            if (phoneMatch != null) {
-                phone = phoneMatch.value
-                    .replace("Tfno:", "")
-                    .trim()
-                additionalInfo = infoLines
-                    .replace(phoneMatch.value, "")
-                    .trim()
-                println("Extracted phone number: $phone")
-            }
-            
-            // Only keep additional info if it's not empty
-            val finalAdditionalInfo = if (additionalInfo.isEmpty()) null else additionalInfo
-            
+        private val phoneRegex = Regex("Tfno:\\s*(\\d{3}\\s*\\d{6})")
+
+        fun parse(name: String, address: String, additionalInfoRaw: String): Pharmacy {
+            val phoneMatch = phoneRegex.find(additionalInfoRaw)
             return Pharmacy(
                 name = name,
                 address = address,
-                phone = phone,
-                additionalInfo = finalAdditionalInfo
+                phone = phoneMatch?.groupValues?.getOrNull(1) ?: "",
+                additionalInfo = additionalInfoRaw
+                    .replace(phoneMatch?.value ?: "", "")
+                    .ifEmpty { null }
             )
         }
 
-        /**
-         * Parse multiple pharmacies from a batch of text lines
-         * Following iOS implementation - groups of 3 lines: [additionalInfo, address, name]
-         */
-        fun parseBatch(lines: List<String>): List<Pharmacy> {
-            // PERFORMANCE: Avoid logging unless debugging is enabled
-            if (DebugConfig.isDetailedLoggingEnabled) {
-                println("🏥 Parsing batch of ${lines.size} lines")
+        fun parseBatch(unparsed: List<Triple<String, String, String>>): List<Pharmacy> {
+            DebugConfig.debugPrint("🏥 Parsing batch of ${unparsed.size} data chunks")
+
+            return unparsed.fold(emptyList<Pharmacy>()) { acc, (name, address, additionalInfo) ->
+                val phoneMatch = phoneRegex.find(additionalInfo)
+                acc + Pharmacy(
+                    name = name,
+                    address = address,
+                    phone = phoneMatch?.groupValues?.getOrNull(1) ?: "",
+                    additionalInfo = additionalInfo
+                        .replace(phoneMatch?.value ?: "", "")
+                        .ifEmpty { null }
+                )
             }
-            
-            // Clean up and filter lines first
-            val cleanLines = lines.map { it.trim() }
-                .filter { it.isNotEmpty() }
-            
-            if (cleanLines.isEmpty()) {
-                if (DebugConfig.isDetailedLoggingEnabled) {
-                    println("⚠️ Warning: No valid lines to parse")
-                }
-                return emptyList()
-            }
-            
-            if (cleanLines.size % 3 != 0 && DebugConfig.isDetailedLoggingEnabled) {
-                println("⚠️ Warning: Number of lines (${cleanLines.size}) is not divisible by 3. Some entries may be incomplete.")
-            }
-            
-            val pharmacies = mutableListOf<Pharmacy>()
-            val currentGroup = mutableListOf<String>()
-            
-            // PERFORMANCE: Pre-compile regex to avoid repeated compilation
-            val phoneRegex = Regex("Tfno:\\s*(\\d{3}\\s*\\d{6})")
-            
-            // Process lines in groups of 3
-            for ((index, line) in cleanLines.withIndex()) {
-                currentGroup.add(line)
-                
-                if (currentGroup.size == 3) {
-                    // iOS order: [additionalInfo, address, name]
-                    val additionalInfo = currentGroup[0]
-                    val address = currentGroup[1]
-                    val name = currentGroup[2]
-                    
-                    // PERFORMANCE: Only log in debug mode
-                    if (DebugConfig.isDetailedLoggingEnabled) {
-                        println("\n🔍 Processing pharmacy group at index ${index - 2}:")
-                        println("   📛 Name: $name")
-                        println("   📍 Address: $address")  
-                        println("   ℹ️ Info: $additionalInfo")
-                    }
-                    
-                    // Validate pharmacy name format
-                    if (!name.contains("FARMACIA", ignoreCase = true)) {
-                        if (DebugConfig.isDetailedLoggingEnabled) {
-                            println("⚠️ Warning: Skipping entry - Invalid pharmacy name format: $name")
-                        }
-                        currentGroup.clear()
-                        continue
-                    }
-                    
-                    // Extract phone from additional info if present
-                    var phone = ""
-                    var finalAdditionalInfo = additionalInfo
-                    
-                    val phoneMatch = phoneRegex.find(additionalInfo)
-                    
-                    if (phoneMatch != null) {
-                        phone = phoneMatch.groupValues[1].trim()
-                        finalAdditionalInfo = additionalInfo
-                            .replace(phoneMatch.value, "")
-                            .trim()
-                        if (DebugConfig.isDetailedLoggingEnabled) {
-                            println("   📞 Extracted phone: $phone")
-                        }
-                    } else if (DebugConfig.isDetailedLoggingEnabled) {
-                        println("   📞 No phone number found in additional info")
-                    }
-                    
-                    // Validate address
-                    if (address.isEmpty() && DebugConfig.isDetailedLoggingEnabled) {
-                        println("⚠️ Warning: Empty address for pharmacy: $name")
-                    }
-                    
-                    // Create pharmacy
-                    pharmacies.add(Pharmacy(
-                        name = name,
-                        address = address,
-                        phone = phone,
-                        additionalInfo = if (finalAdditionalInfo.isEmpty()) null else finalAdditionalInfo
-                    ))
-                    
-                    if (DebugConfig.isDetailedLoggingEnabled) {
-                        println("✅ Successfully parsed pharmacy: $name")
-                    }
-                    
-                    // Start new group
-                    currentGroup.clear()
-                }
-            }
-            
-            if (DebugConfig.isDetailedLoggingEnabled) {
-                println("🏥 Final result: parsed ${pharmacies.size} pharmacies")
-            }
-            return pharmacies
         }
     }
 }
