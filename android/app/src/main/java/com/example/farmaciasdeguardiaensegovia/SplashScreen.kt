@@ -140,11 +140,14 @@ fun SplashScreen(
     
     // Launch animations with iOS-matching timing
     LaunchedEffect(Unit) {
-        // Start PDF loading immediately in background
-        splashViewModel.startBackgroundLoading()
-        
-        // Logo appears immediately
+        // Logo appears immediately (UI not blocked by loading)
         logoVisible = true
+        
+        // Start PDF loading in truly background coroutine after a tiny delay to ensure UI is rendered
+        launch {
+            delay(50) // Small delay to ensure splash UI is rendered first
+            splashViewModel.startBackgroundLoading()
+        }
         
         // Text appears after 0.5s (staggered)
         delay(500)

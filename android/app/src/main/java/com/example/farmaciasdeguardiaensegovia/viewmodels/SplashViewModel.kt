@@ -24,18 +24,20 @@ import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ViewModel for managing splash screen state and background PDF loading
  * Handles preloading of Segovia Capital PDF during splash screen animations
  */
-class SplashViewModel(context: Context) : ViewModel() {
+class SplashViewModel(private val context: Context) : ViewModel() {
     
-    private val repository = PharmacyScheduleRepository.getInstance(context)
+    private val repository by lazy { PharmacyScheduleRepository.getInstance(context) }
     
     // Loading states for each region
     private val _segoviaCapitalLoaded = MutableStateFlow(false)
@@ -57,21 +59,27 @@ class SplashViewModel(context: Context) : ViewModel() {
             return
         }
         
-        // Check if already loaded
-        if (repository.isLoaded(Region.segoviaCapital)) {
-            DebugConfig.debugPrint("SplashViewModel: Segovia Capital already loaded, skipping")
-            _segoviaCapitalLoaded.value = true
-            _loadingProgress.value = 1f
-            return
-        }
-        
         DebugConfig.debugPrint("SplashViewModel: Starting background PDF preloading for Segovia Capital")
         _isLoading.value = true
         _loadingProgress.value = 0f
         
         viewModelScope.launch {
             try {
-                preloadSegoviaCapitalPDF()
+                // Move all repository work to IO dispatcher
+                withContext(Dispatchers.IO) {
+                    // Check if already loaded (in background thread)
+                    if (repository.isLoaded(Region.segoviaCapital)) {
+                        DebugConfig.debugPrint("SplashViewModel: Segovia Capital already loaded, skipping")
+                        withContext(Dispatchers.Main) {
+                            _segoviaCapitalLoaded.value = true
+                            _loadingProgress.value = 1f
+                            _isLoading.value = false
+                        }
+                        return@withContext
+                    }
+                    
+                    preloadSegoviaCapitalPDF()
+                }
             } catch (e: Exception) {
                 DebugConfig.debugError("SplashViewModel: Error during background loading", e)
                 // Still mark as complete to not block the UI
@@ -84,42 +92,50 @@ class SplashViewModel(context: Context) : ViewModel() {
     /**
      * Preload the Segovia Capital PDF using the shared repository
      */
-    private suspend fun preloadSegoviaCapitalPDF() {
+    private suspend fun preloadSegoviaCapitalPDF() = withContext(Dispatchers.IO) {
         DebugConfig.debugPrint("SplashViewModel: Preloading Segovia Capital PDF...")
         
         // Update progress to 10% - starting download
-        _loadingProgress.value = 0.1f
+        withContext(Dispatchers.Main) { _loadingProgress.value = 0.1f }
         
         try {
             val region = Region.segoviaCapital
             
             // Start preloading via repository
             DebugConfig.debugPrint("SplashViewModel: Preloading via repository...")
-            _loadingProgress.value = 0.3f
+            withContext(Dispatchers.Main) { _loadingProgress.value = 0.3f }
             
             val success = repository.preloadSchedules(region)
             
-            if (success) {
-                _segoviaCapitalLoaded.value = true
-                _loadingProgress.value = 1f
-                DebugConfig.debugPrint("SplashViewModel: Successfully preloaded Segovia Capital schedules")
-            } else {
-                DebugConfig.debugWarn("SplashViewModel: Failed to preload Segovia Capital schedules")
-                _loadingProgress.value = 1f
+            withContext(Dispatchers.Main) {
+                if (success) {
+                    _segoviaCapitalLoaded.value = true
+                    _loadingProgress.value = 1f
+                    DebugConfig.debugPrint("SplashViewModel: Successfully preloaded Segovia Capital schedules")
+                } else {
+                    DebugConfig.debugWarn("SplashViewModel: Failed to preload Segovia Capital schedules")
+                    _loadingProgress.value = 1f
+                }
             }
             
         } catch (e: Exception) {
             DebugConfig.debugError("SplashViewModel: Error preloading Segovia Capital PDF", e)
-            _loadingProgress.value = 1f
+            withContext(Dispatchers.Main) { _loadingProgress.value = 1f }
         } finally {
-            _isLoading.value = false
+            withContext(Dispatchers.Main) { _isLoading.value = false }
         }
     }
     
     /**
      * Check if Segovia Capital data is already loaded
+     * This is safe to call from main thread as it only checks in-memory cache
      */
-    fun isSegoviaCapitalLoaded(): Boolean = repository.isLoaded(Region.segoviaCapital)
+    fun isSegoviaCapitalLoaded(): Boolean = try {
+        repository.isLoaded(Region.segoviaCapital)
+    } catch (e: Exception) {
+        DebugConfig.debugError("Error checking if Segovia Capital is loaded", e)
+        false
+    }
     
     /**
      * Get the loaded Segovia Capital schedules (if any)
