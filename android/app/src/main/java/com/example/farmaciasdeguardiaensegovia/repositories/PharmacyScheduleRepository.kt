@@ -2,8 +2,27 @@
  * Copyright (C) 2025  Bruno Follon (@bFollon)
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * it under the terms of the GNU General Public License as published b    suspend fun clearAllCaches() {
+        loadingMutex.withLock {
+            schedulesCache.clear()
+            pdfProcessingService.clearAllCaches()
+            pdfDownloadService.clearCache()
+            cacheService.clearAllCache()
+            DebugConfig.debugPrint("PharmacyScheduleRepository: All caches cleared (including persistent cache)")
+        }
+    }
+    
+    /**
+     * Clear cache for a specific region
+     */
+    suspend fun clearCacheForRegion(region: Region) {
+        loadingMutex.withLock {
+            schedulesCache.remove(region.id)
+            pdfProcessingService.clearCacheForRegion(region)
+            cacheService.clearRegionCache(region)
+            DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (including persistent cache)")
+        }
+    }are Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -23,6 +42,7 @@ import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.PDFDownloadService
 import com.example.farmaciasdeguardiaensegovia.services.PDFProcessingService
+import com.example.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -35,6 +55,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
     
     private val pdfDownloadService = PDFDownloadService(context)
     private val pdfProcessingService = PDFProcessingService()
+    private val cacheService = ScheduleCacheService(context)
     
     // Cache for loaded schedules - keyed by region ID
     private val schedulesCache = mutableMapOf<String, ScheduleCacheEntry>()
@@ -85,12 +106,23 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             
             // Return cached data if it exists and is fresh (unless force refresh)
             if (!forceRefresh && cachedEntry != null && cachedEntry.isFresh()) {
-                DebugConfig.debugPrint("PharmacyScheduleRepository: Returning cached schedules for ${region.name} (${cachedEntry.schedules.size} schedules)")
+                DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${region.name} (${cachedEntry.schedules.size} schedules)")
                 return@withLock cachedEntry.schedules
             }
             
+            // Try to load from persistent cache (serialized file cache)
+            if (!forceRefresh) {
+                val cachedSchedules = cacheService.loadCachedSchedules(region)
+                if (cachedSchedules != null && cachedSchedules.isNotEmpty()) {
+                    // Store in memory cache as well
+                    schedulesCache[cacheKey] = ScheduleCacheEntry(cachedSchedules, region = region)
+                    DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${region.name}")
+                    return@withLock cachedSchedules
+                }
+            }
+            
             try {
-                DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules for ${region.name}")
+                DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules from PDF for ${region.name}")
                 
                 // Download the PDF file
                 val fileName = "${region.id}.pdf"
@@ -105,8 +137,11 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 val schedules = pdfProcessingService.loadPharmacies(pdfFile, region, forceRefresh)
                 
                 if (schedules.isNotEmpty()) {
-                    // Cache the results
+                    // Cache the results in memory
                     schedulesCache[cacheKey] = ScheduleCacheEntry(schedules, region = region)
+                    
+                    // Save to persistent cache for next time
+                    cacheService.saveSchedulesToCache(region, schedules)
                     
                     DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${region.name}")
                     
@@ -131,11 +166,17 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
     /**
      * Check if schedules are already loaded and cached for a region
      * @param region The region to check
-     * @return True if schedules are cached and fresh
+     * @return True if schedules are cached and fresh (either in-memory or persistent cache)
      */
     fun isLoaded(region: Region): Boolean {
+        // First check in-memory cache
         val cachedEntry = schedulesCache[region.id]
-        return cachedEntry != null && cachedEntry.isFresh()
+        if (cachedEntry != null && cachedEntry.isFresh()) {
+            return true
+        }
+        
+        // Then check persistent cache
+        return cacheService.isCacheValid(region)
     }
     
     /**
@@ -199,6 +240,11 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         val freshEntries = schedulesCache.values.count { it.isFresh() }
         val totalSchedules = schedulesCache.values.sumOf { it.schedules.size }
         
-        return "Cache: $freshEntries/$totalEntries fresh entries, $totalSchedules total schedules"
+        val persistentStats = cacheService.getCacheStats()
+        val persistentCacheSize = persistentStats["totalCacheSize"] as? Long ?: 0L
+        val persistentFileCount = persistentStats["cacheFileCount"] as? Int ?: 0
+        
+        return "In-Memory: $freshEntries/$totalEntries fresh entries, $totalSchedules schedules | " +
+                "Persistent: $persistentFileCount cached regions, ${persistentCacheSize / 1024}KB total"
     }
 }
