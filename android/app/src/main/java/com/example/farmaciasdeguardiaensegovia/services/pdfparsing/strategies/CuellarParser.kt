@@ -274,8 +274,8 @@ class CuellarParser : PDFParsingStrategy {
         
         // Create schedules for each date in the set
         for (date in dates) {
-            // If this is January 1st, increment the year
-            if (date.matches(Regex("01-ene"))) {
+            // If this is January 1st, increment the year (handle both regular hyphen and en-dash)
+            if (date.matches(Regex("01[‐-]ene"))) {
                 currentYear++
                 DebugConfig.debugPrint("🎊 New year detected! Now processing year $currentYear")
             }
