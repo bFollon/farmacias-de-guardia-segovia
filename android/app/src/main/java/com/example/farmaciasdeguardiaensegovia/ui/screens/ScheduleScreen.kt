@@ -50,11 +50,14 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleScreen(
+    regionId: String? = null,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val viewModel: ScheduleViewModel = viewModel { ScheduleViewModel(context) }
+    val viewModel: ScheduleViewModel = viewModel { 
+        ScheduleViewModel(context, regionId ?: "segovia-capital") 
+    }
     val uiState by viewModel.uiState.collectAsState()
     
     var showDatePicker by remember { mutableStateOf(false) }

@@ -34,9 +34,78 @@ object PDFParsingUtils {
     }
     
     /**
+     * Convert Spanish month abbreviation to number (1-12)
+     */
+    fun monthAbbrToNumber(monthAbbr: String): Int? {
+        val fullMonth = monthAbbrToFullName(monthAbbr)
+        return fullMonth?.let { DutyDate.monthToNumber(it) }
+    }
+    
+    /**
+     * Convert Spanish month abbreviation to full name
+     */
+    fun monthAbbrToFullName(monthAbbr: String): String? {
+        return when (monthAbbr.lowercase()) {
+            "ene" -> "enero"
+            "feb" -> "febrero"
+            "mar" -> "marzo"
+            "abr" -> "abril"
+            "may" -> "mayo"
+            "jun" -> "junio"
+            "jul" -> "julio"
+            "ago" -> "agosto"
+            "sep" -> "septiembre"
+            "oct" -> "octubre"
+            "nov" -> "noviembre"
+            "dic" -> "diciembre"
+            else -> null
+        }
+    }
+    
+    /**
      * Get current year
      */
     fun getCurrentYear(): Int {
         return Calendar.getInstance().get(Calendar.YEAR)
+    }
+    
+    /**
+     * Get Spanish day of week name for a given date
+     */
+    fun getDayOfWeek(day: Int, month: Int, year: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month - 1, day)
+        
+        return when (calendar.get(Calendar.DAY_OF_WEEK)) {
+            Calendar.SUNDAY -> "domingo"
+            Calendar.MONDAY -> "lunes"
+            Calendar.TUESDAY -> "martes"
+            Calendar.WEDNESDAY -> "miércoles"
+            Calendar.THURSDAY -> "jueves"
+            Calendar.FRIDAY -> "viernes"
+            Calendar.SATURDAY -> "sábado"
+            else -> "unknown"
+        }
+    }
+    
+    /**
+     * Get Spanish month name from number (1-12)
+     */
+    fun getMonthName(month: Int): String {
+        return when (month) {
+            1 -> "enero"
+            2 -> "febrero"
+            3 -> "marzo"
+            4 -> "abril"
+            5 -> "mayo"
+            6 -> "junio"
+            7 -> "julio"
+            8 -> "agosto"
+            9 -> "septiembre"
+            10 -> "octubre"
+            11 -> "noviembre"
+            12 -> "diciembre"
+            else -> "unknown"
+        }
     }
 }

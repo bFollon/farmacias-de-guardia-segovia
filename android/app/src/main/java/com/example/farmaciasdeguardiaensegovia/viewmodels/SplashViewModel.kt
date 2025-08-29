@@ -118,16 +118,22 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 _loadingProgress.value = progressStart
             }
             
-            // Check if already loaded
-            if (repository.isLoaded(region)) {
+            // Check if already loaded (but always force refresh Cuéllar during development)
+            val shouldForceRefresh = region.id == "cuellar" // Force refresh Cuéllar for development
+            
+            if (!shouldForceRefresh && repository.isLoaded(region)) {
                 DebugConfig.debugPrint("SplashViewModel: $regionName already loaded, skipping actual loading")
                 // No artificial delay needed - let cached data load at natural speed
             } else {
-                // Load the region (actual loading for Segovia Capital, placeholder for others)
-                val success = if (region.id == "segovia-capital") {
-                    loadSegoviaCapitalPDF(region)
-                } else {
-                    loadPlaceholderPDF(region) // Placeholder for future implementation
+                if (shouldForceRefresh) {
+                    DebugConfig.debugPrint("SplashViewModel: Force refreshing $regionName for development")
+                }
+                
+                // Load the region (actual loading for implemented regions, placeholder for others)
+                val success = when (region.id) {
+                    "segovia-capital" -> loadRegionPDF(region, "Segovia Capital", forceRefresh = false)
+                    "cuellar" -> loadRegionPDF(region, "Cuéllar", forceRefresh = shouldForceRefresh)
+                    else -> loadPlaceholderPDF(region) // El Espinar and Segovia Rural not implemented yet
                 }
                 
                 if (!success) {
@@ -157,13 +163,19 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     }
     
     /**
-     * Load Segovia Capital PDF (actual implementation)
+     * Load a region's PDF (actual implementation)
      */
-    private suspend fun loadSegoviaCapitalPDF(region: Region): Boolean {
-        DebugConfig.debugPrint("SplashViewModel: Loading Segovia Capital PDF...")
+    private suspend fun loadRegionPDF(region: Region, regionName: String, forceRefresh: Boolean = false): Boolean {
+        DebugConfig.debugPrint("SplashViewModel: Loading $regionName PDF (forceRefresh: $forceRefresh)...")
         
-        // Show intermediate progress during Segovia Capital loading
-        val regionIndex = 0 // Segovia Capital is the first region (index 0)
+        // Clear cache if force refreshing
+        if (forceRefresh) {
+            DebugConfig.debugPrint("SplashViewModel: Clearing cache for $regionName...")
+            repository.clearCacheForRegion(region)
+        }
+        
+        // Show intermediate progress during region loading
+        val regionIndex = regionsToLoad.indexOfFirst { it.id == region.id }
         val progressStart = regionIndex.toFloat() / regionsToLoad.size
         val progressMid = progressStart + (0.5f / regionsToLoad.size) // Halfway through this region
         
@@ -172,16 +184,24 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         }
         
         return try {
-            val success = repository.preloadSchedules(region)
-            if (success) {
-                DebugConfig.debugPrint("SplashViewModel: Successfully loaded Segovia Capital schedules")
+            val schedules = if (forceRefresh) {
+                DebugConfig.debugPrint("SplashViewModel: Force loading schedules for $regionName...")
+                repository.loadSchedules(region, forceRefresh = true)
             } else {
-                DebugConfig.debugWarn("SplashViewModel: Failed to load Segovia Capital schedules")
+                repository.preloadSchedules(region)
+                repository.getCachedSchedules(region) ?: emptyList()
+            }
+            
+            val success = schedules.isNotEmpty()
+            if (success) {
+                DebugConfig.debugPrint("SplashViewModel: Successfully loaded $regionName schedules (${schedules.size} schedules)")
+            } else {
+                DebugConfig.debugWarn("SplashViewModel: Failed to load $regionName schedules")
             }
             success
         } catch (e: Exception) {
             if (e !is kotlinx.coroutines.CancellationException) {
-                DebugConfig.debugError("SplashViewModel: Error loading Segovia Capital PDF", e)
+                DebugConfig.debugError("SplashViewModel: Error loading $regionName PDF", e)
             }
             false
         }
@@ -235,6 +255,17 @@ class SplashViewModel(private val context: Context) : ViewModel() {
      * Get cache statistics for debugging
      */
     fun getCacheStats(): String = repository.getCacheStats()
+    
+    /**
+     * Clear all caches for debugging (force fresh parsing)
+     */
+    fun clearAllCaches() {
+        DebugConfig.debugPrint("SplashViewModel: Manually clearing all caches...")
+        viewModelScope.launch {
+            repository.clearAllCache()
+            DebugConfig.debugPrint("SplashViewModel: All caches cleared!")
+        }
+    }
     
     override fun onCleared() {
         super.onCleared()

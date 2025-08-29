@@ -33,9 +33,15 @@ import java.util.Calendar
 /**
  * ViewModel for managing pharmacy schedules
  */
-class ScheduleViewModel(context: Context) : ViewModel() {
+class ScheduleViewModel(
+    context: Context, 
+    regionId: String = "segovia-capital"
+) : ViewModel() {
     
     private val scheduleService = ScheduleService(context)
+    
+    // Find the region by ID
+    private val currentRegion = Region.allRegions.find { it.id == regionId } ?: Region.segoviaCapital
     
     data class ScheduleUiState(
         val isLoading: Boolean = false,
@@ -52,8 +58,9 @@ class ScheduleViewModel(context: Context) : ViewModel() {
     val uiState: StateFlow<ScheduleUiState> = _uiState.asStateFlow()
     
     init {
-        // Load schedules for default region on startup
-        loadSchedules(Region.segoviaCapital)
+        // Update the state with the current region and load its schedules
+        _uiState.value = _uiState.value.copy(region = currentRegion)
+        loadSchedules(currentRegion)
     }
     
     /**

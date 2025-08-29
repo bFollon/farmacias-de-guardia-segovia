@@ -21,6 +21,7 @@ import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaCapitalParser
+import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.CuellarParser
 import java.io.File
 
 /**
@@ -31,7 +32,8 @@ class PDFProcessingService {
     
     // Registry of parsing strategies for each region
     private val parsingStrategies: Map<String, PDFParsingStrategy> = mapOf(
-        "segovia-capital" to SegoviaCapitalParser()
+        "segovia-capital" to SegoviaCapitalParser(),
+        "cuellar" to CuellarParser()
     )
     
     // Cache for processed results to avoid reprocessing the same file

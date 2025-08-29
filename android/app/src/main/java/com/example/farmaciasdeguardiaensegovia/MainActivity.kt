@@ -59,11 +59,11 @@ fun AppNavigation() {
             MainScreen(
                 onRegionSelected = { region ->
                     when (region) {
-                        Region.segoviaCapital -> {
+                        Region.segoviaCapital, Region.cuellar -> {
                             navController.navigate("schedule/${region.id}")
                         }
                         else -> {
-                            // TODO: Implement other regions
+                            // TODO: Implement El Espinar and Segovia Rural regions
                         }
                     }
                 },
@@ -81,12 +81,28 @@ fun AppNavigation() {
         
         composable("schedule/{regionId}") { backStackEntry ->
             val regionId = backStackEntry.arguments?.getString("regionId")
-            if (regionId == "segovia-capital") {
-                ScheduleScreen(
-                    onBack = {
-                        navController.popBackStack()
+            when (regionId) {
+                "segovia-capital", "cuellar" -> {
+                    ScheduleScreen(
+                        regionId = regionId,
+                        onBack = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+                else -> {
+                    // TODO: Handle other region IDs
+                    Box(
+                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Region \"$regionId\" not implemented yet",
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center
+                        )
                     }
-                )
+                }
             }
         }
         
