@@ -51,8 +51,9 @@ PDFProcessingService
 - ✅ **Android PDF Processing**: Complete PDF parsing with strategy pattern implementation matching iOS architecture
 - ✅ **Android Persistent Caching**: Implemented ScheduleCacheService with JSON serialization for parsed schedules to avoid PDF re-processing bottleneck
 - ✅ **Android Performance Optimization**: Three-tier caching system (memory → persistent → PDF parsing) with cache validation
+- ✅ **Android Cuéllar Implementation**: Complete CuellarParser with dual format handling (regular dd-mmm and special transition formats), year increment logic fixed for proper multi-year PDF parsing, whitespace normalization for NBSP character handling, full integration with navigation and display system
 - 🔄 **Android Migration**: Currently migrating iOS features to Android incrementally
-- 📍 **Next Steps**: Implement PDF view screen and pharmacy detail views
+- 📍 **Next Steps**: Implement El Espinar parser and PDF view screen, then pharmacy detail views
 - 🎯 **Goal**: Feature parity between iOS and Android apps
 
 ## WORKING INSTRUCTIONS FOR COPILOT AGENT **FOLLOW THESE**
