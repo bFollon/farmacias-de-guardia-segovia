@@ -1,0 +1,303 @@
+/*
+ * Copyright (C) 2025  Bruno Follon (@bFollon)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
+
+import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
+import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
+import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
+import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfReader
+import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor
+import java.io.File
+
+/**
+ * Parser implementation for El Espinar pharmacy schedules.
+ * Android equivalent of iOS ElEspinarParser based on Cuéllar implementation pattern.
+ * 
+ * Handles the specific El Espinar PDF format with three pharmacy locations:
+ * - AV. HONTANILLA 18
+ * - C/ MARQUES PERALES  
+ * - SAN RAFAEL
+ */
+class ElEspinarParser : PDFParsingStrategy {
+    
+    /** Current year being processed, incremented when January 1st is found */
+    private var currentYear = 2024
+    
+    override fun getStrategyName(): String = "ElEspinarParser"
+    
+    override fun parseSchedules(pdfFile: File): List<PharmacySchedule> {
+        val allSchedules = mutableListOf<PharmacySchedule>()
+        
+        DebugConfig.debugPrint("\n=== El Espinar Pharmacy Schedules ===")
+        
+        // Open PDF once and reuse across all pages
+        val reader = PdfReader(pdfFile)
+        val pdfDoc = PdfDocument(reader)
+        
+        return try {
+            val pageCount = pdfDoc.numberOfPages
+            DebugConfig.debugPrint("📄 Processing $pageCount pages of El Espinar PDF...")
+            
+            // Process each page
+            for (pageIndex in 1..pageCount) { // iText uses 1-based indexing
+                DebugConfig.debugPrint("\n📃 Processing page $pageIndex of $pageCount")
+                
+                val content = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(pageIndex))
+                val lines = content.split('\n')
+                    .map { it.trim() }
+                    .filter { it.isNotEmpty() }
+                
+                if (lines.isNotEmpty()) {
+                    DebugConfig.debugPrint("\n📊 Page content structure:")
+                    lines.forEachIndexed { index, line ->
+                        DebugConfig.debugPrint("Line $index: '$line'")
+                    }
+                }
+                
+                // Process the page content using El Espinar-specific logic
+                val pageSchedules = processPageContent(lines)
+                allSchedules.addAll(pageSchedules)
+            }
+            
+            // Sort schedules by date efficiently
+            val sortedSchedules = allSchedules.sortedWith(dateComparator)
+            
+            DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for El Espinar")
+            sortedSchedules
+            
+        } catch (e: Exception) {
+            DebugConfig.debugError("❌ Error parsing El Espinar PDF: ${e.message}", e)
+            emptyList()
+        } finally {
+            pdfDoc.close()
+        }
+    }
+    
+    /**
+     * Process the content of a single page for El Espinar format
+     * Unlike Cuéllar's table format, El Espinar uses a mixed text approach
+     */
+    private fun processPageContent(lines: List<String>): List<PharmacySchedule> {
+
+        val (schedules, _, _) = lines.fold(Triple(emptyList<PharmacySchedule>(), null as String?, emptyList<String>())) { (acc, pharmacyKey, dates), line ->
+            DebugConfig.debugPrint("\n🔍 Processing line: '$line'")
+            // Skip header lines
+
+            val (parsedPharmacy, parsedDates) = when {
+                hasPharmacy(line) -> {
+                    Pair(identifyPharmacyFromLine(line), dates)
+                }
+
+                hasDates(line) -> {
+                    Pair(pharmacyKey, extractDatesFromLine(line))
+                }
+
+                else -> {
+                    DebugConfig.debugPrint("⏭️ Skipping unsupported line")
+                    Pair(pharmacyKey, dates)
+                }
+            }
+
+            if(parsedPharmacy != null && parsedDates.isNotEmpty()) {
+                Triple(acc + processDateSet(parsedDates, parsedPharmacy), null, emptyList())
+            } else Triple(acc, parsedPharmacy, parsedDates)
+        }
+
+        return schedules
+    }
+    
+    /**
+     * Check if line is a header that should be skipped
+     */
+    private fun isHeaderLine(line: String): Boolean {
+        return line.contains("COLEGIO", ignoreCase = true) ||
+               line.contains("TURNOS", ignoreCase = true) ||
+               line.contains("LUNES MARTES", ignoreCase = true)
+    }
+
+    /**
+     * Check if line has dates
+     */
+    private fun hasDates(line: String): Boolean {
+        return DATE_REGEX.containsMatchIn(line)
+    }
+    
+    /**
+     * Extract dates from a line using regex patterns
+     */
+    private fun extractDatesFromLine(line: String): List<String> {
+        return DATE_REGEX.findAll(line).map { it.value }.toList()
+    }
+
+    /**
+     * Check if line has pharmacy information
+     */
+    private fun hasPharmacy(line: String): Boolean {
+        return identifyPharmacyFromLine(line) != null
+    }
+
+    /**
+     * Identify pharmacy from line content based on iOS logic
+     */
+    private fun identifyPharmacyFromLine(line: String): String? {
+        return when {
+            line.contains("HONTANILLA", ignoreCase = true) -> "AV. HONTANILLA 18"
+            line.contains("MARQUES PERALES", ignoreCase = true) -> "C/ MARQUES PERALES"
+            line.endsWith("SAN RAFAEL", ignoreCase = true) -> "SAN RAFAEL"
+            else -> null
+        }
+    }
+    
+    /**
+     * Process a set of dates with a pharmacy (following Cuéllar pattern)
+     */
+    private fun processDateSet(dates: List<String>, pharmacyKey: String): List<PharmacySchedule> {
+        DebugConfig.debugPrint("\n📋 Processing date set:")
+        DebugConfig.debugPrint("📅 Dates: $dates")
+        DebugConfig.debugPrint("🏠 Pharmacy: $pharmacyKey")
+        DebugConfig.debugPrint("📆 Current year: $currentYear")
+
+        return dates.fold(emptyList<PharmacySchedule>()) { acc, date ->
+            if (date.matches(Regex("01[‐-]ene"))) {
+                currentYear++
+                DebugConfig.debugPrint("🎊 New year detected! Now processing year $currentYear")
+            }
+
+            DebugConfig.debugPrint("📆 Processing date: $date (year: $currentYear)")
+            val dutyDate = parseDutyDate(date, currentYear)
+
+            dutyDate?.let { dutyDate ->
+                val pharmacyInfo = PHARMACY_INFO[pharmacyKey] ?: PharmacyInfo(
+                    name = "Farmacia $pharmacyKey",
+                    address = "Dirección no disponible",
+                    phone = "No disponible"
+                )
+
+                val pharmacyInstance = Pharmacy(
+                    name = pharmacyInfo.name,
+                    address = pharmacyInfo.address,
+                    phone = pharmacyInfo.phone,
+                    additionalInfo = null
+                )
+
+                DebugConfig.debugPrint("💊 Addeding schedule for ${pharmacyInstance.name} on ${dutyDate.day}-${dutyDate.month}-${dutyDate.year ?: PDFParsingUtils.getCurrentYear()}")
+
+                acc + PharmacySchedule(
+                    date = dutyDate,
+                    shifts = mapOf(
+                        DutyTimeSpan.FullDay to listOf(pharmacyInstance)
+                    )
+                )
+            } ?: acc.also {
+                DebugConfig.debugPrint("⚠️ Could not parse duty date for: $date")
+            }
+        }
+    }
+    
+    /**
+     * Parse a date string like "01-ene" to a DutyDate (following Cuéllar pattern)
+     */
+    private fun parseDutyDate(dateString: String, year: Int): DutyDate? {
+        val match = DATE_REGEX.matchEntire(dateString) ?: return null
+        
+        val dayStr = match.groupValues[1]
+        val monthStr = match.groupValues[2]
+        
+        val day = dayStr.toIntOrNull() ?: return null
+        val month = PDFParsingUtils.monthAbbrToNumber(monthStr) ?: return null
+        
+        return DutyDate(
+            dayOfWeek = PDFParsingUtils.getDayOfWeek(day, month, year),
+            day = day,
+            month = PDFParsingUtils.getMonthName(month),
+            year = year
+        )
+    }
+    
+    /**
+     * Data class for pharmacy information (following Cuéllar pattern)
+     */
+    private data class PharmacyInfo(
+        val name: String,
+        val address: String,
+        val phone: String
+    )
+    
+    companion object {
+        // Pre-compiled regex patterns for performance (following Cuéllar pattern)
+        private val DATE_REGEX by lazy { 
+            Regex("""(\d{1,2})[‐-](\w{3})""") 
+        }
+        
+        // Pharmacy information lookup table (matching iOS implementation exactly)
+        private val PHARMACY_INFO = mapOf(
+            "AV. HONTANILLA 18" to PharmacyInfo(
+                name = "FARMACIA ANA MARÍA APARICIO HERNAN",
+                address = "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+                phone = "921 181 011"
+            ),
+            "C/ MARQUES PERALES" to PharmacyInfo(
+                name = "Farmacia Lda M J. Bartolomé Sánchez",
+                address = "Calle del, C. Marqués de Perales, 2, 40400, Segovia",
+                phone = "921 181 171"
+            ),
+            "SAN RAFAEL" to PharmacyInfo(
+                name = "Farmacia San Rafael",
+                address = "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+                phone = "921 171 105"
+            )
+        )
+        
+        // Cached date comparator to avoid lambda creation overhead (following Cuéllar pattern)
+        private val dateComparator = Comparator<PharmacySchedule> { first, second ->
+            compareSchedulesByDate(first, second)
+        }
+        
+        /**
+         * Compare two pharmacy schedules by date for sorting (following Cuéllar pattern)
+         */
+        private fun compareSchedulesByDate(first: PharmacySchedule, second: PharmacySchedule): Int {
+            val currentYear = PDFParsingUtils.getCurrentYear()
+            
+            // Extract year, month, day from dates
+            val firstYear = first.date.year ?: currentYear
+            val secondYear = second.date.year ?: currentYear
+            
+            if (firstYear != secondYear) {
+                return firstYear.compareTo(secondYear)
+            }
+            
+            val firstMonth = PDFParsingUtils.monthToNumber(first.date.month) ?: 0
+            val secondMonth = PDFParsingUtils.monthToNumber(second.date.month) ?: 0
+            
+            if (firstMonth != secondMonth) {
+                return firstMonth.compareTo(secondMonth)
+            }
+            
+            val firstDay = first.date.day
+            val secondDay = second.date.day
+            
+            return firstDay.compareTo(secondDay)
+        }
+    }
+}

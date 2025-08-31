@@ -118,8 +118,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 _loadingProgress.value = progressStart
             }
             
-            // Check if already loaded
-            if (repository.isLoaded(region)) {
+            // Check if already loaded (but force refresh El Espinar for testing)
+            val shouldForceRefreshElEspinar = region.id == "el-espinar"
+            if (repository.isLoaded(region) && !shouldForceRefreshElEspinar) {
                 DebugConfig.debugPrint("SplashViewModel: $regionName already loaded, skipping actual loading")
                 // No artificial delay needed - let cached data load at natural speed
             } else {
@@ -127,7 +128,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 val success = when (region.id) {
                     "segovia-capital" -> loadRegionPDF(region, "Segovia Capital", forceRefresh = false)
                     "cuellar" -> loadRegionPDF(region, "Cuéllar", forceRefresh = false)
-                    else -> loadPlaceholderPDF(region) // El Espinar and Segovia Rural not implemented yet
+                    "el-espinar" -> loadRegionPDF(region, "El Espinar", forceRefresh = true) // Force refresh to test new parsing logic
+                    else -> loadPlaceholderPDF(region) // Only Segovia Rural not implemented yet
                 }
                 
                 if (!success) {

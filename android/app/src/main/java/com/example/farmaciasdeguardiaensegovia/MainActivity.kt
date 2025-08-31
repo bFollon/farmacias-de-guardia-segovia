@@ -59,11 +59,11 @@ fun AppNavigation() {
             MainScreen(
                 onRegionSelected = { region ->
                     when (region) {
-                        Region.segoviaCapital, Region.cuellar -> {
+                        Region.segoviaCapital, Region.cuellar, Region.elEspinar -> {
                             navController.navigate("schedule/${region.id}")
                         }
                         else -> {
-                            // TODO: Implement El Espinar and Segovia Rural regions
+                            // TODO: Implement Segovia Rural region
                         }
                     }
                 },
@@ -82,7 +82,7 @@ fun AppNavigation() {
         composable("schedule/{regionId}") { backStackEntry ->
             val regionId = backStackEntry.arguments?.getString("regionId")
             when (regionId) {
-                "segovia-capital", "cuellar" -> {
+                "segovia-capital", "cuellar", "el-espinar" -> {
                     ScheduleScreen(
                         regionId = regionId,
                         onBack = {
@@ -91,7 +91,7 @@ fun AppNavigation() {
                     )
                 }
                 else -> {
-                    // TODO: Handle other region IDs
+                    // TODO: Handle other region IDs (only Segovia Rural remaining)
                     Box(
                         modifier = Modifier.fillMaxSize().padding(16.dp),
                         contentAlignment = Alignment.Center
