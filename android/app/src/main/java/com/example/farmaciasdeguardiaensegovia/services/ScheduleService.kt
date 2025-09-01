@@ -23,7 +23,10 @@ import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
+import kotlin.time.Duration
 
 /**
  * Service for loading and managing pharmacy schedules
@@ -31,9 +34,9 @@ import java.util.*
  * Now uses PharmacyScheduleRepository for centralized caching
  */
 class ScheduleService(context: Context) {
-    
+
     private val repository = PharmacyScheduleRepository.getInstance(context)
-    
+
     /**
      * Load schedules for a specific region
      * @param region The region to load schedules for
@@ -42,12 +45,12 @@ class ScheduleService(context: Context) {
      */
     suspend fun loadSchedules(region: Region, forceRefresh: Boolean = false): List<PharmacySchedule> {
         DebugConfig.debugPrint("ScheduleService: Loading schedules for ${region.name} (forceRefresh: $forceRefresh)")
-        
+
         // Use the shared repository for loading
         val schedules = repository.loadSchedules(region, forceRefresh)
-        
+
         DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${region.name}")
-        
+
         // Log sample data for debugging
         if (schedules.isNotEmpty()) {
             val sampleSchedule = schedules.first()
@@ -55,10 +58,10 @@ class ScheduleService(context: Context) {
             DebugConfig.debugPrint("Day shift pharmacies: ${sampleSchedule.dayShiftPharmacies.map { it.name }}")
             DebugConfig.debugPrint("Night shift pharmacies: ${sampleSchedule.nightShiftPharmacies.map { it.name }}")
         }
-        
+
         return schedules
     }
-    
+
     /**
      * Find the current active schedule and shift type
      * @param schedules List of schedules to search in
@@ -66,47 +69,31 @@ class ScheduleService(context: Context) {
      */
     fun findCurrentSchedule(schedules: List<PharmacySchedule>): Pair<PharmacySchedule, DutyTimeSpan>? {
         val now = System.currentTimeMillis()
-        val currentTime = Calendar.getInstance()
-        
-        // Determine which duty date and shift we need
-        val dutyInfo = getDutyTimeInfo(now)
-        
-        // Find matching schedule
-        val matchingSchedule = schedules.find { schedule ->
-            schedule.date.day == dutyInfo.date.day &&
-            schedule.date.month == dutyInfo.date.month &&
-            (schedule.date.year ?: DutyDate.getCurrentYear()) == (dutyInfo.date.year ?: DutyDate.getCurrentYear())
+
+        val matchingSchedule = schedules.find { it.shifts.entries.find { (key, _) -> key.contains(it.date, now) } != null }
+
+        return matchingSchedule?.let {
+            Pair(it, it.shifts.entries.find { (key, _) -> key.contains(it.date, now) }?.key!!)
+        }?: null.also {
+            DebugConfig.debugPrint("ScheduleService: No matching schedule found for duty info: $now")
         }
-        
-        if (matchingSchedule == null) {
-            println("ScheduleService: No matching schedule found for duty info: ${dutyInfo.date.day} ${dutyInfo.date.month}")
-            return null
-        }
-        
-        // Determine active timespan
-        val activeTimeSpan = when (dutyInfo.shiftType) {
-            DutyDate.ShiftType.DAY -> DutyTimeSpan.CapitalDay
-            DutyDate.ShiftType.NIGHT -> DutyTimeSpan.CapitalNight
-        }
-        
-        return Pair(matchingSchedule, activeTimeSpan)
     }
-    
+
     /**
      * Get duty time info for a timestamp (similar to iOS implementation)
      */
     private fun getDutyTimeInfo(timestamp: Long): DutyDate.DutyTimeInfo {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timestamp
-        
+
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
-        
+
         // Convert current time to minutes since midnight
         val currentTimeInMinutes = hour * 60 + minute
         val morningTransitionInMinutes = 10 * 60 + 15  // 10:15
         val eveningTransitionInMinutes = 22 * 60       // 22:00
-        
+
         // Determine which date and shift we need
         val (targetDate, shiftType) = when {
             currentTimeInMinutes < morningTransitionInMinutes -> {
@@ -123,7 +110,7 @@ class ScheduleService(context: Context) {
                 Pair(calendar.time, DutyDate.ShiftType.NIGHT)
             }
         }
-        
+
         return DutyDate.DutyTimeInfo(
             date = DutyDate(
                 dayOfWeek = "",
@@ -134,7 +121,7 @@ class ScheduleService(context: Context) {
             shiftType = shiftType
         )
     }
-    
+
     /**
      * Convert Calendar.MONTH (0-11) to Spanish month name
      */
@@ -145,7 +132,7 @@ class ScheduleService(context: Context) {
         )
         return months.getOrElse(monthIndex) { "enero" }
     }
-    
+
     /**
      * Clear all cached schedules
      */
@@ -153,7 +140,7 @@ class ScheduleService(context: Context) {
         repository.clearAllCache()
         DebugConfig.debugPrint("ScheduleService: All caches cleared via repository")
     }
-    
+
     /**
      * Clear cache for a specific region
      */
@@ -161,17 +148,17 @@ class ScheduleService(context: Context) {
         repository.clearCacheForRegion(region)
         DebugConfig.debugPrint("ScheduleService: Cleared cache for ${region.name} via repository")
     }
-    
+
     /**
      * Check if schedules are already loaded for a region
      */
     fun isLoaded(region: Region): Boolean = repository.isLoaded(region)
-    
+
     /**
      * Get cache statistics for debugging
      */
     fun getCacheStats(): String = repository.getCacheStats()
-    
+
     /**
      * Get current date and time formatted for display
      */
@@ -187,11 +174,11 @@ class ScheduleService(context: Context) {
             Calendar.SUNDAY -> "Domingo"
             else -> "Lunes"
         }
-        
+
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = getSpanishMonthName(calendar.get(Calendar.MONTH))
         val year = calendar.get(Calendar.YEAR)
-        
+
         return "$dayOfWeek, $day de $month de $year"
     }
 }

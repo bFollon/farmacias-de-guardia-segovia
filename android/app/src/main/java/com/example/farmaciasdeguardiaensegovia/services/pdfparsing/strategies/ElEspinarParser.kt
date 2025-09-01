@@ -100,7 +100,7 @@ class ElEspinarParser : PDFParsingStrategy {
     private fun processPageContent(lines: List<String>): List<PharmacySchedule> {
 
         val (schedules, _, _) = lines.fold(Triple(emptyList<PharmacySchedule>(), null as String?, emptyList<String>())) { (acc, pharmacyKey, dates), line ->
-            DebugConfig.debugPrint("\n🔍 Processing line: '$line'")
+            DebugConfig.debugPrint("🔍 Processing line: '$line'")
             // Skip header lines
 
             val (parsedPharmacy, parsedDates) = when {
@@ -113,7 +113,7 @@ class ElEspinarParser : PDFParsingStrategy {
                 }
 
                 else -> {
-                    DebugConfig.debugPrint("⏭️ Skipping unsupported line")
+                    DebugConfig.debugPrint("⏭️ Skipping unsupported line: [$line]")
                     Pair(pharmacyKey, dates)
                 }
             }
@@ -172,7 +172,7 @@ class ElEspinarParser : PDFParsingStrategy {
      * Process a set of dates with a pharmacy (following Cuéllar pattern)
      */
     private fun processDateSet(dates: List<String>, pharmacyKey: String): List<PharmacySchedule> {
-        DebugConfig.debugPrint("\n📋 Processing date set:")
+        DebugConfig.debugPrint("📋 Processing date set:")
         DebugConfig.debugPrint("📅 Dates: $dates")
         DebugConfig.debugPrint("🏠 Pharmacy: $pharmacyKey")
         DebugConfig.debugPrint("📆 Current year: $currentYear")

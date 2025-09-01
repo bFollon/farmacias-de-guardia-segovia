@@ -18,6 +18,11 @@
 package com.example.farmaciasdeguardiaensegovia.data
 
 import kotlinx.serialization.Serializable
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
 
 /**
  * Represents a time span for pharmacy duty shifts
@@ -39,20 +44,20 @@ data class DutyTimeSpan(
     /**
      * Checks if the given timestamp falls within this duty time span
      */
-    fun contains(timestamp: Long): Boolean {
-        val calendar = java.util.Calendar.getInstance()
-        calendar.timeInMillis = timestamp
+    fun contains(date: DutyDate, timestamp: Long): Boolean {
+        val toCheck = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime()
+
+        val shiftDate = LocalDate.of(date.year!!, DutyDate.monthToNumber(date.month)!!, date.day)
         
-        return if (spansMultipleDays) {
-            // For cross-midnight spans, we need to check time of day, not absolute dates
-            containsTimeOfDay(calendar.get(java.util.Calendar.HOUR_OF_DAY), calendar.get(java.util.Calendar.MINUTE))
+        val (startTime, endTime) = if(spansMultipleDays) {
+            Pair(LocalDateTime.of(shiftDate.minusDays(1), LocalTime.of(startHour, startMinute)),
+            LocalDateTime.of(shiftDate, LocalTime.of(endHour, endMinute)))
         } else {
-            // For same-day spans, check if time falls within range
-            val timeInMinutes = calendar.get(java.util.Calendar.HOUR_OF_DAY) * 60 + calendar.get(java.util.Calendar.MINUTE)
-            val startMinutes = startHour * 60 + startMinute
-            val endMinutes = endHour * 60 + endMinute
-            timeInMinutes in startMinutes..endMinutes
+            Pair(LocalDateTime.of(shiftDate, LocalTime.of(startHour, startMinute)),
+            LocalDateTime.of(shiftDate, LocalTime.of(endHour, endMinute)))
         }
+
+        return toCheck in startTime .. endTime
     }
     
     /**
