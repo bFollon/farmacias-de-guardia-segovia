@@ -118,17 +118,15 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 _loadingProgress.value = progressStart
             }
             
-            // Check if already loaded (but force refresh El Espinar for testing)
-            val shouldForceRefreshElEspinar = region.id == "el-espinar"
-            if (repository.isLoaded(region) && !shouldForceRefreshElEspinar) {
-                DebugConfig.debugPrint("SplashViewModel: $regionName already loaded, skipping actual loading")
-                // No artificial delay needed - let cached data load at natural speed
+            // Check if already loaded AND not forcing refresh
+            if (repository.isLoaded(region) && !region.forceRefresh) {
+                DebugConfig.debugPrint("SplashViewModel: $regionName already loaded in cache, skipping")
             } else {
                 // Load the region (actual loading for implemented regions, placeholder for others)
                 val success = when (region.id) {
-                    "segovia-capital" -> loadRegionPDF(region, "Segovia Capital", forceRefresh = false)
-                    "cuellar" -> loadRegionPDF(region, "Cuéllar", forceRefresh = false)
-                    "el-espinar" -> loadRegionPDF(region, "El Espinar", forceRefresh = true) // Force refresh to test new parsing logic
+                    "segovia-capital" -> loadRegionPDF(region, "Segovia Capital")
+                    "cuellar" -> loadRegionPDF(region, "Cuéllar")
+                    "el-espinar" -> loadRegionPDF(region, "El Espinar")
                     else -> loadPlaceholderPDF(region) // Only Segovia Rural not implemented yet
                 }
                 
@@ -161,14 +159,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     /**
      * Load a region's PDF (actual implementation)
      */
-    private suspend fun loadRegionPDF(region: Region, regionName: String, forceRefresh: Boolean = false): Boolean {
-        DebugConfig.debugPrint("SplashViewModel: Loading $regionName PDF (forceRefresh: $forceRefresh)...")
-        
-        // Clear cache if force refreshing
-        if (forceRefresh) {
-            DebugConfig.debugPrint("SplashViewModel: Clearing cache for $regionName...")
-            repository.clearCacheForRegion(region)
-        }
+    private suspend fun loadRegionPDF(region: Region, regionName: String): Boolean {
+        DebugConfig.debugPrint("SplashViewModel: Loading $regionName PDF...")
         
         // Show intermediate progress during region loading
         val regionIndex = regionsToLoad.indexOfFirst { it.id == region.id }
@@ -180,17 +172,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         }
         
         return try {
-            val schedules = if (forceRefresh) {
-                DebugConfig.debugPrint("SplashViewModel: Force loading schedules for $regionName...")
-                repository.loadSchedules(region, forceRefresh = true)
-            } else {
-                repository.preloadSchedules(region)
-                repository.getCachedSchedules(region) ?: emptyList()
-            }
+            val schedules = repository.preloadSchedules(region)
+            val scheduleList = repository.getCachedSchedules(region) ?: emptyList()
             
-            val success = schedules.isNotEmpty()
+            val success = schedules && scheduleList.isNotEmpty()
             if (success) {
-                DebugConfig.debugPrint("SplashViewModel: Successfully loaded $regionName schedules (${schedules.size} schedules)")
+                DebugConfig.debugPrint("SplashViewModel: Successfully loaded $regionName schedules (${scheduleList.size} schedules)")
             } else {
                 DebugConfig.debugWarn("SplashViewModel: Failed to load $regionName schedules")
             }
@@ -260,6 +247,35 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         viewModelScope.launch {
             repository.clearAllCache()
             DebugConfig.debugPrint("SplashViewModel: All caches cleared!")
+        }
+    }
+    
+    /**
+     * Force refresh a specific region (for testing purposes)
+     */
+    fun forceRefreshRegion(region: Region) {
+        DebugConfig.debugPrint("SplashViewModel: Force refreshing ${region.name}...")
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    // Clear cache for this region first
+                    repository.clearCacheForRegion(region)
+                    
+                    // Force load from PDF
+                    val schedules = repository.loadSchedules(region)
+                    val success = schedules.isNotEmpty()
+                    
+                    if (success) {
+                        DebugConfig.debugPrint("SplashViewModel: Successfully force refreshed ${region.name} (${schedules.size} schedules)")
+                    } else {
+                        DebugConfig.debugWarn("SplashViewModel: Failed to force refresh ${region.name}")
+                    }
+                }
+            } catch (e: Exception) {
+                if (e !is kotlinx.coroutines.CancellationException) {
+                    DebugConfig.debugError("SplashViewModel: Error force refreshing ${region.name}", e)
+                }
+            }
         }
     }
     

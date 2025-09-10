@@ -47,7 +47,7 @@ class ScheduleService(context: Context) {
         DebugConfig.debugPrint("ScheduleService: Loading schedules for ${region.name} (forceRefresh: $forceRefresh)")
 
         // Use the shared repository for loading
-        val schedules = repository.loadSchedules(region, forceRefresh)
+        val schedules = repository.loadSchedules(region)
 
         DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${region.name}")
 

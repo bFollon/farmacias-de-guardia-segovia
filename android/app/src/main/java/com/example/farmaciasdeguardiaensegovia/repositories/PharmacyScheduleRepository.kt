@@ -99,19 +99,19 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(region: Region, forceRefresh: Boolean = false): List<PharmacySchedule> {
+    suspend fun loadSchedules(region: Region): List<PharmacySchedule> {
         return loadingMutex.withLock {
             val cacheKey = region.id
             val cachedEntry = schedulesCache[cacheKey]
             
             // Return cached data if it exists and is fresh (unless force refresh)
-            if (!forceRefresh && cachedEntry != null && cachedEntry.isFresh()) {
+            if (!region.forceRefresh && cachedEntry != null && cachedEntry.isFresh()) {
                 DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${region.name} (${cachedEntry.schedules.size} schedules)")
                 return@withLock cachedEntry.schedules
             }
             
             // Try to load from persistent cache (serialized file cache)
-            if (!forceRefresh) {
+            if (!region.forceRefresh) {
                 val cachedSchedules = cacheService.loadCachedSchedules(region)
                 if (cachedSchedules != null && cachedSchedules.isNotEmpty()) {
                     // Store in memory cache as well
@@ -134,7 +134,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 }
                 
                 // Process the PDF file
-                val schedules = pdfProcessingService.loadPharmacies(pdfFile, region, forceRefresh)
+                val schedules = pdfProcessingService.loadPharmacies(pdfFile, region)
                 
                 if (schedules.isNotEmpty()) {
                     // Cache the results in memory
@@ -201,7 +201,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun preloadSchedules(region: Region): Boolean {
         return try {
-            val schedules = loadSchedules(region, forceRefresh = false)
+            val schedules = loadSchedules(region)
             schedules.isNotEmpty()
         } catch (e: Exception) {
             DebugConfig.debugError("PharmacyScheduleRepository: Error preloading schedules for ${region.name}", e)

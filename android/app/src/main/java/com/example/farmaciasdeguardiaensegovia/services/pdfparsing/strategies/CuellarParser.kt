@@ -24,6 +24,7 @@ import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
+import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.ElEspinarParser.PharmacyInfo
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor
@@ -90,54 +91,57 @@ class CuellarParser : PDFParsingStrategy {
             pdfDoc.close()
         }
     }
-    
-    /**
-     * Process the table structure for a single page
-     */
+
     private fun processPageTable(lines: List<String>): List<PharmacySchedule> {
-        val schedules = mutableListOf<PharmacySchedule>()
-        
-        // Skip the header lines (first 2 lines contain title and column headers)
-        val dataLines = lines.drop(2)
-        
-        for (line in dataLines) {
+        val (schedules, _, _) = lines.fold(Triple(emptyList<PharmacySchedule>(), null as String?, emptyList<String>())) { (acc, pharmacyKey, dates), line ->
             DebugConfig.debugPrint("\n🔍 Processing line: '$line'")
-            
-            // Skip month indicator lines and empty lines
-            if (line.isEmpty() || isMonthIndicatorLine(line)) {
-                DebugConfig.debugPrint("⏭️ Skipping empty or month indicator line")
-                continue
+
+            val (parsedDates, parsedPharmacy) = when {
+                hasDates(line) -> processCompositeLine(line)
+                hasPharmacy(line) -> {
+                    val maybePharmacy = extractPharmacyFromLine(line)
+                    Pair(dates, maybePharmacy)
+                }
+                else -> {
+                    DebugConfig.debugPrint("⏭️ Skipping unsupported line: [$line]")
+                    Pair(dates, pharmacyKey)
+                }
             }
-            
-            // Try to extract dates and pharmacy from the line
-            val parseResult = parseLine(line)
-            if (parseResult != null) {
-                val (dates, pharmacy) = parseResult
-                DebugConfig.debugPrint("📆 Extracted dates: $dates, pharmacy: '$pharmacy'")
-                processDateSet(dates, pharmacy, schedules)
-            } else {
-                DebugConfig.debugPrint("⚠️ Could not parse line: '$line'")
-            }
+
+            if(parsedPharmacy != null && parsedDates.isNotEmpty()) {
+                Triple(acc + processDateSet(parsedDates, parsedPharmacy), null, emptyList())
+            } else Triple(acc, parsedPharmacy, parsedDates)
         }
-        
+
         return schedules
     }
-    
-    /**
-     * Parse a single line to extract dates and pharmacy.
-     * Handles both regular format (dd-mmm) and special transition format.
-     */
-    private fun parseLine(line: String): Pair<List<String>, String>? {
-        return when {
-            // Try special transition format first
-            containsSpecialTransition(line) -> parseSpecialTransitionLine(line)
-            
-            // Fall back to regular dd-mmm format
-            containsRegularDates(line) -> parseRegularDateLine(line)
-            
-            // Skip unrecognized lines
-            else -> null
+
+    private fun hasDates(line: String): Boolean = REGULAR_DATE_REGEX.containsMatchIn(line)
+
+    private fun hasPharmacy(line: String): Boolean =
+        normalizeWhitespace(line).let { normalizedLine ->
+            PHARMACY_INFO.keys.find { pharmacyKey ->
+                normalizedLine.contains(pharmacyKey, ignoreCase = true)
+            } != null
         }
+
+    private fun processCompositeLine(line: String): Pair<List<String>, String?> {
+        val dates = REGULAR_DATE_REGEX.findAll(line).map { it.value }.toList()
+
+        val maybePharmacy = extractPharmacyFromLine(line)
+
+        if(maybePharmacy == null) {
+            DebugConfig.debugPrint("Composite line had no pharmacy information: [$line]")
+            DebugConfig.debugPrint("Will try to find pharmacy information next line")
+        }
+        return Pair(dates, maybePharmacy)
+    }
+
+    private fun extractPharmacyFromLine(line: String): String? =
+        normalizeWhitespace(line).let { normalizedLine ->
+            PHARMACY_INFO.keys.find { pharmacyKey ->
+                normalizedLine.contains(pharmacyKey, ignoreCase = true)
+            }
     }
     
     /**
@@ -266,46 +270,44 @@ class CuellarParser : PDFParsingStrategy {
     /**
      * Process a set of dates with a pharmacy to create schedules
      */
-    private fun processDateSet(dates: List<String>, pharmacy: String, schedules: MutableList<PharmacySchedule>) {
-        DebugConfig.debugPrint("\n📋 Processing date set:")
+    private fun processDateSet(dates: List<String>, pharmacyKey: String): List<PharmacySchedule> {
+        DebugConfig.debugPrint("📋 Processing date set:")
         DebugConfig.debugPrint("📅 Dates: $dates")
-        DebugConfig.debugPrint("🏥 Pharmacy: $pharmacy")
+        DebugConfig.debugPrint("🏠 Pharmacy: $pharmacyKey")
         DebugConfig.debugPrint("📆 Current year: $currentYear")
-        
-        // Create schedules for each date in the set
-        for (date in dates) {
-            // If this is January 1st, increment the year (handle both regular hyphen and en-dash)
+
+        return dates.fold(emptyList<PharmacySchedule>()) { acc, date ->
             if (date.matches(Regex("01[‐-]ene"))) {
                 currentYear++
                 DebugConfig.debugPrint("🎊 New year detected! Now processing year $currentYear")
             }
-            
+
             DebugConfig.debugPrint("📆 Processing date: $date (year: $currentYear)")
-            
             val dutyDate = parseDutyDate(date, currentYear)
-            if (dutyDate != null) {
-                val pharmacyInfo = PHARMACY_INFO[pharmacy] ?: PharmacyInfo(
-                    name = pharmacy,
+
+            dutyDate?.let { dutyDate ->
+                val pharmacyInfo = PHARMACY_INFO[pharmacyKey] ?: PharmacyInfo(
+                    name = "Farmacia $pharmacyKey",
                     address = "Dirección no disponible",
                     phone = "No disponible"
                 )
-                
+
                 val pharmacyInstance = Pharmacy(
                     name = pharmacyInfo.name,
                     address = pharmacyInfo.address,
                     phone = pharmacyInfo.phone,
                     additionalInfo = null
                 )
-                
-                val schedule = PharmacySchedule(
+
+                DebugConfig.debugPrint("💊 Adding schedule for ${pharmacyInstance.name} on ${dutyDate.day}-${dutyDate.month}-${dutyDate.year ?: PDFParsingUtils.getCurrentYear()}")
+
+                acc + PharmacySchedule(
                     date = dutyDate,
                     shifts = mapOf(
                         DutyTimeSpan.FullDay to listOf(pharmacyInstance)
                     )
                 )
-                
-                schedules.add(schedule)
-            } else {
+            } ?: acc.also {
                 DebugConfig.debugPrint("⚠️ Could not parse duty date for: $date")
             }
         }

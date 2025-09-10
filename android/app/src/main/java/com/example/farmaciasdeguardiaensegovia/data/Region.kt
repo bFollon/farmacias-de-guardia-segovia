@@ -34,7 +34,10 @@ data class Region(
     val pdfURL: String,
     
     /** Additional metadata about the region */
-    val metadata: RegionMetadata = RegionMetadata()
+    val metadata: RegionMetadata = RegionMetadata(),
+    
+    /** Whether to force refresh this region's cache on every load (useful for testing) */
+    val forceRefresh: Boolean = false
 ) {
     companion object {
         /** The default region (Segovia Capital) */
@@ -59,7 +62,8 @@ data class Region(
             metadata = RegionMetadata(
                 isMonthlySchedule = false,  // Cuéllar uses weekly schedules
                 notes = "Servicios semanales excepto primera semana de septiembre"
-            )
+            ),
+            forceRefresh = true
         )
         
         /** El Espinar region */
@@ -71,7 +75,7 @@ data class Region(
             metadata = RegionMetadata(
                 isMonthlySchedule = false,  // Uses weekly schedules like Cuéllar
                 notes = "Servicios semanales"
-            )
+            ),
         )
         
         /** Segovia Rural region */

@@ -93,15 +93,11 @@ class ElEspinarParser : PDFParsingStrategy {
         }
     }
     
-    /**
-     * Process the content of a single page for El Espinar format
-     * Unlike Cuéllar's table format, El Espinar uses a mixed text approach
-     */
+
     private fun processPageContent(lines: List<String>): List<PharmacySchedule> {
 
         val (schedules, _, _) = lines.fold(Triple(emptyList<PharmacySchedule>(), null as String?, emptyList<String>())) { (acc, pharmacyKey, dates), line ->
             DebugConfig.debugPrint("🔍 Processing line: '$line'")
-            // Skip header lines
 
             val (parsedPharmacy, parsedDates) = when {
                 hasPharmacy(line) -> {
@@ -124,15 +120,6 @@ class ElEspinarParser : PDFParsingStrategy {
         }
 
         return schedules
-    }
-    
-    /**
-     * Check if line is a header that should be skipped
-     */
-    private fun isHeaderLine(line: String): Boolean {
-        return line.contains("COLEGIO", ignoreCase = true) ||
-               line.contains("TURNOS", ignoreCase = true) ||
-               line.contains("LUNES MARTES", ignoreCase = true)
     }
 
     /**
@@ -200,7 +187,7 @@ class ElEspinarParser : PDFParsingStrategy {
                     additionalInfo = null
                 )
 
-                DebugConfig.debugPrint("💊 Addeding schedule for ${pharmacyInstance.name} on ${dutyDate.day}-${dutyDate.month}-${dutyDate.year ?: PDFParsingUtils.getCurrentYear()}")
+                DebugConfig.debugPrint("💊 Adding schedule for ${pharmacyInstance.name} on ${dutyDate.day}-${dutyDate.month}-${dutyDate.year ?: PDFParsingUtils.getCurrentYear()}")
 
                 acc + PharmacySchedule(
                     date = dutyDate,
