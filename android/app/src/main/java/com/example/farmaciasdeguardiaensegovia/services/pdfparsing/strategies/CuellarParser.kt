@@ -173,126 +173,12 @@ class CuellarParser : PDFParsingStrategy {
         }
 
     /**
-     * Check if line contains special transition format (e.g., "DE AGOSTO", "DE SEPTIEMBRE")
-     */
-    private fun containsSpecialTransition(line: String): Boolean {
-        return line.contains("DE AGOSTO", ignoreCase = true) ||
-                line.contains("DE SEPTIEMBRE", ignoreCase = true) ||
-                line.contains("de Septiembre")
-    }
-
-    /**
-     * Check if line contains regular date format (dd-mmm)
-     */
-    private fun containsRegularDates(line: String): Boolean {
-        return REGULAR_DATE_REGEX.containsMatchIn(line)
-    }
-
-    /**
-     * Check if line is a month indicator (e.g., "ENE", "FEB", "MAR")
-     */
-    private fun isMonthIndicatorLine(line: String): Boolean {
-        return MONTH_INDICATOR_REGEX.matches(line)
-    }
-
-    /**
-     * Parse special transition format lines like:
-     * "DOMINGO 31 DE AGOSTO Y LUNES 1 DE SEPTIEMBRE  STA. MARINA"
-     */
-    private fun parseSpecialTransitionLine(line: String): Pair<List<String>, String>? {
-        DebugConfig.debugPrint("\n🔄 Parsing special format line: '$line'")
-
-        val dates = mutableListOf<String>()
-        val dateMatches = SPECIAL_TRANSITION_REGEX.findAll(line)
-
-        DebugConfig.debugPrint("✅ Found ${dateMatches.count()} special date matches")
-
-        for (match in dateMatches) {
-            val day = match.groupValues[2].toIntOrNull() ?: continue
-            val monthAbbr = when (match.groupValues[3].uppercase()) {
-                "AGOSTO" -> "ago"
-                "SEPTIEMBRE", "Septiembre" -> "sep"
-                else -> continue
-            }
-            val formattedDate = String.format("%02d-%s", day, monthAbbr)
-            dates.add(formattedDate)
-            DebugConfig.debugPrint("   - Converted '${match.value}' to '$formattedDate'")
-        }
-
-        // Extract pharmacy name from end of line
-        val pharmacy = extractPharmacyFromEndOfLine(line)
-
-        DebugConfig.debugPrint("📅 Special format dates: $dates")
-        DebugConfig.debugPrint("🏥 Pharmacy: '$pharmacy'")
-
-        return if (dates.isNotEmpty() && pharmacy.isNotEmpty()) {
-            Pair(dates, pharmacy)
-        } else {
-            DebugConfig.debugPrint("❌ Failed to extract dates or pharmacy from special format line")
-            null
-        }
-    }
-
-    /**
-     * Parse regular format lines like:
-     * "30-dic  31-dic  01-ene  02-ene  03-ene  04-ene  05-ene  Av C.J. CELA"
-     */
-    private fun parseRegularDateLine(line: String): Pair<List<String>, String>? {
-        DebugConfig.debugPrint("\n📋 Parsing regular format line: '$line'")
-
-        val dates = mutableListOf<String>()
-        val dateMatches = REGULAR_DATE_REGEX.findAll(line)
-
-        DebugConfig.debugPrint("✅ Found ${dateMatches.count()} regular date matches")
-
-        for (match in dateMatches) {
-            dates.add(match.value)
-            DebugConfig.debugPrint("   - Found date: '${match.value}'")
-        }
-
-        // Extract pharmacy name from end of line (after the last date)
-        val pharmacy = extractPharmacyFromEndOfLine(line)
-
-        DebugConfig.debugPrint("📅 Regular dates: $dates")
-        DebugConfig.debugPrint("🏥 Pharmacy: '$pharmacy'")
-
-        return if (dates.isNotEmpty() && pharmacy.isNotEmpty()) {
-            Pair(dates, pharmacy)
-        } else {
-            DebugConfig.debugPrint("❌ Failed to extract dates or pharmacy from regular format line")
-            null
-        }
-    }
-
-    /**
      * Normalize whitespace by replacing all types of whitespace characters with single regular spaces
      * This handles NBSP (non-breaking space), tabs, multiple spaces, etc.
      */
     private fun normalizeWhitespace(text: String): String {
         // Replace all Unicode whitespace characters with regular spaces, then collapse multiple spaces
         return text.replace(WHITESPACE_REGEX, " ").trim()
-    }
-
-    /**
-     * Extract pharmacy name from the end of a line
-     */
-    private fun extractPharmacyFromEndOfLine(line: String): String {
-        DebugConfig.debugPrint("🔍 Extracting pharmacy from line: '$line'")
-
-        // Normalize whitespace in the input line
-        val normalizedLine = normalizeWhitespace(line)
-        DebugConfig.debugPrint("🔧 Normalized line: '$normalizedLine'")
-
-        // Find the pharmacy name that appears in the line (with normalized whitespace comparison)
-        val foundPharmacy = PHARMACY_INFO.keys.find { pharmacy ->
-            val normalizedPharmacy = normalizeWhitespace(pharmacy.trim())
-            val matches = normalizedLine.contains(normalizedPharmacy, ignoreCase = true)
-            DebugConfig.debugPrint("🔍 Checking '$normalizedPharmacy' against normalized line: $matches")
-            matches
-        }?.trim()
-
-        DebugConfig.debugPrint("🔍 Found pharmacy match: '$foundPharmacy'")
-        return foundPharmacy ?: ""
     }
 
     /**
@@ -380,17 +266,6 @@ class CuellarParser : PDFParsingStrategy {
         // Pre-compiled regex patterns for performance
         private val REGULAR_DATE_REGEX by lazy {
             Regex("""(\d{1,2})[‐-](\w{3})""")
-        }
-
-        private val SPECIAL_TRANSITION_REGEX by lazy {
-            Regex(
-                """(?:DOMINGO|LUNES|MARTES|MIERCOLES|JUEVES|VIERNES|SABADO)\s+(\d+)\s+DE\s+(AGOSTO|SEPTIEMBRE|Septiembre)""",
-                RegexOption.IGNORE_CASE
-            )
-        }
-
-        private val MONTH_INDICATOR_REGEX by lazy {
-            Regex("""^[A-Z]{3}\s*$""")
         }
 
         // Regex to match all types of whitespace characters (NBSP, regular space, tab, etc.)
