@@ -24,6 +24,9 @@ import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.example.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
+import com.example.farmaciasdeguardiaensegovia.services.PDFURLScrapingDemo
+import com.example.farmaciasdeguardiaensegovia.services.PDFURLScrapingTest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,6 +61,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     private val _currentLoadingRegion = MutableStateFlow<String?>(null)
     val currentLoadingRegion: StateFlow<String?> = _currentLoadingRegion.asStateFlow()
     
+    private val _scrapedPDFURLs = MutableStateFlow<List<PDFURLScrapingService.ScrapedPDFData>>(emptyList())
+    val scrapedPDFURLs: StateFlow<List<PDFURLScrapingService.ScrapedPDFData>> = _scrapedPDFURLs.asStateFlow()
+    
     // Sequential regions to load (in order)
     private val regionsToLoad = listOf(
         Region.segoviaCapital,
@@ -84,6 +90,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             try {
                 // Move all repository work to IO dispatcher
                 withContext(Dispatchers.IO) {
+                    // First, scrape PDF URLs to check for updates
+                    scrapePDFURLs()
+                    
+                    // Then load regions sequentially
                     loadRegionsSequentially()
                 }
             } catch (e: Exception) {
@@ -96,6 +106,32 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                     _loadingProgress.value = 1f
                     _isLoading.value = false
                 }
+            }
+        }
+    }
+    
+    /**
+     * Scrape PDF URLs from the stable cofsegovia.com page
+     * This runs at startup to check for URL updates
+     */
+    private suspend fun scrapePDFURLs() {
+        try {
+            DebugConfig.debugPrint("SplashViewModel: Starting PDF URL scraping...")
+            
+            val scrapedData = PDFURLScrapingService.scrapePDFURLs()
+            
+            withContext(Dispatchers.Main) {
+                _scrapedPDFURLs.value = scrapedData
+            }
+            
+            // Print the scraped data to console for debugging
+            PDFURLScrapingService.printScrapedData(scrapedData)
+            
+            DebugConfig.debugPrint("SplashViewModel: PDF URL scraping completed")
+            
+        } catch (e: Exception) {
+            if (e !is kotlinx.coroutines.CancellationException) {
+                DebugConfig.debugError("SplashViewModel: Error during PDF URL scraping", e)
             }
         }
     }
@@ -218,6 +254,35 @@ class SplashViewModel(private val context: Context) : ViewModel() {
      * Get the loaded Segovia Capital schedules (if any)
      */
     fun getSegoviaCapitalSchedules(): List<PharmacySchedule>? = repository.getCachedSchedules(Region.segoviaCapital)
+    
+    /**
+     * Get the scraped PDF URLs from the cofsegovia.com page
+     */
+    fun getScrapedPDFURLs(): List<PDFURLScrapingService.ScrapedPDFData> = _scrapedPDFURLs.value
+    
+    /**
+     * Run the PDF URL scraping demo for testing purposes
+     */
+    fun runScrapingDemo() {
+        DebugConfig.debugPrint("SplashViewModel: Running PDF URL scraping demo...")
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                PDFURLScrapingDemo.runDemo()
+            }
+        }
+    }
+    
+    /**
+     * Run the PDF URL scraping test with detailed HTML output
+     */
+    fun runScrapingTest() {
+        DebugConfig.debugPrint("SplashViewModel: Running PDF URL scraping test with HTML output...")
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                PDFURLScrapingTest.runTest()
+            }
+        }
+    }
     
     /**
      * Reset loading state (for testing or if user wants to refresh)

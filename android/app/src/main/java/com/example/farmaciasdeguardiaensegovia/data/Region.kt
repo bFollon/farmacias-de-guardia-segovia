@@ -63,7 +63,7 @@ data class Region(
                 isMonthlySchedule = false,  // Cuéllar uses weekly schedules
                 notes = "Servicios semanales excepto primera semana de septiembre"
             ),
-            forceRefresh = true
+            forceRefresh = false
         )
         
         /** El Espinar region */

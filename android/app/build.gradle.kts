@@ -59,7 +59,7 @@ dependencies {
         // PDF Processing
     implementation(libs.itext.kernel)
     
-    // HTTP client for PDF downloads
+    // HTTP client for PDF downloads and web scraping
     implementation(libs.okhttp)
     
     // Date picker
