@@ -70,7 +70,7 @@ class ScheduleService(context: Context) {
     fun findCurrentSchedule(schedules: List<PharmacySchedule>): Pair<PharmacySchedule, DutyTimeSpan>? {
         val now = System.currentTimeMillis()
 
-        val matchingSchedule = schedules.find { it.shifts.entries.find { (key, _) -> key.contains(it.date, now) } != null }
+        val matchingSchedule = schedules.find { it.shifts.entries.find { (timeSpan, _) -> timeSpan.contains(it.date, now) } != null }
 
         return matchingSchedule?.let {
             Pair(it, it.shifts.entries.find { (key, _) -> key.contains(it.date, now) }?.key!!)

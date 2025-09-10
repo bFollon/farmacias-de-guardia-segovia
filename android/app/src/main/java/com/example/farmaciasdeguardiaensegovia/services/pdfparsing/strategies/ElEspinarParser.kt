@@ -28,63 +28,66 @@ import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor
 import java.io.File
+import java.time.Instant
+import java.time.ZoneId
+import kotlin.collections.plus
 
 /**
  * Parser implementation for El Espinar pharmacy schedules.
  * Android equivalent of iOS ElEspinarParser based on Cuéllar implementation pattern.
- * 
+ *
  * Handles the specific El Espinar PDF format with three pharmacy locations:
  * - AV. HONTANILLA 18
- * - C/ MARQUES PERALES  
+ * - C/ MARQUES PERALES
  * - SAN RAFAEL
  */
 class ElEspinarParser : PDFParsingStrategy {
-    
+
     /** Current year being processed, incremented when January 1st is found */
-    private var currentYear = 2024
-    
+    private val startingYear = Instant.ofEpochMilli(System.currentTimeMillis())
+        .atZone(ZoneId.systemDefault()).toLocalDateTime().year - 1
+
     override fun getStrategyName(): String = "ElEspinarParser"
-    
+
     override fun parseSchedules(pdfFile: File): List<PharmacySchedule> {
-        val allSchedules = mutableListOf<PharmacySchedule>()
-        
+
         DebugConfig.debugPrint("\n=== El Espinar Pharmacy Schedules ===")
-        
+
         // Open PDF once and reuse across all pages
         val reader = PdfReader(pdfFile)
         val pdfDoc = PdfDocument(reader)
-        
+
         return try {
             val pageCount = pdfDoc.numberOfPages
             DebugConfig.debugPrint("📄 Processing $pageCount pages of El Espinar PDF...")
-            
+
             // Process each page
-            for (pageIndex in 1..pageCount) { // iText uses 1-based indexing
+            val (allSchedules, _) = (1..pageCount).fold(Pair(emptyList<PharmacySchedule>(), startingYear)) { (acc, year), pageIndex ->
                 DebugConfig.debugPrint("\n📃 Processing page $pageIndex of $pageCount")
-                
+
                 val content = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(pageIndex))
                 val lines = content.split('\n')
                     .map { it.trim() }
                     .filter { it.isNotEmpty() }
-                
+
                 if (lines.isNotEmpty()) {
                     DebugConfig.debugPrint("\n📊 Page content structure:")
                     lines.forEachIndexed { index, line ->
                         DebugConfig.debugPrint("Line $index: '$line'")
                     }
                 }
-                
+
                 // Process the page content using El Espinar-specific logic
-                val pageSchedules = processPageContent(lines)
-                allSchedules.addAll(pageSchedules)
+                val (pageSchedules, processedYear) = processPageContent(lines, year)
+                Pair(acc + pageSchedules, processedYear)
             }
-            
+
             // Sort schedules by date efficiently
             val sortedSchedules = allSchedules.sortedWith(dateComparator)
-            
+
             DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for El Espinar")
             sortedSchedules
-            
+
         } catch (e: Exception) {
             DebugConfig.debugError("❌ Error parsing El Espinar PDF: ${e.message}", e)
             emptyList()
@@ -92,34 +95,63 @@ class ElEspinarParser : PDFParsingStrategy {
             pdfDoc.close()
         }
     }
-    
 
-    private fun processPageContent(lines: List<String>): List<PharmacySchedule> {
 
-        val (schedules, _, _) = lines.fold(Triple(emptyList<PharmacySchedule>(), null as String?, emptyList<String>())) { (acc, pharmacyKey, dates), line ->
-            DebugConfig.debugPrint("🔍 Processing line: '$line'")
+    private fun processPageContent(
+        lines: List<String>,
+        year: Int
+    ): Pair<List<PharmacySchedule>, Int> {
 
-            val (parsedPharmacy, parsedDates) = when {
-                hasPharmacy(line) -> {
-                    Pair(identifyPharmacyFromLine(line), dates)
+        val (schedules, metadata) = lines
+            .fold(
+                Pair(
+                    emptyList<PharmacySchedule>(),
+                    Triple(
+                        null as String?,
+                        emptyList<String>(),
+                        year
+                    )
+                )
+            ) { (acc, metadata), line ->
+                val (pharmacyKey, dates, transientYear) = metadata
+                DebugConfig.debugPrint("🔍 Processing line: '$line'")
+
+                val (parsedPharmacy, parsedDates) = when {
+                    hasPharmacy(line) -> {
+                        Pair(identifyPharmacyFromLine(line), dates)
+                    }
+
+                    hasDates(line) -> {
+                        Pair(pharmacyKey, extractDatesFromLine(line))
+                    }
+
+                    else -> {
+                        DebugConfig.debugPrint("⏭️ Skipping unsupported line: [$line]")
+                        Pair(pharmacyKey, dates)
+                    }
                 }
 
-                hasDates(line) -> {
-                    Pair(pharmacyKey, extractDatesFromLine(line))
-                }
-
-                else -> {
-                    DebugConfig.debugPrint("⏭️ Skipping unsupported line: [$line]")
-                    Pair(pharmacyKey, dates)
-                }
+                if (parsedPharmacy != null && parsedDates.isNotEmpty()) {
+                    val (schedules, processedYear) = processDateSet(
+                        parsedDates,
+                        parsedPharmacy,
+                        transientYear
+                    )
+                    Pair(
+                        acc + schedules,
+                        Triple(
+                            null,
+                            emptyList(),
+                            processedYear
+                        )
+                    )
+                } else Pair(
+                    acc,
+                    Triple(parsedPharmacy, parsedDates, transientYear)
+                )
             }
 
-            if(parsedPharmacy != null && parsedDates.isNotEmpty()) {
-                Triple(acc + processDateSet(parsedDates, parsedPharmacy), null, emptyList())
-            } else Triple(acc, parsedPharmacy, parsedDates)
-        }
-
-        return schedules
+        return Pair(schedules, metadata.third)
     }
 
     /**
@@ -128,7 +160,7 @@ class ElEspinarParser : PDFParsingStrategy {
     private fun hasDates(line: String): Boolean {
         return DATE_REGEX.containsMatchIn(line)
     }
-    
+
     /**
      * Extract dates from a line using regex patterns
      */
@@ -154,24 +186,28 @@ class ElEspinarParser : PDFParsingStrategy {
             else -> null
         }
     }
-    
+
     /**
      * Process a set of dates with a pharmacy (following Cuéllar pattern)
      */
-    private fun processDateSet(dates: List<String>, pharmacyKey: String): List<PharmacySchedule> {
+    private fun processDateSet(
+        dates: List<String>,
+        pharmacyKey: String,
+        year: Int
+    ): Pair<List<PharmacySchedule>, Int> {
         DebugConfig.debugPrint("📋 Processing date set:")
         DebugConfig.debugPrint("📅 Dates: $dates")
         DebugConfig.debugPrint("🏠 Pharmacy: $pharmacyKey")
-        DebugConfig.debugPrint("📆 Current year: $currentYear")
+        DebugConfig.debugPrint("📆 Current year: $year")
 
-        return dates.fold(emptyList<PharmacySchedule>()) { acc, date ->
-            if (date.matches(Regex("01[‐-]ene"))) {
-                currentYear++
-                DebugConfig.debugPrint("🎊 New year detected! Now processing year $currentYear")
-            }
+        return dates.fold(Pair(emptyList(), year)) { (acc, year), date ->
+            val transientYear = if (date.matches(Regex("01[‐-]ene"))) {
+                DebugConfig.debugPrint("🎊 New year detected! Now processing year ${year + 1}")
+                year + 1
+            } else year
 
-            DebugConfig.debugPrint("📆 Processing date: $date (year: $currentYear)")
-            val dutyDate = parseDutyDate(date, currentYear)
+            DebugConfig.debugPrint("📆 Processing date: $date (year: $transientYear)")
+            val dutyDate = parseDutyDate(date, transientYear)
 
             dutyDate?.let { dutyDate ->
                 val pharmacyInfo = PHARMACY_INFO[pharmacyKey] ?: PharmacyInfo(
@@ -189,30 +225,32 @@ class ElEspinarParser : PDFParsingStrategy {
 
                 DebugConfig.debugPrint("💊 Adding schedule for ${pharmacyInstance.name} on ${dutyDate.day}-${dutyDate.month}-${dutyDate.year ?: PDFParsingUtils.getCurrentYear()}")
 
-                acc + PharmacySchedule(
-                    date = dutyDate,
-                    shifts = mapOf(
-                        DutyTimeSpan.FullDay to listOf(pharmacyInstance)
-                    )
+                Pair(
+                    acc + PharmacySchedule(
+                        date = dutyDate,
+                        shifts = mapOf(
+                            DutyTimeSpan.FullDay to listOf(pharmacyInstance)
+                        )
+                    ), transientYear
                 )
-            } ?: acc.also {
+            } ?: Pair(acc, year).also {
                 DebugConfig.debugPrint("⚠️ Could not parse duty date for: $date")
             }
         }
     }
-    
+
     /**
      * Parse a date string like "01-ene" to a DutyDate (following Cuéllar pattern)
      */
     private fun parseDutyDate(dateString: String, year: Int): DutyDate? {
         val match = DATE_REGEX.matchEntire(dateString) ?: return null
-        
+
         val dayStr = match.groupValues[1]
         val monthStr = match.groupValues[2]
-        
+
         val day = dayStr.toIntOrNull() ?: return null
         val month = PDFParsingUtils.monthAbbrToNumber(monthStr) ?: return null
-        
+
         return DutyDate(
             dayOfWeek = PDFParsingUtils.getDayOfWeek(day, month, year),
             day = day,
@@ -220,7 +258,7 @@ class ElEspinarParser : PDFParsingStrategy {
             year = year
         )
     }
-    
+
     /**
      * Data class for pharmacy information (following Cuéllar pattern)
      */
@@ -229,13 +267,13 @@ class ElEspinarParser : PDFParsingStrategy {
         val address: String,
         val phone: String
     )
-    
+
     companion object {
         // Pre-compiled regex patterns for performance (following Cuéllar pattern)
-        private val DATE_REGEX by lazy { 
-            Regex("""(\d{1,2})[‐-](\w{3})""") 
+        private val DATE_REGEX by lazy {
+            Regex("""(\d{1,2})[‐-](\w{3})""")
         }
-        
+
         // Pharmacy information lookup table (matching iOS implementation exactly)
         private val PHARMACY_INFO = mapOf(
             "AV. HONTANILLA 18" to PharmacyInfo(
@@ -254,36 +292,36 @@ class ElEspinarParser : PDFParsingStrategy {
                 phone = "921 171 105"
             )
         )
-        
+
         // Cached date comparator to avoid lambda creation overhead (following Cuéllar pattern)
         private val dateComparator = Comparator<PharmacySchedule> { first, second ->
             compareSchedulesByDate(first, second)
         }
-        
+
         /**
          * Compare two pharmacy schedules by date for sorting (following Cuéllar pattern)
          */
         private fun compareSchedulesByDate(first: PharmacySchedule, second: PharmacySchedule): Int {
             val currentYear = PDFParsingUtils.getCurrentYear()
-            
+
             // Extract year, month, day from dates
             val firstYear = first.date.year ?: currentYear
             val secondYear = second.date.year ?: currentYear
-            
+
             if (firstYear != secondYear) {
                 return firstYear.compareTo(secondYear)
             }
-            
+
             val firstMonth = PDFParsingUtils.monthToNumber(first.date.month) ?: 0
             val secondMonth = PDFParsingUtils.monthToNumber(second.date.month) ?: 0
-            
+
             if (firstMonth != secondMonth) {
                 return firstMonth.compareTo(secondMonth)
             }
-            
+
             val firstDay = first.date.day
             val secondDay = second.date.day
-            
+
             return firstDay.compareTo(secondDay)
         }
     }
