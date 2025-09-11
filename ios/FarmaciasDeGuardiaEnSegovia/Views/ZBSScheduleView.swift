@@ -245,7 +245,7 @@ struct ZBSScheduleView: View {
                                     .foregroundColor(.secondary)
                                 
                                 Link("Calendario de Guardias - Segovia Rural",
-                                     destination: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!)
+                                     destination: Region.segoviaRural.pdfURL)
                                     .font(.footnote)
                                 
                                 // Error reporting section

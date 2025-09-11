@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+import com.example.farmaciasdeguardiaensegovia.viewmodels.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,24 +44,44 @@ fun SplashScreen(
     onSplashFinished: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val splashViewModel: SplashViewModel = viewModel { SplashViewModel(context) }
+    
+    // Observe loading states from ViewModel
+    val regionLoadingStates by splashViewModel.regionLoadingStates.collectAsState()
+    val loadingProgress by splashViewModel.loadingProgress.collectAsState()
+    val isLoading by splashViewModel.isLoading.collectAsState()
+    val currentLoadingRegion by splashViewModel.currentLoadingRegion.collectAsState()
+    
     // Animation states
     var logoVisible by remember { mutableStateOf(false) }
     var textVisible by remember { mutableStateOf(false) }
     var progressVisible by remember { mutableStateOf(false) }
     var regionsVisible by remember { mutableStateOf(false) }
     
-    // Region icons with emojis matching iOS
-    var regions by remember {
-        mutableStateOf(listOf(
-            RegionIcon("🏙", "Segovia Capital"),
-            RegionIcon("🌳", "Cuéllar"),  
-            RegionIcon("⛰", "El Espinar"),
-            RegionIcon("🚜", "Segovia Rural")
-        ))
+    // Region icons with emojis matching iOS - updated based on actual loading states
+    val regions by remember {
+        derivedStateOf {
+            listOf(
+                RegionIcon("🏙", "Segovia Capital", regionLoadingStates["Segovia Capital"] ?: false),
+                RegionIcon("🌳", "Cuéllar", regionLoadingStates["Cuéllar"] ?: false),  
+                RegionIcon("⛰", "El Espinar", regionLoadingStates["El Espinar"] ?: false),
+                RegionIcon("🚜", "Segovia Rural", regionLoadingStates["Segovia Rural"] ?: false)
+            )
+        }
     }
     
-    // Progress animation
+    // Progress animation - combines manual animation with actual loading progress
     val progress = remember { Animatable(0f) }
+    
+    // Update progress based on actual loading progress
+    LaunchedEffect(loadingProgress) {
+        // Animate smoothly to the actual loading progress
+        progress.animateTo(
+            loadingProgress,
+            animationSpec = tween(300, easing = EaseOut)
+        )
+    }
     
     // Logo animations - matching iOS easeOut 0.8s
     val logoScale by animateFloatAsState(
@@ -109,8 +133,14 @@ fun SplashScreen(
     
     // Launch animations with iOS-matching timing
     LaunchedEffect(Unit) {
-        // Logo appears immediately
+        // Logo appears immediately (UI not blocked by loading)
         logoVisible = true
+        
+        // Start PDF loading in truly background coroutine after a tiny delay to ensure UI is rendered
+        launch {
+            delay(50) // Small delay to ensure splash UI is rendered first
+            splashViewModel.startBackgroundLoading()
+        }
         
         // Text appears after 0.5s (staggered)
         delay(500)
@@ -124,25 +154,48 @@ fun SplashScreen(
         delay(100)
         regionsVisible = true
         
-        // Start progress animation (runs concurrently with region animations)
-        val progressJob = launch {
-            progress.animateTo(1f, animationSpec = tween(1200, easing = LinearEasing))
-        }
+        // No manual region animation - they are now tied to actual loading states
+        // Icons will animate automatically as regionLoadingStates changes
         
-        // Animate region completion while progress is running
-        delay(200) // Small delay before starting region animations
-        repeat(regions.size) { index ->
-            delay(250) // Slightly slower for better visual effect
-            regions = regions.mapIndexed { i, region ->
-                if (i == index) region.copy(isCompleted = true) else region
+        // Wait for sequential loading to complete
+        val startTime = System.currentTimeMillis()
+        val minSplashTime = 3000L // Minimum 3 seconds for good UX
+        val maxWaitTime = 15000L // Maximum 15 seconds to prevent hanging
+        
+        // Wait for actual loading completion, respecting min/max times
+        while (System.currentTimeMillis() - startTime < maxWaitTime) {
+            delay(100)
+            
+            val elapsedTime = System.currentTimeMillis() - startTime
+            
+            // Check if Segovia Capital is actually loaded (the real indicator)
+            val segoviaCapitalCompleted = regionLoadingStates["Segovia Capital"] ?: false
+            
+            // If Segovia Capital is completed and we've waited minimum time, we can proceed
+            if (segoviaCapitalCompleted && elapsedTime >= minSplashTime) {
+                DebugConfig.debugPrint("SplashScreen: Segovia Capital loaded, proceeding after ${elapsedTime}ms")
+                break
+            }
+            
+            // Also check traditional isLoading state as backup (but with higher minimum time)
+            if (!isLoading && elapsedTime >= minSplashTime) {
+                DebugConfig.debugPrint("SplashScreen: isLoading=false, proceeding after ${elapsedTime}ms")
+                break
             }
         }
         
-        // Wait for progress to complete
-        progressJob.join()
+        // If we hit max wait time, log it but proceed anyway
+        if (System.currentTimeMillis() - startTime >= maxWaitTime) {
+            DebugConfig.debugWarn("SplashScreen: Maximum wait time reached, proceeding anyway")
+        }
         
-        // Hold final state briefly then navigate
-        delay(500)
+        // Final progress to 100% if not already there (quick animation)
+        if (progress.value < 1f) {
+            progress.animateTo(1f, animationSpec = tween(200, easing = EaseOut))
+        }
+        
+        // Brief hold then navigate immediately
+        delay(200)
         onSplashFinished()
     }
 

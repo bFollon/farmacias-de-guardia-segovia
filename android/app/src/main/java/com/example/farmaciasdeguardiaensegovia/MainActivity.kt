@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.ui.screens.MainScreen
+import com.example.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
@@ -56,7 +58,14 @@ fun AppNavigation() {
         composable("main") {
             MainScreen(
                 onRegionSelected = { region ->
-                    // TODO: Navigate to PDF view
+                    when (region) {
+                        Region.segoviaCapital, Region.cuellar, Region.elEspinar -> {
+                            navController.navigate("schedule/${region.id}")
+                        }
+                        else -> {
+                            // TODO: Implement Segovia Rural region
+                        }
+                    }
                 },
                 onZBSSelectionRequested = {
                     navController.navigate("zbs_selection")
@@ -68,6 +77,33 @@ fun AppNavigation() {
                     // TODO: Navigate to about
                 }
             )
+        }
+        
+        composable("schedule/{regionId}") { backStackEntry ->
+            val regionId = backStackEntry.arguments?.getString("regionId")
+            when (regionId) {
+                "segovia-capital", "cuellar", "el-espinar" -> {
+                    ScheduleScreen(
+                        regionId = regionId,
+                        onBack = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+                else -> {
+                    // TODO: Handle other region IDs (only Segovia Rural remaining)
+                    Box(
+                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Region \"$regionId\" not implemented yet",
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
         }
         
         composable("zbs_selection") {

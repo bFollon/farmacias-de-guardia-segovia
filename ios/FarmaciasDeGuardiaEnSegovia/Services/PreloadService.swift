@@ -26,7 +26,7 @@ class PreloadService: ObservableObject {
     @Published var completedRegions = 0
     @Published var totalRegions = 0
     
-    private let regions: [Region] = [
+    private var regions: [Region] = [
         .segoviaCapital,
         .cuellar,
         .elEspinar,
@@ -34,6 +34,27 @@ class PreloadService: ObservableObject {
     ]
     
     private init() {}
+    
+    /// Scrape PDF URLs from the stable cofsegovia.com page
+    /// This runs at startup to check for URL updates
+    private func scrapePDFURLs() async {
+        DebugConfig.debugPrint("PreloadService: Starting PDF URL scraping...")
+        
+        let scrapedData = await PDFURLScrapingService.shared.scrapePDFURLs()
+        
+        // Print the scraped data to console for debugging
+        PDFURLScrapingService.shared.printScrapedData(scrapedData)
+        
+        // Now that scraping is complete, populate regions with scraped URLs
+        regions = [
+            .segoviaCapital,
+            .cuellar,
+            .elEspinar,
+            .segoviaRural
+        ]
+        
+        DebugConfig.debugPrint("PreloadService: PDF URL scraping completed, regions populated")
+    }
     
     /// Preload all PDFs and cache them
     func preloadAllData() async {
@@ -44,6 +65,9 @@ class PreloadService: ObservableObject {
         }
         
         DebugConfig.debugPrint("🚀 Starting preload of \(regions.count) regions...")
+        
+        // First, scrape PDF URLs to check for updates
+        await scrapePDFURLs()
         
         // Initialize cache manager first
         await MainActor.run {
@@ -59,22 +83,13 @@ class PreloadService: ObservableObject {
             
             DebugConfig.debugPrint("📥 Preloading region: \(region.name)")
             
-            do {
-                // Load and cache schedules for this region (this will download, parse and cache)
-                let schedules = await ScheduleService.loadSchedules(for: region, forceRefresh: false)
-                
-                DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(region.name)")
-                
-                await MainActor.run {
-                    completedRegions = index + 1
-                }
-                
-            } catch {
-                DebugConfig.debugPrint("❌ Failed to preload \(region.name): \(error)")
-                // Continue with other regions even if one fails
-                await MainActor.run {
-                    completedRegions = index + 1
-                }
+            // Load and cache schedules for this region (this will download, parse and cache)
+            let schedules = await ScheduleService.loadSchedules(for: region, forceRefresh: false)
+            
+            DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(region.name)")
+            
+            await MainActor.run {
+                completedRegions = index + 1
             }
         }
         

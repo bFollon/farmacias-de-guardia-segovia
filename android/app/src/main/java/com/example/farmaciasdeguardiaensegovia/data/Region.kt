@@ -17,6 +17,9 @@
 
 package com.example.farmaciasdeguardiaensegovia.data
 
+import com.example.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+
 /**
  * Represents a geographical region or location that has its own pharmacy duty schedule
  */
@@ -34,57 +37,74 @@ data class Region(
     val pdfURL: String,
     
     /** Additional metadata about the region */
-    val metadata: RegionMetadata = RegionMetadata()
+    val metadata: RegionMetadata = RegionMetadata(),
+    
+    /** Whether to force refresh this region's cache on every load (useful for testing) */
+    val forceRefresh: Boolean = false
 ) {
     companion object {
         /** The default region (Segovia Capital) */
-        val segoviaCapital = Region(
-            id = "segovia-capital",
-            name = "Segovia Capital",
-            icon = "🏙",
-            pdfURL = "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf",
-            metadata = RegionMetadata(
-                has24HourPharmacies = false,
-                isMonthlySchedule = false,
-                notes = "Includes both day and night shifts"
-            )
-        )
+        val segoviaCapital: Region
+            get() {
+                val scrapedURL = PDFURLScrapingService.getScrapedURL("Segovia Capital")
+                val finalURL = scrapedURL ?: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf"
+                if (scrapedURL != null) {
+                    DebugConfig.debugPrint("Region: Using SCRAPED URL for Segovia Capital: $scrapedURL")
+                } else {
+                    DebugConfig.debugPrint("Region: Using FALLBACK URL for Segovia Capital: $finalURL")
+                }
+                return Region(
+                    id = "segovia-capital",
+                    name = "Segovia Capital",
+                    icon = "🏙",
+                    pdfURL = finalURL,
+                    metadata = RegionMetadata(
+                        has24HourPharmacies = false,
+                        isMonthlySchedule = false,
+                        notes = "Includes both day and night shifts"
+                    )
+                )
+            }
         
         /** Cuéllar region */
-        val cuellar = Region(
-            id = "cuellar",
-            name = "Cuéllar",
-            icon = "🌳",
-            pdfURL = "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf",
-            metadata = RegionMetadata(
-                isMonthlySchedule = false,  // Cuéllar uses weekly schedules
-                notes = "Servicios semanales excepto primera semana de septiembre"
+        val cuellar: Region
+            get() = Region(
+                id = "cuellar",
+                name = "Cuéllar",
+                icon = "🌳",
+                pdfURL = PDFURLScrapingService.getScrapedURL("Cuéllar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf",
+                metadata = RegionMetadata(
+                    isMonthlySchedule = false,  // Cuéllar uses weekly schedules
+                    notes = "Servicios semanales excepto primera semana de septiembre"
+                ),
+                forceRefresh = false
             )
-        )
         
         /** El Espinar region */
-        val elEspinar = Region(
-            id = "el-espinar",
-            name = "El Espinar / San Rafael",
-            icon = "🏔️",
-            pdfURL = "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf",
-            metadata = RegionMetadata(
-                isMonthlySchedule = false,  // Uses weekly schedules like Cuéllar
-                notes = "Servicios semanales"
+        val elEspinar: Region
+            get() = Region(
+                id = "el-espinar",
+                name = "El Espinar / San Rafael",
+                icon = "🏔️",
+                pdfURL = PDFURLScrapingService.getScrapedURL("El Espinar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf",
+                metadata = RegionMetadata(
+                    isMonthlySchedule = false,  // Uses weekly schedules like Cuéllar
+                    notes = "Servicios semanales"
+                ),
             )
-        )
         
         /** Segovia Rural region */
-        val segoviaRural = Region(
-            id = "segovia-rural",
-            name = "Segovia Rural",
-            icon = "🚜",
-            pdfURL = "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf",
-            metadata = RegionMetadata(
-                isMonthlySchedule = false,
-                notes = "Servicios de urgencia rurales"
+        val segoviaRural: Region
+            get() = Region(
+                id = "segovia-rural",
+                name = "Segovia Rural",
+                icon = "🚜",
+                pdfURL = PDFURLScrapingService.getScrapedURL("Segovia Rural") ?: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf",
+                metadata = RegionMetadata(
+                    isMonthlySchedule = false,
+                    notes = "Servicios de urgencia rurales"
+                )
             )
-        )
         
         /** List of all available regions */
         val allRegions = listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)

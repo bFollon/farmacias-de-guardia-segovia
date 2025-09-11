@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
 }
 
 android {
@@ -49,7 +50,27 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
+    
+    // ViewModel support
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    
+        // PDF Processing
+    implementation(libs.itext.kernel)
+    
+    // HTTP client for PDF downloads and web scraping
+    implementation(libs.okhttp)
+    
+    // Date picker
+    implementation(libs.compose.material.dialogs.datetime)
+    
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    
+    // Serialization for data models
+    implementation(libs.kotlinx.serialization.json)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

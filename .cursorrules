@@ -1,0 +1,80 @@
+# Farmacias de Guardia - Cursor Rules
+
+## Project Context
+Cross-platform pharmacy duty schedule app for Segovia, Spain. iOS app is complete and stable - DO NOT MODIFY unless specifically requested. Android app is in incremental migration to achieve feature parity.
+
+## Architecture Patterns
+- **Strategy Pattern** for PDF parsing (region-specific parsers)
+- **Repository Pattern** for data access
+- **Service-based architecture** with three-tier caching (memory → persistent → PDF parsing)
+- **SOLID principles** throughout all code
+- **ObservableObject** for iOS state management
+- **Material3** design system for Android
+
+## Development Workflow
+- **Explain before implementing** - Always explain the purpose and scope of changes
+- **Small incremental changes** - Limit scope to single features or bug fixes
+- **Test frequently** - Ensure each change is testable and working
+- **Match iOS patterns** when migrating to Android
+
+## Platform-Specific Guidelines
+
+### iOS (Swift/SwiftUI) - STABLE, DO NOT MODIFY
+- Location: `ios/FarmaciasDeGuardiaEnSegovia/`
+- Key patterns: Strategy pattern, ObservableObject, environmental values
+- Testing: `xcodebuild test -scheme FarmaciasDeGuardiaEnSegovia -destination 'platform=iOS Simulator,name=iPhone 16 Pro'`
+
+### Android (Kotlin/Jetpack Compose) - ACTIVE DEVELOPMENT
+- Location: `android/app/src/main/java/com/example/farmaciasdeguardiaensegovia/`
+- Key patterns: Mimic iOS architecture, Strategy pattern, Repository pattern
+- PDF Libraries: iText7 (current), PDFBox (backup reference)
+- Build: `cd android && ./gradlew assembleDebug`
+- Testing: `cd android && ./gradlew test`
+
+## PDF Processing Strategy
+1. **Strategy Registration**: Register parsers in `PDFProcessingService` constructor using region IDs
+2. **Column-based Extraction**: Use coordinate-based extraction with defined margins and column widths
+3. **Parser Implementation**: Extend `ColumnBasedPDFParser`, implement region-specific layout handling
+4. **Caching**: Always implement caching to avoid re-parsing same files
+5. **Error Handling**: Graceful degradation when PDF structure changes
+
+## Core Data Models
+- **Region**: Core entity with `id`, `name`, `icon`, `pdfURL`, `metadata`
+- **PharmacySchedule**: Links dates to shift-based pharmacy assignments
+- **Pharmacy**: Extracted from PDF text with name/address parsing
+- **DutyTimeSpan/DutyDate**: Time and date representations
+
+## Current Android Status
+- ✅ Basic structure with Jetpack Compose + Material3
+- ✅ Splash screen with iOS-matching animations
+- ✅ Main screen with region selection grid
+- ✅ ZBS selection for Segovia Rural
+- ✅ PDF processing with strategy pattern
+- ✅ Persistent caching system
+- ✅ Cuéllar implementation complete
+- 🔄 **Next**: El Espinar parser and PDF view screen
+
+## Regions & Parsers
+- **🏛 Segovia Capital**: 3-column parser (dates, day shifts, night shifts)
+- **🌳 Cuéllar**: 2-column parser (dates, pharmacies) - COMPLETE
+- **⛰ El Espinar**: 2-column parser (dates, pharmacies) - IN PROGRESS
+- **🚜 Segovia Rural**: Complex ZBS handling with 8 sub-areas
+
+## Code Quality Standards
+- Use meaningful variable and function names
+- Avoid magic numbers and strings - make constants configurable
+- Implement proper error handling and logging
+- Follow platform-specific conventions
+- Maintain consistency between iOS and Android implementations
+- Use `DebugConfig.debugPrint()` for conditional logging
+
+## Migration Guidelines
+- **iOS implementation always takes precedence** for reference
+- Use `android_full_migration_backup/` as reference only (has theme/config errors)
+- Focus on architecture patterns: Strategy pattern, service-based architecture
+- Ensure Android implementation matches iOS functionality closely
+
+## Build Commands
+- **iOS**: `xcodebuild test -scheme FarmaciasDeGuardiaEnSegovia -destination 'platform=iOS Simulator,name=iPhone 16 Pro'`
+- **Android**: `cd android && ./gradlew assembleDebug`
+- **Android Test**: `cd android && ./gradlew test`
