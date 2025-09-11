@@ -71,51 +71,59 @@ public struct RegionMetadata: Equatable {
 
 extension Region {
     /// The default region (Segovia Capital)
-    public static let segoviaCapital = Region(
-        id: "segovia-capital",
-        name: "Segovia Capital",
-        icon: "🏙",
-        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!,
-        metadata: RegionMetadata(
-            has24HourPharmacies: false,
-            isMonthlySchedule: false,
-            notes: "Includes both day and night shifts"
+    public static var segoviaCapital: Region {
+        return Region(
+            id: "segovia-capital",
+            name: "Segovia Capital",
+            icon: "🏙",
+            pdfURL: PDFURLScrapingService.shared.getScrapedURL(for: "Segovia Capital") ?? URL(string: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf")!,
+            metadata: RegionMetadata(
+                has24HourPharmacies: false,
+                isMonthlySchedule: false,
+                notes: "Includes both day and night shifts"
+            )
         )
-    )
+    }
     
     /// Cuéllar region
-    public static let cuellar = Region(
-        id: "cuellar",
-        name: "Cuéllar",
-        icon: "🌳",
-        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf")!,
-        metadata: RegionMetadata(
-            isMonthlySchedule: false,  // Cuéllar uses weekly schedules
-            notes: "Servicios semanales excepto primera semana de septiembre"
+    public static var cuellar: Region {
+        Region(
+            id: "cuellar",
+            name: "Cuéllar",
+            icon: "🌳",
+            pdfURL: PDFURLScrapingService.shared.getScrapedURL(for: "Cuéllar") ?? URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf")!,
+            metadata: RegionMetadata(
+                isMonthlySchedule: false,  // Cuéllar uses weekly schedules
+                notes: "Servicios semanales excepto primera semana de septiembre"
+            )
         )
-    )
+    }
     
     /// El Espinar region
-    public static let elEspinar = Region(
-        id: "el-espinar",
-        name: "El Espinar / San Rafael",
-        icon: "⛰",
-        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf")!,
-        metadata: RegionMetadata(
-            isMonthlySchedule: false,  // Uses weekly schedules like Cuéllar
-            notes: "Servicios semanales"
+    public static var elEspinar: Region {
+        Region(
+            id: "el-espinar",
+            name: "El Espinar / San Rafael",
+            icon: "⛰",
+            pdfURL: PDFURLScrapingService.shared.getScrapedURL(for: "El Espinar") ?? URL(string: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf")!,
+            metadata: RegionMetadata(
+                isMonthlySchedule: false,  // Uses weekly schedules like Cuéllar
+                notes: "Servicios semanales"
+            )
         )
-    )
+    }
     
     /// Segovia Rural region
-    public static let segoviaRural = Region(
-        id: "segovia-rural",
-        name: "Segovia Rural",
-        icon: "🚜",
-        pdfURL: URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!,
-        metadata: RegionMetadata(
-            isMonthlySchedule: false,
-            notes: "Servicios de urgencia rurales"
+    public static var segoviaRural: Region {
+        Region(
+            id: "segovia-rural",
+            name: "Segovia Rural",
+            icon: "🚜",
+            pdfURL: PDFURLScrapingService.shared.getScrapedURL(for: "Segovia Rural") ?? URL(string: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf")!,
+            metadata: RegionMetadata(
+                isMonthlySchedule: false,
+                notes: "Servicios de urgencia rurales"
+            )
         )
-    )
+    }
 }

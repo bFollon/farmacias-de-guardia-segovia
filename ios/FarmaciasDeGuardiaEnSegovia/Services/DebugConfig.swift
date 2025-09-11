@@ -21,7 +21,7 @@ import Foundation
 struct DebugConfig {
     /// Default debug setting when no environment variable is set
     /// Change this value to enable/disable debug logging by default
-    private static let defaultDebugEnabled = false
+    private static let defaultDebugEnabled = true
     
     /// Master debug flag - controls all debug output in the application
     /// Can be overridden by the DEBUG_ENABLED environment variable

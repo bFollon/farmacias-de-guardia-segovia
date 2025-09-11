@@ -64,13 +64,8 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     private val _scrapedPDFURLs = MutableStateFlow<List<PDFURLScrapingService.ScrapedPDFData>>(emptyList())
     val scrapedPDFURLs: StateFlow<List<PDFURLScrapingService.ScrapedPDFData>> = _scrapedPDFURLs.asStateFlow()
     
-    // Sequential regions to load (in order)
-    private val regionsToLoad = listOf(
-        Region.segoviaCapital,
-        Region.cuellar,
-        Region.elEspinar,
-        Region.segoviaRural
-    )
+    // Sequential regions to load (in order) - will be populated after scraping
+    private var regionsToLoad = emptyList<Region>()
     
     /**
      * Start sequential background loading of all regions
@@ -92,6 +87,14 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 withContext(Dispatchers.IO) {
                     // First, scrape PDF URLs to check for updates
                     scrapePDFURLs()
+                    
+                    // Now that scraping is complete, populate regions with scraped URLs
+                    regionsToLoad = listOf(
+                        Region.segoviaCapital,
+                        Region.cuellar,
+                        Region.elEspinar,
+                        Region.segoviaRural
+                    )
                     
                     // Then load regions sequentially
                     loadRegionsSequentially()

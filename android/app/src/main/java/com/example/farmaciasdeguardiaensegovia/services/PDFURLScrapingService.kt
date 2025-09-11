@@ -33,6 +33,13 @@ object PDFURLScrapingService {
     private const val TAG = "PDFURLScrapingService"
     private const val BASE_URL = "https://cofsegovia.com/farmacias-de-guardia/"
     
+    // Cache for scraped PDF URLs by region name
+    private val scrapedURLs = mutableMapOf<String, String>()
+    
+    // Flag to track if scraping has completed
+    @Volatile
+    private var scrapingCompleted = false
+    
     // OkHttp client for making requests
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
@@ -48,6 +55,25 @@ object PDFURLScrapingService {
         val pdfUrl: String,
         val lastUpdated: String? = null
     )
+    
+    /**
+     * Get the scraped URL for a specific region
+     * Returns the scraped URL if available, otherwise returns null
+     */
+    fun getScrapedURL(regionName: String): String? {
+        return if (scrapingCompleted) {
+            scrapedURLs[regionName]
+        } else {
+            null
+        }
+    }
+    
+    /**
+     * Check if scraping has completed
+     */
+    fun isScrapingCompleted(): Boolean {
+        return scrapingCompleted
+    }
     
     /**
      * Scrape the cofsegovia.com page to extract current PDF URLs
@@ -77,12 +103,19 @@ object PDFURLScrapingService {
             val scrapedData = extractPDFDataFromHTML(htmlContent)
             
             DebugConfig.debugPrint("$TAG: Successfully scraped ${scrapedData.size} PDF URLs")
+            
+            // Cache the scraped URLs for later use
             scrapedData.forEach { data ->
+                scrapedURLs[data.regionName] = data.pdfUrl
                 DebugConfig.debugPrint("$TAG: Found PDF for ${data.regionName}: ${data.pdfUrl}")
                 data.lastUpdated?.let { 
                     DebugConfig.debugPrint("$TAG: Last updated: $it")
                 }
             }
+            
+            // Mark scraping as completed
+            scrapingCompleted = true
+            DebugConfig.debugPrint("$TAG: Scraping completed, ${scrapedURLs.size} URLs cached")
             
             scrapedData
             
