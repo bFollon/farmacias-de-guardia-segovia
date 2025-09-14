@@ -131,7 +131,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${region.name}")
             }
 
-            return mapOf(cacheKey to schedules[cacheKey]!!)
+            return mapOf(cacheKey to (schedules[cacheKey] ?: emptyList()))
 
         } catch (e: Exception) {
             DebugConfig.debugError(

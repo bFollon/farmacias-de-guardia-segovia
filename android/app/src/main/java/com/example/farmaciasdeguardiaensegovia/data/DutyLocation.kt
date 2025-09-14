@@ -1,8 +1,16 @@
 package com.example.farmaciasdeguardiaensegovia.data
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.decodeStructure
+import kotlinx.serialization.encoding.encodeStructure
 
-@Serializable
+@Serializable(with = DutyLocationSerializer::class)
 data class DutyLocation(
     /** Unique identifier for the ZBS */
     val id: String,
@@ -34,5 +42,36 @@ data class DutyLocation(
             notes = null,
             associatedRegion = region
         )
+
+        /**
+         * Reconstructs a DutyLocation from its ID by looking up in Regions and ZBSs
+         * This is used when deserializing from a map key
+         */
+        fun fromId(id: String): DutyLocation {
+            val maybeLocation = Region.allRegions.find { it.id == id }?.let { fromRegion(it) }
+                ?: ZBS.availableZBS.find { it.id == id }?.let { fromZBS(it) }
+
+            maybeLocation?.let { return it }
+
+            // If not found, throw an error
+            throw IllegalArgumentException("No DutyLocation found with ID: $id")
+        }
+    }
+}
+
+/**
+ * Custom serializer for DutyLocation that serializes only the ID
+ * This enables DutyLocation to be used as a map key
+ */
+object DutyLocationSerializer : KSerializer<DutyLocation> {
+    override val descriptor: SerialDescriptor = kotlinx.serialization.descriptors.PrimitiveSerialDescriptor("DutyLocation", kotlinx.serialization.descriptors.PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: DutyLocation) {
+        encoder.encodeString(value.id)
+    }
+
+    override fun deserialize(decoder: Decoder): DutyLocation {
+        val id = decoder.decodeString()
+        return DutyLocation.fromId(id)
     }
 }

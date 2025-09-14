@@ -42,7 +42,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
     override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
         val allSchedules = mutableListOf<PharmacySchedule>()
         
-        DebugConfig.debugPrint("\n=== Segovia Capital Schedules ===")
+        DebugConfig.debugPrint("=== Segovia Capital Schedules ===")
         
         // MAJOR OPTIMIZATION: Open PDF once and reuse across all pages
         val reader = PdfReader(pdfFile)
