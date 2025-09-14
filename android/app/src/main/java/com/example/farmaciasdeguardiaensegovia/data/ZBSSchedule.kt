@@ -15,27 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.example.farmaciasdeguardiaensegovia.services.pdfparsing
-
-import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
-import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
-import java.io.File
+package com.example.farmaciasdeguardiaensegovia.data
 
 /**
- * Interface for PDF parsing strategies
- * Now using File instead of PDDocument for iText compatibility
+ * Represents pharmacy schedules organized by ZBS (Zona Básica de Salud)
+ * Android equivalent of iOS ZBSSchedule.swift
  */
-interface PDFParsingStrategy {
+data class ZBSSchedule(
+    /** The date this schedule applies to */
+    val date: DutyDate,
+    
+    /** Schedules organized by ZBS ID */
+    val schedulesByZBS: Map<String, List<Pharmacy>>
+) {
+    /**
+     * Get pharmacies for a specific ZBS
+     */
+    fun pharmaciesForZBS(zbsId: String): List<Pharmacy> {
+        return schedulesByZBS[zbsId] ?: emptyList()
+    }
     
     /**
-     * Parse schedules from a PDF file
-     * @param pdfFile The PDF file to parse
-     * @return List of parsed pharmacy schedules
+     * Get all available ZBS IDs for this date
      */
-    fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>>
-    
-    /**
-     * Get the name of this parsing strategy (for debugging)
-     */
-    fun getStrategyName(): String
+    val availableZBSIds: List<String>
+        get() = schedulesByZBS.keys.sorted()
 }

@@ -18,6 +18,7 @@
 package com.example.farmaciasdeguardiaensegovia.services
 
 import android.content.Context
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import kotlinx.serialization.Serializable
@@ -87,7 +88,7 @@ class ScheduleCacheService(private val context: Context) {
     /**
      * Load cached schedules for a region (if valid)
      */
-    fun loadCachedSchedules(region: Region): List<PharmacySchedule>? {
+    fun loadCachedSchedules(region: Region): Map<DutyLocation, List<PharmacySchedule>>? {
         if (!isCacheValid(region)) {
             return null
         }
@@ -113,7 +114,7 @@ class ScheduleCacheService(private val context: Context) {
     /**
      * Save parsed schedules to cache
      */
-    fun saveSchedulesToCache(region: Region, schedules: List<PharmacySchedule>) {
+    fun saveSchedulesToCache(region: Region, schedules: Map<DutyLocation, List<PharmacySchedule>>) {
         try {
             val startTime = System.currentTimeMillis()
             
@@ -232,7 +233,7 @@ class ScheduleCacheService(private val context: Context) {
     private data class CachedSchedules(
         val regionId: String,
         val regionName: String,
-        val schedules: List<PharmacySchedule>,
+        val schedules: Map<DutyLocation, List<PharmacySchedule>>,
         val cacheTimestamp: Long
     )
     

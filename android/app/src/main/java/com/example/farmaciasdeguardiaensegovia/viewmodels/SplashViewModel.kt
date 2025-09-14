@@ -20,6 +20,7 @@ package com.example.farmaciasdeguardiaensegovia.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
@@ -40,33 +41,37 @@ import kotlinx.coroutines.withContext
  * Handles preloading of Segovia Capital PDF during splash screen animations
  */
 class SplashViewModel(private val context: Context) : ViewModel() {
-    
+
     private val repository by lazy { PharmacyScheduleRepository.getInstance(context) }
-    
+
     // Loading states for each region (in sequential order)
-    private val _regionLoadingStates = MutableStateFlow(mapOf(
-        "Segovia Capital" to false,
-        "Cuéllar" to false,
-        "El Espinar" to false,
-        "Segovia Rural" to false
-    ))
+    private val _regionLoadingStates = MutableStateFlow(
+        mapOf(
+            "Segovia Capital" to false,
+            "Cuéllar" to false,
+            "El Espinar" to false,
+            "Segovia Rural" to false
+        )
+    )
     val regionLoadingStates: StateFlow<Map<String, Boolean>> = _regionLoadingStates.asStateFlow()
-    
+
     private val _loadingProgress = MutableStateFlow(0f)
     val loadingProgress: StateFlow<Float> = _loadingProgress.asStateFlow()
-    
+
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-    
+
     private val _currentLoadingRegion = MutableStateFlow<String?>(null)
     val currentLoadingRegion: StateFlow<String?> = _currentLoadingRegion.asStateFlow()
-    
-    private val _scrapedPDFURLs = MutableStateFlow<List<PDFURLScrapingService.ScrapedPDFData>>(emptyList())
-    val scrapedPDFURLs: StateFlow<List<PDFURLScrapingService.ScrapedPDFData>> = _scrapedPDFURLs.asStateFlow()
-    
+
+    private val _scrapedPDFURLs =
+        MutableStateFlow<List<PDFURLScrapingService.ScrapedPDFData>>(emptyList())
+    val scrapedPDFURLs: StateFlow<List<PDFURLScrapingService.ScrapedPDFData>> =
+        _scrapedPDFURLs.asStateFlow()
+
     // Sequential regions to load (in order) - will be populated after scraping
     private var regionsToLoad = emptyList<Region>()
-    
+
     /**
      * Start sequential background loading of all regions
      * This will load PDFs one by one to avoid memory issues
@@ -76,18 +81,18 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             DebugConfig.debugPrint("SplashViewModel: Loading already in progress, ignoring request")
             return
         }
-        
+
         DebugConfig.debugPrint("SplashViewModel: Starting sequential PDF preloading")
         _isLoading.value = true
         _loadingProgress.value = 0f
-        
+
         viewModelScope.launch {
             try {
                 // Move all repository work to IO dispatcher
                 withContext(Dispatchers.IO) {
                     // First, scrape PDF URLs to check for updates
                     scrapePDFURLs()
-                    
+
                     // Now that scraping is complete, populate regions with scraped URLs
                     regionsToLoad = listOf(
                         Region.segoviaCapital,
@@ -95,7 +100,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                         Region.elEspinar,
                         Region.segoviaRural
                     )
-                    
+
                     // Then load regions sequentially
                     loadRegionsSequentially()
                 }
@@ -112,7 +117,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
-    
+
     /**
      * Scrape PDF URLs from the stable cofsegovia.com page
      * This runs at startup to check for URL updates
@@ -120,43 +125,43 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     private suspend fun scrapePDFURLs() {
         try {
             DebugConfig.debugPrint("SplashViewModel: Starting PDF URL scraping...")
-            
+
             val scrapedData = PDFURLScrapingService.scrapePDFURLs()
-            
+
             withContext(Dispatchers.Main) {
                 _scrapedPDFURLs.value = scrapedData
             }
-            
+
             // Print the scraped data to console for debugging
             PDFURLScrapingService.printScrapedData(scrapedData)
-            
+
             DebugConfig.debugPrint("SplashViewModel: PDF URL scraping completed")
-            
+
         } catch (e: Exception) {
             if (e !is kotlinx.coroutines.CancellationException) {
                 DebugConfig.debugError("SplashViewModel: Error during PDF URL scraping", e)
             }
         }
     }
-    
+
     /**
      * Load regions sequentially, updating progress and states as we go
      */
     private suspend fun loadRegionsSequentially() {
         val totalRegions = regionsToLoad.size
-        
+
         regionsToLoad.forEachIndexed { index, region ->
             val regionName = region.name
             val progressStart = index.toFloat() / totalRegions
             val progressEnd = (index + 1).toFloat() / totalRegions
-            
+
             DebugConfig.debugPrint("SplashViewModel: Loading region ${index + 1}/$totalRegions: $regionName")
-            
+
             withContext(Dispatchers.Main) {
                 _currentLoadingRegion.value = regionName
                 _loadingProgress.value = progressStart
             }
-            
+
             // Check if already loaded AND not forcing refresh
             if (repository.isLoaded(region) && !region.forceRefresh) {
                 DebugConfig.debugPrint("SplashViewModel: $regionName already loaded in cache, skipping")
@@ -166,54 +171,55 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                     "segovia-capital" -> loadRegionPDF(region, "Segovia Capital")
                     "cuellar" -> loadRegionPDF(region, "Cuéllar")
                     "el-espinar" -> loadRegionPDF(region, "El Espinar")
-                    else -> loadPlaceholderPDF(region) // Only Segovia Rural not implemented yet
+                    "segovia-rural" -> loadRegionPDF(region, "Segovia Rural")
+                    else -> loadPlaceholderPDF(region)
                 }
-                
+
                 if (!success) {
                     DebugConfig.debugWarn("SplashViewModel: Failed to load $regionName")
                 }
             }
-            
+
             // Mark region as completed and update progress
             withContext(Dispatchers.Main) {
                 val updatedStates = _regionLoadingStates.value.toMutableMap()
                 updatedStates[regionName] = true
                 _regionLoadingStates.value = updatedStates
-                
+
                 _loadingProgress.value = progressEnd
                 DebugConfig.debugPrint("SplashViewModel: Completed $regionName (${((progressEnd * 100).toInt())}%)")
             }
-            
+
             // Small delay between regions for visual effect
             delay(200)
         }
-        
+
         withContext(Dispatchers.Main) {
             _currentLoadingRegion.value = null
             _isLoading.value = false
             DebugConfig.debugPrint("SplashViewModel: All regions loaded sequentially!")
         }
     }
-    
+
     /**
      * Load a region's PDF (actual implementation)
      */
     private suspend fun loadRegionPDF(region: Region, regionName: String): Boolean {
         DebugConfig.debugPrint("SplashViewModel: Loading $regionName PDF...")
-        
+
         // Show intermediate progress during region loading
         val regionIndex = regionsToLoad.indexOfFirst { it.id == region.id }
         val progressStart = regionIndex.toFloat() / regionsToLoad.size
         val progressMid = progressStart + (0.5f / regionsToLoad.size) // Halfway through this region
-        
+
         withContext(Dispatchers.Main) {
             _loadingProgress.value = progressMid
         }
-        
+
         return try {
             val schedules = repository.preloadSchedules(region)
-            val scheduleList = repository.getCachedSchedules(region) ?: emptyList()
-            
+            val scheduleList = repository.getCachedSchedules(region) ?: emptyMap()
+
             val success = schedules && scheduleList.isNotEmpty()
             if (success) {
                 DebugConfig.debugPrint("SplashViewModel: Successfully loaded $regionName schedules (${scheduleList.size} schedules)")
@@ -228,41 +234,43 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             false
         }
     }
-    
+
     /**
      * Placeholder for future PDF loading (instantly completes for now)
      */
     private suspend fun loadPlaceholderPDF(region: Region): Boolean {
         DebugConfig.debugPrint("SplashViewModel: Placeholder loading for ${region.name} (quick completion)")
-        
+
         // Simulate a tiny bit of work to show the sequential nature
         delay(100) // Brief delay to show sequential loading visually
-        
+
         // For now, just return true (successful placeholder)
         // In the future, this will be replaced with actual PDF loading
         return true
     }
-    
+
     /**
      * Check if a specific region is loaded
      */
     fun isRegionLoaded(regionName: String): Boolean = _regionLoadingStates.value[regionName] == true
-    
+
     /**
      * Check if Segovia Capital data is already loaded (for backward compatibility)
      */
     fun isSegoviaCapitalLoaded(): Boolean = isRegionLoaded("Segovia Capital")
-    
+
     /**
      * Get the loaded Segovia Capital schedules (if any)
      */
-    fun getSegoviaCapitalSchedules(): List<PharmacySchedule>? = repository.getCachedSchedules(Region.segoviaCapital)
-    
+    fun getSegoviaCapitalSchedules(): List<PharmacySchedule>? =
+        repository.getCachedSchedules(Region.segoviaCapital)
+            ?.get(DutyLocation.fromRegion(Region.segoviaCapital)) ?: emptyList()
+
     /**
      * Get the scraped PDF URLs from the cofsegovia.com page
      */
     fun getScrapedPDFURLs(): List<PDFURLScrapingService.ScrapedPDFData> = _scrapedPDFURLs.value
-    
+
     /**
      * Run the PDF URL scraping demo for testing purposes
      */
@@ -274,7 +282,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
-    
+
     /**
      * Run the PDF URL scraping test with detailed HTML output
      */
@@ -286,7 +294,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             }
         }
     }
-    
+
     /**
      * Reset loading state (for testing or if user wants to refresh)
      */
@@ -301,12 +309,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             "Segovia Rural" to false
         )
     }
-    
+
     /**
      * Get cache statistics for debugging
      */
     fun getCacheStats(): String = repository.getCacheStats()
-    
+
     /**
      * Clear all caches for debugging (force fresh parsing)
      */
@@ -317,7 +325,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             DebugConfig.debugPrint("SplashViewModel: All caches cleared!")
         }
     }
-    
+
     /**
      * Force refresh a specific region (for testing purposes)
      */
@@ -328,11 +336,11 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 withContext(Dispatchers.IO) {
                     // Clear cache for this region first
                     repository.clearCacheForRegion(region)
-                    
+
                     // Force load from PDF
                     val schedules = repository.loadSchedules(region)
                     val success = schedules.isNotEmpty()
-                    
+
                     if (success) {
                         DebugConfig.debugPrint("SplashViewModel: Successfully force refreshed ${region.name} (${schedules.size} schedules)")
                     } else {
@@ -341,12 +349,15 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 }
             } catch (e: Exception) {
                 if (e !is kotlinx.coroutines.CancellationException) {
-                    DebugConfig.debugError("SplashViewModel: Error force refreshing ${region.name}", e)
+                    DebugConfig.debugError(
+                        "SplashViewModel: Error force refreshing ${region.name}",
+                        e
+                    )
                 }
             }
         }
     }
-    
+
     override fun onCleared() {
         super.onCleared()
         DebugConfig.debugPrint("SplashViewModel: Cleared")

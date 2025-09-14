@@ -19,6 +19,7 @@ package com.example.farmaciasdeguardiaensegovia.services
 
 import android.content.Context
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
@@ -43,21 +44,13 @@ class ScheduleService(context: Context) {
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(region: Region, forceRefresh: Boolean = false): List<PharmacySchedule> {
-        DebugConfig.debugPrint("ScheduleService: Loading schedules for ${region.name} (forceRefresh: $forceRefresh)")
+    suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): Map<DutyLocation, List<PharmacySchedule>> {
+        DebugConfig.debugPrint("ScheduleService: Loading schedules for ${location.associatedRegion.name} (forceRefresh: $forceRefresh)")
 
         // Use the shared repository for loading
-        val schedules = repository.loadSchedules(region)
+        val schedules = repository.loadSchedules(location.associatedRegion)
 
-        DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${region.name}")
-
-        // Log sample data for debugging
-        if (schedules.isNotEmpty()) {
-            val sampleSchedule = schedules.first()
-            DebugConfig.debugPrint("Sample schedule: ${sampleSchedule.date.day} ${sampleSchedule.date.month}")
-            DebugConfig.debugPrint("Day shift pharmacies: ${sampleSchedule.dayShiftPharmacies.map { it.name }}")
-            DebugConfig.debugPrint("Night shift pharmacies: ${sampleSchedule.nightShiftPharmacies.map { it.name }}")
-        }
+        DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${location.associatedRegion.name}")
 
         return schedules
     }

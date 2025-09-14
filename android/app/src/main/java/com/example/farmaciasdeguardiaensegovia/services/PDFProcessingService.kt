@@ -17,12 +17,14 @@
 
 package com.example.farmaciasdeguardiaensegovia.services
 
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaCapitalParser
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.CuellarParser
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.ElEspinarParser
+import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaRuralParser
 import java.io.File
 
 /**
@@ -35,11 +37,9 @@ class PDFProcessingService {
     private val parsingStrategies: Map<String, PDFParsingStrategy> = mapOf(
         "segovia-capital" to SegoviaCapitalParser(),
         "cuellar" to CuellarParser(),
-        "el-espinar" to ElEspinarParser()
+        "el-espinar" to ElEspinarParser(),
+        "segovia-rural" to SegoviaRuralParser()
     )
-
-    // Cache for processed results to avoid reprocessing the same file
-    private val processingCache = mutableMapOf<String, List<PharmacySchedule>>()
 
     /**
      * Load pharmacy schedules from a PDF file
@@ -53,15 +53,7 @@ class PDFProcessingService {
     suspend fun loadPharmacies(
         pdfFile: File,
         region: Region
-    ): List<PharmacySchedule> {
-        val cacheKey = "${pdfFile.absolutePath}_${pdfFile.lastModified()}_${region.name}"
-
-        // Check cache first (unless force refresh is requested)
-        if (!region.forceRefresh && processingCache.containsKey(cacheKey)) {
-            DebugConfig.debugPrint("PDFProcessingService: Returning cached results for ${region.name}")
-            return processingCache[cacheKey] ?: emptyList()
-        }
-
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         DebugConfig.debugPrint("\n=== PDF Processing Started ===")
         DebugConfig.debugPrint("PDFProcessingService: Processing PDF for ${region.name}")
         DebugConfig.debugPrint("📁 PDF file: ${pdfFile.absolutePath}")
@@ -71,7 +63,7 @@ class PDFProcessingService {
 
         if (!pdfFile.exists() || pdfFile.length() == 0L) {
             DebugConfig.debugError("PDFProcessingService: PDF file does not exist or is empty")
-            return emptyList()
+            return emptyMap()
         }
 
         return try {
@@ -83,20 +75,10 @@ class PDFProcessingService {
             DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
             val schedules = parsingStrategy.parseSchedules(pdfFile)
 
-            // Cache the results
-            processingCache[cacheKey] = schedules
-
             DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
 
             // Log some sample data for debugging
-            if (schedules.isNotEmpty()) {
-                DebugConfig.debugPrint(
-                    "📄 Sample schedule dates: ${
-                        schedules.take(3).map { "${it.date.day} ${it.date.month}" }
-                    }"
-                )
-                DebugConfig.debugPrint("📄 First schedule shifts: ${schedules.first().shifts.keys.map { it.displayName }}")
-            } else {
+            if (schedules.isEmpty()) {
                 DebugConfig.debugWarn("⚠️ No schedules were parsed from the PDF!")
             }
 
@@ -108,7 +90,7 @@ class PDFProcessingService {
                 "❌ PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}",
                 e
             )
-            emptyList()
+            emptyMap()
         }
     }
 
@@ -119,20 +101,4 @@ class PDFProcessingService {
         return parsingStrategies[region.id] ?: SegoviaCapitalParser()
     }
 
-    /**
-     * Clear the internal processing cache
-     */
-    suspend fun clearCache() {
-        processingCache.clear()
-        println("PDFProcessingService: Processing cache cleared")
-    }
-
-    /**
-     * Clear cache for a specific region
-     */
-    suspend fun clearCacheForRegion(region: Region) {
-        val keysToRemove = processingCache.keys.filter { it.contains(region.name) }
-        keysToRemove.forEach { processingCache.remove(it) }
-        println("PDFProcessingService: Cleared cache for region ${region.name} (${keysToRemove.size} entries)")
-    }
 }

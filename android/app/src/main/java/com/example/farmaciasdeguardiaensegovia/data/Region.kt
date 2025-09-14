@@ -19,10 +19,12 @@ package com.example.farmaciasdeguardiaensegovia.data
 
 import com.example.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import kotlinx.serialization.Serializable
 
 /**
  * Represents a geographical region or location that has its own pharmacy duty schedule
  */
+@Serializable
 data class Region(
     /** Unique identifier for the region, used to match with PDF parsing strategies */
     val id: String,
@@ -60,7 +62,6 @@ data class Region(
                     pdfURL = finalURL,
                     metadata = RegionMetadata(
                         has24HourPharmacies = false,
-                        isMonthlySchedule = false,
                         notes = "Includes both day and night shifts"
                     )
                 )
@@ -74,10 +75,8 @@ data class Region(
                 icon = "🌳",
                 pdfURL = PDFURLScrapingService.getScrapedURL("Cuéllar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf",
                 metadata = RegionMetadata(
-                    isMonthlySchedule = false,  // Cuéllar uses weekly schedules
                     notes = "Servicios semanales excepto primera semana de septiembre"
-                ),
-                forceRefresh = false
+                )
             )
         
         /** El Espinar region */
@@ -88,7 +87,6 @@ data class Region(
                 icon = "🏔️",
                 pdfURL = PDFURLScrapingService.getScrapedURL("El Espinar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf",
                 metadata = RegionMetadata(
-                    isMonthlySchedule = false,  // Uses weekly schedules like Cuéllar
                     notes = "Servicios semanales"
                 ),
             )
@@ -101,7 +99,6 @@ data class Region(
                 icon = "🚜",
                 pdfURL = PDFURLScrapingService.getScrapedURL("Segovia Rural") ?: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf",
                 metadata = RegionMetadata(
-                    isMonthlySchedule = false,
                     notes = "Servicios de urgencia rurales"
                 )
             )
@@ -114,12 +111,10 @@ data class Region(
 /**
  * Additional configuration and metadata for a region
  */
+@Serializable
 data class RegionMetadata(
     /** Whether this region has 24-hour pharmacies that are always open */
     val has24HourPharmacies: Boolean = false,
-    
-    /** Whether this region's schedule changes monthly */
-    val isMonthlySchedule: Boolean = false,
     
     /** Any special notes about this region's pharmacy schedule */
     val notes: String? = null

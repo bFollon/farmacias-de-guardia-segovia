@@ -20,6 +20,7 @@ package com.example.farmaciasdeguardiaensegovia.ui.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
@@ -60,30 +61,30 @@ class ScheduleViewModel(
     init {
         // Update the state with the current region and load its schedules
         _uiState.value = _uiState.value.copy(region = currentRegion)
-        loadSchedules(currentRegion)
+        loadSchedules(DutyLocation.fromRegion(currentRegion))
     }
     
     /**
      * Load schedules for a specific region
      */
-    fun loadSchedules(region: Region, forceRefresh: Boolean = false) {
+    fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false) {
         viewModelScope.launch {
             try {
                 _uiState.value = _uiState.value.copy(
                     isLoading = true,
                     error = null,
-                    region = region
+                    region = location.associatedRegion
                 )
                 
-                val schedules = scheduleService.loadSchedules(region, forceRefresh)
+                val schedules = scheduleService.loadSchedules(location, forceRefresh)
                 val currentDateTime = scheduleService.getCurrentDateTime()
                 
                 // Find current schedule and active timespan
-                val currentInfo = scheduleService.findCurrentSchedule(schedules)
+                val currentInfo = scheduleService.findCurrentSchedule(schedules[location] ?: emptyList())
                 
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    schedules = schedules,
+                    schedules = schedules[location] ?: emptyList(),
                     currentSchedule = currentInfo?.first,
                     activeTimeSpan = currentInfo?.second,
                     formattedDateTime = currentDateTime
@@ -128,7 +129,7 @@ class ScheduleViewModel(
      * Refresh current data
      */
     fun refresh() {
-        loadSchedules(_uiState.value.region, forceRefresh = true)
+        loadSchedules(DutyLocation.fromRegion(_uiState.value.region), forceRefresh = true)
     }
     
     /**
@@ -146,7 +147,7 @@ class ScheduleViewModel(
             try {
                 scheduleService.clearCache()
                 // Reload after clearing cache
-                loadSchedules(_uiState.value.region, forceRefresh = true)
+                loadSchedules(DutyLocation.fromRegion(_uiState.value.region), forceRefresh = true)
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     error = "Error clearing cache: ${e.message}"
@@ -154,7 +155,7 @@ class ScheduleViewModel(
             }
         }
     }
-    
+
     /**
      * Convert Calendar.MONTH (0-11) to Spanish month name
      */

@@ -23,67 +23,69 @@ package com.example.farmaciasdeguardiaensegovia.data
 data class ZBS(
     /** Unique identifier for the ZBS */
     val id: String,
-    
+
     /** Display name of the ZBS */
     val name: String,
-    
+
     /** Emoji icon representing the ZBS area */
     val icon: String,
-    
+
     /** Additional notes about this ZBS */
     val notes: String? = null
 ) {
     companion object {
         /** List of all available ZBS areas in Segovia Rural */
+
+        val RIAZA_SEPULVEDA = ZBS(
+            id = "RIAZA/SEPÚLVEDA",
+            name = "Riaza / Sepúlveda",
+            icon = "🏔️",
+            notes = "Mountain highland area"
+        )
+        val LA_GRANJA = ZBS(
+            id = "LA GRANJA",
+            name = "La Granja",
+            icon = "🏰",
+            notes = "Historic palace town area"
+        )
+        val LA_SIERRA = ZBS(
+            id = "LA SIERRA",
+            name = "La Sierra",
+            icon = "⛰️",
+            notes = "Mountain range area"
+        )
+        val FUENTIDUENA = ZBS(
+            id = "FUENTIDUEÑA",
+            name = "Fuentidueña",
+            icon = "🏞️",
+            notes = "Valley countryside area"
+        )
+        val CARBONERO = ZBS(
+            id = "CARBONERO",
+            name = "Carbonero",
+            icon = "🌲",
+            notes = "Forest region area"
+        )
+        val NAVAS_DE_LA_ASUNCION = ZBS(
+            id = "NAVAS DE LA ASUNCIÓN",
+            name = "Navas de la Asunción",
+            icon = "🏘️",
+            notes = "Small town area"
+        )
+        val VILLACASTIN = ZBS(
+            id = "VILLACASTÍN",
+            name = "Villacastín",
+            icon = "🚂",
+            notes = "Railway junction town"
+        )
+        val CANTALEJO = ZBS(
+            id = "CANTALEJO",
+            name = "Cantalejo",
+            icon = "🏘️",
+            notes = "Rural town area"
+        )
         val availableZBS = listOf(
-            ZBS(
-                id = "riaza-sepulveda",
-                name = "Riaza / Sepúlveda",
-                icon = "🏔️",
-                notes = "Mountain highland area"
-            ),
-            ZBS(
-                id = "la-granja",
-                name = "La Granja",
-                icon = "🏰",
-                notes = "Historic palace town area"
-            ),
-            ZBS(
-                id = "la-sierra",
-                name = "La Sierra",
-                icon = "⛰️",
-                notes = "Mountain range area"
-            ),
-            ZBS(
-                id = "fuentiduena",
-                name = "Fuentidueña",
-                icon = "🏞️",
-                notes = "Valley countryside area"
-            ),
-            ZBS(
-                id = "carbonero",
-                name = "Carbonero",
-                icon = "🌲",
-                notes = "Forest region area"
-            ),
-            ZBS(
-                id = "navas-asuncion",
-                name = "Navas de la Asunción",
-                icon = "🏘️",
-                notes = "Small town area"
-            ),
-            ZBS(
-                id = "villacastin",
-                name = "Villacastín",
-                icon = "🚂",
-                notes = "Railway junction town"
-            ),
-            ZBS(
-                id = "cantalejo",
-                name = "Cantalejo",
-                icon = "🏘️",
-                notes = "Rural town area"
-            )
+            RIAZA_SEPULVEDA,
         )
     }
 }

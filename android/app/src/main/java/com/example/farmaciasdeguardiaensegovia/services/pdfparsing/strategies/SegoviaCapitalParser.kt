@@ -18,9 +18,11 @@
 package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.ColumnBasedPDFParser
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
@@ -37,7 +39,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
     
     override fun getStrategyName(): String = "SegoviaCapitalParser"
     
-    override fun parseSchedules(pdfFile: File): List<PharmacySchedule> {
+    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
         val allSchedules = mutableListOf<PharmacySchedule>()
         
         DebugConfig.debugPrint("\n=== Segovia Capital Schedules ===")
@@ -95,11 +97,11 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             val sortedSchedules = allSchedules.sortedWith(dateComparator)
             
             DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for Segovia Capital")
-            sortedSchedules
+            mapOf(DutyLocation.fromRegion(Region.segoviaCapital) to sortedSchedules)
             
         } catch (e: Exception) {
             DebugConfig.debugError("❌ Error parsing Segovia Capital PDF: ${e.message}", e)
-            emptyList()
+            emptyMap()
         } finally {
             // CRITICAL: Always close the PDF document once we're completely done
             pdfDoc.close()

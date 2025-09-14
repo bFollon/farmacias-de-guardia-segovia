@@ -97,5 +97,11 @@ data class DutyTimeSpan(
         
         /** 24-hour shift used by Cuéllar and El Espinar (00:00 - 23:59) */
         val FullDay = DutyTimeSpan(startHour = 0, startMinute = 0, endHour = 23, endMinute = 59)
+
+        /** Rural daytime shift for standard hours (10:00 - 20:00) */
+        val RuralDaytime = DutyTimeSpan(startHour = 10, startMinute = 0, endHour = 20, endMinute = 0)
+
+        /** Rural extended daytime shift (10:00 - 22:00) */
+        val RuralExtendedDaytime = DutyTimeSpan(startHour = 10, startMinute = 0, endHour = 22, endMinute = 0)
     }
 }

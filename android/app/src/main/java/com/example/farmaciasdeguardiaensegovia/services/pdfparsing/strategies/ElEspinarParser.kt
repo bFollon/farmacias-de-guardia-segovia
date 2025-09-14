@@ -18,9 +18,11 @@
 package com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies
 
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
@@ -49,7 +51,7 @@ class ElEspinarParser : PDFParsingStrategy {
 
     override fun getStrategyName(): String = "ElEspinarParser"
 
-    override fun parseSchedules(pdfFile: File): List<PharmacySchedule> {
+    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
 
         DebugConfig.debugPrint("\n=== El Espinar Pharmacy Schedules ===")
 
@@ -86,11 +88,11 @@ class ElEspinarParser : PDFParsingStrategy {
             val sortedSchedules = allSchedules.sortedWith(dateComparator)
 
             DebugConfig.debugPrint("✅ Successfully parsed ${sortedSchedules.size} schedules for El Espinar")
-            sortedSchedules
+            mapOf(DutyLocation.fromRegion(Region.elEspinar) to sortedSchedules)
 
         } catch (e: Exception) {
             DebugConfig.debugError("❌ Error parsing El Espinar PDF: ${e.message}", e)
-            emptyList()
+            emptyMap()
         } finally {
             pdfDoc.close()
         }

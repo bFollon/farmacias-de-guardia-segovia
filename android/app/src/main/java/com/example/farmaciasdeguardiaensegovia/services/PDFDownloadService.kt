@@ -156,13 +156,7 @@ class PDFDownloadService(private val context: Context) {
                     }
                     
                     val responseBody = response.body
-                    if (responseBody == null) {
-                        val error = "Response body is null"
-                        println("PDFDownloadService: $error")
-                        lastException = IOException(error)
-                        continue // Try again
-                    }
-                    
+
                     // Write to file
                     outputFile.outputStream().use { outputStream ->
                         responseBody.byteStream().use { inputStream ->
