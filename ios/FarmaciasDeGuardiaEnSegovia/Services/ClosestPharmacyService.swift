@@ -73,6 +73,13 @@ struct ClosestPharmacyResult {
 
 class ClosestPharmacyService {
     
+    // Location-based caching
+    private static var cachedResult: ClosestPharmacyResult?
+    private static var cachedLocation: CLLocation?
+    private static var cachedDate: Date?
+    private static let cacheDistanceThreshold: CLLocationDistance = 500 // 500 meters
+    private static let cacheTimeThreshold: TimeInterval = 30 * 60 // 30 minutes
+    
     enum ClosestPharmacyError: LocalizedError {
         case noPharmaciesOnDuty
         case geocodingFailed
@@ -96,6 +103,13 @@ class ClosestPharmacyService {
         at date: Date = Date()
     ) async throws -> ClosestPharmacyResult {
         
+        // Check if we can use cached result first
+        if let cachedResult = getCachedResultIfValid(userLocation: userLocation, date: date) {
+            DebugConfig.debugPrint("🚀 Using cached result - user hasn't moved significantly")
+            return cachedResult
+        }
+        
+        // Only log when we're actually doing calculations
         DebugConfig.debugPrint("🎯 OPTIMIZED search for closest on-duty pharmacy at \(date)")
         DebugConfig.debugPrint("📍 User location: \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)")
         
@@ -252,7 +266,7 @@ class ClosestPharmacyService {
         routeResults.sort { $0.distance < $1.distance }
         
         DebugConfig.debugPrint("🏆 Top 5 closest pharmacies by driving distance:")
-        for (index, (result, distance)) in routeResults.prefix(5).enumerated() {
+        for (index, (result, _)) in routeResults.prefix(5).enumerated() {
             DebugConfig.debugPrint("   \(index + 1). \(result.pharmacy.name): \(result.formattedDistance), \(result.formattedTravelTime) (\(result.regionDisplayName))")
         }
         
@@ -262,6 +276,10 @@ class ClosestPharmacyService {
         }
         
         DebugConfig.debugPrint("🎯 DRIVING WINNER: \(closest.result.pharmacy.name) at \(closest.result.formattedDistance), \(closest.result.formattedTravelTime) from \(closest.result.regionDisplayName)")
+        
+        // Cache the result for future use
+        cacheResult(closest.result, userLocation: userLocation, date: date)
+        
         return closest.result
     }
     
@@ -288,5 +306,60 @@ class ClosestPharmacyService {
         // Default assumption for pharmacies without specific hours info
         // Most non-rural pharmacies are 24h
         return .fullDay
+    }
+    
+    // MARK: - Location-based Caching
+    
+    /// Check if cached result is still valid based on location and time
+    private static func getCachedResultIfValid(userLocation: CLLocation, date: Date) -> ClosestPharmacyResult? {
+        guard let cachedResult = cachedResult,
+              let cachedLocation = cachedLocation,
+              let cachedDate = cachedDate else {
+            DebugConfig.debugPrint("💾 No cached result available")
+            return nil
+        }
+        
+        // Check if cache is too old
+        let timeSinceCache = date.timeIntervalSince(cachedDate)
+        if timeSinceCache > cacheTimeThreshold {
+            DebugConfig.debugPrint("⏰ Cache expired (age: \(String(format: "%.0f", timeSinceCache/60)) minutes)")
+            clearCache()
+            return nil
+        }
+        
+        // Check if user has moved significantly
+        let distanceMoved = userLocation.distance(from: cachedLocation)
+        if distanceMoved > cacheDistanceThreshold {
+            DebugConfig.debugPrint("🚶 User moved \(String(format: "%.0f", distanceMoved))m (threshold: \(String(format: "%.0f", cacheDistanceThreshold))m) - cache invalid")
+            clearCache()
+            return nil
+        }
+        
+        DebugConfig.debugPrint("✅ Cache valid - user moved only \(String(format: "%.0f", distanceMoved))m")
+        return cachedResult
+    }
+    
+    /// Cache the result for future use
+    private static func cacheResult(_ result: ClosestPharmacyResult, userLocation: CLLocation, date: Date) {
+        cachedResult = result
+        cachedLocation = userLocation
+        cachedDate = date
+        DebugConfig.debugPrint("💾 Cached result for location: \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)")
+    }
+    
+    /// Clear the cache (useful for testing or manual refresh)
+    static func clearCache() {
+        cachedResult = nil
+        cachedLocation = nil
+        cachedDate = nil
+        DebugConfig.debugPrint("🗑️ Location cache cleared")
+    }
+    
+    /// Get cache statistics for debugging
+    static func getCacheStats() -> (hasCache: Bool, age: TimeInterval?, distance: CLLocationDistance?) {
+        let hasCache = cachedResult != nil
+        let age = cachedDate?.timeIntervalSinceNow
+        let distance = cachedLocation?.distance(from: CLLocation(latitude: 0, longitude: 0))
+        return (hasCache: hasCache, age: age, distance: distance)
     }
 }

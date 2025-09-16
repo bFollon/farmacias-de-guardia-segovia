@@ -26,6 +26,8 @@ struct ClosestPharmacyView: View {
     @State private var errorMessage: String?
     @State private var showingResult = false
     @State private var searchStep: SearchStep = .idle
+    @State private var retryCount = 0
+    @State private var maxRetries = 3
     
     enum SearchStep {
         case idle
@@ -112,45 +114,33 @@ struct ClosestPharmacyView: View {
                 ClosestPharmacyResultView(result: result)
             }
         }
+        .onChange(of: locationManager.userLocation) { _, newLocation in
+            // React to location updates - this is the event-driven approach
+            if let location = newLocation, isSearching {
+                DebugConfig.debugPrint("📍 Location received, starting search")
+                searchForClosestPharmacy(location: location)
+            }
+        }
+        .onChange(of: locationManager.error) { _, newError in
+            // React to location errors
+            if let error = newError, isSearching {
+                DebugConfig.debugPrint("❌ Location error received: \(error.localizedDescription)")
+                handleLocationError(error)
+            }
+        }
     }
     
     private func findClosestPharmacy() {
         errorMessage = nil
         isSearching = true
         searchStep = .gettingLocation
+        retryCount = 0
         
-        // Request location first
+        // Request location - the View will react to changes via onChange
         locationManager.requestLocationOnce()
-        
-        // Listen for location updates
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            checkLocationAndSearch()
-        }
     }
     
-    private func checkLocationAndSearch() {
-        // Check if we have location permission and location
-        if let error = locationManager.error {
-            isSearching = false
-            searchStep = .idle
-            errorMessage = error.localizedDescription
-            return
-        }
-        
-        guard let userLocation = locationManager.userLocation else {
-            // If still loading, wait a bit more
-            if locationManager.isLoading {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    checkLocationAndSearch()
-                }
-            } else {
-                isSearching = false
-                searchStep = .idle
-                errorMessage = "No se pudo obtener tu ubicación"
-            }
-            return
-        }
-        
+    private func searchForClosestPharmacy(location: CLLocation) {
         // Step 2: Finding pharmacies (show this step for at least 500ms)
         searchStep = .findingPharmacies
         
@@ -159,7 +149,7 @@ struct ClosestPharmacyView: View {
             // Add minimum delay to show the "finding pharmacies" step
             let searchTask = Task {
                 try await ClosestPharmacyService.findClosestOnDutyPharmacy(
-                    userLocation: userLocation
+                    userLocation: location
                 )
             }
             
@@ -210,6 +200,28 @@ struct ClosestPharmacyView: View {
                     notificationFeedback.notificationOccurred(.error)
                 }
             }
+        }
+    }
+    
+    private func handleLocationError(_ error: LocationManager.LocationError) {
+        // Check if we should retry
+        if retryCount < maxRetries {
+            retryCount += 1
+            let delay = Double(retryCount) * 1.0 // Exponential backoff: 1s, 2s, 3s
+            
+            DebugConfig.debugPrint("🔄 Location error, retrying in \(delay)s (attempt \(retryCount)/\(maxRetries)): \(error.localizedDescription)")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                if isSearching { // Only retry if still searching
+                    locationManager.requestLocationOnce()
+                }
+            }
+        } else {
+            // Max retries reached
+            DebugConfig.debugPrint("❌ Max retries reached for location request")
+            isSearching = false
+            searchStep = .idle
+            errorMessage = error.localizedDescription
         }
     }
 }
