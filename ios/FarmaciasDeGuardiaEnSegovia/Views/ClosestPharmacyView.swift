@@ -114,6 +114,20 @@ struct ClosestPharmacyView: View {
                 ClosestPharmacyResultView(result: result)
             }
         }
+        .onChange(of: locationManager.userLocation) { _, newLocation in
+            // React to location updates - this is the event-driven approach
+            if let location = newLocation, isSearching {
+                DebugConfig.debugPrint("📍 Location received, starting search")
+                searchForClosestPharmacy(location: location)
+            }
+        }
+        .onChange(of: locationManager.error) { _, newError in
+            // React to location errors
+            if let error = newError, isSearching {
+                DebugConfig.debugPrint("❌ Location error received: \(error.localizedDescription)")
+                handleLocationError(error)
+            }
+        }
     }
     
     private func findClosestPharmacy() {
@@ -122,44 +136,11 @@ struct ClosestPharmacyView: View {
         searchStep = .gettingLocation
         retryCount = 0
         
-        // Request location first
+        // Request location - the View will react to changes via onChange
         locationManager.requestLocationOnce()
-        
-        // Start monitoring location changes
-        startLocationMonitoring()
     }
     
-    private func startLocationMonitoring() {
-        // Use a timer to check location state periodically
-        // This replaces the race condition-prone approach
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
-            checkLocationAndSearch()
-            
-            // Stop monitoring if we're no longer searching or have an error
-            if !isSearching || locationManager.error != nil {
-                timer.invalidate()
-            }
-        }
-    }
-    
-    private func checkLocationAndSearch() {
-        // Check if we have location permission and location
-        if let error = locationManager.error {
-            handleLocationError(error)
-            return
-        }
-        
-        guard let userLocation = locationManager.userLocation else {
-            // If still requesting location, continue waiting
-            if locationManager.isRequestingLocation {
-                return // Continue monitoring
-            } else {
-                // Location request completed but no location received
-                handleLocationError(LocationManager.LocationError.failed)
-            }
-            return
-        }
-        
+    private func searchForClosestPharmacy(location: CLLocation) {
         // Step 2: Finding pharmacies (show this step for at least 500ms)
         searchStep = .findingPharmacies
         
@@ -168,7 +149,7 @@ struct ClosestPharmacyView: View {
             // Add minimum delay to show the "finding pharmacies" step
             let searchTask = Task {
                 try await ClosestPharmacyService.findClosestOnDutyPharmacy(
-                    userLocation: userLocation
+                    userLocation: location
                 )
             }
             
