@@ -31,6 +31,16 @@ class LocationManager: NSObject, ObservableObject {
     // Track location request state
     private var currentRequestId: UUID?
     private var locationRequestTimeout: Timer?
+    private var accuracyFallbackTimer: Timer?
+    private var currentAccuracyLevel = 0
+    
+    // Accuracy fallback levels (in meters)
+    private let accuracyLevels: [CLLocationAccuracy] = [
+        kCLLocationAccuracyNearestTenMeters,    // 10m - highest accuracy
+        kCLLocationAccuracyHundredMeters,       // 100m - good accuracy
+        kCLLocationAccuracyKilometer,           // 1km - acceptable accuracy
+        kCLLocationAccuracyThreeKilometers      // 3km - fallback accuracy
+    ]
     
     enum LocationError: LocalizedError {
         case denied
@@ -55,7 +65,7 @@ class LocationManager: NSObject, ObservableObject {
     override init() {
         super.init()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        // Accuracy will be set dynamically during location requests
         authorizationStatus = manager.authorizationStatus
     }
     
@@ -82,8 +92,11 @@ class LocationManager: NSObject, ObservableObject {
     private func cancelCurrentRequest() {
         currentRequestId = nil
         isRequestingLocation = false
+        currentAccuracyLevel = 0
         locationRequestTimeout?.invalidate()
         locationRequestTimeout = nil
+        accuracyFallbackTimer?.invalidate()
+        accuracyFallbackTimer = nil
     }
     
     private func requestCurrentLocation() {
@@ -91,10 +104,12 @@ class LocationManager: NSObject, ObservableObject {
         currentRequestId = UUID()
         isLoading = true
         isRequestingLocation = true
+        currentAccuracyLevel = 0
         
         DebugConfig.debugPrint("📍 Starting location request: \(currentRequestId?.uuidString ?? "unknown")")
         
-        manager.requestLocation()
+        // Start with highest accuracy
+        startLocationRequestWithAccuracy()
         
         // Set a timeout with proper cleanup
         locationRequestTimeout = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { [weak self] _ in
@@ -108,6 +123,48 @@ class LocationManager: NSObject, ObservableObject {
             }
         }
     }
+    
+    private func startLocationRequestWithAccuracy() {
+        guard currentAccuracyLevel < accuracyLevels.count else {
+            DebugConfig.debugPrint("❌ All accuracy levels exhausted")
+            cancelCurrentRequest()
+            isLoading = false
+            error = .failed
+            return
+        }
+        
+        let accuracy = accuracyLevels[currentAccuracyLevel]
+        manager.desiredAccuracy = accuracy
+        
+        let accuracyDescription = getAccuracyDescription(accuracy)
+        DebugConfig.debugPrint("🎯 Requesting location with accuracy: \(accuracyDescription) (level \(currentAccuracyLevel + 1)/\(accuracyLevels.count))")
+        
+        manager.requestLocation()
+        
+        // Set fallback timer - if no location received in 3 seconds, try next accuracy level
+        accuracyFallbackTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [weak self] _ in
+            guard let self = self, self.isRequestingLocation else { return }
+            
+            DebugConfig.debugPrint("⏰ Accuracy level \(self.currentAccuracyLevel + 1) timeout, trying next level")
+            self.currentAccuracyLevel += 1
+            self.startLocationRequestWithAccuracy()
+        }
+    }
+    
+    private func getAccuracyDescription(_ accuracy: CLLocationAccuracy) -> String {
+        switch accuracy {
+        case kCLLocationAccuracyNearestTenMeters:
+            return "10m"
+        case kCLLocationAccuracyHundredMeters:
+            return "100m"
+        case kCLLocationAccuracyKilometer:
+            return "1km"
+        case kCLLocationAccuracyThreeKilometers:
+            return "3km"
+        default:
+            return "\(Int(accuracy))m"
+        }
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -116,7 +173,11 @@ extension LocationManager: CLLocationManagerDelegate {
         
         if let location = locations.first {
             let requestId = currentRequestId?.uuidString ?? "unknown"
+            let accuracyDescription = getAccuracyDescription(manager.desiredAccuracy)
+            let actualAccuracy = location.horizontalAccuracy
+            
             DebugConfig.debugPrint("📍 Location obtained for request \(requestId): \(location.coordinate.latitude), \(location.coordinate.longitude)")
+            DebugConfig.debugPrint("   🎯 Requested accuracy: \(accuracyDescription), Actual accuracy: \(String(format: "%.0f", actualAccuracy))m")
             
             // Clear request state
             cancelCurrentRequest()
