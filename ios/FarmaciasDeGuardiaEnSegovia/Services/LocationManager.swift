@@ -25,7 +25,12 @@ class LocationManager: NSObject, ObservableObject {
     @Published var userLocation: CLLocation?
     @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published var isLoading = false
+    @Published var isRequestingLocation = false
     @Published var error: LocationError?
+    
+    // Track location request state
+    private var currentRequestId: UUID?
+    private var locationRequestTimeout: Timer?
     
     enum LocationError: LocalizedError {
         case denied
@@ -57,6 +62,9 @@ class LocationManager: NSObject, ObservableObject {
     func requestLocationOnce() {
         error = nil
         
+        // Cancel any existing request
+        cancelCurrentRequest()
+        
         switch authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
@@ -71,15 +79,32 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
     
+    private func cancelCurrentRequest() {
+        currentRequestId = nil
+        isRequestingLocation = false
+        locationRequestTimeout?.invalidate()
+        locationRequestTimeout = nil
+    }
+    
     private func requestCurrentLocation() {
+        // Generate unique request ID
+        currentRequestId = UUID()
         isLoading = true
+        isRequestingLocation = true
+        
+        DebugConfig.debugPrint("📍 Starting location request: \(currentRequestId?.uuidString ?? "unknown")")
+        
         manager.requestLocation()
         
-        // Set a timeout
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
-            if self?.isLoading == true {
-                self?.isLoading = false
-                self?.error = .timeout
+        // Set a timeout with proper cleanup
+        locationRequestTimeout = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if self.isRequestingLocation {
+                DebugConfig.debugPrint("⏰ Location request timeout: \(self.currentRequestId?.uuidString ?? "unknown")")
+                self.cancelCurrentRequest()
+                self.isLoading = false
+                self.error = .timeout
             }
         }
     }
@@ -87,17 +112,29 @@ class LocationManager: NSObject, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        isLoading = false
+        guard isRequestingLocation else { return }
+        
         if let location = locations.first {
+            let requestId = currentRequestId?.uuidString ?? "unknown"
+            DebugConfig.debugPrint("📍 Location obtained for request \(requestId): \(location.coordinate.latitude), \(location.coordinate.longitude)")
+            
+            // Clear request state
+            cancelCurrentRequest()
+            isLoading = false
             userLocation = location
-            DebugConfig.debugPrint("📍 Location obtained: \(location.coordinate.latitude), \(location.coordinate.longitude)")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        guard isRequestingLocation else { return }
+        
+        let requestId = currentRequestId?.uuidString ?? "unknown"
+        DebugConfig.debugPrint("❌ Location error for request \(requestId): \(error.localizedDescription)")
+        
+        // Clear request state
+        cancelCurrentRequest()
         isLoading = false
         self.error = .failed
-        DebugConfig.debugPrint("❌ Location error: \(error.localizedDescription)")
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -105,13 +142,15 @@ extension LocationManager: CLLocationManagerDelegate {
         
         switch authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
-            if isLoading {
+            if isRequestingLocation {
                 requestCurrentLocation()
             }
         case .denied:
+            cancelCurrentRequest()
             isLoading = false
             error = .denied
         case .restricted:
+            cancelCurrentRequest()
             isLoading = false
             error = .restricted
         default:

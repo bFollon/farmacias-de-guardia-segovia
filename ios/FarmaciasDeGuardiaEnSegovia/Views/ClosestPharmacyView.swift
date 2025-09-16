@@ -26,6 +26,8 @@ struct ClosestPharmacyView: View {
     @State private var errorMessage: String?
     @State private var showingResult = false
     @State private var searchStep: SearchStep = .idle
+    @State private var retryCount = 0
+    @State private var maxRetries = 3
     
     enum SearchStep {
         case idle
@@ -118,35 +120,42 @@ struct ClosestPharmacyView: View {
         errorMessage = nil
         isSearching = true
         searchStep = .gettingLocation
+        retryCount = 0
         
         // Request location first
         locationManager.requestLocationOnce()
         
-        // Listen for location updates
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        // Start monitoring location changes
+        startLocationMonitoring()
+    }
+    
+    private func startLocationMonitoring() {
+        // Use a timer to check location state periodically
+        // This replaces the race condition-prone approach
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
             checkLocationAndSearch()
+            
+            // Stop monitoring if we're no longer searching or have an error
+            if !isSearching || locationManager.error != nil {
+                timer.invalidate()
+            }
         }
     }
     
     private func checkLocationAndSearch() {
         // Check if we have location permission and location
         if let error = locationManager.error {
-            isSearching = false
-            searchStep = .idle
-            errorMessage = error.localizedDescription
+            handleLocationError(error)
             return
         }
         
         guard let userLocation = locationManager.userLocation else {
-            // If still loading, wait a bit more
-            if locationManager.isLoading {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    checkLocationAndSearch()
-                }
+            // If still requesting location, continue waiting
+            if locationManager.isRequestingLocation {
+                return // Continue monitoring
             } else {
-                isSearching = false
-                searchStep = .idle
-                errorMessage = "No se pudo obtener tu ubicación"
+                // Location request completed but no location received
+                handleLocationError(LocationManager.LocationError.failed)
             }
             return
         }
@@ -210,6 +219,28 @@ struct ClosestPharmacyView: View {
                     notificationFeedback.notificationOccurred(.error)
                 }
             }
+        }
+    }
+    
+    private func handleLocationError(_ error: LocationManager.LocationError) {
+        // Check if we should retry
+        if retryCount < maxRetries {
+            retryCount += 1
+            let delay = Double(retryCount) * 1.0 // Exponential backoff: 1s, 2s, 3s
+            
+            DebugConfig.debugPrint("🔄 Location error, retrying in \(delay)s (attempt \(retryCount)/\(maxRetries)): \(error.localizedDescription)")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                if isSearching { // Only retry if still searching
+                    locationManager.requestLocationOnce()
+                }
+            }
+        } else {
+            // Max retries reached
+            DebugConfig.debugPrint("❌ Max retries reached for location request")
+            isSearching = false
+            searchStep = .idle
+            errorMessage = error.localizedDescription
         }
     }
 }
