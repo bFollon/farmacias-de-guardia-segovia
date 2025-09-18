@@ -26,6 +26,8 @@ import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.Cu
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.ElEspinarParser
 import com.example.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaRuralParser
 import java.io.File
+import kotlin.collections.component1
+import kotlin.collections.component2
 
 /**
  * Android equivalent of iOS PDFProcessingService
@@ -75,8 +77,8 @@ class PDFProcessingService {
             DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
             val scheduleMap = parsingStrategy.parseSchedules(pdfFile)
 
-            scheduleMap[DutyLocation.fromRegion(region)]?.let { schedules ->
-                DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
+            scheduleMap.forEach { (location, schedules) ->
+                DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${location.name} PDF")
             }
 
             // Log some sample data for debugging

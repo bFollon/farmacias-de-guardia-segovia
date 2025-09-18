@@ -45,6 +45,8 @@ import com.example.farmaciasdeguardiaensegovia.services.PDFDownloadService
 import com.example.farmaciasdeguardiaensegovia.services.PDFProcessingService
 import com.example.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.example.farmaciasdeguardiaensegovia.utils.MapUtils.mergeWith
+import kotlin.collections.component1
+import kotlin.collections.component2
 
 /**
  * Repository for managing pharmacy schedules across the application
@@ -126,8 +128,8 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 // Save to persistent cache for next time
                 cacheService.saveSchedulesToCache(region, schedulesMap)
 
-                schedulesMap[DutyLocation.fromRegion(region)]?.let { schedules ->
-                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${region.name}")
+                schedulesMap.forEach { (location, schedules) ->
+                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${location.name}")
                 }
 
             } else {

@@ -63,8 +63,7 @@ data class Region(
                     metadata = RegionMetadata(
                         has24HourPharmacies = false,
                         notes = "Includes both day and night shifts"
-                    ),
-                    forceRefresh = true
+                    )
                 )
             }
         

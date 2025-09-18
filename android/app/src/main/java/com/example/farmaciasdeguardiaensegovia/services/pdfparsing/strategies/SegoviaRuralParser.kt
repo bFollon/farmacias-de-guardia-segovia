@@ -380,9 +380,10 @@ class SegoviaRuralParser : PDFParsingStrategy {
                 acc.mergeWith(pharmaciesSchedules) { a, b -> a + b }
             }
 
-            println("✅ Finished printing all lines from Segovia Rural PDF")
-            emptyMap() // Return empty for now, just printing lines
-
+            allSchedules.forEach { (location, schedules) ->
+                DebugConfig.debugPrint("All schedules parsed for ${location.name}: ${schedules.size}")
+            }
+            allSchedules
         } catch (e: Exception) {
             println("❌ Error reading Segovia Rural PDF: ${e.message}")
             emptyMap()
