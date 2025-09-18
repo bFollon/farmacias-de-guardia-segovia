@@ -43,7 +43,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         "LA SIERRA": .standard,
         "FUENTIDUEÑA": .standard,
         "CARBONERO": .standard,
-        "NAVAS DE LA ASUNCIÓN": .standard,
+        "NAVA DE LA ASUNCIÓN": .standard,
         "VILLACASTÍN": .standard,
         "CANTALEJO": .standard
     ]
@@ -470,7 +470,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let laSierraColumn = TextColumn(x: 500, width: 70)    // ZBS LA SIERRA
             let fuentiduenaColumn = TextColumn(x: 570, width: 50)  // ZBS FUENTIDUEÑA
             let carboneroColumn = TextColumn(x: 620, width: 80)    // ZBS CARBONERO
-            let navasDeLaAsuncionColumn = TextColumn(x: 700, width: 65)  // ZBS NAVAS DE LA ASUNCIÓN
+            let navaDeLaAsuncionColumn = TextColumn(x: 700, width: 65)  // ZBS NAVA DE LA ASUNCIÓN
             let villacastinColumn = TextColumn(x: 770, width: 60)  // ZBS VILLACASTÍN
             
             DebugConfig.debugPrint("📐 Page dimensions: \(pageWidth) x \(pageHeight)")
@@ -487,7 +487,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             DebugConfig.debugPrint("  La Sierra (x: \(laSierraColumn.x), width: \(laSierraColumn.width))")
             DebugConfig.debugPrint("  Fuentidueña (x: \(fuentiduenaColumn.x), width: \(fuentiduenaColumn.width))")
             DebugConfig.debugPrint("  Carbonero (x: \(carboneroColumn.x), width: \(carboneroColumn.width))")
-            DebugConfig.debugPrint("  Navas de la Asunción (x: \(navasDeLaAsuncionColumn.x), width: \(navasDeLaAsuncionColumn.width))")
+            DebugConfig.debugPrint("  Nava de la Asunción (x: \(navaDeLaAsuncionColumn.x), width: \(navaDeLaAsuncionColumn.width))")
             DebugConfig.debugPrint("  Villacastín (x: \(villacastinColumn.x), width: \(villacastinColumn.width))")
             
             // Scan all columns with the same height parameters
@@ -498,7 +498,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             let laSierraData = scanColumn(page, column: laSierraColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let fuentiduenaData = scanColumn(page, column: fuentiduenaColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let carboneroData = scanColumn(page, column: carboneroColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
-            let navasDeLaAsuncionData = scanColumn(page, column: navasDeLaAsuncionColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
+            let navasDeLaAsuncionData = scanColumn(page, column: navaDeLaAsuncionColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             let villacastinData = scanColumn(page, column: villacastinColumn, baseHeight: scanHeight, scanIncrement: scanIncrement)
             
             
