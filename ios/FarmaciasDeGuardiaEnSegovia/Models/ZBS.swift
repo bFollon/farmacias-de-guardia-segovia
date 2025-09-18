@@ -43,7 +43,7 @@ extension ZBS {
         ZBS(id: "la-sierra", name: "La Sierra", icon: "⛰️"),
         ZBS(id: "fuentidueña", name: "Fuentidueña", icon: "🏞️"),
         ZBS(id: "carbonero", name: "Carbonero", icon: "🌲"),
-        ZBS(id: "navas-asuncion", name: "Navas de la Asunción", icon: "🏘️"),
+        ZBS(id: "navas-asuncion", name: "Nava de la Asunción", icon: "🏘️"),
         ZBS(id: "villacastin", name: "Villacastín", icon: "🚂"),
         ZBS(id: "cantalejo", name: "Cantalejo", icon: "🏘️")
     ]
