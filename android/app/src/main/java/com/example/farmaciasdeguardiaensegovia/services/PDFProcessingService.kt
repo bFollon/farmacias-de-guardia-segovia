@@ -73,18 +73,19 @@ class PDFProcessingService {
 
             // Parse the schedules using the strategy
             DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
-            val schedules = parsingStrategy.parseSchedules(pdfFile)
+            val scheduleMap = parsingStrategy.parseSchedules(pdfFile)
 
-            DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
+            scheduleMap[DutyLocation.fromRegion(region)]?.let { schedules ->
+                DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${region.name} PDF")
+            }
 
             // Log some sample data for debugging
-            if (schedules.isEmpty()) {
+            if (scheduleMap.isEmpty()) {
                 DebugConfig.debugWarn("⚠️ No schedules were parsed from the PDF!")
             }
 
             DebugConfig.debugPrint("=== PDF Processing Complete ===\n")
-            schedules
-
+            scheduleMap
         } catch (e: Exception) {
             DebugConfig.debugError(
                 "❌ PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}",

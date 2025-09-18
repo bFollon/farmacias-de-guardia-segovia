@@ -46,8 +46,7 @@ import kotlin.collections.plus
 class ElEspinarParser : PDFParsingStrategy {
 
     /** Current year being processed, incremented when January 1st is found */
-    private val startingYear = Instant.ofEpochMilli(System.currentTimeMillis())
-        .atZone(ZoneId.systemDefault()).toLocalDateTime().year - 1
+    private val startingYear = PDFParsingUtils.getCurrentYear() - 1
 
     override fun getStrategyName(): String = "ElEspinarParser"
 

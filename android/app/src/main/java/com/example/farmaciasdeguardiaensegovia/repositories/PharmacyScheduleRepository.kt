@@ -117,21 +117,24 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             }
 
             // Process the PDF file
-            val schedules = pdfProcessingService.loadPharmacies(pdfFile, region)
+            val schedulesMap = pdfProcessingService.loadPharmacies(pdfFile, region)
 
-            if (schedules.isNotEmpty()) {
+            if (schedulesMap.isNotEmpty()) {
                 // Cache the results in memory
-                schedulesCache = schedulesCache.mergeWith(schedules) { _, b -> b } // Replace the existing schedules with the new ones
+                schedulesCache = schedulesCache.mergeWith(schedulesMap) { _, b -> b } // Replace the existing schedules with the new ones
 
                 // Save to persistent cache for next time
-                cacheService.saveSchedulesToCache(region, schedules)
+                cacheService.saveSchedulesToCache(region, schedulesMap)
 
-                DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${region.name}")
+                schedulesMap[DutyLocation.fromRegion(region)]?.let { schedules ->
+                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${region.name}")
+                }
+
             } else {
                 DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${region.name}")
             }
 
-            return mapOf(cacheKey to (schedules[cacheKey] ?: emptyList()))
+            return mapOf(cacheKey to (schedulesMap[cacheKey] ?: emptyList()))
 
         } catch (e: Exception) {
             DebugConfig.debugError(
