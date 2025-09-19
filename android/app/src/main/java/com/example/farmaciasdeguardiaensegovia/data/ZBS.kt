@@ -86,6 +86,13 @@ data class ZBS(
         )
         val availableZBS = listOf(
             RIAZA_SEPULVEDA,
+            LA_GRANJA,
+            LA_SIERRA,
+            FUENTIDUENA,
+            CARBONERO,
+            NAVAS_DE_LA_ASUNCION,
+            VILLACASTIN,
+            CANTALEJO
         )
     }
 }
