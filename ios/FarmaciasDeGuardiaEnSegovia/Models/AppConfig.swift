@@ -20,7 +20,7 @@ import Foundation
 /// Global application configuration
 struct AppConfig {
     /// Contact email for error reporting, feedback, and general inquiries
-    static let contactEmail = "alive.intake_0b@icloud.com"
+    static let contactEmail = "bfollon.dev@icloud.com"
     
     /// Pre-formatted mailto URLs for common contact purposes
     struct EmailLinks {
