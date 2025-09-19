@@ -50,8 +50,8 @@ data class DutyTimeSpan(
         val shiftDate = LocalDate.of(date.year!!, DutyDate.monthToNumber(date.month)!!, date.day)
         
         val (startTime, endTime) = if(spansMultipleDays) {
-            Pair(LocalDateTime.of(shiftDate.minusDays(1), LocalTime.of(startHour, startMinute)),
-            LocalDateTime.of(shiftDate, LocalTime.of(endHour, endMinute)))
+            Pair(LocalDateTime.of(shiftDate, LocalTime.of(startHour, startMinute)),
+            LocalDateTime.of(shiftDate.plusDays(1), LocalTime.of(endHour, endMinute)))
         } else {
             Pair(LocalDateTime.of(shiftDate, LocalTime.of(startHour, startMinute)),
             LocalDateTime.of(shiftDate, LocalTime.of(endHour, endMinute)))
