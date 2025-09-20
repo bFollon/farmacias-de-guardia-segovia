@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
+import com.example.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.example.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
@@ -246,20 +247,37 @@ private fun ScheduleContent(
         item {
             DateHeader(formattedDateTime = uiState.formattedDateTime)
         }
+
+        item {
+            Text(
+                text = "Farmacias de Guardia",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+        }
         
         // Current schedule info
         uiState.currentSchedule?.let { schedule ->
-            item {
-                Text(
-                    text = "Farmacias de Guardia",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
-            }
 
             schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
-                pharmacies.firstOrNull()?.let { pharmacy ->
+                if (pharmacies.isNotEmpty()) {
+                    pharmacies.firstOrNull()?.let { pharmacy ->
+                        item {
+                            ShiftHeaderCard(
+                                uiState.activeTimeSpan!!,
+                                isActive = true
+                            )
+                        }
+                        item {
+                            PharmacyCard(
+                                pharmacy = pharmacy,
+                                isActive = true
+                            )
+                        }
+                    }
+                } else {
+                    // No pharmacies on duty for this timespan
                     item {
                         ShiftHeaderCard(
                             uiState.activeTimeSpan!!,
@@ -267,12 +285,28 @@ private fun ScheduleContent(
                         )
                     }
                     item {
-                        PharmacyCard(
-                            pharmacy = pharmacy,
-                            isActive = true
+                        NoPharmacyOnDutyCard(
+                            message = "No hay farmacia de guardia asignada para ${uiState.activeTimeSpan!!.displayName} en esta fecha.",
+                            additionalInfo = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
                         )
                     }
                 }
+            } ?: run {
+                // No schedule for this timespan at all
+                item {
+                    NoPharmacyOnDutyCard(
+                        message = "No hay farmacia de guardia programada para esta fecha.",
+                        additionalInfo = "Intente refrescar o seleccione una fecha diferente."
+                    )
+                }
+            }
+        } ?: run {
+            // No schedule for this timespan at all
+            item {
+                NoPharmacyOnDutyCard(
+                    message = "No hay farmacia de guardia programada para esta fecha.",
+                    additionalInfo = "Intente refrescar o seleccione una fecha diferente."
+                )
             }
         }
         
