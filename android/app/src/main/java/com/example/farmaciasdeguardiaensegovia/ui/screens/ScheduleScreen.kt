@@ -370,10 +370,10 @@ private fun DisclaimerCard(
                 onClick = { onViewPDF(location.associatedRegion.pdfURL) },
                 contentPadding = PaddingValues(0.dp)
             ) {
-                Text("Calendario de Guardias - ${location.name}")
+                Text("Calendario de Guardias - ${location.associatedRegion.name}")
             }
             Text(
-                text = "¿Ha encontrado algún error? Contacte con el desarrollador para reportarlo.",
+                text = "¿Ha encontrado algún error? Repórtelo aquí",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.outline
             )
