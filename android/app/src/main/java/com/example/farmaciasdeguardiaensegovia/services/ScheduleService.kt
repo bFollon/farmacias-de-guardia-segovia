@@ -44,11 +44,11 @@ class ScheduleService(context: Context) {
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): Map<DutyLocation, List<PharmacySchedule>> {
+    suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): List<PharmacySchedule> {
         DebugConfig.debugPrint("ScheduleService: Loading schedules for ${location.associatedRegion.name} (forceRefresh: $forceRefresh)")
 
         // Use the shared repository for loading
-        val schedules = repository.loadSchedules(location.associatedRegion)
+        val schedules = repository.loadSchedules(location)
 
         DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${location.associatedRegion.name}")
 

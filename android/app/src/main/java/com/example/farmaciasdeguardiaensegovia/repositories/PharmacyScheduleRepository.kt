@@ -40,6 +40,7 @@ import android.content.Context
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.example.farmaciasdeguardiaensegovia.data.Region
+import com.example.farmaciasdeguardiaensegovia.data.ZBS
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.services.PDFDownloadService
 import com.example.farmaciasdeguardiaensegovia.services.PDFProcessingService
@@ -84,66 +85,65 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(region: Region): Map<DutyLocation, List<PharmacySchedule>> {
-
-        val cacheKey = DutyLocation.fromRegion(region)
-        val cachedEntry = schedulesCache[cacheKey]
+    suspend fun loadSchedules(location: DutyLocation): List<PharmacySchedule> {
+        // TODO decide how we want to manage this function, if region or location.
+        val cachedEntry = schedulesCache[location]
 
         // Return cached data if it exists and is fresh (unless force refresh)
-        if (!region.forceRefresh && cachedEntry != null) {
-            DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${region.name} (${cachedEntry.size} schedules)")
-            return mapOf(cacheKey to cachedEntry)
+        if (!location.associatedRegion.forceRefresh && cachedEntry != null) {
+            DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${location.name} (${cachedEntry.size} schedules)")
+            return cachedEntry
         }
 
         // Try to load from persistent cache (serialized file cache)
-        if (!region.forceRefresh) {
-            val cachedSchedules = cacheService.loadCachedSchedules(region)
-            if (cachedSchedules != null && cachedSchedules.isNotEmpty() && cachedSchedules[cacheKey] != null) {
+        if (!location.associatedRegion.forceRefresh) {
+            val cachedSchedules = cacheService.loadCachedSchedules(location)
+            if (cachedSchedules != null && cachedSchedules.isNotEmpty() && cachedSchedules[location] != null) {
                 // Store in memory cache as well
                 schedulesCache = schedulesCache.mergeWith(cachedSchedules) { _, b -> b } // Replace the existing schedules with the new ones
-                DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${region.name}")
-                return mapOf(cacheKey to cachedSchedules[cacheKey]!!)
+                DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
+                return cachedSchedules[location]!!
             }
         }
 
         try {
-            DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules from PDF for ${region.name}")
+            DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules from PDF for ${location.name}")
 
             // Download the PDF file
-            val fileName = "${region.id}.pdf"
-            val pdfFile = pdfDownloadService.downloadPDF(region.pdfURL, fileName)
+            val fileName = "${location.associatedRegion.id}.pdf"
+            val pdfFile = pdfDownloadService.downloadPDF(location.associatedRegion.pdfURL, fileName)
 
             if (pdfFile == null) {
-                DebugConfig.debugError("PharmacyScheduleRepository: Failed to download PDF for ${region.name}")
-                return mapOf(cacheKey to emptyList())
+                DebugConfig.debugError("PharmacyScheduleRepository: Failed to download PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
+                return emptyList()
             }
 
             // Process the PDF file
-            val schedulesMap = pdfProcessingService.loadPharmacies(pdfFile, region)
+            val schedulesMap = pdfProcessingService.loadPharmacies(pdfFile, location.associatedRegion)
 
             if (schedulesMap.isNotEmpty()) {
                 // Cache the results in memory
                 schedulesCache = schedulesCache.mergeWith(schedulesMap) { _, b -> b } // Replace the existing schedules with the new ones
 
                 // Save to persistent cache for next time
-                cacheService.saveSchedulesToCache(region, schedulesMap)
+                cacheService.saveSchedulesToCache(location, schedulesMap)
 
-                schedulesMap.forEach { (location, schedules) ->
-                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${location.name}")
+                schedulesMap.forEach { (loadedLocation, schedules) ->
+                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${loadedLocation.name}")
                 }
 
             } else {
-                DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${region.name}")
+                DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${location.name}")
             }
 
-            return mapOf(cacheKey to (schedulesMap[cacheKey] ?: emptyList()))
+            return schedulesMap[location] ?: emptyList()
 
         } catch (e: Exception) {
             DebugConfig.debugError(
-                "PharmacyScheduleRepository: Error loading schedules for ${region.name}",
+                "PharmacyScheduleRepository: Error loading schedules for ${location.name}",
                 e
             )
-            return mapOf(cacheKey to emptyList())
+            return emptyList()
         }
     }
 
@@ -154,13 +154,18 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     fun isLoaded(region: Region): Boolean {
         // First check in-memory cache
-        val cachedEntry = schedulesCache[DutyLocation.fromRegion(region)]
-        if (cachedEntry != null) {
-            return true
+
+        val locationsToCheck = when(region.id) {
+            Region.segoviaRural.id -> ZBS.availableZBS.map { DutyLocation.fromZBS(it) }
+            else -> listOf(DutyLocation.fromRegion(region))
         }
 
-        // Then check persistent cache
-        return cacheService.isCacheValid(region)
+        return locationsToCheck.all { location ->
+            val cachedEntry = schedulesCache[location]
+            if (cachedEntry != null) {
+                true
+            } else cacheService.isCacheValid(location)
+        }
     }
 
     /**
@@ -168,15 +173,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * @param region The region to get schedules for
      * @return List of cached schedules, or null if not cached/expired
      */
-    fun getCachedSchedules(region: Region): Map<DutyLocation, List<PharmacySchedule>>? {
-        val cachedEntry = schedulesCache[DutyLocation.fromRegion(region)]
-        return if (cachedEntry != null) {
-            DebugConfig.debugPrint("PharmacyScheduleRepository: Retrieved cached schedules for ${region.name}")
-            mapOf(DutyLocation.fromRegion(region) to cachedEntry)
-        } else {
-            null
-        }
-    }
+    fun getCachedSchedules(location: DutyLocation): List<PharmacySchedule>? = schedulesCache[location]
 
     /**
      * Preload schedules in background (used by splash screen)
@@ -185,8 +182,9 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun preloadSchedules(region: Region): Boolean {
         return try {
-            val schedules = loadSchedules(region)
-            schedules.isNotEmpty()
+            region.toDutyLocationList().all {
+                loadSchedules(it).isNotEmpty()
+            }
         } catch (e: Exception) {
             DebugConfig.debugError(
                 "PharmacyScheduleRepository: Error preloading schedules for ${region.name}",

@@ -218,7 +218,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
         return try {
             val schedules = repository.preloadSchedules(region)
-            val scheduleList = repository.getCachedSchedules(region) ?: emptyMap()
+            val scheduleList = region.toDutyLocationList()
+                .fold(emptyList<PharmacySchedule>()) { acc, location ->
+                    repository.getCachedSchedules(location)?.let { acc + it } ?: acc
+                }
 
             val success = schedules && scheduleList.isNotEmpty()
             if (success) {
@@ -263,8 +266,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
      * Get the loaded Segovia Capital schedules (if any)
      */
     fun getSegoviaCapitalSchedules(): List<PharmacySchedule>? =
-        repository.getCachedSchedules(Region.segoviaCapital)
-            ?.get(DutyLocation.fromRegion(Region.segoviaCapital)) ?: emptyList()
+        repository.getCachedSchedules(DutyLocation.fromRegion(Region.segoviaCapital))
 
     /**
      * Get the scraped PDF URLs from the cofsegovia.com page
@@ -338,7 +340,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                     repository.clearCacheForRegion(region)
 
                     // Force load from PDF
-                    val schedules = repository.loadSchedules(region)
+                    val schedules = region.toDutyLocationList().fold(emptyList<PharmacySchedule>()) { acc, location -> repository.loadSchedules(location) }
                     val success = schedules.isNotEmpty()
 
                     if (success) {

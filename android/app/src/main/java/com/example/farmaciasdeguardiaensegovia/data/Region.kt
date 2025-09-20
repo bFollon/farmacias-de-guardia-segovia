@@ -106,6 +106,11 @@ data class Region(
         /** List of all available regions */
         val allRegions = listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)
     }
+
+    fun toDutyLocationList(): List<DutyLocation> = when(id) {
+        segoviaRural.id -> { ZBS.availableZBS.map { DutyLocation.fromZBS(it) } }
+        else -> listOf(DutyLocation.fromRegion(this))
+    }
 }
 
 /**

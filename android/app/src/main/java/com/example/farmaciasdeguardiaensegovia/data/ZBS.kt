@@ -37,49 +37,49 @@ data class ZBS(
         /** List of all available ZBS areas in Segovia Rural */
 
         val RIAZA_SEPULVEDA = ZBS(
-            id = "RIAZA/SEPÚLVEDA",
+            id = "riaza-sepulveda",
             name = "Riaza / Sepúlveda",
             icon = "🏔️",
             notes = "Mountain highland area"
         )
         val LA_GRANJA = ZBS(
-            id = "LA GRANJA",
+            id = "la-granja",
             name = "La Granja",
             icon = "🏰",
             notes = "Historic palace town area"
         )
         val LA_SIERRA = ZBS(
-            id = "LA SIERRA",
+            id = "la-sierra",
             name = "La Sierra",
             icon = "⛰️",
             notes = "Mountain range area"
         )
         val FUENTIDUENA = ZBS(
-            id = "FUENTIDUEÑA",
+            id = "fuentiduena",
             name = "Fuentidueña",
             icon = "🏞️",
             notes = "Valley countryside area"
         )
         val CARBONERO = ZBS(
-            id = "CARBONERO",
+            id = "carbonero",
             name = "Carbonero",
             icon = "🌲",
             notes = "Forest region area"
         )
         val NAVAS_DE_LA_ASUNCION = ZBS(
-            id = "NAVAS DE LA ASUNCIÓN",
+            id = "navas-asuncion",
             name = "Navas de la Asunción",
             icon = "🏘️",
             notes = "Small town area"
         )
         val VILLACASTIN = ZBS(
-            id = "VILLACASTÍN",
+            id = "villacastin",
             name = "Villacastín",
             icon = "🚂",
             notes = "Railway junction town"
         )
         val CANTALEJO = ZBS(
-            id = "CANTALEJO",
+            id = "cantalejo",
             name = "Cantalejo",
             icon = "🏘️",
             notes = "Rural town area"

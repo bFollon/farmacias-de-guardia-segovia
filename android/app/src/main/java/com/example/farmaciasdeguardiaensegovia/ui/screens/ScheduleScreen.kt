@@ -21,7 +21,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -35,12 +34,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
-import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.example.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -50,13 +48,13 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleScreen(
-    regionId: String? = null,
+    locationId: String? = null,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val viewModel: ScheduleViewModel = viewModel { 
-        ScheduleViewModel(context, regionId ?: "segovia-capital") 
+    val viewModel: ScheduleViewModel = viewModel {
+        ScheduleViewModel(context, locationId ?: "segovia-capital")
     }
     val uiState by viewModel.uiState.collectAsState()
     
@@ -66,9 +64,9 @@ fun ScheduleScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { 
+                title = {
                     Text(
-                        text = "${uiState.region.icon} ${uiState.region.name}",
+                        text = "${uiState.location?.icon} ${uiState.location?.name}",
                         style = MaterialTheme.typography.titleLarge
                     ) 
                 },
@@ -326,7 +324,7 @@ private fun ScheduleContent(
         // Disclaimer and PDF link
         item {
             DisclaimerCard(
-                region = uiState.region,
+                location = uiState.location!!, // TODO fix
                 onViewPDF = onViewPDF
             )
         }
@@ -365,7 +363,7 @@ private fun DateHeader(formattedDateTime: String) {
 
 @Composable
 private fun DisclaimerCard(
-    region: Region,
+    location: DutyLocation,
     onViewPDF: (String) -> Unit
 ) {
     Card(
@@ -389,10 +387,10 @@ private fun DisclaimerCard(
                 color = MaterialTheme.colorScheme.outline
             )
             TextButton(
-                onClick = { onViewPDF(region.pdfURL) },
+                onClick = { onViewPDF(location.associatedRegion.pdfURL) },
                 contentPadding = PaddingValues(0.dp)
             ) {
-                Text("Calendario de Guardias - ${region.name}")
+                Text("Calendario de Guardias - ${location.name}")
             }
             Text(
                 text = "¿Ha encontrado algún error? Contacte con el desarrollador para reportarlo.",

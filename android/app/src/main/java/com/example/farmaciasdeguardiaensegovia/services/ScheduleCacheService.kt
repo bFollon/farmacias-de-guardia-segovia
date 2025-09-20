@@ -50,9 +50,9 @@ class ScheduleCacheService(private val context: Context) {
     /**
      * Check if cached schedules exist and are still valid for a region
      */
-    fun isCacheValid(region: Region): Boolean {
-        val cacheFile = getCacheFile(region)
-        val metadataFile = getMetadataFile(region)
+    fun isCacheValid(location: DutyLocation): Boolean {
+        val cacheFile = getCacheFile(location)
+        val metadataFile = getMetadataFile(location)
         
         if (!cacheFile.exists() || !metadataFile.exists()) {
             return false
@@ -60,11 +60,11 @@ class ScheduleCacheService(private val context: Context) {
         
         try {
             val metadata = json.decodeFromString<CacheMetadata>(metadataFile.readText())
-            val pdfFile = File(context.cacheDir, "pdfs/${region.id}.pdf")
+            val pdfFile = File(context.cacheDir, "pdfs/${location.associatedRegion.id}.pdf")
             
             // Check if PDF file exists and hasn't been modified since cache was created
             if (!pdfFile.exists()) {
-                DebugConfig.debugPrint("📂 PDF file not found for ${region.name}, cache invalid")
+                DebugConfig.debugPrint("📂 PDF file not found for ${location.associatedRegion.name}, cache invalid")
                 return false
             }
             
@@ -72,15 +72,15 @@ class ScheduleCacheService(private val context: Context) {
             val cacheIsValid = pdfLastModified <= metadata.pdfLastModified
             
             if (cacheIsValid) {
-                DebugConfig.debugPrint("✅ Cache valid for ${region.name} (PDF: ${pdfLastModified}, Cache: ${metadata.pdfLastModified})")
+                DebugConfig.debugPrint("✅ Cache valid for ${location.name} (PDF: ${pdfLastModified}, Cache: ${metadata.pdfLastModified})")
             } else {
-                DebugConfig.debugPrint("❌ Cache invalid for ${region.name} - PDF newer than cache")
+                DebugConfig.debugPrint("❌ Cache invalid for ${location.name} - PDF newer than cache")
             }
             
             return cacheIsValid
             
         } catch (e: Exception) {
-            DebugConfig.debugError("Error checking cache validity for ${region.name}", e)
+            DebugConfig.debugError("Error checking cache validity for ${location.name}", e)
             return false
         }
     }
@@ -88,25 +88,25 @@ class ScheduleCacheService(private val context: Context) {
     /**
      * Load cached schedules for a region (if valid)
      */
-    fun loadCachedSchedules(region: Region): Map<DutyLocation, List<PharmacySchedule>>? {
-        if (!isCacheValid(region)) {
+    fun loadCachedSchedules(location: DutyLocation): Map<DutyLocation, List<PharmacySchedule>>? {
+        if (!isCacheValid(location)) {
             return null
         }
         
-        val cacheFile = getCacheFile(region)
+        val cacheFile = getCacheFile(location)
         
         try {
             val startTime = System.currentTimeMillis()
             val cachedData = json.decodeFromString<CachedSchedules>(cacheFile.readText())
             val loadTime = System.currentTimeMillis() - startTime
             
-            DebugConfig.debugPrint("⚡ Loaded ${cachedData.schedules.size} cached schedules for ${region.name} in ${loadTime}ms")
+            DebugConfig.debugPrint("⚡ Loaded ${cachedData.schedules.size} cached schedules for ${location.name} in ${loadTime}ms")
             return cachedData.schedules
             
         } catch (e: Exception) {
-            DebugConfig.debugError("Error loading cached schedules for ${region.name}", e)
+            DebugConfig.debugError("Error loading cached schedules for ${location.name}", e)
             // If cache is corrupted, delete it
-            deleteCacheFiles(region)
+            deleteCacheFiles(location)
             return null
         }
     }
@@ -114,50 +114,50 @@ class ScheduleCacheService(private val context: Context) {
     /**
      * Save parsed schedules to cache
      */
-    fun saveSchedulesToCache(region: Region, schedules: Map<DutyLocation, List<PharmacySchedule>>) {
+    fun saveSchedulesToCache(location: DutyLocation, schedules: Map<DutyLocation, List<PharmacySchedule>>) {
         try {
             val startTime = System.currentTimeMillis()
             
             // Create cache data
             val cachedData = CachedSchedules(
-                regionId = region.id,
-                regionName = region.name,
+                regionId = location.id,
+                regionName = location.name,
                 schedules = schedules,
                 cacheTimestamp = System.currentTimeMillis()
             )
             
             // Save schedules to cache file
-            val cacheFile = getCacheFile(region)
+            val cacheFile = getCacheFile(location)
             cacheFile.writeText(json.encodeToString(cachedData))
             
             // Save metadata
-            val pdfFile = File(context.cacheDir, "pdfs/${region.id}.pdf")
+            val pdfFile = File(context.cacheDir, "pdfs/${location.associatedRegion.id}.pdf")
             val metadata = CacheMetadata(
-                regionId = region.id,
+                regionId = location.id,
                 scheduleCount = schedules.size,
                 cacheTimestamp = System.currentTimeMillis(),
                 pdfLastModified = if (pdfFile.exists()) pdfFile.lastModified() else System.currentTimeMillis()
             )
             
-            val metadataFile = getMetadataFile(region)
+            val metadataFile = getMetadataFile(location)
             metadataFile.writeText(json.encodeToString(metadata))
             
             val saveTime = System.currentTimeMillis() - startTime
             val cacheSize = cacheFile.length() / 1024 // KB
             
-            DebugConfig.debugPrint("💾 Cached ${schedules.size} schedules for ${region.name} in ${saveTime}ms (${cacheSize}KB)")
+            DebugConfig.debugPrint("💾 Cached ${schedules.size} schedules for ${location.name} in ${saveTime}ms (${cacheSize}KB)")
             
         } catch (e: Exception) {
-            DebugConfig.debugError("Error saving schedules to cache for ${region.name}", e)
+            DebugConfig.debugError("Error saving schedules to cache for ${location.name}", e)
         }
     }
     
     /**
      * Clear cache for a specific region
      */
-    fun clearRegionCache(region: Region) {
-        deleteCacheFiles(region)
-        DebugConfig.debugPrint("🗑️ Cleared cache for ${region.name}")
+    fun clearRegionCache(location: DutyLocation) {
+        deleteCacheFiles(location)
+        DebugConfig.debugPrint("🗑️ Cleared cache for ${location.name}")
     }
     
     /**
@@ -210,20 +210,20 @@ class ScheduleCacheService(private val context: Context) {
     
     // Private helper methods
     
-    private fun getCacheFile(region: Region): File {
-        return File(cacheDir, "${region.id}.json")
+    private fun getCacheFile(location: DutyLocation): File {
+        return File(cacheDir, "${location.id}.json")
     }
     
-    private fun getMetadataFile(region: Region): File {
-        return File(cacheDir, "${region.id}.meta.json")
+    private fun getMetadataFile(location: DutyLocation): File {
+        return File(cacheDir, "${location.id}.meta.json")
     }
     
-    private fun deleteCacheFiles(region: Region) {
+    private fun deleteCacheFiles(location: DutyLocation) {
         try {
-            getCacheFile(region).delete()
-            getMetadataFile(region).delete()
+            getCacheFile(location).delete()
+            getMetadataFile(location).delete()
         } catch (e: Exception) {
-            DebugConfig.debugError("Error deleting cache files for ${region.name}", e)
+            DebugConfig.debugError("Error deleting cache files for ${location.name}", e)
         }
     }
     

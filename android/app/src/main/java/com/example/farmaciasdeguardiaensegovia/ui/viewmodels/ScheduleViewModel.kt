@@ -23,7 +23,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.PharmacySchedule
-import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,22 +34,22 @@ import java.util.Calendar
  * ViewModel for managing pharmacy schedules
  */
 class ScheduleViewModel(
-    context: Context, 
-    regionId: String = "segovia-capital"
+    context: Context,
+    locationId: String
 ) : ViewModel() {
     
     private val scheduleService = ScheduleService(context)
     
     // Find the region by ID
-    private val currentRegion = Region.allRegions.find { it.id == regionId } ?: Region.segoviaCapital
-    
+    private val location = DutyLocation.fromId(locationId)
+
     data class ScheduleUiState(
         val isLoading: Boolean = false,
         val schedules: List<PharmacySchedule> = emptyList(),
         val currentSchedule: PharmacySchedule? = null,
         val activeTimeSpan: DutyTimeSpan? = null,
         val selectedDate: Calendar? = null,
-        val region: Region = Region.segoviaCapital,
+        val location: DutyLocation? = null,
         val error: String? = null,
         val formattedDateTime: String = ""
     )
@@ -60,8 +59,8 @@ class ScheduleViewModel(
     
     init {
         // Update the state with the current region and load its schedules
-        _uiState.value = _uiState.value.copy(region = currentRegion)
-        loadSchedules(DutyLocation.fromRegion(currentRegion))
+        _uiState.value = _uiState.value.copy(location = location)
+        loadSchedules(location)
     }
     
     /**
@@ -73,18 +72,18 @@ class ScheduleViewModel(
                 _uiState.value = _uiState.value.copy(
                     isLoading = true,
                     error = null,
-                    region = location.associatedRegion
+                    location = location
                 )
                 
                 val schedules = scheduleService.loadSchedules(location, forceRefresh)
                 val currentDateTime = scheduleService.getCurrentDateTime()
                 
                 // Find current schedule and active timespan
-                val currentInfo = scheduleService.findCurrentSchedule(schedules[location] ?: emptyList())
+                val currentInfo = scheduleService.findCurrentSchedule(schedules)
                 
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    schedules = schedules[location] ?: emptyList(),
+                    schedules = schedules,
                     currentSchedule = currentInfo?.first,
                     activeTimeSpan = currentInfo?.second,
                     formattedDateTime = currentDateTime
@@ -129,7 +128,7 @@ class ScheduleViewModel(
      * Refresh current data
      */
     fun refresh() {
-        loadSchedules(DutyLocation.fromRegion(_uiState.value.region), forceRefresh = true)
+        _uiState.value.location?.let { loadSchedules(it, forceRefresh = true) }
     }
     
     /**
@@ -147,7 +146,7 @@ class ScheduleViewModel(
             try {
                 scheduleService.clearCache()
                 // Reload after clearing cache
-                loadSchedules(DutyLocation.fromRegion(_uiState.value.region), forceRefresh = true)
+                _uiState.value.location?.let { loadSchedules(it, forceRefresh = true) }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     error = "Error clearing cache: ${e.message}"
