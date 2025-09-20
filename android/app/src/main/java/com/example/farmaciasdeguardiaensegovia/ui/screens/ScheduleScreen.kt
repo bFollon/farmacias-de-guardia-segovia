@@ -33,9 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
-import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.example.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
@@ -259,63 +257,20 @@ private fun ScheduleContent(
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
-            
-            // Show only the active shift pharmacy for Segovia Capital
-            when (uiState.activeTimeSpan) {
-                DutyTimeSpan.CapitalDay -> {
-                    // Day shift is active
-                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                        item {
-                            ShiftHeaderCard(
-                                shiftType = DutyDate.ShiftType.DAY,
-                                isActive = true
-                            )
-                        }
-                        item {
-                            PharmacyCard(
-                                pharmacy = pharmacy,
-                                isActive = true
-                            )
-                        }
+
+            schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
+                pharmacies.firstOrNull()?.let { pharmacy ->
+                    item {
+                        ShiftHeaderCard(
+                            uiState.activeTimeSpan!!,
+                            isActive = true
+                        )
                     }
-                }
-                DutyTimeSpan.CapitalNight -> {
-                    // Night shift is active
-                    schedule.nightShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                        item {
-                            ShiftHeaderCard(
-                                shiftType = DutyDate.ShiftType.NIGHT,
-                                isActive = true
-                            )
-                        }
-                        item {
-                            PharmacyCard(
-                                pharmacy = pharmacy,
-                                isActive = true
-                            )
-                        }
-                    }
-                }
-                DutyTimeSpan.FullDay -> {
-                    // For 24-hour regions, show single pharmacy
-                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                        item {
-                            PharmacyCard(
-                                pharmacy = pharmacy,
-                                isActive = true
-                            )
-                        }
-                    }
-                }
-                else -> {
-                    // Fallback: show day shift pharmacy if no active timespan is determined
-                    schedule.dayShiftPharmacies.firstOrNull()?.let { pharmacy ->
-                        item {
-                            PharmacyCard(
-                                pharmacy = pharmacy,
-                                isActive = false
-                            )
-                        }
+                    item {
+                        PharmacyCard(
+                            pharmacy = pharmacy,
+                            isActive = true
+                        )
                     }
                 }
             }

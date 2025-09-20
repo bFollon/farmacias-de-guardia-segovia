@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.farmaciasdeguardiaensegovia.data.DutyDate
+import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 
 /**
  * Component for displaying shift headers (day/night)
@@ -36,28 +37,17 @@ import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShiftHeaderCard(
-    shiftType: DutyDate.ShiftType,
+    timeSpan: DutyTimeSpan,
     isActive: Boolean,
     modifier: Modifier = Modifier,
     onInfoClick: (() -> Unit)? = null
 ) {
-    val (iconData, color) = when (shiftType) {
-        DutyDate.ShiftType.DAY -> {
-            Triple(
-                Icons.Default.WbSunny,
-                "Turno de Día",
-                "10:15 - 22:00"
-            ) to if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
-        }
-        DutyDate.ShiftType.NIGHT -> {
-            Triple(
-                Icons.Default.NightlightRound,
-                "Turno de Noche",
-                "22:00 - 10:15"
-            ) to if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
-        }
-    }
-    
+    val (iconData, color) = Triple(
+        Icons.Default.WbSunny,
+        "Turno actual",
+        timeSpan.displayName
+    ) to if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+
     val (icon, title, timeRange) = iconData
     
     Card(
