@@ -285,28 +285,19 @@ private fun ScheduleContent(
                         )
                     }
                     item {
-                        NoPharmacyOnDutyCard(
-                            message = "No hay farmacia de guardia asignada para ${uiState.activeTimeSpan!!.displayName} en esta fecha.",
-                            additionalInfo = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
-                        )
+                        NoPharmacyOnDuty(uiState.location)
                     }
                 }
             } ?: run {
                 // No schedule for this timespan at all
                 item {
-                    NoPharmacyOnDutyCard(
-                        message = "No hay farmacia de guardia programada para esta fecha.",
-                        additionalInfo = "Intente refrescar o seleccione una fecha diferente."
-                    )
+                    NoPharmacyOnDuty(uiState.location)
                 }
             }
         } ?: run {
             // No schedule for this timespan at all
             item {
-                NoPharmacyOnDutyCard(
-                    message = "No hay farmacia de guardia programada para esta fecha.",
-                    additionalInfo = "Intente refrescar o seleccione una fecha diferente."
-                )
+                NoPharmacyOnDuty(uiState.location)
             }
         }
         
@@ -407,3 +398,10 @@ private fun DatePickerModal(
         }
     )
 }
+
+@Composable
+private fun NoPharmacyOnDuty(location: DutyLocation?) =
+    NoPharmacyOnDutyCard(
+        message = "No hay farmacia de guardia asignada para ${location?.name} en esta fecha.",
+        additionalInfo = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
+    )

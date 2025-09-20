@@ -25,6 +25,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,19 +37,19 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun NoPharmacyOnDutyCard(
     modifier: Modifier = Modifier,
-    message: String = "No hay farmacia de guardia asignada para esta fecha.",
-    additionalInfo: String? = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
+    message: String = "No hay farmacia de guardia programada para esta fecha.",
+    additionalInfo: String? = "Intente refrescar o seleccione una fecha diferente."
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.1f)
+            containerColor = Color(0xFFFDF8F3) // Very light orange/beige background matching iOS
         ),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(8.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Warning icon and title
             Row(
@@ -58,14 +59,14 @@ fun NoPharmacyOnDutyCard(
                 Icon(
                     imageVector = Icons.Default.Warning,
                     contentDescription = "Sin farmacia de guardia",
-                    tint = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.size(24.dp)
+                    tint = Color(0xFFF2994A), // Orange color matching iOS
+                    modifier = Modifier.size(20.dp)
                 )
                 Text(
                     text = "Sin farmacia de guardia",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.error
+                    color = Color(0xFFF2994A) // Orange color matching iOS
                 )
             }
             
