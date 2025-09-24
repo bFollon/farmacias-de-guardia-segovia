@@ -21,6 +21,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.example.farmaciasdeguardiaensegovia.data.Pharmacy
 
@@ -46,21 +48,21 @@ fun PharmacyCard(
     isActive: Boolean = false
 ) {
     val context = LocalContext.current
-    
+
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
             defaultElevation = if (isActive) 8.dp else 4.dp
         ),
         colors = CardDefaults.cardColors(
-            containerColor = if (isActive) MaterialTheme.colorScheme.primaryContainer 
-                           else MaterialTheme.colorScheme.surface
+            containerColor = if (isActive) MaterialTheme.colorScheme.primaryContainer
+            else MaterialTheme.colorScheme.surface
         ),
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Active indicator or duty schedule warning
             if (isActive) {
@@ -92,7 +94,8 @@ fun PharmacyCard(
                         )
                         .border(
                             width = 1.dp,
-                            color = androidx.compose.ui.graphics.Color(0xFFFF9800).copy(alpha = 0.3f),
+                            color = androidx.compose.ui.graphics.Color(0xFFFF9800)
+                                .copy(alpha = 0.3f),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(horizontal = 12.dp, vertical = 8.dp),
@@ -113,7 +116,7 @@ fun PharmacyCard(
                     )
                 }
             }
-            
+
             // Pharmacy name
             Text(
                 text = pharmacy.name,
@@ -121,11 +124,11 @@ fun PharmacyCard(
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
-            
+
             // Address with map button
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Icon(
                     imageVector = Icons.Default.LocationOn,
@@ -133,27 +136,24 @@ fun PharmacyCard(
                     tint = MaterialTheme.colorScheme.outline,
                     modifier = Modifier.size(20.dp)
                 )
-                TextButton(
-                    onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=${pharmacy.address}"))
+                Text(
+                    text = pharmacy.address,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    textDecoration = TextDecoration.Underline,
+                    modifier = Modifier.clickable {
+                        val intent =
+                            Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=${pharmacy.address}"))
                         context.startActivity(intent)
-                    },
-                    contentPadding = PaddingValues(vertical = 4.dp, horizontal = 0.dp),
-                    shape = RoundedCornerShape(0.dp)
-                ) {
-                    Text(
-                        text = pharmacy.address,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
+                    }
+                )
             }
 
             // Phone with call button
             if (pharmacy.phone.isNotEmpty() && pharmacy.phone != "No disponible") {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
                     Icon(
                         imageVector = Icons.Default.Phone,
@@ -161,29 +161,26 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.size(20.dp)
                     )
-                    TextButton(
-                        onClick = {
-                            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${pharmacy.phone}"))
+                    Text(
+                        text = pharmacy.formattedPhone,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        textDecoration = TextDecoration.Underline,
+                        modifier = Modifier.clickable {
+                            val intent =
+                                Intent(Intent.ACTION_DIAL, Uri.parse("tel:${pharmacy.phone}"))
                             context.startActivity(intent)
-                        },
-                        contentPadding = PaddingValues(vertical = 4.dp, horizontal = 0.dp),
-                        shape = RoundedCornerShape(0.dp)
-                    ) {
-                        Text(
-                            text = pharmacy.formattedPhone,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
+                        }
+                    )
                 }
             }
-            
+
             // Additional info
             pharmacy.additionalInfo?.let { info ->
                 if (info.isNotEmpty()) {
                     Row(
                         verticalAlignment = Alignment.Top,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Info,
