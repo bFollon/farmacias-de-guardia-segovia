@@ -67,8 +67,13 @@ class ScheduleService(context: Context) {
 
         return matchingSchedule?.let {
             Pair(it, it.shifts.entries.find { (key, _) -> key.contains(it.date, now) }?.key!!)
-        }?: null.also {
-            DebugConfig.debugPrint("ScheduleService: No matching schedule found for duty info: $now")
+        }?: run {
+            val existingSchedule = schedules.find { it.shifts.entries.find { (timeSpan, _) -> timeSpan.isSameDay(it.date, now) } != null }
+            existingSchedule?.let {
+                Pair(it, it.shifts.entries.find { (key, _) -> key.isSameDay(it.date, now) }?.key!!)
+            } ?: null.also {
+                DebugConfig.debugPrint("ScheduleService: No matching schedule found for duty info: $now")
+            }
         }
     }
 

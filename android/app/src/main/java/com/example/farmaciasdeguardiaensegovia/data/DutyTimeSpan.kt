@@ -59,6 +59,15 @@ data class DutyTimeSpan(
 
         return toCheck in startTime .. endTime
     }
+
+    fun isSameDay(date: DutyDate, timestamp: Long): Boolean {
+        val toCheck = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime()
+
+        val shiftDate = LocalDate.of(date.year!!, DutyDate.monthToNumber(date.month)!!, date.day)
+
+        return toCheck.dayOfMonth == shiftDate.dayOfMonth && toCheck.month == shiftDate.month
+                && toCheck.year == shiftDate.year
+    }
     
     /**
      * Checks if a given time of day (hour and minute) falls within this duty time span
@@ -76,6 +85,11 @@ data class DutyTimeSpan(
             // For spans within the same day (e.g., 10:15 - 22:00)
             timeInMinutes in startMinutes..endMinutes
         }
+    }
+
+    fun isActiveNow(): Boolean {
+        val now = LocalDateTime.now()
+        return containsTimeOfDay(now.hour, now.minute)
     }
     
     /**

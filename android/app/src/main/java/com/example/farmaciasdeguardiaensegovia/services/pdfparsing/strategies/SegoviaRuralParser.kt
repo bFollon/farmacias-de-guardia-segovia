@@ -39,7 +39,7 @@ import kotlin.collections.emptyMap
  *
  * Handles the complex multi-column layout with 8 ZBS (Zonas Básicas de Salud):
  * - RIAZA SEPÚLVEDA (24h)
- * - LA GRANJA (10h-22h) 
+ * - LA GRANJA (10h-22h)
  * - LA SIERRA (10h-20h)
  * - FUENTIDUEÑA (10h-20h)
  * - CARBONERO (10h-20h)
@@ -57,7 +57,14 @@ class SegoviaRuralParser : PDFParsingStrategy {
         val address: String,
         val phone: String,
         val dutyTimeSpan: DutyTimeSpan
-    )
+    ) {
+        fun toPharmacy() = Pharmacy(
+            name = name,
+            address = address,
+            phone = phone,
+            additionalInfo = null
+        )
+    }
 
     override fun getStrategyName(): String = "SegoviaRuralParser"
 
@@ -65,7 +72,33 @@ class SegoviaRuralParser : PDFParsingStrategy {
         // Regex pattern for Spanish date format: dd-mmm-yy
         // Matches patterns like "02-sep-25", "15-dic-24", etc.
         // Only matches valid Spanish month abbreviations
-        private val SPANISH_DATE_REGEX = Regex("""(\d{1,2})-(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)-(\d{2})""", RegexOption.IGNORE_CASE)
+        private val SPANISH_DATE_REGEX = Regex(
+            """(\d{1,2})-(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)-(\d{2})""",
+            RegexOption.IGNORE_CASE
+        )
+
+        private const val WEEKDAYS = 7
+
+        private enum class LaGranjaPharmacyType(val pdfName: String) {
+            VALENCIANA("C/ Valenciana"),
+            DOLORES("Plaza los Dolores")
+        }
+
+        private object LaGranjaPharmacies {
+            val valenciana = PharmacyInfo(
+                name = "Farmacia Cristina Mínguez Del Pozo",
+                address = "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+                phone = "921470038",
+                dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
+            )
+
+            val dolores = PharmacyInfo(
+                name = "Farmacia Almudena Martínez Pardo del Valle",
+                address = "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+                phone = "921472391",
+                dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
+            )
+        }
 
         // Pharmacy information lookup table for Segovia Rural organized by ZBS
         // Extracted from iOS SegoviaRuralParser.swift
@@ -105,27 +138,6 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     name = "Farmacia Luis de la Peña Buquerin",
                     address = "Plaza Mayor, 12, 40520 Ayllón, Segovia",
                     phone = "921553003",
-                    dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
-                )
-            ),
-
-            ZBS.LA_GRANJA to mapOf(
-                "LA GRANJA" to PharmacyInfo(
-                    name = "Farmacia Cristina Mínguez Del Pozo",
-                    address = "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
-                    phone = "921470038",
-                    dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
-                ),
-                "LA GRANJA - VALENCIANA" to PharmacyInfo(
-                    name = "Farmacia Cristina Mínguez Del Pozo",
-                    address = "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
-                    phone = "921470038",
-                    dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
-                ),
-                "LA GRANJA - DOLORES" to PharmacyInfo(
-                    name = "Farmacia Almudena Martínez Pardo del Valle",
-                    address = "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
-                    phone = "921472391",
                     dutyTimeSpan = DutyTimeSpan.RuralExtendedDaytime
                 )
             ),
@@ -365,7 +377,12 @@ class SegoviaRuralParser : PDFParsingStrategy {
             val pageCount = pdfDoc.numberOfPages
             println("📄 Processing $pageCount pages of Segovia Rural PDF...")
 
-            val allSchedules = (1..pageCount).fold(emptyMap<DutyLocation, List<PharmacySchedule>>()) { acc, pageIndex ->
+            val (allSchedules, firstLaGranjaOccurrence) = (1..pageCount).fold(
+                Pair(
+                    emptyMap<DutyLocation, List<PharmacySchedule>>(),
+                    null as LaGranjaPharmacyType?
+                )
+            ) { (acc, maybeLaGranjaPharmacy), pageIndex ->
                 DebugConfig.debugPrint("📃 Processing page $pageIndex of $pageCount")
 
                 val content = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(pageIndex))
@@ -373,17 +390,32 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     .map { it.trim() }
                     .filter { it.isNotEmpty() }
 
-                val pharmaciesSchedules = lines.fold(emptyMap<ZBS, List<PharmacySchedule>>()) { acc, line ->
-                    acc.accumulateWith(processLine(line))
-                }.mapKeys { (zbs, _) -> DutyLocation.fromZBS(zbs) }
+                val (pharmaciesZBSMap, laGranjaUpdated) = lines.fold(
+                    Pair(
+                        emptyMap<ZBS, List<PharmacySchedule>>(),
+                        maybeLaGranjaPharmacy
+                    )
+                ) { (acc, maybeLaGranjaPharmacy), line ->
+                    Pair(
+                        acc.accumulateWith(processLine(line)),
+                        detectFirstLaGranjaPharmacy(line, maybeLaGranjaPharmacy)
+                    )
+                }
 
-                acc.mergeWith(pharmaciesSchedules) { a, b -> a + b }
+                val pharmaciesSchedules =
+                    pharmaciesZBSMap.mapKeys { (zbs, _) -> DutyLocation.fromZBS(zbs) }
+
+                Pair(acc.mergeWith(pharmaciesSchedules) { a, b -> a + b }, laGranjaUpdated)
             }
 
-            allSchedules.forEach { (location, schedules) ->
-                DebugConfig.debugPrint("All schedules parsed for ${location.name}: ${schedules.size}")
+            val allSchedulesWithLaGranja =
+                populateLaGranjaSchedules(allSchedules, firstLaGranjaOccurrence)
+
+            allSchedulesWithLaGranja.also {
+                it.forEach { (location, schedules) ->
+                    DebugConfig.debugPrint("All schedules parsed for ${location.name}: ${schedules.size}")
+                }
             }
-            allSchedules
         } catch (e: Exception) {
             println("❌ Error reading Segovia Rural PDF: ${e.message}")
             emptyMap()
@@ -393,6 +425,9 @@ class SegoviaRuralParser : PDFParsingStrategy {
     }
 
     private fun processLine(line: String): Map<ZBS, PharmacySchedule> {
+
+        DebugConfig.debugPrint("Line: $line")
+
         val schedules = when {
             hasDate(line) -> {
                 val maybeDate = extractDate(line)
@@ -404,12 +439,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
                             .mapValues { (_, pharmacyInfoList) ->
                                 pharmacyInfoList
                                     .map {
-                                        Pharmacy(
-                                            name = it.name,
-                                            address = it.address,
-                                            phone = it.phone,
-                                            additionalInfo = null
-                                        )
+                                        it.toPharmacy()
                                     }
                             }
                     }.associate { (zbs, value) ->
@@ -422,6 +452,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     DebugConfig.debugPrint("Could not extract date from line: $line")
                 }
             }
+
             else -> {
                 DebugConfig.debugPrint("Skipping unsupported line: $line")
                 emptyMap()
@@ -437,15 +468,15 @@ class SegoviaRuralParser : PDFParsingStrategy {
 
     private fun extractDate(line: String): DutyDate? {
         val match = SPANISH_DATE_REGEX.find(line) ?: return null
-        
+
         val dayStr = match.groupValues[1]
         val monthAbbr = match.groupValues[2].lowercase()
         val yearStr = match.groupValues[3]
-        
+
         val day = dayStr.toIntOrNull() ?: return null
         val yearInt = yearStr.toIntOrNull() ?: return null
         val year = 2000 + yearInt
-        
+
         val monthName = when (monthAbbr) {
             "ene" -> "enero"
             "feb" -> "febrero"
@@ -461,7 +492,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
             "dic" -> "diciembre"
             else -> return null
         }
-        
+
         return DutyDate(
             dayOfWeek = "Unknown", // Will be calculated later if needed
             day = day,
@@ -475,4 +506,72 @@ class SegoviaRuralParser : PDFParsingStrategy {
             zbs to pharmacies.filterKeys { key -> line.contains(key) }.values.toList()
         }.toMap()
 
+    private fun detectFirstLaGranjaPharmacy(
+        line: String,
+        previouslyDetected: LaGranjaPharmacyType?
+    ): LaGranjaPharmacyType? {
+        return if (previouslyDetected != null) {
+            previouslyDetected
+        } else {
+            val valencianaIndex = line.indexOf(LaGranjaPharmacyType.VALENCIANA.pdfName)
+            val doloresIndex = line.indexOf(LaGranjaPharmacyType.DOLORES.pdfName)
+
+            when {
+                valencianaIndex < doloresIndex -> LaGranjaPharmacyType.VALENCIANA
+                doloresIndex < valencianaIndex -> LaGranjaPharmacyType.DOLORES
+                else -> null
+            }
+        }
+    }
+
+    private fun populateLaGranjaSchedules(
+        schedules: Map<DutyLocation, List<PharmacySchedule>>,
+        firstLaGranjaOccurrence: LaGranjaPharmacyType?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
+        return if (firstLaGranjaOccurrence == null) {
+            schedules
+        } else {
+            schedules[DutyLocation.fromZBS(ZBS.NAVAS_DE_LA_ASUNCION)]?.let { sampleSchedules ->
+                val (oddPharmacy, evenPharmacy) = when (firstLaGranjaOccurrence) {
+                    LaGranjaPharmacyType.VALENCIANA -> Pair(
+                        LaGranjaPharmacies.valenciana,
+                        LaGranjaPharmacies.dolores
+                    )
+
+                    LaGranjaPharmacyType.DOLORES -> Pair(
+                        LaGranjaPharmacies.dolores,
+                        LaGranjaPharmacies.valenciana
+                    )
+                }
+
+                val laGranjaSchedules = sampleSchedules.mapIndexed { index, value ->
+                    val weekNumber = (index / 7) + 1  // 1-based week numbering
+                    val isEvenWeek = (weekNumber and 1) == 0  // Bitwise check
+
+                    when (isEvenWeek) {
+                        true -> value.copy(
+                            shifts = mapOf(
+                                evenPharmacy.dutyTimeSpan to listOf(
+                                    evenPharmacy.toPharmacy()
+                                )
+                            )
+                        )
+
+                        false -> value.copy(
+                            shifts = mapOf(
+                                evenPharmacy.dutyTimeSpan to listOf(
+                                    oddPharmacy.toPharmacy()
+                                )
+                            )
+                        )
+                    }
+                }
+
+                schedules + (DutyLocation.fromZBS(ZBS.LA_GRANJA) to laGranjaSchedules)
+            } ?: run {
+                DebugConfig.debugPrint("Could not get sample schedules to populate La Granja")
+                schedules
+            }
+        }
+    }
 }
