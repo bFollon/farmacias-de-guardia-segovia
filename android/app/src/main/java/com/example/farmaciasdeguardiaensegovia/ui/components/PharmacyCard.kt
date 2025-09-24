@@ -20,6 +20,7 @@ package com.example.farmaciasdeguardiaensegovia.ui.components
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -86,7 +87,12 @@ fun PharmacyCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(
-                            color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.8f),
+                            color = androidx.compose.ui.graphics.Color.Yellow.copy(alpha = 0.15f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = androidx.compose.ui.graphics.Color(0xFFFF9800).copy(alpha = 0.3f),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(horizontal = 12.dp, vertical = 8.dp),
@@ -96,13 +102,13 @@ fun PharmacyCard(
                     Icon(
                         imageVector = Icons.Default.Warning,
                         contentDescription = "Advertencia",
-                        tint = MaterialTheme.colorScheme.tertiary,
+                        tint = androidx.compose.ui.graphics.Color(0xFFFF9800), // Orange color
                         modifier = Modifier.size(20.dp)
                     )
                     Text(
                         text = "Fuera del horario de guardia",
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        color = androidx.compose.ui.graphics.Color.Black,
                         fontWeight = FontWeight.Medium
                     )
                 }
