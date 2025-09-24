@@ -272,7 +272,7 @@ private fun ScheduleContent(
                         item {
                             PharmacyCard(
                                 pharmacy = pharmacy,
-                                isActive = true
+                                isActive = uiState.activeTimeSpan?.isActiveNow() ?: false
                             )
                         }
                     }
