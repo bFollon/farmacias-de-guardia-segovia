@@ -133,31 +133,22 @@ fun PharmacyCard(
                     tint = MaterialTheme.colorScheme.outline,
                     modifier = Modifier.size(20.dp)
                 )
-                Column(modifier = Modifier.weight(1f)) {
+                TextButton(
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=${pharmacy.address}"))
+                        context.startActivity(intent)
+                    },
+                    contentPadding = PaddingValues(vertical = 4.dp, horizontal = 0.dp),
+                    shape = RoundedCornerShape(0.dp)
+                ) {
                     Text(
-                        text = "Dirección",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.outline,
-                        fontWeight = FontWeight.Medium
+                        text = pharmacy.address,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
                     )
-                    TextButton(
-                        onClick = {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=${pharmacy.address}"))
-                            context.startActivity(intent)
-                        },
-                        contentPadding = PaddingValues(0.dp),
-                        modifier = Modifier.height(IntrinsicSize.Min),
-                        shape = RoundedCornerShape(0.dp)
-                    ) {
-                        Text(
-                            text = pharmacy.address,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
                 }
             }
-            
+
             // Phone with call button
             if (pharmacy.phone.isNotEmpty() && pharmacy.phone != "No disponible") {
                 Row(
@@ -170,28 +161,19 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.size(20.dp)
                     )
-                    Column(modifier = Modifier.weight(1f)) {
+                    TextButton(
+                        onClick = {
+                            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${pharmacy.phone}"))
+                            context.startActivity(intent)
+                        },
+                        contentPadding = PaddingValues(vertical = 4.dp, horizontal = 0.dp),
+                        shape = RoundedCornerShape(0.dp)
+                    ) {
                         Text(
-                            text = "Teléfono",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.outline,
-                            fontWeight = FontWeight.Medium
+                            text = pharmacy.formattedPhone,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.primary
                         )
-                        TextButton(
-                            onClick = {
-                                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${pharmacy.phone}"))
-                                context.startActivity(intent)
-                            },
-                            contentPadding = PaddingValues(0.dp),
-                            modifier = Modifier.height(IntrinsicSize.Min),
-                            shape = RoundedCornerShape(0.dp)
-                        ) {
-                            Text(
-                                text = pharmacy.formattedPhone,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
                     }
                 }
             }
@@ -209,19 +191,11 @@ fun PharmacyCard(
                             tint = MaterialTheme.colorScheme.outline,
                             modifier = Modifier.size(20.dp)
                         )
-                        Column {
-                            Text(
-                                text = "Información adicional",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.outline,
-                                fontWeight = FontWeight.Medium
-                            )
-                            Text(
-                                text = info,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
+                        Text(
+                            text = info,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
                     }
                 }
             }
