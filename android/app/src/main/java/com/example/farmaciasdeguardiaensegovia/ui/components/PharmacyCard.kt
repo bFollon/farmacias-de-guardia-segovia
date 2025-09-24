@@ -146,7 +146,7 @@ fun PharmacyCard(
                             context.startActivity(intent)
                         },
                         contentPadding = PaddingValues(0.dp),
-                        modifier = Modifier.height(IntrinsicSize.Min)
+                        shape = RoundedCornerShape(0.dp)
                     ) {
                         Text(
                             text = pharmacy.address,
@@ -182,7 +182,7 @@ fun PharmacyCard(
                                 context.startActivity(intent)
                             },
                             contentPadding = PaddingValues(0.dp),
-                            modifier = Modifier.height(IntrinsicSize.Min)
+                            shape = RoundedCornerShape(0.dp)
                         ) {
                             Text(
                                 text = pharmacy.formattedPhone,
