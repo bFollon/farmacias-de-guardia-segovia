@@ -266,7 +266,7 @@ private fun ScheduleContent(
                         item {
                             ShiftHeaderCard(
                                 uiState.activeTimeSpan!!,
-                                isActive = true
+                                isActive = uiState.activeTimeSpan.isActiveNow()
                             )
                         }
                         item {
