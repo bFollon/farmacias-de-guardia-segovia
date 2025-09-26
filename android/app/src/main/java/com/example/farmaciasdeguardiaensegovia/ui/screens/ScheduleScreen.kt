@@ -297,7 +297,7 @@ private fun ScheduleContent(
 
             schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
                 if (pharmacies.isNotEmpty()) {
-                    pharmacies.firstOrNull()?.let { pharmacy ->
+                    pharmacies.forEach { pharmacy ->
                         item {
                             ShiftHeaderCard(
                                 uiState.activeTimeSpan!!,

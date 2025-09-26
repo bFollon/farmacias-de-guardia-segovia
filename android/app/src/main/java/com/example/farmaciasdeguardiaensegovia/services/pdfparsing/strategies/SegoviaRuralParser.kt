@@ -100,6 +100,21 @@ class SegoviaRuralParser : PDFParsingStrategy {
             )
         }
 
+        private val cantalejoPharmacies = listOf(
+            PharmacyInfo(
+                name = "Farmacia en Cantalejo",
+                address = "C. Frontón, 15, 40320 Cantalejo, Segovia",
+                phone = "921520053",
+                dutyTimeSpan = DutyTimeSpan.RuralDaytime
+            ),
+            PharmacyInfo(
+                name = "Farmacia Carmen Bautista",
+                address = "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+                phone = "921520005",
+                dutyTimeSpan = DutyTimeSpan.RuralDaytime
+            )
+        )
+
         // Pharmacy information lookup table for Segovia Rural organized by ZBS
         // Extracted from iOS SegoviaRuralParser.swift
         private val pharmacyInfoByZBS: Map<ZBS, Map<String, PharmacyInfo>> = mapOf(
@@ -347,21 +362,6 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     phone = "921192126",
                     dutyTimeSpan = DutyTimeSpan.RuralDaytime
                 )
-            ),
-
-            ZBS.CANTALEJO to mapOf(
-                "CANTALEJO-1" to PharmacyInfo(
-                    name = "Farmacia en Cantalejo",
-                    address = "C. Frontón, 15, 40320 Cantalejo, Segovia",
-                    phone = "921520053",
-                    dutyTimeSpan = DutyTimeSpan.RuralDaytime
-                ),
-                "CANTALEJO-2" to PharmacyInfo(
-                    name = "Farmacia Carmen Bautista",
-                    address = "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
-                    phone = "921520005",
-                    dutyTimeSpan = DutyTimeSpan.RuralDaytime
-                )
             )
         )
     }
@@ -408,10 +408,9 @@ class SegoviaRuralParser : PDFParsingStrategy {
                 Pair(acc.mergeWith(pharmaciesSchedules) { a, b -> a + b }, laGranjaUpdated)
             }
 
-            val allSchedulesWithLaGranja =
-                populateLaGranjaSchedules(allSchedules, firstLaGranjaOccurrence)
 
-            allSchedulesWithLaGranja.also {
+            allSchedules.populateLaGranjaSchedules(firstLaGranjaOccurrence)
+                .populateCantalejoSchedules().also {
                 it.forEach { (location, schedules) ->
                     DebugConfig.debugPrint("All schedules parsed for ${location.name}: ${schedules.size}")
                 }
@@ -503,7 +502,9 @@ class SegoviaRuralParser : PDFParsingStrategy {
 
     private fun extractPharmaciesByZBS(line: String): Map<ZBS, List<PharmacyInfo>> =
         pharmacyInfoByZBS.map { (zbs, pharmacies) ->
-            zbs to pharmacies.filterKeys { key -> line.lowercase().contains(key.lowercase()) }.values.toList()
+            zbs to pharmacies.filterKeys { key ->
+                line.lowercase().contains(key.lowercase())
+            }.values.toList()
         }.toMap()
 
     private fun detectFirstLaGranjaPharmacy(
@@ -524,14 +525,13 @@ class SegoviaRuralParser : PDFParsingStrategy {
         }
     }
 
-    private fun populateLaGranjaSchedules(
-        schedules: Map<DutyLocation, List<PharmacySchedule>>,
+    private fun Map<DutyLocation, List<PharmacySchedule>>.populateLaGranjaSchedules(
         firstLaGranjaOccurrence: LaGranjaPharmacyType?
     ): Map<DutyLocation, List<PharmacySchedule>> {
         return if (firstLaGranjaOccurrence == null) {
-            schedules
+            this
         } else {
-            schedules[DutyLocation.fromZBS(ZBS.NAVAS_DE_LA_ASUNCION)]?.let { sampleSchedules ->
+            this@populateLaGranjaSchedules[DutyLocation.fromZBS(ZBS.NAVAS_DE_LA_ASUNCION)]?.let { sampleSchedules ->
                 val (oddPharmacy, evenPharmacy) = when (firstLaGranjaOccurrence) {
                     LaGranjaPharmacyType.VALENCIANA -> Pair(
                         LaGranjaPharmacies.valenciana,
@@ -567,11 +567,26 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     }
                 }
 
-                schedules + (DutyLocation.fromZBS(ZBS.LA_GRANJA) to laGranjaSchedules)
+                this + (DutyLocation.fromZBS(ZBS.LA_GRANJA) to laGranjaSchedules)
             } ?: run {
                 DebugConfig.debugPrint("Could not get sample schedules to populate La Granja")
-                schedules
+                this@populateLaGranjaSchedules
             }
         }
     }
+
+    fun Map<DutyLocation, List<PharmacySchedule>>.populateCantalejoSchedules(): Map<DutyLocation, List<PharmacySchedule>> =
+        this[DutyLocation.fromZBS(ZBS.NAVAS_DE_LA_ASUNCION)]?.let { sampleSchedules ->
+            val cantalejoSchedules = sampleSchedules.map { schedule ->
+                schedule.copy(
+                    shifts = mapOf(
+                        DutyTimeSpan.RuralDaytime to cantalejoPharmacies.map { it.toPharmacy() }
+                    ))
+            }
+
+            this + (DutyLocation.fromZBS(ZBS.CANTALEJO) to cantalejoSchedules)
+        } ?: run {
+            DebugConfig.debugPrint("Could not get sample schedules to populate La Cantalejo")
+            this
+        }
 }
