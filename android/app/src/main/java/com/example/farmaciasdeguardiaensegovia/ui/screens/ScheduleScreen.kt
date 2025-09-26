@@ -302,9 +302,9 @@ private fun ScheduleContent(
                             ShiftHeaderCard(
                                 uiState.activeTimeSpan!!,
                                 isActive = uiState.activeTimeSpan.isActiveNow(),
-                                onInfoClick = {
-                                    showShiftInfo = true
-                                }
+                                onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
+                                    { showShiftInfo = true }
+                                } else null
                             )
                         }
                         item {
@@ -350,7 +350,7 @@ private fun ScheduleContent(
 
     }
 
-    ShiftInfoModalSheet(uiState.activeTimeSpan!!, isVisible = showShiftInfo, onDismiss = { showShiftInfo = false })
+    ShiftInfoModalSheet(uiState.activeTimeSpan, isVisible = showShiftInfo, onDismiss = { showShiftInfo = false })
 }
 
 @Composable
@@ -451,11 +451,11 @@ private fun NoPharmacyOnDuty(location: DutyLocation?) =
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShiftInfoModalSheet(
-    dutyTimeSpan: DutyTimeSpan,
+    dutyTimeSpan: DutyTimeSpan?,
     isVisible: Boolean,
     onDismiss: () -> Unit = {}
 ) {
-    if (isVisible) {
+    if (isVisible && dutyTimeSpan != null) {
         ModalBottomSheet(
             content = {
                 ShiftInfoCard(dutyTimeSpan = dutyTimeSpan)

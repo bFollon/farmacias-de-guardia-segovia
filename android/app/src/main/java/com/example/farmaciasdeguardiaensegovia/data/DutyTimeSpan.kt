@@ -110,6 +110,8 @@ data class DutyTimeSpan(
         }
     }
 
+    val requiresExplanation get() = spansMultipleDays
+
     /**
      * A human-readable representation of the time span (e.g. "10:15 - 22:00")
      */
