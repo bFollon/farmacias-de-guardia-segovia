@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.farmaciasdeguardiaensegovia.data.DutyDate
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 
 /**
@@ -44,8 +43,8 @@ fun ShiftHeaderCard(
 ) {
     val (iconData, color) = Triple(
         Icons.Default.WbSunny,
-        "Turno actual",
-        timeSpan.displayName
+        timeSpan.displayName,
+        timeSpan.displayFormat
     ) to if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
 
     val (icon, title, timeRange) = iconData

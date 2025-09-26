@@ -34,9 +34,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
+import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
+import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
+import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftType
 import com.example.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
 import java.util.*
 
@@ -238,6 +241,8 @@ private fun ScheduleContent(
     uiState: ScheduleViewModel.ScheduleUiState,
     onViewPDF: (String) -> Unit
 ) {
+    var showShiftInfo by remember { mutableStateOf(false) }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -266,7 +271,10 @@ private fun ScheduleContent(
                         item {
                             ShiftHeaderCard(
                                 uiState.activeTimeSpan!!,
-                                isActive = uiState.activeTimeSpan.isActiveNow()
+                                isActive = uiState.activeTimeSpan.isActiveNow(),
+                                onInfoClick = {
+                                    showShiftInfo = true
+                                }
                             )
                         }
                         item {
@@ -308,7 +316,11 @@ private fun ScheduleContent(
                 onViewPDF = onViewPDF
             )
         }
+
+
     }
+
+    ShiftInfoModalSheet(uiState.activeTimeSpan!!, isVisible = showShiftInfo, onDismiss = { showShiftInfo = false })
 }
 
 @Composable
@@ -405,3 +417,20 @@ private fun NoPharmacyOnDuty(location: DutyLocation?) =
         message = "No hay farmacia de guardia asignada para ${location?.name} en esta fecha.",
         additionalInfo = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
     )
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ShiftInfoModalSheet(
+    dutyTimeSpan: DutyTimeSpan,
+    isVisible: Boolean,
+    onDismiss: () -> Unit = {}
+) {
+    if (isVisible) {
+        ModalBottomSheet(
+            content = {
+                ShiftInfoCard(dutyTimeSpan = dutyTimeSpan)
+            },
+            onDismissRequest = onDismiss
+        )
+    }
+}
