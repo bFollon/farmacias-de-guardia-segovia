@@ -503,7 +503,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
 
     private fun extractPharmaciesByZBS(line: String): Map<ZBS, List<PharmacyInfo>> =
         pharmacyInfoByZBS.map { (zbs, pharmacies) ->
-            zbs to pharmacies.filterKeys { key -> line.contains(key) }.values.toList()
+            zbs to pharmacies.filterKeys { key -> line.lowercase().contains(key.lowercase()) }.values.toList()
         }.toMap()
 
     private fun detectFirstLaGranjaPharmacy(

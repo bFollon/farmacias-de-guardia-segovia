@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.data.ZBS
+import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.example.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
@@ -47,6 +48,7 @@ fun AppNavigation() {
         composable("splash") {
             SplashScreen(
                 onSplashFinished = {
+                    DebugConfig.debugPrint("Navigating from splash screen")
                     navController.navigate("main") {
                         popUpTo("splash") { inclusive = true }
                     }
