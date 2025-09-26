@@ -21,7 +21,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
@@ -70,7 +72,8 @@ fun ZBSSelectionScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(20.dp),
+                .padding(20.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -96,22 +99,43 @@ fun ZBSSelectionScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
-            // ZBS selection grid
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.padding(horizontal = 16.dp)
-            ) {
-                items(ZBS.availableZBS) { zbs ->
+            // ZBS selection grid - using a regular grid instead of LazyVerticalGrid
+            val zbsList = ZBS.availableZBS
+            val rows = (zbsList.size + 1) / 2 // Calculate number of rows for 2 columns
+            
+            repeat(rows) { rowIndex ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    // First column
                     ZBSCard(
-                        zbs = zbs,
-                        onClick = { onZBSSelected(zbs) }
+                        zbs = zbsList[rowIndex * 2],
+                        onClick = { onZBSSelected(zbsList[rowIndex * 2]) },
+                        modifier = Modifier.weight(1f)
                     )
+                    
+                    // Second column (if exists)
+                    if (rowIndex * 2 + 1 < zbsList.size) {
+                        ZBSCard(
+                            zbs = zbsList[rowIndex * 2 + 1],
+                            onClick = { onZBSSelected(zbsList[rowIndex * 2 + 1]) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    } else {
+                        // Empty space to maintain grid alignment
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                }
+                
+                if (rowIndex < rows - 1) {
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
             
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(32.dp))
             
             // Note section
             Card(
