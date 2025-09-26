@@ -91,7 +91,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 // Move all repository work to IO dispatcher
                 withContext(Dispatchers.IO) {
                     // First, scrape PDF URLs to check for updates
-//                    scrapePDFURLs()
+                    scrapePDFURLs()
 
                     // Now that scraping is complete, populate regions with scraped URLs
                     regionsToLoad = listOf(
