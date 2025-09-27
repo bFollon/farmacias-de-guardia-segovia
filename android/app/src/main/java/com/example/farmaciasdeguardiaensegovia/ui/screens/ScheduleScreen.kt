@@ -19,11 +19,15 @@ package com.example.farmaciasdeguardiaensegovia.ui.screens
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -159,7 +163,7 @@ fun ScheduleScreen(
     
     // Date picker dialog
     if (showDatePicker) {
-        DatePickerModal(
+        DatePickerDialog(
             onDateSelected = { calendar ->
                 viewModel.setSelectedDate(calendar)
                 showDatePicker = false
@@ -527,58 +531,78 @@ private fun DisclaimerCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DatePickerModal(
+private fun DatePickerDialog(
     onDateSelected: (Calendar) -> Unit,
     onDismiss: () -> Unit,
     onTodaySelected: () -> Unit
 ) {
-    ModalBottomSheet(
-        onDismissRequest = onDismiss
+    // Date picker state needs to be at the top level to be accessible in button clicks
+    val datePickerState = rememberDatePickerState(
+        initialSelectedDateMillis = System.currentTimeMillis(),
+        // TODO: Calculate dynamically from loaded schedules instead of fixed range
+        yearRange = IntRange(
+            Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
+            Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
+        )
+    )
+    
+    // Use a full-screen dialog approach
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.scrim.copy(alpha = 0.32f))
+            .clickable { onDismiss() }
     ) {
-        Column(
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp)
+                .align(Alignment.Center)
+                .clickable(enabled = false) { }, // Prevent clicks from propagating to background
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            shape = RoundedCornerShape(16.dp)
         ) {
-            // Date picker
-            val datePickerState = rememberDatePickerState(
-                initialSelectedDateMillis = System.currentTimeMillis(),
-                // TODO: Calculate dynamically from loaded schedules instead of fixed range
-                yearRange = IntRange(
-                    Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
-                    Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
-                )
-            )
-            
-            DatePicker(
-                state = datePickerState,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            
-            // Header with title and buttons
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(16.dp)
             ) {
-                TextButton(onClick = onTodaySelected) {
-                    Text("Hoy")
+                // Header with title and buttons at the top
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(onClick = onTodaySelected) {
+                        Text("Hoy")
+                    }
+                    
+                    Text(
+                        text = "Seleccionar fecha",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                    
+                    TextButton(
+                        onClick = {
+                            datePickerState.selectedDateMillis?.let { millis ->
+                                val calendar = Calendar.getInstance().apply { timeInMillis = millis }
+                                onDateSelected(calendar)
+                            }
+                            onDismiss()
+                        }
+                    ) {
+                        Text("Listo")
+                    }
                 }
                 
-                TextButton(
-                    onClick = {
-                        datePickerState.selectedDateMillis?.let { millis ->
-                            val calendar = Calendar.getInstance().apply { timeInMillis = millis }
-                            onDateSelected(calendar)
-                        }
-                        onDismiss()
-                    }
-                ) {
-                    Text("Listo")
-                }
+                // Date picker - full size
+                DatePicker(
+                    state = datePickerState,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }
