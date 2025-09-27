@@ -36,9 +36,9 @@ import androidx.compose.ui.unit.dp
  * Equivalent to the iOS informational banner
  */
 @Composable
-fun CantalejoDisclaimer(
+fun CantalejoDisclaimerCard(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = { showCantalejoSpecialInfo() }
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = modifier

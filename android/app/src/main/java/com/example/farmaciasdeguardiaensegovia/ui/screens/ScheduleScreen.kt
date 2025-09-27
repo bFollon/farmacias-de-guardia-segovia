@@ -67,7 +67,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.example.farmaciasdeguardiaensegovia.data.ZBS
-import com.example.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimer
+import com.example.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
@@ -84,6 +84,7 @@ import java.util.Calendar
 fun ScheduleScreen(
     locationId: String? = null,
     onBack: () -> Unit,
+    onNavigateToCantalejoInfo: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -145,7 +146,8 @@ fun ScheduleScreen(
                         onViewPDF = { url ->
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                             context.startActivity(intent)
-                        }
+                        },
+                        onNavigateToCantalejoInfo = onNavigateToCantalejoInfo
                     )
                 }
             }
@@ -271,7 +273,8 @@ private fun EmptyContent() {
 @Composable
 private fun ScheduleContent(
     uiState: ScheduleViewModel.ScheduleUiState,
-    onViewPDF: (String) -> Unit
+    onViewPDF: (String) -> Unit,
+    onNavigateToCantalejoInfo: () -> Unit = {},
 ) {
     var showShiftInfo by remember { mutableStateOf(false) }
 
@@ -301,7 +304,9 @@ private fun ScheduleContent(
                 if (pharmacies.isNotEmpty()) {
                     if(uiState.location == DutyLocation.fromZBS(ZBS.CANTALEJO)) {
                         item {
-                            CantalejoDisclaimer()
+                            CantalejoDisclaimerCard(
+                                onClick = onNavigateToCantalejoInfo
+                            )
                         }
                     }
 

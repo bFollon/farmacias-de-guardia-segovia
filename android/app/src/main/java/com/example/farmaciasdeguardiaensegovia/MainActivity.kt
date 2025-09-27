@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.data.ZBS
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.example.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
@@ -88,6 +89,9 @@ fun AppNavigation() {
                         locationId = regionId,
                         onBack = {
                             navController.popBackStack()
+                        },
+                        onNavigateToCantalejoInfo = {
+                            navController.navigate("cantalejo_info")
                         }
                     )
                 }
@@ -97,6 +101,9 @@ fun AppNavigation() {
                         locationId = regionId,
                         onBack = {
                             navController.popBackStack()
+                        },
+                        onNavigateToCantalejoInfo = {
+                            navController.navigate("cantalejo_info")
                         }
                     )
                 }
@@ -123,6 +130,14 @@ fun AppNavigation() {
                     navController.navigate("schedule/${zbs.id}")
 //                    navController.popBackStack()
                 },
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable("cantalejo_info") {
+            CantalejoInfoScreen(
                 onDismiss = {
                     navController.popBackStack()
                 }
