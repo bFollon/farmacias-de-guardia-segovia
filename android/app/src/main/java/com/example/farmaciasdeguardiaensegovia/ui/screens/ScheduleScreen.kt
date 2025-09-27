@@ -566,15 +566,6 @@ private fun DatePickerDialog(
     // Get the current selected date (or today if none) as UTC midnight for proper DatePicker initialization
     val initialUtcMillis = getDateAtMidnightUtc(currentSelectedDate)
     
-    // Debug logging
-    val sourceCal = currentSelectedDate ?: Calendar.getInstance()
-    val utcCal = Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC")).apply { timeInMillis = initialUtcMillis }
-    println("🔍 DatePicker Initialization:")
-    println("  Current selected: ${if (currentSelectedDate != null) "${currentSelectedDate.get(Calendar.DAY_OF_MONTH)}/${currentSelectedDate.get(Calendar.MONTH)+1}/${currentSelectedDate.get(Calendar.YEAR)}" else "null (using today)"}")
-    println("  Source date: ${sourceCal.get(Calendar.DAY_OF_MONTH)}/${sourceCal.get(Calendar.MONTH)+1}/${sourceCal.get(Calendar.YEAR)} ${sourceCal.get(Calendar.HOUR_OF_DAY)}:${sourceCal.get(Calendar.MINUTE)}")
-    println("  UTC midnight: ${utcCal.get(Calendar.DAY_OF_MONTH)}/${utcCal.get(Calendar.MONTH)+1}/${utcCal.get(Calendar.YEAR)} ${utcCal.get(Calendar.HOUR_OF_DAY)}:${utcCal.get(Calendar.MINUTE)}")
-    println("  UTC millis: $initialUtcMillis")
-    
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = initialUtcMillis,
         yearRange = IntRange(
@@ -588,13 +579,8 @@ private fun DatePickerDialog(
     
     // Handle immediate date selection when user taps a date
     LaunchedEffect(datePickerState.selectedDateMillis) {
-        println("🔍 LaunchedEffect Triggered:")
-        println("  initialDateSet: $initialDateSet")
-        println("  selectedDateMillis: ${datePickerState.selectedDateMillis}")
-        
         if (!initialDateSet) {
             initialDateSet = true
-            println("  -> Setting initialDateSet to true, ignoring this trigger")
             return@LaunchedEffect
         }
         
@@ -615,12 +601,6 @@ private fun DatePickerDialog(
                 set(Calendar.SECOND, 0)
                 set(Calendar.MILLISECOND, 0)
             }
-            
-            println("🔍 User Selected Date:")
-            println("  UTC millis: $utcMillis")
-            println("  UTC date: ${utcCal.get(Calendar.DAY_OF_MONTH)}/${utcCal.get(Calendar.MONTH)+1}/${utcCal.get(Calendar.YEAR)} ${utcCal.get(Calendar.HOUR_OF_DAY)}:${utcCal.get(Calendar.MINUTE)}")
-            println("  Local date: ${localCal.get(Calendar.DAY_OF_MONTH)}/${localCal.get(Calendar.MONTH)+1}/${localCal.get(Calendar.YEAR)} ${localCal.get(Calendar.HOUR_OF_DAY)}:${localCal.get(Calendar.MINUTE)}")
-            println("  -> Calling onDateSelected and onDismiss")
             
             onDateSelected(localCal)
             onDismiss()
