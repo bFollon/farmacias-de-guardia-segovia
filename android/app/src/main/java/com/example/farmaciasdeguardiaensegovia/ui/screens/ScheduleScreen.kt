@@ -66,6 +66,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.example.farmaciasdeguardiaensegovia.data.DutyTimeSpan
+import com.example.farmaciasdeguardiaensegovia.data.ZBS
+import com.example.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimer
 import com.example.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.example.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
@@ -297,6 +299,12 @@ private fun ScheduleContent(
 
             schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
                 if (pharmacies.isNotEmpty()) {
+                    if(uiState.location == DutyLocation.fromZBS(ZBS.CANTALEJO)) {
+                        item {
+                            CantalejoDisclaimer()
+                        }
+                    }
+
                     item {
                         ShiftHeaderCard(
                             uiState.activeTimeSpan!!,
