@@ -536,15 +536,28 @@ private fun DatePickerDialog(
     onDismiss: () -> Unit,
     onTodaySelected: () -> Unit
 ) {
-    // Date picker state needs to be at the top level to be accessible in button clicks
+    // Get current date at midnight to avoid timezone issues
+    val currentDate = remember {
+        Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.timeInMillis
+    }
+    
+    // Date picker state with proper current date
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = System.currentTimeMillis(),
+        initialSelectedDateMillis = currentDate,
         // TODO: Calculate dynamically from loaded schedules instead of fixed range
         yearRange = IntRange(
             Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
             Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
         )
     )
+    
+    // We'll handle date selection manually through the DatePicker's built-in selection
+    // No automatic triggering - user must double-tap or we'll add a confirm button
     
     // Use a full-screen dialog approach
     Box(
@@ -567,7 +580,7 @@ private fun DatePickerDialog(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                // Header with title and buttons at the top
+                // Header with title and "Hoy" button
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -585,16 +598,8 @@ private fun DatePickerDialog(
                         fontWeight = FontWeight.Medium
                     )
                     
-                    TextButton(
-                        onClick = {
-                            datePickerState.selectedDateMillis?.let { millis ->
-                                val calendar = Calendar.getInstance().apply { timeInMillis = millis }
-                                onDateSelected(calendar)
-                            }
-                            onDismiss()
-                        }
-                    ) {
-                        Text("Listo")
+                    TextButton(onClick = onDismiss) {
+                        Text("Cerrar")
                     }
                 }
                 
@@ -603,6 +608,26 @@ private fun DatePickerDialog(
                     state = datePickerState,
                     modifier = Modifier.fillMaxWidth()
                 )
+                
+                // Bottom action buttons
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(
+                        onClick = {
+                            datePickerState.selectedDateMillis?.let { millis ->
+                                val calendar = Calendar.getInstance().apply { timeInMillis = millis }
+                                onDateSelected(calendar)
+                            }
+                            onDismiss()
+                        }
+                    ) {
+                        Text("Seleccionar")
+                    }
+                }
             }
         }
     }
