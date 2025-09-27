@@ -297,16 +297,17 @@ private fun ScheduleContent(
 
             schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
                 if (pharmacies.isNotEmpty()) {
+                    item {
+                        ShiftHeaderCard(
+                            uiState.activeTimeSpan!!,
+                            isActive = uiState.activeTimeSpan.isActiveNow(),
+                            onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
+                                { showShiftInfo = true }
+                            } else null
+                        )
+                    }
+
                     pharmacies.forEach { pharmacy ->
-                        item {
-                            ShiftHeaderCard(
-                                uiState.activeTimeSpan!!,
-                                isActive = uiState.activeTimeSpan.isActiveNow(),
-                                onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
-                                    { showShiftInfo = true }
-                                } else null
-                            )
-                        }
                         item {
                             PharmacyCard(
                                 pharmacy = pharmacy,
