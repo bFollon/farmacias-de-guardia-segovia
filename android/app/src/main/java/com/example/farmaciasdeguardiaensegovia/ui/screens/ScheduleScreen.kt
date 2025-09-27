@@ -532,8 +532,6 @@ private fun DatePickerModal(
     onDismiss: () -> Unit,
     onTodaySelected: () -> Unit
 ) {
-    var selectedDate by remember { mutableStateOf(System.currentTimeMillis()) }
-    
     ModalBottomSheet(
         onDismissRequest = onDismiss
     ) {
@@ -543,32 +541,9 @@ private fun DatePickerModal(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Header with title and buttons
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextButton(onClick = onTodaySelected) {
-                    Text("Hoy")
-                }
-                
-                Text(
-                    text = "Seleccionar fecha",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                
-                TextButton(onClick = onDismiss) {
-                    Text("Listo")
-                }
-            }
-            
             // Date picker
             val datePickerState = rememberDatePickerState(
-                initialSelectedDateMillis = selectedDate,
+                initialSelectedDateMillis = System.currentTimeMillis(),
                 // TODO: Calculate dynamically from loaded schedules instead of fixed range
                 yearRange = IntRange(
                     Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
@@ -581,12 +556,28 @@ private fun DatePickerModal(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
             
-            // Handle date selection
-            LaunchedEffect(datePickerState.selectedDateMillis) {
-                datePickerState.selectedDateMillis?.let { millis ->
-                    val calendar = Calendar.getInstance().apply { timeInMillis = millis }
-                    onDateSelected(calendar)
-                    onDismiss()
+            // Header with title and buttons
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(onClick = onTodaySelected) {
+                    Text("Hoy")
+                }
+                
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val calendar = Calendar.getInstance().apply { timeInMillis = millis }
+                            onDateSelected(calendar)
+                        }
+                        onDismiss()
+                    }
+                ) {
+                    Text("Listo")
                 }
             }
         }

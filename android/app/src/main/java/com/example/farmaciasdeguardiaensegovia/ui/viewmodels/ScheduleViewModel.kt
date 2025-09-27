@@ -141,6 +141,10 @@ class ScheduleViewModel(
      * Reset to today's date and find current active schedule
      */
     fun resetToToday() {
+        _uiState.value = _uiState.value.copy(
+            selectedDate = null,
+            allShiftsForSelectedDate = emptyList()
+        )
         _uiState.value.location?.let { location ->
             loadSchedules(location)
         }
