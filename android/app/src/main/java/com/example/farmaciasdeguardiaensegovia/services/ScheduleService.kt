@@ -78,49 +78,6 @@ class ScheduleService(context: Context) {
     }
 
     /**
-     * Get duty time info for a timestamp (similar to iOS implementation)
-     */
-    private fun getDutyTimeInfo(timestamp: Long): DutyDate.DutyTimeInfo {
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = timestamp
-
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        // Convert current time to minutes since midnight
-        val currentTimeInMinutes = hour * 60 + minute
-        val morningTransitionInMinutes = 10 * 60 + 15  // 10:15
-        val eveningTransitionInMinutes = 22 * 60       // 22:00
-
-        // Determine which date and shift we need
-        val (targetDate, shiftType) = when {
-            currentTimeInMinutes < morningTransitionInMinutes -> {
-                // Between 00:00 and 10:15, we need previous day's night shift
-                calendar.add(Calendar.DAY_OF_MONTH, -1)
-                Pair(calendar.time, DutyDate.ShiftType.NIGHT)
-            }
-            currentTimeInMinutes < eveningTransitionInMinutes -> {
-                // Between 10:15 and 22:00, we need current day's day shift
-                Pair(calendar.time, DutyDate.ShiftType.DAY)
-            }
-            else -> {
-                // Between 22:00 and 23:59, we need current day's night shift
-                Pair(calendar.time, DutyDate.ShiftType.NIGHT)
-            }
-        }
-
-        return DutyDate.DutyTimeInfo(
-            date = DutyDate(
-                dayOfWeek = "",
-                day = calendar.get(Calendar.DAY_OF_MONTH),
-                month = getSpanishMonthName(calendar.get(Calendar.MONTH)),
-                year = calendar.get(Calendar.YEAR)
-            ),
-            shiftType = shiftType
-        )
-    }
-
-    /**
      * Convert Calendar.MONTH (0-11) to Spanish month name
      */
     private fun getSpanishMonthName(monthIndex: Int): String {

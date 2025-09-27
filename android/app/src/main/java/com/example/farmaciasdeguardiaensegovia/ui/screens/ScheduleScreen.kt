@@ -529,6 +529,30 @@ private fun DisclaimerCard(
     }
 }
 
+/**
+ * Converts today's local date to UTC midnight milliseconds for DatePicker initialization.
+ * DatePicker expects UTC milliseconds but we want to show today's date in local timezone.
+ */
+private fun getTodayAtMidnightUtc(): Long {
+    // Get today's date components in local timezone
+    val localCal = Calendar.getInstance()
+    val year = localCal.get(Calendar.YEAR)
+    val month = localCal.get(Calendar.MONTH)
+    val day = localCal.get(Calendar.DAY_OF_MONTH)
+    
+    // Create UTC calendar with the same date but at midnight UTC
+    val utcCal = Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC"))
+    utcCal.set(Calendar.YEAR, year)
+    utcCal.set(Calendar.MONTH, month)
+    utcCal.set(Calendar.DAY_OF_MONTH, day)
+    utcCal.set(Calendar.HOUR_OF_DAY, 0)
+    utcCal.set(Calendar.MINUTE, 0)
+    utcCal.set(Calendar.SECOND, 0)
+    utcCal.set(Calendar.MILLISECOND, 0)
+    
+    return utcCal.timeInMillis
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DatePickerDialog(
@@ -536,20 +560,19 @@ private fun DatePickerDialog(
     onDismiss: () -> Unit,
     onTodaySelected: () -> Unit
 ) {
-    // Get current date at midnight - use a completely separate calculation from business logic
-    val todayAtMidnight = remember {
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.HOUR_OF_DAY, 0)
-        cal.set(Calendar.MINUTE, 0)
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        cal.timeInMillis
-    }
+    // Get today's date as UTC midnight for proper DatePicker initialization
+    val todayUtcMillis = getTodayAtMidnightUtc()
     
-    // Date picker state with proper current date
+    // Debug logging
+    val localCal = Calendar.getInstance()
+    val utcCal = Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC")).apply { timeInMillis = todayUtcMillis }
+    println("🔍 DatePicker Initialization:")
+    println("  Local today: ${localCal.get(Calendar.DAY_OF_MONTH)}/${localCal.get(Calendar.MONTH)+1}/${localCal.get(Calendar.YEAR)} ${localCal.get(Calendar.HOUR_OF_DAY)}:${localCal.get(Calendar.MINUTE)}")
+    println("  UTC midnight: ${utcCal.get(Calendar.DAY_OF_MONTH)}/${utcCal.get(Calendar.MONTH)+1}/${utcCal.get(Calendar.YEAR)} ${utcCal.get(Calendar.HOUR_OF_DAY)}:${utcCal.get(Calendar.MINUTE)}")
+    println("  UTC millis: $todayUtcMillis")
+    
     val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = todayAtMidnight,
-        // TODO: Calculate dynamically from loaded schedules instead of fixed range
+        initialSelectedDateMillis = todayUtcMillis,
         yearRange = IntRange(
             Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
             Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
@@ -561,15 +584,41 @@ private fun DatePickerDialog(
     
     // Handle immediate date selection when user taps a date
     LaunchedEffect(datePickerState.selectedDateMillis) {
+        println("🔍 LaunchedEffect Triggered:")
+        println("  initialDateSet: $initialDateSet")
+        println("  selectedDateMillis: ${datePickerState.selectedDateMillis}")
+        
         if (!initialDateSet) {
             initialDateSet = true
+            println("  -> Setting initialDateSet to true, ignoring this trigger")
             return@LaunchedEffect
         }
         
-        // User has selected a date - apply it immediately
-        datePickerState.selectedDateMillis?.let { millis ->
-            val calendar = Calendar.getInstance().apply { timeInMillis = millis }
-            onDateSelected(calendar)
+        // User has selected a date - convert from UTC back to local timezone
+        datePickerState.selectedDateMillis?.let { utcMillis ->
+            // DatePicker returns UTC milliseconds, convert to local date
+            val utcCal = Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC")).apply { 
+                timeInMillis = utcMillis 
+            }
+            
+            // Create local calendar with the same date
+            val localCal = Calendar.getInstance().apply {
+                set(Calendar.YEAR, utcCal.get(Calendar.YEAR))
+                set(Calendar.MONTH, utcCal.get(Calendar.MONTH))
+                set(Calendar.DAY_OF_MONTH, utcCal.get(Calendar.DAY_OF_MONTH))
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+            
+            println("🔍 User Selected Date:")
+            println("  UTC millis: $utcMillis")
+            println("  UTC date: ${utcCal.get(Calendar.DAY_OF_MONTH)}/${utcCal.get(Calendar.MONTH)+1}/${utcCal.get(Calendar.YEAR)} ${utcCal.get(Calendar.HOUR_OF_DAY)}:${utcCal.get(Calendar.MINUTE)}")
+            println("  Local date: ${localCal.get(Calendar.DAY_OF_MONTH)}/${localCal.get(Calendar.MONTH)+1}/${localCal.get(Calendar.YEAR)} ${localCal.get(Calendar.HOUR_OF_DAY)}:${localCal.get(Calendar.MINUTE)}")
+            println("  -> Calling onDateSelected and onDismiss")
+            
+            onDateSelected(localCal)
             onDismiss()
         }
     }
