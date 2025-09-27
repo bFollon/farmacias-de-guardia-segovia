@@ -42,6 +42,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -52,6 +54,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -161,7 +164,11 @@ fun ScheduleScreen(
                 viewModel.setSelectedDate(calendar)
                 showDatePicker = false
             },
-            onDismiss = { showDatePicker = false }
+            onDismiss = { showDatePicker = false },
+            onTodaySelected = {
+                viewModel.resetToToday()
+                showDatePicker = false
+            }
         )
     }
 }
@@ -285,7 +292,10 @@ private fun ScheduleContent(
     ) {
         // Header with date
         item {
-            DateHeader(formattedDateTime = uiState.formattedDateTime)
+            DateHeader(
+                selectedDate = uiState.selectedDate,
+                currentDateTime = uiState.formattedDateTime
+            )
         }
 
         item {
@@ -297,45 +307,81 @@ private fun ScheduleContent(
             )
         }
         
-        // Current schedule info
-        uiState.currentSchedule?.let { schedule ->
-
-            schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
-                if (pharmacies.isNotEmpty()) {
-                    if(uiState.location == DutyLocation.fromZBS(ZBS.CANTALEJO)) {
-                        item {
-                            CantalejoDisclaimerCard(
-                                onClick = onNavigateToCantalejoInfo
-                            )
-                        }
-                    }
-
+        // Show content based on whether a date is selected or not
+        if (uiState.selectedDate != null) {
+            // Show all shifts for selected date
+            if (uiState.allShiftsForSelectedDate.isNotEmpty()) {
+                uiState.allShiftsForSelectedDate.forEach { (timeSpan, pharmacies) ->
                     item {
                         ShiftHeaderCard(
-                            uiState.activeTimeSpan!!,
-                            isActive = uiState.activeTimeSpan.isActiveNow(),
-                            onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
+                            timeSpan,
+                            isActive = false, // Always false for selected dates
+                            onInfoClick = if(timeSpan.requiresExplanation) {
                                 { showShiftInfo = true }
                             } else null
                         )
                     }
-
+                    
                     pharmacies.forEach { pharmacy ->
                         item {
                             PharmacyCard(
                                 pharmacy = pharmacy,
-                                isActive = uiState.activeTimeSpan?.isActiveNow() ?: false
+                                isActive = false // Always false for selected dates
                             )
                         }
                     }
-                } else {
-                    // No pharmacies on duty for this timespan
-                    item {
-                        ShiftHeaderCard(
-                            uiState.activeTimeSpan!!,
-                            isActive = true
-                        )
+                }
+            } else {
+                // No shifts with pharmacies for selected date
+                item {
+                    NoPharmacyOnDuty(uiState.location)
+                }
+            }
+        } else {
+            // Show current active schedule (default behavior)
+            uiState.currentSchedule?.let { schedule ->
+                schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
+                    if (pharmacies.isNotEmpty()) {
+                        if(uiState.location == DutyLocation.fromZBS(ZBS.CANTALEJO)) {
+                            item {
+                                CantalejoDisclaimerCard(
+                                    onClick = onNavigateToCantalejoInfo
+                                )
+                            }
+                        }
+
+                        item {
+                            ShiftHeaderCard(
+                                uiState.activeTimeSpan!!,
+                                isActive = uiState.activeTimeSpan.isActiveNow(),
+                                onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
+                                    { showShiftInfo = true }
+                                } else null
+                            )
+                        }
+
+                        pharmacies.forEach { pharmacy ->
+                            item {
+                                PharmacyCard(
+                                    pharmacy = pharmacy,
+                                    isActive = uiState.activeTimeSpan?.isActiveNow() ?: false
+                                )
+                            }
+                        }
+                    } else {
+                        // No pharmacies on duty for this timespan
+                        item {
+                            ShiftHeaderCard(
+                                uiState.activeTimeSpan!!,
+                                isActive = true
+                            )
+                        }
+                        item {
+                            NoPharmacyOnDuty(uiState.location)
+                        }
                     }
+                } ?: run {
+                    // No schedule for this timespan at all
                     item {
                         NoPharmacyOnDuty(uiState.location)
                     }
@@ -345,11 +391,6 @@ private fun ScheduleContent(
                 item {
                     NoPharmacyOnDuty(uiState.location)
                 }
-            }
-        } ?: run {
-            // No schedule for this timespan at all
-            item {
-                NoPharmacyOnDuty(uiState.location)
             }
         }
         
@@ -368,7 +409,21 @@ private fun ScheduleContent(
 }
 
 @Composable
-private fun DateHeader(formattedDateTime: String) {
+private fun DateHeader(
+    selectedDate: Calendar?,
+    currentDateTime: String
+) {
+    val displayText = selectedDate?.let { calendar ->
+        val today = Calendar.getInstance()
+        if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+            calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
+            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
+            "Hoy"
+        } else {
+            formatSelectedDate(calendar)
+        }
+    } ?: currentDateTime
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -388,13 +443,46 @@ private fun DateHeader(formattedDateTime: String) {
                 modifier = Modifier.size(24.dp)
             )
             Text(
-                text = formattedDateTime,
+                text = displayText,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
         }
     }
+}
+
+private fun formatSelectedDate(calendar: Calendar): String {
+    val dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
+        Calendar.MONDAY -> "Lunes"
+        Calendar.TUESDAY -> "Martes"
+        Calendar.WEDNESDAY -> "Miércoles"
+        Calendar.THURSDAY -> "Jueves"
+        Calendar.FRIDAY -> "Viernes"
+        Calendar.SATURDAY -> "Sábado"
+        Calendar.SUNDAY -> "Domingo"
+        else -> "Lunes"
+    }
+
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+    val month = when (calendar.get(Calendar.MONTH)) {
+        Calendar.JANUARY -> "enero"
+        Calendar.FEBRUARY -> "febrero"
+        Calendar.MARCH -> "marzo"
+        Calendar.APRIL -> "abril"
+        Calendar.MAY -> "mayo"
+        Calendar.JUNE -> "junio"
+        Calendar.JULY -> "julio"
+        Calendar.AUGUST -> "agosto"
+        Calendar.SEPTEMBER -> "septiembre"
+        Calendar.OCTOBER -> "octubre"
+        Calendar.NOVEMBER -> "noviembre"
+        Calendar.DECEMBER -> "diciembre"
+        else -> "enero"
+    }
+    val year = calendar.get(Calendar.YEAR)
+
+    return "$dayOfWeek, $day de $month de $year"
 }
 
 @Composable
@@ -437,22 +525,72 @@ private fun DisclaimerCard(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DatePickerModal(
     onDateSelected: (Calendar) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onTodaySelected: () -> Unit
 ) {
-    // For now, show a simple date picker placeholder
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Seleccionar fecha") },
-        text = { Text("Función de selección de fecha en desarrollo") },
-        confirmButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cerrar")
+    var selectedDate by remember { mutableStateOf(System.currentTimeMillis()) }
+    
+    ModalBottomSheet(
+        onDismissRequest = onDismiss
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Header with title and buttons
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(onClick = onTodaySelected) {
+                    Text("Hoy")
+                }
+                
+                Text(
+                    text = "Seleccionar fecha",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium
+                )
+                
+                TextButton(onClick = onDismiss) {
+                    Text("Listo")
+                }
+            }
+            
+            // Date picker
+            val datePickerState = rememberDatePickerState(
+                initialSelectedDateMillis = selectedDate,
+                // TODO: Calculate dynamically from loaded schedules instead of fixed range
+                yearRange = IntRange(
+                    Calendar.getInstance().apply { add(Calendar.MONTH, -6) }.get(Calendar.YEAR),
+                    Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
+                )
+            )
+            
+            DatePicker(
+                state = datePickerState,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+            
+            // Handle date selection
+            LaunchedEffect(datePickerState.selectedDateMillis) {
+                datePickerState.selectedDateMillis?.let { millis ->
+                    val calendar = Calendar.getInstance().apply { timeInMillis = millis }
+                    onDateSelected(calendar)
+                    onDismiss()
+                }
             }
         }
-    )
+    }
 }
 
 @Composable

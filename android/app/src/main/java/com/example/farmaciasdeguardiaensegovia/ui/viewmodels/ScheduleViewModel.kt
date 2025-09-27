@@ -49,6 +49,7 @@ class ScheduleViewModel(
         val currentSchedule: PharmacySchedule? = null,
         val activeTimeSpan: DutyTimeSpan? = null,
         val selectedDate: Calendar? = null,
+        val allShiftsForSelectedDate: List<Pair<DutyTimeSpan, List<com.example.farmaciasdeguardiaensegovia.data.Pharmacy>>> = emptyList(),
         val location: DutyLocation? = null,
         val error: String? = null,
         val formattedDateTime: String = ""
@@ -118,10 +119,31 @@ class ScheduleViewModel(
      */
     fun setSelectedDate(calendar: Calendar) {
         val schedule = findScheduleForDate(calendar)
+        val allShifts = findAllShiftsForDate(calendar)
         _uiState.value = _uiState.value.copy(
             selectedDate = calendar,
-            currentSchedule = schedule
+            currentSchedule = schedule,
+            allShiftsForSelectedDate = allShifts
         )
+    }
+    
+    /**
+     * Find all shifts that have pharmacies assigned for a specific date
+     */
+    fun findAllShiftsForDate(calendar: Calendar): List<Pair<DutyTimeSpan, List<com.example.farmaciasdeguardiaensegovia.data.Pharmacy>>> {
+        val schedule = findScheduleForDate(calendar)
+        return schedule?.shifts?.filter { (_, pharmacies) -> 
+            pharmacies.isNotEmpty() 
+        }?.toList() ?: emptyList()
+    }
+    
+    /**
+     * Reset to today's date and find current active schedule
+     */
+    fun resetToToday() {
+        _uiState.value.location?.let { location ->
+            loadSchedules(location)
+        }
     }
     
     /**
