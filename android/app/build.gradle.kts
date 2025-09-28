@@ -71,6 +71,9 @@ dependencies {
     // Serialization for data models
     implementation(libs.kotlinx.serialization.json)
     
+    // Location services
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.farmaciasdeguardiaensegovia.data.Region
+import com.example.farmaciasdeguardiaensegovia.ui.components.ClosestPharmacyButton
 import com.example.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
@@ -110,40 +111,10 @@ fun MainScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
-            // Closest pharmacy finder placeholder
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = IOSBlue.copy(alpha = 0.1f)
-                ),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "🏥",
-                        fontSize = 32.sp
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Farmacia más cercana",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        text = "Próximamente",
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
+            // Closest pharmacy finder
+            ClosestPharmacyButton(
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
             
             Spacer(modifier = Modifier.height(32.dp))
             

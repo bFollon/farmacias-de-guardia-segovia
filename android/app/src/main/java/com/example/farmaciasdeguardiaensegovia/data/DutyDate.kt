@@ -122,6 +122,30 @@ data class DutyDate(
     }
     
     /**
+     * Check if this DutyDate matches a Calendar instance
+     */
+    fun matchesCalendar(calendar: Calendar): Boolean {
+        val targetDay = calendar.get(Calendar.DAY_OF_MONTH)
+        val targetMonth = getSpanishMonthName(calendar.get(Calendar.MONTH))
+        val targetYear = calendar.get(Calendar.YEAR)
+        
+        return day == targetDay &&
+               month.equals(targetMonth, ignoreCase = true) &&
+               (year ?: targetYear) == targetYear
+    }
+    
+    /**
+     * Convert Calendar.MONTH (0-11) to Spanish month name
+     */
+    private fun getSpanishMonthName(monthIndex: Int): String {
+        val months = listOf(
+            "enero", "febrero", "marzo", "abril", "mayo", "junio",
+            "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        )
+        return months.getOrElse(monthIndex) { "enero" }
+    }
+    
+    /**
      * Represents shift types for pharmacy duty
      */
     enum class ShiftType {
