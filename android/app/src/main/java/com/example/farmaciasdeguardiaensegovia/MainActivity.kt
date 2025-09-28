@@ -20,6 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.farmaciasdeguardiaensegovia.data.Region
 import com.example.farmaciasdeguardiaensegovia.data.ZBS
 import com.example.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.example.farmaciasdeguardiaensegovia.services.CoordinateCache
+import com.example.farmaciasdeguardiaensegovia.services.RouteCache
 import com.example.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
@@ -30,6 +32,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        
+        // Initialize caches and cleanup expired entries
+        CoordinateCache.initialize(this)
+        RouteCache.initialize(this)
+        
+        // Cleanup expired cache entries on app start
+        CoordinateCache.cleanupExpiredEntries()
+        RouteCache.cleanupExpiredEntries()
+        
         setContent {
             FarmaciasDeGuardiaEnSegoviaTheme {
                 AppNavigation()

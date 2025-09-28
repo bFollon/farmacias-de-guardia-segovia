@@ -110,30 +110,46 @@ object RoutingService {
     suspend fun calculateDrivingRoute(from: Location, to: Location): RouteResult? {
         DebugConfig.debugPrint("🗺️ Calculating routes from ${from.latitude},${from.longitude} to ${to.latitude},${to.longitude}")
         
+        // Check cache first
+        RouteCache.getCachedRoute(from, to)?.let { cachedResult ->
+            DebugConfig.debugPrint("🚀 Using cached route result")
+            return cachedResult
+        }
+        
         return try {
             // Try OSRM first for both driving and walking routes
             val drivingRoute = calculateOSRMRoute(from, to, DRIVING_PROFILE)
             val walkingRoute = calculateOSRMRoute(from, to, WALKING_PROFILE)
             
-            if (drivingRoute != null && walkingRoute != null) {
-                val result = RouteResult(
+            val result = if (drivingRoute != null && walkingRoute != null) {
+                val routeResult = RouteResult(
                     distance = drivingRoute.distance,
                     travelTime = drivingRoute.duration,
                     walkingTime = walkingRoute.duration,
                     isEstimated = false
                 )
-                DebugConfig.debugPrint("🚗 Driving: ${result.formattedDistance}, ${result.formattedTravelTime}")
-                DebugConfig.debugPrint("🚶 Walking: ${result.formattedWalkingTime}")
-                result
+                DebugConfig.debugPrint("🚗 Driving: ${routeResult.formattedDistance}, ${routeResult.formattedTravelTime}")
+                DebugConfig.debugPrint("🚶 Walking: ${routeResult.formattedWalkingTime}")
+                routeResult
             } else {
                 // Fallback to straight-line estimation
                 DebugConfig.debugPrint("🔄 OSRM failed, falling back to straight-line estimation")
                 calculateStraightLineEstimation(from, to)
             }
+            
+            // Cache the result
+            RouteCache.setCachedRoute(from, to, result)
+            
+            result
         } catch (exception: Exception) {
             DebugConfig.debugPrint("❌ Route calculation failed: ${exception.message}")
             // Fall back to straight-line distance if routing fails
-            calculateStraightLineEstimation(from, to)
+            val fallbackResult = calculateStraightLineEstimation(from, to)
+            
+            // Cache fallback result too
+            RouteCache.setCachedRoute(from, to, fallbackResult)
+            
+            fallbackResult
         }
     }
     

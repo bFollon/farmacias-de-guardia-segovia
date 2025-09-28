@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.services.CoordinateCache
+import com.example.farmaciasdeguardiaensegovia.services.RouteCache
 import com.example.farmaciasdeguardiaensegovia.ui.screens.ClosestPharmacyResultBottomSheet
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
@@ -53,9 +54,10 @@ fun ClosestPharmacyButton(
     val viewModel: ClosestPharmacyViewModel = viewModel { ClosestPharmacyViewModel(context) }
     val uiState by viewModel.uiState.collectAsState()
     
-    // Initialize coordinate cache
+    // Initialize caches
     LaunchedEffect(Unit) {
         CoordinateCache.initialize(context)
+        RouteCache.initialize(context)
     }
     
     // Permission launcher

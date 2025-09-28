@@ -258,6 +258,10 @@ class ClosestPharmacyService(private val context: Context) {
         val distance = userLocation.distanceTo(cachedLoc)
         if (distance > CACHE_DISTANCE_THRESHOLD) {
             DebugConfig.debugPrint("📍 User moved ${distance.toInt()}m, cache invalid")
+            
+            // Clear route cache when user moves significantly
+            RouteCache.clearAllRoutes()
+            
             return null
         }
         
