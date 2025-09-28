@@ -93,7 +93,7 @@ fun ClosestPharmacyResultBottomSheet(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
@@ -176,7 +176,7 @@ fun ClosestPharmacyResultBottomSheet(
             
             // Divider
             HorizontalDivider(
-                modifier = Modifier.padding(vertical = 16.dp),
+                modifier = Modifier.padding(vertical = 8.dp),
                 color = MaterialTheme.colorScheme.outlineVariant
             )
             
@@ -184,7 +184,7 @@ fun ClosestPharmacyResultBottomSheet(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
@@ -245,7 +245,7 @@ fun ClosestPharmacyResultBottomSheet(
             
             // Divider
             HorizontalDivider(
-                modifier = Modifier.padding(vertical = 16.dp),
+                modifier = Modifier.padding(vertical = 8.dp),
                 color = MaterialTheme.colorScheme.outlineVariant
             )
             
@@ -253,7 +253,7 @@ fun ClosestPharmacyResultBottomSheet(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
@@ -308,10 +308,6 @@ fun ClosestPharmacyResultBottomSheet(
                     // Additional info (if available)
                     result.pharmacy.additionalInfo?.let { info ->
                         if (info.isNotEmpty()) {
-                            HorizontalDivider(
-                                color = MaterialTheme.colorScheme.outlineVariant
-                            )
-                            
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
