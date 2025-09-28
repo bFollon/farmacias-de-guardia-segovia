@@ -143,7 +143,7 @@ class ClosestPharmacyService(private val context: Context) {
                     // Handle ZBS areas for Segovia Rural
                     for (zbs in ZBS.availableZBS) {
                         val dutyLocation = DutyLocation.fromZBS(zbs)
-                        val onDutyPharmacies = getOnDutyPharmaciesForLocation(dutyLocation, date)
+                        val onDutyPharmacies = getOnDutyPharmaciesForLocation(dutyLocation)
                         
                         for ((pharmacy, timeSpan) in onDutyPharmacies) {
                             allOnDutyPharmacies.add(
@@ -157,7 +157,7 @@ class ClosestPharmacyService(private val context: Context) {
                 else -> {
                     // Handle regular regions
                     val dutyLocation = DutyLocation.fromRegion(region)
-                    val onDutyPharmacies = getOnDutyPharmaciesForLocation(dutyLocation, date)
+                    val onDutyPharmacies = getOnDutyPharmaciesForLocation(dutyLocation)
                     
                     for ((pharmacy, timeSpan) in onDutyPharmacies) {
                         allOnDutyPharmacies.add(
@@ -282,38 +282,31 @@ class ClosestPharmacyService(private val context: Context) {
     }
     
     /**
-     * Get on-duty pharmacies for a specific location and date
+     * Get on-duty pharmacies for a specific location using existing ScheduleService
      */
     private suspend fun getOnDutyPharmaciesForLocation(
-        dutyLocation: DutyLocation,
-        date: Date
+        dutyLocation: DutyLocation
     ): List<Pair<Pharmacy, DutyTimeSpan>> {
         val scheduleService = ScheduleService(context)
         
         return try {
+            // Use existing ScheduleService to load schedules
             val schedules = scheduleService.loadSchedules(dutyLocation)
-            val calendar = Calendar.getInstance().apply { time = date }
-            val now = date.time
             
-            // Find schedules that match the current date and are currently active
-            val onDutyPharmacies = mutableListOf<Pair<Pharmacy, DutyTimeSpan>>()
+            // Use existing ScheduleService to find current active schedule
+            val currentScheduleInfo = scheduleService.findCurrentSchedule(schedules)
             
-            for (schedule in schedules) {
-                // Check if this schedule is for the current date
-                if (schedule.date.matchesCalendar(calendar)) {
-                    // Check each shift to see if it's currently active
-                    for ((timeSpan, pharmacies) in schedule.shifts) {
-                        if (timeSpan.contains(schedule.date, now)) {
-                            // This shift is currently active
-                            for (pharmacy in pharmacies) {
-                                onDutyPharmacies.add(pharmacy to timeSpan)
-                            }
-                        }
-                    }
-                }
+            if (currentScheduleInfo != null) {
+                val (schedule, activeTimeSpan) = currentScheduleInfo
+                // Get pharmacies for the active time span
+                val pharmacies = schedule.shifts[activeTimeSpan] ?: emptyList()
+                
+                // Return pharmacies paired with their time span
+                pharmacies.map { pharmacy -> pharmacy to activeTimeSpan }
+            } else {
+                DebugConfig.debugPrint("📋 No current active schedule found for ${dutyLocation.name}")
+                emptyList()
             }
-            
-            onDutyPharmacies
         } catch (exception: Exception) {
             DebugConfig.debugPrint("❌ Failed to get schedules for ${dutyLocation.name}: ${exception.message}")
             emptyList()
