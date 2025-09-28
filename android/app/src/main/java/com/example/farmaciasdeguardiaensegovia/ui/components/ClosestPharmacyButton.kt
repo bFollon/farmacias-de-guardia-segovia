@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.farmaciasdeguardiaensegovia.services.CoordinateCache
-import com.example.farmaciasdeguardiaensegovia.ui.screens.ClosestPharmacyResultScreen
+import com.example.farmaciasdeguardiaensegovia.ui.screens.ClosestPharmacyResultBottomSheet
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
 import com.example.farmaciasdeguardiaensegovia.viewmodels.ClosestPharmacyViewModel
@@ -157,10 +157,10 @@ fun ClosestPharmacyButton(
         }
     }
     
-    // Show result screen when available
+    // Show result bottom sheet when available
     uiState.result?.let { result ->
         if (uiState.showingResult) {
-            ClosestPharmacyResultScreen(
+            ClosestPharmacyResultBottomSheet(
                 result = result,
                 onDismiss = viewModel::dismissResult
             )

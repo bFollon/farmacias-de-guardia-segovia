@@ -20,141 +20,123 @@ package com.example.farmaciasdeguardiaensegovia.ui.screens
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
-import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
-import com.example.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
 import java.net.URLEncoder
 
 /**
- * Screen that displays the closest pharmacy result
- * Equivalent to iOS ClosestPharmacyResultView
+ * Material 3 ModalBottomSheet that displays the closest pharmacy result
+ * Matches iOS content structure but uses Material 3 design system
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ClosestPharmacyResultScreen(
+fun ClosestPharmacyResultBottomSheet(
     result: ClosestPharmacyResult,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    var showingMapOptions by remember { mutableStateOf(false) }
+    val bottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Resultado") },
-                navigationIcon = {
-                    IconButton(onClick = onDismiss) {
-                        Icon(Icons.Default.Close, contentDescription = "Cerrar")
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = bottomSheetState
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 40.dp), // Extra bottom padding for gesture area
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Header
+            // Header with pharmacy icon and title
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(vertical = 16.dp)
+                modifier = Modifier.padding(bottom = 32.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.LocalPharmacy,
                     contentDescription = null,
-                    tint = IOSGreen,
-                    modifier = Modifier.size(60.dp)
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(64.dp)
                 )
                 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
                     text = "Farmacia más cercana",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center
                 )
                 
                 Text(
                     text = "De guardia y abierta ahora",
-                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
             }
             
-            Spacer(modifier = Modifier.height(20.dp))
-            
-            // Pharmacy info card
+            // Pharmacy information card
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-                ),
-                shape = RoundedCornerShape(12.dp)
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     // Pharmacy name
                     Text(
                         text = result.pharmacy.name,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
                     )
                     
                     // Distance and travel time
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Navigation,
                             contentDescription = null,
-                            tint = IOSBlue,
-                            modifier = Modifier.size(20.dp)
+                            tint = MaterialTheme.colorScheme.primary
                         )
                         
                         Column {
                             Text(
                                 text = result.formattedDistance,
-                                fontSize = 16.sp,
+                                style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.Medium
                             )
                             if (result.formattedTravelTime.isNotEmpty()) {
                                 Text(
                                     text = "🚗 ${result.formattedTravelTime}",
-                                    fontSize = 14.sp,
+                                    style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                             if (result.formattedWalkingTime.isNotEmpty()) {
                                 Text(
                                     text = "🚶 ${result.formattedWalkingTime}",
-                                    fontSize = 14.sp,
+                                    style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -164,39 +146,35 @@ fun ClosestPharmacyResultScreen(
                     // Address
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.LocationOn,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.size(20.dp)
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         
                         Text(
                             text = result.pharmacy.address,
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     }
                     
-                    // Phone
+                    // Phone (if available)
                     if (result.pharmacy.phone.isNotEmpty() && result.pharmacy.phone != "No disponible") {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Phone,
                                 contentDescription = null,
-                                tint = IOSGreen,
-                                modifier = Modifier.size(20.dp)
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             
                             Text(
                                 text = result.pharmacy.phone,
-                                fontSize = 16.sp,
-                                color = MaterialTheme.colorScheme.onSurface
+                                style = MaterialTheme.typography.bodyLarge
                             )
                         }
                     }
@@ -204,112 +182,100 @@ fun ClosestPharmacyResultScreen(
                     // Region/ZBS info
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Place,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.size(20.dp)
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         
                         Text(
                             text = result.regionDisplayName,
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     }
                     
                     // Duty time info
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Schedule,
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.size(20.dp)
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         
                         Text(
                             text = result.timeSpan.displayName,
-                            fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurface
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     }
                     
-                    // Additional info if available
+                    // Additional info (if available)
                     result.pharmacy.additionalInfo?.let { info ->
                         Row(
                             verticalAlignment = Alignment.Top,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Info,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.outline,
-                                modifier = Modifier.size(20.dp)
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             
                             Text(
                                 text = info,
-                                fontSize = 14.sp,
+                                style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                        }
-                    }
-                    
-                    Spacer(modifier = Modifier.height(8.dp))
-                    
-                    // Action buttons
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        // Open in Maps button
-                        Button(
-                            onClick = {
-                                openInMaps(context, result)
-                            },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = IOSBlue
-                            )
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Map,
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Abrir en Mapas")
-                        }
-                        
-                        // Call button (if phone available)
-                        if (result.pharmacy.phone.isNotEmpty() && result.pharmacy.phone != "No disponible") {
-                            Button(
-                                onClick = {
-                                    callPharmacy(context, result.pharmacy.phone)
-                                },
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = IOSGreen
-                                )
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Phone,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text("Llamar")
-                            }
                         }
                     }
                 }
             }
             
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(24.dp))
+            
+            // Action buttons
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Open in Maps button
+                Button(
+                    onClick = {
+                        openInMaps(context, result)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Map,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Abrir en Mapas")
+                }
+                
+                // Call button (if phone available)
+                if (result.pharmacy.phone.isNotEmpty() && result.pharmacy.phone != "No disponible") {
+                    FilledTonalButton(
+                        onClick = {
+                            callPharmacy(context, result.pharmacy.phone)
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Phone,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Llamar")
+                    }
+                }
+            }
         }
     }
 }
