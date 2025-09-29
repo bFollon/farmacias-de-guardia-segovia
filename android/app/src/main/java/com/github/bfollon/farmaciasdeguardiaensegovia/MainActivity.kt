@@ -22,6 +22,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
@@ -88,7 +89,7 @@ fun AppNavigation() {
                     // TODO: Navigate to settings
                 },
                 onAboutClick = {
-                    // TODO: Navigate to about
+                    navController.navigate("about")
                 }
             )
         }
@@ -151,6 +152,14 @@ fun AppNavigation() {
         composable("cantalejo_info") {
             CantalejoInfoScreen(
                 onDismiss = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable("about") {
+            AboutScreen(
+                onBack = {
                     navController.popBackStack()
                 }
             )

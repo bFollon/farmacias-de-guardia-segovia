@@ -49,7 +49,6 @@ fun MainScreen(
     onAboutClick: () -> Unit = {}
 ) {
     var showingSettings by remember { mutableStateOf(false) }
-    var showingAbout by remember { mutableStateOf(false) }
     
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -139,7 +138,7 @@ fun MainScreen(
             
             // About button
             TextButton(
-                onClick = { showingAbout = true }
+                onClick = onAboutClick
             ) {
                 Text(
                     text = "Acerca de",
@@ -173,39 +172,6 @@ fun MainScreen(
                 Text(
                     text = "Próximamente",
                     color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-            }
-        }
-    }
-    
-    // About bottom sheet (placeholder)
-    if (showingAbout) {
-        ModalBottomSheet(
-            onDismissRequest = { showingAbout = false }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Acerca de",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Farmacias de Guardia - Segovia",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Consulta las farmacias de guardia en la provincia de Segovia",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(32.dp))
             }
