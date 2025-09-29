@@ -1,0 +1,159 @@
+package com.github.bfollon.farmaciasdeguardiaensegovia
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        
+        // Initialize caches and cleanup expired entries
+        CoordinateCache.initialize(this)
+        RouteCache.initialize(this)
+        
+        // Cleanup expired cache entries on app start
+        CoordinateCache.cleanupExpiredEntries()
+        RouteCache.cleanupExpiredEntries()
+        
+        setContent {
+            FarmaciasDeGuardiaEnSegoviaTheme {
+                AppNavigation()
+            }
+        }
+    }
+}
+
+@Composable
+fun AppNavigation() {
+    val navController = rememberNavController()
+    
+    NavHost(
+        navController = navController,
+        startDestination = "splash"
+    ) {
+        composable("splash") {
+            SplashScreen(
+                onSplashFinished = {
+                    DebugConfig.debugPrint("Navigating from splash screen")
+                    navController.navigate("main") {
+                        popUpTo("splash") { inclusive = true }
+                    }
+                }
+            )
+        }
+        
+        composable("main") {
+            MainScreen(
+                onRegionSelected = { region ->
+                    when (region) {
+                        Region.Companion.segoviaCapital, Region.Companion.cuellar, Region.Companion.elEspinar -> {
+                            navController.navigate("schedule/${region.id}")
+                        }
+
+                        else -> {
+                            // TODO: Implement Segovia Rural region
+                        }
+                    }
+                },
+                onZBSSelectionRequested = {
+                    navController.navigate("zbs_selection")
+                },
+                onSettingsClick = {
+                    // TODO: Navigate to settings
+                },
+                onAboutClick = {
+                    // TODO: Navigate to about
+                }
+            )
+        }
+        
+        composable("schedule/{regionId}") { backStackEntry ->
+            val regionId = backStackEntry.arguments?.getString("regionId")
+            when (regionId) {
+                "segovia-capital", "cuellar", "el-espinar" -> {
+                    ScheduleScreen(
+                        locationId = regionId,
+                        onBack = {
+                            navController.popBackStack()
+                        },
+                        onNavigateToCantalejoInfo = {
+                            navController.navigate("cantalejo_info")
+                        }
+                    )
+                }
+
+                in ZBS.Companion.availableZBS.map { it.id } -> {
+                    ScheduleScreen(
+                        locationId = regionId,
+                        onBack = {
+                            navController.popBackStack()
+                        },
+                        onNavigateToCantalejoInfo = {
+                            navController.navigate("cantalejo_info")
+                        }
+                    )
+                }
+                else -> {
+                    // TODO: Handle other region IDs (only Segovia Rural remaining)
+                    Box(
+                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Region \"$regionId\" not implemented yet",
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+        }
+        
+        composable("zbs_selection") {
+            ZBSSelectionScreen(
+                onZBSSelected = { zbs ->
+                    // TODO: Navigate to ZBS schedule view
+                    navController.navigate("schedule/${zbs.id}")
+//                    navController.popBackStack()
+                },
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable("cantalejo_info") {
+            CantalejoInfoScreen(
+                onDismiss = {
+                    navController.popBackStack()
+                }
+            )
+        }
+    }
+}
