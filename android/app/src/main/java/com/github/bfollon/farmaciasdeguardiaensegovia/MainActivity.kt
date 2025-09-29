@@ -26,6 +26,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SettingsScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
@@ -86,7 +87,7 @@ fun AppNavigation() {
                     navController.navigate("zbs_selection")
                 },
                 onSettingsClick = {
-                    // TODO: Navigate to settings
+                    navController.navigate("settings")
                 },
                 onAboutClick = {
                     navController.navigate("about")
@@ -153,6 +154,17 @@ fun AppNavigation() {
             CantalejoInfoScreen(
                 onDismiss = {
                     navController.popBackStack()
+                }
+            )
+        }
+        
+        composable("settings") {
+            SettingsScreen(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onAboutClick = {
+                    navController.navigate("about")
                 }
             )
         }

@@ -369,3 +369,4 @@ private fun openEmail(context: Context, mailtoUrl: String) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mailtoUrl))
     context.startActivity(intent)
 }
+

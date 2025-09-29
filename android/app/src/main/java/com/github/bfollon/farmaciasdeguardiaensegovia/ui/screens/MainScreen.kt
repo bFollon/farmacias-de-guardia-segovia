@@ -48,8 +48,6 @@ fun MainScreen(
     onSettingsClick: () -> Unit = {},
     onAboutClick: () -> Unit = {}
 ) {
-    var showingSettings by remember { mutableStateOf(false) }
-    
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
@@ -67,7 +65,7 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(
-                    onClick = { showingSettings = true }
+                    onClick = onSettingsClick
                 ) {
                     Icon(
                         imageVector = Icons.Default.Settings,
@@ -149,32 +147,6 @@ fun MainScreen(
             }
             
             Spacer(modifier = Modifier.height(16.dp))
-        }
-    }
-    
-    // Settings bottom sheet (placeholder)
-    if (showingSettings) {
-        ModalBottomSheet(
-            onDismissRequest = { showingSettings = false }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Configuración",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Próximamente",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-            }
         }
     }
 }
