@@ -17,7 +17,6 @@
 
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,7 +29,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -42,9 +40,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
-    onAboutClick: () -> Unit
+    onAboutClick: () -> Unit,
+    onCacheStatusClick: () -> Unit,
+    onCacheRefreshClick: () -> Unit
 ) {
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
     
     Scaffold(
@@ -77,12 +76,8 @@ fun SettingsScreen(
         ) {
             // PDF Cache Section
             CachePDFSection(
-                onCheckUpdatesClick = {
-                    Toast.makeText(context, "Próximamente", Toast.LENGTH_SHORT).show()
-                },
-                onViewCacheStatusClick = {
-                    Toast.makeText(context, "Próximamente", Toast.LENGTH_SHORT).show()
-                }
+                onCheckUpdatesClick = onCacheRefreshClick,
+                onViewCacheStatusClick = onCacheStatusClick
             )
             
             // Information Section

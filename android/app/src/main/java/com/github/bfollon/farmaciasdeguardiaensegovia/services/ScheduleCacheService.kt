@@ -30,7 +30,7 @@ import java.io.File
  */
 class ScheduleCacheService(private val context: Context) {
     
-    private val cacheDir = File(context.cacheDir, "schedules")
+    private val cacheDir = File(context.filesDir, "schedules")
     private val json = Json { 
         ignoreUnknownKeys = true 
         encodeDefaults = false
@@ -57,7 +57,7 @@ class ScheduleCacheService(private val context: Context) {
         
         try {
             val metadata = json.decodeFromString<CacheMetadata>(metadataFile.readText())
-            val pdfFile = File(context.cacheDir, "pdfs/${location.associatedRegion.id}.pdf")
+            val pdfFile = File(context.filesDir, "pdfs/${location.associatedRegion.id}.pdf")
             
             // Check if PDF file exists and hasn't been modified since cache was created
             if (!pdfFile.exists()) {
@@ -128,7 +128,7 @@ class ScheduleCacheService(private val context: Context) {
             cacheFile.writeText(json.encodeToString(cachedData))
             
             // Save metadata
-            val pdfFile = File(context.cacheDir, "pdfs/${location.associatedRegion.id}.pdf")
+            val pdfFile = File(context.filesDir, "pdfs/${location.associatedRegion.id}.pdf")
             val metadata = CacheMetadata(
                 regionId = location.id,
                 scheduleCount = schedules.size,

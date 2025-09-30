@@ -23,6 +23,8 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheRefreshScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheStatusScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
@@ -165,6 +167,28 @@ fun AppNavigation() {
                 },
                 onAboutClick = {
                     navController.navigate("about")
+                },
+                onCacheStatusClick = {
+                    navController.navigate("cache_status")
+                },
+                onCacheRefreshClick = {
+                    navController.navigate("cache_refresh")
+                }
+            )
+        }
+        
+        composable("cache_status") {
+            CacheStatusScreen(
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        
+        composable("cache_refresh") {
+            CacheRefreshScreen(
+                onBack = {
+                    navController.popBackStack()
                 }
             )
         }

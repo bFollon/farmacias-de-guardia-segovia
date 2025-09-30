@@ -370,3 +370,4 @@ private fun openEmail(context: Context, mailtoUrl: String) {
     context.startActivity(intent)
 }
 
+

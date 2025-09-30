@@ -118,12 +118,13 @@ class PDFDownloadService(private val context: Context) {
     }
     
     /**
-     * Download a PDF file from URL and cache it locally
+     * Download a PDF file from URL and save it to persistent storage
      * @param url The URL to download from
      * @param fileName The filename to save as (e.g., "segovia-capital.pdf")
+     * @param forceDownload If true, downloads even if file exists (default: false)
      * @return The downloaded file, or null if download failed
      */
-    suspend fun downloadPDF(url: String, fileName: String): File? = withContext(Dispatchers.IO) {
+    suspend fun downloadPDF(url: String, fileName: String, forceDownload: Boolean = false): File? = withContext(Dispatchers.IO) {
         var lastException: Exception? = null
         
         // Retry logic for SSL handshake issues
@@ -131,17 +132,17 @@ class PDFDownloadService(private val context: Context) {
             try {
                 println("PDFDownloadService: Starting download from $url (attempt ${attempt + 1})")
                 
-                // Create cache directory if it doesn't exist
-                val cacheDir = File(context.cacheDir, "pdfs")
-                if (!cacheDir.exists()) {
-                    cacheDir.mkdirs()
+                // Create PDF storage directory in filesDir (persistent)
+                val pdfDir = File(context.filesDir, "pdfs")
+                if (!pdfDir.exists()) {
+                    pdfDir.mkdirs()
                 }
                 
-                val outputFile = File(cacheDir, fileName)
+                val outputFile = File(pdfDir, fileName)
                 
-                // Check if file exists and is recent (less than 1 hour old)
-                if (outputFile.exists() && (System.currentTimeMillis() - outputFile.lastModified()) < 3600000) {
-                    println("PDFDownloadService: Using cached file ${outputFile.absolutePath}")
+                // Skip download if file exists and forceDownload is false
+                if (outputFile.exists() && !forceDownload) {
+                    println("PDFDownloadService: Using existing file ${outputFile.absolutePath}")
                     return@withContext outputFile
                 }
                 
@@ -197,28 +198,46 @@ class PDFDownloadService(private val context: Context) {
     }
     
     /**
-     * Clear all cached PDF files
+     * Clear all PDF files from persistent storage
      */
     fun clearCache() {
-        val cacheDir = File(context.cacheDir, "pdfs")
-        if (cacheDir.exists()) {
-            val deletedFiles = cacheDir.listFiles()?.size ?: 0
-            cacheDir.deleteRecursively()
-            println("PDFDownloadService: Cleared $deletedFiles cached PDF files")
+        val pdfDir = File(context.filesDir, "pdfs")
+        if (pdfDir.exists()) {
+            val deletedFiles = pdfDir.listFiles()?.size ?: 0
+            pdfDir.deleteRecursively()
+            println("PDFDownloadService: Cleared $deletedFiles PDF files")
         }
     }
     
     /**
-     * Get cache info for debugging
+     * Get PDF storage info for debugging
      */
     fun getCacheInfo(): String {
-        val cacheDir = File(context.cacheDir, "pdfs")
-        if (!cacheDir.exists()) {
-            return "No cache directory"
+        val pdfDir = File(context.filesDir, "pdfs")
+        if (!pdfDir.exists()) {
+            return "No PDF directory"
         }
         
-        val files = cacheDir.listFiles() ?: emptyArray()
+        val files = pdfDir.listFiles() ?: emptyArray()
         val totalSize = files.sumOf { it.length() }
-        return "${files.size} cached files, ${totalSize / 1024} KB total"
+        return "${files.size} PDF files, ${totalSize / 1024} KB total"
+    }
+    
+    /**
+     * Check if a PDF file exists in storage
+     */
+    fun hasCachedFile(fileName: String): Boolean {
+        val pdfDir = File(context.filesDir, "pdfs")
+        val file = File(pdfDir, fileName)
+        return file.exists()
+    }
+    
+    /**
+     * Get the File object for a cached PDF (if it exists)
+     */
+    fun getCachedFile(fileName: String): File? {
+        val pdfDir = File(context.filesDir, "pdfs")
+        val file = File(pdfDir, fileName)
+        return if (file.exists()) file else null
     }
 }

@@ -42,7 +42,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFDownloadService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFProcessingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.utils.MapUtils.mergeWith
@@ -58,7 +58,7 @@ import kotlin.collections.minus
  */
 class PharmacyScheduleRepository private constructor(private val context: Context) {
 
-    private val pdfDownloadService = PDFDownloadService(context)
+    private val pdfCacheManager = PDFCacheManager.getInstance(context)
     private val pdfProcessingService = PDFProcessingService()
     private val cacheService = ScheduleCacheService(context)
 
@@ -111,12 +111,11 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         try {
             DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules from PDF for ${location.name}")
 
-            // Download the PDF file
-            val fileName = "${location.associatedRegion.id}.pdf"
-            val pdfFile = pdfDownloadService.downloadPDF(location.associatedRegion.pdfURL, fileName)
+            // Get the effective PDF file (cached or downloaded)
+            val pdfFile = pdfCacheManager.getEffectivePDFFile(location.associatedRegion)
 
             if (pdfFile == null) {
-                DebugConfig.debugError("PharmacyScheduleRepository: Failed to download PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
+                DebugConfig.debugError("PharmacyScheduleRepository: Failed to get PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
                 return emptyList()
             }
 
@@ -201,8 +200,9 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun clearAllCache() {
         schedulesCache = emptyMap()
-        pdfDownloadService.clearCache()
-        DebugConfig.debugPrint("PharmacyScheduleRepository: All caches cleared")
+        pdfCacheManager.clearCache()
+        cacheService.clearAllCache()
+        DebugConfig.debugPrint("PharmacyScheduleRepository: All caches cleared (including PDF cache)")
     }
 
     /**
@@ -210,7 +210,9 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun clearCacheForRegion(region: Region) {
         schedulesCache = schedulesCache - DutyLocation.Companion.fromRegion(region)
-        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name}")
+        pdfCacheManager.clearCache(region)
+        cacheService.clearRegionCache(DutyLocation.fromRegion(region))
+        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (including PDF cache)")
     }
 
     /**
