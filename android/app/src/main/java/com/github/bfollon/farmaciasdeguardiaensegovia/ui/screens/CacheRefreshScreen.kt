@@ -107,7 +107,7 @@ fun CacheRefreshScreen(
                 
                 // Region cards
                 items(regions) { region ->
-                    val state = viewModel.getStateForRegion(region.id)
+                    val state = refreshStates[region.id] ?: UpdateProgressState.Checking
                     CacheRefreshCard(region, state)
                 }
             }
