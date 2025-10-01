@@ -49,7 +49,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     ]
     
     // Pharmacy information lookup table for Segovia Rural
-    // TODO: Fill in the actual pharmacy details for each location
     private let pharmacyInfo: [String: (name: String, address: String, phone: String)] = [
         // Riaza-Sepúlveda ZBS pharmacies
         "RIAZA": (

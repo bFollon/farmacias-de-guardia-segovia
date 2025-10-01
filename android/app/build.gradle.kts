@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.farmaciasdeguardiaensegovia"
+    namespace = "com.github.bfollon.farmaciasdeguardiaensegovia"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.farmaciasdeguardiaensegovia"
+        applicationId = "com.github.bfollon.farmaciasdeguardiaensegovia"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -70,6 +70,9 @@ dependencies {
     
     // Serialization for data models
     implementation(libs.kotlinx.serialization.json)
+    
+    // Location services
+    implementation("com.google.android.gms:play-services-location:21.0.1")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

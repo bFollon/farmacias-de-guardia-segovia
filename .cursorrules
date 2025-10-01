@@ -17,6 +17,46 @@ Cross-platform pharmacy duty schedule app for Segovia, Spain. iOS app is complet
 - **Test frequently** - Ensure each change is testable and working
 - **Match iOS patterns** when migrating to Android
 
+## Collaborative Development Methodology
+- **Explain First**: Always explain what you plan to do before making any edits
+- **Request Approval**: Ask for explicit manual approval before implementing changes
+- **Small Increments**: All edits must be in short, testable increments
+- **Manual Testing**: Test each increment via manual testing and debug output
+- **Adjust as Needed**: Adjust approach based on results from each test
+
+### Development Process
+1. **Explain the planned change and reasoning**
+2. **Request explicit approval from user**
+3. **Implement the small, testable change**
+4. **Test and analyze debug output together**
+5. **Adjust approach based on results**
+6. **Repeat with next small increment**
+
+### Communication Format
+Always use this format for each increment:
+```
+## **[Increment Name] Plan**
+
+### **What I will do:**
+[Detailed explanation of the specific change]
+
+### **Why this approach:**
+[Reasoning behind the approach]
+
+### **Specific changes:**
+[Bullet points of exact changes to be made]
+
+**May I proceed with [specific action]?**
+```
+
+### Key Rules
+- NEVER make edits without explicit approval
+- Keep changes small and focused on single functionality
+- Always explain the reasoning behind decisions
+- Wait for user confirmation before proceeding
+- Test each increment thoroughly before moving to the next
+- Be prepared to adjust based on user feedback and test results
+
 ## Platform-Specific Guidelines
 
 ### iOS (Swift/SwiftUI) - STABLE, DO NOT MODIFY
