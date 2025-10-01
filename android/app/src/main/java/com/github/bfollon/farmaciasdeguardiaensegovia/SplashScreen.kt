@@ -133,69 +133,46 @@ fun SplashScreen(
 
     // Launch animations with iOS-matching timing
     LaunchedEffect(Unit) {
-        // Logo appears immediately (UI not blocked by loading)
-        logoVisible = true
+        val startTime = System.currentTimeMillis()
+        val minSplashTime = 3000L // Minimum 3 seconds for good UX
 
-        // Start PDF loading in truly background coroutine after a tiny delay to ensure UI is rendered
+        // Start PDF loading in background immediately
         launch {
             delay(50) // Small delay to ensure splash UI is rendered first
             splashViewModel.startBackgroundLoading()
         }
 
-        // Text appears after 0.5s (staggered)
+        // Staggered UI animations for polished look
+        logoVisible = true
         delay(500)
         textVisible = true
-
-        // Progress appears after 0.6s
         delay(100)
         progressVisible = true
-
-        // Regions appear after 0.7s (while progress is running)
         delay(100)
         regionsVisible = true
 
-        // No manual region animation - they are now tied to actual loading states
-        // Icons will animate automatically as regionLoadingStates changes
+        // Wait for loading to complete (suspends here until done or timeout)
+        splashViewModel.awaitLoadingCompletion()
+        DebugConfig.debugPrint("SplashScreen: Loading complete")
 
-        // Wait for sequential loading to complete
-        val startTime = System.currentTimeMillis()
-        val minSplashTime = 3000L // Minimum 3 seconds for good UX
-        val maxWaitTime = 15000L // Maximum 15 seconds to prevent hanging
-
-        // Wait for actual loading completion, respecting min/max times
-        while (System.currentTimeMillis() - startTime < maxWaitTime) {
-            delay(100)
-
-            val elapsedTime = System.currentTimeMillis() - startTime
-
-            // Check if Segovia Capital is actually loaded (the real indicator)
-            val segoviaCapitalCompleted = regionLoadingStates["Segovia Capital"] ?: false
-
-            // If Segovia Capital is completed and we've waited minimum time, we can proceed
-            if (segoviaCapitalCompleted && elapsedTime >= minSplashTime) {
-                DebugConfig.debugPrint("SplashScreen: Segovia Capital loaded, proceeding after ${elapsedTime}ms")
-                break
-            }
-
-            // Also check traditional isLoading state as backup (but with higher minimum time)
-            if (!isLoading && elapsedTime >= minSplashTime) {
-                DebugConfig.debugPrint("SplashScreen: isLoading=false, proceeding after ${elapsedTime}ms")
-                break
-            }
+        // Ensure minimum splash time for branding/UX
+        val elapsed = System.currentTimeMillis() - startTime
+        val remaining = maxOf(0, minSplashTime - elapsed)
+        if (remaining > 0) {
+            DebugConfig.debugPrint("SplashScreen: Waiting ${remaining}ms to meet minimum splash time")
+            delay(remaining)
         }
 
-        // If we hit max wait time, log it but proceed anyway
-        if (System.currentTimeMillis() - startTime >= maxWaitTime) {
-            DebugConfig.debugWarn("SplashScreen: Maximum wait time reached, proceeding anyway")
-        }
-
-        // Final progress to 100% if not already there (quick animation)
+        // Final progress animation to 100%
         if (progress.value < 1f) {
             progress.animateTo(1f, animationSpec = tween(200, easing = EaseOut))
         }
 
-        // Brief hold then navigate immediately
+        // Brief hold for smooth transition
         delay(200)
+
+        // Navigate to main screen
+        DebugConfig.debugPrint("SplashScreen: Navigating to main screen")
         onSplashFinished()
     }
 

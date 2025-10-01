@@ -34,8 +34,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 
 /**
  * ViewModel for managing splash screen state and background PDF loading
@@ -110,13 +112,44 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 if (e !is CancellationException) {
                     DebugConfig.debugError("SplashViewModel: Error during sequential loading", e)
                 }
-                // Still mark as complete to not block the UI
+            } finally {
+                // ALWAYS mark as complete, even on error - this ensures awaitLoadingCompletion() never hangs
                 withContext(Dispatchers.Main) {
                     _loadingProgress.value = 1f
                     _isLoading.value = false
                 }
             }
         }
+    }
+
+    /**
+     * Suspends until loading is complete or timeout is reached
+     * Returns immediately if loading is not started or already complete
+     * 
+     * @return true if loading completed normally, false if timed out
+     */
+    suspend fun awaitLoadingCompletion(): Boolean {
+        // If loading hasn't started or is already complete, return immediately
+        if (!_isLoading.value) {
+            DebugConfig.debugPrint("SplashViewModel: Loading already complete or not started")
+            return true
+        }
+        
+        DebugConfig.debugPrint("SplashViewModel: Waiting for loading to complete...")
+        
+        // Wait for isLoading to become false, with 60 second safety timeout
+        val completed = withTimeoutOrNull(60000L) {
+            _isLoading.first { !it }
+            true
+        } ?: false
+        
+        if (completed) {
+            DebugConfig.debugPrint("SplashViewModel: Loading completed successfully")
+        } else {
+            DebugConfig.debugWarn("SplashViewModel: Loading timeout after 60s - proceeding anyway")
+        }
+        
+        return completed
     }
 
     /**
