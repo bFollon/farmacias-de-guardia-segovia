@@ -82,9 +82,9 @@ class PDFDownloadService(private val context: Context) {
             }
             
             OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
                 .sslSocketFactory(sslContext.socketFactory, trustManager)
                 .hostnameVerifier(hostnameVerifier)
                 .retryOnConnectionFailure(true)
@@ -93,9 +93,9 @@ class PDFDownloadService(private val context: Context) {
             println("PDFDownloadService: Failed to create SSL-configured client, falling back to basic: ${e.message}")
             // Fallback to basic client
             OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build()
         }

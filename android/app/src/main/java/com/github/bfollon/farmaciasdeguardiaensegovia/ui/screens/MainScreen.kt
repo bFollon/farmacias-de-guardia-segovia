@@ -29,13 +29,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ClosestPharmacyButton
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
@@ -48,6 +51,14 @@ fun MainScreen(
     onSettingsClick: () -> Unit = {},
     onAboutClick: () -> Unit = {}
 ) {
+    // Check network status on screen load
+    var isOffline by remember { mutableStateOf(false) }
+    var showOfflineDialog by remember { mutableStateOf(false) }
+    
+    LaunchedEffect(Unit) {
+        isOffline = !NetworkMonitor.isOnline()
+    }
+    
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
@@ -59,6 +70,17 @@ fun MainScreen(
                 .padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Offline dialog (shown when card is tapped)
+            if (showOfflineDialog) {
+                OfflineDialog(
+                    onDismiss = { showOfflineDialog = false },
+                    onGoToSettings = {
+                        showOfflineDialog = false
+                        onSettingsClick()
+                    }
+                )
+            }
+            
             // Top bar with settings button
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -102,7 +124,19 @@ fun MainScreen(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
             
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // Offline warning card (appears below subtitle when offline)
+            if (isOffline) {
+                OfflineWarningCard(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    isClickable = true,
+                    onClick = { showOfflineDialog = true }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+            
+            Spacer(modifier = Modifier.height(16.dp))
             
             // Closest pharmacy finder
             ClosestPharmacyButton(
@@ -149,6 +183,66 @@ fun MainScreen(
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
+}
+
+/**
+ * Dialog explaining offline mode with option to navigate to settings
+ */
+@Composable
+fun OfflineDialog(
+    onDismiss: () -> Unit,
+    onGoToSettings: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        icon = {
+            Text(
+                text = "⚠️",
+                fontSize = 40.sp
+            )
+        },
+        title = {
+            Text(
+                text = "Modo sin conexión",
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold
+            )
+        },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = "No hay conexión a Internet. La aplicación está usando datos almacenados localmente.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "Los horarios mostrados corresponden a la última actualización descargada.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onGoToSettings) {
+                Text(
+                    text = "Ir a Ajustes",
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(
+                    text = "Cerrar",
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        },
+        containerColor = MaterialTheme.colorScheme.surface,
+        iconContentColor = Color(0xFFFFA726),
+        titleContentColor = MaterialTheme.colorScheme.onSurface,
+        textContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    )
 }
 
 @Composable

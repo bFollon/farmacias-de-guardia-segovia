@@ -21,6 +21,7 @@ import android.content.Context
 import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyProgress
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
@@ -52,7 +53,8 @@ data class ClosestPharmacyUiState(
     val result: ClosestPharmacyResult? = null,
     val errorMessage: String? = null,
     val showingResult: Boolean = false,
-    val retryCount: Int = 0
+    val retryCount: Int = 0,
+    val progress: ClosestPharmacyProgress? = null
 )
 
 /**
@@ -68,6 +70,15 @@ class ClosestPharmacyViewModel(private val context: Context) : ViewModel() {
     private val closestPharmacyService = ClosestPharmacyService(context)
     
     private val maxRetries = 3
+    
+    init {
+        // Collect progress updates from the service
+        viewModelScope.launch {
+            closestPharmacyService.progress.collect { progress ->
+                _uiState.value = _uiState.value.copy(progress = progress)
+            }
+        }
+    }
     
     /**
      * Start the search for the closest pharmacy
@@ -214,7 +225,14 @@ class ClosestPharmacyViewModel(private val context: Context) : ViewModel() {
             SearchStep.Idle -> ""
             SearchStep.GettingLocation -> "Obteniendo ubicación..."
             SearchStep.FindingPharmacies -> "Buscando farmacias de guardia..."
-            SearchStep.CalculatingDistances -> "Calculando distancias..."
+            SearchStep.CalculatingDistances -> {
+                val progress = _uiState.value.progress
+                if (progress != null) {
+                    "Comprobando ${progress.current}/${progress.total} farmacias..."
+                } else {
+                    "Calculando distancias..."
+                }
+            }
             SearchStep.Completed -> "¡Completado!"
         }
     }

@@ -23,6 +23,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PDFVersion
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -87,6 +88,14 @@ class PDFCacheManager private constructor(private val context: Context) {
             DebugConfig.debugError("Failed to decode version data", e)
             null
         }
+    }
+    
+    /**
+     * Get the download date for a cached region
+     * Returns the timestamp when the PDF was downloaded, or null if not cached
+     */
+    fun getDownloadDate(region: Region): Long? {
+        return getStoredVersion(region)?.downloadDate
     }
     
     /**
@@ -273,7 +282,22 @@ class PDFCacheManager private constructor(private val context: Context) {
      * Get the effective PDF file (cached if available and up-to-date, otherwise download)
      */
     suspend fun getEffectivePDFFile(region: Region): File? {
-        // Check if we have a valid cached version
+        // Check if we're offline first
+        val isOnline = NetworkMonitor.isOnline()
+        
+        if (!isOnline) {
+            // Offline: use cache if available, otherwise fail immediately
+            val cachedFile = cachedFileURL(region)
+            if (cachedFile != null) {
+                DebugConfig.debugPrint("📡 PDFCacheManager: Offline - using cached file for ${region.name}")
+                return cachedFile
+            } else {
+                DebugConfig.debugWarn("📡 PDFCacheManager: Offline and no cache available for ${region.name}")
+                return null
+            }
+        }
+        
+        // Online: check if we have a valid cached version
         val isCacheValid = isCacheUpToDate(region)
         
         return if (isCacheValid) {

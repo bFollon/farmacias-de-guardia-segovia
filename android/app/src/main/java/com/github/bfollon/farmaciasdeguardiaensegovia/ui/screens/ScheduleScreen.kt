@@ -34,6 +34,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.EventBusy
@@ -63,14 +64,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
@@ -103,6 +113,12 @@ fun ScheduleScreen(
     
     var showDatePicker by remember { mutableStateOf(false) }
     var showInfo by remember { mutableStateOf(false) }
+    
+    // Check network status
+    var isOffline by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        isOffline = !NetworkMonitor.isOnline()
+    }
     
     Scaffold(
         topBar = {
@@ -146,7 +162,7 @@ fun ScheduleScreen(
                     )
                 }
                 uiState.schedules.isEmpty() -> {
-                    EmptyContent()
+                    EmptyContent(isOffline = isOffline)
                 }
                 else -> {
                     ScheduleContent(
@@ -253,32 +269,62 @@ private fun ErrorContent(
 }
 
 @Composable
-private fun EmptyContent() {
+private fun EmptyContent(isOffline: Boolean = false) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
+            modifier = Modifier.padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.EventBusy,
-                contentDescription = "Sin horarios",
-                modifier = Modifier.size(64.dp),
-                tint = MaterialTheme.colorScheme.outline
-            )
-            Text(
-                text = "No hay farmacias de guardia programadas",
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center
-            )
-            Text(
-                text = "Intente refrescar o seleccione una fecha diferente",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.outline,
-                textAlign = TextAlign.Center
-            )
+            if (isOffline) {
+                // Offline + no cache scenario
+                Icon(
+                    imageVector = Icons.Default.CloudOff,
+                    contentDescription = "Sin conexión",
+                    modifier = Modifier.size(64.dp),
+                    tint = androidx.compose.ui.graphics.Color(0xFFFFA726) // Amber warning color
+                )
+                Text(
+                    text = "Sin conexión y sin datos almacenados",
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "No hay conexión a Internet y no hay datos descargados para esta región.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "Conecte a Internet e intente refrescar para descargar los horarios.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            } else {
+                // Normal empty state (no schedules in cache)
+                Icon(
+                    imageVector = Icons.Default.EventBusy,
+                    contentDescription = "Sin horarios",
+                    modifier = Modifier.size(64.dp),
+                    tint = MaterialTheme.colorScheme.outline
+                )
+                Text(
+                    text = "No hay farmacias de guardia programadas",
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "Intente refrescar o seleccione una fecha diferente",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.outline,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
@@ -402,16 +448,106 @@ private fun ScheduleContent(
         
         // Disclaimer and PDF link
         item {
+            // Get pharmacy info for error reporting - works for both current and selected date views
+            val (pharmacy, shift) = when {
+                // Selected date view - get first pharmacy from the first shift
+                uiState.selectedDate != null && uiState.allShiftsForSelectedDate.isNotEmpty() -> {
+                    val firstShift = uiState.allShiftsForSelectedDate.firstOrNull()
+                    val firstPharmacy = firstShift?.second?.firstOrNull()
+                    val shiftName = firstShift?.first?.let { timeSpan ->
+                        when {
+                            timeSpan == DutyTimeSpan.FullDay -> "24 horas"
+                            timeSpan == DutyTimeSpan.CapitalDay -> "Diurno"
+                            timeSpan == DutyTimeSpan.CapitalNight -> "Nocturno"
+                            else -> timeSpan.displayName
+                        }
+                    }
+                    Pair(firstPharmacy, shiftName)
+                }
+                // Current schedule view
+                else -> {
+                    val currentPharmacy = uiState.currentSchedule?.shifts?.get(uiState.activeTimeSpan)?.firstOrNull()
+                    val shiftName = uiState.activeTimeSpan?.let { timeSpan ->
+                        when {
+                            timeSpan == DutyTimeSpan.FullDay -> "24 horas"
+                            timeSpan == DutyTimeSpan.CapitalDay -> "Diurno"
+                            timeSpan == DutyTimeSpan.CapitalNight -> "Nocturno"
+                            else -> timeSpan.displayName
+                        }
+                    }
+                    Pair(currentPharmacy, shiftName)
+                }
+            }
+            
             DisclaimerCard(
                 location = uiState.location!!, // TODO fix
+                currentPharmacy = pharmacy,
+                shiftName = shift,
                 onViewPDF = onViewPDF
             )
+        }
+        
+        // Last updated indicator (subtle cache age footnote at bottom)
+        if (uiState.downloadDate != null) {
+            item {
+                LastUpdatedIndicator(downloadDate = uiState.downloadDate)
+            }
         }
 
 
     }
 
     ShiftInfoModalSheet(uiState.activeTimeSpan, isVisible = showShiftInfo, onDismiss = { showShiftInfo = false })
+}
+
+/**
+ * Subtle footnote indicator showing when the cached data was last updated
+ * Shows relative time for recent updates, absolute date for older ones
+ * Positioned at the very bottom of the schedule like a footnote
+ */
+@Composable
+private fun LastUpdatedIndicator(downloadDate: Long) {
+    val formattedDate = remember(downloadDate) {
+        val now = System.currentTimeMillis()
+        val diff = now - downloadDate
+        val daysDiff = TimeUnit.MILLISECONDS.toDays(diff)
+        
+        when {
+            daysDiff == 0L -> {
+                val hoursDiff = TimeUnit.MILLISECONDS.toHours(diff)
+                if (hoursDiff == 0L) {
+                    "Actualizado hace menos de una hora"
+                } else if (hoursDiff == 1L) {
+                    "Actualizado hace 1 hora"
+                } else {
+                    "Actualizado hace $hoursDiff horas"
+                }
+            }
+            daysDiff == 1L -> "Actualizado ayer"
+            daysDiff < 7L -> "Actualizado hace $daysDiff días"
+            else -> {
+                // For older updates, show absolute date
+                val formatter = SimpleDateFormat("d 'de' MMMM, yyyy", Locale("es", "ES"))
+                "Actualizado el ${formatter.format(Date(downloadDate))}"
+            }
+        }
+    }
+    
+    // Footnote style at bottom - centered and very subtle
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp, bottom = 8.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "📥 $formattedDate",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+            fontSize = 11.sp,
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
 @Composable
@@ -494,8 +630,12 @@ private fun formatSelectedDate(calendar: Calendar): String {
 @Composable
 private fun DisclaimerCard(
     location: DutyLocation,
+    currentPharmacy: Pharmacy? = null,
+    shiftName: String? = null,
     onViewPDF: (String) -> Unit
 ) {
+    val context = LocalContext.current
+    
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -522,11 +662,31 @@ private fun DisclaimerCard(
             ) {
                 Text("Calendario de Guardias - ${location.associatedRegion.name}")
             }
-            Text(
-                text = "¿Ha encontrado algún error? Repórtelo aquí",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.outline
-            )
+            
+            // Error reporting link - always clickable, different body based on whether there's a pharmacy
+            TextButton(
+                onClick = {
+                    val emailBody = if (currentPharmacy != null && shiftName != null) {
+                        // Pharmacy exists - report error with pharmacy details
+                        AppConfig.EmailLinks.currentScheduleContentErrorBody(
+                            shiftName = shiftName,
+                            pharmacyName = currentPharmacy.name,
+                            pharmacyAddress = currentPharmacy.address
+                        )
+                    } else {
+                        // No pharmacy assigned - report missing pharmacy
+                        AppConfig.EmailLinks.currentNoPharmacyAssignedErrorBody(
+                            location = location.name
+                        )
+                    }
+                    val mailtoUri = AppConfig.EmailLinks.errorReport(body = emailBody)
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mailtoUri))
+                    context.startActivity(intent)
+                },
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text("¿Ha encontrado algún error? Repórtelo aquí")
+            }
         }
     }
 }

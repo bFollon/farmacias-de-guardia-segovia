@@ -25,6 +25,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingDemo
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingTest
@@ -72,6 +73,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     val scrapedPDFURLs: StateFlow<List<PDFURLScrapingService.ScrapedPDFData>> =
         _scrapedPDFURLs.asStateFlow()
 
+    private val _isOffline = MutableStateFlow(false)
+    val isOffline: StateFlow<Boolean> = _isOffline.asStateFlow()
+
     // Sequential regions to load (in order) - will be populated after scraping
     private var regionsToLoad = emptyList<Region>()
 
@@ -93,10 +97,26 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             try {
                 // Move all repository work to IO dispatcher
                 withContext(Dispatchers.IO) {
-                    // First, scrape PDF URLs to check for updates
-                    scrapePDFURLs()
+                    // Check network status first
+                    val isOnline = NetworkMonitor.isOnline()
+                    val networkState = NetworkMonitor.getNetworkStateDescription()
+                    
+                    if (!isOnline) {
+                        DebugConfig.debugPrint("SplashViewModel: ⚠️ Device is offline ($networkState) - skipping network operations")
+                        withContext(Dispatchers.Main) {
+                            _isOffline.value = true
+                        }
+                    } else {
+                        DebugConfig.debugPrint("SplashViewModel: ✅ Device is online ($networkState) - proceeding with updates")
+                        withContext(Dispatchers.Main) {
+                            _isOffline.value = false
+                        }
+                        
+                        // First, scrape PDF URLs to check for updates (only when online)
+                        scrapePDFURLs()
+                    }
 
-                    // Now that scraping is complete, populate regions with scraped URLs
+                    // Now populate regions with scraped URLs (or hardcoded URLs if offline)
                     regionsToLoad = listOf(
                         Region.Companion.segoviaCapital,
                         Region.Companion.cuellar,
@@ -104,7 +124,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                         Region.Companion.segoviaRural
                     )
 
-                    // Then load regions sequentially
+                    // Then load regions sequentially (will use cache if offline)
                     loadRegionsSequentially()
                 }
             } catch (e: Exception) {

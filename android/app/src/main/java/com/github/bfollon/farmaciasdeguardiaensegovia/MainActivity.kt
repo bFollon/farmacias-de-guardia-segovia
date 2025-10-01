@@ -21,6 +21,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheRefreshScreen
@@ -36,6 +37,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        
+        // Initialize network monitor
+        NetworkMonitor.initialize(this)
         
         // Initialize caches and cleanup expired entries
         CoordinateCache.initialize(this)

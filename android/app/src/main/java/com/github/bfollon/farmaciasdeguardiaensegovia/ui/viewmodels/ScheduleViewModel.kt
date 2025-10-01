@@ -24,6 +24,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,6 +41,7 @@ class ScheduleViewModel(
 ) : ViewModel() {
     
     private val scheduleService = ScheduleService(context)
+    private val pdfCacheManager = PDFCacheManager.getInstance(context)
     
     // Find the region by ID
     private val location = DutyLocation.Companion.fromId(locationId)
@@ -53,7 +55,8 @@ class ScheduleViewModel(
         val allShiftsForSelectedDate: List<Pair<DutyTimeSpan, List<Pharmacy>>> = emptyList(),
         val location: DutyLocation? = null,
         val error: String? = null,
-        val formattedDateTime: String = ""
+        val formattedDateTime: String = "",
+        val downloadDate: Long? = null
     )
     
     private val _uiState = MutableStateFlow(ScheduleUiState())
@@ -83,12 +86,16 @@ class ScheduleViewModel(
                 // Find current schedule and active timespan
                 val currentInfo = scheduleService.findCurrentSchedule(schedules)
                 
+                // Get download date for cache age indicator
+                val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
+                
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     schedules = schedules,
                     currentSchedule = currentInfo?.first,
                     activeTimeSpan = currentInfo?.second,
-                    formattedDateTime = currentDateTime
+                    formattedDateTime = currentDateTime,
+                    downloadDate = downloadDate
                 )
                 
             } catch (e: Exception) {

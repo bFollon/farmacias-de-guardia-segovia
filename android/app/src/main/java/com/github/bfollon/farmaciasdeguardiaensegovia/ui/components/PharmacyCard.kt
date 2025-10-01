@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
+import java.net.URLEncoder
 
 /**
  * Component for displaying pharmacy information
@@ -143,8 +144,8 @@ fun PharmacyCard(
                     color = MaterialTheme.colorScheme.primary,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
-                        val intent =
-                            Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=${pharmacy.address}"))
+                        val encodedQuery = buildMapsQuery(pharmacy.name, pharmacy.address)
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$encodedQuery"))
                         context.startActivity(intent)
                     }
                 )
@@ -199,4 +200,26 @@ fun PharmacyCard(
             }
         }
     }
+}
+
+/**
+ * Build a Google Maps query with smart location context
+ * Checks if "Segovia" and "Spain" are present and only appends if missing
+ */
+private fun buildMapsQuery(pharmacyName: String, address: String): String {
+    // Build query starting with pharmacy name and address
+    var query = "$pharmacyName, $address"
+    
+    // Check if address already contains "Segovia" (case-insensitive)
+    if (!address.contains("Segovia", ignoreCase = true)) {
+        query += ", Segovia"
+    }
+    
+    // Check if address already contains "Spain" (case-insensitive)
+    if (!address.contains("Spain", ignoreCase = true)) {
+        query += ", Spain"
+    }
+    
+    // URL-encode the final query
+    return URLEncoder.encode(query, "UTF-8")
 }

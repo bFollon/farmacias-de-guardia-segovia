@@ -27,8 +27,20 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
 import kotlin.collections.map
+
+/**
+ * Progress information for closest pharmacy search
+ */
+data class ClosestPharmacyProgress(
+    val current: Int,
+    val total: Int,
+    val pharmacyName: String? = null
+)
 
 /**
  * Result of finding the closest pharmacy
@@ -96,6 +108,10 @@ class ClosestPharmacyService(private val context: Context) {
     private var cachedResult: ClosestPharmacyResult? = null
     private var cachedLocation: Location? = null
     private var cachedDate: Date? = null
+    
+    // Progress tracking for UI
+    private val _progress = MutableStateFlow<ClosestPharmacyProgress?>(null)
+    val progress: StateFlow<ClosestPharmacyProgress?> = _progress.asStateFlow()
     
     companion object {
         private const val CACHE_DISTANCE_THRESHOLD = 500.0 // 500 meters (same as iOS)
@@ -210,9 +226,17 @@ class ClosestPharmacyService(private val context: Context) {
         
         // Calculate driving routes to all pharmacies
         val routeResults = mutableListOf<Pair<ClosestPharmacyResult, Double>>()
+        val totalPharmacies = pharmacyCoordinates.size
         
-        for (pharmacyWithCoords in pharmacyCoordinates) {
-            DebugConfig.debugPrint("🚗 Calculating route to: ${pharmacyWithCoords.context.pharmacy.name}")
+        for ((index, pharmacyWithCoords) in pharmacyCoordinates.withIndex()) {
+            // Update progress for UI
+            _progress.value = ClosestPharmacyProgress(
+                current = index + 1,
+                total = totalPharmacies,
+                pharmacyName = pharmacyWithCoords.context.pharmacy.name
+            )
+            
+            DebugConfig.debugPrint("🚗 Calculating route to: ${pharmacyWithCoords.context.pharmacy.name} (${index + 1}/$totalPharmacies)")
             
             val routeResult = RoutingService.calculateDrivingRoute(userLocation, pharmacyWithCoords.coordinates)
             if (routeResult != null) {
@@ -231,6 +255,9 @@ class ClosestPharmacyService(private val context: Context) {
                 DebugConfig.debugPrint("   ❌ Could not calculate route to: ${pharmacyWithCoords.context.pharmacy.name}")
             }
         }
+        
+        // Clear progress when done
+        _progress.value = null
         
         // Sort by driving distance and log top candidates
         routeResults.sortBy { it.second }

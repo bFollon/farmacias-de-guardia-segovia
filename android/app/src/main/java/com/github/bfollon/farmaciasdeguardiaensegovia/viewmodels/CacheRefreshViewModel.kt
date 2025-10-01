@@ -22,6 +22,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,6 +43,9 @@ class CacheRefreshViewModel(application: Application) : AndroidViewModel(applica
     private val _isCompleted = MutableStateFlow(false)
     val isCompleted: StateFlow<Boolean> = _isCompleted.asStateFlow()
     
+    private val _wasOffline = MutableStateFlow(false)
+    val wasOffline: StateFlow<Boolean> = _wasOffline.asStateFlow()
+    
     private val regions = listOf(
         Region.segoviaCapital,
         Region.cuellar,
@@ -58,7 +62,21 @@ class CacheRefreshViewModel(application: Application) : AndroidViewModel(applica
      */
     private fun startRefresh() {
         viewModelScope.launch {
-            // Initialize all regions as pending
+            // Check network status first
+            val isOnline = NetworkMonitor.isOnline()
+            
+            if (!isOnline) {
+                // Offline: Set all regions to error state immediately
+                val offlineStates = regions.associate { 
+                    it.id to UpdateProgressState.Error("Sin conexión a Internet")
+                }
+                _refreshStates.value = offlineStates
+                _wasOffline.value = true
+                _isCompleted.value = true
+                return@launch
+            }
+            
+            // Online: Initialize all regions as pending
             val pendingStates = regions.associate { it.id to UpdateProgressState.Checking }
             _refreshStates.value = pendingStates
             

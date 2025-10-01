@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.SplashViewModel
 import kotlinx.coroutines.delay
@@ -52,6 +53,7 @@ fun SplashScreen(
     val loadingProgress by splashViewModel.loadingProgress.collectAsState()
     val isLoading by splashViewModel.isLoading.collectAsState()
     val currentLoadingRegion by splashViewModel.currentLoadingRegion.collectAsState()
+    val isOffline by splashViewModel.isOffline.collectAsState()
 
     // Animation states
     var logoVisible by remember { mutableStateOf(false) }
@@ -234,7 +236,9 @@ fun SplashScreen(
             // Region icons with animated emoji progression
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.alpha(regionsAlpha)
+                modifier = Modifier
+                    .alpha(regionsAlpha)
+                    .padding(bottom = if (isOffline) 16.dp else 0.dp)
             ) {
                 regions.forEach { region ->
                     RegionIconView(
@@ -242,6 +246,16 @@ fun SplashScreen(
                         modifier = Modifier.size(48.dp)
                     )
                 }
+            }
+            
+            // Offline warning card (appears below icons when offline)
+            if (isOffline) {
+                OfflineWarningCard(
+                    modifier = Modifier
+                        .alpha(regionsAlpha)
+                        .padding(horizontal = 32.dp),
+                    isClickable = false
+                )
             }
         }
     }

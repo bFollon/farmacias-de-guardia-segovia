@@ -52,6 +52,7 @@ fun CacheRefreshScreen(
 ) {
     val refreshStates by viewModel.refreshStates.collectAsState()
     val isCompleted by viewModel.isCompleted.collectAsState()
+    val wasOffline by viewModel.wasOffline.collectAsState()
     
     val regions = listOf(
         Region.segoviaCapital,
@@ -114,7 +115,7 @@ fun CacheRefreshScreen(
             
             // Completion view (appears at bottom when done)
             AnimatedVisibility(visible = isCompleted) {
-                CompletionView()
+                CompletionView(wasOffline = wasOffline)
             }
         }
     }
@@ -223,7 +224,7 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
  * Completion view shown when all updates are complete
  */
 @Composable
-private fun CompletionView() {
+private fun CompletionView(wasOffline: Boolean = false) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -236,26 +237,51 @@ private fun CompletionView() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = null,
-                tint = Color(0xFF66BB6A), // Green
-                modifier = Modifier.size(48.dp)
-            )
-            
-            Text(
-                text = "¡Actualización Completada!",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-            
-            Text(
-                text = "Todos los PDFs han sido comprobados",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
+            if (wasOffline) {
+                // Offline - show error state
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = null,
+                    tint = Color(0xFFFFA726), // Amber warning
+                    modifier = Modifier.size(48.dp)
+                )
+                
+                Text(
+                    text = "Sin conexión a Internet",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                
+                Text(
+                    text = "No se pudo actualizar la caché. Conecte a Internet e intente de nuevo.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            } else {
+                // Online - show success state
+                Icon(
+                    imageVector = Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    tint = Color(0xFF66BB6A), // Green
+                    modifier = Modifier.size(48.dp)
+                )
+                
+                Text(
+                    text = "¡Actualización Completada!",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                
+                Text(
+                    text = "Todos los PDFs han sido comprobados",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
