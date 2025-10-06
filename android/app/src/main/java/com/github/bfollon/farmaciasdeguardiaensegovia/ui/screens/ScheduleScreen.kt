@@ -18,6 +18,7 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
 import android.content.Intent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -679,7 +680,7 @@ private fun DisclaimerCard(
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
                 text = "Aviso",
@@ -691,16 +692,21 @@ private fun DisclaimerCard(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.outline
             )
-            TextButton(
-                onClick = { onViewPDF(location.associatedRegion.pdfURL) },
-                contentPadding = PaddingValues(0.dp)
-            ) {
-                Text("Calendario de Guardias - ${location.associatedRegion.name}")
-            }
+            Text(
+                text = "Calendario de Guardias - ${location.associatedRegion.name}",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.clickable {
+                    onViewPDF(location.associatedRegion.pdfURL)
+                }
+            )
             
             // Error reporting link - always clickable, different body based on whether there's a pharmacy
-            TextButton(
-                onClick = {
+            Text(
+                text = "¿Ha encontrado algún error? Repórtelo aquí",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.clickable {
                     val emailBody = if (currentPharmacy != null && shiftName != null) {
                         // Pharmacy exists - report error with pharmacy details
                         AppConfig.EmailLinks.currentScheduleContentErrorBody(
@@ -717,11 +723,8 @@ private fun DisclaimerCard(
                     val mailtoUri = AppConfig.EmailLinks.errorReport(body = emailBody)
                     val intent = Intent(Intent.ACTION_VIEW, mailtoUri.toUri())
                     context.startActivity(intent)
-                },
-                contentPadding = PaddingValues(0.dp)
-            ) {
-                Text("¿Ha encontrado algún error? Repórtelo aquí")
-            }
+                }
+            )
         }
     }
 }
