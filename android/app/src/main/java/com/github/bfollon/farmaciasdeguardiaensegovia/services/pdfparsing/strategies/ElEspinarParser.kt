@@ -121,7 +121,7 @@ class ElEspinarParser : PDFParsingStrategy {
                     }
 
                     hasDates(line) -> {
-                        Pair(pharmacyKey, extractDatesFromLine(line))
+                        Pair(pharmacyKey, dates + extractDatesFromLine(line))
                     }
 
                     else -> {
