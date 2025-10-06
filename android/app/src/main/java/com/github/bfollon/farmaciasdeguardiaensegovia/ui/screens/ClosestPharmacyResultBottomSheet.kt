@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
 import java.net.URLEncoder
+import androidx.core.net.toUri
 
 /**
  * Material 3 ModalBottomSheet that displays the closest pharmacy result
@@ -161,7 +163,7 @@ fun ClosestPharmacyResultBottomSheet(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Icon(
-                                imageVector = Icons.Default.DirectionsWalk,
+                                imageVector = Icons.AutoMirrored.Filled.DirectionsWalk,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier.size(20.dp)
@@ -385,14 +387,14 @@ private fun openInMaps(context: Context, result: ClosestPharmacyResult) {
     val encodedQuery = URLEncoder.encode(query, "UTF-8")
     
     // Try to open in Google Maps first, fallback to generic maps intent
-    val googleMapsIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$encodedQuery"))
+    val googleMapsIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
     googleMapsIntent.setPackage("com.google.android.apps.maps")
     
     if (googleMapsIntent.resolveActivity(context.packageManager) != null) {
         context.startActivity(googleMapsIntent)
     } else {
         // Fallback to generic maps intent
-        val genericMapsIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$encodedQuery"))
+        val genericMapsIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
         context.startActivity(genericMapsIntent)
     }
 }

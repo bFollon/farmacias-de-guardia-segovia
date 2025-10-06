@@ -18,7 +18,6 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,16 +42,15 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -62,17 +60,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.concurrent.TimeUnit
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
@@ -85,11 +79,12 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.TimeZone
-import kotlin.collections.forEach
-import kotlin.collections.get
-import kotlin.collections.isNotEmpty
+import java.util.concurrent.TimeUnit
 
 /**
  * Main schedule screen showing pharmacy schedules for Segovia Capital
@@ -208,7 +203,7 @@ fun ScheduleScreen(
                     ScheduleContent(
                         uiState = uiState,
                         onViewPDF = { url ->
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
                             context.startActivity(intent)
                         },
                         onNavigateToCantalejoInfo = onNavigateToCantalejoInfo
@@ -720,7 +715,7 @@ private fun DisclaimerCard(
                         )
                     }
                     val mailtoUri = AppConfig.EmailLinks.errorReport(body = emailBody)
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mailtoUri))
+                    val intent = Intent(Intent.ACTION_VIEW, mailtoUri.toUri())
                     context.startActivity(intent)
                 },
                 contentPadding = PaddingValues(0.dp)
