@@ -22,6 +22,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -58,7 +60,7 @@ fun ClosestPharmacyResultBottomSheet(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
+                .verticalScroll(rememberScrollState())
                 .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 40.dp), // Extra bottom padding for gesture area
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
