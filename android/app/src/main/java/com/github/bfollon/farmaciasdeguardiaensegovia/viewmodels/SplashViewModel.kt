@@ -23,6 +23,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
+import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
@@ -47,6 +48,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 class SplashViewModel(private val context: Context) : ViewModel() {
 
     private val repository by lazy { PharmacyScheduleRepository.Companion.getInstance(context) }
+    private val urlRepository by lazy { PDFURLRepository.getInstance(context) }
 
     // Loading states for each region (in sequential order)
     private val _regionLoadingStates = MutableStateFlow(
@@ -112,11 +114,16 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                             _isOffline.value = false
                         }
                         
-                        // First, scrape PDF URLs to check for updates (only when online)
-                        scrapePDFURLs()
+                        // First, initialize PDF URL repository (scrape and validate URLs)
+                        initializeURLRepository()
                     }
 
-                    // Now populate regions with scraped URLs (or hardcoded URLs if offline)
+                    // Set up the URL provider for Region objects
+                    Region.setURLProvider { regionName ->
+                        urlRepository.getURL(regionName)
+                    }
+
+                    // Now populate regions with validated URLs
                     regionsToLoad = listOf(
                         Region.Companion.segoviaCapital,
                         Region.Companion.cuellar,
@@ -173,7 +180,30 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     }
 
     /**
-     * Scrape PDF URLs from the stable cofsegovia.com page
+     * Initialize PDF URL repository - scrape, validate, and persist URLs
+     * This runs at startup before loading regions
+     */
+    private suspend fun initializeURLRepository() {
+        try {
+            DebugConfig.debugPrint("SplashViewModel: Initializing PDF URL repository...")
+
+            val success = urlRepository.initializeURLs()
+
+            if (success) {
+                DebugConfig.debugPrint("SplashViewModel: ✅ PDF URL repository initialized successfully")
+            } else {
+                DebugConfig.debugWarn("SplashViewModel: ⚠️ PDF URL repository initialization failed, using fallbacks")
+            }
+
+        } catch (e: Exception) {
+            if (e !is CancellationException) {
+                DebugConfig.debugError("SplashViewModel: Error during URL repository initialization", e)
+            }
+        }
+    }
+    
+    /**
+     * Scrape PDF URLs from the stable cofsegovia.com page (legacy method, kept for demo)
      * This runs at startup to check for URL updates
      */
     private suspend fun scrapePDFURLs() {

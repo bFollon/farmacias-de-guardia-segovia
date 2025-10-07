@@ -38,6 +38,7 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.EventBusy
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -58,6 +59,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,6 +69,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import kotlinx.coroutines.launch
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
@@ -104,6 +107,7 @@ fun ScheduleScreen(
         ScheduleViewModel(context, locationId ?: "segovia-capital")
     }
     val uiState by viewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
     
     var showDatePicker by remember { mutableStateOf(false) }
     var showInfo by remember { mutableStateOf(false) }
@@ -203,15 +207,64 @@ fun ScheduleScreen(
                 else -> {
                     ScheduleContent(
                         uiState = uiState,
-                        onViewPDF = { url ->
-                            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-                            context.startActivity(intent)
+                        onViewPDF = {
+                            // Validate URL before opening browser
+                            coroutineScope.launch {
+                                val validatedURL = viewModel.validateAndGetPDFURL()
+                                if (validatedURL != null) {
+                                    val intent = Intent(Intent.ACTION_VIEW, validatedURL.toUri())
+                                    context.startActivity(intent)
+                                }
+                                // Error is shown automatically via dialog below
+                            }
                         },
                         onNavigateToCantalejoInfo = onNavigateToCantalejoInfo
                     )
                 }
             }
         }
+    }
+    
+    // Loading dialog for PDF URL validation
+    if (uiState.isValidatingPDFURL) {
+        AlertDialog(
+            onDismissRequest = { /* Can't dismiss while loading */ },
+            title = { Text("Verificando enlace") },
+            text = {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+                    Text("Verificando enlace del PDF...")
+                }
+            },
+            confirmButton = { /* No button while loading */ }
+        )
+    }
+    
+    // Error dialog for PDF URL errors
+    uiState.pdfURLError?.let { errorMessage ->
+        AlertDialog(
+            onDismissRequest = { viewModel.clearPDFURLError() },
+            title = { 
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Text("Error de acceso")
+                }
+            },
+            text = { Text(errorMessage) },
+            confirmButton = {
+                TextButton(onClick = { viewModel.clearPDFURLError() }) {
+                    Text("Aceptar")
+                }
+            }
+        )
     }
     
     // Date picker dialog
@@ -368,7 +421,7 @@ private fun EmptyContent(isOffline: Boolean = false) {
 @Composable
 private fun ScheduleContent(
     uiState: ScheduleViewModel.ScheduleUiState,
-    onViewPDF: (String) -> Unit,
+    onViewPDF: () -> Unit,
     onNavigateToCantalejoInfo: () -> Unit = {},
 ) {
     var showShiftInfo by remember { mutableStateOf(false) }
@@ -668,7 +721,7 @@ private fun DisclaimerCard(
     location: DutyLocation,
     currentPharmacy: Pharmacy? = null,
     shiftName: String? = null,
-    onViewPDF: (String) -> Unit
+    onViewPDF: () -> Unit
 ) {
     val context = LocalContext.current
     
@@ -697,7 +750,7 @@ private fun DisclaimerCard(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.clickable {
-                    onViewPDF(location.associatedRegion.pdfURL)
+                    onViewPDF()
                 }
             )
             
