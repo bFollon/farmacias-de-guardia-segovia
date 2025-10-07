@@ -72,6 +72,20 @@ class PDFURLRepository private constructor(private val context: Context) {
             "Segovia Rural" to "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf"
         )
         
+        /**
+         * Normalize region name to lookup key
+         * Handles display names vs storage keys
+         */
+        private fun normalizeRegionName(regionName: String): String {
+            return when {
+                regionName.contains("Espinar") -> "El Espinar"
+                regionName.contains("Capital") -> "Segovia Capital"
+                regionName.contains("Cuéllar") || regionName.contains("Cuellar") -> "Cuéllar"
+                regionName.contains("Rural") -> "Segovia Rural"
+                else -> regionName
+            }
+        }
+        
         @Volatile
         private var INSTANCE: PDFURLRepository? = null
         
@@ -261,11 +275,12 @@ class PDFURLRepository private constructor(private val context: Context) {
      * Get the best URL for a region (persisted > fallback)
      */
     fun getURL(regionName: String): String {
+        val normalizedName = normalizeRegionName(regionName)
         val persistedURLs = loadPersistedURLs()
-        val url = persistedURLs[regionName] ?: FALLBACK_URLS[regionName]
+        val url = persistedURLs[normalizedName] ?: FALLBACK_URLS[normalizedName]
         
         if (url == null) {
-            DebugConfig.debugError("No URL found for region: $regionName", null)
+            DebugConfig.debugError("No URL found for region: $regionName (normalized: $normalizedName)", null)
             return ""
         }
         
@@ -279,16 +294,18 @@ class PDFURLRepository private constructor(private val context: Context) {
      * 3. Return new URL or fail
      */
     suspend fun resolveURLWithHealing(regionName: String): URLResolutionResult = withContext(Dispatchers.IO) {
+        val normalizedName = normalizeRegionName(regionName)
+        
         // Check if we're online
         if (!NetworkMonitor.isOnline()) {
-            val url = getURL(regionName)
-            DebugConfig.debugPrint("📡 PDFURLRepository: Offline, using stored URL for $regionName")
+            val url = getURL(normalizedName)
+            DebugConfig.debugPrint("📡 PDFURLRepository: Offline, using stored URL for $normalizedName")
             return@withContext URLResolutionResult.Success(url)
         }
         
-        val currentURL = getURL(regionName)
+        val currentURL = getURL(normalizedName)
         
-        DebugConfig.debugPrint("🔄 PDFURLRepository: Resolving URL for $regionName with self-healing")
+        DebugConfig.debugPrint("🔄 PDFURLRepository: Resolving URL for $normalizedName with self-healing")
         
         // Validate current URL
         when (val validation = validateURL(currentURL)) {
@@ -302,7 +319,7 @@ class PDFURLRepository private constructor(private val context: Context) {
                     
                     // Scrape fresh URLs
                     val freshURLs = scrapeURLs()
-                    val newURL = freshURLs[regionName]
+                    val newURL = freshURLs[normalizedName]
                     
                     if (newURL != null && newURL != currentURL) {
                         DebugConfig.debugPrint("✅ PDFURLRepository: Found new URL: $newURL")
@@ -311,7 +328,7 @@ class PDFURLRepository private constructor(private val context: Context) {
                         DebugConfig.debugWarn("⚠️ PDFURLRepository: Scraped URL is same as old URL")
                         return@withContext URLResolutionResult.Failed("No se puede acceder al PDF en este momento. Inténtalo más tarde.")
                     } else {
-                        DebugConfig.debugError("PDFURLRepository: Could not find new URL for $regionName", null)
+                        DebugConfig.debugError("PDFURLRepository: Could not find new URL for $normalizedName", null)
                         return@withContext URLResolutionResult.Failed("No se puede acceder al PDF en este momento. Inténtalo más tarde.")
                     }
                 } else {
