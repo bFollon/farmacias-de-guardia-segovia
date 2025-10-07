@@ -24,6 +24,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
+import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,6 +43,7 @@ class ScheduleViewModel(
     
     private val scheduleService = ScheduleService(context)
     private val pdfCacheManager = PDFCacheManager.getInstance(context)
+    private val urlRepository = PDFURLRepository.getInstance(context)
     
     // Find the region by ID
     private val location = DutyLocation.Companion.fromId(locationId)
@@ -56,7 +58,9 @@ class ScheduleViewModel(
         val location: DutyLocation? = null,
         val error: String? = null,
         val formattedDateTime: String = "",
-        val downloadDate: Long? = null
+        val downloadDate: Long? = null,
+        val isValidatingPDFURL: Boolean = false,
+        val pdfURLError: String? = null
     )
     
     private val _uiState = MutableStateFlow(ScheduleUiState())
@@ -190,6 +194,55 @@ class ScheduleViewModel(
                 )
             }
         }
+    }
+
+    /**
+     * Validate PDF URL and return the best URL to use
+     * If URL is invalid (404), attempts to scrape fresh URL
+     * 
+     * @return Validated URL or null if validation fails
+     */
+    suspend fun validateAndGetPDFURL(): String? {
+        val location = _uiState.value.location ?: return null
+        val regionName = location.associatedRegion.name
+        
+        _uiState.value = _uiState.value.copy(
+            isValidatingPDFURL = true,
+            pdfURLError = null
+        )
+        
+        return try {
+            when (val result = urlRepository.resolveURLWithHealing(regionName)) {
+                is PDFURLRepository.URLResolutionResult.Success -> {
+                    _uiState.value = _uiState.value.copy(isValidatingPDFURL = false)
+                    result.url
+                }
+                is PDFURLRepository.URLResolutionResult.Updated -> {
+                    _uiState.value = _uiState.value.copy(isValidatingPDFURL = false)
+                    result.newUrl
+                }
+                is PDFURLRepository.URLResolutionResult.Failed -> {
+                    _uiState.value = _uiState.value.copy(
+                        isValidatingPDFURL = false,
+                        pdfURLError = result.message
+                    )
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            _uiState.value = _uiState.value.copy(
+                isValidatingPDFURL = false,
+                pdfURLError = "Error de red. Inténtalo más tarde."
+            )
+            null
+        }
+    }
+    
+    /**
+     * Clear PDF URL error
+     */
+    fun clearPDFURLError() {
+        _uiState.value = _uiState.value.copy(pdfURLError = null)
     }
 
     /**

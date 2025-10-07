@@ -18,7 +18,6 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.data
 
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
 import kotlinx.serialization.Serializable
 
 /**
@@ -45,16 +44,27 @@ data class Region(
     val forceRefresh: Boolean = false
 ) {
     companion object {
+        /**
+         * Set the URL provider for regions
+         * Must be called during app initialization before creating regions
+         */
+        private var urlProvider: ((String) -> String)? = null
+        
+        fun setURLProvider(provider: (String) -> String) {
+            urlProvider = provider
+        }
+        
+        private fun getURL(regionName: String, fallback: String): String {
+            return urlProvider?.invoke(regionName) ?: fallback
+        }
+        
         /** The default region (Segovia Capital) */
         val segoviaCapital: Region
             get() {
-                val scrapedURL = PDFURLScrapingService.getScrapedURL("Segovia Capital")
-                val finalURL = scrapedURL ?: "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf"
-                if (scrapedURL != null) {
-                    DebugConfig.debugPrint("Region: Using SCRAPED URL for Segovia Capital: $scrapedURL")
-                } else {
-                    DebugConfig.debugPrint("Region: Using FALLBACK URL for Segovia Capital: $finalURL")
-                }
+                val finalURL = getURL(
+                    "Segovia Capital",
+                    "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf"
+                )
                 return Region(
                     id = "segovia-capital",
                     name = "Segovia Capital",
@@ -69,39 +79,57 @@ data class Region(
         
         /** Cuéllar region */
         val cuellar: Region
-            get() = Region(
-                id = "cuellar",
-                name = "Cuéllar",
-                icon = "🌳",
-                pdfURL = PDFURLScrapingService.getScrapedURL("Cuéllar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf",
-                metadata = RegionMetadata(
-                    notes = "Servicios semanales excepto primera semana de septiembre"
+            get() {
+                val finalURL = getURL(
+                    "Cuéllar",
+                    "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf"
                 )
-            )
+                return Region(
+                    id = "cuellar",
+                    name = "Cuéllar",
+                    icon = "🌳",
+                    pdfURL = finalURL,
+                    metadata = RegionMetadata(
+                        notes = "Servicios semanales excepto primera semana de septiembre"
+                    )
+                )
+            }
         
         /** El Espinar region */
         val elEspinar: Region
-            get() = Region(
-                id = "el-espinar",
-                name = "El Espinar / San Rafael",
-                icon = "🏔️",
-                pdfURL = PDFURLScrapingService.getScrapedURL("El Espinar") ?: "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf",
-                metadata = RegionMetadata(
-                    notes = "Servicios semanales"
-                ),
-            )
+            get() {
+                val finalURL = getURL(
+                    "El Espinar",
+                    "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf"
+                )
+                return Region(
+                    id = "el-espinar",
+                    name = "El Espinar / San Rafael",
+                    icon = "🏔️",
+                    pdfURL = finalURL,
+                    metadata = RegionMetadata(
+                        notes = "Servicios semanales"
+                    )
+                )
+            }
         
         /** Segovia Rural region */
         val segoviaRural: Region
-            get() = Region(
-                id = "segovia-rural",
-                name = "Segovia Rural",
-                icon = "🚜",
-                pdfURL = PDFURLScrapingService.getScrapedURL("Segovia Rural") ?: "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf",
-                metadata = RegionMetadata(
-                    notes = "Servicios de urgencia rurales"
+            get() {
+                val finalURL = getURL(
+                    "Segovia Rural",
+                    "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf"
                 )
-            )
+                return Region(
+                    id = "segovia-rural",
+                    name = "Segovia Rural",
+                    icon = "🚜",
+                    pdfURL = finalURL,
+                    metadata = RegionMetadata(
+                        notes = "Servicios de urgencia rurales"
+                    )
+                )
+            }
         
         /** List of all available regions */
         val allRegions = listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)

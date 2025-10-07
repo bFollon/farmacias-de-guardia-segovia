@@ -17,13 +17,22 @@
 
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,130 +52,115 @@ fun ZBSSelectionScreen(
     onZBSSelected: (ZBS) -> Unit = {},
     onDismiss: () -> Unit = {}
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Segovia Rural",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onDismiss) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Cancelar"
-                        )
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(20.dp)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            // Title and description
-            Text(
-                text = "Selecciona tu Zona Básica de Salud",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            Text(
-                text = "Elige la zona rural de Segovia para ver las farmacias de guardia correspondientes.",
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-            
-            Spacer(modifier = Modifier.height(32.dp))
-            
-            // ZBS selection grid - using a regular grid instead of LazyVerticalGrid
-            val zbsList = ZBS.Companion.availableZBS
-            val rows = (zbsList.size + 1) / 2 // Calculate number of rows for 2 columns
-            
-            repeat(rows) { rowIndex ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    // First column
-                    ZBSCard(
-                        zbs = zbsList[rowIndex * 2],
-                        onClick = { onZBSSelected(zbsList[rowIndex * 2]) },
-                        modifier = Modifier.weight(1f)
-                    )
-                    
-                    // Second column (if exists)
-                    if (rowIndex * 2 + 1 < zbsList.size) {
-                        ZBSCard(
-                            zbs = zbsList[rowIndex * 2 + 1],
-                            onClick = { onZBSSelected(zbsList[rowIndex * 2 + 1]) },
-                            modifier = Modifier.weight(1f)
-                        )
-                    } else {
-                        // Empty space to maintain grid alignment
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
-                }
-                
-                if (rowIndex < rows - 1) {
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(32.dp))
-            
-            // Note section
-            Card(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Modal title
+        Text(
+            text = "Segovia Rural",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        // Title and description
+        Text(
+            text = "Selecciona tu Zona Básica de Salud",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        Text(
+            text = "Elige la zona rural de Segovia para ver las farmacias de guardia correspondientes.",
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
+        
+        Spacer(modifier = Modifier.height(32.dp))
+        
+        // ZBS selection grid - using a regular grid instead of LazyVerticalGrid
+        val zbsList = ZBS.Companion.availableZBS
+        val rows = (zbsList.size + 1) / 2 // Calculate number of rows for 2 columns
+        
+        repeat(rows) { rowIndex ->
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = IOSGreen.copy(alpha = 0.1f)
-                ),
-                shape = RoundedCornerShape(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Nota",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.primary
+                // First column
+                ZBSCard(
+                    zbs = zbsList[rowIndex * 2],
+                    onClick = { onZBSSelected(zbsList[rowIndex * 2]) },
+                    modifier = Modifier.weight(1f)
+                )
+                
+                // Second column (if exists)
+                if (rowIndex * 2 + 1 < zbsList.size) {
+                    ZBSCard(
+                        zbs = zbsList[rowIndex * 2 + 1],
+                        onClick = { onZBSSelected(zbsList[rowIndex * 2 + 1]) },
+                        modifier = Modifier.weight(1f)
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Cada zona básica de salud tiene sus farmacias asignadas según el calendario oficial.",
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
-                    )
+                } else {
+                    // Empty space to maintain grid alignment
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
             
-            Spacer(modifier = Modifier.height(32.dp))
+            if (rowIndex < rows - 1) {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
+        
+        Spacer(modifier = Modifier.height(32.dp))
+        
+        // Note section
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = IOSGreen.copy(alpha = 0.1f)
+            ),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Nota",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Cada zona básica de salud tiene sus farmacias asignadas según el calendario oficial.",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 

@@ -7,9 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -57,9 +64,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    
+    // State management for ZBS Selection modal
+    var showZBSSelectionModal by remember { mutableStateOf(false) }
+    val zbsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for Schedule modal
+    var showScheduleModal by remember { mutableStateOf(false) }
+    var selectedLocationId by remember { mutableStateOf<String?>(null) }
+    val scheduleSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for Cantalejo Info modal (stacks on top of Schedule modal)
+    var showCantalejoInfo by remember { mutableStateOf(false) }
+    val cantalejoSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     
     NavHost(
         navController = navController,
@@ -81,7 +102,8 @@ fun AppNavigation() {
                 onRegionSelected = { region ->
                     when (region) {
                         Region.Companion.segoviaCapital, Region.Companion.cuellar, Region.Companion.elEspinar -> {
-                            navController.navigate("schedule/${region.id}")
+                            selectedLocationId = region.id
+                            showScheduleModal = true
                         }
 
                         else -> {
@@ -90,76 +112,13 @@ fun AppNavigation() {
                     }
                 },
                 onZBSSelectionRequested = {
-                    navController.navigate("zbs_selection")
+                    showZBSSelectionModal = true
                 },
                 onSettingsClick = {
                     navController.navigate("settings")
                 },
                 onAboutClick = {
                     navController.navigate("about")
-                }
-            )
-        }
-        
-        composable("schedule/{regionId}") { backStackEntry ->
-            val regionId = backStackEntry.arguments?.getString("regionId")
-            when (regionId) {
-                "segovia-capital", "cuellar", "el-espinar" -> {
-                    ScheduleScreen(
-                        locationId = regionId,
-                        onBack = {
-                            navController.popBackStack()
-                        },
-                        onNavigateToCantalejoInfo = {
-                            navController.navigate("cantalejo_info")
-                        }
-                    )
-                }
-
-                in ZBS.Companion.availableZBS.map { it.id } -> {
-                    ScheduleScreen(
-                        locationId = regionId,
-                        onBack = {
-                            navController.popBackStack()
-                        },
-                        onNavigateToCantalejoInfo = {
-                            navController.navigate("cantalejo_info")
-                        }
-                    )
-                }
-                else -> {
-                    // TODO: Handle other region IDs (only Segovia Rural remaining)
-                    Box(
-                        modifier = Modifier.fillMaxSize().padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Region \"$regionId\" not implemented yet",
-                            style = MaterialTheme.typography.bodyLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-        }
-        
-        composable("zbs_selection") {
-            ZBSSelectionScreen(
-                onZBSSelected = { zbs ->
-                    // TODO: Navigate to ZBS schedule view
-                    navController.navigate("schedule/${zbs.id}")
-//                    navController.popBackStack()
-                },
-                onDismiss = {
-                    navController.popBackStack()
-                }
-            )
-        }
-        
-        composable("cantalejo_info") {
-            CantalejoInfoScreen(
-                onDismiss = {
-                    navController.popBackStack()
                 }
             )
         }
@@ -201,6 +160,65 @@ fun AppNavigation() {
             AboutScreen(
                 onBack = {
                     navController.popBackStack()
+                }
+            )
+        }
+    }
+    
+    // Schedule Modal (state-based presentation)
+    if (showScheduleModal && selectedLocationId != null) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showScheduleModal = false
+                selectedLocationId = null
+            },
+            sheetState = scheduleSheetState
+        ) {
+            ScheduleScreen(
+                locationId = selectedLocationId!!,
+                onBack = {
+                    showScheduleModal = false
+                    selectedLocationId = null
+                },
+                onNavigateToCantalejoInfo = {
+                    showCantalejoInfo = true
+                }
+            )
+        }
+    }
+    
+    // Cantalejo Info Modal (stacks on top of Schedule modal)
+    if (showCantalejoInfo) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showCantalejoInfo = false
+            },
+            sheetState = cantalejoSheetState
+        ) {
+            CantalejoInfoScreen(
+                onDismiss = {
+                    showCantalejoInfo = false
+                }
+            )
+        }
+    }
+    
+    // ZBS Selection Modal
+    if (showZBSSelectionModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showZBSSelectionModal = false
+            },
+            sheetState = zbsSheetState
+        ) {
+            ZBSSelectionScreen(
+                onZBSSelected = { zbs ->
+                    selectedLocationId = zbs.id
+                    showScheduleModal = true
+                    // Keep ZBS modal open underneath so it stacks properly
+                },
+                onDismiss = {
+                    showZBSSelectionModal = false
                 }
             )
         }
