@@ -17,7 +17,7 @@
 
 import Foundation
 
-public struct DutyTimeSpan: Equatable, Hashable {
+public struct DutyTimeSpan: Equatable, Hashable, Codable {
     public let start: Date
     public let end: Date
     
@@ -109,4 +109,31 @@ public extension DutyTimeSpan {
     
     /// Rural extended daytime shift (10:00 - 22:00)
     static let ruralExtendedDaytime = DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 22, endMinute: 0)
+    
+    /// Convert to a string identifier for encoding
+    func toString() -> String {
+        let calendar = Calendar.current
+        let startComponents = calendar.dateComponents([.hour, .minute], from: start)
+        let endComponents = calendar.dateComponents([.hour, .minute], from: end)
+        return "\(startComponents.hour!):\(startComponents.minute!)-\(endComponents.hour!):\(endComponents.minute!)"
+    }
+    
+    /// Create from a string identifier for decoding
+    static func from(string: String) -> DutyTimeSpan? {
+        let parts = string.split(separator: "-")
+        guard parts.count == 2 else { return nil }
+        
+        let startParts = parts[0].split(separator: ":")
+        let endParts = parts[1].split(separator: ":")
+        
+        guard startParts.count == 2, endParts.count == 2,
+              let startHour = Int(startParts[0]),
+              let startMinute = Int(startParts[1]),
+              let endHour = Int(endParts[0]),
+              let endMinute = Int(endParts[1]) else {
+            return nil
+        }
+        
+        return DutyTimeSpan(startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute)
+    }
 }

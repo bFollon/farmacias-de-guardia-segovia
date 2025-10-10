@@ -17,7 +17,7 @@
 
 import Foundation
 
-public struct DutyDate {
+public struct DutyDate: Codable {
     public let dayOfWeek: String
     public let day: Int
     public let month: String

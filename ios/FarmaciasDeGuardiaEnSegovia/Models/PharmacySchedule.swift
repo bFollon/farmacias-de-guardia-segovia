@@ -17,13 +17,46 @@
 
 import Foundation
 
-public struct PharmacySchedule {
+public struct PharmacySchedule: Codable {
     public let date: DutyDate
     public let shifts: [DutyTimeSpan: [Pharmacy]]
     
     public init(date: DutyDate, shifts: [DutyTimeSpan: [Pharmacy]]) {
         self.date = date
         self.shifts = shifts
+    }
+    
+    // Custom Codable implementation for Dictionary with non-String keys
+    enum CodingKeys: String, CodingKey {
+        case date
+        case shifts
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decode(DutyDate.self, forKey: .date)
+        
+        // Decode shifts as an array of key-value pairs
+        let shiftsArray = try container.decode([[String: [Pharmacy]]].self, forKey: .shifts)
+        var decodedShifts: [DutyTimeSpan: [Pharmacy]] = [:]
+        
+        for shiftDict in shiftsArray {
+            for (key, pharmacies) in shiftDict {
+                if let timeSpan = DutyTimeSpan.from(string: key) {
+                    decodedShifts[timeSpan] = pharmacies
+                }
+            }
+        }
+        shifts = decodedShifts
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(date, forKey: .date)
+        
+        // Encode shifts as an array of key-value pairs
+        let shiftsArray = shifts.map { [$0.key.toString(): $0.value] }
+        try container.encode(shiftsArray, forKey: .shifts)
     }
     
     // Convenience initializer for backward compatibility during transition

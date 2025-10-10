@@ -18,21 +18,35 @@
 import Foundation
 
 class ScheduleService {
-    // Cache by region ID
+    // In-memory cache by region ID (session cache)
     static private var cachedSchedules: [String: [PharmacySchedule]] = [:]
     static private let pdfService = PDFProcessingService()
+    static private let cacheService = ScheduleCacheService.shared
     
     static func loadSchedules(for region: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
-        // Return cached schedules if available and not forcing refresh
+        // Return in-memory cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[region.id], !forceRefresh {
-            DebugConfig.debugPrint("ScheduleService: Using cached schedules for region \(region.name)")
+            DebugConfig.debugPrint("ScheduleService: Using in-memory cached schedules for region \(region.name)")
             return cached
         }
         
-        // Load and cache if not available or force refresh requested
+        // Try to load from persistent cache if not forcing refresh
+        if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: region) {
+            DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for region \(region.name)")
+            cachedSchedules[region.id] = persistedSchedules
+            return persistedSchedules
+        }
+        
+        // Load from PDF and save to both caches
         DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(region.name)...")
         let schedules = await pdfService.loadPharmacies(for: region, forceRefresh: forceRefresh)
+        
+        // Save to in-memory cache
         cachedSchedules[region.id] = schedules
+        
+        // Save to persistent cache
+        cacheService.saveSchedulesToCache(for: region, schedules: schedules)
+        
         DebugConfig.debugPrint("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         
         // Print a sample schedule for verification
@@ -72,7 +86,17 @@ class ScheduleService {
     }
     
     static func clearCache() {
+        // Clear both in-memory and persistent cache
         cachedSchedules.removeAll()
+        cacheService.clearAllCache()
+        DebugConfig.debugPrint("🗑️ ScheduleService: Cleared all caches (in-memory + persistent)")
+    }
+    
+    static func clearCache(for region: Region) {
+        // Clear both in-memory and persistent cache for specific region
+        cachedSchedules.removeValue(forKey: region.id)
+        cacheService.clearRegionCache(for: region)
+        DebugConfig.debugPrint("🗑️ ScheduleService: Cleared cache for \(region.name)")
     }
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {
         let now = Date()
