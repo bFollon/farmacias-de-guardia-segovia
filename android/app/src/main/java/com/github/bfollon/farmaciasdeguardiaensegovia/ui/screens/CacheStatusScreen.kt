@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
@@ -45,78 +44,55 @@ import java.util.Locale
 /**
  * Cache Status Screen - Displays PDF cache status for all regions
  * Matches iOS CacheStatusView design with Material 3
+ * Displayed as a ModalBottomSheet
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CacheStatusScreen(
-    onBack: () -> Unit,
+    onDismiss: () -> Unit,
     viewModel: CacheStatusViewModel = viewModel()
 ) {
     val cacheStatuses by viewModel.cacheStatuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text("Estado de la caché")
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+    if (isLoading) {
+        // Loading state
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                CircularProgressIndicator()
+                Text(
+                    text = "Comprobando estado de la caché...",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-            )
-        }
-    ) { paddingValues ->
-        if (isLoading) {
-            // Loading state
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    CircularProgressIndicator()
-                    Text(
-                        text = "Comprobando estado de la caché...",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
             }
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Header Section
-                item {
-                    CacheStatusHeader(cacheStatuses)
-                }
-                
-                // Region Status Cards
-                items(cacheStatuses) { status ->
-                    CacheStatusCard(status)
-                }
-                
-                // Info Section
-                item {
-                    CacheInfoCard()
-                }
+        }
+    } else {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // Header Section
+            item {
+                CacheStatusHeader(cacheStatuses)
+            }
+            
+            // Region Status Cards
+            items(cacheStatuses) { status ->
+                CacheStatusCard(status)
+            }
+            
+            // Info Section
+            item {
+                CacheInfoCard()
             }
         }
     }

@@ -43,11 +43,11 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheRefreshVie
 /**
  * Cache Refresh Screen - Shows progress when checking for PDF updates
  * Matches iOS CacheRefreshView design with Material 3
+ * Displayed as a ModalBottomSheet
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CacheRefreshScreen(
-    onBack: () -> Unit,
+    onDismiss: () -> Unit,
     viewModel: CacheRefreshViewModel = viewModel()
 ) {
     val refreshStates by viewModel.refreshStates.collectAsState()
@@ -61,62 +61,36 @@ fun CacheRefreshScreen(
         Region.segoviaRural
     )
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text("Actualizar caché")
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = onBack,
-                        enabled = isCompleted
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Cerrar"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { paddingValues ->
-        Column(
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+                .fillMaxWidth()
+                .weight(1f),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                // Section header
-                item {
-                    Text(
-                        text = "Estado de Actualización",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
-                
-                // Region cards
-                items(regions) { region ->
-                    val state = refreshStates[region.id] ?: UpdateProgressState.Checking
-                    CacheRefreshCard(region, state)
-                }
+            // Section header
+            item {
+                Text(
+                    text = "Estado de Actualización",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
             }
             
-            // Completion view (appears at bottom when done)
-            AnimatedVisibility(visible = isCompleted) {
-                CompletionView(wasOffline = wasOffline)
+            // Region cards
+            items(regions) { region ->
+                val state = refreshStates[region.id] ?: UpdateProgressState.Checking
+                CacheRefreshCard(region, state)
             }
+        }
+        
+        // Completion view (appears at bottom when done)
+        AnimatedVisibility(visible = isCompleted) {
+            CompletionView(wasOffline = wasOffline)
         }
     }
 }

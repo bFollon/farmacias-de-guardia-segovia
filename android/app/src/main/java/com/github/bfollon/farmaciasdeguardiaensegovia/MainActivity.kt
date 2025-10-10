@@ -82,6 +82,22 @@ fun AppNavigation() {
     var showCantalejoInfo by remember { mutableStateOf(false) }
     val cantalejoSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     
+    // State management for Settings modal
+    var showSettingsModal by remember { mutableStateOf(false) }
+    val settingsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for About modal
+    var showAboutModal by remember { mutableStateOf(false) }
+    val aboutSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for Cache Status modal (stacks on top of Settings)
+    var showCacheStatusModal by remember { mutableStateOf(false) }
+    val cacheStatusSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for Cache Refresh modal (stacks on top of Settings)
+    var showCacheRefreshModal by remember { mutableStateOf(false) }
+    val cacheRefreshSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
     NavHost(
         navController = navController,
         startDestination = "splash"
@@ -115,51 +131,10 @@ fun AppNavigation() {
                     showZBSSelectionModal = true
                 },
                 onSettingsClick = {
-                    navController.navigate("settings")
+                    showSettingsModal = true
                 },
                 onAboutClick = {
-                    navController.navigate("about")
-                }
-            )
-        }
-        
-        composable("settings") {
-            SettingsScreen(
-                onBack = {
-                    navController.popBackStack()
-                },
-                onAboutClick = {
-                    navController.navigate("about")
-                },
-                onCacheStatusClick = {
-                    navController.navigate("cache_status")
-                },
-                onCacheRefreshClick = {
-                    navController.navigate("cache_refresh")
-                }
-            )
-        }
-        
-        composable("cache_status") {
-            CacheStatusScreen(
-                onBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
-        
-        composable("cache_refresh") {
-            CacheRefreshScreen(
-                onBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
-        
-        composable("about") {
-            AboutScreen(
-                onBack = {
-                    navController.popBackStack()
+                    showAboutModal = true
                 }
             )
         }
@@ -219,6 +194,79 @@ fun AppNavigation() {
                 },
                 onDismiss = {
                     showZBSSelectionModal = false
+                }
+            )
+        }
+    }
+    
+    // Settings Modal
+    if (showSettingsModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showSettingsModal = false
+            },
+            sheetState = settingsSheetState
+        ) {
+            SettingsScreen(
+                onDismiss = {
+                    showSettingsModal = false
+                },
+                onAboutClick = {
+                    showAboutModal = true
+                },
+                onCacheStatusClick = {
+                    showCacheStatusModal = true
+                },
+                onCacheRefreshClick = {
+                    showCacheRefreshModal = true
+                }
+            )
+        }
+    }
+    
+    // About Modal
+    if (showAboutModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showAboutModal = false
+            },
+            sheetState = aboutSheetState
+        ) {
+            AboutScreen(
+                onDismiss = {
+                    showAboutModal = false
+                }
+            )
+        }
+    }
+    
+    // Cache Status Modal (stacks on top of Settings modal)
+    if (showCacheStatusModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showCacheStatusModal = false
+            },
+            sheetState = cacheStatusSheetState
+        ) {
+            CacheStatusScreen(
+                onDismiss = {
+                    showCacheStatusModal = false
+                }
+            )
+        }
+    }
+    
+    // Cache Refresh Modal (stacks on top of Settings modal)
+    if (showCacheRefreshModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showCacheRefreshModal = false
+            },
+            sheetState = cacheRefreshSheetState
+        ) {
+            CacheRefreshScreen(
+                onDismiss = {
+                    showCacheRefreshModal = false
                 }
             )
         }
