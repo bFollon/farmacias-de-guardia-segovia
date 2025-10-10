@@ -52,6 +52,10 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
+                // Offline warning indicator
+                OfflineWarningCard()
+                    .padding(.top, 8)
+                
                 // Closest pharmacy finder
                 ClosestPharmacyView()
                     .padding(.horizontal)

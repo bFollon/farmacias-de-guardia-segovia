@@ -26,6 +26,7 @@ struct PDFViewScreen: View {
     @State private var selectedDate: Date = Date()
     @State private var isShowingDatePicker = false
     @State private var refreshTrigger = false // For triggering UI refresh
+    @State private var downloadDate: Date? = nil // Track when PDF was downloaded
     var url: URL
     var region: Region
     
@@ -45,22 +46,30 @@ struct PDFViewScreen: View {
                 if isLoading || isRefreshing {
                     LoadingView()
                 } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
-                    if Calendar.current.isDateInToday(selectedDate),
-                       let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
-                        ScheduleContentView(
-                            schedule: current.0,
-                            activeShift: current.1,
-                            region: region,
-                            isPresentingInfo: $isPresentingInfo,
-                            formattedDateTime: ScheduleService.getCurrentDateTime()
-                        )
-                    } else {
-                        DayScheduleView(
-                            schedule: schedule,
-                            region: region,
-                            isPresentingInfo: $isPresentingInfo,
-                            date: selectedDate
-                        )
+                    VStack(spacing: 0) {
+                        // Offline warning at the top
+                        OfflineWarningCard()
+                            .padding(.top, 8)
+                        
+                        if Calendar.current.isDateInToday(selectedDate),
+                           let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
+                            ScheduleContentView(
+                                schedule: current.0,
+                                activeShift: current.1,
+                                region: region,
+                                isPresentingInfo: $isPresentingInfo,
+                                formattedDateTime: ScheduleService.getCurrentDateTime(),
+                                downloadDate: downloadDate
+                            )
+                        } else {
+                            DayScheduleView(
+                                schedule: schedule,
+                                region: region,
+                                isPresentingInfo: $isPresentingInfo,
+                                date: selectedDate,
+                                downloadDate: downloadDate
+                            )
+                        }
                     }
                 } else {
                     NoScheduleView()
@@ -132,8 +141,14 @@ struct PDFViewScreen: View {
         isLoading = true
         Task {
             let loadedSchedules = await ScheduleService.loadSchedules(for: region)
+            
+            // Get download date from PDF cache
+            let cacheStatuses = await PDFCacheManager.shared.getCacheStatus()
+            let cacheDate = cacheStatuses.first(where: { $0.region.id == region.id })?.downloadDate
+            
             await MainActor.run {
                 schedules = loadedSchedules
+                downloadDate = cacheDate
                 isLoading = false
             }
         }

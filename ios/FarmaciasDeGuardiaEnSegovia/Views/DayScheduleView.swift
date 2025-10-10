@@ -7,6 +7,7 @@ struct DayScheduleView: View {
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
     let date: Date
+    let downloadDate: Date?
     
     private var formattedDate: String {
         let formatter = DateFormatter()
@@ -16,8 +17,9 @@ struct DayScheduleView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
                 // Region name at the top (matching ZBS style)
                 HStack {
                     Text(region.icon)
@@ -105,6 +107,10 @@ struct DayScheduleView: View {
                 }
             }
             .padding()
+        }
+        
+        // Data freshness footer pinned to bottom
+        DataFreshnessFooter(downloadDate: downloadDate)
         }
     }
 }

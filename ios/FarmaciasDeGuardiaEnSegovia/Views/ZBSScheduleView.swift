@@ -24,6 +24,7 @@ struct ZBSScheduleView: View {
     @State private var isLoading = true
     @State private var isShowingDatePicker = false
     @State private var showCantalejoInfo = false
+    @State private var downloadDate: Date? = nil // Track when PDF was downloaded
     @Environment(\.presentationMode) var presentationMode
     
     private var dateButtonText: String {
@@ -123,8 +124,13 @@ struct ZBSScheduleView: View {
                 } else if zbsSchedules.isEmpty {
                     NoScheduleView()
                 } else {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 12) {
+                    VStack(spacing: 0) {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 12) {
+                            // Offline warning at the top
+                            OfflineWarningCard()
+                                .padding(.bottom, 8)
+                            
                             // ZBS name at the top (matching main view style)
                             HStack {
                                 Text(selectedZBS.icon)
@@ -271,6 +277,10 @@ struct ZBSScheduleView: View {
                         }
                         .padding()
                     }
+                    
+                    // Data freshness footer pinned to bottom
+                    DataFreshnessFooter(downloadDate: downloadDate)
+                    }
                 }
             }
             .navigationTitle("")
@@ -339,8 +349,13 @@ struct ZBSScheduleView: View {
         Task {
             let schedules = await ZBSScheduleService.getZBSSchedules(for: .segoviaRural, forceRefresh: forceRefresh) ?? []
             
+            // Get download date from PDF cache for Segovia Rural
+            let cacheStatuses = await PDFCacheManager.shared.getCacheStatus()
+            let cacheDate = cacheStatuses.first(where: { $0.region.id == Region.segoviaRural.id })?.downloadDate
+            
             await MainActor.run {
                 self.zbsSchedules = schedules
+                self.downloadDate = cacheDate
                 self.isLoading = false
             }
         }

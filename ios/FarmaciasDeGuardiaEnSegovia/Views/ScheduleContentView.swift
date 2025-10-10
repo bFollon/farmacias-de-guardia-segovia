@@ -23,10 +23,12 @@ struct ScheduleContentView: View {
     let region: Region
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
+    let downloadDate: Date?
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
                 // Region name at the top (matching ZBS style)
                 HStack {
                     Text(region.icon)
@@ -105,6 +107,10 @@ struct ScheduleContentView: View {
                 }
             }
             .padding()
+        }
+        
+        // Data freshness footer pinned to bottom
+        DataFreshnessFooter(downloadDate: downloadDate)
         }
     }
 }
