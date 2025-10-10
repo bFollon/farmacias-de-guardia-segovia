@@ -152,7 +152,8 @@ fun AboutScreen(
                     openUrl(context, AppConfig.KOFI_URL)
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF29ABE0) // Ko-fi blue color
+                    containerColor = Color(0xFF29ABE0), // Ko-fi blue color
+                    contentColor = Color.White
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -189,7 +190,8 @@ fun AboutScreen(
                     openUrl(context, AppConfig.GITHUB_REPO_URL)
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF24292E) // GitHub dark color
+                    containerColor = Color(0xFF24292E), // GitHub dark color
+                    contentColor = Color.White
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
