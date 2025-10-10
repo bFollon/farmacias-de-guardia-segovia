@@ -82,6 +82,14 @@ fun AppNavigation() {
     var showCantalejoInfo by remember { mutableStateOf(false) }
     val cantalejoSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     
+    // State management for Settings modal
+    var showSettingsModal by remember { mutableStateOf(false) }
+    val settingsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
+    // State management for About modal
+    var showAboutModal by remember { mutableStateOf(false) }
+    val aboutSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    
     NavHost(
         navController = navController,
         startDestination = "splash"
@@ -115,27 +123,10 @@ fun AppNavigation() {
                     showZBSSelectionModal = true
                 },
                 onSettingsClick = {
-                    navController.navigate("settings")
+                    showSettingsModal = true
                 },
                 onAboutClick = {
-                    navController.navigate("about")
-                }
-            )
-        }
-        
-        composable("settings") {
-            SettingsScreen(
-                onBack = {
-                    navController.popBackStack()
-                },
-                onAboutClick = {
-                    navController.navigate("about")
-                },
-                onCacheStatusClick = {
-                    navController.navigate("cache_status")
-                },
-                onCacheRefreshClick = {
-                    navController.navigate("cache_refresh")
+                    showAboutModal = true
                 }
             )
         }
@@ -150,14 +141,6 @@ fun AppNavigation() {
         
         composable("cache_refresh") {
             CacheRefreshScreen(
-                onBack = {
-                    navController.popBackStack()
-                }
-            )
-        }
-        
-        composable("about") {
-            AboutScreen(
                 onBack = {
                     navController.popBackStack()
                 }
@@ -219,6 +202,47 @@ fun AppNavigation() {
                 },
                 onDismiss = {
                     showZBSSelectionModal = false
+                }
+            )
+        }
+    }
+    
+    // Settings Modal
+    if (showSettingsModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showSettingsModal = false
+            },
+            sheetState = settingsSheetState
+        ) {
+            SettingsScreen(
+                onDismiss = {
+                    showSettingsModal = false
+                },
+                onAboutClick = {
+                    showAboutModal = true
+                },
+                onCacheStatusClick = {
+                    navController.navigate("cache_status")
+                },
+                onCacheRefreshClick = {
+                    navController.navigate("cache_refresh")
+                }
+            )
+        }
+    }
+    
+    // About Modal
+    if (showAboutModal) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showAboutModal = false
+            },
+            sheetState = aboutSheetState
+        ) {
+            AboutScreen(
+                onDismiss = {
+                    showAboutModal = false
                 }
             )
         }

@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
@@ -35,58 +34,36 @@ import androidx.compose.ui.unit.dp
 /**
  * Settings screen that displays cache management and information options
  * Matches iOS SettingsView structure with Material 3 design system
+ * Displayed as a ModalBottomSheet
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onBack: () -> Unit,
+    onDismiss: () -> Unit,
     onAboutClick: () -> Unit,
     onCacheStatusClick: () -> Unit,
     onCacheRefreshClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text("Configuración")
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(scrollState)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            // PDF Cache Section
-            CachePDFSection(
-                onCheckUpdatesClick = onCacheRefreshClick,
-                onViewCacheStatusClick = onCacheStatusClick
-            )
-            
-            // Information Section
-            InformationSection(
-                onAboutClick = onAboutClick
-            )
-            
-            Spacer(modifier = Modifier.height(16.dp))
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        // PDF Cache Section
+        CachePDFSection(
+            onCheckUpdatesClick = onCacheRefreshClick,
+            onViewCacheStatusClick = onCacheStatusClick
+        )
+        
+        // Information Section
+        InformationSection(
+            onAboutClick = onAboutClick
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
