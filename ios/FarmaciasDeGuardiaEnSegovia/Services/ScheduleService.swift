@@ -27,6 +27,16 @@ class ScheduleService {
         // Return in-memory cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[region.id], !forceRefresh {
             DebugConfig.debugPrint("ScheduleService: Using in-memory cached schedules for region \(region.name)")
+            
+            // Special handling for Segovia Rural: ensure ZBS schedules are loaded
+            if region == .segoviaRural && SegoviaRuralParser.getCachedZBSSchedules().isEmpty {
+                // ZBS cache is empty, try to load from persistent cache
+                if let zbsSchedules = cacheService.loadCachedZBSSchedules(for: region) {
+                    SegoviaRuralParser.setCachedZBSSchedules(zbsSchedules)
+                    DebugConfig.debugPrint("✅ ScheduleService: Loaded \(zbsSchedules.count) ZBS schedules from persistent cache")
+                }
+            }
+            
             return cached
         }
         
@@ -34,6 +44,15 @@ class ScheduleService {
         if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: region) {
             DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for region \(region.name)")
             cachedSchedules[region.id] = persistedSchedules
+            
+            // Special handling for Segovia Rural: load ZBS schedules from cache
+            if region == .segoviaRural {
+                if let zbsSchedules = cacheService.loadCachedZBSSchedules(for: region) {
+                    SegoviaRuralParser.setCachedZBSSchedules(zbsSchedules)
+                    DebugConfig.debugPrint("✅ ScheduleService: Loaded \(zbsSchedules.count) ZBS schedules from cache")
+                }
+            }
+            
             return persistedSchedules
         }
         
@@ -46,6 +65,13 @@ class ScheduleService {
         
         // Save to persistent cache
         cacheService.saveSchedulesToCache(for: region, schedules: schedules)
+        
+        // Special handling for Segovia Rural: cache ZBS schedules
+        if region == .segoviaRural {
+            let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()
+            cacheService.saveZBSSchedulesToCache(for: region, zbsSchedules: zbsSchedules)
+            DebugConfig.debugPrint("💾 ScheduleService: Saved \(zbsSchedules.count) ZBS schedules to cache")
+        }
         
         DebugConfig.debugPrint("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
         
@@ -96,8 +122,15 @@ class ScheduleService {
         // Clear both in-memory and persistent cache for specific region
         cachedSchedules.removeValue(forKey: region.id)
         cacheService.clearRegionCache(for: region)
+        
+        // Clear ZBS cache if clearing Segovia Rural
+        if region == .segoviaRural {
+            SegoviaRuralParser.clearZBSCache()
+        }
+        
         DebugConfig.debugPrint("🗑️ ScheduleService: Cleared cache for \(region.name)")
     }
+    
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {
         let now = Date()
         let currentTimestamp = now.timeIntervalSince1970

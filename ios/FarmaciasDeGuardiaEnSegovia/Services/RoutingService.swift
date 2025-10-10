@@ -81,6 +81,10 @@ class RoutingService {
     
     /// Calculate driving route from user location to destination
     static func calculateDrivingRoute(from userLocation: CLLocation, to destination: CLLocation) async -> RouteResult? {
+        // Check cache first
+        if let cachedResult = RouteCacheService.shared.getCachedRoute(from: userLocation, to: destination) {
+            return cachedResult
+        }
         // Create requests for both driving and walking routes
         let drivingRequest = MKDirections.Request()
         drivingRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
@@ -113,6 +117,10 @@ class RoutingService {
                 )
                 DebugConfig.debugPrint("🚗 Driving: \(result.formattedDistance), \(result.formattedTravelTime)")
                 DebugConfig.debugPrint("🚶 Walking: \(result.formattedWalkingTime)")
+                
+                // Cache the result
+                RouteCacheService.shared.setCachedRoute(from: userLocation, to: destination, result: result)
+                
                 return result
             }
         } catch {
@@ -120,12 +128,17 @@ class RoutingService {
             // Fall back to straight-line distance if routing fails
             let straightLineDistance = userLocation.distance(from: destination)
             DebugConfig.debugPrint("📏 Falling back to straight-line distance: \(String(format: "%.1f km", straightLineDistance / 1000))")
-            return RouteResult(
+            let fallbackResult = RouteResult(
                 distance: straightLineDistance,
                 travelTime: 0,
                 walkingTime: 0,
                 isEstimated: true
             )
+            
+            // Cache the fallback result too
+            RouteCacheService.shared.setCachedRoute(from: userLocation, to: destination, result: fallbackResult)
+            
+            return fallbackResult
         }
         
         return nil

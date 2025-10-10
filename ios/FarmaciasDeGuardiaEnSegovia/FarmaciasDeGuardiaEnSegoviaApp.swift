@@ -68,6 +68,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
         
         // Perform coordinate cache maintenance (already done in preload)
         GeocodingService.performMaintenanceCleanup()
+        
+        // Clean up expired route cache entries
+        RouteCacheService.shared.cleanupExpiredEntries()
     }
 }
 

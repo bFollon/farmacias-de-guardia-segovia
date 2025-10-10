@@ -352,6 +352,10 @@ class ClosestPharmacyService {
         cachedResult = nil
         cachedLocation = nil
         cachedDate = nil
+        
+        // Clear route cache when user moves significantly
+        RouteCacheService.shared.clearAllRoutes()
+        
         DebugConfig.debugPrint("🗑️ Location cache cleared")
     }
     

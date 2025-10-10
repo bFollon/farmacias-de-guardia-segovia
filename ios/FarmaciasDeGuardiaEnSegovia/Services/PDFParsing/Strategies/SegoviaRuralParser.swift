@@ -431,6 +431,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         return cachedZBSSchedules
     }
     
+    /// Set cached ZBS schedules (used when loading from persistent cache)
+    static func setCachedZBSSchedules(_ schedules: [ZBSSchedule]) {
+        cachedZBSSchedules = schedules
+        DebugConfig.debugPrint("📦 SegoviaRuralParser: Set cached ZBS schedules (\(schedules.count) schedules)")
+    }
+    
     /// Clear cached ZBS schedules
     static func clearZBSCache() {
         cachedZBSSchedules = []

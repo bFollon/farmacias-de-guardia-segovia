@@ -231,12 +231,60 @@ class ScheduleCacheService {
         return cacheDirectory.appendingPathComponent("\(region.id).meta.json")
     }
     
+    private func getZBSCacheFile(for region: Region) -> URL {
+        return cacheDirectory.appendingPathComponent("\(region.id).zbs.json")
+    }
+    
     private func deleteCacheFiles(for region: Region) {
         do {
             try fileManager.removeItem(at: getCacheFile(for: region))
             try fileManager.removeItem(at: getMetadataFile(for: region))
+            try fileManager.removeItem(at: getZBSCacheFile(for: region))
         } catch {
             // Ignore errors if files don't exist
+        }
+    }
+    
+    // MARK: - ZBS Schedule Caching (for Segovia Rural)
+    
+    /// Save ZBS schedules to cache (for Segovia Rural)
+    func saveZBSSchedulesToCache(for region: Region, zbsSchedules: [ZBSSchedule]) {
+        guard region == .segoviaRural else {
+            return
+        }
+        
+        do {
+            let zbsFile = getZBSCacheFile(for: region)
+            let data = try json.encode(zbsSchedules)
+            try data.write(to: zbsFile)
+            
+            DebugConfig.debugPrint("💾 Cached \(zbsSchedules.count) ZBS schedules for \(region.name)")
+        } catch {
+            DebugConfig.debugPrint("❌ Error saving ZBS schedules to cache: \(error)")
+        }
+    }
+    
+    /// Load ZBS schedules from cache (for Segovia Rural)
+    func loadCachedZBSSchedules(for region: Region) -> [ZBSSchedule]? {
+        guard region == .segoviaRural else {
+            return nil
+        }
+        
+        let zbsFile = getZBSCacheFile(for: region)
+        
+        guard fileManager.fileExists(atPath: zbsFile.path) else {
+            return nil
+        }
+        
+        do {
+            let data = try Data(contentsOf: zbsFile)
+            let zbsSchedules = try decoder.decode([ZBSSchedule].self, from: data)
+            
+            DebugConfig.debugPrint("⚡ Loaded \(zbsSchedules.count) ZBS schedules from cache")
+            return zbsSchedules
+        } catch {
+            DebugConfig.debugPrint("❌ Error loading ZBS schedules from cache: \(error)")
+            return nil
         }
     }
 }
