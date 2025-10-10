@@ -4,7 +4,9 @@
       "Bash(awk:*)",
       "Bash(xargs dirname:*)",
       "Bash(xargs:*)",
-      "Bash(xcodebuild:*)"
+      "Bash(xcodebuild:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
