@@ -4,7 +4,7 @@
 
 ## Overview
 
-Farmacias de Guardia En Segovia ("we," "our," or "the app") is committed to protecting your privacy. This privacy notice explains how we handle information when you use our iOS application.
+Farmacias de Guardia En Segovia ("we," "our," or "the app") is committed to protecting your privacy. This privacy notice explains how we handle information when you use our Android application.
 
 ## Information We Do NOT Collect
 
@@ -43,9 +43,7 @@ Our app requests access to your device's location **only** to:
 Our app does not integrate with any third-party analytics, advertising, or data collection services.
 
 When you use mapping features (directions to pharmacies), you may be redirected to:
-- Apple Maps (iOS default)
-- Google Maps (if installed)
-- Waze (if installed)
+- Google Maps (Android default)
 
 These external applications have their own privacy policies and are not controlled by us.
 
