@@ -17,9 +17,42 @@
 
 import Foundation
 
-public struct PharmacySchedule {
+public struct PharmacySchedule: Codable {
     public let date: DutyDate
     public let shifts: [DutyTimeSpan: [Pharmacy]]
+
+    // Custom coding keys for encoding/decoding the dictionary
+    private enum CodingKeys: String, CodingKey {
+        case date, shifts
+    }
+
+    // Custom encoding to handle dictionary with DutyTimeSpan keys
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(date, forKey: .date)
+
+        // Convert dictionary to array of tuples for encoding
+        let shiftsArray = shifts.map { (key, value) in
+            ShiftEntry(timeSpan: key, pharmacies: value)
+        }
+        try container.encode(shiftsArray, forKey: .shifts)
+    }
+
+    // Custom decoding to reconstruct dictionary from array
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decode(DutyDate.self, forKey: .date)
+
+        // Decode array and convert back to dictionary
+        let shiftsArray = try container.decode([ShiftEntry].self, forKey: .shifts)
+        shifts = Dictionary(uniqueKeysWithValues: shiftsArray.map { ($0.timeSpan, $0.pharmacies) })
+    }
+
+    // Helper struct for encoding/decoding dictionary entries
+    private struct ShiftEntry: Codable {
+        let timeSpan: DutyTimeSpan
+        let pharmacies: [Pharmacy]
+    }
     
     public init(date: DutyDate, shifts: [DutyTimeSpan: [Pharmacy]]) {
         self.date = date

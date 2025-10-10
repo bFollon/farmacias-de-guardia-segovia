@@ -18,10 +18,10 @@
 import Foundation
 
 /// Represents pharmacy schedules organized by ZBS (Zona Básica de Salud)
-public struct ZBSSchedule {
+public struct ZBSSchedule: Codable {
     /// The date this schedule applies to
     public let date: DutyDate
-    
+
     /// Schedules organized by ZBS ID
     public let schedulesByZBS: [String: [Pharmacy]]
     
