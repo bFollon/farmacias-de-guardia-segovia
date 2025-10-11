@@ -112,6 +112,23 @@ class ScheduleCacheService {
         }
     }
 
+    /// Get the cache timestamp for a region (when it was last saved)
+    func getCacheTimestamp(for region: Region) -> TimeInterval? {
+        let cacheFile = getCacheFile(for: region)
+
+        guard fileManager.fileExists(atPath: cacheFile.path) else {
+            return nil
+        }
+
+        do {
+            let data = try Data(contentsOf: cacheFile)
+            let cachedData = try decoder.decode(CachedSchedules.self, from: data)
+            return cachedData.cacheTimestamp
+        } catch {
+            return nil
+        }
+    }
+
     // MARK: - Cache Saving
 
     /// Save parsed schedules to cache

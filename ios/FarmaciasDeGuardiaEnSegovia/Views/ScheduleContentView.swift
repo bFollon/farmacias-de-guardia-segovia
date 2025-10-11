@@ -23,30 +23,41 @@ struct ScheduleContentView: View {
     let region: Region
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
-    
+    let cacheTimestamp: TimeInterval?
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                // Region name at the top (matching ZBS style)
-                HStack {
-                    Text(region.icon)
-                        .font(.title)
-                    Text(region.name)
-                        .font(.title)
-                        .fontWeight(.medium)
-                }
-                .padding(.bottom, 5)
-                
-                // Date and time with calendar icon
-                HStack(spacing: 8) {
-                    Image(systemName: "calendar.circle.fill")
-                        .foregroundColor(.blue)
-                        .frame(width: 20)
-                    Text(formattedDateTime)
-                        .font(.title2)
-                        .fontWeight(.medium)
-                }
-                .padding(.bottom, 20)
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
+                    // Region name at the top (matching ZBS style)
+                    HStack {
+                        Text(region.icon)
+                            .font(.title)
+                        Text(region.name)
+                            .font(.title)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.bottom, 5)
+
+                    // Date and time with calendar icon
+                    HStack(spacing: 8) {
+                        Image(systemName: "calendar.circle.fill")
+                            .foregroundColor(.blue)
+                            .frame(width: 20)
+                        Text(formattedDateTime)
+                            .font(.title2)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.bottom, 20)
+
+                    // Offline warning (if not connected)
+                    if !networkMonitor.isOnline {
+                        OfflineWarningCard()
+                            .padding(.bottom, 12)
+                    }
                 
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
@@ -103,8 +114,16 @@ struct ScheduleContentView: View {
                             .padding(.top, 8)
                     }
                 }
+                }
+                .padding()
             }
-            .padding()
+
+            // Cache freshness indicator at bottom (fixed footer outside ScrollView)
+            if let cacheTimestamp = cacheTimestamp {
+                Divider()
+                CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                    .background(Color(UIColor.systemBackground))
+            }
         }
     }
 }

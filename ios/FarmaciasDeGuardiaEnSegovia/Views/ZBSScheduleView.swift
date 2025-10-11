@@ -24,6 +24,7 @@ struct ZBSScheduleView: View {
     @State private var isLoading = true
     @State private var isShowingDatePicker = false
     @State private var showCantalejoInfo = false
+    @State private var cacheTimestamp: TimeInterval? = nil
     @Environment(\.presentationMode) var presentationMode
     
     private var dateButtonText: String {
@@ -117,14 +118,15 @@ struct ZBSScheduleView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 if isLoading {
                     LoadingView()
                 } else if zbsSchedules.isEmpty {
                     NoScheduleView()
                 } else {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 12) {
+                    VStack(spacing: 0) {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 12) {
                             // ZBS name at the top (matching main view style)
                             HStack {
                                 Text(selectedZBS.icon)
@@ -270,6 +272,14 @@ struct ZBSScheduleView: View {
                             }
                         }
                         .padding()
+                        }
+
+                        // Cache freshness footer (fixed at bottom)
+                        if let cacheTimestamp = cacheTimestamp {
+                            Divider()
+                            CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                                .background(Color(UIColor.systemBackground))
+                        }
                     }
                 }
             }
@@ -335,12 +345,14 @@ struct ZBSScheduleView: View {
     
     private func loadZBSSchedules(forceRefresh: Bool = false) {
         isLoading = true
-        
+
         Task {
             let schedules = await ZBSScheduleService.getZBSSchedules(for: .segoviaRural, forceRefresh: forceRefresh) ?? []
-            
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: .segoviaRural)
+
             await MainActor.run {
                 self.zbsSchedules = schedules
+                self.cacheTimestamp = timestamp
                 self.isLoading = false
             }
         }

@@ -231,11 +231,13 @@ struct ClosestPharmacyResultView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @State private var showingMapOptions = false
-    
+    @State private var cacheTimestamp: TimeInterval? = nil
+
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+            VStack(spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
                     // Header
                     VStack(spacing: 12) {
                         Image(systemName: "cross.circle.fill")
@@ -426,8 +428,16 @@ struct ClosestPharmacyResultView: View {
                     .cornerRadius(12)
                     
                     Spacer()
+                    }
+                    .padding()
                 }
-                .padding()
+
+                // Cache freshness footer (fixed at bottom)
+                if let cacheTimestamp = cacheTimestamp {
+                    Divider()
+                    CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                        .background(Color(UIColor.systemBackground))
+                }
             }
             .navigationTitle("Resultado")
             .navigationBarTitleDisplayMode(.inline)
@@ -447,6 +457,10 @@ struct ClosestPharmacyResultView: View {
                 Button("Cancelar", role: .cancel) { }
             } message: {
                 Text("Elije una aplicación de mapas")
+            }
+            .onAppear {
+                // Load cache timestamp for the result's region
+                cacheTimestamp = ScheduleCacheService.shared.getCacheTimestamp(for: result.region)
             }
         }
     }

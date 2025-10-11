@@ -26,6 +26,7 @@ struct PDFViewScreen: View {
     @State private var selectedDate: Date = Date()
     @State private var isShowingDatePicker = false
     @State private var refreshTrigger = false // For triggering UI refresh
+    @State private var cacheTimestamp: TimeInterval? = nil
     var url: URL
     var region: Region
     
@@ -52,7 +53,8 @@ struct PDFViewScreen: View {
                             activeShift: current.1,
                             region: region,
                             isPresentingInfo: $isPresentingInfo,
-                            formattedDateTime: ScheduleService.getCurrentDateTime()
+                            formattedDateTime: ScheduleService.getCurrentDateTime(),
+                            cacheTimestamp: cacheTimestamp
                         )
                     } else {
                         DayScheduleView(
@@ -132,8 +134,10 @@ struct PDFViewScreen: View {
         isLoading = true
         Task {
             let loadedSchedules = await ScheduleService.loadSchedules(for: region)
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: region)
             await MainActor.run {
                 schedules = loadedSchedules
+                cacheTimestamp = timestamp
                 isLoading = false
             }
         }
@@ -154,13 +158,15 @@ struct PDFViewScreen: View {
     
     private func refreshData() {
         isRefreshing = true
-        
+
         Task {
             let refreshedSchedules = await ScheduleService.loadSchedules(for: region, forceRefresh: true)
-            
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: region)
+
             // Update UI on main thread
             await MainActor.run {
                 schedules = refreshedSchedules
+                cacheTimestamp = timestamp
                 isRefreshing = false
             }
         }
