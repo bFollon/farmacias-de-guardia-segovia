@@ -28,6 +28,12 @@ struct ScheduleContentView: View {
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
 
+    // PDF link validation
+    @State private var isValidatingPDFLink = false
+    @State private var showPDFLinkError = false
+    @State private var pdfLinkErrorMessage = ""
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -93,10 +99,20 @@ struct ScheduleContentView: View {
                     Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    
-                    Link("Calendario de Guardias - \(region.name)",
-                         destination: region.pdfURL)
-                        .font(.footnote)
+
+                    Button(action: {
+                        openPDFLink()
+                    }) {
+                        HStack(spacing: 4) {
+                            if isValidatingPDFLink {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                            }
+                            Text("Calendario de Guardias - \(region.name)")
+                        }
+                    }
+                    .font(.footnote)
+                    .disabled(isValidatingPDFLink)
                     
                     let currentPharmacy = schedule.shifts[activeShift]?.first ?? schedule.dayShiftPharmacies.first
                     let shiftName = activeShift == .fullDay ? "24 horas" : (activeShift == .capitalDay ? "Diurno" : "Nocturno")
@@ -123,6 +139,30 @@ struct ScheduleContentView: View {
                 Divider()
                 CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
                     .background(Color(UIColor.systemBackground))
+            }
+        }
+        .alert("Error al abrir el enlace", isPresented: $showPDFLinkError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(pdfLinkErrorMessage)
+        }
+    }
+
+    private func openPDFLink() {
+        isValidatingPDFLink = true
+
+        Task {
+            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+
+            await MainActor.run {
+                isValidatingPDFLink = false
+
+                if validationResult.isValid {
+                    openURL(region.pdfURL)
+                } else if let errorMsg = validationResult.errorMessage {
+                    pdfLinkErrorMessage = errorMsg
+                    showPDFLinkError = true
+                }
             }
         }
     }

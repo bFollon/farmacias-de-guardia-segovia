@@ -11,6 +11,12 @@ struct DayScheduleView: View {
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
 
+    // PDF link validation
+    @State private var isValidatingPDFLink = false
+    @State private var showPDFLinkError = false
+    @State private var pdfLinkErrorMessage = ""
+    @Environment(\.openURL) private var openURL
+
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -92,10 +98,20 @@ struct DayScheduleView: View {
                     Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    
-                    Link("Calendario de Guardias - \(region.name)",
-                         destination: region.pdfURL)
-                        .font(.footnote)
+
+                    Button(action: {
+                        openPDFLink()
+                    }) {
+                        HStack(spacing: 4) {
+                            if isValidatingPDFLink {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                            }
+                            Text("Calendario de Guardias - \(region.name)")
+                        }
+                    }
+                    .font(.footnote)
+                    .disabled(isValidatingPDFLink)
                     
                     let emailBody = AppConfig.EmailLinks.dayScheduleErrorBody(
                         date: formattedDate,
@@ -114,6 +130,30 @@ struct DayScheduleView: View {
                 }
             }
             .padding()
+        }
+        .alert("Error al abrir el enlace", isPresented: $showPDFLinkError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(pdfLinkErrorMessage)
+        }
+    }
+
+    private func openPDFLink() {
+        isValidatingPDFLink = true
+
+        Task {
+            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+
+            await MainActor.run {
+                isValidatingPDFLink = false
+
+                if validationResult.isValid {
+                    openURL(region.pdfURL)
+                } else if let errorMsg = validationResult.errorMessage {
+                    pdfLinkErrorMessage = errorMsg
+                    showPDFLinkError = true
+                }
+            }
         }
     }
 }
