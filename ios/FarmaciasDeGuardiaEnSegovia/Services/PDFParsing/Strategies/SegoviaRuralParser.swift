@@ -430,7 +430,12 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     static func getCachedZBSSchedules() -> [ZBSSchedule] {
         return cachedZBSSchedules
     }
-    
+
+    /// Set cached ZBS schedules (used by ScheduleService when loading from cache)
+    static func setCachedZBSSchedules(_ schedules: [ZBSSchedule]) {
+        cachedZBSSchedules = schedules
+    }
+
     /// Clear cached ZBS schedules
     static func clearZBSCache() {
         cachedZBSSchedules = []
