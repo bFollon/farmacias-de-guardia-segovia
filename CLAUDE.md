@@ -40,12 +40,46 @@ PDFProcessingService (coordinator)
 2. **Persistent Cache** (fast): JSON files managed by `ScheduleCacheService`
    - Validates cache by comparing PDF modification dates
    - Dramatically reduces app startup time (avoids PDF re-parsing)
+   - Location: `Documents/ScheduleCache/`
 3. **PDF Parsing** (slowest): Fallback when caches are invalid or empty
 
 **Cache Flow (iOS example):**
 - See `ios/FarmaciasDeGuardiaEnSegovia/Services/ScheduleService.swift:26-106`
 - Memory → Persistent → PDF parsing
 - Validates PDF modification timestamps to detect stale caches
+
+### Offline Support Architecture
+
+**Comprehensive offline experience:**
+
+1. **NetworkMonitor Service** (`ios/FarmaciasDeGuardiaEnSegovia/Services/NetworkMonitor.swift`)
+   - Real-time network connectivity monitoring
+   - Observable pattern for reactive UI updates
+   - Used throughout app to show offline warnings
+
+2. **Route Caching** (`ios/FarmaciasDeGuardiaEnSegovia/Services/RouteCacheService.swift`)
+   - Location-aware route caching with distance-based invalidation
+   - Routes invalidate when user moves >300m from cached origin
+   - 24-hour cache expiration for freshness
+   - Stores: distance, travel time, walking time
+   - Location: `Documents/RouteCache/routes.json`
+
+3. **PDF URL Validation** (`ios/FarmaciasDeGuardiaEnSegovia/Services/PDFURLValidator.swift`)
+   - Validates PDF URLs before opening (HTTP HEAD requests)
+   - 1-hour validation result caching
+   - Automatic URL scraping on validation failure
+   - Offline-aware (respects NetworkMonitor)
+
+4. **UI Indicators**:
+   - **OfflineWarningCard**: Orange warning shown when offline
+   - **CacheFreshnessFooter**: Shows cache age timestamp
+   - **Enhanced Empty States**: Different messages for offline vs normal empty states
+   - **Loading Overlays**: Smart loading indicators only shown when needed
+
+**Cache Maintenance:**
+- Automatic cleanup on app startup (`FarmaciasDeGuardiaEnSegoviaApp.swift:65-76`)
+- PDF URL validation cache: cleared on app start
+- Coordinate cache: maintenance via GeocodingService
 
 ### Region Data Model
 

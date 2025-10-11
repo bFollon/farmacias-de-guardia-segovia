@@ -65,9 +65,14 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     private func initializeApp() {
         // Initialize PDF cache manager (already done in preload, but ensure it's ready)
         PDFCacheManager.shared.initialize()
-        
+
         // Perform coordinate cache maintenance (already done in preload)
         GeocodingService.performMaintenanceCleanup()
+
+        // Clean up expired validation and route caches
+        PDFURLValidator.shared.clearExpiredCache()
+
+        DebugConfig.debugPrint("✅ App initialization complete with cache maintenance")
     }
 }
 
