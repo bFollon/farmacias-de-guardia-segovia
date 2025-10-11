@@ -24,6 +24,9 @@ struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingAbout = false
 
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -39,19 +42,25 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top)
-                
+
                 Text("Farmacias de Guardia")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.top)
-                
+
                 Text("Seleccione su región para consultar las farmacias de guardia.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
-                
+
+                // Offline warning (if not connected)
+                if !networkMonitor.isOnline {
+                    OfflineWarningCard()
+                        .padding(.horizontal)
+                }
+
                 // Closest pharmacy finder
                 ClosestPharmacyView()
                     .padding(.horizontal)

@@ -7,14 +7,17 @@ struct DayScheduleView: View {
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
     let date: Date
-    
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         formatter.locale = Locale(identifier: "es_ES")
         return formatter.string(from: date)
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
@@ -27,7 +30,7 @@ struct DayScheduleView: View {
                         .fontWeight(.medium)
                 }
                 .padding(.bottom, 5)
-                
+
                 // Date with calendar icon
                 HStack(spacing: 8) {
                     Image(systemName: "calendar.circle.fill")
@@ -38,6 +41,12 @@ struct DayScheduleView: View {
                         .fontWeight(.medium)
                 }
                 .padding(.bottom, 20)
+
+                // Offline warning (if not connected)
+                if !networkMonitor.isOnline {
+                    OfflineWarningCard()
+                        .padding(.bottom, 12)
+                }
                 
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {

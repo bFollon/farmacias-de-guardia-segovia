@@ -233,6 +233,9 @@ struct ClosestPharmacyResultView: View {
     @State private var showingMapOptions = false
     @State private var cacheTimestamp: TimeInterval? = nil
 
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -243,13 +246,13 @@ struct ClosestPharmacyResultView: View {
                         Image(systemName: "cross.circle.fill")
                             .font(.system(size: 60))
                             .foregroundColor(.green)
-                        
+
                         VStack(spacing: 4) {
                             Text("Farmacia más cercana")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
-                            
+
                             Text("De guardia y abierta ahora")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
@@ -258,7 +261,13 @@ struct ClosestPharmacyResultView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top)
-                    
+
+                    // Offline warning (if not connected)
+                    if !networkMonitor.isOnline {
+                        OfflineWarningCard()
+                            .padding(.horizontal)
+                    }
+
                     // Pharmacy info
                     VStack(alignment: .leading, spacing: 16) {
                         // Name and distance

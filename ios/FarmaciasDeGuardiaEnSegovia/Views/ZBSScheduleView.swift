@@ -26,6 +26,9 @@ struct ZBSScheduleView: View {
     @State private var showCantalejoInfo = false
     @State private var cacheTimestamp: TimeInterval? = nil
     @Environment(\.presentationMode) var presentationMode
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
     
     private var dateButtonText: String {
         if Calendar.current.isDateInToday(selectedDate) {
@@ -155,7 +158,13 @@ struct ZBSScheduleView: View {
                                     .fontWeight(.medium)
                             }
                             .padding(.bottom, 20)
-                            
+
+                            // Offline warning (if not connected)
+                            if !networkMonitor.isOnline {
+                                OfflineWarningCard()
+                                    .padding(.bottom, 12)
+                            }
+
                             // Pharmacies for this ZBS on selected date
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Farmacias de Guardia")
