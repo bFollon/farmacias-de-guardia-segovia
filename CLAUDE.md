@@ -286,3 +286,4 @@ Keep commit messages clean and professional without AI tool attribution.
 - **GPL-v3 licensed**: All files include copyright header
 - Not a professional iOS/Android developer work - expect unconventional patterns
 - Focus on practical functionality over perfect architecture
+- Don't commit changes until they have been validated by the user.
