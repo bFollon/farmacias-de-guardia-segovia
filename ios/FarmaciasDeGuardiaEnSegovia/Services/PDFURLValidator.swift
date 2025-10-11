@@ -72,6 +72,23 @@ class PDFURLValidator {
         self.session = URLSession(configuration: config)
     }
 
+    /// Check if a URL needs validation (not in cache or cache expired)
+    /// - Parameter url: The URL to check
+    /// - Returns: True if validation is needed
+    func needsValidation(for url: URL) -> Bool {
+        // Check if we're offline first
+        if !NetworkMonitor.shared.isOnline {
+            return false // No need to validate if offline
+        }
+
+        // Check cache
+        if let cached = validationCache[url], !cached.isExpired() {
+            return false // Cache hit, no validation needed
+        }
+
+        return true // Cache miss or expired, validation needed
+    }
+
     /// Validate a PDF URL using HTTP HEAD request
     /// - Parameter url: The URL to validate
     /// - Returns: Validation result
