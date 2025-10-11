@@ -24,7 +24,11 @@ struct ZBSScheduleView: View {
     @State private var isLoading = true
     @State private var isShowingDatePicker = false
     @State private var showCantalejoInfo = false
+    @State private var cacheTimestamp: TimeInterval? = nil
     @Environment(\.presentationMode) var presentationMode
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
     
     private var dateButtonText: String {
         if Calendar.current.isDateInToday(selectedDate) {
@@ -117,14 +121,15 @@ struct ZBSScheduleView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 if isLoading {
                     LoadingView()
                 } else if zbsSchedules.isEmpty {
                     NoScheduleView()
                 } else {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 12) {
+                    VStack(spacing: 0) {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 12) {
                             // ZBS name at the top (matching main view style)
                             HStack {
                                 Text(selectedZBS.icon)
@@ -153,7 +158,13 @@ struct ZBSScheduleView: View {
                                     .fontWeight(.medium)
                             }
                             .padding(.bottom, 20)
-                            
+
+                            // Offline warning (if not connected)
+                            if !networkMonitor.isOnline {
+                                OfflineWarningCard()
+                                    .padding(.bottom, 12)
+                            }
+
                             // Pharmacies for this ZBS on selected date
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Farmacias de Guardia")
@@ -270,6 +281,14 @@ struct ZBSScheduleView: View {
                             }
                         }
                         .padding()
+                        }
+
+                        // Cache freshness footer (fixed at bottom)
+                        if let cacheTimestamp = cacheTimestamp {
+                            Divider()
+                            CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                                .background(Color(UIColor.systemBackground))
+                        }
                     }
                 }
             }
@@ -335,12 +354,14 @@ struct ZBSScheduleView: View {
     
     private func loadZBSSchedules(forceRefresh: Bool = false) {
         isLoading = true
-        
+
         Task {
             let schedules = await ZBSScheduleService.getZBSSchedules(for: .segoviaRural, forceRefresh: forceRefresh) ?? []
-            
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: .segoviaRural)
+
             await MainActor.run {
                 self.zbsSchedules = schedules
+                self.cacheTimestamp = timestamp
                 self.isLoading = false
             }
         }

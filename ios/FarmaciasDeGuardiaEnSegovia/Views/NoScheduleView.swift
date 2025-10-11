@@ -18,16 +18,50 @@
 import SwiftUI
 
 struct NoScheduleView: View {
+    var isOffline: Bool = false
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     var body: some View {
         VStack(spacing: 20) {
-            Text("No hay farmacias de guardia programadas para hoy")
-                .font(.headline)
-                .multilineTextAlignment(.center)
-            
-            Text("(\(Date().formatted(date: .long, time: .omitted)))")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+            if !networkMonitor.isOnline || isOffline {
+                // Offline + no cache scenario
+                Image(systemName: "icloud.slash.fill")
+                    .font(.system(size: 64))
+                    .foregroundColor(Color.orange)
+
+                Text("Sin conexión y sin datos almacenados")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+
+                Text("No hay conexión a Internet y no hay datos descargados para esta región.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+
+                Text("Conecte a Internet e intente refrescar para descargar los horarios.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            } else {
+                // Normal empty state (no schedules in cache)
+                Image(systemName: "calendar.badge.exclamationmark")
+                    .font(.system(size: 64))
+                    .foregroundColor(.secondary)
+
+                Text("No hay farmacias de guardia programadas")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+
+                Text("Intente refrescar o seleccione una fecha diferente")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
-        .padding()
+        .padding(32)
     }
 }

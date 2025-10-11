@@ -231,23 +231,28 @@ struct ClosestPharmacyResultView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @State private var showingMapOptions = false
-    
+    @State private var cacheTimestamp: TimeInterval? = nil
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+            VStack(spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
                     // Header
                     VStack(spacing: 12) {
                         Image(systemName: "cross.circle.fill")
                             .font(.system(size: 60))
                             .foregroundColor(.green)
-                        
+
                         VStack(spacing: 4) {
                             Text("Farmacia más cercana")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
-                            
+
                             Text("De guardia y abierta ahora")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
@@ -256,7 +261,13 @@ struct ClosestPharmacyResultView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.top)
-                    
+
+                    // Offline warning (if not connected)
+                    if !networkMonitor.isOnline {
+                        OfflineWarningCard()
+                            .padding(.horizontal)
+                    }
+
                     // Pharmacy info
                     VStack(alignment: .leading, spacing: 16) {
                         // Name and distance
@@ -426,8 +437,16 @@ struct ClosestPharmacyResultView: View {
                     .cornerRadius(12)
                     
                     Spacer()
+                    }
+                    .padding()
                 }
-                .padding()
+
+                // Cache freshness footer (fixed at bottom)
+                if let cacheTimestamp = cacheTimestamp {
+                    Divider()
+                    CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                        .background(Color(UIColor.systemBackground))
+                }
             }
             .navigationTitle("Resultado")
             .navigationBarTitleDisplayMode(.inline)
@@ -447,6 +466,10 @@ struct ClosestPharmacyResultView: View {
                 Button("Cancelar", role: .cancel) { }
             } message: {
                 Text("Elije una aplicación de mapas")
+            }
+            .onAppear {
+                // Load cache timestamp for the result's region
+                cacheTimestamp = ScheduleCacheService.shared.getCacheTimestamp(for: result.region)
             }
         }
     }

@@ -18,8 +18,8 @@
 import Foundation
 import CoreLocation
 
-public struct Pharmacy: Identifiable {
-    public let id = UUID()
+public struct Pharmacy: Identifiable, Codable {
+    public let id: UUID
     public let name: String
     public let address: String
     public let phone: String
@@ -42,6 +42,16 @@ public struct Pharmacy: Identifiable {
     }
     
     public init(name: String, address: String, phone: String, additionalInfo: String?) {
+        self.id = UUID()
+        self.name = name
+        self.address = address
+        self.phone = phone
+        self.additionalInfo = additionalInfo
+    }
+
+    // Custom init for decoding with UUID
+    public init(id: UUID, name: String, address: String, phone: String, additionalInfo: String?) {
+        self.id = id
         self.name = name
         self.address = address
         self.phone = phone

@@ -17,9 +17,40 @@
 
 import Foundation
 
-public struct DutyTimeSpan: Equatable, Hashable {
+public struct DutyTimeSpan: Equatable, Hashable, Codable {
     public let start: Date
     public let end: Date
+
+    // Coding keys for custom encoding/decoding
+    private enum CodingKeys: String, CodingKey {
+        case startHour, startMinute, endHour, endMinute
+    }
+
+    // Custom encoding - store as time components instead of absolute dates
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        let calendar = Calendar.current
+
+        let startComponents = calendar.dateComponents([.hour, .minute], from: start)
+        let endComponents = calendar.dateComponents([.hour, .minute], from: end)
+
+        try container.encode(startComponents.hour ?? 0, forKey: .startHour)
+        try container.encode(startComponents.minute ?? 0, forKey: .startMinute)
+        try container.encode(endComponents.hour ?? 0, forKey: .endHour)
+        try container.encode(endComponents.minute ?? 0, forKey: .endMinute)
+    }
+
+    // Custom decoding - reconstruct from time components
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let startHour = try container.decode(Int.self, forKey: .startHour)
+        let startMinute = try container.decode(Int.self, forKey: .startMinute)
+        let endHour = try container.decode(Int.self, forKey: .endHour)
+        let endMinute = try container.decode(Int.self, forKey: .endMinute)
+
+        self.init(startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute)
+    }
     
     public init(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int) {
         let calendar = Calendar.current

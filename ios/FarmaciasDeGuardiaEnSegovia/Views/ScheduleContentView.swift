@@ -23,30 +23,47 @@ struct ScheduleContentView: View {
     let region: Region
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
-    
+    let cacheTimestamp: TimeInterval?
+
+    // Observe network status
+    @ObservedObject private var networkMonitor = NetworkMonitor.shared
+
+    // PDF link validation
+    @State private var isValidatingPDFLink = false
+    @State private var showPDFLinkError = false
+    @State private var pdfLinkErrorMessage = ""
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                // Region name at the top (matching ZBS style)
-                HStack {
-                    Text(region.icon)
-                        .font(.title)
-                    Text(region.name)
-                        .font(.title)
-                        .fontWeight(.medium)
-                }
-                .padding(.bottom, 5)
-                
-                // Date and time with calendar icon
-                HStack(spacing: 8) {
-                    Image(systemName: "calendar.circle.fill")
-                        .foregroundColor(.blue)
-                        .frame(width: 20)
-                    Text(formattedDateTime)
-                        .font(.title2)
-                        .fontWeight(.medium)
-                }
-                .padding(.bottom, 20)
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
+                    // Region name at the top (matching ZBS style)
+                    HStack {
+                        Text(region.icon)
+                            .font(.title)
+                        Text(region.name)
+                            .font(.title)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.bottom, 5)
+
+                    // Date and time with calendar icon
+                    HStack(spacing: 8) {
+                        Image(systemName: "calendar.circle.fill")
+                            .foregroundColor(.blue)
+                            .frame(width: 20)
+                        Text(formattedDateTime)
+                            .font(.title2)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.bottom, 20)
+
+                    // Offline warning (if not connected)
+                    if !networkMonitor.isOnline {
+                        OfflineWarningCard()
+                            .padding(.bottom, 12)
+                    }
                 
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
@@ -82,10 +99,14 @@ struct ScheduleContentView: View {
                     Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    
-                    Link("Calendario de Guardias - \(region.name)",
-                         destination: region.pdfURL)
-                        .font(.footnote)
+
+                    Button(action: {
+                        openPDFLink()
+                    }) {
+                        Text("Calendario de Guardias - \(region.name)")
+                    }
+                    .font(.footnote)
+                    .disabled(isValidatingPDFLink)
                     
                     let currentPharmacy = schedule.shifts[activeShift]?.first ?? schedule.dayShiftPharmacies.first
                     let shiftName = activeShift == .fullDay ? "24 horas" : (activeShift == .capitalDay ? "Diurno" : "Nocturno")
@@ -103,8 +124,78 @@ struct ScheduleContentView: View {
                             .padding(.top, 8)
                     }
                 }
+                }
+                .padding()
             }
-            .padding()
+
+            // Cache freshness indicator at bottom (fixed footer outside ScrollView)
+            if let cacheTimestamp = cacheTimestamp {
+                Divider()
+                CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
+                    .background(Color(UIColor.systemBackground))
+            }
+        }
+        .overlay {
+            if isValidatingPDFLink {
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                            .tint(.white)
+
+                        Text("Comprobando URL...")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .padding(32)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(16)
+                }
+            }
+        }
+        .alert("Error al abrir el enlace", isPresented: $showPDFLinkError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(pdfLinkErrorMessage)
+        }
+    }
+
+    private func openPDFLink() {
+        Task {
+            // Check if we need to show loading (cache miss)
+            let needsValidation = PDFURLValidator.shared.needsValidation(for: region.pdfURL)
+
+            await MainActor.run {
+                if needsValidation {
+                    isValidatingPDFLink = true
+                }
+            }
+
+            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+
+            await MainActor.run {
+                isValidatingPDFLink = false
+
+                if validationResult.isValid {
+                    openURL(region.pdfURL)
+                } else {
+                    // URL validation failed - trigger scraping to get fresh URLs
+                    DebugConfig.debugPrint("📄 PDF URL validation failed, triggering URL scraping")
+                    Task {
+                        _ = await PDFURLScrapingService.shared.scrapePDFURLs()
+                        // After scraping, show error to user
+                        await MainActor.run {
+                            if let errorMsg = validationResult.errorMessage {
+                                pdfLinkErrorMessage = errorMsg + "\n\nSe ha intentado actualizar los enlaces automáticamente."
+                                showPDFLinkError = true
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
