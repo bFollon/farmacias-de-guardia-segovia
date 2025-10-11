@@ -81,28 +81,39 @@ class RoutingService {
     
     /// Calculate driving route from user location to destination
     static func calculateDrivingRoute(from userLocation: CLLocation, to destination: CLLocation) async -> RouteResult? {
+        // Check cache first
+        if let cachedRoute = RouteCacheService.shared.getCachedRoute(from: userLocation, to: destination.coordinate) {
+            DebugConfig.debugPrint("🗺️ Using cached route")
+            return RouteResult(
+                distance: cachedRoute.distance,
+                travelTime: cachedRoute.travelTime,
+                walkingTime: cachedRoute.walkingTime,
+                isEstimated: cachedRoute.isEstimated
+            )
+        }
+
         // Create requests for both driving and walking routes
         let drivingRequest = MKDirections.Request()
         drivingRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
         drivingRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination.coordinate))
         drivingRequest.transportType = .automobile
         drivingRequest.requestsAlternateRoutes = false
-        
+
         let walkingRequest = MKDirections.Request()
         walkingRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: userLocation.coordinate))
         walkingRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination.coordinate))
         walkingRequest.transportType = .walking
         walkingRequest.requestsAlternateRoutes = false
-        
+
         do {
             DebugConfig.debugPrint("🗺️ Calculating routes from \(userLocation.coordinate) to \(destination.coordinate)")
-            
+
             // Calculate both routes concurrently
             async let drivingResponse = MKDirections(request: drivingRequest).calculate()
             async let walkingResponse = MKDirections(request: walkingRequest).calculate()
-            
+
             let (drivingResult, walkingResult) = try await (drivingResponse, walkingResponse)
-            
+
             if let drivingRoute = drivingResult.routes.first,
                let walkingRoute = walkingResult.routes.first {
                 let result = RouteResult(
@@ -113,6 +124,17 @@ class RoutingService {
                 )
                 DebugConfig.debugPrint("🚗 Driving: \(result.formattedDistance), \(result.formattedTravelTime)")
                 DebugConfig.debugPrint("🚶 Walking: \(result.formattedWalkingTime)")
+
+                // Cache the successful result
+                RouteCacheService.shared.cacheRoute(
+                    from: userLocation,
+                    to: destination.coordinate,
+                    distance: drivingRoute.distance,
+                    travelTime: drivingRoute.expectedTravelTime,
+                    walkingTime: walkingRoute.expectedTravelTime,
+                    isEstimated: false
+                )
+
                 return result
             }
         } catch {
@@ -120,14 +142,27 @@ class RoutingService {
             // Fall back to straight-line distance if routing fails
             let straightLineDistance = userLocation.distance(from: destination)
             DebugConfig.debugPrint("📏 Falling back to straight-line distance: \(String(format: "%.1f km", straightLineDistance / 1000))")
-            return RouteResult(
+
+            let result = RouteResult(
                 distance: straightLineDistance,
                 travelTime: 0,
                 walkingTime: 0,
                 isEstimated: true
             )
+
+            // Cache the estimated result as well (helps when offline)
+            RouteCacheService.shared.cacheRoute(
+                from: userLocation,
+                to: destination.coordinate,
+                distance: straightLineDistance,
+                travelTime: 0,
+                walkingTime: 0,
+                isEstimated: true
+            )
+
+            return result
         }
-        
+
         return nil
     }
     
