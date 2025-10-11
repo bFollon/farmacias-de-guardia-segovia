@@ -266,6 +266,19 @@ When implementing features:
 - Complex multi-ZBS PDF with shared/separate schedules
 - Requires ZBS selection before viewing schedules
 
+## Git Commit Guidelines
+
+**DO NOT include Claude Code promotional text in commit messages.**
+
+Never add the following to any commits:
+```
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+Keep commit messages clean and professional without AI tool attribution.
+
 ## Project Context Notes
 
 - **"Vibe coded"**: Built primarily with AI assistance (see README.md)
