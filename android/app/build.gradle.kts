@@ -85,6 +85,9 @@ dependencies {
     // Force modern androidx.fragment version (replaces ancient 1.0.0 from Play Services)
     implementation("androidx.fragment:fragment-ktx:1.8.9")
 
+    // Window Size Classes for responsive layouts
+    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
