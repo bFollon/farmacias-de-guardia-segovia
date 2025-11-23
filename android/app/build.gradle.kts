@@ -13,8 +13,8 @@ android {
         applicationId = "com.github.bfollon.farmaciasdeguardiaensegovia"
         minSdk = 26
         targetSdk = 36
-        versionCode = 10
-        versionName = "1.0.1"
+        versionCode = 15
+        versionName = "1.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -81,7 +81,10 @@ dependencies {
     
     // Location services
     implementation("com.google.android.gms:play-services-location:21.0.1")
-    
+
+    // Force modern androidx.fragment version (replaces ancient 1.0.0 from Play Services)
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
