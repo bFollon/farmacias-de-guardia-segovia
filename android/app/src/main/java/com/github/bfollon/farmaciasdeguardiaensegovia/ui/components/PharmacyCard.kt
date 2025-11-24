@@ -18,16 +18,29 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.components
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +48,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import java.net.URLEncoder
 
@@ -78,11 +92,9 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
                     )
-                    ResponsiveText(
+                    Text(
                         text = "Activa ahora",
-                        compactSize = MaterialTheme.typography.labelMedium.fontSize,
-                        mediumSize = MaterialTheme.typography.labelMedium.fontSize,
-                        expandedSize = MaterialTheme.typography.labelMedium.fontSize,
+                        style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Medium
                     )
@@ -112,11 +124,9 @@ fun PharmacyCard(
                         tint = Color(0xFFFF9800), // Orange color
                         modifier = Modifier.size(20.dp)
                     )
-                    ResponsiveText(
+                    Text(
                         text = "Fuera del horario de guardia",
-                        compactSize = MaterialTheme.typography.labelMedium.fontSize,
-                        mediumSize = MaterialTheme.typography.labelMedium.fontSize,
-                        expandedSize = MaterialTheme.typography.labelMedium.fontSize,
+                        style = MaterialTheme.typography.labelMedium,
                         color = Color.Black,
                         fontWeight = FontWeight.Medium
                     )
@@ -124,11 +134,9 @@ fun PharmacyCard(
             }
 
             // Pharmacy name
-            ResponsiveText(
+            Text(
                 text = pharmacy.name,
-                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -144,16 +152,14 @@ fun PharmacyCard(
                     tint = MaterialTheme.colorScheme.outline,
                     modifier = Modifier.size(20.dp)
                 )
-                ResponsiveText(
+                Text(
                     text = pharmacy.address,
-                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
                         val encodedQuery = buildMapsQuery(pharmacy.name, pharmacy.address)
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$encodedQuery"))
+                        val intent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
                         context.startActivity(intent)
                     }
                 )
@@ -171,16 +177,14 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.size(20.dp)
                     )
-                    ResponsiveText(
+                    Text(
                         text = pharmacy.formattedPhone,
-                        compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable {
                             val intent =
-                                Intent(Intent.ACTION_DIAL, Uri.parse("tel:${pharmacy.phone}"))
+                                Intent(Intent.ACTION_DIAL, "tel:${pharmacy.phone}".toUri())
                             context.startActivity(intent)
                         }
                     )
@@ -200,11 +204,9 @@ fun PharmacyCard(
                             tint = MaterialTheme.colorScheme.outline,
                             modifier = Modifier.size(20.dp)
                         )
-                        ResponsiveText(
+                        Text(
                             text = info,
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }

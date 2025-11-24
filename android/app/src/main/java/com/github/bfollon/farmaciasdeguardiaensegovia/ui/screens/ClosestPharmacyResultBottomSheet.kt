@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
 import java.net.URLEncoder
 import androidx.core.net.toUri
-import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 
 /**
  * Material 3 ModalBottomSheet that displays the closest pharmacy result
@@ -55,7 +54,7 @@ fun ClosestPharmacyResultBottomSheet(
     val bottomSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
     )
-    
+
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = bottomSheetState
@@ -64,7 +63,12 @@ fun ClosestPharmacyResultBottomSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
-                .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 40.dp), // Extra bottom padding for gesture area
+                .padding(
+                    start = 24.dp,
+                    end = 24.dp,
+                    top = 24.dp,
+                    bottom = 40.dp
+                ), // Extra bottom padding for gesture area
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Header with pharmacy icon and title
@@ -78,27 +82,23 @@ fun ClosestPharmacyResultBottomSheet(
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(64.dp)
                 )
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
-                ResponsiveText(
+
+                Text(
                     text = "Farmacia más cercana",
-                    compactSize = MaterialTheme.typography.headlineSmall.fontSize,
-                    mediumSize = MaterialTheme.typography.headlineMedium.fontSize,
-                    expandedSize = MaterialTheme.typography.headlineMedium.fontSize,
+                    style = MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center
                 )
-                
-                ResponsiveText(
+
+                Text(
                     text = "De guardia y abierta ahora",
-                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
             }
-            
+
             // Card 1: Pharmacy name and distance/time info
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -113,15 +113,13 @@ fun ClosestPharmacyResultBottomSheet(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     // Pharmacy name
-                    ResponsiveText(
+                    Text(
                         text = result.pharmacy.name,
-                        compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                        mediumSize = MaterialTheme.typography.titleLarge.fontSize,
-                        expandedSize = MaterialTheme.typography.titleLarge.fontSize,
+                        style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold
                     )
-                    
+
                     // Inline distance and travel time (iOS style)
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -134,22 +132,18 @@ fun ClosestPharmacyResultBottomSheet(
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp)
                         )
-                        ResponsiveText(
+                        Text(
                             text = result.formattedDistance,
-                            compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                            style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Medium
                         )
-                        
+
                         // Travel time (if available)
                         if (result.formattedTravelTime.isNotEmpty()) {
-                            ResponsiveText(
+                            Text(
                                 text = "•",
-                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Icon(
@@ -158,23 +152,19 @@ fun ClosestPharmacyResultBottomSheet(
                                 tint = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            ResponsiveText(
+                            Text(
                                 text = result.formattedTravelTime,
-                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.secondary,
                                 fontWeight = FontWeight.Medium
                             )
                         }
-                        
+
                         // Walking time (if available)
                         if (result.formattedWalkingTime.isNotEmpty()) {
-                            ResponsiveText(
+                            Text(
                                 text = "•",
-                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Icon(
@@ -183,11 +173,9 @@ fun ClosestPharmacyResultBottomSheet(
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            ResponsiveText(
+                            Text(
                                 text = result.formattedWalkingTime,
-                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.tertiary,
                                 fontWeight = FontWeight.Medium
                             )
@@ -195,13 +183,13 @@ fun ClosestPharmacyResultBottomSheet(
                     }
                 }
             }
-            
+
             // Divider
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 8.dp),
                 color = MaterialTheme.colorScheme.outlineVariant
             )
-            
+
             // Card 2: Contact information (Address and Phone)
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -219,19 +207,15 @@ fun ClosestPharmacyResultBottomSheet(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        ResponsiveText(
+                        Text(
                             text = "Dirección",
-                            compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                            style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.SemiBold
                         )
-                        ResponsiveText(
+                        Text(
                             text = result.pharmacy.address,
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.primary,
                             textDecoration = TextDecoration.Underline,
                             modifier = Modifier.clickable {
@@ -239,29 +223,25 @@ fun ClosestPharmacyResultBottomSheet(
                             }
                         )
                     }
-                    
+
                     // Phone section (if available)
                     if (result.pharmacy.phone.isNotEmpty() && result.pharmacy.phone != "No disponible") {
                         HorizontalDivider(
                             color = MaterialTheme.colorScheme.outlineVariant
                         )
-                        
+
                         Column(
                             verticalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
-                            ResponsiveText(
+                            Text(
                                 text = "Teléfono",
-                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontWeight = FontWeight.SemiBold
                             )
-                            ResponsiveText(
+                            Text(
                                 text = result.pharmacy.phone,
-                                compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.primary,
                                 textDecoration = TextDecoration.Underline,
                                 modifier = Modifier.clickable {
@@ -272,13 +252,13 @@ fun ClosestPharmacyResultBottomSheet(
                     }
                 }
             }
-            
+
             // Divider
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 8.dp),
                 color = MaterialTheme.colorScheme.outlineVariant
             )
-            
+
             // Card 3: Service information
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -292,78 +272,64 @@ fun ClosestPharmacyResultBottomSheet(
                         .padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    ResponsiveText(
+                    Text(
                         text = "Información del servicio",
-                        compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                        style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.SemiBold
                     )
-                    
+
                     // Region info
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        ResponsiveText(
+                        Text(
                             text = "Región:",
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        ResponsiveText(
+                        Text(
                             text = result.regionDisplayName,
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Medium
                         )
                     }
-                    
+
                     // Schedule info
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        ResponsiveText(
+                        Text(
                             text = "Horario:",
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        ResponsiveText(
+                        Text(
                             text = result.timeSpan.displayName,
-                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Medium
                         )
                     }
-                    
+
                     // Additional info (if available)
                     result.pharmacy.additionalInfo?.let { info ->
                         if (info.isNotEmpty()) {
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
-                                ResponsiveText(
+                                Text(
                                     text = "Información adicional",
-                                    compactSize = MaterialTheme.typography.titleMedium.fontSize,
-                                    mediumSize = MaterialTheme.typography.titleMedium.fontSize,
-                                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.onSurface,
                                     fontWeight = FontWeight.SemiBold
                                 )
-                                ResponsiveText(
+                                Text(
                                     text = info,
-                                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
-                                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-                                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                    style = MaterialTheme.typography.bodyLarge,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -371,9 +337,9 @@ fun ClosestPharmacyResultBottomSheet(
                     }
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(24.dp))
-            
+
             // Action buttons
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -394,7 +360,7 @@ fun ClosestPharmacyResultBottomSheet(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("Abrir en Mapas")
                 }
-                
+
                 // Call button (if phone available)
                 if (result.pharmacy.phone.isNotEmpty() && result.pharmacy.phone != "No disponible") {
                     FilledTonalButton(
@@ -424,11 +390,11 @@ private fun openInMaps(context: Context, result: ClosestPharmacyResult) {
     // Use enhanced query with pharmacy name (same as iOS)
     val query = "${result.pharmacy.name}, ${result.pharmacy.address}, Segovia, Spain"
     val encodedQuery = URLEncoder.encode(query, "UTF-8")
-    
+
     // Try to open in Google Maps first, fallback to generic maps intent
     val googleMapsIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
     googleMapsIntent.setPackage("com.google.android.apps.maps")
-    
+
     if (googleMapsIntent.resolveActivity(context.packageManager) != null) {
         context.startActivity(googleMapsIntent)
     } else {

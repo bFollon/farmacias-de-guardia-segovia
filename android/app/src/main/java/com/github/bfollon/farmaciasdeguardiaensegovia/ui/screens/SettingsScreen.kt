@@ -17,21 +17,33 @@
 
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 
 /**
  * Settings screen that displays cache management and information options
@@ -81,11 +93,9 @@ private fun CachePDFSection(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Section Header
-        ResponsiveText(
+        Text(
             text = "Caché de PDFs",
-            compactSize = 12.sp,
-            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-            expandedSize = 16.sp,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -104,19 +114,15 @@ private fun CachePDFSection(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    ResponsiveText(
+                    Text(
                         text = "PDFs en caché",
-                        compactSize = 14.sp,
-                        mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                        expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
 
-                    ResponsiveText(
+                    Text(
                         text = "Los horarios PDF se almacenan localmente para una carga más rápida y acceso sin conexión.",
-                        compactSize = 12.sp,
-                        mediumSize = 13.sp,
-                        expandedSize = 14.sp,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -158,11 +164,9 @@ private fun InformationSection(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Section Header
-        ResponsiveText(
+        Text(
             text = "Información",
-            compactSize = 12.sp,
-            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
-            expandedSize = 16.sp,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -220,11 +224,9 @@ private fun SettingsListItem(
                     contentDescription = null,
                     tint = iconTint
                 )
-                ResponsiveText(
+                Text(
                     text = text,
-                    compactSize = 14.sp,
-                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
-                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
+                    style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
