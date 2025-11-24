@@ -30,6 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 
 /**
  * Settings screen that displays cache management and information options
@@ -79,9 +81,11 @@ private fun CachePDFSection(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Section Header
-        Text(
+        ResponsiveText(
             text = "Caché de PDFs",
-            style = MaterialTheme.typography.titleSmall,
+            compactSize = 12.sp,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = 16.sp,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -100,15 +104,19 @@ private fun CachePDFSection(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(
+                    ResponsiveText(
                         text = "PDFs en caché",
-                        style = MaterialTheme.typography.titleMedium,
+                        compactSize = 14.sp,
+                        mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                        expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                         fontWeight = FontWeight.Bold
                     )
-                    
-                    Text(
+
+                    ResponsiveText(
                         text = "Los horarios PDF se almacenan localmente para una carga más rápida y acceso sin conexión.",
-                        style = MaterialTheme.typography.bodySmall,
+                        compactSize = 12.sp,
+                        mediumSize = 13.sp,
+                        expandedSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -150,9 +158,11 @@ private fun InformationSection(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Section Header
-        Text(
+        ResponsiveText(
             text = "Información",
-            style = MaterialTheme.typography.titleSmall,
+            compactSize = 12.sp,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = 16.sp,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -210,9 +220,11 @@ private fun SettingsListItem(
                     contentDescription = null,
                     tint = iconTint
                 )
-                Text(
+                ResponsiveText(
                     text = text,
-                    style = MaterialTheme.typography.bodyLarge,
+                    compactSize = 14.sp,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }

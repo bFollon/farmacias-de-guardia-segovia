@@ -34,6 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheStatusViewModel
@@ -67,9 +69,11 @@ fun CacheStatusScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 CircularProgressIndicator()
-                Text(
+                ResponsiveText(
                     text = "Comprobando estado de la caché...",
-                    style = MaterialTheme.typography.bodySmall,
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -106,24 +110,30 @@ private fun CacheStatusHeader(cacheStatuses: List<RegionCacheStatus>) {
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Text(
+        ResponsiveText(
             text = "Estado de la caché de PDFs",
-            style = MaterialTheme.typography.titleMedium,
+            compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                expandedSize = MaterialTheme.typography.titleMedium.fontSize,
             fontWeight = FontWeight.Bold
         )
         
         val lastChecked = cacheStatuses.firstOrNull()?.lastChecked
         if (lastChecked != null) {
             val formatter = SimpleDateFormat("d 'sept' yyyy, HH:mm", Locale.forLanguageTag("es-ES"))
-            Text(
+            ResponsiveText(
                 text = "Última búsqueda de actualizaciones: ${formatter.format(Date(lastChecked))}",
-                style = MaterialTheme.typography.bodySmall,
+                compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         } else {
-            Text(
+            ResponsiveText(
                 text = "La caché nunca se ha comprobado para actualizaciones",
-                style = MaterialTheme.typography.bodySmall,
+                compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -157,13 +167,17 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    ResponsiveText(
                         text = status.region.icon,
-                        style = MaterialTheme.typography.headlineSmall
+                        compactSize = MaterialTheme.typography.titleLarge.fontSize,
+                        mediumSize = MaterialTheme.typography.headlineSmall.fontSize,
+                        expandedSize = MaterialTheme.typography.headlineSmall.fontSize
                     )
-                    Text(
+                    ResponsiveText(
                         text = status.region.name,
-                        style = MaterialTheme.typography.titleMedium,
+                        compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -183,9 +197,11 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         tint = status.statusColor,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(
+                    ResponsiveText(
                         text = status.statusText,
-                        style = MaterialTheme.typography.labelMedium,
+                        compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                        expandedSize = MaterialTheme.typography.bodySmall.fontSize,
                         fontWeight = FontWeight.Medium,
                         color = status.statusColor
                     )
@@ -203,14 +219,18 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
+                        ResponsiveText(
                             text = "Descargado:",
-                            style = MaterialTheme.typography.bodySmall,
+                            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Text(
+                        ResponsiveText(
                             text = status.formattedDownloadDate,
-                            style = MaterialTheme.typography.bodySmall,
+                            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                             fontWeight = FontWeight.Medium
                         )
                     }
@@ -219,14 +239,18 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
+                        ResponsiveText(
                             text = "Tamaño:",
-                            style = MaterialTheme.typography.bodySmall,
+                            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Text(
+                        ResponsiveText(
                             text = status.formattedFileSize,
-                            style = MaterialTheme.typography.bodySmall,
+                            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                             fontWeight = FontWeight.Medium
                         )
                     }
@@ -244,9 +268,11 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                                 tint = Color(0xFFFFA726), // Orange
                                 modifier = Modifier.size(16.dp)
                             )
-                            Text(
+                            ResponsiveText(
                                 text = "Hay una actualización disponible para este PDF",
-                                style = MaterialTheme.typography.bodySmall,
+                                compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                                 color = Color(0xFFFFA726)
                             )
                         }
@@ -265,9 +291,11 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(16.dp)
                     )
-                    Text(
+                    ResponsiveText(
                         text = "PDF no descargado - se obtendrá cuando sea necesario",
-                        style = MaterialTheme.typography.bodySmall,
+                        compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -284,9 +312,11 @@ private fun CacheInfoCard() {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(
+        ResponsiveText(
             text = "Los PDFs se almacenan localmente para una carga más rápida y acceso sin conexión.",
-            style = MaterialTheme.typography.bodySmall,
+            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         
@@ -309,9 +339,11 @@ private fun CacheInfoCard() {
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
-                    Text(
+                    ResponsiveText(
                         text = "Información de la caché",
-                        style = MaterialTheme.typography.titleSmall,
+                        compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                    mediumSize = MaterialTheme.typography.titleSmall.fontSize,
+                    expandedSize = MaterialTheme.typography.titleSmall.fontSize,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -346,15 +378,19 @@ private fun InfoColorRow(color: Color, text: String) {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
+        ResponsiveText(
             text = "•",
             color = color,
-            style = MaterialTheme.typography.bodyMedium,
+            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
             fontWeight = FontWeight.Bold
         )
-        Text(
+        ResponsiveText(
             text = text,
-            style = MaterialTheme.typography.bodyMedium
+            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = MaterialTheme.typography.bodyLarge.fontSize
         )
     }
 }

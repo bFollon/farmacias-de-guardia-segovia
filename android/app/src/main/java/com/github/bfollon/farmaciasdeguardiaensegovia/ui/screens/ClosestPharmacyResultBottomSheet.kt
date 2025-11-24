@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
 import java.net.URLEncoder
 import androidx.core.net.toUri
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 
 /**
  * Material 3 ModalBottomSheet that displays the closest pharmacy result
@@ -80,15 +81,19 @@ fun ClosestPharmacyResultBottomSheet(
                 
                 Spacer(modifier = Modifier.height(16.dp))
                 
-                Text(
+                ResponsiveText(
                     text = "Farmacia más cercana",
-                    style = MaterialTheme.typography.headlineMedium,
+                    compactSize = MaterialTheme.typography.headlineSmall.fontSize,
+                    mediumSize = MaterialTheme.typography.headlineMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.headlineMedium.fontSize,
                     textAlign = TextAlign.Center
                 )
                 
-                Text(
+                ResponsiveText(
                     text = "De guardia y abierta ahora",
-                    style = MaterialTheme.typography.bodyLarge,
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
@@ -108,9 +113,11 @@ fun ClosestPharmacyResultBottomSheet(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     // Pharmacy name
-                    Text(
+                    ResponsiveText(
                         text = result.pharmacy.name,
-                        style = MaterialTheme.typography.titleLarge,
+                        compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+                        expandedSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold
                     )
@@ -127,18 +134,22 @@ fun ClosestPharmacyResultBottomSheet(
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text(
+                        ResponsiveText(
                             text = result.formattedDistance,
-                            style = MaterialTheme.typography.titleMedium,
+                            compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Medium
                         )
                         
                         // Travel time (if available)
                         if (result.formattedTravelTime.isNotEmpty()) {
-                            Text(
+                            ResponsiveText(
                                 text = "•",
-                                style = MaterialTheme.typography.titleMedium,
+                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Icon(
@@ -147,9 +158,11 @@ fun ClosestPharmacyResultBottomSheet(
                                 tint = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(
+                            ResponsiveText(
                                 text = result.formattedTravelTime,
-                                style = MaterialTheme.typography.titleMedium,
+                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.secondary,
                                 fontWeight = FontWeight.Medium
                             )
@@ -157,9 +170,11 @@ fun ClosestPharmacyResultBottomSheet(
                         
                         // Walking time (if available)
                         if (result.formattedWalkingTime.isNotEmpty()) {
-                            Text(
+                            ResponsiveText(
                                 text = "•",
-                                style = MaterialTheme.typography.titleMedium,
+                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Icon(
@@ -168,9 +183,11 @@ fun ClosestPharmacyResultBottomSheet(
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier.size(20.dp)
                             )
-                            Text(
+                            ResponsiveText(
                                 text = result.formattedWalkingTime,
-                                style = MaterialTheme.typography.titleMedium,
+                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.tertiary,
                                 fontWeight = FontWeight.Medium
                             )
@@ -202,15 +219,19 @@ fun ClosestPharmacyResultBottomSheet(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        Text(
+                        ResponsiveText(
                             text = "Dirección",
-                            style = MaterialTheme.typography.titleMedium,
+                            compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.SemiBold
                         )
-                        Text(
+                        ResponsiveText(
                             text = result.pharmacy.address,
-                            style = MaterialTheme.typography.bodyLarge,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                             color = MaterialTheme.colorScheme.primary,
                             textDecoration = TextDecoration.Underline,
                             modifier = Modifier.clickable {
@@ -228,15 +249,19 @@ fun ClosestPharmacyResultBottomSheet(
                         Column(
                             verticalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
-                            Text(
+                            ResponsiveText(
                                 text = "Teléfono",
-                                style = MaterialTheme.typography.titleMedium,
+                                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                 color = MaterialTheme.colorScheme.onSurface,
                                 fontWeight = FontWeight.SemiBold
                             )
-                            Text(
+                            ResponsiveText(
                                 text = result.pharmacy.phone,
-                                style = MaterialTheme.typography.bodyLarge,
+                                compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                                 color = MaterialTheme.colorScheme.primary,
                                 textDecoration = TextDecoration.Underline,
                                 modifier = Modifier.clickable {
@@ -267,9 +292,11 @@ fun ClosestPharmacyResultBottomSheet(
                         .padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Text(
+                    ResponsiveText(
                         text = "Información del servicio",
-                        style = MaterialTheme.typography.titleMedium,
+                        compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -279,14 +306,18 @@ fun ClosestPharmacyResultBottomSheet(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
+                        ResponsiveText(
                             text = "Región:",
-                            style = MaterialTheme.typography.bodyLarge,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Text(
+                        ResponsiveText(
                             text = result.regionDisplayName,
-                            style = MaterialTheme.typography.bodyLarge,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Medium
                         )
@@ -297,14 +328,18 @@ fun ClosestPharmacyResultBottomSheet(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
+                        ResponsiveText(
                             text = "Horario:",
-                            style = MaterialTheme.typography.bodyLarge,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Text(
+                        ResponsiveText(
                             text = result.timeSpan.displayName,
-                            style = MaterialTheme.typography.bodyLarge,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Medium
                         )
@@ -316,15 +351,19 @@ fun ClosestPharmacyResultBottomSheet(
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
-                                Text(
+                                ResponsiveText(
                                     text = "Información adicional",
-                                    style = MaterialTheme.typography.titleMedium,
+                                    compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                                     color = MaterialTheme.colorScheme.onSurface,
                                     fontWeight = FontWeight.SemiBold
                                 )
-                                Text(
+                                ResponsiveText(
                                     text = info,
-                                    style = MaterialTheme.typography.bodyMedium,
+                                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }

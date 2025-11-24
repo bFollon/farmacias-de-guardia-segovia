@@ -104,9 +104,9 @@ fun MainScreen(
             // Main title with gradient effect - responsive font size
             ResponsiveText(
                 text = "Farmacias de Guardia",
-                compactSize = 26.sp,   // Very narrow screens
-                mediumSize = 28.sp,    // Standard phones (S24)
-                expandedSize = 32.sp,  // Large phones (S10+)
+                compactSize = MaterialTheme.typography.headlineSmall.fontSize,
+                mediumSize = MaterialTheme.typography.headlineMedium.fontSize,
+                expandedSize = MaterialTheme.typography.headlineLarge.fontSize,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
@@ -123,9 +123,9 @@ fun MainScreen(
             // Subtitle
             ResponsiveText(
                 text = "Seleccione su región para consultar las farmacias de guardia.",
-                compactSize = 14.sp,   // Compact screens
-                mediumSize = 15.sp,    // Medium screens (S24)
-                expandedSize = 16.sp,  // Large screens (S10+)
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.bodyLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -181,15 +181,15 @@ fun MainScreen(
             ) {
                 ResponsiveText(
                     text = "Acerca de",
-                    compactSize = 12.sp,   // Compact screens
-                    mediumSize = 13.sp,    // Medium screens (S24)
-                    expandedSize = 14.sp,  // Large screens (S10+)
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyMedium.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.SemiBold,
                     color = IOSBlue
                 )
             }
-            
-            Spacer(modifier = Modifier.height(16.dp))
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
@@ -215,9 +215,9 @@ fun OfflineDialog(
         title = {
             ResponsiveText(
                 text = "Modo sin conexión",
-                compactSize = 20.sp,   // Compact screens
-                mediumSize = 22.sp,    // Medium screens (S24)
-                expandedSize = 24.sp,  // Large screens (S10+)
+                compactSize = MaterialTheme.typography.titleLarge.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.titleLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.headlineSmall.fontSize,  // Large screens (S10+)
                 fontWeight = FontWeight.Bold
             )
         },
@@ -227,14 +227,14 @@ fun OfflineDialog(
             ) {
                 ResponsiveText(
                     text = "No hay conexión a Internet. La aplicación está usando datos almacenados localmente.",
-                    compactSize = 13.sp,   // Compact screens
-                    mediumSize = 14.sp,    // Medium screens (S24)
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
                     expandedSize = 15.sp   // Large screens (S10+)
                 )
                 ResponsiveText(
                     text = "Los horarios mostrados corresponden a la última actualización descargada.",
-                    compactSize = 13.sp,   // Compact screens
-                    mediumSize = 14.sp,    // Medium screens (S24)
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
                     expandedSize = 15.sp   // Large screens (S10+)
                 )
             }
@@ -243,9 +243,9 @@ fun OfflineDialog(
             TextButton(onClick = onGoToSettings) {
                 ResponsiveText(
                     text = "Ir a Ajustes",
-                    compactSize = 13.sp,   // Compact screens
-                    mediumSize = 14.sp,    // Medium screens (S24)
-                    expandedSize = 15.sp,  // Large screens (S10+)
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.SemiBold
                 )
             }
@@ -254,9 +254,9 @@ fun OfflineDialog(
             TextButton(onClick = onDismiss) {
                 ResponsiveText(
                     text = "Cerrar",
-                    compactSize = 13.sp,   // Compact screens
-                    mediumSize = 14.sp,    // Medium screens (S24)
-                    expandedSize = 15.sp,  // Large screens (S10+)
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -302,18 +302,18 @@ fun RegionCard(
             // Region icon emoji
             ResponsiveText(
                 text = region.icon,
-                compactSize = 28.sp,   // Compact screens
-                mediumSize = 30.sp,    // Medium screens (S24)
-                expandedSize = 32.sp,  // Large screens (S10+)
+                compactSize = MaterialTheme.typography.headlineMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.headlineMedium.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.headlineLarge.fontSize,  // Large screens (S10+)
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             // Region name
             ResponsiveText(
                 text = region.name,
-                compactSize = 14.sp,   // Compact screens
-                mediumSize = 15.sp,    // Medium screens (S24)
-                expandedSize = 16.sp,  // Large screens (S10+)
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.bodyLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,
