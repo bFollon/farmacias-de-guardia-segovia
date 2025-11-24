@@ -73,11 +73,17 @@ fun OfflineWarningCard(
                 modifier = Modifier.size(20.dp)
             )
 
-            Text(
+            ResponsiveText(
                 text = "Sin conexión - usando datos almacenados",
-                style = MaterialTheme.typography.bodySmall,
+                compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                 color = Color(0xFFFFA726),
-                lineHeight = 18.sp
+                lineHeight = responsiveTextSize(
+                    compactSize = 16.sp,
+                    mediumSize = 18.sp,
+                    expandedSize = 20.sp
+                )
             )
         }
     }

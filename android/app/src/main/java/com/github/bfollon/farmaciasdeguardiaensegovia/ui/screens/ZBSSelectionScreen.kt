@@ -43,6 +43,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
 
@@ -60,9 +61,11 @@ fun ZBSSelectionScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Modal title
-        Text(
+        ResponsiveText(
             text = "Segovia Rural",
-            fontSize = 24.sp,
+            compactSize = MaterialTheme.typography.titleLarge.fontSize,
+            mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+            expandedSize = MaterialTheme.typography.headlineSmall.fontSize,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 8.dp)
         )
@@ -70,19 +73,23 @@ fun ZBSSelectionScreen(
         Spacer(modifier = Modifier.height(16.dp))
         
         // Title and description
-        Text(
+        ResponsiveText(
             text = "Selecciona tu Zona Básica de Salud",
-            fontSize = 22.sp,
+            compactSize = MaterialTheme.typography.titleLarge.fontSize,
+            mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+            expandedSize = MaterialTheme.typography.titleLarge.fontSize,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
         
         Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
+
+        ResponsiveText(
             text = "Elige la zona rural de Segovia para ver las farmacias de guardia correspondientes.",
-            fontSize = 16.sp,
+            compactSize = 14.sp,
+            mediumSize = 15.sp,
+            expandedSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -144,16 +151,20 @@ fun ZBSSelectionScreen(
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
+                ResponsiveText(
                     text = "Nota",
-                    fontSize = 14.sp,
+                    compactSize = 12.sp,
+                    mediumSize = 13.sp,
+                    expandedSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
+                ResponsiveText(
                     text = "Cada zona básica de salud tiene sus farmacias asignadas según el calendario oficial.",
-                    fontSize = 14.sp,
+                    compactSize = 12.sp,
+                    mediumSize = 13.sp,
+                    expandedSize = 14.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
@@ -195,15 +206,19 @@ fun ZBSCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
+            ResponsiveText(
                 text = zbs.icon,
-                fontSize = 32.sp,
+                compactSize = 28.sp,
+                mediumSize = 30.sp,
+                expandedSize = 32.sp,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            
-            Text(
+
+            ResponsiveText(
                 text = zbs.name,
-                fontSize = 16.sp,
+                compactSize = 14.sp,
+                mediumSize = 15.sp,
+                expandedSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.Center,

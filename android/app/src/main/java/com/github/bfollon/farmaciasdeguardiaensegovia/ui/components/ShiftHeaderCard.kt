@@ -72,21 +72,27 @@ fun ShiftHeaderCard(
             )
             
             Column(modifier = Modifier.weight(1f)) {
-                Text(
+                ResponsiveText(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall,
+                    compactSize = MaterialTheme.typography.titleSmall.fontSize,
+                    mediumSize = MaterialTheme.typography.titleSmall.fontSize,
+                    expandedSize = MaterialTheme.typography.titleSmall.fontSize,
                     fontWeight = FontWeight.SemiBold,
                     color = color
                 )
-                Text(
+                ResponsiveText(
                     text = timeRange,
-                    style = MaterialTheme.typography.bodySmall,
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                    mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                    expandedSize = MaterialTheme.typography.bodySmall.fontSize,
                     color = MaterialTheme.colorScheme.outline
                 )
                 if (isActive) {
-                    Text(
+                    ResponsiveText(
                         text = "Activo ahora",
-                        style = MaterialTheme.typography.labelSmall,
+                        compactSize = MaterialTheme.typography.labelSmall.fontSize,
+                        mediumSize = MaterialTheme.typography.labelSmall.fontSize,
+                        expandedSize = MaterialTheme.typography.labelSmall.fontSize,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Medium
                     )

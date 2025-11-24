@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * Information card for Cantalejo region
@@ -58,9 +59,11 @@ fun CantalejoDisclaimerCard(
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(20.dp)
         )
-        Text(
+        ResponsiveText(
             text = "Se muestran ambas farmacias. Llama antes de ir para confirmar cuál está de guardia.",
-            style = MaterialTheme.typography.bodySmall,
+            compactSize = MaterialTheme.typography.bodySmall.fontSize,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.Medium
         )

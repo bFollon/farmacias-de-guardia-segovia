@@ -80,6 +80,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
@@ -147,7 +148,7 @@ fun ScheduleScreen(
                             modifier = Modifier.size(20.dp)
                         )
                         Spacer(modifier = Modifier.size(6.dp))
-                        Text(
+                        ResponsiveText(
                             text = if (uiState.selectedDate?.let { selectedCal ->
                                 val today = Calendar.getInstance()
                                 selectedCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
@@ -156,6 +157,9 @@ fun ScheduleScreen(
                             } == true) "Hoy" else {
                                 uiState.selectedDate?.let { formatSelectedDate(it) } ?: "Hoy"
                             },
+                            compactSize = 14.sp,
+                            mediumSize = 15.sp,
+                            expandedSize = 16.sp,
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }
@@ -177,12 +181,17 @@ fun ScheduleScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    ResponsiveText(
                         text = uiState.location?.icon ?: "",
-                        fontSize = 28.sp
+                        compactSize = MaterialTheme.typography.headlineSmall.fontSize,
+                        mediumSize = 28.sp,
+                        expandedSize = 30.sp
                     )
-                    Text(
+                    ResponsiveText(
                         text = uiState.location?.name ?: "",
+                        compactSize = 24.sp,
+                        mediumSize = 26.sp,
+                        expandedSize = 28.sp,
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -229,25 +238,25 @@ fun ScheduleScreen(
     if (uiState.isValidatingPDFURL) {
         AlertDialog(
             onDismissRequest = { /* Can't dismiss while loading */ },
-            title = { Text("Verificando enlace") },
+            title = { ResponsiveText("Verificando enlace", compactSize = MaterialTheme.typography.titleLarge.fontSize, mediumSize = 19.sp, expandedSize = 20.sp) },
             text = {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     CircularProgressIndicator(modifier = Modifier.padding(16.dp))
-                    Text("Verificando enlace del PDF...")
+                    ResponsiveText("Verificando enlace del PDF...", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                 }
             },
             confirmButton = { /* No button while loading */ }
         )
     }
-    
+
     // Error dialog for PDF URL errors
     uiState.pdfURLError?.let { errorMessage ->
         AlertDialog(
             onDismissRequest = { viewModel.clearPDFURLError() },
-            title = { 
+            title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Default.Error,
@@ -255,13 +264,13 @@ fun ScheduleScreen(
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.padding(end = 8.dp)
                     )
-                    Text("Error de acceso")
+                    ResponsiveText("Error de acceso", compactSize = MaterialTheme.typography.titleLarge.fontSize, mediumSize = 19.sp, expandedSize = 20.sp)
                 }
             },
-            text = { Text(errorMessage) },
+            text = { ResponsiveText(errorMessage, compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp) },
             confirmButton = {
                 TextButton(onClick = { viewModel.clearPDFURLError() }) {
-                    Text("Aceptar")
+                    ResponsiveText("Aceptar", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                 }
             }
         )
@@ -295,8 +304,11 @@ private fun LoadingContent() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             CircularProgressIndicator()
-            Text(
+            ResponsiveText(
                 text = "Cargando calendarios...",
+                compactSize = 14.sp,
+                mediumSize = 15.sp,
+                expandedSize = 16.sp,
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -330,14 +342,20 @@ private fun ErrorContent(
                     tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier.size(48.dp)
                 )
-                Text(
+                ResponsiveText(
                     text = "Error",
+                    compactSize = 22.sp,
+                    mediumSize = 24.sp,
+                    expandedSize = 26.sp,
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
+                ResponsiveText(
                     text = error,
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onErrorContainer,
                     textAlign = TextAlign.Center
@@ -346,10 +364,10 @@ private fun ErrorContent(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Cerrar")
+                        ResponsiveText("Cerrar", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                     }
                     Button(onClick = onRetry) {
-                        Text("Reintentar")
+                        ResponsiveText("Reintentar", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                     }
                 }
             }
@@ -376,20 +394,29 @@ private fun EmptyContent(isOffline: Boolean = false) {
                     modifier = Modifier.size(64.dp),
                     tint = androidx.compose.ui.graphics.Color(0xFFFFA726) // Amber warning color
                 )
-                Text(
+                ResponsiveText(
                     text = "Sin conexión y sin datos almacenados",
+                    compactSize = 22.sp,
+                    mediumSize = 24.sp,
+                    expandedSize = 26.sp,
                     style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
+                ResponsiveText(
                     text = "No hay conexión a Internet y no hay datos descargados para esta región.",
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
-                Text(
+                ResponsiveText(
                     text = "Conecte a Internet e intente refrescar para descargar los horarios.",
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -402,13 +429,19 @@ private fun EmptyContent(isOffline: Boolean = false) {
                     modifier = Modifier.size(64.dp),
                     tint = MaterialTheme.colorScheme.outline
                 )
-                Text(
+                ResponsiveText(
                     text = "No hay farmacias de guardia programadas",
+                    compactSize = 22.sp,
+                    mediumSize = 24.sp,
+                    expandedSize = 26.sp,
                     style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Center
                 )
-                Text(
+                ResponsiveText(
                     text = "Intente refrescar o seleccione una fecha diferente",
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline,
                     textAlign = TextAlign.Center
@@ -440,8 +473,11 @@ private fun ScheduleContent(
         }
 
         item {
-            Text(
+            ResponsiveText(
                 text = "Farmacias de Guardia",
+                compactSize = 24.sp,
+                mediumSize = 26.sp,
+                expandedSize = 28.sp,
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -629,11 +665,13 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
             .padding(top = 16.dp, bottom = 8.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(
+        ResponsiveText(
             text = "📥 $formattedDate",
+            compactSize = 10.sp,
+            mediumSize = 11.sp,
+            expandedSize = 12.sp,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            fontSize = 11.sp,
             textAlign = TextAlign.Center
         )
     }
@@ -673,8 +711,11 @@ private fun DateHeader(
                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
                 modifier = Modifier.size(24.dp)
             )
-            Text(
+            ResponsiveText(
                 text = displayText,
+                compactSize = 15.sp,
+                mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -735,28 +776,40 @@ private fun DisclaimerCard(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(
+            ResponsiveText(
                 text = "Aviso",
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold
             )
-            Text(
+            ResponsiveText(
                 text = "La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:",
+                compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                expandedSize = 13.sp,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.outline
             )
-            Text(
+            ResponsiveText(
                 text = "Calendario de Guardias - ${location.associatedRegion.name}",
+                compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                expandedSize = 13.sp,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.clickable {
                     onViewPDF()
                 }
             )
-            
+
             // Error reporting link - always clickable, different body based on whether there's a pharmacy
-            Text(
+            ResponsiveText(
                 text = "¿Ha encontrado algún error? Repórtelo aquí",
+                compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                expandedSize = 13.sp,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.clickable {
@@ -881,17 +934,20 @@ private fun DatePickerDialog(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextButton(onClick = onTodaySelected) {
-                    Text("Hoy")
+                    ResponsiveText("Hoy", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                 }
-                
-                Text(
+
+                ResponsiveText(
                     text = "Seleccionar fecha",
+                    compactSize = 15.sp,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Medium
                 )
-                
+
                 TextButton(onClick = onDismiss) {
-                    Text("Cerrar")
+                    ResponsiveText("Cerrar", compactSize = MaterialTheme.typography.bodyMedium.fontSize, mediumSize = MaterialTheme.typography.bodyMedium.fontSize, expandedSize = 15.sp)
                 }
             }
             

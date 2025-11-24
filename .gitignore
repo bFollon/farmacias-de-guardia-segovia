@@ -4,3 +4,5 @@
 android/.gradle/
 
 android/app/build/generated/source/buildConfig/debug/com/bfollon/farmaciasdeGuardia/BuildConfig.java
+
+.idea

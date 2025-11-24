@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * Card component for displaying "No pharmacy on duty" message
@@ -62,27 +63,33 @@ fun NoPharmacyOnDutyCard(
                     tint = Color(0xFFF2994A), // Orange color matching iOS
                     modifier = Modifier.size(20.dp)
                 )
-                Text(
+                ResponsiveText(
                     text = "Sin farmacia de guardia",
-                    style = MaterialTheme.typography.titleSmall,
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFF2994A) // Orange color matching iOS
                 )
             }
             
             // Main message
-            Text(
+            ResponsiveText(
                 text = message,
-                style = MaterialTheme.typography.bodyMedium,
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Start
             )
-            
+
             // Additional info if provided
             additionalInfo?.let { info ->
-                Text(
+                ResponsiveText(
                     text = info,
-                    style = MaterialTheme.typography.bodySmall,
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                     color = MaterialTheme.colorScheme.outline,
                     textAlign = TextAlign.Start
                 )

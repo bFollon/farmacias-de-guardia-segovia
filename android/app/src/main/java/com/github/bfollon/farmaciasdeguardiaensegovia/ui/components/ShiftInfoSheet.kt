@@ -79,9 +79,11 @@ fun ShiftInfoSheet(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    ResponsiveText(
                         text = "Horarios de Guardia",
-                        style = MaterialTheme.typography.headlineMedium,
+                        compactSize = MaterialTheme.typography.headlineMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.headlineMedium.fontSize,
+                        expandedSize = MaterialTheme.typography.headlineMedium.fontSize,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -147,16 +149,20 @@ private fun DayShiftExplanation() {
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
+                ResponsiveText(
                     text = "Turno Diurno",
-                    style = MaterialTheme.typography.titleMedium,
+                    compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-                
-                Text(
+
+                ResponsiveText(
                     text = DutyTimeSpan.Companion.CapitalDay.displayFormat,
-                    style = MaterialTheme.typography.bodyLarge,
+                    compactSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -164,9 +170,11 @@ private fun DayShiftExplanation() {
         }
     }
     
-    Text(
+    ResponsiveText(
         text = "El turno diurno empieza a las 10:15 y se extiende hasta las 22:00 del mismo día.",
-        style = MaterialTheme.typography.bodyLarge,
+        compactSize = MaterialTheme.typography.bodyLarge.fontSize,
+        mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+        expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
         color = MaterialTheme.colorScheme.onSurface,
         lineHeight = 24.sp
     )
@@ -201,16 +209,20 @@ private fun NightShiftExplanation(
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text(
+                ResponsiveText(
                     text = "Turno Nocturno",
-                    style = MaterialTheme.typography.titleMedium,
+                    compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
-                
-                Text(
+
+                ResponsiveText(
                     text = DutyTimeSpan.Companion.CapitalNight.displayFormat,
-                    style = MaterialTheme.typography.bodyLarge,
+                    compactSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.secondary
                 )
@@ -221,9 +233,11 @@ private fun NightShiftExplanation(
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(
+        ResponsiveText(
             text = "El turno nocturno empieza a las 22:00 y se extiende hasta las 10:15 del día siguiente.",
-            style = MaterialTheme.typography.bodyLarge,
+            compactSize = MaterialTheme.typography.bodyLarge.fontSize,
+            mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+            expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
             color = MaterialTheme.colorScheme.onSurface,
             lineHeight = 24.sp
         )
@@ -249,10 +263,12 @@ private fun NightShiftExplanation(
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
-                    
-                    Text(
+
+                    ResponsiveText(
                         text = "Por ello, la farmacia que está de guardia ahora comenzó su turno ayer a las 22:00.",
-                        style = MaterialTheme.typography.bodyMedium,
+                        compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 20.sp
                     )

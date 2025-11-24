@@ -35,7 +35,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheRefreshViewModel
@@ -73,9 +75,11 @@ fun CacheRefreshScreen(
         ) {
             // Section header
             item {
-                Text(
+                ResponsiveText(
                     text = "Estado de Actualización",
-                    style = MaterialTheme.typography.titleMedium,
+                    compactSize = 14.sp,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -119,13 +123,17 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.weight(1f)
             ) {
-                Text(
+                ResponsiveText(
                     text = region.icon,
-                    style = MaterialTheme.typography.headlineSmall
+                    compactSize = MaterialTheme.typography.titleLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+                    expandedSize = 24.sp
                 )
-                Text(
+                ResponsiveText(
                     text = region.name,
-                    style = MaterialTheme.typography.titleMedium,
+                    compactSize = 14.sp,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -141,9 +149,11 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             modifier = Modifier.size(20.dp),
                             strokeWidth = 2.dp
                         )
-                        Text(
+                        ResponsiveText(
                             text = "Comprobando...",
-                            style = MaterialTheme.typography.labelMedium,
+                            compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                            expandedSize = 13.sp,
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -153,9 +163,11 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             modifier = Modifier.size(20.dp),
                             strokeWidth = 2.dp
                         )
-                        Text(
+                        ResponsiveText(
                             text = "Descargando...",
-                            style = MaterialTheme.typography.labelMedium,
+                            compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                            expandedSize = 13.sp,
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -168,9 +180,11 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             tint = Color(0xFF66BB6A), // Green
                             modifier = Modifier.size(20.dp)
                         )
-                        Text(
+                        ResponsiveText(
                             text = "Actualizado",
-                            style = MaterialTheme.typography.labelMedium,
+                            compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                            expandedSize = 13.sp,
                             color = Color(0xFF66BB6A)
                         )
                     }
@@ -182,9 +196,11 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             tint = Color(0xFFD32F2F), // Red
                             modifier = Modifier.size(20.dp)
                         )
-                        Text(
+                        ResponsiveText(
                             text = "Error",
-                            style = MaterialTheme.typography.labelMedium,
+                            compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                            expandedSize = 13.sp,
                             color = Color(0xFFD32F2F)
                         )
                     }
@@ -220,16 +236,20 @@ private fun CompletionView(wasOffline: Boolean = false) {
                     modifier = Modifier.size(48.dp)
                 )
                 
-                Text(
+                ResponsiveText(
                     text = "Sin conexión a Internet",
-                    style = MaterialTheme.typography.titleLarge,
+                    compactSize = MaterialTheme.typography.titleLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-                
-                Text(
+
+                ResponsiveText(
                     text = "No se pudo actualizar la caché. Conecte a Internet e intente de nuevo.",
-                    style = MaterialTheme.typography.bodyMedium,
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
@@ -242,16 +262,20 @@ private fun CompletionView(wasOffline: Boolean = false) {
                     modifier = Modifier.size(48.dp)
                 )
                 
-                Text(
+                ResponsiveText(
                     text = "¡Actualización Completada!",
-                    style = MaterialTheme.typography.titleLarge,
+                    compactSize = MaterialTheme.typography.titleLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.titleLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-                
-                Text(
+
+                ResponsiveText(
                     text = "Todos los PDFs han sido comprobados",
-                    style = MaterialTheme.typography.bodyMedium,
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )

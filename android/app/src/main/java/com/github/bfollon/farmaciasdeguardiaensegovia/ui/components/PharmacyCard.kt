@@ -78,9 +78,11 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(
+                    ResponsiveText(
                         text = "Activa ahora",
-                        style = MaterialTheme.typography.labelMedium,
+                        compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.labelMedium.fontSize,
+                        expandedSize = MaterialTheme.typography.labelMedium.fontSize,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Medium
                     )
@@ -110,9 +112,11 @@ fun PharmacyCard(
                         tint = Color(0xFFFF9800), // Orange color
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(
+                    ResponsiveText(
                         text = "Fuera del horario de guardia",
-                        style = MaterialTheme.typography.labelMedium,
+                        compactSize = MaterialTheme.typography.labelMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.labelMedium.fontSize,
+                        expandedSize = MaterialTheme.typography.labelMedium.fontSize,
                         color = Color.Black,
                         fontWeight = FontWeight.Medium
                     )
@@ -120,9 +124,11 @@ fun PharmacyCard(
             }
 
             // Pharmacy name
-            Text(
+            ResponsiveText(
                 text = pharmacy.name,
-                style = MaterialTheme.typography.titleMedium,
+                compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -138,9 +144,11 @@ fun PharmacyCard(
                     tint = MaterialTheme.colorScheme.outline,
                     modifier = Modifier.size(20.dp)
                 )
-                Text(
+                ResponsiveText(
                     text = pharmacy.address,
-                    style = MaterialTheme.typography.bodyMedium,
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                     color = MaterialTheme.colorScheme.primary,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
@@ -163,9 +171,11 @@ fun PharmacyCard(
                         tint = MaterialTheme.colorScheme.outline,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(
+                    ResponsiveText(
                         text = pharmacy.formattedPhone,
-                        style = MaterialTheme.typography.bodyMedium,
+                        compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                         color = MaterialTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable {
@@ -190,9 +200,11 @@ fun PharmacyCard(
                             tint = MaterialTheme.colorScheme.outline,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text(
+                        ResponsiveText(
                             text = info,
-                            style = MaterialTheme.typography.bodyMedium,
+                            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+                            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+                            expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }

@@ -58,9 +58,11 @@ fun ShiftInfoCard(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         if (showHeader) {
-            Text(
+            ResponsiveText(
                 text = "Horarios de Guardia",
-                style = MaterialTheme.typography.headlineSmall,
+                compactSize = MaterialTheme.typography.headlineSmall.fontSize,
+                mediumSize = MaterialTheme.typography.headlineSmall.fontSize,
+                expandedSize = MaterialTheme.typography.headlineSmall.fontSize,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -94,16 +96,20 @@ private fun ShiftContent(
             Column(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                Text(
+                ResponsiveText(
                     text = dutyTimeSpan.displayName,
-                    style = MaterialTheme.typography.titleMedium,
+                    compactSize = MaterialTheme.typography.titleMedium.fontSize,
+                    mediumSize = MaterialTheme.typography.titleMedium.fontSize,
+                    expandedSize = MaterialTheme.typography.titleMedium.fontSize,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                Text(
+                ResponsiveText(
                     text = dutyTimeSpan.displayFormat,
-                    style = MaterialTheme.typography.bodyLarge,
+                    compactSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    mediumSize = MaterialTheme.typography.bodyLarge.fontSize,
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -111,9 +117,11 @@ private fun ShiftContent(
         }
 
         // Explanation text
-        Text(
+        ResponsiveText(
             text = dutyTimeSpan.shiftInfo,
-            style = MaterialTheme.typography.bodyMedium,
+            compactSize = MaterialTheme.typography.bodyMedium.fontSize,
+            mediumSize = MaterialTheme.typography.bodyMedium.fontSize,
+            expandedSize = MaterialTheme.typography.bodyMedium.fontSize,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             lineHeight = 20.sp
         )
@@ -140,9 +148,11 @@ private fun ShiftContent(
                         modifier = Modifier.size(20.dp)
                     )
 
-                    Text(
+                    ResponsiveText(
                         text = "Por ello, la farmacia que está de guardia ahora comenzó su turno ayer a las 22:00.",
-                        style = MaterialTheme.typography.bodySmall,
+                        compactSize = MaterialTheme.typography.bodySmall.fontSize,
+                        mediumSize = MaterialTheme.typography.bodySmall.fontSize,
+                        expandedSize = MaterialTheme.typography.bodySmall.fontSize,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         lineHeight = 18.sp
                     )

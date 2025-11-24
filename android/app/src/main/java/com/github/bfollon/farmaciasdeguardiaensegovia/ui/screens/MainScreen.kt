@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +40,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ClosestPharmacyButton
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
@@ -98,27 +100,32 @@ fun MainScreen(
             }
             
             Spacer(modifier = Modifier.height(16.dp))
-            
-            // Main title with gradient effect
-            Text(
+
+            // Main title with gradient effect - responsive font size
+            ResponsiveText(
                 text = "Farmacias de Guardia",
-                fontSize = 32.sp,
+                compactSize = MaterialTheme.typography.headlineSmall.fontSize,
+                mediumSize = MaterialTheme.typography.headlineMedium.fontSize,
+                expandedSize = MaterialTheme.typography.headlineLarge.fontSize,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                style = LocalTextStyle.current.copy(
-                    brush = Brush.linearGradient(
-                        colors = listOf(IOSBlue, IOSGreen)
-                    )
+                maxLines = 1,
+                brush = Brush.linearGradient(
+                    colors = listOf(IOSBlue, IOSGreen)
                 ),
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             // Subtitle
-            Text(
+            ResponsiveText(
                 text = "Seleccione su región para consultar las farmacias de guardia.",
-                fontSize = 16.sp,
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.bodyLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -172,15 +179,17 @@ fun MainScreen(
             TextButton(
                 onClick = onAboutClick
             ) {
-                Text(
+                ResponsiveText(
                     text = "Acerca de",
-                    fontSize = 14.sp,
+                    compactSize = MaterialTheme.typography.bodySmall.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyMedium.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.SemiBold,
                     color = IOSBlue
                 )
             }
-            
-            Spacer(modifier = Modifier.height(16.dp))
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
@@ -196,15 +205,19 @@ fun OfflineDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         icon = {
-            Text(
+            ResponsiveText(
                 text = "⚠️",
-                fontSize = 40.sp
+                compactSize = 36.sp,   // Compact screens
+                mediumSize = 38.sp,    // Medium screens (S24)
+                expandedSize = 40.sp   // Large screens (S10+)
             )
         },
         title = {
-            Text(
+            ResponsiveText(
                 text = "Modo sin conexión",
-                style = MaterialTheme.typography.headlineSmall,
+                compactSize = MaterialTheme.typography.titleLarge.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.titleLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.headlineSmall.fontSize,  // Large screens (S10+)
                 fontWeight = FontWeight.Bold
             )
         },
@@ -212,28 +225,38 @@ fun OfflineDialog(
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
+                ResponsiveText(
                     text = "No hay conexión a Internet. La aplicación está usando datos almacenados localmente.",
-                    style = MaterialTheme.typography.bodyMedium
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = 15.sp   // Large screens (S10+)
                 )
-                Text(
+                ResponsiveText(
                     text = "Los horarios mostrados corresponden a la última actualización descargada.",
-                    style = MaterialTheme.typography.bodyMedium
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = 15.sp   // Large screens (S10+)
                 )
             }
         },
         confirmButton = {
             TextButton(onClick = onGoToSettings) {
-                Text(
+                ResponsiveText(
                     text = "Ir a Ajustes",
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.SemiBold
                 )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(
+                ResponsiveText(
                     text = "Cerrar",
+                    compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                    mediumSize = MaterialTheme.typography.bodyMedium.fontSize,    // Medium screens (S24)
+                    expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -276,15 +299,21 @@ fun RegionCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
+            // Region icon emoji
+            ResponsiveText(
                 text = region.icon,
-                fontSize = 32.sp,
+                compactSize = MaterialTheme.typography.headlineMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.headlineMedium.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.headlineLarge.fontSize,  // Large screens (S10+)
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-            
-            Text(
+
+            // Region name
+            ResponsiveText(
                 text = region.name,
-                fontSize = 16.sp,
+                compactSize = MaterialTheme.typography.bodyMedium.fontSize,   // Compact screens
+                mediumSize = MaterialTheme.typography.bodyLarge.fontSize,    // Medium screens (S24)
+                expandedSize = MaterialTheme.typography.bodyLarge.fontSize,  // Large screens (S10+)
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center,

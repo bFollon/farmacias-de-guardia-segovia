@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ResponsiveText
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.SplashViewModel
 import kotlinx.coroutines.delay
@@ -202,15 +203,15 @@ fun SplashScreen(
             )
 
             // App title with gradient text effect
-            Text(
+            ResponsiveText(
                 text = "Farmacias de Guardia\nSegovia",
-                style = TextStyle(
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 38.sp,
-                    brush = Brush.linearGradient(gradientColors)
-                ),
+                compactSize = 26.sp,   // Compact screens
+                mediumSize = 28.sp,    // Medium screens (S24)
+                expandedSize = 32.sp,  // Large screens (S10+)
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                lineHeight = 38.sp,
+                brush = Brush.linearGradient(gradientColors),
                 modifier = Modifier
                     .alpha(textAlpha)
                     .padding(bottom = 48.dp)
@@ -288,9 +289,11 @@ fun RegionIconView(
             .clip(CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Text(
+        ResponsiveText(
             text = region.emoji,
-            fontSize = 24.sp,
+            compactSize = 20.sp,   // Compact screens
+            mediumSize = 22.sp,    // Medium screens (S24)
+            expandedSize = 24.sp,  // Large screens (S10+)
             textAlign = TextAlign.Center
         )
     }
