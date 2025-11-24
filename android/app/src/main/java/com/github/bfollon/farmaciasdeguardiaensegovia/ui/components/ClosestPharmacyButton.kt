@@ -71,90 +71,109 @@ fun ClosestPharmacyButton(
         }
     }
     
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = IOSBlue.copy(alpha = 0.1f)
-        ),
-        shape = RoundedCornerShape(12.dp),
-        onClick = {
-            if (viewModel.hasLocationPermission()) {
-                viewModel.findClosestPharmacy()
-            } else {
-                permissionLauncher.launch(
-                    arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    )
-                )
-            }
-        }
+    Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
-            modifier = Modifier
+        Card(
+            modifier = modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .height(160.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = IOSBlue.copy(alpha = 0.1f)
+            ),
+            shape = RoundedCornerShape(12.dp),
+            onClick = {
+                if (viewModel.hasLocationPermission()) {
+                    viewModel.findClosestPharmacy()
+                } else {
+                    permissionLauncher.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                    )
+                }
+            }
         ) {
-            if (uiState.isSearching) {
-                // Show search progress (matching iOS)
-                CircularProgressIndicator(
-                    modifier = Modifier.size(32.dp),
-                    color = IOSBlue
-                )
-                
-                Text(
-                    text = viewModel.getSearchStepText(uiState.searchStep),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.primary,
-                    textAlign = TextAlign.Center
-                )
-                
-                // Show retry count if retrying
-                if (uiState.retryCount > 0) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                if (uiState.isSearching) {
+                    // Show search progress (matching iOS)
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(32.dp),
+                        color = IOSBlue
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
                     Text(
-                        text = "Reintentando... (${uiState.retryCount}/3)",
+                        text = viewModel.getSearchStepText(uiState.searchStep),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center
+                    )
+
+                    // Show retry count if retrying
+                    if (uiState.retryCount > 0) {
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        Text(
+                            text = "Reintentando... (${uiState.retryCount}/3)",
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                } else {
+                    // Show normal button state
+                    Icon(
+                        imageVector = Icons.Default.LocationOn,
+                        contentDescription = null,
+                        tint = IOSGreen,
+                        modifier = Modifier.size(32.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = "Farmacia más cercana",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = "Encuentra la farmacia de guardia más cercana",
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
                 }
-            } else {
-                // Show normal button state
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = null,
-                    tint = IOSGreen,
-                    modifier = Modifier.size(32.dp)
-                )
-                
-                Text(
-                    text = "Farmacia más cercana",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                
-                Text(
-                    text = "Encuentra la farmacia de guardia más cercana",
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
             }
-            
-            // Error message
-            uiState.errorMessage?.let { errorMessage ->
-                Text(
-                    text = errorMessage,
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 8.dp)
-                )
-            }
+        }
+
+        // Error message outside Card
+        uiState.errorMessage?.let { errorMessage ->
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = errorMessage,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+            )
         }
     }
     
