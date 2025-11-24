@@ -74,10 +74,26 @@ fun ClosestPharmacyButton(
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
+        val buttonHeight = responsiveDimension(
+            compactSize = 120.dp,
+            mediumSize = 140.dp,
+            expandedSize = 160.dp
+        )
+        val spacingLarge = responsiveDimension(
+            compactSize = 4.dp,
+            mediumSize = 6.dp,
+            expandedSize = 8.dp
+        )
+        val spacingSmall = responsiveDimension(
+            compactSize = 2.dp,
+            mediumSize = 3.dp,
+            expandedSize = 4.dp
+        )
+
         Card(
             modifier = modifier
                 .fillMaxWidth()
-                .height(160.dp),
+                .height(buttonHeight),
             colors = CardDefaults.cardColors(
                 containerColor = IOSBlue.copy(alpha = 0.1f)
             ),
@@ -110,7 +126,7 @@ fun ClosestPharmacyButton(
                         color = IOSBlue
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(spacingLarge))
 
                     Text(
                         text = viewModel.getSearchStepText(uiState.searchStep),
@@ -122,7 +138,7 @@ fun ClosestPharmacyButton(
 
                     // Show retry count if retrying
                     if (uiState.retryCount > 0) {
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(spacingSmall))
 
                         Text(
                             text = "Reintentando... (${uiState.retryCount}/3)",
@@ -140,7 +156,7 @@ fun ClosestPharmacyButton(
                         modifier = Modifier.size(32.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(spacingLarge))
 
                     Text(
                         text = "Farmacia más cercana",
@@ -149,7 +165,7 @@ fun ClosestPharmacyButton(
                         color = MaterialTheme.colorScheme.primary
                     )
 
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(spacingSmall))
 
                     Text(
                         text = "Encuentra la farmacia de guardia más cercana",
@@ -163,7 +179,7 @@ fun ClosestPharmacyButton(
 
         // Error message outside Card
         uiState.errorMessage?.let { errorMessage ->
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(spacingLarge))
 
             Text(
                 text = errorMessage,

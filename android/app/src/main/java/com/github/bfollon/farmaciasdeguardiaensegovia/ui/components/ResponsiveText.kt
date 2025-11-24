@@ -91,6 +91,29 @@ fun responsiveScaledTextSize(
 }
 
 /**
+ * Calculates a responsive dimension (Dp) based on screen width breakpoints
+ * Useful for heights, widths, padding, margins, etc.
+ *
+ * @param compactSize Size for screens < 360dp width (very narrow)
+ * @param mediumSize Size for screens 360-400dp width (standard phones)
+ * @param expandedSize Size for screens >= 400dp width (large phones, tablets)
+ * @return The appropriate Dp value for current screen width
+ */
+@Composable
+fun responsiveDimension(
+    compactSize: androidx.compose.ui.unit.Dp,
+    mediumSize: androidx.compose.ui.unit.Dp,
+    expandedSize: androidx.compose.ui.unit.Dp
+): androidx.compose.ui.unit.Dp {
+    val configuration = LocalConfiguration.current
+    return when {
+        configuration.screenWidthDp < ResponsiveBreakpoints.COMPACT_THRESHOLD.value -> compactSize
+        configuration.screenWidthDp < ResponsiveBreakpoints.MEDIUM_THRESHOLD.value -> mediumSize
+        else -> expandedSize
+    }
+}
+
+/**
  * A responsive Text composable that automatically adjusts font size based on screen width
  *
  * Usage:
