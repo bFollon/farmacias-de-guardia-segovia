@@ -10,7 +10,8 @@
       "Bash(find:*)",
       "Bash(./gradlew:*)",
       "Bash(unzip:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
