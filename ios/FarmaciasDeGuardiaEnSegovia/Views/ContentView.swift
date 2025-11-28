@@ -122,6 +122,15 @@ struct ContentView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
+            .onAppear {
+                ReviewPromptService.shared.startSession()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                ReviewPromptService.shared.startSession()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+                ReviewPromptService.shared.cancelSession()
+            }
             .navigationBarHidden(true)
             .sheet(isPresented: $showingAbout) {
                 AboutView()

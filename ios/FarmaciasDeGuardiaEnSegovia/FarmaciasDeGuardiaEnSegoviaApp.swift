@@ -16,6 +16,7 @@
  */
 
 import SwiftUI
+import StoreKit
 
 @main
 struct FarmaciasDeGuardiaEnSegoviaApp: App {
@@ -71,6 +72,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
 
         // Clean up expired validation and route caches
         PDFURLValidator.shared.clearExpiredCache()
+
+        // Track app launch for review prompts
+        ReviewPromptService.shared.recordAppLaunch()
 
         DebugConfig.debugPrint("✅ App initialization complete with cache maintenance")
     }

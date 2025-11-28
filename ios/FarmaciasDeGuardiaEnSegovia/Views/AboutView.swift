@@ -67,9 +67,41 @@ struct AboutView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    
+
                     Divider()
-                    
+
+                    // Review Section
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("¿Le gusta la aplicación?")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+
+                        Text("Su valoración nos ayuda a mejorar y hace que más personas puedan descubrir la app.")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+
+                        Button(action: {
+                            if let url = URL(string: "https://apps.apple.com/es/app/farmacias-de-guardia-segovia/id6751126994?action=write-review") {
+                                openURL(url)
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.white)
+                                Text("Valorar en la App Store")
+                                    .fontWeight(.medium)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .background(Color.orange)
+                            .cornerRadius(25)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+
+                    Divider()
+
                     // Source Code Section
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Código fuente")

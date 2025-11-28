@@ -147,4 +147,19 @@ La información correcta es:
 Gracias.
 """
     }
+
+    /// Review prompt configuration
+    struct ReviewPrompt {
+        /// Minimum number of app launches before prompting
+        static let minimumLaunchCount = 3
+
+        /// Minimum days since first launch before prompting
+        static let minimumDaysSinceFirstLaunch = 3
+
+        /// Minimum session duration (seconds) before showing prompt
+        static let minimumSessionDuration: TimeInterval = 10
+
+        /// Days to wait between review prompts
+        static let daysBetweenPrompts = 90
+    }
 }
