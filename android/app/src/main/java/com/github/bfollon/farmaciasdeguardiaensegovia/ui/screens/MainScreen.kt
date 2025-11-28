@@ -17,21 +17,50 @@
 
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,16 +78,19 @@ fun MainScreen(
     onRegionSelected: (Region) -> Unit = {},
     onZBSSelectionRequested: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
-    onAboutClick: () -> Unit = {}
+    onAboutClick: () -> Unit = {},
 ) {
     // Check network status on screen load
     var isOffline by remember { mutableStateOf(false) }
     var showOfflineDialog by remember { mutableStateOf(false) }
-    
+
+    val spacerSeparation = 0.05f
+    val mainScreenPadding = 16.dp
+
     LaunchedEffect(Unit) {
         isOffline = !NetworkMonitor.isOnline()
     }
-    
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
@@ -81,7 +113,7 @@ fun MainScreen(
                     }
                 )
             }
-            
+
             // Top bar with settings button
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -97,8 +129,8 @@ fun MainScreen(
                     )
                 }
             }
-            
-            Spacer(modifier = Modifier.height(16.dp))
+
+            Spacer(modifier = Modifier.weight(spacerSeparation))
 
             // Main title with gradient effect - responsive font size
             Text(
@@ -113,10 +145,10 @@ fun MainScreen(
                 maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+//                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(spacerSeparation))
 
             // Subtitle
             Text(
@@ -124,53 +156,62 @@ fun MainScreen(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = mainScreenPadding)
             )
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
+
+            Spacer(modifier = Modifier.weight(spacerSeparation))
+
             // Offline warning card (appears below subtitle when offline)
             if (isOffline) {
                 OfflineWarningCard(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier.padding(horizontal = mainScreenPadding),
                     isClickable = true,
                     onClick = { showOfflineDialog = true }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
+
+            Spacer(modifier = Modifier.weight(spacerSeparation))
+
             // Closest pharmacy finder
             ClosestPharmacyButton(
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = mainScreenPadding)
             )
-            
-            Spacer(modifier = Modifier.height(32.dp))
-            
+
+            Spacer(modifier = Modifier.weight(spacerSeparation))
+
             // Region selection grid
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.padding(horizontal = 16.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(horizontal = mainScreenPadding)
+                    .weight(1f),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(Region.Companion.allRegions) { region ->
-                    RegionCard(
-                        region = region,
-                        onClick = {
-                            if (region.id == "segovia-rural") {
-                                onZBSSelectionRequested()
-                            } else {
-                                onRegionSelected(region)
-                            }
+                Region.Companion.allRegions.chunked(2).forEach { regionPair ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().weight(1f),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        regionPair.forEach { region ->
+                            RegionCard(
+                                region = region,
+                                onClick = {
+                                    if (region.id == "segovia-rural") {
+                                        onZBSSelectionRequested()
+                                    } else {
+                                        onRegionSelected(region)
+                                    }
+                                },
+                                modifier = Modifier.weight(1f)
+                            )
                         }
-                    )
+                    }
                 }
             }
-            
-            Spacer(modifier = Modifier.weight(1f))
-            
+
+            Spacer(modifier = Modifier.weight(spacerSeparation))
+//
             // About button
             TextButton(
                 onClick = onAboutClick
@@ -182,8 +223,6 @@ fun MainScreen(
                     color = IOSBlue
                 )
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
@@ -258,9 +297,7 @@ fun RegionCard(
 ) {
     Card(
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(120.dp),
+        modifier = modifier,
         colors = CardDefaults.cardColors(
             containerColor = IOSBlue.copy(alpha = 0.1f)
         ),
@@ -274,37 +311,46 @@ fun RegionCard(
             )
         )
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        BoxWithConstraints (
+            modifier = Modifier.fillMaxSize()
         ) {
-            // Region icon emoji
-            Text(
-                text = region.icon,
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+            // Granular responsive sizing based on card width
+            val (iconStyle, textStyle, padding) = when {
+                maxWidth < 160.dp -> Triple(MaterialTheme.typography.headlineSmall, MaterialTheme.typography.bodySmall, 8.dp)
+                maxWidth < 180.dp -> Triple(MaterialTheme.typography.headlineMedium, MaterialTheme.typography.bodyMedium, 12.dp)
+                else -> Triple(MaterialTheme.typography.headlineLarge, MaterialTheme.typography.bodyLarge, 12.dp)
+            }
 
-            // Region name
-            Text(
-                text = region.name,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                lineHeight = 20.sp
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                verticalArrangement = Arrangement.spacedBy(padding, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                // Region icon emoji
+                Text(
+                    text = region.icon,
+                    style = iconStyle,
+                )
+
+                // Region name
+                Text(
+                    text = region.name,
+                    style = textStyle,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.primary,
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                )
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
+fun ScreenPreview() {
     FarmaciasDeGuardiaEnSegoviaTheme {
         MainScreen()
     }
