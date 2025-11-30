@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -144,14 +145,6 @@ fun SplashScreen(
         Color(0xFF34C759)  // iOS green
     )
 
-    // Background gradient - subtle like iOS
-    val backgroundGradient = Brush.verticalGradient(
-        colors = listOf(
-            MaterialTheme.colorScheme.background,
-            Color(0xFF007AFF).copy(alpha = 0.05f)
-        )
-    )
-
     // Launch animations with iOS-matching timing
     LaunchedEffect(Unit) {
         val startTime = System.currentTimeMillis()
@@ -200,7 +193,8 @@ fun SplashScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(backgroundGradient),
+            .statusBarsPadding()
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(

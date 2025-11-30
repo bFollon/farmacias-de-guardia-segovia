@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.FarmaciasDeGuardiaEnSegovia" parent="android:Theme.Material.Light.NoActionBar">
-        <!-- This is just a basic container theme since we're using Compose -->
+    <style name="Theme.FarmaciasDeGuardiaEnSegovia" parent="android:Theme.NoTitleBar.Fullscreen">
+        <!-- Minimal theme for Compose-based UI - avoids deprecated Material XML theme APIs -->
+        <!-- All UI is implemented in Compose with MaterialTheme -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>
