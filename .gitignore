@@ -2,6 +2,7 @@
 *.xcbkptlist
 
 android/.gradle/
+android/local.properties
 
 android/app/build/generated/source/buildConfig/debug/com/bfollon/farmaciasdeGuardia/BuildConfig.java
 
