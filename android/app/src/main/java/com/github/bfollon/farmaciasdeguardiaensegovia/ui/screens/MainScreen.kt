@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material.icons.Icons
@@ -99,8 +100,8 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .navigationBarsPadding()
-                .padding(top = 20.dp),
+                .statusBarsPadding()
+                .navigationBarsPadding(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Offline dialog (shown when card is tapped)
@@ -190,7 +191,9 @@ fun MainScreen(
             ) {
                 Region.Companion.allRegions.chunked(2).forEach { regionPair ->
                     Row(
-                        modifier = Modifier.fillMaxWidth().weight(1f),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         regionPair.forEach { region ->
@@ -311,14 +314,28 @@ fun RegionCard(
             )
         )
     ) {
-        BoxWithConstraints (
+        BoxWithConstraints(
             modifier = Modifier.fillMaxSize()
         ) {
             // Granular responsive sizing based on card width
             val (iconStyle, textStyle, padding) = when {
-                maxWidth < 160.dp -> Triple(MaterialTheme.typography.headlineSmall, MaterialTheme.typography.bodySmall, 8.dp)
-                maxWidth < 180.dp -> Triple(MaterialTheme.typography.headlineMedium, MaterialTheme.typography.bodyMedium, 12.dp)
-                else -> Triple(MaterialTheme.typography.headlineLarge, MaterialTheme.typography.bodyLarge, 12.dp)
+                maxWidth < 160.dp -> Triple(
+                    MaterialTheme.typography.headlineSmall,
+                    MaterialTheme.typography.bodySmall,
+                    8.dp
+                )
+
+                maxWidth < 180.dp -> Triple(
+                    MaterialTheme.typography.headlineMedium,
+                    MaterialTheme.typography.bodyMedium,
+                    12.dp
+                )
+
+                else -> Triple(
+                    MaterialTheme.typography.headlineLarge,
+                    MaterialTheme.typography.bodyLarge,
+                    12.dp
+                )
             }
 
             Column(

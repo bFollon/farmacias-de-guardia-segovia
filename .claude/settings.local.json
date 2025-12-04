@@ -12,7 +12,8 @@
       "Bash(unzip:*)",
       "WebSearch",
       "Bash(cat:*)",
-      "Bash(swift -typecheck:*)"
+      "Bash(swift -typecheck:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []
