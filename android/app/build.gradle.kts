@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.21"
 }
 
 android {
@@ -13,8 +13,8 @@ android {
         applicationId = "com.github.bfollon.farmaciasdeguardiaensegovia"
         minSdk = 26
         targetSdk = 36
-        versionCode = 23
-        versionName = "1.1.9"
+        versionCode = 25
+        versionName = "1.1.11"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -81,13 +81,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     
     // Location services
-    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation(libs.play.services.location)
 
     // Force modern androidx.fragment version (replaces ancient 1.0.0 from Play Services)
-    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation(libs.androidx.fragment.ktx)
 
     // Window Size Classes for responsive layouts
-    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0")
+    implementation(libs.androidx.compose.adaptive)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

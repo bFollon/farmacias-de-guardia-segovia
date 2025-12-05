@@ -25,6 +25,9 @@
 -dontwarn org.slf4j.**
 -dontwarn javax.xml.crypto.**
 
+# Sharpen - iText's C# to Java conversion tool (not needed at runtime)
+-dontwarn sharpen.**
+
 # Jackson JSON library - optional iText dependency
 -dontwarn com.fasterxml.jackson.**
 
