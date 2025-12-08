@@ -55,9 +55,7 @@ fun CacheStatusScreen(
     val cacheStatuses by viewModel.cacheStatuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent,
-    ) { innerPadding ->
+    Scaffold { innerPadding ->
         if (isLoading) {
             // Loading state
             Box(

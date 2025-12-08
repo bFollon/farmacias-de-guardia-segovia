@@ -61,9 +61,7 @@ fun CacheRefreshScreen(
         Region.segoviaRural
     )
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent,
-    ) { innerPadding ->
+    Scaffold { innerPadding ->
         Column(
             modifier = Modifier.fillMaxSize()
                 .padding(innerPadding)

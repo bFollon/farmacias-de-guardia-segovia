@@ -56,9 +56,7 @@ fun ZBSSelectionScreen(
     onZBSSelected: (ZBS) -> Unit = {},
     onDismiss: () -> Unit = {}
 ) {
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent
-    ) { innerPaddings ->
+    Scaffold { innerPaddings ->
 
         Column(
             modifier = Modifier

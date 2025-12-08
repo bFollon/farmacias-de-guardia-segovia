@@ -73,10 +73,7 @@ dependencies {
     
     // HTTP client for PDF downloads and web scraping
     implementation(libs.okhttp)
-    
-    // Date picker
-    implementation(libs.compose.material.dialogs.datetime)
-    
+
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     

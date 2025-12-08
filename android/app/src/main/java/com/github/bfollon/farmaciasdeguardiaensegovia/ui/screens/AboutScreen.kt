@@ -77,9 +77,7 @@ fun AboutScreen(
     val context = LocalContext.current
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent,
-    ) { innerPadding ->
+    Scaffold { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

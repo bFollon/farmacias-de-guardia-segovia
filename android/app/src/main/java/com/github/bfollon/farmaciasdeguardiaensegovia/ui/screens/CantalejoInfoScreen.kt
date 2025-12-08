@@ -57,9 +57,7 @@ fun CantalejoInfoScreen(
 ) {
     val context = LocalContext.current
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent
-    ) { innerPaddings ->
+    Scaffold { innerPaddings ->
         Column(
             modifier = modifier
                 .fillMaxSize()

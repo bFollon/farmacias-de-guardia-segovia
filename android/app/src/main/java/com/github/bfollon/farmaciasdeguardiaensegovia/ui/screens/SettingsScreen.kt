@@ -63,9 +63,7 @@ fun SettingsScreen(
 ) {
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent
-    ) { innerPaddings ->
+    Scaffold { innerPaddings ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

@@ -121,9 +121,7 @@ fun ScheduleScreen(
         isOffline = !NetworkMonitor.isOnline()
     }
 
-    Scaffold(
-        contentWindowInsets = WindowInsets.safeContent
-    ) { innerPaddings ->
+    Scaffold { innerPaddings ->
         Box(
             modifier = modifier
                 .padding(innerPaddings)

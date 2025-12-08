@@ -1,8 +1,6 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia
 
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -37,19 +35,6 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Manually set display cutout mode for Android 15+ compatibility
-        // Overrides the deprecated LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES used by enableEdgeToEdge()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            window.attributes.layoutInDisplayCutoutMode =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-                    // Android 15+ (API 35+): Use ALWAYS mode (non-deprecated)
-                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
-                } else {
-                    // Android 9-14 (API 28-34): Use SHORT_EDGES (backward compatibility)
-                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-                }
-        }
 
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
@@ -164,7 +149,8 @@ fun AppNavigation() {
                 showScheduleModal = false
                 selectedLocationId = null
             },
-            sheetState = scheduleSheetState
+            sheetState = scheduleSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             ScheduleScreen(
                 locationId = selectedLocationId!!,
