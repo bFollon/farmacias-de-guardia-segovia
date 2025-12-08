@@ -18,6 +18,7 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -156,10 +157,12 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             // Header with region and status
-            Row(
+            FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                itemVerticalAlignment = Alignment.CenterVertically,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                maxItemsInEachRow = 3
             ) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -175,6 +178,8 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         fontWeight = FontWeight.Bold
                     )
                 }
+
+                Spacer(Modifier.width(8.dp))
 
                 // Status badge
                 Row(
