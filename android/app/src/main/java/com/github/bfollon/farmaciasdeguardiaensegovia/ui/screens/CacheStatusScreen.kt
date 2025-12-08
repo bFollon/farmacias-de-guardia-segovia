@@ -53,51 +53,57 @@ fun CacheStatusScreen(
 ) {
     val cacheStatuses by viewModel.cacheStatuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
-    
-    if (isLoading) {
-        // Loading state
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeContent,
+    ) { innerPadding ->
+        if (isLoading) {
+            // Loading state
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
-                Text(
-                    text = "Comprobando estado de la caché...",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    CircularProgressIndicator()
+                    Text(
+                        text = "Comprobando estado de la caché...",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
-        }
-    } else {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .navigationBarsPadding(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Header Section
-            item {
-                CacheStatusHeader(cacheStatuses)
-            }
-            
-            // Region Status Cards
-            items(cacheStatuses) { status ->
-                CacheStatusCard(status)
-            }
-            
-            // Info Section
-            item {
-                CacheInfoCard()
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .navigationBarsPadding(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Header Section
+                item {
+                    CacheStatusHeader(cacheStatuses)
+                }
+
+                // Region Status Cards
+                items(cacheStatuses) { status ->
+                    CacheStatusCard(status)
+                }
+
+                // Info Section
+                item {
+                    CacheInfoCard()
+                }
             }
         }
     }
+
 }
 
 /**
@@ -113,7 +119,7 @@ private fun CacheStatusHeader(cacheStatuses: List<RegionCacheStatus>) {
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
-        
+
         val lastChecked = cacheStatuses.firstOrNull()?.lastChecked
         if (lastChecked != null) {
             val formatter = SimpleDateFormat("d 'sept' yyyy, HH:mm", Locale.forLanguageTag("es-ES"))
@@ -169,7 +175,7 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                         fontWeight = FontWeight.Bold
                     )
                 }
-                
+
                 // Status badge
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -193,11 +199,11 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                     )
                 }
             }
-            
+
             // Details (if cached)
             if (status.isCached) {
                 HorizontalDivider()
-                
+
                 Column(
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
@@ -216,7 +222,7 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                             fontWeight = FontWeight.Medium
                         )
                     }
-                    
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -232,7 +238,7 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
                             fontWeight = FontWeight.Medium
                         )
                     }
-                    
+
                     // Update available warning
                     if (status.needsUpdate) {
                         HorizontalDivider()
@@ -291,7 +297,7 @@ private fun CacheInfoCard() {
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        
+
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -317,7 +323,7 @@ private fun CacheInfoCard() {
                         fontWeight = FontWeight.Bold
                     )
                 }
-                
+
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {

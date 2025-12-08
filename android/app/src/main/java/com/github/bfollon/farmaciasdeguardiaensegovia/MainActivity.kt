@@ -8,6 +8,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -246,7 +247,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showAboutModal = false
             },
-            sheetState = aboutSheetState
+            sheetState = aboutSheetState,
+            containerColor = MaterialTheme.colorScheme.background
         ) {
             AboutScreen(
                 onDismiss = {
@@ -262,7 +264,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCacheStatusModal = false
             },
-            sheetState = cacheStatusSheetState
+            sheetState = cacheStatusSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CacheStatusScreen(
                 onDismiss = {
@@ -278,7 +281,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCacheRefreshModal = false
             },
-            sheetState = cacheRefreshSheetState
+            sheetState = cacheRefreshSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CacheRefreshScreen(
                 onDismiss = {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.FarmaciasDeGuardiaEnSegovia" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Edge-to-edge support (automatic with Material3) -->
+        <!-- Android 15+ enforces edge-to-edge by default -->
+        <!-- These are deprecated on API 35+ but included for static analysis -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <!-- Disable contrast enforcement for full transparency -->
         <item name="android:enforceStatusBarContrast">false</item>
         <item name="android:enforceNavigationBarContrast">false</item>
     </style>

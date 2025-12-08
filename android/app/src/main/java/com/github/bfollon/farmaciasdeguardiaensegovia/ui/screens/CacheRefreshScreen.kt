@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
@@ -52,45 +53,50 @@ fun CacheRefreshScreen(
     val refreshStates by viewModel.refreshStates.collectAsState()
     val isCompleted by viewModel.isCompleted.collectAsState()
     val wasOffline by viewModel.wasOffline.collectAsState()
-    
+
     val regions = listOf(
         Region.segoviaCapital,
         Region.cuellar,
         Region.elEspinar,
         Region.segoviaRural
     )
-    
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .navigationBarsPadding(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeContent,
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier.fillMaxSize()
+                .padding(innerPadding)
         ) {
-            // Section header
-            item {
-                Text(
-                    text = "Estado de Actualización",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .navigationBarsPadding(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // Section header
+                item {
+                    Text(
+                        text = "Estado de Actualización",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
+
+                // Region cards
+                items(regions) { region ->
+                    val state = refreshStates[region.id] ?: UpdateProgressState.Checking
+                    CacheRefreshCard(region, state)
+                }
             }
-            
-            // Region cards
-            items(regions) { region ->
-                val state = refreshStates[region.id] ?: UpdateProgressState.Checking
-                CacheRefreshCard(region, state)
+
+            // Completion view (appears at bottom when done)
+            AnimatedVisibility(visible = isCompleted) {
+                CompletionView(wasOffline = wasOffline)
             }
-        }
-        
-        // Completion view (appears at bottom when done)
-        AnimatedVisibility(visible = isCompleted) {
-            CompletionView(wasOffline = wasOffline)
         }
     }
 }
@@ -129,7 +135,7 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                     fontWeight = FontWeight.Bold
                 )
             }
-            
+
             // Status indicator
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -147,7 +153,7 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
-                    
+
                     is UpdateProgressState.Downloading -> {
                         CircularProgressIndicator(
                             modifier = Modifier.size(20.dp),
@@ -159,7 +165,7 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             color = MaterialTheme.colorScheme.primary
                         )
                     }
-                    
+
                     is UpdateProgressState.UpToDate,
                     is UpdateProgressState.Downloaded -> {
                         Icon(
@@ -174,7 +180,7 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                             color = Color(0xFF66BB6A)
                         )
                     }
-                    
+
                     is UpdateProgressState.Error -> {
                         Icon(
                             imageVector = Icons.Default.Warning,
@@ -219,7 +225,7 @@ private fun CompletionView(wasOffline: Boolean = false) {
                     tint = Color(0xFFFFA726), // Amber warning
                     modifier = Modifier.size(48.dp)
                 )
-                
+
                 Text(
                     text = "Sin conexión a Internet",
                     style = MaterialTheme.typography.titleLarge,
@@ -241,7 +247,7 @@ private fun CompletionView(wasOffline: Boolean = false) {
                     tint = Color(0xFF66BB6A), // Green
                     modifier = Modifier.size(48.dp)
                 )
-                
+
                 Text(
                     text = "¡Actualización Completada!",
                     style = MaterialTheme.typography.titleLarge,
@@ -258,4 +264,10 @@ private fun CompletionView(wasOffline: Boolean = false) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CacheRefreshScreenPreview() {
+    CacheRefreshScreen({})
 }
