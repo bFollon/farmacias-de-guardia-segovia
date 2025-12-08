@@ -193,7 +193,7 @@ fun MainScreen(
                     .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Region.Companion.allRegions.chunked(2).forEach { regionPair ->
+                Region.allRegions.chunked(2).forEach { regionPair ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()

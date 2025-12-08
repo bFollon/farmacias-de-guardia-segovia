@@ -185,7 +185,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCantalejoInfo = false
             },
-            sheetState = cantalejoSheetState
+            sheetState = cantalejoSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CantalejoInfoScreen(
                 onDismiss = {
@@ -201,7 +202,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showZBSSelectionModal = false
             },
-            sheetState = zbsSheetState
+            sheetState = zbsSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             ZBSSelectionScreen(
                 onZBSSelected = { zbs ->
@@ -222,7 +224,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showSettingsModal = false
             },
-            sheetState = settingsSheetState
+            sheetState = settingsSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             SettingsScreen(
                 onDismiss = {

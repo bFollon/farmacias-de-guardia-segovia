@@ -25,10 +25,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,6 +52,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -108,123 +111,137 @@ fun ScheduleScreen(
     }
     val uiState by viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
-    
+
     var showDatePicker by remember { mutableStateOf(false) }
     var showInfo by remember { mutableStateOf(false) }
-    
+
     // Check network status
     var isOffline by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         isOffline = !NetworkMonitor.isOnline()
     }
-    
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeContent
+    ) { innerPaddings ->
+        Box(
+            modifier = modifier
+                .padding(innerPaddings)
+                .fillMaxSize()
         ) {
-            // iOS-style header
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                modifier = Modifier.fillMaxSize()
             ) {
-                // Top row: Date picker button (left) and Refresh button (right)
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Date picker button with text (like iOS "Hoy")
-                    TextButton(
-                        onClick = { showDatePicker = true },
-                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.DateRange,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Text(
-                            text = if (uiState.selectedDate?.let { selectedCal ->
-                                val today = Calendar.getInstance()
-                                selectedCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                                selectedCal.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-                                selectedCal.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
-                            } == true) "Hoy" else {
-                                uiState.selectedDate?.let { formatSelectedDate(it) } ?: "Hoy"
-                            },
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
-                    
-                    // Refresh button
-                    IconButton(onClick = { viewModel.refresh() }) {
-                        Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "Refrescar"
-                        )
-                    }
-                }
-                
-                // Region name row (prominent title)
-                Row(
+                // iOS-style header
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp, bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
                 ) {
-                    Text(
-                        text = uiState.location?.icon ?: "",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                    Text(
-                        text = uiState.location?.name ?: "",
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold
-                    )
+                    // Top row: Date picker button (left) and Refresh button (right)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Date picker button with text (like iOS "Hoy")
+                        TextButton(
+                            onClick = { showDatePicker = true },
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.size(6.dp))
+                            Text(
+                                text = if (uiState.selectedDate?.let { selectedCal ->
+                                        val today = Calendar.getInstance()
+                                        selectedCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                                                selectedCal.get(Calendar.MONTH) == today.get(
+                                            Calendar.MONTH
+                                        ) &&
+                                                selectedCal.get(Calendar.DAY_OF_MONTH) == today.get(
+                                            Calendar.DAY_OF_MONTH
+                                        )
+                                    } == true) "Hoy" else {
+                                    uiState.selectedDate?.let { formatSelectedDate(it) } ?: "Hoy"
+                                },
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+
+                        // Refresh button
+                        IconButton(onClick = { viewModel.refresh() }) {
+                            Icon(
+                                imageVector = Icons.Default.Refresh,
+                                contentDescription = "Refrescar"
+                            )
+                        }
+                    }
+
+                    // Region name row (prominent title)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp, bottom = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = uiState.location?.icon ?: "",
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                        Text(
+                            text = uiState.location?.name ?: "",
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
-            }
-            
-            // Main content
-            when {
-                uiState.isLoading -> {
-                    LoadingContent()
-                }
-                uiState.error != null -> {
-                    ErrorContent(
-                        error = uiState.error ?: "Error desconocido",
-                        onRetry = { viewModel.refresh() },
-                        onDismiss = { viewModel.clearError() }
-                    )
-                }
-                uiState.schedules.isEmpty() -> {
-                    EmptyContent(isOffline = isOffline)
-                }
-                else -> {
-                    ScheduleContent(
-                        uiState = uiState,
-                        onViewPDF = {
-                            // Validate URL before opening browser
-                            coroutineScope.launch {
-                                val validatedURL = viewModel.validateAndGetPDFURL()
-                                if (validatedURL != null) {
-                                    val intent = Intent(Intent.ACTION_VIEW, validatedURL.toUri())
-                                    context.startActivity(intent)
+
+                // Main content
+                when {
+                    uiState.isLoading -> {
+                        LoadingContent()
+                    }
+
+                    uiState.error != null -> {
+                        ErrorContent(
+                            error = uiState.error ?: "Error desconocido",
+                            onRetry = { viewModel.refresh() },
+                            onDismiss = { viewModel.clearError() }
+                        )
+                    }
+
+                    uiState.schedules.isEmpty() -> {
+                        EmptyContent(isOffline = isOffline)
+                    }
+
+                    else -> {
+                        ScheduleContent(
+                            uiState = uiState,
+                            onViewPDF = {
+                                // Validate URL before opening browser
+                                coroutineScope.launch {
+                                    val validatedURL = viewModel.validateAndGetPDFURL()
+                                    if (validatedURL != null) {
+                                        val intent =
+                                            Intent(Intent.ACTION_VIEW, validatedURL.toUri())
+                                        context.startActivity(intent)
+                                    }
+                                    // Error is shown automatically via dialog below
                                 }
-                                // Error is shown automatically via dialog below
-                            }
-                        },
-                        onNavigateToCantalejoInfo = onNavigateToCantalejoInfo
-                    )
+                            },
+                            onNavigateToCantalejoInfo = onNavigateToCantalejoInfo
+                        )
+                    }
                 }
             }
         }
     }
-    
+
     // Loading dialog for PDF URL validation
     if (uiState.isValidatingPDFURL) {
         AlertDialog(
@@ -236,7 +253,10 @@ fun ScheduleScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     CircularProgressIndicator(modifier = Modifier.padding(16.dp))
-                    Text("Verificando enlace del PDF...", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        "Verificando enlace del PDF...",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             },
             confirmButton = { /* No button while loading */ }
@@ -266,7 +286,7 @@ fun ScheduleScreen(
             }
         )
     }
-    
+
     // Date picker dialog
     if (showDatePicker) {
         DatePickerDialog(
@@ -428,8 +448,7 @@ private fun ScheduleContent(
 
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding(),
+            .fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -449,7 +468,7 @@ private fun ScheduleContent(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }
-        
+
         // Show content based on whether a date is selected or not
         if (uiState.selectedDate != null) {
             // Show all shifts for selected date
@@ -459,12 +478,12 @@ private fun ScheduleContent(
                         ShiftHeaderCard(
                             timeSpan,
                             isActive = false, // Always false for selected dates
-                            onInfoClick = if(timeSpan.requiresExplanation) {
+                            onInfoClick = if (timeSpan.requiresExplanation) {
                                 { showShiftInfo = true }
                             } else null
                         )
                     }
-                    
+
                     pharmacies.forEach { pharmacy ->
                         item {
                             PharmacyCard(
@@ -485,7 +504,7 @@ private fun ScheduleContent(
             uiState.currentSchedule?.let { schedule ->
                 schedule.shifts[uiState.activeTimeSpan]?.let { pharmacies ->
                     if (pharmacies.isNotEmpty()) {
-                        if(uiState.location == DutyLocation.Companion.fromZBS(ZBS.Companion.CANTALEJO)) {
+                        if (uiState.location == DutyLocation.Companion.fromZBS(ZBS.Companion.CANTALEJO)) {
                             item {
                                 CantalejoDisclaimerCard(
                                     onClick = onNavigateToCantalejoInfo
@@ -497,7 +516,7 @@ private fun ScheduleContent(
                             ShiftHeaderCard(
                                 uiState.activeTimeSpan!!,
                                 isActive = uiState.activeTimeSpan.isActiveNow(),
-                                onInfoClick = if(uiState.activeTimeSpan.requiresExplanation) {
+                                onInfoClick = if (uiState.activeTimeSpan.requiresExplanation) {
                                     { showShiftInfo = true }
                                 } else null
                             )
@@ -536,7 +555,7 @@ private fun ScheduleContent(
                 }
             }
         }
-        
+
         // Disclaimer and PDF link
         item {
             // Get pharmacy info for error reporting - works for both current and selected date views
@@ -557,7 +576,8 @@ private fun ScheduleContent(
                 }
                 // Current schedule view
                 else -> {
-                    val currentPharmacy = uiState.currentSchedule?.shifts?.get(uiState.activeTimeSpan)?.firstOrNull()
+                    val currentPharmacy =
+                        uiState.currentSchedule?.shifts?.get(uiState.activeTimeSpan)?.firstOrNull()
                     val shiftName = uiState.activeTimeSpan?.let { timeSpan ->
                         when {
                             timeSpan == DutyTimeSpan.FullDay -> "24 horas"
@@ -569,7 +589,7 @@ private fun ScheduleContent(
                     Pair(currentPharmacy, shiftName)
                 }
             }
-            
+
             DisclaimerCard(
                 location = uiState.location!!, // TODO fix
                 currentPharmacy = pharmacy,
@@ -577,7 +597,7 @@ private fun ScheduleContent(
                 onViewPDF = onViewPDF
             )
         }
-        
+
         // Last updated indicator (subtle cache age footnote at bottom)
         if (uiState.downloadDate != null) {
             item {
@@ -588,7 +608,10 @@ private fun ScheduleContent(
 
     }
 
-    ShiftInfoModalSheet(uiState.activeTimeSpan, isVisible = showShiftInfo, onDismiss = { showShiftInfo = false })
+    ShiftInfoModalSheet(
+        uiState.activeTimeSpan,
+        isVisible = showShiftInfo,
+        onDismiss = { showShiftInfo = false })
 }
 
 /**
@@ -602,7 +625,7 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
         val now = System.currentTimeMillis()
         val diff = now - downloadDate
         val daysDiff = TimeUnit.MILLISECONDS.toDays(diff)
-        
+
         when {
             daysDiff == 0L -> {
                 val hoursDiff = TimeUnit.MILLISECONDS.toHours(diff)
@@ -614,6 +637,7 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
                     "Actualizado hace $hoursDiff horas"
                 }
             }
+
             daysDiff == 1L -> "Actualizado ayer"
             daysDiff < 7L -> "Actualizado hace $daysDiff días"
             else -> {
@@ -623,7 +647,7 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
             }
         }
     }
-    
+
     // Footnote style at bottom - centered and very subtle
     Box(
         modifier = Modifier
@@ -649,7 +673,8 @@ private fun DateHeader(
         val today = Calendar.getInstance()
         if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
             calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
+            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
+        ) {
             "Hoy"
         } else {
             formatSelectedDate(calendar)
@@ -725,7 +750,7 @@ private fun DisclaimerCard(
     onViewPDF: () -> Unit
 ) {
     val context = LocalContext.current
-    
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -794,7 +819,7 @@ private fun getDateAtMidnightUtc(selectedDate: Calendar? = null): Long {
     val year = sourceCal.get(Calendar.YEAR)
     val month = sourceCal.get(Calendar.MONTH)
     val day = sourceCal.get(Calendar.DAY_OF_MONTH)
-    
+
     // Create UTC calendar with the same date but at midnight UTC
     val utcCal = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
     utcCal.set(Calendar.YEAR, year)
@@ -804,7 +829,7 @@ private fun getDateAtMidnightUtc(selectedDate: Calendar? = null): Long {
     utcCal.set(Calendar.MINUTE, 0)
     utcCal.set(Calendar.SECOND, 0)
     utcCal.set(Calendar.MILLISECOND, 0)
-    
+
     return utcCal.timeInMillis
 }
 
@@ -818,10 +843,10 @@ private fun DatePickerDialog(
 ) {
     // Create sheet state for full-screen modal
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    
+
     // Get the current selected date (or today if none) as UTC midnight for proper DatePicker initialization
     val initialUtcMillis = getDateAtMidnightUtc(currentSelectedDate)
-    
+
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = initialUtcMillis,
         yearRange = IntRange(
@@ -829,24 +854,24 @@ private fun DatePickerDialog(
             Calendar.getInstance().apply { add(Calendar.MONTH, 6) }.get(Calendar.YEAR)
         )
     )
-    
+
     // Track when user actually selects a date (not the initial state)
     var initialDateSet by remember { mutableStateOf(false) }
-    
+
     // Handle immediate date selection when user taps a date
     LaunchedEffect(datePickerState.selectedDateMillis) {
         if (!initialDateSet) {
             initialDateSet = true
             return@LaunchedEffect
         }
-        
+
         // User has selected a date - convert from UTC back to local timezone
         datePickerState.selectedDateMillis?.let { utcMillis ->
             // DatePicker returns UTC milliseconds, convert to local date
             val utcCal = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
-                timeInMillis = utcMillis 
+                timeInMillis = utcMillis
             }
-            
+
             // Create local calendar with the same date
             val localCal = Calendar.getInstance().apply {
                 set(Calendar.YEAR, utcCal.get(Calendar.YEAR))
@@ -857,54 +882,58 @@ private fun DatePickerDialog(
                 set(Calendar.SECOND, 0)
                 set(Calendar.MILLISECOND, 0)
             }
-            
+
             onDateSelected(localCal)
             onDismiss()
         }
     }
-    
+
     // Use ModalBottomSheet for proper stacking
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = sheetState
+        sheetState = sheetState,
+        containerColor = MaterialTheme.colorScheme.background,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-        ) {
-            // Header with title and "Hoy" button
-            Row(
+        Scaffold(
+            contentWindowInsets = WindowInsets.safeContent
+        ) { innerPaddings ->
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(innerPaddings)
             ) {
-                TextButton(onClick = onTodaySelected) {
-                    Text("Hoy", style = MaterialTheme.typography.bodyMedium)
+                // Header with title and "Hoy" button
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(onClick = onTodaySelected) {
+                        Text("Hoy", style = MaterialTheme.typography.bodyMedium)
+                    }
+
+                    Text(
+                        text = "Seleccionar fecha",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+
+                    TextButton(onClick = onDismiss) {
+                        Text("Cerrar", style = MaterialTheme.typography.bodyMedium)
+                    }
                 }
 
-                Text(
-                    text = "Seleccionar fecha",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
+                // Date picker - full size with immediate selection
+                DatePicker(
+                    state = datePickerState,
+                    modifier = Modifier.fillMaxWidth()
                 )
 
-                TextButton(onClick = onDismiss) {
-                    Text("Cerrar", style = MaterialTheme.typography.bodyMedium)
-                }
+                // Bottom padding for better spacing
+                Spacer(modifier = Modifier.size(32.dp))
             }
-            
-            // Date picker - full size with immediate selection
-            DatePicker(
-                state = datePickerState,
-                modifier = Modifier.fillMaxWidth()
-            )
-            
-            // Bottom padding for better spacing
-            Spacer(modifier = Modifier.size(32.dp))
         }
     }
 }

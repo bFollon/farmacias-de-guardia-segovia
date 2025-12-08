@@ -21,11 +21,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -38,6 +40,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,27 +62,31 @@ fun SettingsScreen(
     onCacheRefreshClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .navigationBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        // PDF Cache Section
-        CachePDFSection(
-            onCheckUpdatesClick = onCacheRefreshClick,
-            onViewCacheStatusClick = onCacheStatusClick
-        )
-        
-        // Information Section
-        InformationSection(
-            onAboutClick = onAboutClick
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
+
+    Scaffold(
+        contentWindowInsets = WindowInsets.safeContent
+    ) { innerPaddings ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .navigationBarsPadding()
+                .padding(innerPaddings),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            // PDF Cache Section
+            CachePDFSection(
+                onCheckUpdatesClick = onCacheRefreshClick,
+                onViewCacheStatusClick = onCacheStatusClick
+            )
+
+            // Information Section
+            InformationSection(
+                onAboutClick = onAboutClick
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
 
@@ -101,7 +108,7 @@ private fun CachePDFSection(
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
-        
+
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -128,9 +135,9 @@ private fun CachePDFSection(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                
+
                 // Check Updates Button
                 SettingsListItem(
                     icon = Icons.Default.Refresh,
@@ -139,9 +146,9 @@ private fun CachePDFSection(
                     showTrailingIcon = false,
                     onClick = onCheckUpdatesClick
                 )
-                
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                
+
                 // View Cache Status Button
                 SettingsListItem(
                     icon = Icons.Default.Info,
@@ -172,7 +179,7 @@ private fun InformationSection(
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
-        
+
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -232,7 +239,7 @@ private fun SettingsListItem(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
-            
+
             if (showTrailingIcon) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
