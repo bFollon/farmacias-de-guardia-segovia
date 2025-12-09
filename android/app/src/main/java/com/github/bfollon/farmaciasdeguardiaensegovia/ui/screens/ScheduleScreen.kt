@@ -892,9 +892,7 @@ private fun DatePickerDialog(
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.background,
     ) {
-        Scaffold(
-            contentWindowInsets = WindowInsets.safeContent
-        ) { innerPaddings ->
+        Scaffold { innerPaddings ->
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

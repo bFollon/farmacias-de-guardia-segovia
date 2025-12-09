@@ -29,6 +29,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoSc
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SettingsScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SplashScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 

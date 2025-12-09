@@ -1,4 +1,4 @@
-package com.github.bfollon.farmaciasdeguardiaensegovia
+package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseOut
@@ -14,15 +14,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -48,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.bfollon.farmaciasdeguardiaensegovia.R
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
@@ -191,85 +191,87 @@ fun SplashScreen(
         onSplashFinished()
     }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .statusBarsPadding()
-            .navigationBarsPadding(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(32.dp)
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background
+    ) { paddingValues ->
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center
         ) {
-            // Logo with scale and fade animations
-            Image(
-                painter = painterResource(id = R.drawable.splash_logo),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(200.dp)
-                    .scale(logoScale)
-                    .alpha(logoAlpha)
-                    .padding(bottom = 40.dp),
-                contentScale = ContentScale.Fit
-            )
-
-            // App title with gradient text effect
-            Text(
-                text = "Farmacias de Guardia\nSegovia",
-                style = MaterialTheme.typography.headlineMedium.copy(
-                    brush = Brush.linearGradient(gradientColors)
-                ),
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                lineHeight = 38.sp,
-                modifier = Modifier
-                    .alpha(textAlpha)
-                    .padding(bottom = 48.dp)
-            )
-
-            // Progress indicator
-            Box(
-                modifier = Modifier
-                    .alpha(progressAlpha)
-                    .padding(bottom = 32.dp)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.padding(32.dp)
             ) {
-                LinearProgressIndicator(
-                    progress = { progress.value },
+                // Logo with scale and fade animations
+                Image(
+                    painter = painterResource(id = R.drawable.splash_logo),
+                    contentDescription = "App Logo",
                     modifier = Modifier
-                        .width(200.dp)
-                        .height(4.dp)
-                        .clip(RoundedCornerShape(2.dp)),
-                    color = Color(0xFF007AFF),
-                    trackColor = Color(0xFF007AFF).copy(alpha = 0.2f)
+                        .size(200.dp)
+                        .scale(logoScale)
+                        .alpha(logoAlpha)
+                        .padding(bottom = 40.dp),
+                    contentScale = ContentScale.Fit
                 )
-            }
 
-            // Region icons with animated emoji progression
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier
-                    .alpha(regionsAlpha)
-                    .padding(bottom = if (isOffline) 16.dp else 0.dp)
-            ) {
-                regions.forEach { region ->
-                    RegionIconView(
-                        region = region,
-                        modifier = Modifier.size(48.dp)
+                // App title with gradient text effect
+                Text(
+                    text = "Farmacias de Guardia\nSegovia",
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        brush = Brush.linearGradient(gradientColors)
+                    ),
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 38.sp,
+                    modifier = Modifier
+                        .alpha(textAlpha)
+                        .padding(bottom = 48.dp)
+                )
+
+                // Progress indicator
+                Box(
+                    modifier = Modifier
+                        .alpha(progressAlpha)
+                        .padding(bottom = 32.dp)
+                ) {
+                    LinearProgressIndicator(
+                        progress = { progress.value },
+                        modifier = Modifier
+                            .width(200.dp)
+                            .height(4.dp)
+                            .clip(RoundedCornerShape(2.dp)),
+                        color = Color(0xFF007AFF),
+                        trackColor = Color(0xFF007AFF).copy(alpha = 0.2f)
                     )
                 }
-            }
-            
-            // Offline warning card (appears below icons when offline)
-            if (isOffline) {
-                OfflineWarningCard(
+
+                // Region icons with animated emoji progression
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier
                         .alpha(regionsAlpha)
-                        .padding(horizontal = 32.dp),
-                    isClickable = false
-                )
+                        .padding(bottom = if (isOffline) 16.dp else 0.dp)
+                ) {
+                    regions.forEach { region ->
+                        RegionIconView(
+                            region = region,
+                            modifier = Modifier.size(48.dp)
+                        )
+                    }
+                }
+
+                // Offline warning card (appears below icons when offline)
+                if (isOffline) {
+                    OfflineWarningCard(
+                        modifier = Modifier
+                            .alpha(regionsAlpha)
+                            .padding(horizontal = 32.dp),
+                        isClickable = false
+                    )
+                }
             }
         }
     }

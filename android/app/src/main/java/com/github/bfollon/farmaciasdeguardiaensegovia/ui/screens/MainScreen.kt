@@ -89,8 +89,6 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-//                .statusBarsPadding()
-//                .navigationBarsPadding(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Offline dialog (shown when card is tapped)
