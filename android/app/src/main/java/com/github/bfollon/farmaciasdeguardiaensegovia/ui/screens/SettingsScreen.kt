@@ -47,7 +47,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 /**
  * Settings screen that displays cache management and information options
@@ -68,8 +70,8 @@ fun SettingsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState)
-                .navigationBarsPadding()
-                .padding(innerPaddings),
+                .padding(innerPaddings)
+                .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             // PDF Cache Section
@@ -102,7 +104,8 @@ private fun CachePDFSection(
         // Section Header
         Text(
             text = "Caché de PDFs",
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -173,7 +176,8 @@ private fun InformationSection(
         // Section Header
         Text(
             text = "Información",
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
@@ -250,3 +254,15 @@ private fun SettingsListItem(
     }
 }
 
+@Preview(showBackground = false)
+@Composable
+fun SettingsScreenPreview() {
+    FarmaciasDeGuardiaEnSegoviaTheme {
+        SettingsScreen(
+            onDismiss = {},
+            onAboutClick = {},
+            onCacheStatusClick = {},
+            onCacheRefreshClick = {}
+        )
+    }
+}
