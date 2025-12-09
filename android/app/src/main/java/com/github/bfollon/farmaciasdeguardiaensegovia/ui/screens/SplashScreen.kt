@@ -51,6 +51,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.R
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -203,7 +204,7 @@ fun SplashScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(32.dp)
+                modifier = Modifier.padding(Spacing.Base)
             ) {
                 // Logo with scale and fade animations
                 Image(
@@ -235,7 +236,7 @@ fun SplashScreen(
                 Box(
                     modifier = Modifier
                         .alpha(progressAlpha)
-                        .padding(bottom = 32.dp)
+                        .padding(bottom = Spacing.XXLarge)
                 ) {
                     LinearProgressIndicator(
                         progress = { progress.value },
@@ -268,7 +269,7 @@ fun SplashScreen(
                     OfflineWarningCard(
                         modifier = Modifier
                             .alpha(regionsAlpha)
-                            .padding(horizontal = 32.dp),
+                            .padding(horizontal = Spacing.XXLarge),
                         isClickable = false
                     )
                 }

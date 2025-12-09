@@ -84,6 +84,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOn
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -134,7 +135,7 @@ fun ScheduleScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = Spacing.Base, vertical = 8.dp)
                 ) {
                     // Top row: Date picker button (left) and Refresh button (right)
                     Row(
@@ -447,7 +448,7 @@ private fun ScheduleContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(Spacing.Base),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // Header with date
@@ -897,6 +898,7 @@ private fun DatePickerDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(innerPaddings)
+                    .padding(Spacing.Base)
             ) {
                 // Header with title and "Hoy" button
                 Row(

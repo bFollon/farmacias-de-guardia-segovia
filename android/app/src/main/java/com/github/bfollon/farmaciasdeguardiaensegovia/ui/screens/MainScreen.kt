@@ -61,6 +61,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarni
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,7 +76,6 @@ fun MainScreen(
     var showOfflineDialog by remember { mutableStateOf(false) }
 
     val spacerSeparation = 0.05f
-    val mainScreenPadding = 16.dp
 
     LaunchedEffect(Unit) {
         isOffline = !NetworkMonitor.isOnline()
@@ -144,7 +144,7 @@ fun MainScreen(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = mainScreenPadding)
+                modifier = Modifier.padding(horizontal = Spacing.Base)
             )
 
             Spacer(modifier = Modifier.weight(spacerSeparation))
@@ -152,7 +152,7 @@ fun MainScreen(
             // Offline warning card (appears below subtitle when offline)
             if (isOffline) {
                 OfflineWarningCard(
-                    modifier = Modifier.padding(horizontal = mainScreenPadding),
+                    modifier = Modifier.padding(horizontal = Spacing.Base),
                     isClickable = true,
                     onClick = { showOfflineDialog = true }
                 )
@@ -163,7 +163,7 @@ fun MainScreen(
 
             // Closest pharmacy finder
             ClosestPharmacyButton(
-                modifier = Modifier.padding(horizontal = mainScreenPadding)
+                modifier = Modifier.padding(horizontal = Spacing.Base)
             )
 
             Spacer(modifier = Modifier.weight(spacerSeparation))
@@ -172,7 +172,7 @@ fun MainScreen(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .padding(horizontal = mainScreenPadding)
+                    .padding(horizontal = Spacing.Base)
                     .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {

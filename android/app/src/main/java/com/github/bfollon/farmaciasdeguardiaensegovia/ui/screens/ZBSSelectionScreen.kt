@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,7 +83,7 @@ fun ZBSSelectionScreen(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = Spacing.Base)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -92,7 +93,7 @@ fun ZBSSelectionScreen(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = Spacing.Base)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -105,7 +106,7 @@ fun ZBSSelectionScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = Spacing.Base),
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     // First column
@@ -139,7 +140,7 @@ fun ZBSSelectionScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = Spacing.Base),
                 colors = CardDefaults.cardColors(
                     containerColor = IOSGreen.copy(alpha = 0.1f)
                 ),

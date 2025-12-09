@@ -64,6 +64,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.R
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 /**
  * About screen that displays app information, support options, and contact details
@@ -85,7 +86,7 @@ fun AboutScreen(
 //                .statusBarsPadding()
 //                .navigationBarsPadding()
                 .padding(innerPadding)
-                .padding(horizontal = 20.dp),
+                .padding(horizontal = Spacing.Base),
             horizontalAlignment = Alignment.Start
         ) {
             Spacer(modifier = Modifier.height(24.dp))

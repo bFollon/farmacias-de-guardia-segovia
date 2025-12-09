@@ -50,6 +50,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 /**
  * Settings screen that displays cache management and information options
@@ -71,7 +72,7 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .padding(innerPaddings)
-                .padding(horizontal = 24.dp),
+                .padding(horizontal = Spacing.Base),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             // PDF Cache Section
@@ -107,7 +108,7 @@ private fun CachePDFSection(
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 4.dp)
+            modifier = Modifier.padding(horizontal = Spacing.XSmall)
         )
 
         Card(
@@ -148,7 +149,7 @@ private fun CachePDFSection(
                     onClick = onCheckUpdatesClick
                 )
 
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+                HorizontalDivider(modifier = Modifier.padding(vertical = Spacing.XSmall))
 
                 // View Cache Status Button
                 SettingsListItem(
@@ -179,7 +180,7 @@ private fun InformationSection(
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 4.dp)
+            modifier = Modifier.padding(horizontal = Spacing.XSmall)
         )
 
         Card(

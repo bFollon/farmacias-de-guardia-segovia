@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheStatusViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -82,7 +83,7 @@ fun CacheStatusScreen(
                     .fillMaxSize()
                     .padding(innerPadding)
                     .navigationBarsPadding(),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(Spacing.Base),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 // Header Section

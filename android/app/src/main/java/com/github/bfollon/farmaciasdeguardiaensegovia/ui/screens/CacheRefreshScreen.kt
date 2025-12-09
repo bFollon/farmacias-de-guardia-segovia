@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheRefreshViewModel
 
 /**
@@ -71,7 +72,7 @@ fun CacheRefreshScreen(
                     .fillMaxWidth()
                     .weight(1f)
                     .navigationBarsPadding(),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(Spacing.Base),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 // Section header

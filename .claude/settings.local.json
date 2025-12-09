@@ -13,7 +13,9 @@
       "WebSearch",
       "Bash(cat:*)",
       "Bash(swift -typecheck:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

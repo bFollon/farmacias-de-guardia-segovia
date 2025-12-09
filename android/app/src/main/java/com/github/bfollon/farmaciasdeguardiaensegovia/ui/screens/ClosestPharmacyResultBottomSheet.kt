@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import java.net.URLEncoder
 import androidx.core.net.toUri
 
@@ -66,7 +67,7 @@ fun ClosestPharmacyResultBottomSheet(
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
                     .padding(innerPaddings)
-                    .padding(horizontal = 24.dp),
+                    .padding(horizontal = Spacing.Base),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Header with pharmacy icon and title
