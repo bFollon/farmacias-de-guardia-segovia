@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import java.net.URLEncoder
 
 /**
@@ -114,7 +115,7 @@ fun PharmacyCard(
                                 .copy(alpha = 0.3f),
                             shape = RoundedCornerShape(8.dp)
                         )
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                        .padding(horizontal = Spacing.Medium, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {

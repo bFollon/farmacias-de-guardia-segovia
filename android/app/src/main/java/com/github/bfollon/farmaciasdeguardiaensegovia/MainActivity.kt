@@ -1,13 +1,12 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia
 
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -30,25 +29,13 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoSc
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SettingsScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SplashScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Manually set display cutout mode for Android 15+ compatibility
-        // Overrides the deprecated LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES used by enableEdgeToEdge()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            window.attributes.layoutInDisplayCutoutMode =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-                    // Android 15+ (API 35+): Use ALWAYS mode (non-deprecated)
-                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
-                } else {
-                    // Android 9-14 (API 28-34): Use SHORT_EDGES (backward compatibility)
-                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-                }
-        }
 
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
@@ -163,7 +150,8 @@ fun AppNavigation() {
                 showScheduleModal = false
                 selectedLocationId = null
             },
-            sheetState = scheduleSheetState
+            sheetState = scheduleSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             ScheduleScreen(
                 locationId = selectedLocationId!!,
@@ -184,7 +172,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCantalejoInfo = false
             },
-            sheetState = cantalejoSheetState
+            sheetState = cantalejoSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CantalejoInfoScreen(
                 onDismiss = {
@@ -200,7 +189,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showZBSSelectionModal = false
             },
-            sheetState = zbsSheetState
+            sheetState = zbsSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             ZBSSelectionScreen(
                 onZBSSelected = { zbs ->
@@ -221,7 +211,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showSettingsModal = false
             },
-            sheetState = settingsSheetState
+            sheetState = settingsSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             SettingsScreen(
                 onDismiss = {
@@ -246,7 +237,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showAboutModal = false
             },
-            sheetState = aboutSheetState
+            sheetState = aboutSheetState,
+            containerColor = MaterialTheme.colorScheme.background
         ) {
             AboutScreen(
                 onDismiss = {
@@ -262,7 +254,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCacheStatusModal = false
             },
-            sheetState = cacheStatusSheetState
+            sheetState = cacheStatusSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CacheStatusScreen(
                 onDismiss = {
@@ -278,7 +271,8 @@ fun AppNavigation() {
             onDismissRequest = {
                 showCacheRefreshModal = false
             },
-            sheetState = cacheRefreshSheetState
+            sheetState = cacheRefreshSheetState,
+            containerColor = MaterialTheme.colorScheme.background,
         ) {
             CacheRefreshScreen(
                 onDismiss = {

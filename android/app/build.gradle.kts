@@ -13,8 +13,8 @@ android {
         applicationId = "com.github.bfollon.farmaciasdeguardiaensegovia"
         minSdk = 26
         targetSdk = 36
-        versionCode = 25
-        versionName = "1.1.11"
+        versionCode = 27
+        versionName = "1.1.13"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,6 +61,9 @@ dependencies {
     implementation(libs.androidx.material3.windowsSizeClass)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
+
+    // Material3 for XML theme support (edge-to-edge compliance)
+    implementation("com.google.android.material:material:1.12.0")
     
     // ViewModel support
     implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -70,10 +73,7 @@ dependencies {
     
     // HTTP client for PDF downloads and web scraping
     implementation(libs.okhttp)
-    
-    // Date picker
-    implementation(libs.compose.material.dialogs.datetime)
-    
+
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     

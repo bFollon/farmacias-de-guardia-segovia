@@ -28,8 +28,8 @@ The app processes official PDF documents from health authorities to provide up-t
 ### 🚀 Passion & Learning Project
 This app was created as a personal passion project and learning experience. It started as a way to solve a real-world problem (finding duty pharmacies quickly) while exploring iOS development.
 
-### 🎨 Entirely Vibe Coded
-Fair warning: This entire app was "vibe coded" - meaning it was built using AI almost entirely. I am a Software developer and know what I'm doing, but expect some weird stuff in the codebase.
+### 🎨 Partially Vibe Coded
+Fair warning: This app was partially "vibe coded", meaning it was built using AI. I am a Software developer and know what I'm doing, but expect some weird stuff in the codebase. Most of the iOS app is "vibe-coded" while the Android app required a lot more manual development. Especially for the PDF parsing algorithms.
 
 ### 📱 Not an iOS Developer
 I'm not a professional iOS developer. This is my first serious attempt at building an iOS app, so expect some unconventional approaches and probably a few things that would make Apple's Human Interface Guidelines cry. But it was built with love and lots of trial and error!

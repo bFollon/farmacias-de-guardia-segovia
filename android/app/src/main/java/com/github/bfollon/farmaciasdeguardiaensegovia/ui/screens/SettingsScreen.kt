@@ -21,11 +21,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -38,13 +40,17 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 /**
  * Settings screen that displays cache management and information options
@@ -59,27 +65,29 @@ fun SettingsScreen(
     onCacheRefreshClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .navigationBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        // PDF Cache Section
-        CachePDFSection(
-            onCheckUpdatesClick = onCacheRefreshClick,
-            onViewCacheStatusClick = onCacheStatusClick
-        )
-        
-        // Information Section
-        InformationSection(
-            onAboutClick = onAboutClick
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
+
+    Scaffold { innerPaddings ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(innerPaddings)
+                .padding(horizontal = Spacing.Base),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            // PDF Cache Section
+            CachePDFSection(
+                onCheckUpdatesClick = onCacheRefreshClick,
+                onViewCacheStatusClick = onCacheStatusClick
+            )
+
+            // Information Section
+            InformationSection(
+                onAboutClick = onAboutClick
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
 
@@ -97,11 +105,12 @@ private fun CachePDFSection(
         // Section Header
         Text(
             text = "Caché de PDFs",
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 4.dp)
+            modifier = Modifier.padding(horizontal = Spacing.XSmall)
         )
-        
+
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -128,9 +137,9 @@ private fun CachePDFSection(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                
+
                 // Check Updates Button
                 SettingsListItem(
                     icon = Icons.Default.Refresh,
@@ -139,9 +148,9 @@ private fun CachePDFSection(
                     showTrailingIcon = false,
                     onClick = onCheckUpdatesClick
                 )
-                
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
-                
+
+                HorizontalDivider(modifier = Modifier.padding(vertical = Spacing.XSmall))
+
                 // View Cache Status Button
                 SettingsListItem(
                     icon = Icons.Default.Info,
@@ -168,11 +177,12 @@ private fun InformationSection(
         // Section Header
         Text(
             text = "Información",
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 4.dp)
+            modifier = Modifier.padding(horizontal = Spacing.XSmall)
         )
-        
+
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -232,7 +242,7 @@ private fun SettingsListItem(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
-            
+
             if (showTrailingIcon) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
@@ -245,3 +255,15 @@ private fun SettingsListItem(
     }
 }
 
+@Preview(showBackground = false)
+@Composable
+fun SettingsScreenPreview() {
+    FarmaciasDeGuardiaEnSegoviaTheme {
+        SettingsScreen(
+            onDismiss = {},
+            onAboutClick = {},
+            onCacheStatusClick = {},
+            onCacheRefreshClick = {}
+        )
+    }
+}
