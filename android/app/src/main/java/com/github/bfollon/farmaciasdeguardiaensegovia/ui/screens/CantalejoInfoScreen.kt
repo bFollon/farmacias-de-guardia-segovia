@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
 /**
  * Information screen for Cantalejo region
@@ -63,7 +64,8 @@ fun CantalejoInfoScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .navigationBarsPadding()
-                .padding(innerPaddings),
+                .padding(innerPaddings)
+                .padding(horizontal = Spacing.Base),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             // Header with icon
