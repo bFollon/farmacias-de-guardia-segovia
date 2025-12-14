@@ -475,10 +475,17 @@ private fun ScheduleContent(
             // Show all shifts for selected date
             if (uiState.allShiftsForSelectedDate.isNotEmpty()) {
                 uiState.allShiftsForSelectedDate.forEach { (timeSpan, pharmacies) ->
+                    // Check if this shift is currently active using the same logic
+                    // as ScheduleService.findScheduleForTimestamp()
+                    // This properly handles midnight-crossing shifts
+                    val isShiftActiveNow = uiState.currentSchedule?.let { schedule ->
+                        timeSpan.contains(schedule.date, System.currentTimeMillis())
+                    } ?: false
+
                     item {
                         ShiftHeaderCard(
                             timeSpan,
-                            isActive = false, // Always false for selected dates
+                            isActive = isShiftActiveNow,
                             onInfoClick = if (timeSpan.requiresExplanation) {
                                 { showShiftInfo = true }
                             } else null
@@ -489,7 +496,7 @@ private fun ScheduleContent(
                         item {
                             PharmacyCard(
                                 pharmacy = pharmacy,
-                                isActive = false // Always false for selected dates
+                                isActive = isShiftActiveNow
                             )
                         }
                     }
