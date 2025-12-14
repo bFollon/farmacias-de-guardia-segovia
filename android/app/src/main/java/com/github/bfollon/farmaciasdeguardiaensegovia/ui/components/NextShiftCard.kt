@@ -26,8 +26,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -35,21 +37,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 
 /**
- * Component for displaying the next shift information
- * Shows "Siguiente turno" header with shift details and pharmacy cards
+ * Compact component for displaying the next shift information
+ * Shows "Siguiente turno" label with pharmacy name(s)
+ * Tap to open detailed modal with full shift and pharmacy information
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NextShiftCard(
     timeSpan: DutyTimeSpan,
     pharmacies: List<Pharmacy>,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
+        onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -57,44 +64,50 @@ fun NextShiftCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier.padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Header: "Siguiente turno" label
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AccessTime,
-                    contentDescription = "Siguiente turno",
-                    tint = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.size(20.dp)
-                )
+            Icon(
+                imageVector = Icons.Default.AccessTime,
+                contentDescription = "Siguiente turno",
+                tint = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.size(20.dp)
+            )
+
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "Siguiente turno",
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Medium
                 )
-            }
 
-            // Shift info (e.g., "Nocturno • 22:00 - 10:15")
-            Text(
-                text = "${timeSpan.displayName} • ${timeSpan.displayFormat}",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+                // Pharmacy name(s) - show first pharmacy, "+X más" if multiple
+                val displayText = if (pharmacies.size == 1) {
+                    pharmacies[0].name
+                } else {
+                    "${pharmacies[0].name} +${pharmacies.size - 1} más"
+                }
 
-            // Pharmacy cards (reuse existing PharmacyCard)
-            pharmacies.forEach { pharmacy ->
-                PharmacyCard(
-                    pharmacy = pharmacy,
-                    isActive = false  // Next shift is never "active now"
+                Text(
+                    text = displayText,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
+
+            // Chevron icon to indicate expandability
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = "Ver detalles",
+                tint = MaterialTheme.colorScheme.outline,
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }

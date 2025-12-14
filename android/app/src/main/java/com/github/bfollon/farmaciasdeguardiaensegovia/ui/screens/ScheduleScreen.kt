@@ -81,6 +81,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftModalBottomSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
@@ -459,6 +460,7 @@ private fun ScheduleContent(
     onNavigateToCantalejoInfo: () -> Unit = {},
 ) {
     var showShiftInfo by remember { mutableStateOf(false) }
+    var showNextShiftModal by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
@@ -567,7 +569,8 @@ private fun ScheduleContent(
                                     item {
                                         NextShiftCard(
                                             timeSpan = uiState.nextTimeSpan!!,
-                                            pharmacies = nextPharmacies
+                                            pharmacies = nextPharmacies,
+                                            onClick = { showNextShiftModal = true }
                                         )
                                     }
                                 }
@@ -655,6 +658,18 @@ private fun ScheduleContent(
         uiState.activeTimeSpan,
         isVisible = showShiftInfo,
         onDismiss = { showShiftInfo = false })
+
+    // Next Shift Modal
+    if (uiState.nextSchedule != null && uiState.nextTimeSpan != null) {
+        uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
+            NextShiftModalBottomSheet(
+                timeSpan = uiState.nextTimeSpan!!,
+                pharmacies = nextPharmacies,
+                isVisible = showNextShiftModal,
+                onDismiss = { showNextShiftModal = false }
+            )
+        }
+    }
 }
 
 /**
