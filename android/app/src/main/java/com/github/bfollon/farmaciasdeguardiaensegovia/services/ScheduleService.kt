@@ -18,6 +18,7 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.services
 
 import android.content.Context
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyDate
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
@@ -52,25 +53,98 @@ class ScheduleService(context: Context) {
     }
 
     /**
+     * Find the schedule and shift type for a given timestamp
+     * @param schedules List of schedules to search in
+     * @param timestamp The timestamp to find the schedule for (defaults to current time)
+     * @return Pair of (schedule, active timespan) or null if not found
+     */
+    fun findScheduleForTimestamp(
+        schedules: List<PharmacySchedule>,
+        timestamp: Long = System.currentTimeMillis()
+    ): Pair<PharmacySchedule, DutyTimeSpan>? {
+        val matchingSchedule = schedules.find {
+            it.shifts.entries.find { (timeSpan, _) ->
+                timeSpan.contains(it.date, timestamp)
+            } != null
+        }
+
+        return matchingSchedule?.let {
+            Pair(it, it.shifts.entries.find { (key, _) ->
+                key.contains(it.date, timestamp)
+            }?.key!!)
+        } ?: run {
+            // Fallback: same-day matching
+            val existingSchedule = schedules.find {
+                it.shifts.entries.find { (timeSpan, _) ->
+                    timeSpan.isSameDay(it.date, timestamp)
+                } != null
+            }
+            existingSchedule?.let {
+                Pair(it, it.shifts.entries.find { (key, _) ->
+                    key.isSameDay(it.date, timestamp)
+                }?.key!!)
+            } ?: null.also {
+                DebugConfig.debugPrint("ScheduleService: No matching schedule found for timestamp: $timestamp")
+            }
+        }
+    }
+
+    /**
      * Find the current active schedule and shift type
+     * Convenience method that calls findScheduleForTimestamp with current time
      * @param schedules List of schedules to search in
      * @return Pair of (schedule, active timespan) or null if not found
      */
     fun findCurrentSchedule(schedules: List<PharmacySchedule>): Pair<PharmacySchedule, DutyTimeSpan>? {
-        val now = System.currentTimeMillis()
+        return findScheduleForTimestamp(schedules, System.currentTimeMillis())
+    }
 
-        val matchingSchedule = schedules.find { it.shifts.entries.find { (timeSpan, _) -> timeSpan.contains(it.date, now) } != null }
+    /**
+     * Find the next schedule after the current one
+     * @param schedules List of all schedules
+     * @param currentSchedule The current active schedule
+     * @param currentTimeSpan The current active time span
+     * @return Pair of (next schedule, next timespan) or null if not found
+     */
+    fun findNextSchedule(
+        schedules: List<PharmacySchedule>,
+        currentSchedule: PharmacySchedule?,
+        currentTimeSpan: DutyTimeSpan?
+    ): Pair<PharmacySchedule, DutyTimeSpan>? {
+        if (currentSchedule == null || currentTimeSpan == null) return null
 
-        return matchingSchedule?.let {
-            Pair(it, it.shifts.entries.find { (key, _) -> key.contains(it.date, now) }?.key!!)
-        }?: run {
-            val existingSchedule = schedules.find { it.shifts.entries.find { (timeSpan, _) -> timeSpan.isSameDay(it.date, now) } != null }
-            existingSchedule?.let {
-                Pair(it, it.shifts.entries.find { (key, _) -> key.isSameDay(it.date, now) }?.key!!)
-            } ?: null.also {
-                DebugConfig.debugPrint("ScheduleService: No matching schedule found for duty info: $now")
-            }
+        // Calculate timestamp for end of current shift
+        val currentDate = currentSchedule.date
+        val shiftDate = java.time.LocalDate.of(
+            currentDate.year!!,
+            DutyDate.monthToNumber(currentDate.month)!!,
+            currentDate.day
+        )
+
+        val shiftEndTime = if (currentTimeSpan.spansMultipleDays) {
+            // Night shift ending next day (e.g., 22:00 Dec 11 → 10:15 Dec 12)
+            java.time.LocalDateTime.of(
+                shiftDate.plusDays(1),
+                java.time.LocalTime.of(currentTimeSpan.endHour, currentTimeSpan.endMinute)
+            )
+        } else {
+            // Day shift ending same day (e.g., 10:15 → 22:00)
+            java.time.LocalDateTime.of(
+                shiftDate,
+                java.time.LocalTime.of(currentTimeSpan.endHour, currentTimeSpan.endMinute)
+            )
         }
+
+        // Add 1 minute to shift end to get timestamp that falls in next shift
+        val nextShiftTimestamp = shiftEndTime.plusMinutes(1)
+            .atZone(java.time.ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
+
+        DebugConfig.debugPrint("ScheduleService: Finding next schedule for timestamp: $nextShiftTimestamp")
+
+        // Reuse existing logic to find schedule for that timestamp
+        return findScheduleForTimestamp(schedules, nextShiftTimestamp)
     }
 
     /**

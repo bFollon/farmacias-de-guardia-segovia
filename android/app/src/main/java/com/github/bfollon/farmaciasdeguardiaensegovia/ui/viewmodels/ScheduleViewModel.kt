@@ -60,7 +60,12 @@ class ScheduleViewModel(
         val formattedDateTime: String = "",
         val downloadDate: Long? = null,
         val isValidatingPDFURL: Boolean = false,
-        val pdfURLError: String? = null
+        val pdfURLError: String? = null,
+        // Next shift properties
+        val nextSchedule: PharmacySchedule? = null,
+        val nextTimeSpan: DutyTimeSpan? = null,
+        val minutesUntilShiftChange: Long? = null,
+        val showShiftTransitionWarning: Boolean = false
     )
     
     private val _uiState = MutableStateFlow(ScheduleUiState())
@@ -86,18 +91,37 @@ class ScheduleViewModel(
                 
                 val schedules = scheduleService.loadSchedules(location, forceRefresh)
                 val currentDateTime = scheduleService.getCurrentDateTime()
-                
+
                 // Find current schedule and active timespan
                 val currentInfo = scheduleService.findCurrentSchedule(schedules)
-                
+
+                // Find next schedule
+                val nextInfo = scheduleService.findNextSchedule(
+                    schedules,
+                    currentInfo?.first,
+                    currentInfo?.second
+                )
+
+                // Calculate minutes until current shift ends
+                val minutesUntilChange = currentInfo?.second?.let { timeSpan ->
+                    calculateMinutesUntilShiftEnd(timeSpan)
+                }
+
+                // Show warning if within 30 minutes
+                val showWarning = minutesUntilChange != null && minutesUntilChange <= 30
+
                 // Get download date for cache age indicator
                 val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
-                
+
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     schedules = schedules,
                     currentSchedule = currentInfo?.first,
                     activeTimeSpan = currentInfo?.second,
+                    nextSchedule = nextInfo?.first,
+                    nextTimeSpan = nextInfo?.second,
+                    minutesUntilShiftChange = minutesUntilChange,
+                    showShiftTransitionWarning = showWarning,
                     formattedDateTime = currentDateTime,
                     downloadDate = downloadDate
                 )
@@ -243,6 +267,31 @@ class ScheduleViewModel(
      */
     fun clearPDFURLError() {
         _uiState.value = _uiState.value.copy(pdfURLError = null)
+    }
+
+    /**
+     * Calculate minutes until the current shift ends
+     * Handles midnight-crossing shifts correctly
+     */
+    private fun calculateMinutesUntilShiftEnd(timeSpan: DutyTimeSpan): Long {
+        val now = java.time.LocalDateTime.now()
+        val currentMinutes = now.hour * 60 + now.minute
+        val endMinutes = timeSpan.endHour * 60 + timeSpan.endMinute
+
+        return if (timeSpan.spansMultipleDays) {
+            // Night shift crossing midnight (e.g., 22:00 → 10:15)
+            if (currentMinutes >= (timeSpan.startHour * 60 + timeSpan.startMinute)) {
+                // Currently in "today" portion (after 22:00)
+                val minutesUntilMidnight = (24 * 60) - currentMinutes
+                (minutesUntilMidnight + endMinutes).toLong()
+            } else {
+                // Currently in "tomorrow" portion (before 10:15)
+                (endMinutes - currentMinutes).toLong()
+            }
+        } else {
+            // Same-day shift (e.g., 10:15 → 22:00)
+            (endMinutes - currentMinutes).toLong()
+        }
     }
 
     /**

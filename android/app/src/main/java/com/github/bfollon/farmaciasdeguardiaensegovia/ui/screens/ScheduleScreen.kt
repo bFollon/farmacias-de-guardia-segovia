@@ -80,10 +80,12 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftTransitionWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
 import kotlinx.coroutines.launch
@@ -521,12 +523,42 @@ private fun ScheduleContent(
                             )
                         }
 
+                        // Shift transition warning (if within 30 minutes)
+                        if (uiState.showShiftTransitionWarning &&
+                            uiState.minutesUntilShiftChange != null &&
+                            uiState.nextTimeSpan != null) {
+                            item {
+                                ShiftTransitionWarningCard(
+                                    minutesUntilChange = uiState.minutesUntilShiftChange!!,
+                                    nextShift = uiState.nextTimeSpan!!
+                                )
+                            }
+                        }
+
                         pharmacies.forEach { pharmacy ->
                             item {
                                 PharmacyCard(
                                     pharmacy = pharmacy,
                                     isActive = uiState.activeTimeSpan?.isActiveNow() ?: false
                                 )
+                            }
+                        }
+
+                        // Next shift section
+                        if (uiState.nextSchedule != null && uiState.nextTimeSpan != null) {
+                            uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
+                                if (nextPharmacies.isNotEmpty()) {
+                                    item {
+                                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
+                                    }
+
+                                    item {
+                                        NextShiftCard(
+                                            timeSpan = uiState.nextTimeSpan!!,
+                                            pharmacies = nextPharmacies
+                                        )
+                                    }
+                                }
                             }
                         }
                     } else {
