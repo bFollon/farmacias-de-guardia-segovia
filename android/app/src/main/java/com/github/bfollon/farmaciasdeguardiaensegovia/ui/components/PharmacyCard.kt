@@ -62,7 +62,8 @@ import java.net.URLEncoder
 fun PharmacyCard(
     pharmacy: Pharmacy,
     modifier: Modifier = Modifier,
-    isActive: Boolean = false
+    isActive: Boolean = false,
+    hideWarning: Boolean = false
 ) {
     val context = LocalContext.current
 
@@ -100,7 +101,7 @@ fun PharmacyCard(
                         fontWeight = FontWeight.Medium
                     )
                 }
-            } else {
+            } else if (!hideWarning) {
                 // Duty schedule warning banner
                 Row(
                     modifier = Modifier
