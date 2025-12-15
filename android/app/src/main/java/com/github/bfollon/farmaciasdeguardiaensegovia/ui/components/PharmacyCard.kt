@@ -62,7 +62,8 @@ import java.net.URLEncoder
 fun PharmacyCard(
     pharmacy: Pharmacy,
     modifier: Modifier = Modifier,
-    isActive: Boolean = false
+    isActive: Boolean = false,
+    hideWarning: Boolean = false
 ) {
     val context = LocalContext.current
 
@@ -78,8 +79,8 @@ fun PharmacyCard(
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             // Active indicator or duty schedule warning
             if (isActive) {
@@ -91,7 +92,7 @@ fun PharmacyCard(
                         imageVector = Icons.Default.CheckCircle,
                         contentDescription = "Activa ahora",
                         tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                     Text(
                         text = "Activa ahora",
@@ -100,7 +101,7 @@ fun PharmacyCard(
                         fontWeight = FontWeight.Medium
                     )
                 }
-            } else {
+            } else if (!hideWarning) {
                 // Duty schedule warning banner
                 Row(
                     modifier = Modifier
@@ -123,7 +124,7 @@ fun PharmacyCard(
                         imageVector = Icons.Default.Warning,
                         contentDescription = "Advertencia",
                         tint = Color(0xFFFF9800), // Orange color
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                     Text(
                         text = "Fuera del horario de guardia",
@@ -176,7 +177,7 @@ fun PharmacyCard(
                         imageVector = Icons.Default.Phone,
                         contentDescription = "Teléfono",
                         tint = MaterialTheme.colorScheme.outline,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                     Text(
                         text = pharmacy.formattedPhone,
@@ -203,7 +204,7 @@ fun PharmacyCard(
                             imageVector = Icons.Default.Info,
                             contentDescription = "Información adicional",
                             tint = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(18.dp)
                         )
                         Text(
                             text = info,

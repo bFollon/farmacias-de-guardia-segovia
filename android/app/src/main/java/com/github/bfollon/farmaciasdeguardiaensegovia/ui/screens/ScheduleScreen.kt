@@ -81,6 +81,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftModalBottomSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
@@ -186,7 +187,7 @@ fun ScheduleScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp, bottom = 16.dp),
+                            .padding(top = 8.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -200,6 +201,19 @@ fun ScheduleScreen(
                             fontWeight = FontWeight.Bold
                         )
                     }
+
+                    // Inline date text (replaces DateHeader card)
+                    val displayText = if (uiState.selectedDate != null) {
+                        formatSelectedDate(uiState.selectedDate!!)
+                    } else {
+                        uiState.formattedDateTime
+                    }
+                    Text(
+                        text = displayText,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp, bottom = 12.dp)
+                    )
                 }
 
                 // Main content
@@ -446,27 +460,20 @@ private fun ScheduleContent(
     onNavigateToCantalejoInfo: () -> Unit = {},
 ) {
     var showShiftInfo by remember { mutableStateOf(false) }
+    var showNextShiftModal by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
         contentPadding = PaddingValues(Spacing.Base),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Header with date
-        item {
-            DateHeader(
-                selectedDate = uiState.selectedDate,
-                currentDateTime = uiState.formattedDateTime
-            )
-        }
-
         item {
             Text(
                 text = "Farmacias de Guardia",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 8.dp)
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
             )
         }
 
@@ -562,7 +569,8 @@ private fun ScheduleContent(
                                     item {
                                         NextShiftCard(
                                             timeSpan = uiState.nextTimeSpan!!,
-                                            pharmacies = nextPharmacies
+                                            pharmacies = nextPharmacies,
+                                            onClick = { showNextShiftModal = true }
                                         )
                                     }
                                 }
@@ -650,6 +658,18 @@ private fun ScheduleContent(
         uiState.activeTimeSpan,
         isVisible = showShiftInfo,
         onDismiss = { showShiftInfo = false })
+
+    // Next Shift Modal
+    if (uiState.nextSchedule != null && uiState.nextTimeSpan != null) {
+        uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
+            NextShiftModalBottomSheet(
+                timeSpan = uiState.nextTimeSpan!!,
+                pharmacies = nextPharmacies,
+                isVisible = showNextShiftModal,
+                onDismiss = { showNextShiftModal = false }
+            )
+        }
+    }
 }
 
 /**
@@ -699,51 +719,6 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
             textAlign = TextAlign.Center
         )
-    }
-}
-
-@Composable
-private fun DateHeader(
-    selectedDate: Calendar?,
-    currentDateTime: String
-) {
-    val displayText = selectedDate?.let { calendar ->
-        val today = Calendar.getInstance()
-        if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-            calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
-        ) {
-            "Hoy"
-        } else {
-            formatSelectedDate(calendar)
-        }
-    } ?: currentDateTime
-
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
-        ),
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Schedule,
-                contentDescription = "Fecha y hora",
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                modifier = Modifier.size(24.dp)
-            )
-            Text(
-                text = displayText,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSecondaryContainer
-            )
-        }
     }
 }
 
