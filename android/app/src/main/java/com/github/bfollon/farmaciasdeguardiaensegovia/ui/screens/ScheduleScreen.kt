@@ -42,8 +42,10 @@ import androidx.compose.material.icons.filled.EventBusy
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
@@ -53,6 +55,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -125,7 +128,13 @@ fun ScheduleScreen(
         isOffline = !NetworkMonitor.isOnline()
     }
 
-    Scaffold { innerPaddings ->
+    Scaffold(
+        bottomBar = {
+            if (uiState.downloadDate != null) {
+                LastUpdatedIndicator(downloadDate = uiState.downloadDate!!)
+            }
+        }
+    ) { innerPaddings ->
         Box(
             modifier = modifier
                 .padding(innerPaddings)
@@ -644,13 +653,6 @@ private fun ScheduleContent(
             )
         }
 
-        // Last updated indicator (subtle cache age footnote at bottom)
-        if (uiState.downloadDate != null) {
-            item {
-                LastUpdatedIndicator(downloadDate = uiState.downloadDate)
-            }
-        }
-
 
     }
 
@@ -673,9 +675,9 @@ private fun ScheduleContent(
 }
 
 /**
- * Subtle footnote indicator showing when the cached data was last updated
+ * Subtle sticky indicator showing when the cached data was last updated
  * Shows relative time for recent updates, absolute date for older ones
- * Positioned at the very bottom of the schedule like a footnote
+ * Positioned as a sticky bottom bar using Material3 BottomAppBar
  */
 @Composable
 private fun LastUpdatedIndicator(downloadDate: Long) {
@@ -706,19 +708,36 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
         }
     }
 
-    // Footnote style at bottom - centered and very subtle
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp, bottom = 8.dp),
-        contentAlignment = Alignment.Center
+    // Compact sticky bottom bar with divider
+    Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "📥 $formattedDate",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            textAlign = TextAlign.Center
+        // Subtle divider line
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 0.5.dp,
+            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
         )
+
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+            tonalElevation = 1.dp
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "📥 $formattedDate",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
 
