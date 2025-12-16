@@ -155,7 +155,7 @@ fun ScheduleScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Date picker button with text (like iOS "Hoy")
+                        // Date picker button with text
                         TextButton(
                             onClick = { showDatePicker = true },
                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
@@ -167,17 +167,10 @@ fun ScheduleScreen(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = if (uiState.selectedDate?.let { selectedCal ->
-                                        val today = Calendar.getInstance()
-                                        selectedCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                                                selectedCal.get(Calendar.MONTH) == today.get(
-                                            Calendar.MONTH
-                                        ) &&
-                                                selectedCal.get(Calendar.DAY_OF_MONTH) == today.get(
-                                            Calendar.DAY_OF_MONTH
-                                        )
-                                    } == true) "Hoy" else {
-                                    uiState.selectedDate?.let { formatSelectedDate(it) } ?: "Hoy"
+                                text = if (uiState.selectedDate == null) {
+                                    "Ahora"
+                                } else {
+                                    formatSelectedDate(uiState.selectedDate!!, showNow = false)
                                 },
                                 style = MaterialTheme.typography.bodyLarge
                             )
@@ -931,7 +924,7 @@ private fun DatePickerDialog(
                     .padding(innerPaddings)
                     .padding(Spacing.Base)
             ) {
-                // Header with title and "Hoy" button
+                // Header with title and "Ahora" button
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -940,7 +933,7 @@ private fun DatePickerDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(onClick = onTodaySelected) {
-                        Text("Hoy", style = MaterialTheme.typography.bodyMedium)
+                        Text("Ahora", style = MaterialTheme.typography.bodyMedium)
                     }
 
                     Text(
