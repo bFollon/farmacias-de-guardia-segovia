@@ -212,7 +212,7 @@ fun ScheduleScreen(
                         text = displayText,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 4.dp, bottom = 12.dp)
+                        modifier = Modifier.padding(top = 4.dp)
                     )
                 }
 
@@ -465,7 +465,7 @@ private fun ScheduleContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
-        contentPadding = PaddingValues(Spacing.Base),
+        contentPadding = PaddingValues(horizontal = Spacing.Base),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
