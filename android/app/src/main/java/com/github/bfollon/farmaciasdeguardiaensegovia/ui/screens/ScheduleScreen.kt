@@ -212,13 +212,11 @@ fun ScheduleScreen(
                     }
 
                     // Inline date text (replaces DateHeader card)
-                    val displayText = if (uiState.selectedDate != null) {
-                        formatSelectedDate(uiState.selectedDate!!)
-                    } else {
-                        uiState.formattedDateTime
-                    }
+                    val selectedDate = uiState.selectedDate ?: Calendar.getInstance()
+                    val isNowView = uiState.selectedDate == null  // Check if in "now" mode
+
                     Text(
-                        text = displayText,
+                        text = formatSelectedDate(selectedDate, showNow = isNowView),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 4.dp)
@@ -741,7 +739,7 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
     }
 }
 
-private fun formatSelectedDate(calendar: Calendar): String {
+private fun formatSelectedDate(calendar: Calendar, showNow: Boolean = false): String {
     val dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
         Calendar.MONDAY -> "Lunes"
         Calendar.TUESDAY -> "Martes"
@@ -769,9 +767,9 @@ private fun formatSelectedDate(calendar: Calendar): String {
         Calendar.DECEMBER -> "diciembre"
         else -> "enero"
     }
-    val year = calendar.get(Calendar.YEAR)
 
-    return "$dayOfWeek, $day de $month de $year"
+    val baseDate = "$dayOfWeek, $day de $month"
+    return if (showNow) "$baseDate · Ahora" else baseDate
 }
 
 @Composable
