@@ -563,10 +563,6 @@ private fun ScheduleContent(
                             uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
                                 if (nextPharmacies.isNotEmpty()) {
                                     item {
-                                        Spacer(modifier = Modifier.padding(vertical = 8.dp))
-                                    }
-
-                                    item {
                                         NextShiftCard(
                                             timeSpan = uiState.nextTimeSpan!!,
                                             pharmacies = nextPharmacies,

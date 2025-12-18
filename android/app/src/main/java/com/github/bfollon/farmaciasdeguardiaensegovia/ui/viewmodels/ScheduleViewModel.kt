@@ -107,8 +107,10 @@ class ScheduleViewModel(
                     calculateMinutesUntilShiftEnd(timeSpan)
                 }
 
-                // Show warning if within 30 minutes
-                val showWarning = minutesUntilChange != null && minutesUntilChange <= 30
+                // Show warning only if shift is actively running now AND ending within 30 minutes
+                val showWarning = currentInfo?.second?.let { timeSpan ->
+                    timeSpan.isActiveNow() && minutesUntilChange != null && minutesUntilChange > 0 && minutesUntilChange <= 30
+                } ?: false
 
                 // Get download date for cache age indicator
                 val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
