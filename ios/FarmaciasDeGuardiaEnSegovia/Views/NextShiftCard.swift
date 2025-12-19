@@ -42,56 +42,65 @@ struct NextShiftCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // Header
-            HStack(spacing: 8) {
-                Image(systemName: "clock.fill")
-                    .foregroundColor(.secondary)
-                    .frame(width: 20)
-                Text("Siguiente turno")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-
-            // Shift info
-            HStack(spacing: 8) {
-                Image(systemName: timeSpan == .capitalNight ? "moon.stars.fill" : "sun.max.fill")
-                    .foregroundColor(.secondary.opacity(0.7))
-                    .frame(width: ViewConstants.iconColumnWidth)
-                Text("\(shiftLabel) • \(timeSpan.displayName)")
-                    .font(.headline)
-            }
-
-            // Compact pharmacy preview
-            if let firstPharmacy = pharmacies.first {
-                Button {
-                    showingDetails = true
-                } label: {
-                    HStack {
-                        Text(firstPharmacy.name)
-                            .font(.body)
-                            .foregroundColor(.primary)
-                            .lineLimit(1)
-
-                        if pharmacies.count > 1 {
-                            Text("+\(pharmacies.count - 1) más")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-
-                        Spacer()
-
-                        Image(systemName: "chevron.right")
+        Button {
+            showingDetails = true
+        } label: {
+            HStack(alignment: .center, spacing: 12) {
+                // Left side - all content in VStack
+                VStack(alignment: .leading, spacing: 12) {
+                    // Header
+                    HStack(spacing: 8) {
+                        Image(systemName: "clock.fill")
                             .foregroundColor(.secondary)
-                            .font(.caption)
+                            .frame(width: 20)
+                        Text("Siguiente turno")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+
+                    // Shift info
+                    HStack(spacing: 8) {
+                        Image(systemName: timeSpan == .capitalNight ? "moon.stars.fill" : "sun.max.fill")
+                            .foregroundColor(.secondary.opacity(0.7))
+                            .frame(width: ViewConstants.iconColumnWidth)
+                        Text("\(shiftLabel) • \(timeSpan.displayName)")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                    }
+
+                    // Compact pharmacy preview
+                    if let firstPharmacy = pharmacies.first {
+                        HStack(spacing: 8) {
+                            Text(firstPharmacy.name)
+                                .font(.body)
+                                .foregroundColor(.primary)
+                                .lineLimit(1)
+
+                            if pharmacies.count > 1 {
+                                Text("+\(pharmacies.count - 1) más")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                 }
+
+                Spacer()
+
+                // Right side - chevron
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 14))
             }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.gray.opacity(0.1))
+            )
+            .contentShape(RoundedRectangle(cornerRadius: 8))
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.systemGray6))
-        .cornerRadius(8)
+        .buttonStyle(.plain)
         .sheet(isPresented: $showingDetails) {
             NextShiftDetailSheet(
                 schedule: schedule,
