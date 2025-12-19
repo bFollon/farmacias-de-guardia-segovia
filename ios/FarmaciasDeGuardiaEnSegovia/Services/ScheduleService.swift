@@ -209,4 +209,150 @@ class ScheduleService {
             return calendar.isDate(scheduleDate, inSameDayAs: date)
         }
     }
+
+    // MARK: - Next Shift Feature
+
+    /// Find schedule and timespan for a specific timestamp
+    /// - Parameters:
+    ///   - schedules: Array of pharmacy schedules to search
+    ///   - region: Region to determine shift patterns
+    ///   - timestamp: Unix timestamp to check (defaults to now)
+    /// - Returns: Tuple of (schedule, timespan) or nil if not found
+    static func findScheduleForTimestamp(
+        in schedules: [PharmacySchedule],
+        for region: Region,
+        at timestamp: TimeInterval = Date().timeIntervalSince1970
+    ) -> (PharmacySchedule, DutyTimeSpan)? {
+        let date = Date(timeIntervalSince1970: timestamp)
+        let calendar = Calendar.current
+
+        // Determine shift pattern (same logic as existing findCurrentSchedule)
+        guard let sampleSchedule = schedules.first else { return nil }
+        let has24HourShifts = sampleSchedule.shifts[.fullDay] != nil
+        let hasDayNightShifts = sampleSchedule.shifts[.capitalDay] != nil ||
+                                 sampleSchedule.shifts[.capitalNight] != nil
+
+        if has24HourShifts {
+            // 24-hour regions: find schedule for the timestamp's date
+            guard let schedule = schedules.first(where: { schedule in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+                return calendar.isDate(scheduleDate, inSameDayAs: date)
+            }) else { return nil }
+            return (schedule, .fullDay)
+
+        } else if hasDayNightShifts {
+            // Day/night regions: use DutyDate.dutyTimeInfoForTimestamp logic
+            let dutyInfo = DutyDate.dutyTimeInfoForTimestamp(timestamp)
+
+            guard let schedule = schedules.first(where: { schedule in
+                return schedule.date.day == dutyInfo.date.day &&
+                       schedule.date.year == dutyInfo.date.year &&
+                       DutyDate.monthToNumber(schedule.date.month) ==
+                       calendar.component(.month, from: date)
+            }) else { return nil }
+
+            let timeSpan: DutyTimeSpan = dutyInfo.shiftType == .day ? .capitalDay : .capitalNight
+            return (schedule, timeSpan)
+
+        } else {
+            // Fallback: treat as 24-hour
+            guard let schedule = schedules.first(where: { schedule in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+                return calendar.isDate(scheduleDate, inSameDayAs: date)
+            }) else { return nil }
+            return (schedule, .fullDay)
+        }
+    }
+
+    /// Find the next shift after the current one
+    /// - Parameters:
+    ///   - schedules: Array of pharmacy schedules
+    ///   - region: Region to determine shift patterns
+    ///   - currentSchedule: Current schedule (optional)
+    ///   - currentTimeSpan: Current shift timespan (optional)
+    /// - Returns: Tuple of (schedule, timespan) for next shift, or nil
+    static func findNextSchedule(
+        in schedules: [PharmacySchedule],
+        for region: Region,
+        currentSchedule: PharmacySchedule? = nil,
+        currentTimeSpan: DutyTimeSpan? = nil
+    ) -> (PharmacySchedule, DutyTimeSpan)? {
+        // If no current info provided, find it first
+        let current: (PharmacySchedule, DutyTimeSpan)?
+        if let schedule = currentSchedule, let timeSpan = currentTimeSpan {
+            current = (schedule, timeSpan)
+        } else {
+            current = findCurrentSchedule(in: schedules, for: region)
+        }
+
+        guard let (schedule, timeSpan) = current else { return nil }
+
+        // Calculate end time of current shift
+        let calendar = Calendar.current
+        guard let scheduleTimestamp = schedule.date.toTimestamp() else { return nil }
+        let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+
+        var shiftEndComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+        let endComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.end)
+        shiftEndComponents.hour = endComponents.hour
+        shiftEndComponents.minute = endComponents.minute
+
+        // Handle midnight-crossing shifts (night shifts)
+        if timeSpan.spansMultipleDays {
+            shiftEndComponents.day! += 1
+        }
+
+        guard let shiftEndDate = calendar.date(from: shiftEndComponents) else { return nil }
+
+        // Add 1 minute to get into next shift
+        guard let nextShiftDate = calendar.date(byAdding: .minute, value: 1, to: shiftEndDate)
+            else { return nil }
+
+        let nextTimestamp = nextShiftDate.timeIntervalSince1970
+
+        DebugConfig.debugPrint("📅 Finding next schedule after \(timeSpan.displayName) ending at \(shiftEndDate)")
+
+        // Reuse findScheduleForTimestamp to find next shift
+        return findScheduleForTimestamp(in: schedules, for: region, at: nextTimestamp)
+    }
+
+    /// Calculate minutes remaining until current shift ends
+    /// - Parameter timeSpan: Current duty timespan
+    /// - Returns: Minutes until shift end, or nil if calculation fails
+    static func calculateMinutesUntilShiftEnd(for timeSpan: DutyTimeSpan) -> Int? {
+        let now = Date()
+        let calendar = Calendar.current
+        let currentComponents = calendar.dateComponents([.hour, .minute], from: now)
+
+        guard let currentHour = currentComponents.hour,
+              let currentMinute = currentComponents.minute else { return nil }
+
+        let currentMinutes = currentHour * 60 + currentMinute
+
+        let endComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.end)
+        guard let endHour = endComponents.hour, let endMinute = endComponents.minute else {
+            return nil
+        }
+        let endMinutes = endHour * 60 + endMinute
+
+        if timeSpan.spansMultipleDays {
+            // Night shift crossing midnight
+            let startComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.start)
+            let startMinutes = (startComponents.hour ?? 0) * 60 + (startComponents.minute ?? 0)
+
+            if currentMinutes >= startMinutes {
+                // Currently in "today" portion (after start time)
+                let minutesUntilMidnight = (24 * 60) - currentMinutes
+                return minutesUntilMidnight + endMinutes
+            } else {
+                // Currently in "tomorrow" portion (before end time)
+                return endMinutes - currentMinutes
+            }
+        } else {
+            // Same-day shift
+            return endMinutes - currentMinutes
+        }
+    }
 }

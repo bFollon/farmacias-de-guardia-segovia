@@ -34,6 +34,9 @@ struct ScheduleContentView: View {
     @State private var pdfLinkErrorMessage = ""
     @Environment(\.openURL) private var openURL
 
+    // Next shift feature
+    @State private var nextShiftInfo: NextShiftInfo?
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -86,8 +89,30 @@ struct ScheduleContentView: View {
                             PharmacyView(pharmacy: pharmacy)
                         }
                     }
+
+                    // Shift transition warning (if within 30 minutes)
+                    if let info = nextShiftInfo, info.shouldShowWarning,
+                       let minutes = info.minutesUntilChange {
+                        let nextShiftName = info.timeSpan == .capitalNight ? "turno nocturno" :
+                                            info.timeSpan == .capitalDay ? "turno diurno" : "turno 24 horas"
+                        ShiftTransitionWarningCard(
+                            minutesUntilChange: minutes,
+                            nextShiftName: nextShiftName
+                        )
+                        .padding(.top, 12)
+                    }
+
+                    // Next shift card
+                    if let info = nextShiftInfo {
+                        NextShiftCard(
+                            schedule: info.schedule,
+                            timeSpan: info.timeSpan,
+                            region: region
+                        )
+                        .padding(.top, 12)
+                    }
                 }
-                
+
                 Divider()
                     .padding(.vertical)
                 
@@ -161,6 +186,9 @@ struct ScheduleContentView: View {
         } message: {
             Text(pdfLinkErrorMessage)
         }
+        .onAppear {
+            loadNextShiftInfo()
+        }
     }
 
     private func openPDFLink() {
@@ -194,6 +222,32 @@ struct ScheduleContentView: View {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private func loadNextShiftInfo() {
+        // Find next schedule
+        Task {
+            let schedules = await ScheduleService.loadSchedules(for: region)
+
+            if let nextInfo = ScheduleService.findNextSchedule(
+                in: schedules,
+                for: region,
+                currentSchedule: schedule,
+                currentTimeSpan: activeShift
+            ) {
+                let minutes = ScheduleService.calculateMinutesUntilShiftEnd(for: activeShift)
+
+                await MainActor.run {
+                    nextShiftInfo = NextShiftInfo(
+                        schedule: nextInfo.0,
+                        timeSpan: nextInfo.1,
+                        minutesUntilChange: minutes
+                    )
+
+                    DebugConfig.debugPrint("⏰ Next shift info loaded: \(nextInfo.1.displayName), minutes until change: \(minutes ?? -1)")
                 }
             }
         }
