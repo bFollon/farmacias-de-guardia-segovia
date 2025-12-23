@@ -7,3 +7,6 @@ android/local.properties
 android/app/build/generated/source/buildConfig/debug/com/bfollon/farmaciasdeGuardia/BuildConfig.java
 
 .idea
+
+# iOS Secrets
+ios/FarmaciasDeGuardiaEnSegovia/Secrets.swift

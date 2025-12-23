@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; };
+		3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CE049B512DD6AAC300D1D560 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -23,7 +28,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3AD1AC482EFA1B5B00A6BFF7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:SU7SUNGZJP:New Relic Inc"; lastKnownFileType = wrapper.xcframework; name = NewRelic.xcframework; path = ../../../NewRelic_XCFramework_Agent_7/NewRelic.xcframework; sourceTree = "<group>"; };
 		CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegovia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE049B502DD6AAC300D1D560 /* FarmaciasDeGuardiaEnSegoviaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegoviaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE049B5A2DD6AAC300D1D560 /* FarmaciasDeGuardiaEnSegoviaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegoviaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,10 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AD1AC432EFA1B2C00A6BFF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE049B352DD6AABF00D1D560 = {
 			isa = PBXGroup;
 			children = (
 				CE049B402DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia */,
+				3AD1AC432EFA1B2C00A6BFF7 /* Frameworks */,
 				CE049B3F2DD6AABF00D1D560 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +133,8 @@
 				CE049B3A2DD6AABF00D1D560 /* Sources */,
 				CE049B3B2DD6AABF00D1D560 /* Frameworks */,
 				CE049B3C2DD6AABF00D1D560 /* Resources */,
+				3AD1AC482EFA1B5B00A6BFF7 /* Embed Frameworks */,
+				3AD1AC492EFA1CBA00A6BFF7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -225,6 +257,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3AD1AC492EFA1CBA00A6BFF7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ${CONFIGURATION} = \"Debug\" ]; then\n  echo \"Skipping DSYM upload CONFIGURATION: ${CONFIGURATION}\"\n  exit 0\nfi\nARTIFACT_DIR=\"${BUILD_DIR%Build/*}\"\nSCRIPT=`/usr/bin/find \"${SRCROOT}\" \"${ARTIFACT_DIR}\" -type f -name run-symbol-tool | head -n 1`\n/bin/sh \"${SCRIPT}\" \"eu01xx21da13b19c8d0434a616a0a03bcfb765911d-NRMA\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE049B3A2DD6AABF00D1D560 /* Sources */ = {
