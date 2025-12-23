@@ -24,6 +24,7 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showSplashScreen = true
     @State private var isPreloading = false
+    @State private var showMonitoringConsent = false
 
     var body: some Scene {
         WindowGroup {
@@ -36,6 +37,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
             } else {
                 ContentView()
                     .supportedOrientations(.portrait)
+                    .sheet(isPresented: $showMonitoringConsent) {
+                        MonitoringConsentView()
+                    }
             }
         }
     }
@@ -60,6 +64,14 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
             await MainActor.run {
                 initializeApp()
                 showSplashScreen = false
+
+                // TEMPORARY: Always show monitoring consent for UI testing
+                showMonitoringConsent = true
+
+                // Show monitoring consent if user hasn't made a choice yet
+                // if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
+                //     showMonitoringConsent = true
+                // }
             }
         }
     }
@@ -93,8 +105,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize NewRelic
-        NewRelic.start(withApplicationToken: Secrets.newRelicAppToken)
+        // Initialize NewRelic only if user has opted in
+        if MonitoringPreferencesService.shared.hasUserOptedIn() {
+            NewRelic.start(withApplicationToken: Secrets.newRelicAppToken)
+            DebugConfig.debugPrint("✅ NewRelic monitoring initialized (user opted in)")
+        } else {
+            DebugConfig.debugPrint("⚠️ NewRelic monitoring disabled (user has not opted in)")
+        }
 
         return true
     }

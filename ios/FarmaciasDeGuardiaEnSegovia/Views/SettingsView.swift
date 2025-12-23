@@ -22,6 +22,11 @@ struct SettingsView: View {
     @State private var showingCacheStatus = false
     @State private var showingCacheRefresh = false
     @State private var showingAbout = false
+
+    // Monitoring preferences
+    @State private var monitoringEnabled = MonitoringPreferencesService.shared.hasUserOptedIn()
+    @State private var originalMonitoringValue = MonitoringPreferencesService.shared.hasUserOptedIn()
+    @State private var showRestartNotice = false
     
     var body: some View {
         NavigationView {
@@ -57,7 +62,36 @@ struct SettingsView: View {
                         }
                     }
                 }
-                
+
+                Section("Privacidad") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Toggle(isOn: $monitoringEnabled) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Monitoreo de Errores")
+                                    .font(.headline)
+                                Text("Envía datos técnicos para ayudar a mejorar la app")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .onChange(of: monitoringEnabled) { newValue in
+                            MonitoringPreferencesService.shared.setMonitoringEnabled(newValue)
+                            showRestartNotice = newValue != originalMonitoringValue
+                        }
+                    }
+                    .padding(.vertical, 4)
+
+                    if showRestartNotice {
+                        HStack {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(.orange)
+                            Text("Requiere reiniciar la app para aplicar cambios")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
                 Section("Información") {
                     Button(action: { showingAbout = true }) {
                         HStack {
