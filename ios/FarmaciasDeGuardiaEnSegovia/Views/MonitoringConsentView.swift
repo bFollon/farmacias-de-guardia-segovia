@@ -19,124 +19,108 @@ import SwiftUI
 
 /// Modal view for obtaining user consent for monitoring and error tracking
 struct MonitoringConsentView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Binding var isPresented: Bool
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Header
-                    VStack(spacing: 12) {
-                        Image(systemName: "chart.bar.fill")
-                            .font(.system(size: 50))
-                            .foregroundColor(.blue)
+        VStack(alignment: .leading, spacing: 16) {
+            // Header
+            VStack(spacing: 8) {
+                Image(systemName: "chart.bar.fill")
+                    .font(.system(size: 36))
+                    .foregroundColor(.blue)
 
-                        Text("Ayúdenos a Mejorar la App")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top)
-
-                    // Main Description
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("¿Puede la aplicación recopilar datos técnicos anónimos para ayudarnos a detectar errores y mejorar el rendimiento de la app?")
-                            .font(.body)
-                            .foregroundColor(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-
-                    Divider()
-
-                    // What IS collected
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("¿Qué se recopila?")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-
-                        VStack(alignment: .leading, spacing: 8) {
-                            InfoRow(icon: "iphone", text: "Información del dispositivo (modelo, versión de iOS)")
-                            InfoRow(icon: "exclamationmark.triangle", text: "Errores y fallos de la aplicación")
-                            InfoRow(icon: "speedometer", text: "Métricas de rendimiento y tiempos de carga")
-                        }
-                    }
-
-                    Divider()
-
-                    // What is NOT collected
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("¿Qué NO se recopila?")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-
-                        VStack(alignment: .leading, spacing: 8) {
-                            InfoRow(icon: "person.fill.xmark", text: "Información personal identificable", color: .red)
-                            InfoRow(icon: "location.slash", text: "Ubicación geográfica precisa", color: .red)
-                            InfoRow(icon: "cross.case.slash", text: "Datos de farmacias consultadas", color: .red)
-                        }
-                    }
-
-                    Divider()
-
-                    // Buttons
-                    VStack(spacing: 12) {
-                        // Enable button (green)
-                        Button(action: {
-                            MonitoringPreferencesService.shared.setMonitoringEnabled(true)
-                            dismiss()
-                        }) {
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.white)
-                                Text("Habilitar Monitoreo")
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 14)
-                            .background(Color.green)
-                            .cornerRadius(12)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-
-                        // Not now button (gray)
-                        Button(action: {
-                            MonitoringPreferencesService.shared.setMonitoringEnabled(false)
-                            dismiss()
-                        }) {
-                            HStack {
-                                Image(systemName: "xmark.circle")
-                                    .foregroundColor(.white)
-                                Text("Ahora No")
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 14)
-                            .background(Color.gray)
-                            .cornerRadius(12)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-
-                    // Footer note
-                    Text("Esta función es completamente opcional. Puede cambiar su preferencia en cualquier momento desde la sección de Ajustes.")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, 8)
-                }
-                .padding()
+                Text("Ayúdenos a Mejorar la App")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
             }
-            .navigationTitle("Privacidad")
-            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxWidth: .infinity)
+
+            // Main Description
+            Text("¿Permitir recopilación de datos técnicos anónimos para detectar errores?")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Divider()
+
+            // What IS collected
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Se recopila:")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    InfoRow(icon: "iphone", text: "Info del dispositivo", color: .blue)
+                    InfoRow(icon: "exclamationmark.triangle", text: "Errores y fallos", color: .blue)
+                    InfoRow(icon: "speedometer", text: "Métricas de rendimiento", color: .blue)
+                }
+            }
+
+            // What is NOT collected
+            VStack(alignment: .leading, spacing: 8) {
+                Text("NO se recopila:")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    InfoRow(icon: "person.fill.xmark", text: "Información personal", color: .red)
+                    InfoRow(icon: "location.slash", text: "Ubicación precisa", color: .red)
+                    InfoRow(icon: "cross.case.slash", text: "Farmacias consultadas", color: .red)
+                }
+            }
+
+            Divider()
+
+            // Buttons
+            VStack(spacing: 8) {
+                // Enable button (green)
+                Button(action: {
+                    MonitoringPreferencesService.shared.setMonitoringEnabled(true)
+                    isPresented = false
+                }) {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Permitir")
+                            .fontWeight(.medium)
+                    }
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                }
+                .buttonStyle(PlainButtonStyle())
+
+                // Not now button (gray)
+                Button(action: {
+                    MonitoringPreferencesService.shared.setMonitoringEnabled(false)
+                    isPresented = false
+                }) {
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                        Text("No, Gracias")
+                            .fontWeight(.medium)
+                    }
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color.gray)
+                    .cornerRadius(10)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+
+            // Footer note
+            Text("Cambiar en Ajustes cuando quiera")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
         }
-        .interactiveDismissDisabled() // Prevent dismissal by swiping down
+        .padding(20)
     }
 }
 
@@ -147,12 +131,13 @@ private struct InfoRow: View {
     var color: Color = .blue
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .center, spacing: 8) {
             Image(systemName: icon)
                 .foregroundColor(color)
-                .frame(width: 20)
+                .font(.caption)
+                .frame(width: 16)
             Text(text)
-                .font(.body)
+                .font(.caption)
                 .foregroundColor(.primary)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -160,5 +145,5 @@ private struct InfoRow: View {
 }
 
 #Preview {
-    MonitoringConsentView()
+    MonitoringConsentView(isPresented: .constant(true))
 }

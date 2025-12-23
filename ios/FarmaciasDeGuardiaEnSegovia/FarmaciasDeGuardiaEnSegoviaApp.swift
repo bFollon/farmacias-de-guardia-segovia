@@ -37,8 +37,26 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
             } else {
                 ContentView()
                     .supportedOrientations(.portrait)
-                    .sheet(isPresented: $showMonitoringConsent) {
-                        MonitoringConsentView()
+                    .overlay {
+                        if showMonitoringConsent {
+                            ZStack {
+                                // Semi-transparent background
+                                Color.black.opacity(0.4)
+                                    .ignoresSafeArea()
+
+                                // Centered popup
+                                MonitoringConsentView(isPresented: $showMonitoringConsent)
+                                    .frame(maxWidth: 500)
+                                    .background(Color(uiColor: .systemBackground))
+                                    .cornerRadius(16)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                    )
+                                    .shadow(radius: 20)
+                                    .padding(40)
+                            }
+                        }
                     }
             }
         }
