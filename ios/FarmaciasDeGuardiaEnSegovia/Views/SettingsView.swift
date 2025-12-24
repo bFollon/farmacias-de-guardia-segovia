@@ -74,7 +74,7 @@ struct SettingsView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
-                        .onChange(of: monitoringEnabled) { newValue in
+                        .onChange(of: monitoringEnabled) { oldValue, newValue in
                             MonitoringPreferencesService.shared.setMonitoringEnabled(newValue)
                             showRestartNotice = newValue != originalMonitoringValue
                         }
