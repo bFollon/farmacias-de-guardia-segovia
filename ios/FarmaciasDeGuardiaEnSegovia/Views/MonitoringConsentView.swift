@@ -68,7 +68,7 @@ struct MonitoringConsentView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     InfoRow(icon: "person.fill.xmark", text: "Información personal", color: .red)
                     InfoRow(icon: "location.slash", text: "Ubicación precisa", color: .red)
-                    InfoRow(icon: "cross.case.slash", text: "Farmacias consultadas", color: .red)
+                    InfoRow(icon: "pill.fill", text: "Farmacias consultadas", color: .red)
                 }
             }
 

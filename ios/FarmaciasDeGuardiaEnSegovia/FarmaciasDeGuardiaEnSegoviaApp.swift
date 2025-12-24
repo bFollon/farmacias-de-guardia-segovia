@@ -83,13 +83,10 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
                 initializeApp()
                 showSplashScreen = false
 
-                // TEMPORARY: Always show monitoring consent for UI testing
-                showMonitoringConsent = true
-
                 // Show monitoring consent if user hasn't made a choice yet
-                // if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
-                //     showMonitoringConsent = true
-                // }
+                if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
+                    showMonitoringConsent = true
+                }
             }
         }
     }
