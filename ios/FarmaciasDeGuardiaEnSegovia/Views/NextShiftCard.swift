@@ -41,6 +41,13 @@ struct NextShiftCard: View {
         }
     }
 
+    private var sheetHeight: CGFloat {
+        let baseHeight: CGFloat = 150  // Nav bar + inline shift header + padding
+        let pharmacyHeight: CGFloat = 120  // Height per pharmacy including spacing
+        let pharmacyCount = CGFloat(pharmacies.count)
+        return baseHeight + (pharmacyCount * pharmacyHeight)
+    }
+
     var body: some View {
         Button {
             showingDetails = true
@@ -107,6 +114,8 @@ struct NextShiftCard: View {
                 timeSpan: timeSpan,
                 region: region
             )
+            .presentationDetents([.height(sheetHeight)])
+            .presentationDragIndicator(.visible)
         }
     }
 }

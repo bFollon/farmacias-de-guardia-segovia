@@ -45,25 +45,17 @@ struct NextShiftDetailSheet: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Shift header
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 8) {
-                            Image(systemName: timeSpan == .capitalNight ?
-                                  "moon.stars.fill" : "sun.max.fill")
-                                .foregroundColor(.secondary.opacity(0.7))
-                            Text(shiftLabel)
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                        }
+                    // Shift header (matching main schedule format)
+                    HStack(alignment: .center, spacing: ViewConstants.iconSpacing) {
+                        Image(systemName: timeSpan == .capitalNight ?
+                              "moon.stars.fill" : "sun.max.fill")
+                            .foregroundColor(.secondary.opacity(0.7))
+                            .frame(width: ViewConstants.iconColumnWidth)
 
-                        Text(timeSpan.displayName)
-                            .font(.subheadline)
+                        Text("\(shiftLabel) (\(timeSpan.displayName))")
+                            .font(.headline)
                             .foregroundColor(.secondary)
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
 
                     // Pharmacies
                     ForEach(pharmacies, id: \.name) { pharmacy in
