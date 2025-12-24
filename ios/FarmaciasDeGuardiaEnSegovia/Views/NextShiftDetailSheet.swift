@@ -64,6 +64,7 @@ struct NextShiftDetailSheet: View {
                 }
                 .padding()
             }
+            .background(Color(.systemBackground))
             .navigationTitle("Siguiente turno")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
