@@ -20,7 +20,8 @@
       "Bash(then echo \"exists\")",
       "Bash(else echo \"not found\")",
       "Bash(fi)",
-      "Bash(git check-ignore:*)"
+      "Bash(git check-ignore:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

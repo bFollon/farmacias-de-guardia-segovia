@@ -468,8 +468,11 @@ struct ClosestPharmacyResultView: View {
                 Text("Elije una aplicación de mapas")
             }
             .onAppear {
-                // Load cache timestamp for the result's region
-                cacheTimestamp = ScheduleCacheService.shared.getCacheTimestamp(for: result.region)
+                // Load cache timestamp for the result's location
+                let location = result.zbs != nil ?
+                    DutyLocation.fromZBS(result.zbs!, region: result.region) :
+                    DutyLocation.fromRegion(result.region)
+                cacheTimestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
             }
         }
     }

@@ -51,7 +51,10 @@ public class PDFProcessingService {
     }
     
     /// Loads pharmacy schedules for the current region
-    public func loadPharmacies(forceRefresh: Bool = false) async -> [PharmacySchedule] {
+    /// Returns a dictionary mapping DutyLocation to schedules
+    /// - Main regions return 1 entry
+    /// - Segovia Rural returns 8 entries (one per ZBS)
+    public func loadPharmacies(forceRefresh: Bool = false) async -> [DutyLocation: [PharmacySchedule]] {
         // Get the effective PDF URL (cached or remote, force download if requested)
         let effectiveURL: URL
         if forceRefresh {
@@ -66,15 +69,15 @@ public class PDFProcessingService {
         } else {
             effectiveURL = await region.getEffectivePDFURL()
         }
-        
+
         guard let pdfDocument = PDFDocument(url: effectiveURL) else {
             DebugConfig.debugPrint("Failed to load PDF from \(effectiveURL)")
-            return []
+            return [:]
         }
 
         guard let parser = parsingStrategies[region.id] else {
             DebugConfig.debugPrint("No parser found for region: \(region.name) (id: \(region.id))")
-            return []
+            return [:]
         }
 
         DebugConfig.debugPrint("Loading schedules for \(region.name) from \(effectiveURL)")
@@ -84,17 +87,19 @@ public class PDFProcessingService {
     /// Updates the current region and returns schedules for that region
     /// - Parameter newRegion: The new region to update to
     /// - Parameter forceRefresh: Whether to force re-download the PDF
-    /// - Returns: An array of `PharmacySchedule` for the new region
-    public func loadPharmacies(for newRegion: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
+    /// - Returns: Dictionary mapping DutyLocation to PharmacySchedule arrays
+    public func loadPharmacies(for newRegion: Region, forceRefresh: Bool = false) async -> [DutyLocation: [PharmacySchedule]] {
         self.region = newRegion
         return await loadPharmacies(forceRefresh: forceRefresh)
-    }    /// Internal method, kept for backward compatibility and testing
-    func loadPharmacies(from url: URL) -> [PharmacySchedule] {
+    }
+
+    /// Internal method, kept for backward compatibility and testing
+    func loadPharmacies(from url: URL) -> [DutyLocation: [PharmacySchedule]] {
         guard let pdfDocument = PDFDocument(url: url) else {
             DebugConfig.debugPrint("Failed to load PDF from \(url)")
-            return []
+            return [:]
         }
-        
+
         // For direct URL loading, use Segovia parser as default
         let parser = parsingStrategies["segovia-capital"] ?? SegoviaCapitalParser()
         DebugConfig.debugPrint("Loading schedules from \(url)")

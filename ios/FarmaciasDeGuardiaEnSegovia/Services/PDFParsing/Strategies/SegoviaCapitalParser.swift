@@ -27,7 +27,7 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
         self.parser = SegoviaPDFParser()
     }
     
-    public func parseSchedules(from pdf: PDFDocument) -> [PharmacySchedule] {
+    public func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
         var allSchedules: [PharmacySchedule] = []
         
         // Process each page
@@ -66,24 +66,28 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
                 ))
             }
         }
-        
+
         // Sort schedules by date
-        return allSchedules.sorted { first, second in
+        let sortedSchedules = allSchedules.sorted { first, second in
             let currentYear = DutyDate.getCurrentYear()
             let firstYear = first.date.year ?? currentYear
             let secondYear = second.date.year ?? currentYear
-            
+
             if firstYear != secondYear {
                 return firstYear < secondYear
             }
-            
+
             let firstMonth = DutyDate.monthToNumber(first.date.month) ?? 0
             let secondMonth = DutyDate.monthToNumber(second.date.month) ?? 0
-            
+
             if firstMonth != secondMonth {
                 return firstMonth < secondMonth
             }
             return first.date.day < second.date.day
         }
+
+        // Return as dictionary with DutyLocation as key
+        let location = DutyLocation.fromRegion(.segoviaCapital)
+        return [location: sortedSchedules]
     }
 }

@@ -137,7 +137,7 @@ struct ContentView: View {
             }
         }
         .sheet(item: $selectedRegion) { region in
-            PDFViewScreen(url: region.pdfURL, region: region)
+            PDFViewScreen(url: region.pdfURL, location: DutyLocation.fromRegion(region))
         }
         .sheet(isPresented: $showingZBSSelection) {
             ZBSSelectionView(selectedRegion: $selectedRegion)

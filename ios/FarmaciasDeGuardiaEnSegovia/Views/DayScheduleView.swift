@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DayScheduleView: View {
     let schedule: PharmacySchedule
-    let region: Region
+    let location: DutyLocation
     @Binding var isPresentingInfo: Bool // Keep for backward compatibility
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
@@ -27,11 +27,11 @@ struct DayScheduleView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                // Region name at the top (matching ZBS style)
+                // Location name at the top (matching ZBS style)
                 HStack {
-                    Text(region.icon)
+                    Text(location.icon)
                         .font(.title)
-                    Text(region.name)
+                    Text(location.name)
                         .font(.title)
                         .fontWeight(.medium)
                 }
@@ -58,8 +58,8 @@ struct DayScheduleView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Farmacias de Guardia")
                         .font(.headline)
-                    
-                    if region.id == "segovia-capital" {
+
+                    if location.id == "segovia-capital" {
                         // Show day/night shifts for Segovia Capital
                         VStack(alignment: .leading, spacing: 12) {
                             ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
@@ -102,7 +102,7 @@ struct DayScheduleView: View {
                     Button(action: {
                         openPDFLink()
                     }) {
-                        Text("Calendario de Guardias - \(region.name)")
+                        Text("Calendario de Guardias - \(location.name)")
                     }
                     .font(.footnote)
                     .disabled(isValidatingPDFLink)
@@ -155,8 +155,10 @@ struct DayScheduleView: View {
 
     private func openPDFLink() {
         Task {
+            let pdfURL = location.associatedRegion.pdfURL
+
             // Check if we need to show loading (cache miss)
-            let needsValidation = PDFURLValidator.shared.needsValidation(for: region.pdfURL)
+            let needsValidation = PDFURLValidator.shared.needsValidation(for: pdfURL)
 
             await MainActor.run {
                 if needsValidation {
@@ -164,13 +166,13 @@ struct DayScheduleView: View {
                 }
             }
 
-            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+            let validationResult = await PDFURLValidator.shared.validateURL(pdfURL)
 
             await MainActor.run {
                 isValidatingPDFLink = false
 
                 if validationResult.isValid {
-                    openURL(region.pdfURL)
+                    openURL(pdfURL)
                 } else {
                     // URL validation failed - trigger scraping to get fresh URLs
                     DebugConfig.debugPrint("📄 PDF URL validation failed, triggering URL scraping")

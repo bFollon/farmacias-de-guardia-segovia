@@ -20,7 +20,7 @@ import SwiftUI
 struct ScheduleContentView: View {
     let schedule: PharmacySchedule
     let activeShift: DutyTimeSpan
-    let region: Region
+    let location: DutyLocation
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
     let cacheTimestamp: TimeInterval?
@@ -41,11 +41,11 @@ struct ScheduleContentView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    // Region name at the top (matching ZBS style)
+                    // Location name at the top (matching ZBS style)
                     HStack {
-                        Text(region.icon)
+                        Text(location.icon)
                             .font(.title)
-                        Text(region.name)
+                        Text(location.name)
                             .font(.title)
                             .fontWeight(.medium)
                     }
@@ -107,7 +107,7 @@ struct ScheduleContentView: View {
                         NextShiftCard(
                             schedule: info.schedule,
                             timeSpan: info.timeSpan,
-                            region: region
+                            region: location.associatedRegion
                         )
                         .padding(.top, 12)
                     }
@@ -128,7 +128,7 @@ struct ScheduleContentView: View {
                     Button(action: {
                         openPDFLink()
                     }) {
-                        Text("Calendario de Guardias - \(region.name)")
+                        Text("Calendario de Guardias - \(location.name)")
                     }
                     .font(.footnote)
                     .disabled(isValidatingPDFLink)
@@ -193,8 +193,10 @@ struct ScheduleContentView: View {
 
     private func openPDFLink() {
         Task {
+            let pdfURL = location.associatedRegion.pdfURL
+
             // Check if we need to show loading (cache miss)
-            let needsValidation = PDFURLValidator.shared.needsValidation(for: region.pdfURL)
+            let needsValidation = PDFURLValidator.shared.needsValidation(for: pdfURL)
 
             await MainActor.run {
                 if needsValidation {
@@ -202,13 +204,13 @@ struct ScheduleContentView: View {
                 }
             }
 
-            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+            let validationResult = await PDFURLValidator.shared.validateURL(pdfURL)
 
             await MainActor.run {
                 isValidatingPDFLink = false
 
                 if validationResult.isValid {
-                    openURL(region.pdfURL)
+                    openURL(pdfURL)
                 } else {
                     // URL validation failed - trigger scraping to get fresh URLs
                     DebugConfig.debugPrint("📄 PDF URL validation failed, triggering URL scraping")
@@ -230,11 +232,11 @@ struct ScheduleContentView: View {
     private func loadNextShiftInfo() {
         // Find next schedule
         Task {
-            let schedules = await ScheduleService.loadSchedules(for: region)
+            let schedules = await ScheduleService.loadSchedules(for: location)
 
             if let nextInfo = ScheduleService.findNextSchedule(
                 in: schedules,
-                for: region,
+                for: location.associatedRegion,
                 currentSchedule: schedule,
                 currentTimeSpan: activeShift
             ) {

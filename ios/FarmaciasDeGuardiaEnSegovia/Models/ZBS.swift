@@ -21,17 +21,21 @@ import Foundation
 public struct ZBS: Identifiable {
     /// Unique identifier for the ZBS
     public let id: String
-    
+
     /// Display name of the ZBS
     public let name: String
-    
+
     /// Emoji icon for the ZBS
     public let icon: String
-    
-    public init(id: String, name: String, icon: String) {
+
+    /// Optional notes for special handling (e.g., Cantalejo explanation)
+    public let notes: String?
+
+    public init(id: String, name: String, icon: String, notes: String? = nil) {
         self.id = id
         self.name = name
         self.icon = icon
+        self.notes = notes
     }
 }
 
@@ -45,6 +49,7 @@ extension ZBS {
         ZBS(id: "carbonero", name: "Carbonero", icon: "🌲"),
         ZBS(id: "navas-asuncion", name: "Nava de la Asunción", icon: "🏘️"),
         ZBS(id: "villacastin", name: "Villacastín", icon: "🚂"),
-        ZBS(id: "cantalejo", name: "Cantalejo", icon: "🏘️")
+        ZBS(id: "cantalejo", name: "Cantalejo", icon: "🏘️",
+            notes: "Se muestran ambas farmacias. Llama antes de ir para confirmar cuál está de guardia.")
     ]
 }

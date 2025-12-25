@@ -160,10 +160,10 @@ class ElEspinarParser: PDFParsingStrategy {
         }
     }
 
-    func parseSchedules(from pdfDocument: PDFDocument) -> [PharmacySchedule] {
+    func parseSchedules(from pdfDocument: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
-        
+
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
 
         for pageIndex in 0..<pageCount {
@@ -184,30 +184,30 @@ class ElEspinarParser: PDFParsingStrategy {
 
             for line in lines {
                 DebugConfig.debugPrint("📝 Processing line: \(line)")
-                
+
                 // Skip header lines
                 if line.contains("COLEGIO") || line.contains("TURNOS") || line.contains("LUNES MARTES") {
                     continue
                 }
-                
+
                 // Extract dates using regex
                 let datePattern = #"\d{1,2}[‐-]\w{3}"#
                 let regex = try? NSRegularExpression(pattern: datePattern)
                 let range = NSRange(line.startIndex..., in: line)
                 let matches = regex?.matches(in: line, range: range) ?? []
-                
+
                 var lineDates: [String] = []
                 for match in matches {
                     if let range = Range(match.range, in: line) {
                         lineDates.append(String(line[range]))
                     }
                 }
-                
+
                 // First, collect any dates we find
                 if !lineDates.isEmpty {
                     dates = lineDates
                 }
-                
+
                 // Then check for pharmacy addresses
                 if line.contains("HONTANILLA") {
                     currentAddress = "AV. HONTANILLA 18"
@@ -236,13 +236,15 @@ class ElEspinarParser: PDFParsingStrategy {
                     currentAddress = nil
                 }
             }
-            
+
             // Process any remaining dates
             if !dates.isEmpty && currentAddress != nil {
                 processDateSet(dates: dates, address: currentAddress!, into: &schedules)
             }
         }
 
-        return schedules
+        // Return as dictionary with DutyLocation as key
+        let location = DutyLocation.fromRegion(.elEspinar)
+        return [location: schedules]
     }
 }

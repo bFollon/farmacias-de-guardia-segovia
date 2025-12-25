@@ -122,39 +122,27 @@ class ClosestPharmacyService {
             DebugConfig.debugPrint("🌍 Checking region: \(region.name)")
             
             if region.id == "segovia-rural" {
-                // Handle rural areas using existing ZBS logic from ZBSScheduleView
+                // Handle rural areas using new DutyLocation-based approach
                 DebugConfig.debugPrint("🏘️ Processing rural ZBS areas")
-                
-                let zbsSchedules = await ZBSScheduleService.getZBSSchedules(for: region) ?? []
-                DebugConfig.debugPrint("📅 Found \(zbsSchedules.count) ZBS schedules")
-                
-                // Find today's ZBS schedule (same logic as ZBSScheduleView)
-                let calendar = Calendar.current
-                let selectedComponents = calendar.dateComponents([.day, .month, .year], from: date)
-                
-                if let todaySchedule = zbsSchedules.first(where: { schedule in
-                    let scheduleDay = schedule.date.day
-                    let scheduleMonth = monthNameToNumber(schedule.date.month) ?? 0
-                    let scheduleYear = schedule.date.year ?? calendar.component(.year, from: date)
-                    
-                    return scheduleDay == selectedComponents.day &&
-                           scheduleMonth == selectedComponents.month &&
-                           scheduleYear == selectedComponents.year
-                }) {
-                    DebugConfig.debugPrint("✅ Found today's ZBS schedule - getting pharmacies")
-                    
-                    // Get all ZBS areas and their pharmacies
-                    for zbs in ZBS.availableZBS {
-                        let zbsPharmacies = todaySchedule.pharmacies(for: zbs.id)
-                        if !zbsPharmacies.isEmpty {
+
+                // Get all ZBS areas and load their schedules
+                for zbs in ZBS.availableZBS {
+                    let location = DutyLocation.fromZBS(zbs)
+                    let schedules = await ScheduleService.loadSchedules(for: location)
+                    DebugConfig.debugPrint("📋 Loaded \(schedules.count) schedules for \(location.name)")
+
+                    // Find the schedule for the requested date
+                    if let schedule = ScheduleService.findSchedule(for: date, in: schedules) {
+                        // For ZBS, pharmacies are in .fullDay shift
+                        if let zbsPharmacies = schedule.shifts[.fullDay] {
                             DebugConfig.debugPrint("💊 \(zbs.name): \(zbsPharmacies.count) pharmacies on duty")
-                            
+
                             // Filter by actual operating hours before geocoding
                             var actuallyOpenPharmacies = 0
                             for pharmacy in zbsPharmacies {
                                 // Determine the actual timespan for this pharmacy based on its operating hours
                                 let pharmacyTimeSpan = getPharmacyTimeSpan(pharmacy)
-                                
+
                                 if pharmacyTimeSpan.contains(date) {
                                     allOnDutyPharmacies.append((pharmacy, region, zbs, pharmacyTimeSpan))
                                     actuallyOpenPharmacies += 1
@@ -165,13 +153,14 @@ class ClosestPharmacyService {
                             }
                             DebugConfig.debugPrint("   📊 \(actuallyOpenPharmacies)/\(zbsPharmacies.count) are actually open")
                         }
+                    } else {
+                        DebugConfig.debugPrint("❌ No schedule found for \(zbs.name) on requested date")
                     }
-                } else {
-                    DebugConfig.debugPrint("❌ No ZBS schedule found for today")
                 }
             } else {
-                // Handle regular regions using existing ScheduleService logic
-                let schedules = await ScheduleService.loadSchedules(for: region)
+                // Handle regular regions using new DutyLocation-based approach
+                let location = DutyLocation.fromRegion(region)
+                let schedules = await ScheduleService.loadSchedules(for: location)
                 DebugConfig.debugPrint("📋 Loaded \(schedules.count) schedules for \(region.name)")
                 
                 // Use the existing ScheduleService.findCurrentSchedule logic
@@ -281,13 +270,6 @@ class ClosestPharmacyService {
         cacheResult(closest.result, userLocation: userLocation, date: date)
         
         return closest.result
-    }
-    
-    /// Helper function to convert month names to numbers (from ZBSScheduleView)
-    private static func monthNameToNumber(_ monthName: String) -> Int? {
-        let monthNames = ["ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
-                         "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12]
-        return monthNames[monthName.lowercased()]
     }
     
     /// Get the appropriate DutyTimeSpan for a pharmacy based on its operating hours

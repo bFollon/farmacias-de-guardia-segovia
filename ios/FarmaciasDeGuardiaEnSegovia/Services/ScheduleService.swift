@@ -18,66 +18,44 @@
 import Foundation
 
 class ScheduleService {
-    // In-memory cache by region ID (session cache)
+    // In-memory cache by location ID (session cache)
     static private var cachedSchedules: [String: [PharmacySchedule]] = [:]
     static private let pdfService = PDFProcessingService()
     static private let cacheService = ScheduleCacheService.shared
 
-    static func loadSchedules(for region: Region, forceRefresh: Bool = false) async -> [PharmacySchedule] {
+    static func loadSchedules(for location: DutyLocation, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // Return in-memory cached schedules if available and not forcing refresh
-        if let cached = cachedSchedules[region.id], !forceRefresh {
-            DebugConfig.debugPrint("ScheduleService: Using in-memory cached schedules for region \(region.name)")
-
-            // Special handling for Segovia Rural: ensure ZBS schedules are loaded
-            if region == .segoviaRural && SegoviaRuralParser.getCachedZBSSchedules().isEmpty {
-                // ZBS cache is empty, try to load from persistent cache
-                if let zbsSchedules = cacheService.loadCachedZBSSchedules(for: region) {
-                    SegoviaRuralParser.setCachedZBSSchedules(zbsSchedules)
-                    DebugConfig.debugPrint("✅ ScheduleService: Loaded \(zbsSchedules.count) ZBS schedules from persistent cache")
-                }
-            }
-
+        if let cached = cachedSchedules[location.id], !forceRefresh {
+            DebugConfig.debugPrint("ScheduleService: Using in-memory cached schedules for location \(location.name)")
             return cached
         }
 
         // Try to load from persistent cache if not forcing refresh
-        if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: region) {
-            DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for region \(region.name)")
-            cachedSchedules[region.id] = persistedSchedules
-
-            // Special handling for Segovia Rural: load ZBS schedules from cache
-            if region == .segoviaRural {
-                if let zbsSchedules = cacheService.loadCachedZBSSchedules(for: region) {
-                    SegoviaRuralParser.setCachedZBSSchedules(zbsSchedules)
-                    DebugConfig.debugPrint("✅ ScheduleService: Loaded \(zbsSchedules.count) ZBS schedules from cache")
-                }
-            }
-
+        if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
+            DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for location \(location.name)")
+            cachedSchedules[location.id] = persistedSchedules
             return persistedSchedules
         }
 
-        // Load from PDF and save to both caches
-        DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(region.name)...")
-        let schedules = await pdfService.loadPharmacies(for: region, forceRefresh: forceRefresh)
+        // Load from PDF - this returns ALL locations for the region
+        DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(location.associatedRegion.name)...")
+        let schedulesByLocation = await pdfService.loadPharmacies(for: location.associatedRegion, forceRefresh: forceRefresh)
 
-        // Save to in-memory cache
-        cachedSchedules[region.id] = schedules
-
-        // Save to persistent cache
-        cacheService.saveSchedulesToCache(for: region, schedules: schedules)
-
-        // Special handling for Segovia Rural: cache ZBS schedules
-        if region == .segoviaRural {
-            let zbsSchedules = SegoviaRuralParser.getCachedZBSSchedules()
-            cacheService.saveZBSSchedulesToCache(for: region, zbsSchedules: zbsSchedules)
-            DebugConfig.debugPrint("💾 ScheduleService: Saved \(zbsSchedules.count) ZBS schedules to cache")
+        // Cache ALL locations from the parse (important for Segovia Rural - parse once, cache all 8 ZBS)
+        for (loc, schedules) in schedulesByLocation {
+            cachedSchedules[loc.id] = schedules
+            cacheService.saveSchedulesToCache(for: loc, schedules: schedules)
+            DebugConfig.debugPrint("💾 ScheduleService: Cached \(schedules.count) schedules for \(loc.name)")
         }
 
-        DebugConfig.debugPrint("ScheduleService: Successfully cached \(schedules.count) schedules for \(region.name)")
+        // Extract and return schedules for the requested location
+        let schedules = schedulesByLocation[location] ?? []
+
+        DebugConfig.debugPrint("ScheduleService: Successfully loaded \(schedules.count) schedules for \(location.name)")
 
         // Print a sample schedule for verification
         if let sampleSchedule = schedules.first {
-            DebugConfig.debugPrint("\nSample schedule for \(region.name):")
+            DebugConfig.debugPrint("\nSample schedule for \(location.name):")
             DebugConfig.debugPrint("Date: \(sampleSchedule.date)")
 
             DebugConfig.debugPrint("\nDay Shift Pharmacies:")
@@ -108,7 +86,8 @@ class ScheduleService {
     // Keep backward compatibility for direct URL loading
     static func loadSchedules(from url: URL, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // For direct URL loading, treat as Segovia Capital
-        return await loadSchedules(for: .segoviaCapital, forceRefresh: forceRefresh)
+        let location = DutyLocation.fromRegion(.segoviaCapital)
+        return await loadSchedules(for: location, forceRefresh: forceRefresh)
     }
 
     static func clearCache() {
@@ -118,17 +97,11 @@ class ScheduleService {
         DebugConfig.debugPrint("🗑️ ScheduleService: Cleared all caches (in-memory + persistent)")
     }
 
-    static func clearCache(for region: Region) {
-        // Clear both in-memory and persistent cache for specific region
-        cachedSchedules.removeValue(forKey: region.id)
-        cacheService.clearRegionCache(for: region)
-
-        // Clear ZBS cache if clearing Segovia Rural
-        if region == .segoviaRural {
-            SegoviaRuralParser.clearZBSCache()
-        }
-
-        DebugConfig.debugPrint("🗑️ ScheduleService: Cleared cache for \(region.name)")
+    static func clearCache(for location: DutyLocation) {
+        // Clear both in-memory and persistent cache for specific location
+        cachedSchedules.removeValue(forKey: location.id)
+        cacheService.clearLocationCache(for: location)
+        DebugConfig.debugPrint("🗑️ ScheduleService: Cleared cache for \(location.name)")
     }
 
     static func findCurrentSchedule(in schedules: [PharmacySchedule]) -> (PharmacySchedule, DutyDate.ShiftType)? {

@@ -82,9 +82,10 @@ class PreloadService: ObservableObject {
             }
             
             DebugConfig.debugPrint("📥 Preloading region: \(region.name)")
-            
+
             // Load and cache schedules for this region (this will download, parse and cache)
-            let schedules = await ScheduleService.loadSchedules(for: region, forceRefresh: false)
+            let location = DutyLocation.fromRegion(region)
+            let schedules = await ScheduleService.loadSchedules(for: location, forceRefresh: false)
             
             DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(region.name)")
             
