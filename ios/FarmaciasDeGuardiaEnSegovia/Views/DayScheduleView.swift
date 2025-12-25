@@ -59,6 +59,20 @@ struct DayScheduleView: View {
                     Text("Farmacias de Guardia")
                         .font(.headline)
 
+                    // Show notes if present (e.g., Cantalejo special instructions)
+                    if let notes = location.notes {
+                        HStack(spacing: 8) {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundColor(.blue)
+                            Text(notes)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+
                     if location.id == "segovia-capital" {
                         // Show day/night shifts for Segovia Capital
                         VStack(alignment: .leading, spacing: 12) {
@@ -79,9 +93,12 @@ struct DayScheduleView: View {
                         }
                         .padding(.vertical)
                     } else {
-                        // Show single pharmacy for other regions
-                        if let pharmacy = schedule.dayShiftPharmacies.first {
-                            PharmacyView(pharmacy: pharmacy)
+                        // Show all pharmacies (multiple for Cantalejo, single for others)
+                        let pharmacies = schedule.dayShiftPharmacies
+                        if !pharmacies.isEmpty {
+                            ForEach(pharmacies, id: \.name) { pharmacy in
+                                PharmacyView(pharmacy: pharmacy)
+                            }
                         }
                     }
                 }
