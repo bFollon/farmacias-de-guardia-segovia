@@ -300,21 +300,24 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             return .standard
         }
     }
-    
-    /// Check if a pharmacy with given schedule type is currently open
-    private func isPharmacyCurrentlyOpen(_ scheduleType: ScheduleType) -> Bool {
-        let now = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: now)
-        
-        switch scheduleType {
-        case .fullDay:
-            return true // 24h pharmacies are always open
-        case .extended:
-            return hour >= 10 && hour < 22 // 10h-22h
-        case .standard:
-            return hour >= 10 && hour < 20 // 10h-20h
+
+    /// Get the correct DutyTimeSpan for a given ZBS ID
+    /// Maps ZBS zones to their actual operating hours
+    private func getDutyTimeSpan(for zbsId: String) -> DutyTimeSpan {
+        switch zbsId {
+        case "riaza-sepulveda":
+            return .fullDay  // 24h (00:00-23:59)
+        case "la-granja":
+            return .ruralExtendedDaytime  // 10h-22h
+        default:
+            return .ruralDaytime  // 10h-20h (standard hours)
         }
+    }
+
+    /// Check if a pharmacy with given duty timespan is currently open
+    private func isPharmacyCurrentlyOpen(_ dutyTimeSpan: DutyTimeSpan) -> Bool {
+        let now = Date()
+        return dutyTimeSpan.contains(now)
     }
     
     /// Handle the specific case where the PDF contains "S.E. GORMAZ (SORIA) SEPÚLVEDA" as a single string
@@ -381,10 +384,22 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     private func createPharmacy(name: String, zbsId: String, date: DutyDate) -> Pharmacy {
         // Map ZBS ID to display name for schedule info
         let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
-        
-        // Get schedule type
-        let scheduleType = getScheduleType(for: zbsId)
-        
+
+        // Get the correct DutyTimeSpan for this ZBS
+        let dutyTimeSpan = getDutyTimeSpan(for: zbsId)
+
+        // Generate hours string from DutyTimeSpan
+        let hours: String
+        if dutyTimeSpan == .fullDay {
+            hours = "24h"
+        } else if dutyTimeSpan == .ruralExtendedDaytime {
+            hours = "10h-22h"
+        } else if dutyTimeSpan == .ruralDaytime {
+            hours = "10h-20h"
+        } else {
+            hours = dutyTimeSpan.displayName
+        }
+
         // Handle La Granja alternation - override the name with the correct pharmacy
         let lookupKey: String
         if zbsId == "la-granja" && name.uppercased().contains("LA GRANJA") {
@@ -395,7 +410,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             // Use original name for lookup
             lookupKey = name.uppercased()
         }
-        
+
         let info = pharmacyInfo[lookupKey] ?? {
             // Log when no match is found
             DebugConfig.debugPrint("⚠️ No pharmacy info found for key: '\(lookupKey)' (original: '\(name)')")
@@ -406,15 +421,15 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 phone: "No disponible"
             )
         }()
-        
+
         // Keep original additionalInfo format
-        let additionalInfo = "Horario: \(scheduleType.hours) - ZBS: \(zbsDisplayName)"
-        
+        let additionalInfo = "Horario: \(hours) - ZBS: \(zbsDisplayName)"
+
         // Debug logging for shift status
-        if !isPharmacyCurrentlyOpen(scheduleType) {
-            DebugConfig.debugPrint("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(scheduleType.hours))")
+        if !isPharmacyCurrentlyOpen(dutyTimeSpan) {
+            DebugConfig.debugPrint("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(hours))")
         }
-        
+
         return Pharmacy(
             name: info.name,
             address: info.address,
@@ -598,10 +613,13 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
 
                     let location = DutyLocation.fromZBS(zbs)
 
-                    // Create schedule for this ZBS (even if pharmacies is empty)
+                    // Get the correct DutyTimeSpan for this ZBS based on operating hours
+                    let dutyTimeSpan = getDutyTimeSpan(for: zbsId)
+
+                    // Create schedule with the correct timespan
                     let schedule = PharmacySchedule(
                         date: date,
-                        shifts: [.fullDay: pharmacies]
+                        shifts: [dutyTimeSpan: pharmacies]
                     )
 
                     schedulesByLocation[location]?.append(schedule)

@@ -125,45 +125,79 @@ class ScheduleService {
     }
 
     /// Region-aware version that detects shift pattern from schedule data
+    /// Returns the current schedule even during dead hours (for displaying with "Fuera del horario" warning)
     static func findCurrentSchedule(in schedules: [PharmacySchedule], for region: Region) -> (PharmacySchedule, DutyTimeSpan)? {
         let now = Date()
+        let nowTimestamp = now.timeIntervalSince1970
         let calendar = Calendar.current
 
-        // First, find a sample schedule to determine the shift pattern for this region
-        guard let sampleSchedule = schedules.first else { return nil }
+        guard !schedules.isEmpty else { return nil }
 
-        // Detect shift pattern based on what shifts are available in the schedule
-        let has24HourShifts = sampleSchedule.shifts[.fullDay] != nil
-        let hasDayNightShifts = sampleSchedule.shifts[.capitalDay] != nil || sampleSchedule.shifts[.capitalNight] != nil
+        // STEP 1: Try to find an ACTIVE shift first
+        // Use findScheduleForTimestamp which properly handles all shift types
+        if let activeShift = findScheduleForTimestamp(in: schedules, for: region, at: nowTimestamp) {
+            // Check if this shift is actually active right now
+            let schedule = activeShift.0
+            let timeSpan = activeShift.1
 
-        if has24HourShifts {
-            // For 24-hour regions, always use current day and full-day shift
-            guard let schedule = schedules.first(where: { schedule in
-                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
-                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
-                return calendar.isDate(scheduleDate, inSameDayAs: now)
-            }) else {
-                return nil
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else {
+                // If we can't get timestamp, return what we found
+                return activeShift
             }
-            return (schedule, .fullDay)
-        } else if hasDayNightShifts {
-            // For day/night regions, use the existing logic
-            if let legacyResult = findCurrentSchedule(in: schedules) {
-                let timeSpan: DutyTimeSpan = legacyResult.1 == .day ? .capitalDay : .capitalNight
-                return (legacyResult.0, timeSpan)
+
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+
+            // Build shift start and end times
+            var shiftStartComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+            let startTimeComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.start)
+            shiftStartComponents.hour = startTimeComponents.hour
+            shiftStartComponents.minute = startTimeComponents.minute
+
+            var shiftEndComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+            let endTimeComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.end)
+            shiftEndComponents.hour = endTimeComponents.hour
+            shiftEndComponents.minute = endTimeComponents.minute
+
+            if timeSpan.spansMultipleDays {
+                shiftEndComponents.day! += 1
             }
-            return nil
-        } else {
-            // Fallback: treat as 24-hour if we can't determine
-            guard let schedule = schedules.first(where: { schedule in
-                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
-                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
-                return calendar.isDate(scheduleDate, inSameDayAs: now)
-            }) else {
-                return nil
+
+            if let shiftStart = calendar.date(from: shiftStartComponents),
+               let shiftEnd = calendar.date(from: shiftEndComponents),
+               now >= shiftStart && now <= shiftEnd {
+                // Shift is currently active
+                return activeShift
             }
-            return (schedule, .fullDay)
         }
+
+        // STEP 2: No active shift - return today's schedule (for dead hours display)
+        // This allows showing "Fuera del horario de guardia" warning
+        if let todaySchedule = schedules.first(where: { schedule in
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+            return calendar.isDate(scheduleDate, inSameDayAs: now)
+        }), let firstShift = todaySchedule.shifts.first(where: { !$0.value.isEmpty }) {
+            DebugConfig.debugPrint("⏰ Dead hours: Returning today's schedule for display with out-of-hours warning")
+            return (todaySchedule, firstShift.key)
+        }
+
+        // STEP 3: Fallback - return most recent past schedule
+        // This handles edge cases like early morning before any schedule exists for today
+        let sortedPastSchedules = schedules
+            .compactMap { schedule -> (PharmacySchedule, TimeInterval, DutyTimeSpan)? in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return nil }
+                guard let firstShift = schedule.shifts.first(where: { !$0.value.isEmpty }) else { return nil }
+                return (schedule, scheduleTimestamp, firstShift.key)
+            }
+            .filter { $0.1 <= nowTimestamp }  // Only past schedules
+            .sorted { $0.1 > $1.1 }  // Sort by date descending (most recent first)
+
+        if let mostRecent = sortedPastSchedules.first {
+            DebugConfig.debugPrint("📅 Returning most recent past schedule")
+            return (mostRecent.0, mostRecent.2)
+        }
+
+        return nil
     }
 
     static func getCurrentDateTime() -> String {
@@ -199,44 +233,91 @@ class ScheduleService {
         let date = Date(timeIntervalSince1970: timestamp)
         let calendar = Calendar.current
 
-        // Determine shift pattern (same logic as existing findCurrentSchedule)
-        guard let sampleSchedule = schedules.first else { return nil }
-        let has24HourShifts = sampleSchedule.shifts[.fullDay] != nil
-        let hasDayNightShifts = sampleSchedule.shifts[.capitalDay] != nil ||
-                                 sampleSchedule.shifts[.capitalNight] != nil
+        guard !schedules.isEmpty else { return nil }
 
-        if has24HourShifts {
-            // 24-hour regions: find schedule for the timestamp's date
-            guard let schedule = schedules.first(where: { schedule in
-                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
-                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
-                return calendar.isDate(scheduleDate, inSameDayAs: date)
-            }) else { return nil }
-            return (schedule, .fullDay)
+        // STEP 1: Try to find a shift where the timestamp falls within active hours
+        // This properly handles all shift types and dead hours
+        for schedule in schedules {
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else { continue }
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
 
-        } else if hasDayNightShifts {
-            // Day/night regions: use DutyDate.dutyTimeInfoForTimestamp logic
-            let dutyInfo = DutyDate.dutyTimeInfoForTimestamp(timestamp)
+            // Check each shift in this schedule
+            for (timeSpan, pharmacies) in schedule.shifts {
+                // Skip empty shifts
+                guard !pharmacies.isEmpty else { continue }
 
-            guard let schedule = schedules.first(where: { schedule in
-                return schedule.date.day == dutyInfo.date.day &&
-                       schedule.date.year == dutyInfo.date.year &&
-                       DutyDate.monthToNumber(schedule.date.month) ==
-                       calendar.component(.month, from: date)
-            }) else { return nil }
+                // Build the shift's actual start and end times
+                var shiftStartComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+                let startTimeComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.start)
+                shiftStartComponents.hour = startTimeComponents.hour
+                shiftStartComponents.minute = startTimeComponents.minute
 
-            let timeSpan: DutyTimeSpan = dutyInfo.shiftType == .day ? .capitalDay : .capitalNight
-            return (schedule, timeSpan)
+                var shiftEndComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+                let endTimeComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.end)
+                shiftEndComponents.hour = endTimeComponents.hour
+                shiftEndComponents.minute = endTimeComponents.minute
 
-        } else {
-            // Fallback: treat as 24-hour
-            guard let schedule = schedules.first(where: { schedule in
-                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
-                let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
-                return calendar.isDate(scheduleDate, inSameDayAs: date)
-            }) else { return nil }
-            return (schedule, .fullDay)
+                // Handle midnight-crossing shifts (e.g., night shift 22:00-10:15)
+                if timeSpan.spansMultipleDays {
+                    shiftEndComponents.day! += 1
+                }
+
+                guard let shiftStart = calendar.date(from: shiftStartComponents),
+                      let shiftEnd = calendar.date(from: shiftEndComponents) else { continue }
+
+                // Check if timestamp falls within this shift's active time range
+                if date >= shiftStart && date <= shiftEnd {
+                    DebugConfig.debugPrint("✅ Found active shift for timestamp \(timestamp): \(timeSpan.displayName)")
+                    return (schedule, timeSpan)
+                }
+            }
         }
+
+        // STEP 2: No active shift found - find the next future schedule
+        // This handles dead hours by finding the next shift that will be active
+        let sortedFutureSchedules = schedules
+            .compactMap { schedule -> (PharmacySchedule, TimeInterval, DutyTimeSpan)? in
+                guard let scheduleTimestamp = schedule.date.toTimestamp() else { return nil }
+                // Only consider schedules on or after the timestamp's date
+                guard scheduleTimestamp >= timestamp - (24 * 3600) else { return nil }  // Look within 24 hours back
+
+                // Get first non-empty shift
+                if let firstShift = schedule.shifts.first(where: { !$0.value.isEmpty }) {
+                    return (schedule, scheduleTimestamp, firstShift.key)
+                }
+                return nil
+            }
+            .sorted { $0.1 < $1.1 }  // Sort by schedule date ascending
+
+        // Find the first schedule that has a shift starting after the timestamp
+        for (schedule, scheduleTimestamp, timeSpan) in sortedFutureSchedules {
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+
+            // Build shift start time
+            var shiftStartComponents = calendar.dateComponents([.year, .month, .day], from: scheduleDate)
+            let startTimeComponents = calendar.dateComponents([.hour, .minute], from: timeSpan.start)
+            shiftStartComponents.hour = startTimeComponents.hour
+            shiftStartComponents.minute = startTimeComponents.minute
+
+            if let shiftStart = calendar.date(from: shiftStartComponents),
+               shiftStart.timeIntervalSince1970 > timestamp {
+                DebugConfig.debugPrint("⏭️ Found next future schedule for timestamp \(timestamp): \(timeSpan.displayName) starting at \(shiftStart)")
+                return (schedule, timeSpan)
+            }
+        }
+
+        // STEP 3: Last resort - same-day matching for edge cases
+        if let schedule = schedules.first(where: { schedule in
+            guard let scheduleTimestamp = schedule.date.toTimestamp() else { return false }
+            let scheduleDate = Date(timeIntervalSince1970: scheduleTimestamp)
+            return calendar.isDate(scheduleDate, inSameDayAs: date)
+        }), let firstShift = schedule.shifts.first(where: { !$0.value.isEmpty }) {
+            DebugConfig.debugPrint("⚠️ Using same-day fallback for timestamp \(timestamp)")
+            return (schedule, firstShift.key)
+        }
+
+        DebugConfig.debugPrint("❌ No schedule found for timestamp \(timestamp)")
+        return nil
     }
 
     /// Find the next shift after the current one
