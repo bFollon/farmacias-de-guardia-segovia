@@ -3,7 +3,13 @@ import SwiftUI
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    
+
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        return "Versión \(version) (\(build))"
+    }
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -14,10 +20,15 @@ struct AboutView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 80)
-                        
+
                         Text("Farmacias de Guardia Segovia")
                             .font(.title2)
                             .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+
+                        Text(appVersion)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
