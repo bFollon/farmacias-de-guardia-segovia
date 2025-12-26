@@ -70,7 +70,17 @@ struct ScheduleContentView: View {
                         OfflineWarningCard()
                             .padding(.bottom, 12)
                     }
-                
+
+                    // Shift transition warning (if within 30 minutes)
+                    if let info = nextShiftInfo, info.shouldShowWarning,
+                       let minutes = info.minutesUntilChange {
+                        ShiftTransitionWarningCard(
+                            minutesUntilChange: minutes,
+                            hasGap: info.hasGap
+                        )
+                        .padding(.bottom, 12)
+                    }
+
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Farmacias de Guardia")
@@ -124,18 +134,6 @@ struct ScheduleContentView: View {
                                 PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
                             }
                         }
-                    }
-
-                    // Shift transition warning (if within 30 minutes)
-                    if let info = nextShiftInfo, info.shouldShowWarning,
-                       let minutes = info.minutesUntilChange {
-                        let nextShiftName = info.timeSpan == .capitalNight ? "turno nocturno" :
-                                            info.timeSpan == .capitalDay ? "turno diurno" : "turno 24 horas"
-                        ShiftTransitionWarningCard(
-                            minutesUntilChange: minutes,
-                            nextShiftName: nextShiftName
-                        )
-                        .padding(.top, 12)
                     }
 
                     // Next shift card
@@ -283,14 +281,23 @@ struct ScheduleContentView: View {
             ) {
                 let minutes = ScheduleService.calculateMinutesUntilShiftEnd(for: activeShift)
 
+                // Calculate gap between shifts
+                let gapMinutes = ScheduleService.calculateGapBetweenShifts(
+                    currentSchedule: schedule,
+                    currentTimeSpan: activeShift,
+                    nextSchedule: nextInfo.0,
+                    nextTimeSpan: nextInfo.1
+                )
+
                 await MainActor.run {
                     nextShiftInfo = NextShiftInfo(
                         schedule: nextInfo.0,
                         timeSpan: nextInfo.1,
-                        minutesUntilChange: minutes
+                        minutesUntilChange: minutes,
+                        gapMinutes: gapMinutes
                     )
 
-                    DebugConfig.debugPrint("⏰ Next shift info loaded: \(nextInfo.1.displayName), minutes until change: \(minutes ?? -1)")
+                    DebugConfig.debugPrint("⏰ Next shift info loaded: \(nextInfo.1.displayName), minutes until change: \(minutes ?? -1), gap: \(gapMinutes ?? -1)")
                 }
             }
         }

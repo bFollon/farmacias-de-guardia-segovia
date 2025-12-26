@@ -20,7 +20,7 @@ import SwiftUI
 /// Warning card shown when within 30 minutes of shift change
 struct ShiftTransitionWarningCard: View {
     let minutesUntilChange: Int
-    let nextShiftName: String
+    let hasGap: Bool
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -34,7 +34,7 @@ struct ShiftTransitionWarningCard: View {
                     .fontWeight(.semibold)
                     .foregroundColor(Color(red: 0.36, green: 0.25, blue: 0.22)) // Dark brown
 
-                Text("En \(minutesUntilChange) minuto\(minutesUntilChange == 1 ? "" : "s") comienza el \(nextShiftName.lowercased()). Considera la farmacia del siguiente turno.")
+                Text(warningMessage)
                     .font(.caption)
                     .foregroundColor(Color(red: 0.36, green: 0.25, blue: 0.22))
                     .fixedSize(horizontal: false, vertical: true)
@@ -46,5 +46,16 @@ struct ShiftTransitionWarningCard: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color(red: 1.0, green: 0.95, blue: 0.88)) // Light orange
         )
+    }
+
+    /// Dynamic warning message based on whether there's a gap between shifts
+    private var warningMessage: String {
+        let minuteText = minutesUntilChange == 1 ? "minuto" : "minutos"
+
+        if hasGap {
+            return "En \(minutesUntilChange) \(minuteText) finaliza el turno actual. Planea tu visita y considera ir a otra farmacia."
+        } else {
+            return "En \(minutesUntilChange) \(minuteText) comienza el siguiente turno. Planea tu visita y considera ir a la siguiente farmacia."
+        }
     }
 }

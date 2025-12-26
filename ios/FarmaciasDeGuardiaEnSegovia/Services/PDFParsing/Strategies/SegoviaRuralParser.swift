@@ -382,8 +382,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
     }
     
     private func createPharmacy(name: String, zbsId: String, date: DutyDate) -> Pharmacy {
-        // Map ZBS ID to display name for schedule info
-        let zbsDisplayName = ZBS.availableZBS.first { $0.id == zbsId }?.name ?? zbsId
 
         // Get the correct DutyTimeSpan for this ZBS
         let dutyTimeSpan = getDutyTimeSpan(for: zbsId)

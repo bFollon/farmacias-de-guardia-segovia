@@ -22,10 +22,18 @@ struct NextShiftInfo {
     let schedule: PharmacySchedule
     let timeSpan: DutyTimeSpan
     let minutesUntilChange: Int?
+    let gapMinutes: Int?
 
     /// Whether to show the 30-minute transition warning
     var shouldShowWarning: Bool {
         guard let minutes = minutesUntilChange else { return false }
         return minutes > 0 && minutes <= 30
+    }
+
+    /// Whether there's a gap between current shift end and next shift start
+    /// Gap is considered present if > 2 minutes (handles midnight transitions gracefully)
+    var hasGap: Bool {
+        guard let gap = gapMinutes else { return false }
+        return gap > 2
     }
 }

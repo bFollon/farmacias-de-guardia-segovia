@@ -409,4 +409,55 @@ class ScheduleService {
             return endMinutes - currentMinutes
         }
     }
+
+    /// Calculate gap in minutes between current shift end and next shift start
+    /// - Parameters:
+    ///   - currentSchedule: Current pharmacy schedule
+    ///   - currentTimeSpan: Current shift timespan
+    ///   - nextSchedule: Next pharmacy schedule
+    ///   - nextTimeSpan: Next shift timespan
+    /// - Returns: Gap in minutes, or nil if calculation fails
+    static func calculateGapBetweenShifts(
+        currentSchedule: PharmacySchedule,
+        currentTimeSpan: DutyTimeSpan,
+        nextSchedule: PharmacySchedule,
+        nextTimeSpan: DutyTimeSpan
+    ) -> Int? {
+        let calendar = Calendar.current
+
+        // Get current shift end date
+        guard let currentScheduleTimestamp = currentSchedule.date.toTimestamp() else { return nil }
+        let currentScheduleDate = Date(timeIntervalSince1970: currentScheduleTimestamp)
+
+        var currentEndComponents = calendar.dateComponents([.year, .month, .day], from: currentScheduleDate)
+        let endTimeComponents = calendar.dateComponents([.hour, .minute], from: currentTimeSpan.end)
+        currentEndComponents.hour = endTimeComponents.hour
+        currentEndComponents.minute = endTimeComponents.minute
+
+        // Handle midnight-crossing shifts
+        if currentTimeSpan.spansMultipleDays {
+            currentEndComponents.day! += 1
+        }
+
+        guard let currentShiftEndDate = calendar.date(from: currentEndComponents) else { return nil }
+
+        // Get next shift start date
+        guard let nextScheduleTimestamp = nextSchedule.date.toTimestamp() else { return nil }
+        let nextScheduleDate = Date(timeIntervalSince1970: nextScheduleTimestamp)
+
+        var nextStartComponents = calendar.dateComponents([.year, .month, .day], from: nextScheduleDate)
+        let startTimeComponents = calendar.dateComponents([.hour, .minute], from: nextTimeSpan.start)
+        nextStartComponents.hour = startTimeComponents.hour
+        nextStartComponents.minute = startTimeComponents.minute
+
+        guard let nextShiftStartDate = calendar.date(from: nextStartComponents) else { return nil }
+
+        // Calculate gap
+        let components = calendar.dateComponents([.minute], from: currentShiftEndDate, to: nextShiftStartDate)
+        let gapMinutes = components.minute ?? 0
+
+        DebugConfig.debugPrint("⏰ Gap between shifts: \(gapMinutes) minutes (current ends: \(currentShiftEndDate), next starts: \(nextShiftStartDate))")
+
+        return gapMinutes
+    }
 }
