@@ -36,8 +36,10 @@ struct NextShiftCard: View {
             return "Nocturno"
         case .fullDay:
             return "24 horas"
+        case .ruralDaytime, .ruralExtendedDaytime:
+            return "Diurno"
         default:
-            return timeSpan.displayName
+            return "Turno"
         }
     }
 
