@@ -93,28 +93,45 @@ struct DayScheduleView: View {
                     if location.id == "segovia-capital" {
                         // Show day/night shifts for Segovia Capital
                         VStack(alignment: .leading, spacing: 12) {
-                            ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
+                            ScheduleHeaderView(timeSpan: .capitalDay, date: date, isPresentingInfo: $isPresentingDayInfo)
                             if let pharmacy = schedule.dayShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy)
+                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalDay)
                             }
                         }
                         .padding(.vertical)
-                        
+
                         Divider()
-                        
+
                         VStack(alignment: .leading, spacing: 12) {
-                            ShiftHeaderView(shiftType: .night, date: date, isPresentingInfo: $isPresentingNightInfo)
+                            ScheduleHeaderView(timeSpan: .capitalNight, date: date, isPresentingInfo: $isPresentingNightInfo)
                             if let pharmacy = schedule.nightShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy)
+                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalNight)
                             }
                         }
                         .padding(.vertical)
                     } else {
-                        // Show all pharmacies (multiple for Cantalejo, single for others)
-                        let pharmacies = schedule.dayShiftPharmacies
-                        if !pharmacies.isEmpty {
-                            ForEach(pharmacies, id: \.name) { pharmacy in
-                                PharmacyView(pharmacy: pharmacy)
+                        // Show schedule header and pharmacies for other regions
+                        // Determine shift type from schedule.shifts (first available shift)
+                        if let firstShift = schedule.shifts.keys.first {
+                            VStack(alignment: .leading, spacing: 12) {
+                                ScheduleHeaderView(timeSpan: firstShift, date: date, isPresentingInfo: $isPresentingInfo)
+
+                                if let pharmacies = schedule.shifts[firstShift], !pharmacies.isEmpty {
+                                    ForEach(pharmacies, id: \.name) { pharmacy in
+                                        PharmacyView(pharmacy: pharmacy, activeShift: firstShift)
+                                    }
+                                }
+                            }
+                        } else {
+                            // Fallback to legacy properties if shift data unavailable
+                            let pharmacies = schedule.dayShiftPharmacies
+                            if !pharmacies.isEmpty {
+                                // Use fullDay as default for non-capital regions
+                                ScheduleHeaderView(timeSpan: .fullDay, date: date, isPresentingInfo: $isPresentingInfo)
+
+                                ForEach(pharmacies, id: \.name) { pharmacy in
+                                    PharmacyView(pharmacy: pharmacy, activeShift: .fullDay)
+                                }
                             }
                         }
                     }

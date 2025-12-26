@@ -22,28 +22,21 @@ import CoreLocation
 
 struct PharmacyView: View {
     let pharmacy: Pharmacy
+    let activeShift: DutyTimeSpan?
     @State private var showingMapOptions = false
-    
-    /// Determine if pharmacy should show closed warning based on additionalInfo
+
+    /// Determine if pharmacy should show closed warning
+    /// Shows warning if current time is outside the active shift's hours
     private var shouldShowClosedWarning: Bool {
-        guard let info = pharmacy.additionalInfo else { return false }
-        
-        // Only apply to Segovia Rural pharmacies (those with "ZBS:" in additionalInfo)
-        guard info.contains("ZBS:") else { return false }
-        
-        let now = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: now)
-        
-        if info.contains("24h") {
-            return false // 24h pharmacies never show warning
-        } else if info.contains("10h-22h") {
-            return hour < 10 || hour >= 22 // Extended hours
-        } else if info.contains("10h-20h") {
-            return hour < 10 || hour >= 20 // Standard hours
+        guard let shift = activeShift else { return false }
+
+        // Only show warnings for rural pharmacies (not capital or full-day shifts)
+        guard shift != .capitalDay && shift != .capitalNight && shift != .fullDay else {
+            return false
         }
-        
-        return false // Default: no warning
+
+        // Check if current time is within the shift's hours
+        return !shift.contains(Date())
     }
     
     private func openInMaps(using app: MapApp) {

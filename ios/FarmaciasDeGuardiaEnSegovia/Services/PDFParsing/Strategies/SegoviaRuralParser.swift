@@ -388,18 +388,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         // Get the correct DutyTimeSpan for this ZBS
         let dutyTimeSpan = getDutyTimeSpan(for: zbsId)
 
-        // Generate hours string from DutyTimeSpan
-        let hours: String
-        if dutyTimeSpan == .fullDay {
-            hours = "24h"
-        } else if dutyTimeSpan == .ruralExtendedDaytime {
-            hours = "10h-22h"
-        } else if dutyTimeSpan == .ruralDaytime {
-            hours = "10h-20h"
-        } else {
-            hours = dutyTimeSpan.displayName
-        }
-
         // Handle La Granja alternation - override the name with the correct pharmacy
         let lookupKey: String
         if zbsId == "la-granja" && name.uppercased().contains("LA GRANJA") {
@@ -422,19 +410,17 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
             )
         }()
 
-        // Keep original additionalInfo format
-        let additionalInfo = "Horario: \(hours) - ZBS: \(zbsDisplayName)"
-
+        // Remove additionalInfo - schedule now shown in unified header, region/ZBS shown at top
         // Debug logging for shift status
         if !isPharmacyCurrentlyOpen(dutyTimeSpan) {
-            DebugConfig.debugPrint("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(hours))")
+            DebugConfig.debugPrint("⚠️ Shift Warning: \(info.name) is scheduled but currently closed (\(dutyTimeSpan.displayName))")
         }
 
         return Pharmacy(
             name: info.name,
             address: info.address,
             phone: info.phone,
-            additionalInfo: additionalInfo
+            additionalInfo: nil
         )
     }
     

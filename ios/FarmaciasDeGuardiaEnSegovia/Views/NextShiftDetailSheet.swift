@@ -28,38 +28,30 @@ struct NextShiftDetailSheet: View {
         schedule.shifts[timeSpan] ?? []
     }
 
-    private var shiftLabel: String {
-        switch timeSpan {
-        case .capitalDay:
-            return "Diurno"
-        case .capitalNight:
-            return "Nocturno"
-        case .fullDay:
-            return "24 horas"
-        default:
-            return timeSpan.displayName
-        }
-    }
+    @State private var isPresentingInfo: Bool = false
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Shift header (matching main schedule format)
-                    HStack(alignment: .center, spacing: ViewConstants.iconSpacing) {
-                        Image(systemName: timeSpan == .capitalNight ?
-                              "moon.stars.fill" : "sun.max.fill")
-                            .foregroundColor(.secondary.opacity(0.7))
-                            .frame(width: ViewConstants.iconColumnWidth)
+                    // Use unified ScheduleHeaderView
+                    // Convert DutyDate to Date for info content
+                    let date: Date = {
+                        if let timestamp = schedule.date.toTimestamp() {
+                            return Date(timeIntervalSince1970: timestamp)
+                        }
+                        return Date() // Fallback to current date
+                    }()
 
-                        Text("\(shiftLabel) (\(timeSpan.displayName))")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                    }
+                    ScheduleHeaderView(
+                        timeSpan: timeSpan,
+                        date: date,
+                        isPresentingInfo: $isPresentingInfo
+                    )
 
                     // Pharmacies
                     ForEach(pharmacies, id: \.name) { pharmacy in
-                        PharmacyView(pharmacy: pharmacy)
+                        PharmacyView(pharmacy: pharmacy, activeShift: timeSpan)
                     }
                 }
                 .padding()

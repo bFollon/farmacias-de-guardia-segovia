@@ -104,24 +104,24 @@ struct ScheduleContentView: View {
                         .disabled(location.detailViewId == nil)
                     }
 
-                    // Show shift info if applicable (for day/night regions)
-                    if activeShift == .capitalDay || activeShift == .capitalNight {
-                        // Convert DutyTimeSpan back to ShiftType for ShiftHeaderView compatibility
-                        let legacyShiftType: DutyDate.ShiftType = activeShift == .capitalDay ? .day : .night
-                        ShiftHeaderView(shiftType: legacyShiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
-                    }
+                    // Always show schedule header for all regions
+                    ScheduleHeaderView(
+                        timeSpan: activeShift,
+                        date: Date(),
+                        isPresentingInfo: $isPresentingInfo
+                    )
                     
                     // Show active pharmacy/pharmacies for current shift
                     if let pharmacies = schedule.shifts[activeShift], !pharmacies.isEmpty {
                         ForEach(pharmacies, id: \.name) { pharmacy in
-                            PharmacyView(pharmacy: pharmacy)
+                            PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
                         }
                     } else {
                         // Fallback to legacy properties if shift-specific data isn't available
                         let pharmacies = schedule.dayShiftPharmacies
                         if !pharmacies.isEmpty {
                             ForEach(pharmacies, id: \.name) { pharmacy in
-                                PharmacyView(pharmacy: pharmacy)
+                                PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
                             }
                         }
                     }

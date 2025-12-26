@@ -23,6 +23,10 @@ import Foundation
 class ScheduleCacheService {
     static let shared = ScheduleCacheService()
 
+    /// Current cache format version. Increment when cache structure changes.
+    /// Version 2: Removed schedule info from Pharmacy.additionalInfo for ZBS regions
+    private let currentCacheVersion = 2
+
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
     private let encoder = JSONEncoder()
@@ -56,6 +60,12 @@ class ScheduleCacheService {
             let metadataData = try Data(contentsOf: metadataFile)
             let metadata = try decoder.decode(CacheMetadata.self, from: metadataData)
 
+            // Check cache version first
+            if metadata.cacheVersion != currentCacheVersion {
+                DebugConfig.debugPrint("❌ ScheduleCacheService: Cache version mismatch for \(location.name) (expected: \(currentCacheVersion), found: \(metadata.cacheVersion))")
+                return false
+            }
+
             // Check if PDF file exists (use associated region for PDF cache)
             guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) else {
                 DebugConfig.debugPrint("📂 ScheduleCacheService: PDF file not found for \(location.name), cache invalid")
@@ -72,7 +82,7 @@ class ScheduleCacheService {
             let cacheIsValid = pdfLastModified <= metadata.pdfLastModified
 
             if cacheIsValid {
-                DebugConfig.debugPrint("✅ ScheduleCacheService: Cache valid for \(location.name) (PDF: \(Int(pdfLastModified)), Cache: \(Int(metadata.pdfLastModified)))")
+                DebugConfig.debugPrint("✅ ScheduleCacheService: Cache valid for \(location.name) (PDF: \(Int(pdfLastModified)), Cache: \(Int(metadata.pdfLastModified)), Version: \(metadata.cacheVersion))")
             } else {
                 DebugConfig.debugPrint("❌ ScheduleCacheService: Cache invalid for \(location.name) - PDF newer than cache")
             }
@@ -162,7 +172,8 @@ class ScheduleCacheService {
                 locationId: location.id,
                 scheduleCount: schedules.count,
                 cacheTimestamp: Date().timeIntervalSince1970,
-                pdfLastModified: pdfModificationDate.timeIntervalSince1970
+                pdfLastModified: pdfModificationDate.timeIntervalSince1970,
+                cacheVersion: currentCacheVersion
             )
 
             let metadataFile = getMetadataFile(for: location)
@@ -277,4 +288,23 @@ private struct CacheMetadata: Codable {
     let scheduleCount: Int
     let cacheTimestamp: TimeInterval
     let pdfLastModified: TimeInterval
+    let cacheVersion: Int
+
+    // For backward compatibility with old cache files
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        locationId = try container.decode(String.self, forKey: .locationId)
+        scheduleCount = try container.decode(Int.self, forKey: .scheduleCount)
+        cacheTimestamp = try container.decode(TimeInterval.self, forKey: .cacheTimestamp)
+        pdfLastModified = try container.decode(TimeInterval.self, forKey: .pdfLastModified)
+        cacheVersion = try container.decodeIfPresent(Int.self, forKey: .cacheVersion) ?? 1
+    }
+
+    init(locationId: String, scheduleCount: Int, cacheTimestamp: TimeInterval, pdfLastModified: TimeInterval, cacheVersion: Int) {
+        self.locationId = locationId
+        self.scheduleCount = scheduleCount
+        self.cacheTimestamp = cacheTimestamp
+        self.pdfLastModified = pdfLastModified
+        self.cacheVersion = cacheVersion
+    }
 }
