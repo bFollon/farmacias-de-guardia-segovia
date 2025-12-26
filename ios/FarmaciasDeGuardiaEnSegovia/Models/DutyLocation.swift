@@ -33,6 +33,9 @@ public struct DutyLocation: Codable, Hashable, Identifiable {
     /// Optional notes (e.g., special instructions for Cantalejo)
     public let notes: String?
 
+    /// Optional detail view identifier for showing additional information
+    public let detailViewId: String?
+
     /// The ID of the parent region this location belongs to
     private let associatedRegionId: String
 
@@ -59,6 +62,7 @@ public struct DutyLocation: Codable, Hashable, Identifiable {
             name: region.name,
             icon: region.icon,
             notes: nil,
+            detailViewId: nil,
             associatedRegionId: region.id
         )
     }
@@ -70,6 +74,7 @@ public struct DutyLocation: Codable, Hashable, Identifiable {
             name: zbs.name,
             icon: zbs.icon,
             notes: zbs.notes,
+            detailViewId: zbs.detailViewId,
             associatedRegionId: region.id
         )
     }

@@ -31,11 +31,15 @@ public struct ZBS: Identifiable {
     /// Optional notes for special handling (e.g., Cantalejo explanation)
     public let notes: String?
 
-    public init(id: String, name: String, icon: String, notes: String? = nil) {
+    /// Optional detail view identifier for showing additional information
+    public let detailViewId: String?
+
+    public init(id: String, name: String, icon: String, notes: String? = nil, detailViewId: String? = nil) {
         self.id = id
         self.name = name
         self.icon = icon
         self.notes = notes
+        self.detailViewId = detailViewId
     }
 }
 
@@ -50,6 +54,7 @@ extension ZBS {
         ZBS(id: "navas-asuncion", name: "Nava de la Asunción", icon: "🏘️"),
         ZBS(id: "villacastin", name: "Villacastín", icon: "🚂"),
         ZBS(id: "cantalejo", name: "Cantalejo", icon: "🏘️",
-            notes: "Se muestran ambas farmacias. Llama antes de ir para confirmar cuál está de guardia.")
+            notes: "Se muestran ambas farmacias. Llama antes de ir para confirmar cuál está de guardia.",
+            detailViewId: "cantalejo-info")
     ]
 }

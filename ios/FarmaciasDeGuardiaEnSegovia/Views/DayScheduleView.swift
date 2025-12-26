@@ -17,6 +17,9 @@ struct DayScheduleView: View {
     @State private var pdfLinkErrorMessage = ""
     @Environment(\.openURL) private var openURL
 
+    // Detail view sheet
+    @State private var showingDetailView = false
+
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -61,16 +64,30 @@ struct DayScheduleView: View {
 
                     // Show notes if present (e.g., Cantalejo special instructions)
                     if let notes = location.notes {
-                        HStack(spacing: 8) {
-                            Image(systemName: "info.circle.fill")
-                                .foregroundColor(.blue)
-                            Text(notes)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                        Button(action: {
+                            if location.detailViewId != nil {
+                                showingDetailView = true
+                            }
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(.blue)
+                                Text(notes)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                if location.detailViewId != nil {
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.blue)
+                                        .font(.caption)
+                                }
+                            }
+                            .padding()
+                            .background(Color.blue.opacity(0.1))
+                            .cornerRadius(8)
                         }
-                        .padding()
-                        .background(Color.blue.opacity(0.1))
-                        .cornerRadius(8)
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(location.detailViewId == nil)
                     }
 
                     if location.id == "segovia-capital" {
@@ -167,6 +184,11 @@ struct DayScheduleView: View {
             Button("OK", role: .cancel) { }
         } message: {
             Text(pdfLinkErrorMessage)
+        }
+        .sheet(isPresented: $showingDetailView) {
+            if let detailViewId = location.detailViewId {
+                DetailViewFactory.makeDetailView(for: detailViewId)
+            }
         }
     }
 
