@@ -37,6 +37,11 @@ class ScheduleService {
             return persistedSchedules
         }
 
+        // If we're about to parse (cache miss or invalid), clear the location's cache to avoid orphaned files
+        if !forceRefresh {
+            cacheService.clearLocationCache(for: location)
+        }
+
         // Load from PDF - this returns ALL locations for the region
         DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(location.associatedRegion.name)...")
         let schedulesByLocation = await pdfService.loadPharmacies(for: location.associatedRegion, forceRefresh: forceRefresh)
@@ -47,6 +52,9 @@ class ScheduleService {
             cacheService.saveSchedulesToCache(for: loc, schedules: schedules)
             DebugConfig.debugPrint("💾 ScheduleService: Cached \(schedules.count) schedules for \(loc.name)")
         }
+
+        // Record parsing metrics to NewRelic (if user opted in)
+        ParsingMetricsService.shared.recordParsingMetrics(for: schedulesByLocation)
 
         // Extract and return schedules for the requested location
         let schedules = schedulesByLocation[location] ?? []

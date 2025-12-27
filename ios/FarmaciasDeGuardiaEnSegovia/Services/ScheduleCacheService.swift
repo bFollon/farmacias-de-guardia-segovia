@@ -293,10 +293,12 @@ private struct CacheMetadata: Codable {
     // For backward compatibility with old cache files
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        locationId = try container.decode(String.self, forKey: .locationId)
+        // locationId was added later, use "unknown" as fallback for old caches
+        locationId = try container.decodeIfPresent(String.self, forKey: .locationId) ?? "unknown"
         scheduleCount = try container.decode(Int.self, forKey: .scheduleCount)
         cacheTimestamp = try container.decode(TimeInterval.self, forKey: .cacheTimestamp)
         pdfLastModified = try container.decode(TimeInterval.self, forKey: .pdfLastModified)
+        // cacheVersion was added in version 2, default to 1 for old caches
         cacheVersion = try container.decodeIfPresent(Int.self, forKey: .cacheVersion) ?? 1
     }
 
