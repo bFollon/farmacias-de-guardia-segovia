@@ -6,6 +6,8 @@
 
 Farmacias de Guardia En Segovia ("we," "our," or "the app") is committed to protecting your privacy. This privacy notice explains how we handle information when you use our iOS application.
 
+The app includes optional application performance monitoring to help diagnose crashes and improve stability. **This monitoring is disabled by default and is only enabled if you explicitly opt in.**
+
 ## Information We Do NOT Collect
 
 We do not collect:
@@ -18,9 +20,10 @@ We do not collect:
 
 ## Information We Collect for App Monitoring
 
-To ensure the app functions reliably and to diagnose errors, we collect a limited amount of **technical and diagnostic information** through **New Relic Monitoring**.
+**Application performance monitoring is optional.**  
+By default, the app does **not** send monitoring or diagnostic data. Monitoring is enabled only if you explicitly choose to opt in.
 
-This information may include:
+If enabled, the following technical and diagnostic information may be collected through New Relic Monitoring:
 
 ### Application & Performance Data
 - App name, version, and build number
@@ -76,6 +79,15 @@ The app may request access to your device’s location only to:
 - You can disable location services at any time in your device settings
 - The app will continue to function without location access
 
+## User Choices and Controls
+
+You can enable or disable application performance monitoring at any time from within the app’s settings.
+
+- Monitoring is **off by default**
+- Opting in helps us identify crashes and performance issues
+- Opting out has no impact on core app functionality
+
+Your choice is respected immediately and does not affect your access to pharmacy schedules or location-based features.
 
 ## Data Storage
 
@@ -87,6 +99,8 @@ The app may request access to your device’s location only to:
 ## Third-Party Services
 
 ### New Relic Monitoring
+
+> New Relic Monitoring is used only if you have opted in to application performance monitoring.
 
 We use **New Relic, Inc.** as a third-party service provider for application performance monitoring and error reporting.
 
@@ -139,4 +153,4 @@ This app serves pharmacy duty schedules for Segovia, Spain, and complies with ap
 ---
 
 **Summary:**  
-The app does not collect information that directly identifies you as a person. Limited technical, diagnostic, and pseudonymous data is collected via New Relic solely to monitor app performance and diagnose errors. This data is never sold, never used for advertising or profiling, and is collected only to keep the app stable and reliable.
+The app does not collect information that directly identifies you as a person. Application performance monitoring is optional and disabled by default. If you choose to opt in, limited technical and diagnostic data is collected solely to monitor app stability and diagnose errors. This data is never sold, never used for advertising or profiling, and can be disabled at any time.
