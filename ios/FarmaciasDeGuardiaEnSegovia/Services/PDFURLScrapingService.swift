@@ -49,37 +49,51 @@ class PDFURLScrapingService {
     /// Scrape the cofsegovia.com page to extract current PDF URLs
     /// This runs asynchronously to avoid blocking the main thread
     func scrapePDFURLs() async -> [ScrapedPDFData] {
+        let startTime = Date()
+        var scrapedData: [ScrapedPDFData] = []
+        var scrapingError: Error? = nil
+
         do {
             DebugConfig.debugPrint("PDFURLScrapingService: Starting PDF URL scraping from \(baseURL)")
-            
+
             guard let url = URL(string: baseURL) else {
+                let error = ScrapingError.networkError("Invalid URL")
                 DebugConfig.debugPrint("PDFURLScrapingService: Invalid URL")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
                 return []
             }
-            
+
             var request = URLRequest(url: url)
             request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15", forHTTPHeaderField: "User-Agent")
-            
+
             let (data, response) = try await session.data(for: request)
-            
+
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
-                DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+                let error = ScrapingError.networkError("HTTP status \(statusCode)")
+                DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \(statusCode)")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
                 return []
             }
-            
+
             guard let htmlContent = String(data: data, encoding: .utf8) else {
+                let error = ScrapingError.networkError("Failed to decode HTML content")
                 DebugConfig.debugPrint("PDFURLScrapingService: Failed to decode HTML content")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
                 return []
             }
-            
+
             DebugConfig.debugPrint("PDFURLScrapingService: Successfully fetched HTML content (\(htmlContent.count) chars)")
-            
+
             // Extract PDF links using regex patterns
-            let scrapedData = extractPDFDataFromHTML(htmlContent)
-            
+            scrapedData = extractPDFDataFromHTML(htmlContent)
+
             DebugConfig.debugPrint("PDFURLScrapingService: Successfully scraped \(scrapedData.count) PDF URLs")
-            
+
             // Cache the scraped URLs for later use
             for data in scrapedData {
                 scrapedURLs[data.regionName] = data.pdfURL
@@ -88,17 +102,33 @@ class PDFURLScrapingService {
                     DebugConfig.debugPrint("PDFURLScrapingService: Last updated: \(lastUpdated)")
                 }
             }
-            
+
             // Mark scraping as completed
             scrapingCompleted = true
             DebugConfig.debugPrint("PDFURLScrapingService: Scraping completed, \(scrapedURLs.count) URLs cached")
-            
+
+            // Record metrics with the scraped data
+            recordMetrics(scrapedData: scrapedData, startTime: startTime, error: nil)
+
             return scrapedData
-            
+
         } catch {
             DebugConfig.debugPrint("PDFURLScrapingService: Error scraping PDF URLs: \(error)")
+            scrapingError = ScrapingError.networkError(error.localizedDescription)
+            recordMetrics(scrapedData: [], startTime: startTime, error: scrapingError)
             return []
         }
+    }
+
+    /// Record scraping metrics to New Relic
+    private func recordMetrics(scrapedData: [ScrapedPDFData], startTime: Date, error: Error?) {
+        let duration = Date().timeIntervalSince(startTime)
+        ScrapingMetricsService.shared.recordScrapingMetrics(
+            scrapedData: scrapedData,
+            expectedCount: 4, // We expect 4 regions: Segovia Capital, Cuéllar, El Espinar, Segovia Rural
+            duration: duration,
+            error: error
+        )
     }
     
     /// Extract PDF data from HTML content using regex patterns
