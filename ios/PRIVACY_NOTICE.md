@@ -1,12 +1,12 @@
 # Privacy Notice - Farmacias de Guardia En Segovia
 
-**Last Updated:** September 11, 2025
+**Last Updated:** December 27, 2025
 
 ## Overview
 
 Farmacias de Guardia En Segovia ("we," "our," or "the app") is committed to protecting your privacy. This privacy notice explains how we handle information when you use our iOS application.
 
-The app includes optional application performance monitoring to help diagnose crashes and improve stability. **This monitoring is disabled by default and is only enabled if you explicitly opt in.**
+The app includes **optional** application performance monitoring to help diagnose crashes and improve stability. **This monitoring is disabled by default and is only enabled if you explicitly opt in.**
 
 ## Information We Do NOT Collect
 
