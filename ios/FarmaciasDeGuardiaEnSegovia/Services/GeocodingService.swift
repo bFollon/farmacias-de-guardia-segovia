@@ -17,6 +17,7 @@
 
 import Foundation
 import CoreLocation
+import OpenTelemetryApi
 
 class GeocodingService {
     
@@ -65,23 +66,39 @@ class GeocodingService {
     
     /// Enhanced geocoding for pharmacies that includes the pharmacy name for better accuracy
     static func getCoordinatesForPharmacy(_ pharmacy: Pharmacy) async -> CLLocation? {
+        // Start performance span
+        let span = TelemetryService.shared.startSpan(
+            name: "pharmacy.geocode",
+            kind: .client  // External geocoding service
+        )
+        span.setAttribute(key: "pharmacy_name", value: pharmacy.name)
+        span.setAttribute(key: "address", value: pharmacy.address)
+
         // Use enhanced query with pharmacy name (like in PharmacyView)
         let enhancedQuery = "\(pharmacy.name), \(pharmacy.address), Segovia, España"
         let cacheKey = enhancedQuery
-        
+
         // Check session cache first (fastest)
         if let cachedLocation = sessionCache[cacheKey] {
             DebugConfig.debugPrint("📍 Using session cache for pharmacy: \(pharmacy.name)")
+            span.setAttribute(key: "source", value: "session_cache")
+            span.setAttribute(key: "cache_hit", value: "true")
+            span.status = .ok
+            span.end()
             return cachedLocation
         }
-        
+
         // Check persistent cache
         if let persistentLocation = CoordinateCache.getCoordinates(for: cacheKey) {
             DebugConfig.debugPrint("📍 Using persistent cache for pharmacy: \(pharmacy.name)")
             sessionCache[cacheKey] = persistentLocation // Also cache in session
+            span.setAttribute(key: "source", value: "persistent_cache")
+            span.setAttribute(key: "cache_hit", value: "true")
+            span.status = .ok
+            span.end()
             return persistentLocation
         }
-        
+
         let geocoder = CLGeocoder()
         
         do {
@@ -92,32 +109,60 @@ class GeocodingService {
                 // Cache in both session and persistent storage
                 sessionCache[cacheKey] = location
                 CoordinateCache.setCoordinates(location, for: cacheKey)
-                
+
                 DebugConfig.debugPrint("✅ Geocoded pharmacy \(pharmacy.name) -> \(location.coordinate.latitude), \(location.coordinate.longitude)")
+                span.setAttribute(key: "source", value: "geocoder")
+                span.setAttribute(key: "cache_hit", value: "false")
+                span.setAttribute(key: "used_fallback", value: "false")
+                span.status = .ok
+                span.end()
                 return location
             } else {
                 DebugConfig.debugPrint("❌ No coordinates found for pharmacy: \(enhancedQuery)")
-                
+
                 // Fallback to address-only geocoding
                 DebugConfig.debugPrint("🔄 Trying fallback geocoding with address only for: \(pharmacy.name)")
                 let fallbackResult = await getCoordinates(for: pharmacy.address)
                 if fallbackResult != nil {
                     DebugConfig.debugPrint("✅ Fallback geocoding succeeded for: \(pharmacy.name)")
+                    span.setAttribute(key: "source", value: "geocoder_fallback")
+                    span.setAttribute(key: "cache_hit", value: "false")
+                    span.setAttribute(key: "used_fallback", value: "true")
+                    span.status = .ok
+                    span.end()
                 } else {
                     DebugConfig.debugPrint("❌ Fallback geocoding also failed for: \(pharmacy.name)")
+                    span.setAttribute(key: "error_message", value: "No coordinates found")
+                    span.setAttribute(key: "source", value: "failed")
+                    span.setAttribute(key: "cache_hit", value: "false")
+                    span.setAttribute(key: "error.type", value: "not_found")
+                    span.status = .error(description: "No coordinates found")
+                    span.end()
                 }
                 return fallbackResult
             }
         } catch {
             DebugConfig.debugPrint("❌ Pharmacy geocoding failed for \(enhancedQuery): \(error.localizedDescription)")
-            
+
             // Fallback to address-only geocoding
             DebugConfig.debugPrint("🔄 Trying fallback geocoding with address only for: \(pharmacy.name)")
             let fallbackResult = await getCoordinates(for: pharmacy.address)
             if fallbackResult != nil {
                 DebugConfig.debugPrint("✅ Fallback geocoding succeeded for: \(pharmacy.name)")
+                span.setAttribute(key: "source", value: "geocoder_fallback")
+                span.setAttribute(key: "cache_hit", value: "false")
+                span.setAttribute(key: "used_fallback", value: "true")
+                span.setAttribute(key: "initial_error", value: error.localizedDescription)
+                span.status = .ok
+                span.end()
             } else {
                 DebugConfig.debugPrint("❌ Fallback geocoding also failed for: \(pharmacy.name)")
+                span.setAttribute(key: "error_message", value: error.localizedDescription)
+                span.setAttribute(key: "source", value: "failed")
+                span.setAttribute(key: "cache_hit", value: "false")
+                span.setAttribute(key: "error.type", value: "unavailable")
+                span.status = .error(description: error.localizedDescription)
+                span.end()
             }
             return fallbackResult
         }

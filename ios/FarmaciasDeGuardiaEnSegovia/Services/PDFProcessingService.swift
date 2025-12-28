@@ -17,6 +17,7 @@
 
 import Foundation
 import PDFKit
+import OpenTelemetryApi
 
 public class PDFProcessingService {
     /// Current active region. For now, always Segovia Capital.
@@ -55,6 +56,17 @@ public class PDFProcessingService {
     /// - Main regions return 1 entry
     /// - Segovia Rural returns 8 entries (one per ZBS)
     public func loadPharmacies(forceRefresh: Bool = false) async -> [DutyLocation: [PharmacySchedule]] {
+        // Start performance span
+        let span = TelemetryService.shared.startSpan(
+            name: "pdf.parse",
+            kind: .internal
+        )
+        span.setAttribute(key: "region_id", value: region.id)
+        span.setAttribute(key: "region_name", value: region.name)
+        span.setAttribute(key: "force_refresh", value: forceRefresh)
+        span.setAttribute(key: "region", value: region.id)
+        span.setAttribute(key: "cache_used", value: forceRefresh ? "false" : "true")
+
         // Get the effective PDF URL (cached or remote, force download if requested)
         let effectiveURL: URL
         if forceRefresh {
@@ -72,16 +84,33 @@ public class PDFProcessingService {
 
         guard let pdfDocument = PDFDocument(url: effectiveURL) else {
             DebugConfig.debugPrint("Failed to load PDF from \(effectiveURL)")
+            span.setAttribute(key: "error_message", value: "PDF load failed")
+            span.setAttribute(key: "error.type", value: "data_loss")
+            span.status = .error(description: "PDF load failed")
+            span.end()
             return [:]
         }
 
         guard let parser = parsingStrategies[region.id] else {
             DebugConfig.debugPrint("No parser found for region: \(region.name) (id: \(region.id))")
+            span.setAttribute(key: "error_message", value: "No parser found")
+            span.setAttribute(key: "error.type", value: "not_found")
+            span.status = .error(description: "No parser found")
+            span.end()
             return [:]
         }
 
         DebugConfig.debugPrint("Loading schedules for \(region.name) from \(effectiveURL)")
-        return parser.parseSchedules(from: pdfDocument)
+        let schedules = parser.parseSchedules(from: pdfDocument)
+
+        // Finish span with results
+        let totalSchedules = schedules.values.reduce(0) { $0 + $1.count }
+        span.setAttribute(key: "locations_count", value: schedules.count)
+        span.setAttribute(key: "schedules_count", value: totalSchedules)
+        span.status = .ok
+        span.end()
+
+        return schedules
     }
 
     /// Updates the current region and returns schedules for that region

@@ -16,7 +16,7 @@
  */
 
 import Foundation
-import NewRelic
+import OpenTelemetryApi
 
 /// Error types for PDF URL scraping failures
 enum ScrapingError: Error, LocalizedError {
@@ -36,8 +36,8 @@ enum ScrapingError: Error, LocalizedError {
     }
 }
 
-/// Service responsible for recording PDF URL scraping metrics to New Relic
-/// Tracks scraping success/failure rates and alerts on incomplete results
+/// Service responsible for recording PDF URL scraping errors to Signoz (OpenTelemetry)
+/// Only sends error events when scraping fails or returns incomplete results
 class ScrapingMetricsService {
     static let shared = ScrapingMetricsService()
 
@@ -66,89 +66,30 @@ class ScrapingMetricsService {
         let urlCount = scrapedData.count
         let success = urlCount == expectedCount && error == nil
 
-        DebugConfig.debugPrint("📊 Recording scraping metrics: found \(urlCount)/\(expectedCount) URLs, success: \(success)")
-
-        // Get app version info
-        let versionInfo = getAppVersionInfo()
-
-        // Get list of regions found and missing
-        let foundRegions = scrapedData.map { $0.regionName }
-        let expectedRegions = ["Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"]
-        let missingRegions = expectedRegions.filter { !foundRegions.contains($0) }
-
-        // Record custom event for trending/analytics
-        recordCustomEvent(
-            urlCount: urlCount,
-            expectedCount: expectedCount,
-            success: success,
-            duration: duration,
-            foundRegions: foundRegions,
-            missingRegions: missingRegions,
-            appVersion: versionInfo.version,
-            buildNumber: versionInfo.build,
-            error: error
-        )
-
-        // Record error to New Relic if scraping was unsuccessful
+        // Only record errors to Signoz (spans track all operations)
         if !success {
+            DebugConfig.debugPrint("⚠️ Scraping issue detected: found \(urlCount)/\(expectedCount) URLs")
+
+            // Get list of regions found and missing
+            let foundRegions = scrapedData.map { $0.regionName }
+            let expectedRegions = ["Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"]
+            let missingRegions = expectedRegions.filter { !foundRegions.contains($0) }
+
+            // Record error to Signoz (OpenTelemetry)
             recordError(
                 urlCount: urlCount,
                 expectedCount: expectedCount,
                 missingRegions: missingRegions,
                 error: error
             )
-        }
 
-        DebugConfig.debugPrint("✅ Recorded scraping metrics to New Relic")
+            DebugConfig.debugPrint("🚨 Recorded scraping error to Signoz")
+        } else {
+            DebugConfig.debugPrint("✅ Scraping successful: \(urlCount)/\(expectedCount) URLs (no error sent to Signoz)")
+        }
     }
 
     // MARK: - Private Methods
-
-    /// Record a custom event for scraping results
-    private func recordCustomEvent(
-        urlCount: Int,
-        expectedCount: Int,
-        success: Bool,
-        duration: TimeInterval,
-        foundRegions: [String],
-        missingRegions: [String],
-        appVersion: String,
-        buildNumber: String,
-        error: Error?
-    ) {
-        var attributes: [String: Any] = [
-            "urlCount": urlCount,
-            "expectedCount": expectedCount,
-            "success": success,
-            "scrapingDuration": duration,
-            "appVersion": appVersion,
-            "buildNumber": buildNumber,
-            "foundRegionsCount": foundRegions.count,
-            "missingRegionsCount": missingRegions.count
-        ]
-
-        // Add found regions as comma-separated string
-        if !foundRegions.isEmpty {
-            attributes["foundRegions"] = foundRegions.joined(separator: ", ")
-        }
-
-        // Add missing regions if any
-        if !missingRegions.isEmpty {
-            attributes["missingRegions"] = missingRegions.joined(separator: ", ")
-        }
-
-        // Add error message if present
-        if let error = error {
-            attributes["errorMessage"] = error.localizedDescription
-        }
-
-        NewRelic.recordCustomEvent(
-            "PDFURLScrapingCompleted",
-            attributes: attributes
-        )
-
-        DebugConfig.debugPrint("📊 Event: PDFURLScrapingCompleted - \(urlCount)/\(expectedCount) URLs, duration: \(String(format: "%.2f", duration))s")
-    }
 
     /// Record an error when scraping fails or returns incomplete results
     private func recordError(
@@ -170,31 +111,24 @@ class ScrapingMetricsService {
             scrapingError = ScrapingError.incompleteResults(found: urlCount, expected: expectedCount)
         }
 
-        // Build error attributes
-        var errorAttributes: [String: Any] = [
-            "urlCount": urlCount,
-            "expectedCount": expectedCount,
-            "missingRegionsCount": missingRegions.count
+        // Build error attributes for OpenTelemetry
+        var errorAttributes: [String: AttributeValue] = [
+            "urlCount": AttributeValue.int(urlCount),
+            "expectedCount": AttributeValue.int(expectedCount),
+            "missingRegionsCount": AttributeValue.int(missingRegions.count)
         ]
 
         if !missingRegions.isEmpty {
-            errorAttributes["missingRegions"] = missingRegions.joined(separator: ", ")
+            errorAttributes["missingRegions"] = AttributeValue.string(missingRegions.joined(separator: ", "))
         }
 
-        // Record error to New Relic
-        NewRelic.recordError(scrapingError, attributes: errorAttributes)
+        // Record error to Signoz (OpenTelemetry)
+        TelemetryService.shared.recordError(scrapingError, attributes: errorAttributes)
 
         DebugConfig.debugPrint("🚨 Error recorded: \(scrapingError.localizedDescription)")
         if !missingRegions.isEmpty {
             DebugConfig.debugPrint("🚨 Missing regions: \(missingRegions.joined(separator: ", "))")
         }
-    }
-
-    /// Get app version information from Bundle
-    private func getAppVersionInfo() -> (version: String, build: String) {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
-        return (version, build)
     }
 
     /// Check if metrics should be sent (user has opted in to monitoring)

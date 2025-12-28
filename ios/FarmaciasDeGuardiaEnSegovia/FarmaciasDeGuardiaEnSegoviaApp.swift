@@ -17,7 +17,12 @@
 
 import SwiftUI
 import StoreKit
-import NewRelic
+import GRPC
+import NIO
+import OpenTelemetryApi
+import OpenTelemetrySdk
+import OpenTelemetryProtocolExporterCommon
+import OpenTelemetryProtocolExporterGrpc
 
 @main
 struct FarmaciasDeGuardiaEnSegoviaApp: App {
@@ -108,8 +113,8 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     }
 }
 
-extension View {
-    func supportedOrientations(_ orientations: UIInterfaceOrientationMask) -> some View {
+extension SwiftUI.View {
+    func supportedOrientations(_ orientations: UIInterfaceOrientationMask) -> some SwiftUI.View {
         self.onAppear {
             AppDelegate.orientationLock = orientations
         }
@@ -120,12 +125,51 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize NewRelic only if user has opted in
+        // Initialize OpenTelemetry (Signoz) only if user has opted in
         if MonitoringPreferencesService.shared.hasUserOptedIn() {
-            NewRelic.start(withApplicationToken: Secrets.newRelicAppToken)
-            DebugConfig.debugPrint("✅ NewRelic monitoring initialized (user opted in)")
+            // Get app version and environment
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+            #if DEBUG
+            let environment = "debug"
+            #else
+            let environment = "production"
+            #endif
+
+            // Create resource with service info
+            let resource = Resource(attributes: [
+                "service.name": AttributeValue.string("farmacias-guardia-segovia"),
+                "service.version": AttributeValue.string(appVersion),
+                "deployment.environment": AttributeValue.string(environment)
+            ])
+
+            // Configure OTLP configuration
+            let otlpConfiguration = OtlpConfiguration(timeout: TimeInterval(10))
+
+            // Create gRPC channel for Signoz
+            let grpcChannel = ClientConnection.insecure(group: MultiThreadedEventLoopGroup(numberOfThreads: 1))
+                .connect(host: "homeserver.local", port: 4317)
+
+            // Configure OTLP exporter for Signoz
+            let otlpExporter = OtlpTraceExporter(
+                channel: grpcChannel,
+                config: otlpConfiguration
+            )
+
+            // Create span processor with immediate export
+            let spanProcessor = SimpleSpanProcessor(spanExporter: otlpExporter)
+
+            // Create tracer provider
+            let tracerProvider = TracerProviderBuilder()
+                .add(spanProcessor: spanProcessor)
+                .with(resource: resource)
+                .build()
+
+            // Register globally
+            OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
+
+            DebugConfig.debugPrint("✅ OpenTelemetry (Signoz) monitoring initialized (user opted in)")
         } else {
-            DebugConfig.debugPrint("⚠️ NewRelic monitoring disabled (user has not opted in)")
+            DebugConfig.debugPrint("⚠️ OpenTelemetry (Signoz) monitoring disabled (user has not opted in)")
         }
 
         return true

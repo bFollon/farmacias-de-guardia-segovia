@@ -18,6 +18,7 @@
 import Foundation
 import MapKit
 import CoreLocation
+import OpenTelemetryApi
 
 // Note: MapKit may generate harmless system warnings about RenderBox.framework/default.metallib
 // on first use. This is a known iOS system issue related to Metal shader loading and doesn't
@@ -81,9 +82,23 @@ class RoutingService {
     
     /// Calculate driving route from user location to destination
     static func calculateDrivingRoute(from userLocation: CLLocation, to destination: CLLocation) async -> RouteResult? {
+        // Start performance span
+        let span = TelemetryService.shared.startSpan(
+            name: "route.calculate",
+            kind: .client  // Apple Maps API
+        )
+        span.setAttribute(key: "origin", value: "\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)")
+        span.setAttribute(key: "destination", value: "\(destination.coordinate.latitude),\(destination.coordinate.longitude)")
+
         // Check cache first
         if let cachedRoute = RouteCacheService.shared.getCachedRoute(from: userLocation, to: destination.coordinate) {
             DebugConfig.debugPrint("🗺️ Using cached route")
+            span.setAttribute(key: "source", value: "cache")
+            span.setAttribute(key: "distance", value: cachedRoute.distance)
+            span.setAttribute(key: "cache_hit", value: "true")
+            span.setAttribute(key: "is_estimated", value: cachedRoute.isEstimated ? "true" : "false")
+            span.status = .ok
+            span.end()
             return RouteResult(
                 distance: cachedRoute.distance,
                 travelTime: cachedRoute.travelTime,
@@ -135,6 +150,15 @@ class RoutingService {
                     isEstimated: false
                 )
 
+                // Finish span successfully
+                span.setAttribute(key: "source", value: "mapkit")
+                span.setAttribute(key: "is_estimated", value: "false")
+                span.setAttribute(key: "distance", value: drivingRoute.distance)
+                span.setAttribute(key: "travel_time", value: drivingRoute.expectedTravelTime)
+                span.setAttribute(key: "cache_hit", value: "false")
+                span.status = .ok
+                span.end()
+
                 return result
             }
         } catch {
@@ -160,9 +184,22 @@ class RoutingService {
                 isEstimated: true
             )
 
+            // Finish span with fallback
+            span.setAttribute(key: "source", value: "straight_line_fallback")
+            span.setAttribute(key: "is_estimated", value: "true")
+            span.setAttribute(key: "distance", value: straightLineDistance)
+            span.setAttribute(key: "routing_error", value: error.localizedDescription)
+            span.setAttribute(key: "cache_hit", value: "false")
+            span.status = .ok // Still OK since we have fallback
+            span.end()
+
             return result
         }
 
+        span.setAttribute(key: "error_message", value: "No routes found")
+        span.setAttribute(key: "error.type", value: "not_found")
+        span.status = .error(description: "No routes found")
+        span.end()
         return nil
     }
     

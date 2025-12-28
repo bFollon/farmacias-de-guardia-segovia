@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A9EDFB12F00BCD000920FCE /* OpenTelemetryProtocolExporter in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */; };
 		3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; };
 		3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */,
+				3A9EDFB12F00BCD000920FCE /* OpenTelemetryProtocolExporter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,7 @@
 			);
 			name = FarmaciasDeGuardiaEnSegovia;
 			packageProductDependencies = (
+				3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */,
 			);
 			productName = FarmaciasDeGuardiaEnSegovia;
 			productReference = CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */;
@@ -222,6 +225,9 @@
 			);
 			mainGroup = CE049B352DD6AABF00D1D560;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CE049B3F2DD6AABF00D1D560 /* Products */;
 			projectDirPath = "";
@@ -622,6 +628,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/open-telemetry/opentelemetry-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */;
+			productName = OpenTelemetryProtocolExporter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE049B362DD6AABF00D1D560 /* Project object */;
 }
