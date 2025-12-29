@@ -38,9 +38,12 @@ class TelemetryService {
     ///   - kind: SpanKind indicating the type of operation
     /// - Returns: Started span that must be ended with span.end()
     func startSpan(name: String, kind: SpanKind = .internal) -> Span {
-        return tracer.spanBuilder(spanName: name)
+        DebugConfig.debugPrint("📊 Starting span: \(name) (kind: \(kind))")
+        let span = tracer.spanBuilder(spanName: name)
             .setSpanKind(spanKind: kind)
             .startSpan()
+        DebugConfig.debugPrint("📊 Span started: \(name) with context: \(span.context)")
+        return span
     }
 
     /// Record an error as an exception event

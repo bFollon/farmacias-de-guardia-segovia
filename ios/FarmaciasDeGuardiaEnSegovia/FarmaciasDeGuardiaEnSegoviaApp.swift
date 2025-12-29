@@ -17,12 +17,10 @@
 
 import SwiftUI
 import StoreKit
-import GRPC
-import NIO
 import OpenTelemetryApi
 import OpenTelemetrySdk
 import OpenTelemetryProtocolExporterCommon
-import OpenTelemetryProtocolExporterGrpc
+import OpenTelemetryProtocolExporterHttp
 
 @main
 struct FarmaciasDeGuardiaEnSegoviaApp: App {
@@ -135,25 +133,40 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             let environment = "production"
             #endif
 
-            // Create resource with service info
-            let resource = Resource(attributes: [
+            // Create resource with automatic SDK detection (includes telemetry.sdk.name,
+            // telemetry.sdk.language, telemetry.sdk.version automatically)
+            let defaultResource = Resource()
+
+            // Merge with custom service attributes
+            let customResource = Resource(attributes: [
                 "service.name": AttributeValue.string("farmacias-guardia-segovia"),
                 "service.version": AttributeValue.string(appVersion),
                 "deployment.environment": AttributeValue.string(environment)
             ])
 
-            // Configure OTLP configuration
-            let otlpConfiguration = OtlpConfiguration(timeout: TimeInterval(10))
+            let resources = defaultResource.merging(other: customResource)
 
-            // Create gRPC channel for Signoz
-            let grpcChannel = ClientConnection.insecure(group: MultiThreadedEventLoopGroup(numberOfThreads: 1))
-                .connect(host: "homeserver.local", port: 4317)
+            // Configure OTLP HTTP exporter for Signoz
+            DebugConfig.debugPrint("🔧 Configuring Signoz OTLP HTTP exporter")
+            DebugConfig.debugPrint("🔧 Endpoint: \(Secrets.signozEndpoint)")
+            DebugConfig.debugPrint("🔧 Auth header: signoz-ingestion-key")
 
-            // Configure OTLP exporter for Signoz
-            let otlpExporter = OtlpTraceExporter(
-                channel: grpcChannel,
+            let otlpConfiguration = OtlpConfiguration(
+                timeout: TimeInterval(10),
+                headers: [("signoz-ingestion-key", Secrets.signozIngestionKey)]
+            )
+
+            guard let endpoint = URL(string: Secrets.signozEndpoint) else {
+                DebugConfig.debugPrint("❌ Invalid Signoz endpoint URL: \(Secrets.signozEndpoint)")
+                return true
+            }
+
+            let otlpExporter = OtlpHttpTraceExporter(
+                endpoint: endpoint,
                 config: otlpConfiguration
             )
+
+            DebugConfig.debugPrint("🔧 OTLP HTTP exporter created successfully")
 
             // Create span processor with immediate export
             let spanProcessor = SimpleSpanProcessor(spanExporter: otlpExporter)
@@ -161,7 +174,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             // Create tracer provider
             let tracerProvider = TracerProviderBuilder()
                 .add(spanProcessor: spanProcessor)
-                .with(resource: resource)
+                .with(resource: resources)
                 .build()
 
             // Register globally

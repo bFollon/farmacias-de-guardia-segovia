@@ -21,7 +21,8 @@
       "Bash(else echo \"not found\")",
       "Bash(fi)",
       "Bash(git check-ignore:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "WebFetch(domain:signoz.io)"
     ],
     "deny": [],
     "ask": []

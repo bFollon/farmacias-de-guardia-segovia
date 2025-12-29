@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A9EDFB12F00BCD000920FCE /* OpenTelemetryProtocolExporter in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */; };
+		3A9EDFB52F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */; };
 		3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; };
 		3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -77,7 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */,
-				3A9EDFB12F00BCD000920FCE /* OpenTelemetryProtocolExporter in Frameworks */,
+				3A9EDFB52F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,7 @@
 			);
 			name = FarmaciasDeGuardiaEnSegovia;
 			packageProductDependencies = (
-				3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */,
+				3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */,
 			);
 			productName = FarmaciasDeGuardiaEnSegovia;
 			productReference = CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */;
@@ -641,10 +641,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A9EDFB02F00BCD000920FCE /* OpenTelemetryProtocolExporter */ = {
+		3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */;
-			productName = OpenTelemetryProtocolExporter;
+			productName = OpenTelemetryProtocolExporterHTTP;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
