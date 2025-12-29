@@ -20,6 +20,7 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -53,64 +54,51 @@ fun ShiftHeaderCard(
     modifier: Modifier = Modifier,
     onInfoClick: (() -> Unit)? = null
 ) {
-    val (iconData, color) = Triple(
-        Icons.Default.WbSunny,
-        timeSpan.displayName,
-        timeSpan.displayFormat
-    ) to if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+    val color = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
 
-    val (icon, title, timeRange) = iconData
-    
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = if (isActive) 
+            containerColor = if (isActive)
                 MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-            else 
+            else
                 MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                imageVector = icon,
-                contentDescription = title,
+                imageVector = Icons.Default.WbSunny,
+                contentDescription = timeSpan.displayName,
                 tint = color,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(20.dp)
             )
-            
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = color
-                )
-                Text(
-                    text = timeRange,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.outline
-                )
-                if (isActive) {
-                    Text(
-                        text = "Activo ahora",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
-            }
-            
+
+            // Combined text on one line
+            Text(
+                text = "${timeSpan.displayName} • ${timeSpan.displayFormat}",
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = color
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Info button (if needed)
             if (onInfoClick != null) {
-                IconButton(onClick = onInfoClick) {
+                IconButton(
+                    onClick = onInfoClick,
+                    modifier = Modifier.size(32.dp)
+                ) {
                     Icon(
                         imageVector = Icons.Default.Info,
                         contentDescription = "Más información",
-                        tint = MaterialTheme.colorScheme.outline
+                        tint = MaterialTheme.colorScheme.outline,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

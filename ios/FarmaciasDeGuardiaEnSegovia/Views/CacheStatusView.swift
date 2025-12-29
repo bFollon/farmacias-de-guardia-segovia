@@ -3,6 +3,7 @@ import SwiftUI
 struct CacheStatusView: View {
     @State private var cacheStatuses: [RegionCacheStatus] = []
     @State private var isLoading = true
+    @State private var isRefreshing = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -48,12 +49,34 @@ struct CacheStatusView: View {
                                 Text("Información de la caché")
                                     .font(.headline)
                             }
-                            
+
                             Text("• Verde: PDF descargado y actualizado")
                             Text("• Naranja: Actualización del PDF disponible")
                             Text("• Rojo: PDF no descargado")
                         }
                         .padding(.vertical, 8)
+                    }
+
+                    Section {
+                        Button(action: {
+                            refreshAllCaches()
+                        }) {
+                            HStack {
+                                Spacer()
+                                if isRefreshing {
+                                    ProgressView()
+                                        .padding(.trailing, 8)
+                                    Text("Actualizando todos los PDFs...")
+                                } else {
+                                    Image(systemName: "arrow.clockwise")
+                                    Text("Forzar actualización de todos los PDFs")
+                                }
+                                Spacer()
+                            }
+                        }
+                        .disabled(isRefreshing)
+                    } footer: {
+                        Text("Esto descargará y procesará nuevamente todos los PDFs de guardias, actualizando la caché.")
                     }
                 }
             }
@@ -74,13 +97,36 @@ struct CacheStatusView: View {
     
     private func loadCacheStatus() {
         isLoading = true
-        
+
         Task {
             let statuses = await PDFCacheManager.shared.getCacheStatus()
-            
+
             await MainActor.run {
                 self.cacheStatuses = statuses
                 self.isLoading = false
+            }
+        }
+    }
+
+    private func refreshAllCaches() {
+        isRefreshing = true
+
+        Task {
+            let allRegions: [Region] = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+
+            // Force re-parse all PDFs
+            for region in allRegions {
+                let location = DutyLocation.fromRegion(region)
+                _ = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
+                DebugConfig.debugPrint("✅ Force refreshed cache for \(region.name)")
+            }
+
+            // Reload cache status to reflect updates
+            let statuses = await PDFCacheManager.shared.getCacheStatus()
+
+            await MainActor.run {
+                self.cacheStatuses = statuses
+                self.isRefreshing = false
             }
         }
     }

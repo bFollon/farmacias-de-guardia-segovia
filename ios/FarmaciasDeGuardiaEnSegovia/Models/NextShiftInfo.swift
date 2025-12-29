@@ -16,14 +16,24 @@
  */
 
 import Foundation
-import PDFKit
 
-/// Protocol defining the contract for PDF schedule parsing strategies.
-/// Each region/location should implement its own strategy to handle its specific PDF format.
-public protocol PDFParsingStrategy {
-    /// Parse a PDF document and extract pharmacy schedules organized by duty location
-    /// - Parameter pdf: The PDF document to parse
-    /// - Returns: A dictionary mapping duty locations to their pharmacy schedules.
-    ///           Main regions return 1 entry, Segovia Rural returns 8 entries (one per ZBS).
-    func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]]
+/// Contains information about the next pharmacy shift
+struct NextShiftInfo {
+    let schedule: PharmacySchedule
+    let timeSpan: DutyTimeSpan
+    let minutesUntilChange: Int?
+    let gapMinutes: Int?
+
+    /// Whether to show the 30-minute transition warning
+    var shouldShowWarning: Bool {
+        guard let minutes = minutesUntilChange else { return false }
+        return minutes > 0 && minutes <= 30
+    }
+
+    /// Whether there's a gap between current shift end and next shift start
+    /// Gap is considered present if > 2 minutes (handles midnight transitions gracefully)
+    var hasGap: Bool {
+        guard let gap = gapMinutes else { return false }
+        return gap > 2
+    }
 }

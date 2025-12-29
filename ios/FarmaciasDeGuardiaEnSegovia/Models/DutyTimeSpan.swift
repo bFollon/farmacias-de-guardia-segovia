@@ -128,16 +128,64 @@ public struct DutyTimeSpan: Equatable, Hashable, Codable {
 public extension DutyTimeSpan {
     /// Segovia Capital daytime shift (10:15 - 22:00)
     static let capitalDay = DutyTimeSpan(startHour: 10, startMinute: 15, endHour: 22, endMinute: 0)
-    
+
     /// Segovia Capital nighttime shift (22:00 - 10:15 next day)
     static let capitalNight = DutyTimeSpan(startHour: 22, startMinute: 0, endHour: 10, endMinute: 15)
-    
+
     /// 24-hour shift used by Cuéllar and El Espinar (00:00 - 23:59)
     static let fullDay = DutyTimeSpan(startHour: 0, startMinute: 0, endHour: 23, endMinute: 59)
-    
+
     /// Rural daytime shift for standard hours (10:00 - 20:00)
     static let ruralDaytime = DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 20, endMinute: 0)
-    
+
     /// Rural extended daytime shift (10:00 - 22:00)
     static let ruralExtendedDaytime = DutyTimeSpan(startHour: 10, startMinute: 0, endHour: 22, endMinute: 0)
+}
+
+// MARK: - Display Metadata
+public extension DutyTimeSpan {
+    /// Human-readable label for the shift type
+    var shiftLabel: String {
+        switch self {
+        case .capitalDay:
+            return "Guardia diurna"
+        case .capitalNight:
+            return "Guardia nocturna"
+        case .fullDay:
+            return "Guardia de 24 horas"
+        case .ruralDaytime:
+            return "Guardia diurna"
+        case .ruralExtendedDaytime:
+            return "Guardia diurna extendida"
+        default:
+            return "Guardia"
+        }
+    }
+
+    /// SF Symbol icon name for the shift type
+    var icon: String {
+        switch self {
+        case .capitalDay, .ruralDaytime, .ruralExtendedDaytime:
+            return "sun.max.fill"
+        case .capitalNight:
+            return "moon.stars.fill"
+        case .fullDay:
+            return "clock.fill"
+        default:
+            return "calendar.circle.fill"
+        }
+    }
+
+    /// Optional info content for this shift type
+    /// Only Segovia Capital shifts have explanatory content
+    func infoContent(for date: Date) -> ShiftInfoContent? {
+        switch self {
+        case .capitalDay:
+            return CapitalShiftInfo(shiftType: .day)
+        case .capitalNight:
+            return CapitalShiftInfo(shiftType: .night)
+        default:
+            return nil
+        }
+    }
 }

@@ -15,7 +15,14 @@
       "Bash(swift -typecheck:*)",
       "Bash(git restore:*)",
       "Bash(ls:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(if [ -f .gitignore ])",
+      "Bash(then echo \"exists\")",
+      "Bash(else echo \"not found\")",
+      "Bash(fi)",
+      "Bash(git check-ignore:*)",
+      "Bash(tee:*)",
+      "WebFetch(domain:signoz.io)"
     ],
     "deny": [],
     "ask": []

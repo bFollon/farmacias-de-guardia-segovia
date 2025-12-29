@@ -17,30 +17,71 @@
 
 import SwiftUI
 
+/// Generic schedule header view that works with any DutyTimeSpan
+struct ScheduleHeaderView: View {
+    let timeSpan: DutyTimeSpan
+    let date: Date
+    @Binding var isPresentingInfo: Bool
+
+    var body: some View {
+        HStack(alignment: .center, spacing: ViewConstants.iconSpacing) {
+            // Shift icon (sun, moon, clock, etc.)
+            Image(systemName: timeSpan.icon)
+                .foregroundColor(.secondary.opacity(0.7))
+                .frame(width: ViewConstants.iconColumnWidth)
+
+            // Shift label with time range
+            Text("\(timeSpan.shiftLabel) (\(timeSpan.displayName))")
+                .font(.headline)
+                .foregroundColor(.secondary)
+
+            // Info button (only shown if shift has explanatory content)
+            if let infoContent = timeSpan.infoContent(for: date) {
+                Button {
+                    isPresentingInfo = true
+                } label: {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.secondary)
+                }
+                .sheet(isPresented: $isPresentingInfo) {
+                    ShiftInfoSheet(content: infoContent, date: date)
+                }
+            }
+        }
+    }
+}
+
+/// Generic info sheet that displays shift explanatory content
+struct ShiftInfoSheet: View {
+    let content: ShiftInfoContent
+    let date: Date
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(content.title)
+                .font(.headline)
+
+            content.bodyContent(for: date)
+
+            Spacer()
+        }
+        .padding()
+        .presentationDetents([.medium])
+    }
+}
+
+// MARK: - Legacy Compatibility
+
+/// Legacy ShiftHeaderView for backward compatibility
+/// Wraps the new ScheduleHeaderView with Segovia Capital-specific logic
+@available(*, deprecated, message: "Use ScheduleHeaderView with DutyTimeSpan instead")
 struct ShiftHeaderView: View {
     let shiftType: DutyDate.ShiftType
     let date: Date
     @Binding var isPresentingInfo: Bool
-    
+
     var body: some View {
-        HStack(alignment: .center, spacing: ViewConstants.iconSpacing) {
-            Image(systemName: shiftType == .day ? "sun.max.fill" : "moon.stars.fill")
-                .foregroundColor(.secondary.opacity(0.7))
-                .frame(width: ViewConstants.iconColumnWidth)
-            
-            Text(shiftType == .day ? "Guardia diurna (10:15 - 22:00)" : "Guardia nocturna (22:00 - 10:15)")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            
-            Button {
-                isPresentingInfo = true
-            } label: {
-                Image(systemName: "info.circle")
-                    .foregroundColor(.secondary)
-            }
-            .sheet(isPresented: $isPresentingInfo) {
-                GuardiaInfoSheet(shiftType: shiftType, date: date)
-            }
-        }
+        let timeSpan: DutyTimeSpan = shiftType == .day ? .capitalDay : .capitalNight
+        ScheduleHeaderView(timeSpan: timeSpan, date: date, isPresentingInfo: $isPresentingInfo)
     }
 }

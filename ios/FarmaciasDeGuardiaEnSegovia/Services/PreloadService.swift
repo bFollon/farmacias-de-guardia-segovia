@@ -58,49 +58,83 @@ class PreloadService: ObservableObject {
     
     /// Preload all PDFs and cache them
     func preloadAllData() async {
+        // Calculate total: 3 main regions + 8 ZBS (skip Segovia Rural region itself)
+        let zbsLocations = ZBS.availableZBS
+        let totalLocations = regions.count - 1 + zbsLocations.count  // -1 for segoviaRural
+
         await MainActor.run {
             isLoading = true
-            totalRegions = regions.count
+            totalRegions = totalLocations
             completedRegions = 0
         }
-        
-        DebugConfig.debugPrint("🚀 Starting preload of \(regions.count) regions...")
-        
+
+        DebugConfig.debugPrint("🚀 Starting preload of 3 main regions + \(zbsLocations.count) ZBS...")
+
         // First, scrape PDF URLs to check for updates
         await scrapePDFURLs()
-        
+
         // Initialize cache manager first
         await MainActor.run {
             loadingProgress = "Inicializando..."
         }
         PDFCacheManager.shared.initialize()
-        
-        // Preload each region
-        for (index, region) in regions.enumerated() {
+
+        var completedCount = 0
+
+        // Preload main regions (Segovia Capital, Cuéllar, El Espinar)
+        // Skip Segovia Rural - it doesn't have schedules, only its ZBS do
+        for region in regions {
+            // Skip Segovia Rural - we'll preload its ZBS instead
+            if region.id == "segovia-rural" {
+                DebugConfig.debugPrint("⏭️ Skipping Segovia Rural region (will preload ZBS instead)")
+                continue
+            }
+
             await MainActor.run {
                 loadingProgress = "Cargando \(region.name)..."
             }
-            
+
             DebugConfig.debugPrint("📥 Preloading region: \(region.name)")
-            
-            // Load and cache schedules for this region (this will download, parse and cache)
-            let schedules = await ScheduleService.loadSchedules(for: region, forceRefresh: false)
-            
+
+            let location = DutyLocation.fromRegion(region)
+            let schedules = await ScheduleService.loadSchedules(for: location, forceRefresh: false)
+
             DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(region.name)")
-            
+
+            completedCount += 1
             await MainActor.run {
-                completedRegions = index + 1
+                completedRegions = completedCount
             }
         }
-        
+
+        // Preload Segovia Rural ZBS (8 locations)
+        // If any ZBS cache is invalid, parsing will happen once and cache all 8
+        for zbs in zbsLocations {
+            await MainActor.run {
+                loadingProgress = "Cargando \(zbs.name)..."
+            }
+
+            DebugConfig.debugPrint("📥 Preloading ZBS: \(zbs.name)")
+
+            let location = DutyLocation.fromZBS(zbs)
+            let schedules = await ScheduleService.loadSchedules(for: location, forceRefresh: false)
+
+            DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(zbs.name)")
+
+            completedCount += 1
+            await MainActor.run {
+                completedRegions = completedCount
+            }
+        }
+
         // Perform coordinate cache maintenance
         await MainActor.run {
             loadingProgress = "Finalizando..."
         }
         GeocodingService.performMaintenanceCleanup()
-        
+
         DebugConfig.debugPrint("🎉 Preload completed!")
-        
+
         await MainActor.run {
             isLoading = false
             loadingProgress = "Completado"

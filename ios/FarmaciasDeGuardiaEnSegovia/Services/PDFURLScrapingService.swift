@@ -16,6 +16,7 @@
  */
 
 import Foundation
+import OpenTelemetryApi
 
 /// Service for scraping PDF URLs from the stable cofsegovia.com page
 /// This prevents PDF URLs from becoming stale by fetching the latest links at app startup
@@ -49,37 +50,81 @@ class PDFURLScrapingService {
     /// Scrape the cofsegovia.com page to extract current PDF URLs
     /// This runs asynchronously to avoid blocking the main thread
     func scrapePDFURLs() async -> [ScrapedPDFData] {
+        // Start performance span
+        let span = TelemetryService.shared.startSpan(
+            name: "pdf.url.scraping",
+            kind: .client  // HTTP client operation
+        )
+        span.setAttribute(key: "url", value: baseURL)
+        span.setAttribute(key: "source", value: "web_scraping")
+
+        let startTime = Date()
+        var scrapedData: [ScrapedPDFData] = []
+        var scrapingError: Error? = nil
+
         do {
             DebugConfig.debugPrint("PDFURLScrapingService: Starting PDF URL scraping from \(baseURL)")
-            
+
             guard let url = URL(string: baseURL) else {
+                let error = ScrapingError.networkError("Invalid URL")
                 DebugConfig.debugPrint("PDFURLScrapingService: Invalid URL")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
+
+                span.setAttribute(key: "error_message", value: "Invalid URL")
+                span.setAttribute(key: "urls_found", value: "0")
+                span.setAttribute(key: "status", value: "failed")
+                span.setAttribute(key: "error.type", value: "invalid_argument")
+                span.status = .error(description: "Invalid URL")
+                span.end()
                 return []
             }
-            
+
             var request = URLRequest(url: url)
             request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15", forHTTPHeaderField: "User-Agent")
-            
+
             let (data, response) = try await session.data(for: request)
-            
+
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
-                DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+                let error = ScrapingError.networkError("HTTP status \(statusCode)")
+                DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \(statusCode)")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
+
+                span.setAttribute(key: "http_status", value: statusCode)
+                span.setAttribute(key: "error_message", value: "HTTP \(statusCode)")
+                span.setAttribute(key: "urls_found", value: "0")
+                span.setAttribute(key: "status", value: "failed")
+                span.setAttribute(key: "error.type", value: "unavailable")
+                span.status = .error(description: "HTTP \(statusCode)")
+                span.end()
                 return []
             }
-            
+
             guard let htmlContent = String(data: data, encoding: .utf8) else {
+                let error = ScrapingError.networkError("Failed to decode HTML content")
                 DebugConfig.debugPrint("PDFURLScrapingService: Failed to decode HTML content")
+                scrapingError = error
+                recordMetrics(scrapedData: [], startTime: startTime, error: error)
+
+                span.setAttribute(key: "error_message", value: "Failed to decode HTML")
+                span.setAttribute(key: "urls_found", value: "0")
+                span.setAttribute(key: "status", value: "failed")
+                span.setAttribute(key: "error.type", value: "data_loss")
+                span.status = .error(description: "Failed to decode HTML")
+                span.end()
                 return []
             }
-            
+
             DebugConfig.debugPrint("PDFURLScrapingService: Successfully fetched HTML content (\(htmlContent.count) chars)")
-            
+
             // Extract PDF links using regex patterns
-            let scrapedData = extractPDFDataFromHTML(htmlContent)
-            
+            scrapedData = extractPDFDataFromHTML(htmlContent)
+
             DebugConfig.debugPrint("PDFURLScrapingService: Successfully scraped \(scrapedData.count) PDF URLs")
-            
+
             // Cache the scraped URLs for later use
             for data in scrapedData {
                 scrapedURLs[data.regionName] = data.pdfURL
@@ -88,17 +133,48 @@ class PDFURLScrapingService {
                     DebugConfig.debugPrint("PDFURLScrapingService: Last updated: \(lastUpdated)")
                 }
             }
-            
+
             // Mark scraping as completed
             scrapingCompleted = true
             DebugConfig.debugPrint("PDFURLScrapingService: Scraping completed, \(scrapedURLs.count) URLs cached")
-            
+
+            // Record metrics with the scraped data
+            recordMetrics(scrapedData: scrapedData, startTime: startTime, error: nil)
+
+            // Finish span successfully
+            span.setAttribute(key: "urls_found", value: "\(scrapedData.count)")
+            span.setAttribute(key: "status", value: scrapedData.count == 4 ? "success" : "partial")
+            span.status = .ok
+            span.end()
+
             return scrapedData
-            
+
         } catch {
             DebugConfig.debugPrint("PDFURLScrapingService: Error scraping PDF URLs: \(error)")
+            scrapingError = ScrapingError.networkError(error.localizedDescription)
+            recordMetrics(scrapedData: [], startTime: startTime, error: scrapingError)
+
+            // Finish span with error
+            span.setAttribute(key: "error_message", value: error.localizedDescription)
+            span.setAttribute(key: "urls_found", value: "0")
+            span.setAttribute(key: "status", value: "failed")
+            span.setAttribute(key: "error.type", value: "internal_error")
+            span.status = .error(description: error.localizedDescription)
+            span.end()
+
             return []
         }
+    }
+
+    /// Record scraping metrics to New Relic
+    private func recordMetrics(scrapedData: [ScrapedPDFData], startTime: Date, error: Error?) {
+        let duration = Date().timeIntervalSince(startTime)
+        ScrapingMetricsService.shared.recordScrapingMetrics(
+            scrapedData: scrapedData,
+            expectedCount: 4, // We expect 4 regions: Segovia Capital, Cuéllar, El Espinar, Segovia Rural
+            duration: duration,
+            error: error
+        )
     }
     
     /// Extract PDF data from HTML content using regex patterns

@@ -17,12 +17,17 @@
 
 import SwiftUI
 import StoreKit
+import OpenTelemetryApi
+import OpenTelemetrySdk
+import OpenTelemetryProtocolExporterCommon
+import OpenTelemetryProtocolExporterHttp
 
 @main
 struct FarmaciasDeGuardiaEnSegoviaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showSplashScreen = true
     @State private var isPreloading = false
+    @State private var showMonitoringConsent = false
 
     var body: some Scene {
         WindowGroup {
@@ -35,6 +40,27 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
             } else {
                 ContentView()
                     .supportedOrientations(.portrait)
+                    .overlay {
+                        if showMonitoringConsent {
+                            ZStack {
+                                // Semi-transparent background
+                                Color.black.opacity(0.4)
+                                    .ignoresSafeArea()
+
+                                // Centered popup
+                                MonitoringConsentView(isPresented: $showMonitoringConsent)
+                                    .frame(maxWidth: 500)
+                                    .background(Color(uiColor: .systemBackground))
+                                    .cornerRadius(16)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                    )
+                                    .shadow(radius: 20)
+                                    .padding(40)
+                            }
+                        }
+                    }
             }
         }
     }
@@ -59,6 +85,11 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
             await MainActor.run {
                 initializeApp()
                 showSplashScreen = false
+
+                // Show monitoring consent if user hasn't made a choice yet
+                if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
+                    showMonitoringConsent = true
+                }
             }
         }
     }
@@ -80,8 +111,8 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     }
 }
 
-extension View {
-    func supportedOrientations(_ orientations: UIInterfaceOrientationMask) -> some View {
+extension SwiftUI.View {
+    func supportedOrientations(_ orientations: UIInterfaceOrientationMask) -> some SwiftUI.View {
         self.onAppear {
             AppDelegate.orientationLock = orientations
         }
@@ -90,7 +121,73 @@ extension View {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
-    
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Initialize OpenTelemetry (Signoz) only if user has opted in
+        if MonitoringPreferencesService.shared.hasUserOptedIn() {
+            // Get app version and environment
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+            #if DEBUG
+            let environment = "debug"
+            #else
+            let environment = "production"
+            #endif
+
+            // Create resource with automatic SDK detection (includes telemetry.sdk.name,
+            // telemetry.sdk.language, telemetry.sdk.version automatically)
+            let defaultResource = Resource()
+
+            // Merge with custom service attributes
+            let customResource = Resource(attributes: [
+                "service.name": AttributeValue.string("farmacias-guardia-segovia"),
+                "service.version": AttributeValue.string(appVersion),
+                "deployment.environment": AttributeValue.string(environment)
+            ])
+
+            let resources = defaultResource.merging(other: customResource)
+
+            // Configure OTLP HTTP exporter for Signoz
+            DebugConfig.debugPrint("🔧 Configuring Signoz OTLP HTTP exporter")
+            DebugConfig.debugPrint("🔧 Endpoint: \(Secrets.signozEndpoint)")
+            DebugConfig.debugPrint("🔧 Auth header: signoz-ingestion-key")
+
+            let otlpConfiguration = OtlpConfiguration(
+                timeout: TimeInterval(10),
+                headers: [("signoz-ingestion-key", Secrets.signozIngestionKey)]
+            )
+
+            guard let endpoint = URL(string: Secrets.signozEndpoint) else {
+                DebugConfig.debugPrint("❌ Invalid Signoz endpoint URL: \(Secrets.signozEndpoint)")
+                return true
+            }
+
+            let otlpExporter = OtlpHttpTraceExporter(
+                endpoint: endpoint,
+                config: otlpConfiguration
+            )
+
+            DebugConfig.debugPrint("🔧 OTLP HTTP exporter created successfully")
+
+            // Create span processor with immediate export
+            let spanProcessor = SimpleSpanProcessor(spanExporter: otlpExporter)
+
+            // Create tracer provider
+            let tracerProvider = TracerProviderBuilder()
+                .add(spanProcessor: spanProcessor)
+                .with(resource: resources)
+                .build()
+
+            // Register globally
+            OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
+
+            DebugConfig.debugPrint("✅ OpenTelemetry (Signoz) monitoring initialized (user opted in)")
+        } else {
+            DebugConfig.debugPrint("⚠️ OpenTelemetry (Signoz) monitoring disabled (user has not opted in)")
+        }
+
+        return true
+    }
+
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return AppDelegate.orientationLock
     }

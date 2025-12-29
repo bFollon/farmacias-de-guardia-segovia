@@ -28,7 +28,7 @@ struct PDFViewScreen: View {
     @State private var refreshTrigger = false // For triggering UI refresh
     @State private var cacheTimestamp: TimeInterval? = nil
     var url: URL
-    var region: Region
+    var location: DutyLocation
     
     private var dateButtonText: String {
         if Calendar.current.isDateInToday(selectedDate) {
@@ -47,11 +47,11 @@ struct PDFViewScreen: View {
                     LoadingView()
                 } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
                     if Calendar.current.isDateInToday(selectedDate),
-                       let current = ScheduleService.findCurrentSchedule(in: schedules, for: region) {
+                       let current = ScheduleService.findCurrentSchedule(in: schedules, for: location.associatedRegion) {
                         ScheduleContentView(
                             schedule: current.0,
                             activeShift: current.1,
-                            region: region,
+                            location: location,
                             isPresentingInfo: $isPresentingInfo,
                             formattedDateTime: ScheduleService.getCurrentDateTime(),
                             cacheTimestamp: cacheTimestamp
@@ -59,7 +59,7 @@ struct PDFViewScreen: View {
                     } else {
                         DayScheduleView(
                             schedule: schedule,
-                            region: region,
+                            location: location,
                             isPresentingInfo: $isPresentingInfo,
                             date: selectedDate
                         )
@@ -133,8 +133,8 @@ struct PDFViewScreen: View {
     private func loadPharmacies() {
         isLoading = true
         Task {
-            let loadedSchedules = await ScheduleService.loadSchedules(for: region)
-            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: region)
+            let loadedSchedules = await ScheduleService.loadSchedules(for: location)
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
             await MainActor.run {
                 schedules = loadedSchedules
                 cacheTimestamp = timestamp
@@ -142,26 +142,26 @@ struct PDFViewScreen: View {
             }
         }
     }
-    
+
     private func refreshCurrentView() {
         // Just re-evaluate what should be shown based on current time
         // Uses existing cached schedules, no re-downloading
         // This handles the 23:55 -> 00:05 day rollover scenario
-        
-        DebugConfig.debugPrint("🔄 Refreshing current view for \(region.name)")
-        
+
+        DebugConfig.debugPrint("🔄 Refreshing current view for \(location.name)")
+
         // Toggle refresh trigger to force SwiftUI re-evaluation
-        // The views will automatically re-evaluate ScheduleService.findCurrentSchedule 
+        // The views will automatically re-evaluate ScheduleService.findCurrentSchedule
         // based on current time
         refreshTrigger.toggle()
     }
-    
+
     private func refreshData() {
         isRefreshing = true
 
         Task {
-            let refreshedSchedules = await ScheduleService.loadSchedules(for: region, forceRefresh: true)
-            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: region)
+            let refreshedSchedules = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
 
             // Update UI on main thread
             await MainActor.run {
@@ -179,7 +179,7 @@ struct PDFViewScreen_Previews: PreviewProvider {
             url: Bundle.main.url(
                 forResource: "CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025",
                 withExtension: "pdf")!,
-            region: .segoviaCapital
+            location: DutyLocation.fromRegion(.segoviaCapital)
         )
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DayScheduleView: View {
     let schedule: PharmacySchedule
-    let region: Region
+    let location: DutyLocation
     @Binding var isPresentingInfo: Bool // Keep for backward compatibility
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
@@ -17,6 +17,9 @@ struct DayScheduleView: View {
     @State private var pdfLinkErrorMessage = ""
     @Environment(\.openURL) private var openURL
 
+    // Detail view sheet
+    @State private var showingDetailView = false
+
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -27,11 +30,11 @@ struct DayScheduleView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                // Region name at the top (matching ZBS style)
+                // Location name at the top (matching ZBS style)
                 HStack {
-                    Text(region.icon)
+                    Text(location.icon)
                         .font(.title)
-                    Text(region.name)
+                    Text(location.name)
                         .font(.title)
                         .fontWeight(.medium)
                 }
@@ -58,30 +61,78 @@ struct DayScheduleView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Farmacias de Guardia")
                         .font(.headline)
-                    
-                    if region.id == "segovia-capital" {
+
+                    // Show notes if present (e.g., Cantalejo special instructions)
+                    if let notes = location.notes {
+                        Button(action: {
+                            if location.detailViewId != nil {
+                                showingDetailView = true
+                            }
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(.blue)
+                                Text(notes)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                if location.detailViewId != nil {
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.blue)
+                                        .font(.caption)
+                                }
+                            }
+                            .padding()
+                            .background(Color.blue.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(location.detailViewId == nil)
+                    }
+
+                    if location.id == "segovia-capital" {
                         // Show day/night shifts for Segovia Capital
                         VStack(alignment: .leading, spacing: 12) {
-                            ShiftHeaderView(shiftType: .day, date: date, isPresentingInfo: $isPresentingDayInfo)
+                            ScheduleHeaderView(timeSpan: .capitalDay, date: date, isPresentingInfo: $isPresentingDayInfo)
                             if let pharmacy = schedule.dayShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy)
+                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalDay)
                             }
                         }
                         .padding(.vertical)
-                        
+
                         Divider()
-                        
+
                         VStack(alignment: .leading, spacing: 12) {
-                            ShiftHeaderView(shiftType: .night, date: date, isPresentingInfo: $isPresentingNightInfo)
+                            ScheduleHeaderView(timeSpan: .capitalNight, date: date, isPresentingInfo: $isPresentingNightInfo)
                             if let pharmacy = schedule.nightShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy)
+                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalNight)
                             }
                         }
                         .padding(.vertical)
                     } else {
-                        // Show single pharmacy for other regions
-                        if let pharmacy = schedule.dayShiftPharmacies.first {
-                            PharmacyView(pharmacy: pharmacy)
+                        // Show schedule header and pharmacies for other regions
+                        // Determine shift type from schedule.shifts (first available shift)
+                        if let firstShift = schedule.shifts.keys.first {
+                            VStack(alignment: .leading, spacing: 12) {
+                                ScheduleHeaderView(timeSpan: firstShift, date: date, isPresentingInfo: $isPresentingInfo)
+
+                                if let pharmacies = schedule.shifts[firstShift], !pharmacies.isEmpty {
+                                    ForEach(pharmacies, id: \.name) { pharmacy in
+                                        PharmacyView(pharmacy: pharmacy, activeShift: firstShift)
+                                    }
+                                }
+                            }
+                        } else {
+                            // Fallback to legacy properties if shift data unavailable
+                            let pharmacies = schedule.dayShiftPharmacies
+                            if !pharmacies.isEmpty {
+                                // Use fullDay as default for non-capital regions
+                                ScheduleHeaderView(timeSpan: .fullDay, date: date, isPresentingInfo: $isPresentingInfo)
+
+                                ForEach(pharmacies, id: \.name) { pharmacy in
+                                    PharmacyView(pharmacy: pharmacy, activeShift: .fullDay)
+                                }
+                            }
                         }
                     }
                 }
@@ -102,7 +153,7 @@ struct DayScheduleView: View {
                     Button(action: {
                         openPDFLink()
                     }) {
-                        Text("Calendario de Guardias - \(region.name)")
+                        Text("Calendario de Guardias - \(location.name)")
                     }
                     .font(.footnote)
                     .disabled(isValidatingPDFLink)
@@ -151,12 +202,19 @@ struct DayScheduleView: View {
         } message: {
             Text(pdfLinkErrorMessage)
         }
+        .sheet(isPresented: $showingDetailView) {
+            if let detailViewId = location.detailViewId {
+                DetailViewFactory.makeDetailView(for: detailViewId)
+            }
+        }
     }
 
     private func openPDFLink() {
         Task {
+            let pdfURL = location.associatedRegion.pdfURL
+
             // Check if we need to show loading (cache miss)
-            let needsValidation = PDFURLValidator.shared.needsValidation(for: region.pdfURL)
+            let needsValidation = PDFURLValidator.shared.needsValidation(for: pdfURL)
 
             await MainActor.run {
                 if needsValidation {
@@ -164,13 +222,13 @@ struct DayScheduleView: View {
                 }
             }
 
-            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+            let validationResult = await PDFURLValidator.shared.validateURL(pdfURL)
 
             await MainActor.run {
                 isValidatingPDFLink = false
 
                 if validationResult.isValid {
-                    openURL(region.pdfURL)
+                    openURL(pdfURL)
                 } else {
                     // URL validation failed - trigger scraping to get fresh URLs
                     DebugConfig.debugPrint("📄 PDF URL validation failed, triggering URL scraping")

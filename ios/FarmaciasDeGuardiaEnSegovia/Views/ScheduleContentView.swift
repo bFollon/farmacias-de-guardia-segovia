@@ -20,7 +20,7 @@ import SwiftUI
 struct ScheduleContentView: View {
     let schedule: PharmacySchedule
     let activeShift: DutyTimeSpan
-    let region: Region
+    let location: DutyLocation
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
     let cacheTimestamp: TimeInterval?
@@ -34,15 +34,21 @@ struct ScheduleContentView: View {
     @State private var pdfLinkErrorMessage = ""
     @Environment(\.openURL) private var openURL
 
+    // Detail view sheet
+    @State private var showingDetailView = false
+
+    // Next shift feature
+    @State private var nextShiftInfo: NextShiftInfo?
+
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    // Region name at the top (matching ZBS style)
+                    // Location name at the top (matching ZBS style)
                     HStack {
-                        Text(region.icon)
+                        Text(location.icon)
                             .font(.title)
-                        Text(region.name)
+                        Text(location.name)
                             .font(.title)
                             .fontWeight(.medium)
                     }
@@ -64,30 +70,83 @@ struct ScheduleContentView: View {
                         OfflineWarningCard()
                             .padding(.bottom, 12)
                     }
-                
+
+                    // Shift transition warning (if within 30 minutes)
+                    if let info = nextShiftInfo, info.shouldShowWarning,
+                       let minutes = info.minutesUntilChange {
+                        ShiftTransitionWarningCard(
+                            minutesUntilChange: minutes,
+                            hasGap: info.hasGap
+                        )
+                        .padding(.bottom, 12)
+                    }
+
                 // Pharmacy section with header
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Farmacias de Guardia")
                         .font(.headline)
-                    
-                    // Show shift info if applicable (for day/night regions)
-                    if activeShift == .capitalDay || activeShift == .capitalNight {
-                        // Convert DutyTimeSpan back to ShiftType for ShiftHeaderView compatibility
-                        let legacyShiftType: DutyDate.ShiftType = activeShift == .capitalDay ? .day : .night
-                        ShiftHeaderView(shiftType: legacyShiftType, date: Date(), isPresentingInfo: $isPresentingInfo)
+
+                    // Show notes if present (e.g., Cantalejo special instructions)
+                    if let notes = location.notes {
+                        Button(action: {
+                            if location.detailViewId != nil {
+                                showingDetailView = true
+                            }
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "info.circle.fill")
+                                    .foregroundColor(.blue)
+                                Text(notes)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                if location.detailViewId != nil {
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.blue)
+                                        .font(.caption)
+                                }
+                            }
+                            .padding()
+                            .background(Color.blue.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(location.detailViewId == nil)
                     }
+
+                    // Always show schedule header for all regions
+                    ScheduleHeaderView(
+                        timeSpan: activeShift,
+                        date: Date(),
+                        isPresentingInfo: $isPresentingInfo
+                    )
                     
-                    // Show active pharmacy for current shift
-                    if let pharmacies = schedule.shifts[activeShift], let pharmacy = pharmacies.first {
-                        PharmacyView(pharmacy: pharmacy)
+                    // Show active pharmacy/pharmacies for current shift
+                    if let pharmacies = schedule.shifts[activeShift], !pharmacies.isEmpty {
+                        ForEach(pharmacies, id: \.name) { pharmacy in
+                            PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
+                        }
                     } else {
                         // Fallback to legacy properties if shift-specific data isn't available
-                        if let pharmacy = schedule.dayShiftPharmacies.first {
-                            PharmacyView(pharmacy: pharmacy)
+                        let pharmacies = schedule.dayShiftPharmacies
+                        if !pharmacies.isEmpty {
+                            ForEach(pharmacies, id: \.name) { pharmacy in
+                                PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
+                            }
                         }
                     }
+
+                    // Next shift card
+                    if let info = nextShiftInfo {
+                        NextShiftCard(
+                            schedule: info.schedule,
+                            timeSpan: info.timeSpan,
+                            region: location.associatedRegion
+                        )
+                        .padding(.top, 12)
+                    }
                 }
-                
+
                 Divider()
                     .padding(.vertical)
                 
@@ -103,7 +162,7 @@ struct ScheduleContentView: View {
                     Button(action: {
                         openPDFLink()
                     }) {
-                        Text("Calendario de Guardias - \(region.name)")
+                        Text("Calendario de Guardias - \(location.name)")
                     }
                     .font(.footnote)
                     .disabled(isValidatingPDFLink)
@@ -161,12 +220,22 @@ struct ScheduleContentView: View {
         } message: {
             Text(pdfLinkErrorMessage)
         }
+        .onAppear {
+            loadNextShiftInfo()
+        }
+        .sheet(isPresented: $showingDetailView) {
+            if let detailViewId = location.detailViewId {
+                DetailViewFactory.makeDetailView(for: detailViewId)
+            }
+        }
     }
 
     private func openPDFLink() {
         Task {
+            let pdfURL = location.associatedRegion.pdfURL
+
             // Check if we need to show loading (cache miss)
-            let needsValidation = PDFURLValidator.shared.needsValidation(for: region.pdfURL)
+            let needsValidation = PDFURLValidator.shared.needsValidation(for: pdfURL)
 
             await MainActor.run {
                 if needsValidation {
@@ -174,13 +243,13 @@ struct ScheduleContentView: View {
                 }
             }
 
-            let validationResult = await PDFURLValidator.shared.validateURL(region.pdfURL)
+            let validationResult = await PDFURLValidator.shared.validateURL(pdfURL)
 
             await MainActor.run {
                 isValidatingPDFLink = false
 
                 if validationResult.isValid {
-                    openURL(region.pdfURL)
+                    openURL(pdfURL)
                 } else {
                     // URL validation failed - trigger scraping to get fresh URLs
                     DebugConfig.debugPrint("📄 PDF URL validation failed, triggering URL scraping")
@@ -194,6 +263,41 @@ struct ScheduleContentView: View {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    private func loadNextShiftInfo() {
+        // Find next schedule
+        Task {
+            let schedules = await ScheduleService.loadSchedules(for: location)
+
+            if let nextInfo = ScheduleService.findNextSchedule(
+                in: schedules,
+                for: location.associatedRegion,
+                currentSchedule: schedule,
+                currentTimeSpan: activeShift
+            ) {
+                let minutes = ScheduleService.calculateMinutesUntilShiftEnd(for: activeShift)
+
+                // Calculate gap between shifts
+                let gapMinutes = ScheduleService.calculateGapBetweenShifts(
+                    currentSchedule: schedule,
+                    currentTimeSpan: activeShift,
+                    nextSchedule: nextInfo.0,
+                    nextTimeSpan: nextInfo.1
+                )
+
+                await MainActor.run {
+                    nextShiftInfo = NextShiftInfo(
+                        schedule: nextInfo.0,
+                        timeSpan: nextInfo.1,
+                        minutesUntilChange: minutes,
+                        gapMinutes: gapMinutes
+                    )
+
+                    DebugConfig.debugPrint("⏰ Next shift info loaded: \(nextInfo.1.displayName), minutes until change: \(minutes ?? -1), gap: \(gapMinutes ?? -1)")
                 }
             }
         }

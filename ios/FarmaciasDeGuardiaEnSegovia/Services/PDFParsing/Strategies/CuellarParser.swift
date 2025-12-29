@@ -82,39 +82,41 @@ class CuellarParser: PDFParsingStrategy {
         return months[month] ?? "Unknown"
     }
     
-    func parseSchedules(from pdfDocument: PDFDocument) -> [PharmacySchedule] {
+    func parseSchedules(from pdfDocument: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
-        
+
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
-        
+
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else {
                 DebugConfig.debugPrint("❌ Could not get page \(pageIndex) of PDF")
                 continue
             }
-            
+
             DebugConfig.debugPrint("\n📃 Processing page \(pageIndex + 1) of \(pageCount)")
-            
+
             let content = page.string ?? ""
             let lines = content.components(separatedBy: .newlines)
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
                 .filter { !$0.isEmpty }
-            
+
             if lines.count > 0 {
                 DebugConfig.debugPrint("\n📊 Page content structure:")
                 for (index, line) in lines.enumerated() {
                     DebugConfig.debugPrint("Line \(index): '\(line)'")
                 }
             }
-            
+
             // Process the table structure for this page
             if let monthSchedules = processPageTable(lines: lines) {
                 schedules.append(contentsOf: monthSchedules)
             }
         }
-        
-        return schedules
+
+        // Return as dictionary with DutyLocation as key
+        let location = DutyLocation.fromRegion(.cuellar)
+        return [location: schedules]
     }
     
     /// Represents a weekly schedule entry

@@ -42,8 +42,10 @@ import androidx.compose.material.icons.filled.EventBusy
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
@@ -53,6 +55,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -80,10 +83,13 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftModalBottomSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftTransitionWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels.ScheduleViewModel
 import kotlinx.coroutines.launch
@@ -122,7 +128,13 @@ fun ScheduleScreen(
         isOffline = !NetworkMonitor.isOnline()
     }
 
-    Scaffold { innerPaddings ->
+    Scaffold(
+        bottomBar = {
+            if (uiState.downloadDate != null) {
+                LastUpdatedIndicator(downloadDate = uiState.downloadDate!!)
+            }
+        }
+    ) { innerPaddings ->
         Box(
             modifier = modifier
                 .padding(innerPaddings)
@@ -143,7 +155,7 @@ fun ScheduleScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // Date picker button with text (like iOS "Hoy")
+                        // Date picker button with text
                         TextButton(
                             onClick = { showDatePicker = true },
                             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
@@ -155,17 +167,10 @@ fun ScheduleScreen(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = if (uiState.selectedDate?.let { selectedCal ->
-                                        val today = Calendar.getInstance()
-                                        selectedCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                                                selectedCal.get(Calendar.MONTH) == today.get(
-                                            Calendar.MONTH
-                                        ) &&
-                                                selectedCal.get(Calendar.DAY_OF_MONTH) == today.get(
-                                            Calendar.DAY_OF_MONTH
-                                        )
-                                    } == true) "Hoy" else {
-                                    uiState.selectedDate?.let { formatSelectedDate(it) } ?: "Hoy"
+                                text = if (uiState.selectedDate == null) {
+                                    "Ahora"
+                                } else {
+                                    formatSelectedDate(uiState.selectedDate!!, showNow = false)
                                 },
                                 style = MaterialTheme.typography.bodyLarge
                             )
@@ -184,7 +189,7 @@ fun ScheduleScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp, bottom = 16.dp),
+                            .padding(top = 8.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -198,6 +203,17 @@ fun ScheduleScreen(
                             fontWeight = FontWeight.Bold
                         )
                     }
+
+                    // Inline date text (replaces DateHeader card)
+                    val selectedDate = uiState.selectedDate ?: Calendar.getInstance()
+                    val isNowView = uiState.selectedDate == null  // Check if in "now" mode
+
+                    Text(
+                        text = formatSelectedDate(selectedDate, showNow = isNowView),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
                 }
 
                 // Main content
@@ -444,27 +460,20 @@ private fun ScheduleContent(
     onNavigateToCantalejoInfo: () -> Unit = {},
 ) {
     var showShiftInfo by remember { mutableStateOf(false) }
+    var showNextShiftModal by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
-        contentPadding = PaddingValues(Spacing.Base),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(horizontal = Spacing.Base),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Header with date
-        item {
-            DateHeader(
-                selectedDate = uiState.selectedDate,
-                currentDateTime = uiState.formattedDateTime
-            )
-        }
-
         item {
             Text(
                 text = "Farmacias de Guardia",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 8.dp)
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
             )
         }
 
@@ -473,10 +482,17 @@ private fun ScheduleContent(
             // Show all shifts for selected date
             if (uiState.allShiftsForSelectedDate.isNotEmpty()) {
                 uiState.allShiftsForSelectedDate.forEach { (timeSpan, pharmacies) ->
+                    // Check if this shift is currently active using the same logic
+                    // as ScheduleService.findScheduleForTimestamp()
+                    // This properly handles midnight-crossing shifts
+                    val isShiftActiveNow = uiState.currentSchedule?.let { schedule ->
+                        timeSpan.contains(schedule.date, System.currentTimeMillis())
+                    } ?: false
+
                     item {
                         ShiftHeaderCard(
                             timeSpan,
-                            isActive = false, // Always false for selected dates
+                            isActive = isShiftActiveNow,
                             onInfoClick = if (timeSpan.requiresExplanation) {
                                 { showShiftInfo = true }
                             } else null
@@ -487,7 +503,7 @@ private fun ScheduleContent(
                         item {
                             PharmacyCard(
                                 pharmacy = pharmacy,
-                                isActive = false // Always false for selected dates
+                                isActive = isShiftActiveNow
                             )
                         }
                     }
@@ -521,12 +537,39 @@ private fun ScheduleContent(
                             )
                         }
 
+                        // Shift transition warning (if within 30 minutes)
+                        if (uiState.showShiftTransitionWarning &&
+                            uiState.minutesUntilShiftChange != null &&
+                            uiState.nextTimeSpan != null) {
+                            item {
+                                ShiftTransitionWarningCard(
+                                    minutesUntilChange = uiState.minutesUntilShiftChange!!,
+                                    nextShift = uiState.nextTimeSpan!!
+                                )
+                            }
+                        }
+
                         pharmacies.forEach { pharmacy ->
                             item {
                                 PharmacyCard(
                                     pharmacy = pharmacy,
                                     isActive = uiState.activeTimeSpan?.isActiveNow() ?: false
                                 )
+                            }
+                        }
+
+                        // Next shift section
+                        if (uiState.nextSchedule != null && uiState.nextTimeSpan != null) {
+                            uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
+                                if (nextPharmacies.isNotEmpty()) {
+                                    item {
+                                        NextShiftCard(
+                                            timeSpan = uiState.nextTimeSpan!!,
+                                            pharmacies = nextPharmacies,
+                                            onClick = { showNextShiftModal = true }
+                                        )
+                                    }
+                                }
                             }
                         }
                     } else {
@@ -597,13 +640,6 @@ private fun ScheduleContent(
             )
         }
 
-        // Last updated indicator (subtle cache age footnote at bottom)
-        if (uiState.downloadDate != null) {
-            item {
-                LastUpdatedIndicator(downloadDate = uiState.downloadDate)
-            }
-        }
-
 
     }
 
@@ -611,12 +647,24 @@ private fun ScheduleContent(
         uiState.activeTimeSpan,
         isVisible = showShiftInfo,
         onDismiss = { showShiftInfo = false })
+
+    // Next Shift Modal
+    if (uiState.nextSchedule != null && uiState.nextTimeSpan != null) {
+        uiState.nextSchedule!!.shifts[uiState.nextTimeSpan]?.let { nextPharmacies ->
+            NextShiftModalBottomSheet(
+                timeSpan = uiState.nextTimeSpan!!,
+                pharmacies = nextPharmacies,
+                isVisible = showNextShiftModal,
+                onDismiss = { showNextShiftModal = false }
+            )
+        }
+    }
 }
 
 /**
- * Subtle footnote indicator showing when the cached data was last updated
+ * Subtle sticky indicator showing when the cached data was last updated
  * Shows relative time for recent updates, absolute date for older ones
- * Positioned at the very bottom of the schedule like a footnote
+ * Positioned as a sticky bottom bar using Material3 BottomAppBar
  */
 @Composable
 private fun LastUpdatedIndicator(downloadDate: Long) {
@@ -647,68 +695,40 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
         }
     }
 
-    // Footnote style at bottom - centered and very subtle
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp, bottom = 8.dp),
-        contentAlignment = Alignment.Center
+    // Compact sticky bottom bar with divider
+    Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = "📥 $formattedDate",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-            textAlign = TextAlign.Center
+        // Subtle divider line
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 0.5.dp,
+            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
         )
-    }
-}
 
-@Composable
-private fun DateHeader(
-    selectedDate: Calendar?,
-    currentDateTime: String
-) {
-    val displayText = selectedDate?.let { calendar ->
-        val today = Calendar.getInstance()
-        if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-            calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-            calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+            tonalElevation = 1.dp
         ) {
-            "Hoy"
-        } else {
-            formatSelectedDate(calendar)
-        }
-    } ?: currentDateTime
-
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
-        ),
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Schedule,
-                contentDescription = "Fecha y hora",
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                modifier = Modifier.size(24.dp)
-            )
-            Text(
-                text = displayText,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSecondaryContainer
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "📥 $formattedDate",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
 
-private fun formatSelectedDate(calendar: Calendar): String {
+private fun formatSelectedDate(calendar: Calendar, showNow: Boolean = false): String {
     val dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
         Calendar.MONDAY -> "Lunes"
         Calendar.TUESDAY -> "Martes"
@@ -736,9 +756,9 @@ private fun formatSelectedDate(calendar: Calendar): String {
         Calendar.DECEMBER -> "diciembre"
         else -> "enero"
     }
-    val year = calendar.get(Calendar.YEAR)
 
-    return "$dayOfWeek, $day de $month de $year"
+    val baseDate = "$dayOfWeek, $day de $month"
+    return if (showNow) "$baseDate · Ahora" else baseDate
 }
 
 @Composable
@@ -900,7 +920,7 @@ private fun DatePickerDialog(
                     .padding(innerPaddings)
                     .padding(Spacing.Base)
             ) {
-                // Header with title and "Hoy" button
+                // Header with title and "Ahora" button
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -909,7 +929,7 @@ private fun DatePickerDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TextButton(onClick = onTodaySelected) {
-                        Text("Hoy", style = MaterialTheme.typography.bodyMedium)
+                        Text("Ahora", style = MaterialTheme.typography.bodyMedium)
                     }
 
                     Text(

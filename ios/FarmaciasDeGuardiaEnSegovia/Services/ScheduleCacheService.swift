@@ -23,6 +23,10 @@ import Foundation
 class ScheduleCacheService {
     static let shared = ScheduleCacheService()
 
+    /// Current cache format version. Increment when cache structure changes.
+    /// Version 2: Removed schedule info from Pharmacy.additionalInfo for ZBS regions
+    private let currentCacheVersion = 2
+
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
     private let encoder = JSONEncoder()
@@ -42,10 +46,10 @@ class ScheduleCacheService {
 
     // MARK: - Cache Validation
 
-    /// Check if cached schedules exist and are still valid for a region
-    func isCacheValid(for region: Region) -> Bool {
-        let cacheFile = getCacheFile(for: region)
-        let metadataFile = getMetadataFile(for: region)
+    /// Check if cached schedules exist and are still valid for a location
+    func isCacheValid(for location: DutyLocation) -> Bool {
+        let cacheFile = getCacheFile(for: location)
+        let metadataFile = getMetadataFile(for: location)
 
         guard fileManager.fileExists(atPath: cacheFile.path),
               fileManager.fileExists(atPath: metadataFile.path) else {
@@ -56,9 +60,15 @@ class ScheduleCacheService {
             let metadataData = try Data(contentsOf: metadataFile)
             let metadata = try decoder.decode(CacheMetadata.self, from: metadataData)
 
-            // Check if PDF file exists
-            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: region) else {
-                DebugConfig.debugPrint("📂 ScheduleCacheService: PDF file not found for \(region.name), cache invalid")
+            // Check cache version first
+            if metadata.cacheVersion != currentCacheVersion {
+                DebugConfig.debugPrint("❌ ScheduleCacheService: Cache version mismatch for \(location.name) (expected: \(currentCacheVersion), found: \(metadata.cacheVersion))")
+                return false
+            }
+
+            // Check if PDF file exists (use associated region for PDF cache)
+            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) else {
+                DebugConfig.debugPrint("📂 ScheduleCacheService: PDF file not found for \(location.name), cache invalid")
                 return false
             }
 
@@ -72,28 +82,28 @@ class ScheduleCacheService {
             let cacheIsValid = pdfLastModified <= metadata.pdfLastModified
 
             if cacheIsValid {
-                DebugConfig.debugPrint("✅ ScheduleCacheService: Cache valid for \(region.name) (PDF: \(Int(pdfLastModified)), Cache: \(Int(metadata.pdfLastModified)))")
+                DebugConfig.debugPrint("✅ ScheduleCacheService: Cache valid for \(location.name) (PDF: \(Int(pdfLastModified)), Cache: \(Int(metadata.pdfLastModified)), Version: \(metadata.cacheVersion))")
             } else {
-                DebugConfig.debugPrint("❌ ScheduleCacheService: Cache invalid for \(region.name) - PDF newer than cache")
+                DebugConfig.debugPrint("❌ ScheduleCacheService: Cache invalid for \(location.name) - PDF newer than cache")
             }
 
             return cacheIsValid
 
         } catch {
-            DebugConfig.debugPrint("❌ ScheduleCacheService: Error checking cache validity for \(region.name): \(error)")
+            DebugConfig.debugPrint("❌ ScheduleCacheService: Error checking cache validity for \(location.name): \(error)")
             return false
         }
     }
 
     // MARK: - Cache Loading
 
-    /// Load cached schedules for a region (if valid)
-    func loadCachedSchedules(for region: Region) -> [PharmacySchedule]? {
-        guard isCacheValid(for: region) else {
+    /// Load cached schedules for a location (if valid)
+    func loadCachedSchedules(for location: DutyLocation) -> [PharmacySchedule]? {
+        guard isCacheValid(for: location) else {
             return nil
         }
 
-        let cacheFile = getCacheFile(for: region)
+        let cacheFile = getCacheFile(for: location)
 
         do {
             let startTime = Date()
@@ -101,20 +111,20 @@ class ScheduleCacheService {
             let cachedData = try decoder.decode(CachedSchedules.self, from: data)
             let loadTime = Date().timeIntervalSince(startTime) * 1000 // Convert to ms
 
-            DebugConfig.debugPrint("⚡ ScheduleCacheService: Loaded \(cachedData.schedules.count) cached schedules for \(region.name) in \(Int(loadTime))ms")
+            DebugConfig.debugPrint("⚡ ScheduleCacheService: Loaded \(cachedData.schedules.count) cached schedules for \(location.name) in \(Int(loadTime))ms")
             return cachedData.schedules
 
         } catch {
-            DebugConfig.debugPrint("❌ ScheduleCacheService: Error loading cached schedules for \(region.name): \(error)")
+            DebugConfig.debugPrint("❌ ScheduleCacheService: Error loading cached schedules for \(location.name): \(error)")
             // If cache is corrupted, delete it
-            deleteCacheFiles(for: region)
+            deleteCacheFiles(for: location)
             return nil
         }
     }
 
-    /// Get the cache timestamp for a region (when it was last saved)
-    func getCacheTimestamp(for region: Region) -> TimeInterval? {
-        let cacheFile = getCacheFile(for: region)
+    /// Get the cache timestamp for a location (when it was last saved)
+    func getCacheTimestamp(for location: DutyLocation) -> TimeInterval? {
+        let cacheFile = getCacheFile(for: location)
 
         guard fileManager.fileExists(atPath: cacheFile.path) else {
             return nil
@@ -132,26 +142,26 @@ class ScheduleCacheService {
     // MARK: - Cache Saving
 
     /// Save parsed schedules to cache
-    func saveSchedulesToCache(for region: Region, schedules: [PharmacySchedule]) {
+    func saveSchedulesToCache(for location: DutyLocation, schedules: [PharmacySchedule]) {
         do {
             let startTime = Date()
 
             // Create cache data
             let cachedData = CachedSchedules(
-                regionId: region.id,
-                regionName: region.name,
+                locationId: location.id,
+                locationName: location.name,
                 schedules: schedules,
                 cacheTimestamp: Date().timeIntervalSince1970
             )
 
             // Save schedules to cache file
-            let cacheFile = getCacheFile(for: region)
+            let cacheFile = getCacheFile(for: location)
             let data = try encoder.encode(cachedData)
             try data.write(to: cacheFile)
 
-            // Save metadata
-            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: region) else {
-                DebugConfig.debugPrint("⚠️ ScheduleCacheService: No PDF file found for \(region.name), using current timestamp")
+            // Save metadata (use associated region for PDF cache)
+            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) else {
+                DebugConfig.debugPrint("⚠️ ScheduleCacheService: No PDF file found for \(location.name), using current timestamp")
                 return
             }
 
@@ -159,32 +169,33 @@ class ScheduleCacheService {
             let pdfModificationDate = (attributes[.modificationDate] as? Date) ?? Date()
 
             let metadata = CacheMetadata(
-                regionId: region.id,
+                locationId: location.id,
                 scheduleCount: schedules.count,
                 cacheTimestamp: Date().timeIntervalSince1970,
-                pdfLastModified: pdfModificationDate.timeIntervalSince1970
+                pdfLastModified: pdfModificationDate.timeIntervalSince1970,
+                cacheVersion: currentCacheVersion
             )
 
-            let metadataFile = getMetadataFile(for: region)
+            let metadataFile = getMetadataFile(for: location)
             let metadataData = try encoder.encode(metadata)
             try metadataData.write(to: metadataFile)
 
             let saveTime = Date().timeIntervalSince(startTime) * 1000 // Convert to ms
             let cacheSize = data.count / 1024 // KB
 
-            DebugConfig.debugPrint("💾 ScheduleCacheService: Cached \(schedules.count) schedules for \(region.name) in \(Int(saveTime))ms (\(cacheSize)KB)")
+            DebugConfig.debugPrint("💾 ScheduleCacheService: Cached \(schedules.count) schedules for \(location.name) in \(Int(saveTime))ms (\(cacheSize)KB)")
 
         } catch {
-            DebugConfig.debugPrint("❌ ScheduleCacheService: Error saving schedules to cache for \(region.name): \(error)")
+            DebugConfig.debugPrint("❌ ScheduleCacheService: Error saving schedules to cache for \(location.name): \(error)")
         }
     }
 
     // MARK: - Cache Management
 
-    /// Clear cache for a specific region
-    func clearRegionCache(for region: Region) {
-        deleteCacheFiles(for: region)
-        DebugConfig.debugPrint("🗑️ ScheduleCacheService: Cleared cache for \(region.name)")
+    /// Clear cache for a specific location
+    func clearLocationCache(for location: DutyLocation) {
+        deleteCacheFiles(for: location)
+        DebugConfig.debugPrint("🗑️ ScheduleCacheService: Cleared cache for \(location.name)")
     }
 
     /// Clear all cached schedules
@@ -218,17 +229,17 @@ class ScheduleCacheService {
                 return sum + size
             }
 
-            // Per-region stats
+            // Per-location stats
             for cacheFile in cacheFiles {
-                let regionId = cacheFile.deletingPathExtension().lastPathComponent
+                let locationId = cacheFile.deletingPathExtension().lastPathComponent
                 do {
                     let data = try Data(contentsOf: cacheFile)
                     let cachedData = try decoder.decode(CachedSchedules.self, from: data)
-                    stats["\(regionId)_scheduleCount"] = cachedData.schedules.count
-                    stats["\(regionId)_cacheSize"] = data.count
-                    stats["\(regionId)_cacheAge"] = Date().timeIntervalSince1970 - cachedData.cacheTimestamp
+                    stats["\(locationId)_scheduleCount"] = cachedData.schedules.count
+                    stats["\(locationId)_cacheSize"] = data.count
+                    stats["\(locationId)_cacheAge"] = Date().timeIntervalSince1970 - cachedData.cacheTimestamp
                 } catch {
-                    stats["\(regionId)_error"] = error.localizedDescription
+                    stats["\(locationId)_error"] = error.localizedDescription
                 }
             }
 
@@ -241,76 +252,24 @@ class ScheduleCacheService {
 
     // MARK: - Private Helper Methods
 
-    private func getCacheFile(for region: Region) -> URL {
-        return cacheDirectory.appendingPathComponent("\(region.id).json")
+    private func getCacheFile(for location: DutyLocation) -> URL {
+        return cacheDirectory.appendingPathComponent("\(location.id).json")
     }
 
-    private func getMetadataFile(for region: Region) -> URL {
-        return cacheDirectory.appendingPathComponent("\(region.id).meta.json")
+    private func getMetadataFile(for location: DutyLocation) -> URL {
+        return cacheDirectory.appendingPathComponent("\(location.id).meta.json")
     }
 
-    private func getZBSCacheFile(for region: Region) -> URL {
-        return cacheDirectory.appendingPathComponent("\(region.id).zbs.json")
-    }
-
-    private func deleteCacheFiles(for region: Region) {
+    private func deleteCacheFiles(for location: DutyLocation) {
         do {
-            try fileManager.removeItem(at: getCacheFile(for: region))
+            try fileManager.removeItem(at: getCacheFile(for: location))
         } catch {
             // Ignore errors if files don't exist
         }
         do {
-            try fileManager.removeItem(at: getMetadataFile(for: region))
+            try fileManager.removeItem(at: getMetadataFile(for: location))
         } catch {
             // Ignore errors if files don't exist
-        }
-        do {
-            try fileManager.removeItem(at: getZBSCacheFile(for: region))
-        } catch {
-            // Ignore errors if files don't exist
-        }
-    }
-
-    // MARK: - ZBS Schedule Caching (for Segovia Rural)
-
-    /// Save ZBS schedules to cache (for Segovia Rural)
-    func saveZBSSchedulesToCache(for region: Region, zbsSchedules: [ZBSSchedule]) {
-        guard region == .segoviaRural else {
-            return
-        }
-
-        do {
-            let zbsFile = getZBSCacheFile(for: region)
-            let data = try encoder.encode(zbsSchedules)
-            try data.write(to: zbsFile)
-
-            DebugConfig.debugPrint("💾 ScheduleCacheService: Cached \(zbsSchedules.count) ZBS schedules for \(region.name)")
-        } catch {
-            DebugConfig.debugPrint("❌ ScheduleCacheService: Error saving ZBS schedules to cache: \(error)")
-        }
-    }
-
-    /// Load ZBS schedules from cache (for Segovia Rural)
-    func loadCachedZBSSchedules(for region: Region) -> [ZBSSchedule]? {
-        guard region == .segoviaRural else {
-            return nil
-        }
-
-        let zbsFile = getZBSCacheFile(for: region)
-
-        guard fileManager.fileExists(atPath: zbsFile.path) else {
-            return nil
-        }
-
-        do {
-            let data = try Data(contentsOf: zbsFile)
-            let zbsSchedules = try decoder.decode([ZBSSchedule].self, from: data)
-
-            DebugConfig.debugPrint("⚡ ScheduleCacheService: Loaded \(zbsSchedules.count) ZBS schedules from cache")
-            return zbsSchedules
-        } catch {
-            DebugConfig.debugPrint("❌ ScheduleCacheService: Error loading ZBS schedules from cache: \(error)")
-            return nil
         }
     }
 }
@@ -318,15 +277,36 @@ class ScheduleCacheService {
 // MARK: - Data Structures
 
 private struct CachedSchedules: Codable {
-    let regionId: String
-    let regionName: String
+    let locationId: String
+    let locationName: String
     let schedules: [PharmacySchedule]
     let cacheTimestamp: TimeInterval
 }
 
 private struct CacheMetadata: Codable {
-    let regionId: String
+    let locationId: String
     let scheduleCount: Int
     let cacheTimestamp: TimeInterval
     let pdfLastModified: TimeInterval
+    let cacheVersion: Int
+
+    // For backward compatibility with old cache files
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        // locationId was added later, use "unknown" as fallback for old caches
+        locationId = try container.decodeIfPresent(String.self, forKey: .locationId) ?? "unknown"
+        scheduleCount = try container.decode(Int.self, forKey: .scheduleCount)
+        cacheTimestamp = try container.decode(TimeInterval.self, forKey: .cacheTimestamp)
+        pdfLastModified = try container.decode(TimeInterval.self, forKey: .pdfLastModified)
+        // cacheVersion was added in version 2, default to 1 for old caches
+        cacheVersion = try container.decodeIfPresent(Int.self, forKey: .cacheVersion) ?? 1
+    }
+
+    init(locationId: String, scheduleCount: Int, cacheTimestamp: TimeInterval, pdfLastModified: TimeInterval, cacheVersion: Int) {
+        self.locationId = locationId
+        self.scheduleCount = scheduleCount
+        self.cacheTimestamp = cacheTimestamp
+        self.pdfLastModified = pdfLastModified
+        self.cacheVersion = cacheVersion
+    }
 }

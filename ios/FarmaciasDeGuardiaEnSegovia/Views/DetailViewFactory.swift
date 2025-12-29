@@ -15,15 +15,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Foundation
-import PDFKit
+import SwiftUI
 
-/// Protocol defining the contract for PDF schedule parsing strategies.
-/// Each region/location should implement its own strategy to handle its specific PDF format.
-public protocol PDFParsingStrategy {
-    /// Parse a PDF document and extract pharmacy schedules organized by duty location
-    /// - Parameter pdf: The PDF document to parse
-    /// - Returns: A dictionary mapping duty locations to their pharmacy schedules.
-    ///           Main regions return 1 entry, Segovia Rural returns 8 entries (one per ZBS).
-    func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]]
+/// Factory for creating detail views based on identifier
+struct DetailViewFactory {
+    @ViewBuilder
+    static func makeDetailView(for id: String) -> some View {
+        switch id {
+        case "cantalejo-info":
+            CantalejoInfoView()
+        default:
+            // Fallback: empty view for unknown IDs
+            EmptyView()
+        }
+    }
 }

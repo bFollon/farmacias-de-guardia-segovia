@@ -94,7 +94,10 @@ struct ZBSSelectionView: View {
             }
         }
         .sheet(item: $selectedZBS) { zbs in
-            ZBSScheduleView(selectedZBS: zbs)
+            PDFViewScreen(
+                url: Region.segoviaRural.pdfURL,
+                location: DutyLocation.fromZBS(zbs)
+            )
         }
     }
 }

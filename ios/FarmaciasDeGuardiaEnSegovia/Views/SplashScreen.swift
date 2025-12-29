@@ -70,20 +70,20 @@ struct SplashScreen: View {
                     .tint(.blue)
                     .opacity(preloadService.isLoading ? 1.0 : 0.0)
                     .animation(.easeInOut(duration: 0.3), value: preloadService.isLoading)
-                
-                // Always show icon progression once we know the total regions
-                if preloadService.totalRegions > 0 {
-                    // Icon progression for each region
+
+                // Show 4 PDF icons (representing the 4 PDFs being downloaded)
+                if preloadService.isLoading {
+                    // Icon progression for each PDF
                     HStack(spacing: 8) {
-                        ForEach(0..<preloadService.totalRegions, id: \.self) { index in
+                        ForEach(0..<4, id: \.self) { index in
                             HStack(spacing: 8) {
                                 Text(getRegionIcon(for: index))
                                     .font(.title2)
-                                    .opacity(index < preloadService.completedRegions ? 1.0 : 0.3)
-                                    .scaleEffect(index < preloadService.completedRegions ? 1.1 : 0.9)
+                                    .opacity(getPDFProgress(for: index) ? 1.0 : 0.3)
+                                    .scaleEffect(getPDFProgress(for: index) ? 1.1 : 0.9)
                                     .animation(.spring(duration: 0.4), value: preloadService.completedRegions)
-                                
-                                if index < preloadService.totalRegions - 1 {
+
+                                if index < 3 {
                                     Text("—")
                                         .font(.caption)
                                         .foregroundColor(.secondary.opacity(0.5))
@@ -117,7 +117,7 @@ struct SplashScreen: View {
     }
     
     // MARK: - Helper Methods
-    
+
     private func getRegionIcon(for index: Int) -> String {
         let regions = [
             Region.segoviaCapital,
@@ -125,9 +125,25 @@ struct SplashScreen: View {
             Region.elEspinar,
             Region.segoviaRural
         ]
-        
+
         guard index < regions.count else { return "💊" }
         return regions[index].icon
+    }
+
+    private func getPDFProgress(for pdfIndex: Int) -> Bool {
+        // Map PDF index to location progress
+        // PDF 0 (Segovia Capital) = location 0
+        // PDF 1 (Cuéllar) = location 1
+        // PDF 2 (El Espinar) = location 2
+        // PDF 3 (Segovia Rural) = locations 3-10 (8 ZBS)
+
+        if pdfIndex < 3 {
+            // Main regions: completed when that location is done
+            return preloadService.completedRegions > pdfIndex
+        } else {
+            // Segovia Rural: completed when all ZBS are done (3 + 8 = 11 total)
+            return preloadService.completedRegions >= 11
+        }
     }
 }
 
