@@ -73,4 +73,37 @@ class TelemetryService {
         span.status = .error(description: error.localizedDescription)
         span.end()
     }
+
+    /// Record app launch event with platform and version information
+    func recordAppLaunch() {
+        // Create a zero-duration span for app launch
+        let span = tracer.spanBuilder(spanName: "app.launch")
+            .setSpanKind(spanKind: .internal)
+            .startSpan()
+
+        // Gather platform information
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersionString
+        let platform = "iOS"
+
+        // Add attributes to span
+        span.setAttribute(key: "platform", value: platform)
+        span.setAttribute(key: "app.version", value: appVersion)
+        span.setAttribute(key: "app.build", value: buildNumber)
+        span.setAttribute(key: "os.version", value: osVersion)
+
+        // Add event for semantic clarity
+        span.addEvent(name: "app.launched", attributes: [
+            "platform": AttributeValue.string(platform),
+            "app.version": AttributeValue.string(appVersion),
+            "app.build": AttributeValue.string(buildNumber),
+            "os.version": AttributeValue.string(osVersion)
+        ])
+
+        // Immediately end span (zero duration)
+        span.end()
+
+        DebugConfig.debugPrint("📱 App launch recorded: \(platform) \(appVersion) (\(buildNumber)) on \(osVersion)")
+    }
 }

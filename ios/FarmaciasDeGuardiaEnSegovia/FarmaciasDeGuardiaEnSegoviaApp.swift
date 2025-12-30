@@ -181,6 +181,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
 
             DebugConfig.debugPrint("✅ OpenTelemetry (Signoz) monitoring initialized (user opted in)")
+
+            // Record app launch event
+            TelemetryService.shared.recordAppLaunch()
         } else {
             DebugConfig.debugPrint("⚠️ OpenTelemetry (Signoz) monitoring disabled (user has not opted in)")
         }

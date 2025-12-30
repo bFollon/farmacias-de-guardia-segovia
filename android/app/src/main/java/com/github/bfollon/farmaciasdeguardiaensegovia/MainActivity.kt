@@ -68,6 +68,11 @@ class MainActivity : ComponentActivity() {
         // Initialize telemetry service if user has opted in
         if (MonitoringPreferencesService.hasUserOptedIn()) {
             TelemetryService.initialize(this)
+
+            // Record app launch event (only if initialization succeeded)
+            if (TelemetryService.isInitialized) {
+                TelemetryService.recordAppLaunch(this)
+            }
         }
         
         setContent {

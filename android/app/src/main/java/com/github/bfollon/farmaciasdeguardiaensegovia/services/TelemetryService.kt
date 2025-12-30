@@ -189,6 +189,56 @@ object TelemetryService {
     }
 
     /**
+     * Record app launch event with platform and version information
+     */
+    fun recordAppLaunch(context: Context) {
+        val currentTracer = tracer ?: return
+
+        // Create a zero-duration span for app launch
+        val span = currentTracer.spanBuilder("app.launch")
+            .setSpanKind(SpanKind.INTERNAL)
+            .startSpan()
+
+        // Gather platform information
+        val platform = "Android"
+        val appVersion = try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
+        } catch (e: PackageManager.NameNotFoundException) {
+            "unknown"
+        }
+
+        val buildNumber = try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionCode.toString()
+        } catch (e: PackageManager.NameNotFoundException) {
+            "unknown"
+        }
+
+        val osVersion = android.os.Build.VERSION.RELEASE
+
+        // Add attributes to span
+        span.setAttribute("platform", platform)
+        span.setAttribute("app.version", appVersion)
+        span.setAttribute("app.build", buildNumber)
+        span.setAttribute("os.version", osVersion)
+
+        // Add event for semantic clarity
+        span.addEvent(
+            "app.launched",
+            Attributes.of(
+                AttributeKey.stringKey("platform"), platform,
+                AttributeKey.stringKey("app.version"), appVersion,
+                AttributeKey.stringKey("app.build"), buildNumber,
+                AttributeKey.stringKey("os.version"), osVersion
+            )
+        )
+
+        // Immediately end span (zero duration)
+        span.end()
+
+        DebugConfig.debugPrint("📱 App launch recorded: $platform $appVersion ($buildNumber) on Android $osVersion")
+    }
+
+    /**
      * Shutdown the telemetry service gracefully
      */
     fun shutdown() {
