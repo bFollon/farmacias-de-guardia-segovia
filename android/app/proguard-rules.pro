@@ -140,3 +140,20 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+# ================================
+# OpenTelemetry Rules
+# ================================
+
+# Keep OpenTelemetry classes - they use reflection
+-keep class io.opentelemetry.** { *; }
+-keepclassmembers class io.opentelemetry.** { *; }
+-dontwarn io.opentelemetry.**
+
+# Keep gRPC classes used by OTLP exporter
+-keep class io.grpc.** { *; }
+-dontwarn io.grpc.**
+
+# Keep OkHttp classes used by OTLP HTTP exporter
+-dontwarn okio.**
+-dontwarn okhttp3.internal.platform.**

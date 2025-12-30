@@ -35,6 +35,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -42,13 +43,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPreferencesService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 
@@ -80,6 +87,9 @@ fun SettingsScreen(
                 onCheckUpdatesClick = onCacheRefreshClick,
                 onViewCacheStatusClick = onCacheStatusClick
             )
+
+            // Monitoring Section
+            MonitoringSection()
 
             // Information Section
             InformationSection(
@@ -158,6 +168,88 @@ private fun CachePDFSection(
                     text = "Ver Estado de la caché",
                     showTrailingIcon = true,
                     onClick = onViewCacheStatusClick
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Monitoring section with toggle for error monitoring
+ * Matches iOS SettingsView monitoring section
+ */
+@Composable
+private fun MonitoringSection() {
+    var isMonitoringEnabled by remember {
+        mutableStateOf(MonitoringPreferencesService.hasUserOptedIn())
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        // Section Header
+        Text(
+            text = "Monitoreo",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(horizontal = Spacing.XSmall)
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                // Toggle row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Speed,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            text = "Monitoreo de Errores",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    Switch(
+                        checked = isMonitoringEnabled,
+                        onCheckedChange = { enabled ->
+                            isMonitoringEnabled = enabled
+                            MonitoringPreferencesService.setMonitoringEnabled(enabled)
+                        }
+                    )
+                }
+
+                // Description text
+                Text(
+                    text = "Recopila datos tecnicos anonimos para mejorar la app.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                // Restart note
+                Text(
+                    text = "Requiere reiniciar la app para aplicar cambios.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Medium
                 )
             }
         }

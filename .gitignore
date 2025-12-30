@@ -8,5 +8,6 @@ android/app/build/generated/source/buildConfig/debug/com/bfollon/farmaciasdeGuar
 
 .idea
 
-# iOS Secrets
-ios/FarmaciasDeGuardiaEnSegovia/Secrets.swift
+# Secrets files (ignore anywhere in project, any extension)
+**/Secrets.*
+Secrets.*

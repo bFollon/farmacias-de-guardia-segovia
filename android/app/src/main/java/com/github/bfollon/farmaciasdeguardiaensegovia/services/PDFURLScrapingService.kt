@@ -17,6 +17,8 @@
 
 package com.github.bfollon.farmaciasdeguardiaensegovia.services
 
+import io.opentelemetry.api.trace.SpanKind
+import io.opentelemetry.api.trace.StatusCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -80,47 +82,71 @@ object PDFURLScrapingService {
      * This runs on the IO dispatcher to avoid blocking the main thread
      */
     suspend fun scrapePDFURLs(): List<ScrapedPDFData> = withContext(Dispatchers.IO) {
+        // Start performance span
+        val span = TelemetryService.startSpan("pdf.url.scraping", SpanKind.CLIENT)
+        span.setAttribute("url", BASE_URL)
+        span.setAttribute("source", "web_scraping")
+
         try {
             DebugConfig.debugPrint("$TAG: Starting PDF URL scraping from $BASE_URL")
-            
+
             // Make HTTP request
             val request = Request.Builder()
                 .url(BASE_URL)
                 .addHeader("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
                 .build()
-            
+
             val response = httpClient.newCall(request).execute()
-            
+
             if (!response.isSuccessful) {
                 DebugConfig.debugError("$TAG: HTTP request failed: ${response.code}")
+                span.setAttribute("http_status", response.code.toLong())
+                span.setAttribute("error_message", "HTTP ${response.code}")
+                span.setAttribute("urls_found", 0L)
+                span.setAttribute("status", "failed")
+                span.setAttribute("error.type", "unavailable")
+                span.setStatus(StatusCode.ERROR, "HTTP ${response.code}")
+                span.end()
                 return@withContext emptyList()
             }
-            
+
             val htmlContent = response.body?.string() ?: ""
             DebugConfig.debugPrint("$TAG: Successfully fetched HTML content (${htmlContent.length} chars)")
-            
+
             // Extract PDF links using regex patterns
             val scrapedData = extractPDFDataFromHTML(htmlContent)
-            
+
             DebugConfig.debugPrint("$TAG: Successfully scraped ${scrapedData.size} PDF URLs")
-            
+
             // Cache the scraped URLs for later use
             scrapedData.forEach { data ->
                 scrapedURLs[data.regionName] = data.pdfUrl
                 DebugConfig.debugPrint("$TAG: Found PDF for ${data.regionName}: ${data.pdfUrl}")
-                data.lastUpdated?.let { 
+                data.lastUpdated?.let {
                     DebugConfig.debugPrint("$TAG: Last updated: $it")
                 }
             }
-            
+
             // Mark scraping as completed
             scrapingCompleted = true
             DebugConfig.debugPrint("$TAG: Scraping completed, ${scrapedURLs.size} URLs cached")
-            
+
+            // Finish span successfully
+            span.setAttribute("urls_found", scrapedData.size.toLong())
+            span.setAttribute("status", if (scrapedData.size == 4) "success" else "partial")
+            span.setStatus(StatusCode.OK)
+            span.end()
+
             scrapedData
-            
+
         } catch (e: Exception) {
             DebugConfig.debugError("$TAG: Error scraping PDF URLs", e)
+            span.setAttribute("error_message", e.message ?: "Unknown error")
+            span.setAttribute("urls_found", 0L)
+            span.setAttribute("status", "failed")
+            span.setAttribute("error.type", "internal_error")
+            span.setStatus(StatusCode.ERROR, e.message ?: "Unknown error")
+            span.end()
             emptyList()
         }
     }

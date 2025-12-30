@@ -20,13 +20,16 @@ import androidx.navigation.compose.rememberNavController
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPreferencesService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheRefreshScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheStatusScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CantalejoInfoScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MainScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MonitoringConsentScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SettingsScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SplashScreen
@@ -50,14 +53,22 @@ class MainActivity : ComponentActivity() {
         
         // Initialize network monitor
         NetworkMonitor.initialize(this)
-        
+
         // Initialize caches and cleanup expired entries
         CoordinateCache.initialize(this)
         RouteCache.initialize(this)
-        
+
         // Cleanup expired cache entries on app start
         CoordinateCache.cleanupExpiredEntries()
         RouteCache.cleanupExpiredEntries()
+
+        // Initialize monitoring preferences service
+        MonitoringPreferencesService.initialize(this)
+
+        // Initialize telemetry service if user has opted in
+        if (MonitoringPreferencesService.hasUserOptedIn()) {
+            TelemetryService.initialize(this)
+        }
         
         setContent {
             FarmaciasDeGuardiaEnSegoviaTheme {
@@ -100,7 +111,10 @@ fun AppNavigation() {
     // State management for Cache Refresh modal (stacks on top of Settings)
     var showCacheRefreshModal by remember { mutableStateOf(false) }
     val cacheRefreshSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    
+
+    // State management for Monitoring Consent overlay
+    var showMonitoringConsent by remember { mutableStateOf(false) }
+
     NavHost(
         navController = navController,
         startDestination = "splash"
@@ -111,6 +125,10 @@ fun AppNavigation() {
                     DebugConfig.debugPrint("Navigating from splash screen")
                     navController.navigate("main") {
                         popUpTo("splash") { inclusive = true }
+                    }
+                    // Show monitoring consent if user hasn't made a choice yet
+                    if (!MonitoringPreferencesService.hasUserMadeChoice()) {
+                        showMonitoringConsent = true
                     }
                 }
             )
@@ -280,5 +298,14 @@ fun AppNavigation() {
                 }
             )
         }
+    }
+
+    // Monitoring Consent Overlay (shown after splash if user hasn't made a choice)
+    if (showMonitoringConsent) {
+        MonitoringConsentScreen(
+            onDismiss = {
+                showMonitoringConsent = false
+            }
+        )
     }
 }

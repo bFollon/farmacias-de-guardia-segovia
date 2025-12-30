@@ -25,6 +25,8 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.strate
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.ElEspinarParser
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaCapitalParser
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.strategies.SegoviaRuralParser
+import io.opentelemetry.api.trace.SpanKind
+import io.opentelemetry.api.trace.StatusCode
 import java.io.File
 import kotlin.collections.component1
 import kotlin.collections.component2
@@ -56,6 +58,13 @@ class PDFProcessingService {
         pdfFile: File,
         region: Region
     ): Map<DutyLocation, List<PharmacySchedule>> {
+        // Start performance span
+        val span = TelemetryService.startSpan("pdf.parse", SpanKind.INTERNAL)
+        span.setAttribute("region_id", region.id)
+        span.setAttribute("region_name", region.name)
+        span.setAttribute("force_refresh", region.forceRefresh)
+        span.setAttribute("cache_used", !region.forceRefresh)
+
         DebugConfig.debugPrint("\n=== PDF Processing Started ===")
         DebugConfig.debugPrint("PDFProcessingService: Processing PDF for ${region.name}")
         DebugConfig.debugPrint("📁 PDF file: ${pdfFile.absolutePath}")
@@ -65,6 +74,10 @@ class PDFProcessingService {
 
         if (!pdfFile.exists() || pdfFile.length() == 0L) {
             DebugConfig.debugError("PDFProcessingService: PDF file does not exist or is empty")
+            span.setAttribute("error_message", "PDF file does not exist or is empty")
+            span.setAttribute("error.type", "data_loss")
+            span.setStatus(StatusCode.ERROR, "PDF file does not exist or is empty")
+            span.end()
             return emptyMap()
         }
 
@@ -87,12 +100,24 @@ class PDFProcessingService {
             }
 
             DebugConfig.debugPrint("=== PDF Processing Complete ===\n")
+
+            // Finish span with results
+            val totalSchedules = scheduleMap.values.sumOf { it.size }
+            span.setAttribute("locations_count", scheduleMap.size.toLong())
+            span.setAttribute("schedules_count", totalSchedules.toLong())
+            span.setStatus(StatusCode.OK)
+            span.end()
+
             scheduleMap
         } catch (e: Exception) {
             DebugConfig.debugError(
                 "❌ PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}",
                 e
             )
+            span.setAttribute("error_message", e.message ?: "Unknown error")
+            span.setAttribute("error.type", "internal_error")
+            span.setStatus(StatusCode.ERROR, e.message ?: "Unknown error")
+            span.end()
             emptyMap()
         }
     }
