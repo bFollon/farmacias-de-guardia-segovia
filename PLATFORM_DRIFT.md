@@ -24,7 +24,7 @@ This document tracks implementation differences between iOS and Android platform
 ## Monitoring & Telemetry
 
 ### OpenTelemetry Implementation
-- [x] **Both platforms use OpenTelemetry with SigNoz**
+- [x] **Both platforms use OpenTelemetry with Grafana stack**
   - iOS: `opentelemetry-swift` (version 2.3.0+)
   - Android: `io.opentelemetry:opentelemetry-*` (version 1.44.1)
 

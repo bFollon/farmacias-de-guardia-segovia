@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Service for OpenTelemetry tracing and error recording
- * Provides convenient methods for creating spans and capturing errors for SigNoz
+ * Provides convenient methods for creating spans and capturing errors for Grafana
  * Equivalent to iOS TelemetryService
  */
 object TelemetryService {
@@ -65,7 +65,7 @@ object TelemetryService {
         }
 
         if (!MonitoringPreferencesService.hasUserOptedIn()) {
-            DebugConfig.debugPrint("OpenTelemetry (Signoz) monitoring disabled (user has not opted in)")
+            DebugConfig.debugPrint("OpenTelemetry (Grafana) monitoring disabled (user has not opted in)")
             return
         }
 
@@ -80,7 +80,7 @@ object TelemetryService {
             // Determine environment
             val environment = if (BuildConfig.DEBUG) "debug" else "production"
 
-            DebugConfig.debugPrint("Configuring Signoz OTLP HTTP exporter")
+            DebugConfig.debugPrint("Configuring Grafana OTLP HTTP exporter")
             DebugConfig.debugPrint("Endpoint: ${Secrets.signozEndpoint}")
             DebugConfig.debugPrint("Auth header: signoz-ingestion-key")
 
@@ -118,7 +118,7 @@ object TelemetryService {
             // Get tracer
             tracer = openTelemetry?.getTracer(INSTRUMENTATION_NAME)
 
-            DebugConfig.debugPrint("OpenTelemetry (Signoz) monitoring initialized (user opted in)")
+            DebugConfig.debugPrint("OpenTelemetry (Grafana) monitoring initialized (user opted in)")
 
         } catch (e: Exception) {
             DebugConfig.debugError("Failed to initialize OpenTelemetry: ${e.message}", e)

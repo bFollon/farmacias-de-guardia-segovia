@@ -1,6 +1,6 @@
 # Privacy Notice - Farmacias de Guardia En Segovia
 
-**Last Updated:** December 27, 2025
+**Last Updated:** January 5, 2026
 
 ## Overview
 
@@ -23,7 +23,7 @@ We do not collect:
 **Application performance monitoring is optional.**  
 By default, the app does **not** send monitoring or diagnostic data. Monitoring is enabled only if you explicitly choose to opt in.
 
-If enabled, the following technical and diagnostic information may be collected through New Relic Monitoring:
+If enabled, the following technical and diagnostic information may be collected through Grafana observability platform:
 
 ### Application & Performance Data
 - App name, version, and build number
@@ -47,7 +47,7 @@ These identifiers do **not** directly identify you as a person and are used only
 - Country, region, or city
 - Network or autonomous system (ASN) information
 
-This location information is inferred from network data and is **approximate only**.  
+This location information is inferred from network data and is **approximate only**.
 We do **not** collect or transmit precise GPS-based location data for monitoring purposes.
 
 ## Purpose and Use of Monitoring Data
@@ -75,7 +75,7 @@ The app may request access to your device’s location only to:
 **Important:**
 - GPS-based location access is used only locally on your device
 - We do not store or transmit precise location data
-- Approximate location information (such as city or region) may be inferred indirectly by New Relic via network diagnostics, as described above
+- Approximate location information (such as city or region) may be inferred indirectly by Grafana via network diagnostics, as described above
 - You can disable location services at any time in your device settings
 - The app will continue to function without location access
 
@@ -98,19 +98,19 @@ Your choice is respected immediately and does not affect your access to pharmacy
 
 ## Third-Party Services
 
-### New Relic Monitoring
+### Grafana Observability Platform
 
-> New Relic Monitoring is used only if you have opted in to application performance monitoring.
+> Grafana monitoring is used only if you have opted in to application performance monitoring.
 
-We use **New Relic, Inc.** as a third-party service provider for application performance monitoring and error reporting.
+We use **Grafana Labs** as a third-party service provider for application performance monitoring and error reporting.
 
-New Relic processes technical and diagnostic data on our behalf and acts as a **data processor**. The data is used only for the purposes described in this notice and is subject to New Relic’s own security and privacy obligations.
+Grafana processes technical and diagnostic data on our behalf and acts as a **data processor**. The data is used only for the purposes described in this notice and is subject to Grafana's own security and privacy obligations.
 
-### New Relic Data Use
+### Grafana Data Use
 
-We use New Relic Monitoring for performance and error reporting. While this service collects technical and diagnostic data (as described above), **New Relic does not sell this data or use it for advertising, marketing, or profiling purposes**.  
-New Relic may share data with service providers and partners to operate, support, and improve the monitoring service in accordance with their privacy policy, but this **does not involve selling personal data** to third parties for commercial use.  
-For more details, see New Relic’s privacy policy: https://newrelic.com/termsandconditions/privacy. 
+We use Grafana for performance and error reporting. While this service collects technical and diagnostic data (as described above), **Grafana does not sell this data or use it for advertising, marketing, or profiling purposes**.
+Grafana may share data with service providers and partners to operate, support, and improve the monitoring service in accordance with their privacy policy, but this **does not involve selling personal data** to third parties for commercial use.
+For more details, see Grafana's privacy policy: https://grafana.com/legal/privacy-policy/. 
 
 ### Mapping Applications
 
@@ -129,7 +129,7 @@ We do not sell personal data.
 
 We do not share data for advertising, marketing, or profiling purposes.
 
-Technical and diagnostic data is shared only with New Relic for the sole purpose of application monitoring and error reporting.
+Technical and diagnostic data is shared only with Grafana for the sole purpose of application monitoring and error reporting.
 
 ## Children's Privacy
 

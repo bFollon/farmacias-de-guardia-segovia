@@ -19,7 +19,7 @@ import Foundation
 import OpenTelemetryApi
 
 /// Service for OpenTelemetry tracing and error recording
-/// Provides convenient methods for creating spans and capturing errors for Signoz
+/// Provides convenient methods for creating spans and capturing errors for Grafana
 class TelemetryService {
     static let shared = TelemetryService()
 

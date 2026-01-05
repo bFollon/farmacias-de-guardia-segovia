@@ -36,7 +36,7 @@ enum ScrapingError: Error, LocalizedError {
     }
 }
 
-/// Service responsible for recording PDF URL scraping errors to Signoz (OpenTelemetry)
+/// Service responsible for recording PDF URL scraping errors to Grafana (OpenTelemetry)
 /// Only sends error events when scraping fails or returns incomplete results
 class ScrapingMetricsService {
     static let shared = ScrapingMetricsService()
@@ -66,7 +66,7 @@ class ScrapingMetricsService {
         let urlCount = scrapedData.count
         let success = urlCount == expectedCount && error == nil
 
-        // Only record errors to Signoz (spans track all operations)
+        // Only record errors to Grafana (spans track all operations)
         if !success {
             DebugConfig.debugPrint("⚠️ Scraping issue detected: found \(urlCount)/\(expectedCount) URLs")
 
@@ -75,7 +75,7 @@ class ScrapingMetricsService {
             let expectedRegions = ["Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"]
             let missingRegions = expectedRegions.filter { !foundRegions.contains($0) }
 
-            // Record error to Signoz (OpenTelemetry)
+            // Record error to Grafana (OpenTelemetry)
             recordError(
                 urlCount: urlCount,
                 expectedCount: expectedCount,
@@ -83,9 +83,9 @@ class ScrapingMetricsService {
                 error: error
             )
 
-            DebugConfig.debugPrint("🚨 Recorded scraping error to Signoz")
+            DebugConfig.debugPrint("🚨 Recorded scraping error to Grafana")
         } else {
-            DebugConfig.debugPrint("✅ Scraping successful: \(urlCount)/\(expectedCount) URLs (no error sent to Signoz)")
+            DebugConfig.debugPrint("✅ Scraping successful: \(urlCount)/\(expectedCount) URLs (no error sent to Grafana)")
         }
     }
 
@@ -122,7 +122,7 @@ class ScrapingMetricsService {
             errorAttributes["missingRegions"] = AttributeValue.string(missingRegions.joined(separator: ", "))
         }
 
-        // Record error to Signoz (OpenTelemetry)
+        // Record error to Grafana (OpenTelemetry)
         TelemetryService.shared.recordError(scrapingError, attributes: errorAttributes)
 
         DebugConfig.debugPrint("🚨 Error recorded: \(scrapingError.localizedDescription)")

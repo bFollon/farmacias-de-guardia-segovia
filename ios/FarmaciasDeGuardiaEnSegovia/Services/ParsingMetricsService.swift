@@ -19,7 +19,7 @@ import Foundation
 
 /// Service for tracking pharmacy parsing operations
 /// Parsing errors are automatically captured by OpenTelemetry when exceptions occur
-/// This service only logs debug information, no events sent to Signoz for successful parsing
+/// This service only logs debug information, no events sent to Grafana for successful parsing
 class ParsingMetricsService {
     static let shared = ParsingMetricsService()
 
@@ -27,7 +27,7 @@ class ParsingMetricsService {
 
     // MARK: - Public Methods
 
-    /// Log parsing results for debugging (no events sent to Signoz)
+    /// Log parsing results for debugging (no events sent to Grafana)
     /// - Parameter schedulesByLocation: Dictionary of DutyLocation to schedules from PDF parse
     func recordParsingMetrics(for schedulesByLocation: [DutyLocation: [PharmacySchedule]]) {
         DebugConfig.debugPrint("📊 PDF parsing completed for \(schedulesByLocation.count) locations")
@@ -42,7 +42,7 @@ class ParsingMetricsService {
             DebugConfig.debugPrint("📊 Parsed \(location.id): \(scheduleCount) schedules")
         }
 
-        DebugConfig.debugPrint("✅ Total schedules parsed: \(totalSchedules) (no event sent to Signoz)")
+        DebugConfig.debugPrint("✅ Total schedules parsed: \(totalSchedules) (no event sent to Grafana)")
     }
 
 }

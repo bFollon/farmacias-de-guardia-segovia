@@ -123,7 +123,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize OpenTelemetry (Signoz) only if user has opted in
+        // Initialize OpenTelemetry (Grafana) only if user has opted in
         if MonitoringPreferencesService.shared.hasUserOptedIn() {
             // Get app version and environment
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
@@ -146,8 +146,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
             let resources = defaultResource.merging(other: customResource)
 
-            // Configure OTLP HTTP exporter for Signoz
-            DebugConfig.debugPrint("🔧 Configuring Signoz OTLP HTTP exporter")
+            // Configure OTLP HTTP exporter for Grafana
+            DebugConfig.debugPrint("🔧 Configuring Grafana OTLP HTTP exporter")
             DebugConfig.debugPrint("🔧 Endpoint: \(Secrets.signozEndpoint)")
             DebugConfig.debugPrint("🔧 Auth header: signoz-ingestion-key")
 
@@ -157,7 +157,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             )
 
             guard let endpoint = URL(string: Secrets.signozEndpoint) else {
-                DebugConfig.debugPrint("❌ Invalid Signoz endpoint URL: \(Secrets.signozEndpoint)")
+                DebugConfig.debugPrint("❌ Invalid Grafana endpoint URL: \(Secrets.signozEndpoint)")
                 return true
             }
 
@@ -180,12 +180,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             // Register globally
             OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
 
-            DebugConfig.debugPrint("✅ OpenTelemetry (Signoz) monitoring initialized (user opted in)")
+            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) monitoring initialized (user opted in)")
 
             // Record app launch event
             TelemetryService.shared.recordAppLaunch()
         } else {
-            DebugConfig.debugPrint("⚠️ OpenTelemetry (Signoz) monitoring disabled (user has not opted in)")
+            DebugConfig.debugPrint("⚠️ OpenTelemetry (Grafana) monitoring disabled (user has not opted in)")
         }
 
         return true
