@@ -180,7 +180,47 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             // Register globally
             OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
 
-            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) monitoring initialized (user opted in)")
+            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) tracing initialized (user opted in)")
+
+            // Configure metrics exporter for Grafana
+            DebugConfig.debugPrint("🔧 Configuring Grafana OTLP HTTP metrics exporter")
+
+            guard let metricsEndpoint = URL(string: Secrets.signozEndpoint.replacingOccurrences(of: "/v1/traces", with: "/v1/metrics")) else {
+                DebugConfig.debugPrint("❌ Invalid Grafana metrics endpoint URL")
+                return true
+            }
+
+            DebugConfig.debugPrint("🔧 Metrics endpoint: \(metricsEndpoint)")
+
+            let metricsExporter = OtlpHttpMetricExporter(
+                endpoint: metricsEndpoint,
+                config: otlpConfiguration
+            )
+
+            DebugConfig.debugPrint("🔧 OTLP HTTP metrics exporter created successfully")
+
+            // Create periodic metric reader (60s interval)
+            let metricReader = PeriodicMetricReaderBuilder(
+                exporter: metricsExporter
+            )
+            .setInterval(timeInterval: 60)
+            .build()
+
+            // Create meter provider with shared resource
+            // IMPORTANT: Must register a view for metrics to be exported
+            let meterProvider = MeterProviderSdk.builder()
+                .setResource(resource: resources)
+                .registerMetricReader(reader: metricReader)
+                .registerView(
+                    selector: InstrumentSelector.builder().setInstrument(name: ".*").build(),
+                    view: View.builder().build()
+                )
+                .build()
+
+            // Register globally
+            OpenTelemetry.registerMeterProvider(meterProvider: meterProvider)
+
+            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) metrics initialized (user opted in)")
 
             // Record app launch event
             TelemetryService.shared.recordAppLaunch()

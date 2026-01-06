@@ -22,7 +22,9 @@
       "Bash(fi)",
       "Bash(git check-ignore:*)",
       "Bash(tee:*)",
-      "WebFetch(domain:signoz.io)"
+      "WebFetch(domain:signoz.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:grafana.com)"
     ],
     "deny": [],
     "ask": []

@@ -23,12 +23,17 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.BuildConfig
 import io.opentelemetry.api.OpenTelemetry
 import io.opentelemetry.api.common.AttributeKey
 import io.opentelemetry.api.common.Attributes
+import io.opentelemetry.api.metrics.LongCounter
+import io.opentelemetry.api.metrics.Meter
 import io.opentelemetry.api.trace.Span
 import io.opentelemetry.api.trace.SpanKind
 import io.opentelemetry.api.trace.StatusCode
 import io.opentelemetry.api.trace.Tracer
+import io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporter
 import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter
 import io.opentelemetry.sdk.OpenTelemetrySdk
+import io.opentelemetry.sdk.metrics.SdkMeterProvider
+import io.opentelemetry.sdk.metrics.export.PeriodicMetricReader
 import io.opentelemetry.sdk.resources.Resource
 import io.opentelemetry.sdk.trace.SdkTracerProvider
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor
@@ -45,6 +50,8 @@ object TelemetryService {
 
     private var openTelemetry: OpenTelemetry? = null
     private var tracer: Tracer? = null
+    private var meter: Meter? = null
+    private var appLaunchCounter: LongCounter? = null
 
     /**
      * Whether the telemetry service has been initialized
@@ -118,7 +125,42 @@ object TelemetryService {
             // Get tracer
             tracer = openTelemetry?.getTracer(INSTRUMENTATION_NAME)
 
-            DebugConfig.debugPrint("OpenTelemetry (Grafana) monitoring initialized (user opted in)")
+            DebugConfig.debugPrint("OpenTelemetry (Grafana) tracing initialized (user opted in)")
+
+            // Configure metrics exporter
+            DebugConfig.debugPrint("Configuring Grafana OTLP HTTP metrics exporter")
+
+            val metricsEndpoint = Secrets.signozEndpoint.replace("/v1/traces", "/v1/metrics")
+            DebugConfig.debugPrint("Metrics endpoint: $metricsEndpoint")
+
+            val metricsExporter = OtlpHttpMetricExporter.builder()
+                .setEndpoint(metricsEndpoint)
+                .addHeader("signoz-ingestion-key", Secrets.signozIngestionKey)
+                .setTimeout(10, TimeUnit.SECONDS)
+                .build()
+
+            DebugConfig.debugPrint("OTLP HTTP metrics exporter created successfully")
+
+            // Create periodic metric reader (default 60s interval)
+            val metricReader = PeriodicMetricReader.builder(metricsExporter).build()
+
+            // Create meter provider with shared resource
+            val meterProvider = SdkMeterProvider.builder()
+                .registerMetricReader(metricReader)
+                .setResource(resource)
+                .build()
+
+            // Rebuild OpenTelemetry SDK with both tracer and meter providers
+            openTelemetry = OpenTelemetrySdk.builder()
+                .setTracerProvider(tracerProvider)
+                .setMeterProvider(meterProvider)
+                .build()
+
+            // Get meter and create counter
+            meter = openTelemetry?.getMeter(INSTRUMENTATION_NAME)
+            appLaunchCounter = meter?.counterBuilder("app.launches")?.build()
+
+            DebugConfig.debugPrint("OpenTelemetry (Grafana) metrics initialized (user opted in)")
 
         } catch (e: Exception) {
             DebugConfig.debugError("Failed to initialize OpenTelemetry: ${e.message}", e)
@@ -194,11 +236,6 @@ object TelemetryService {
     fun recordAppLaunch(context: Context) {
         val currentTracer = tracer ?: return
 
-        // Create a zero-duration span for app launch
-        val span = currentTracer.spanBuilder("app.launch")
-            .setSpanKind(SpanKind.INTERNAL)
-            .startSpan()
-
         // Gather platform information
         val platform = "Android"
         val appVersion = try {
@@ -214,23 +251,35 @@ object TelemetryService {
         }
 
         val osVersion = android.os.Build.VERSION.RELEASE
+        val environment = if (BuildConfig.DEBUG) "debug" else "production"
+
+        // Create shared attributes for both span and metric
+        val attributes = Attributes.of(
+            AttributeKey.stringKey("platform"), platform,
+            AttributeKey.stringKey("app.version"), appVersion,
+            AttributeKey.stringKey("app.build"), buildNumber,
+            AttributeKey.stringKey("os.version"), osVersion,
+            AttributeKey.stringKey("environment"), environment
+        )
+
+        // Increment metrics counter
+        appLaunchCounter?.add(1, attributes)
+        DebugConfig.debugPrint("📊 Metrics counter incremented: app.launches = 1")
+
+        // Create a zero-duration span for app launch
+        val span = currentTracer.spanBuilder("app.launch")
+            .setSpanKind(SpanKind.INTERNAL)
+            .startSpan()
 
         // Add attributes to span
         span.setAttribute("platform", platform)
         span.setAttribute("app.version", appVersion)
         span.setAttribute("app.build", buildNumber)
         span.setAttribute("os.version", osVersion)
+        span.setAttribute("environment", environment)
 
         // Add event for semantic clarity
-        span.addEvent(
-            "app.launched",
-            Attributes.of(
-                AttributeKey.stringKey("platform"), platform,
-                AttributeKey.stringKey("app.version"), appVersion,
-                AttributeKey.stringKey("app.build"), buildNumber,
-                AttributeKey.stringKey("os.version"), osVersion
-            )
-        )
+        span.addEvent("app.launched", attributes)
 
         // Immediately end span (zero duration)
         span.end()
@@ -244,9 +293,12 @@ object TelemetryService {
     fun shutdown() {
         (openTelemetry as? OpenTelemetrySdk)?.let { sdk ->
             sdk.sdkTracerProvider.shutdown()
+            sdk.sdkMeterProvider.shutdown()
         }
         openTelemetry = null
         tracer = null
+        meter = null
+        appLaunchCounter = null
         DebugConfig.debugPrint("TelemetryService shutdown")
     }
 }

@@ -32,6 +32,14 @@ class TelemetryService {
         )
     }
 
+    private lazy var meter = OpenTelemetry.instance.meterProvider.get(
+        name: "farmacias-guardia-segovia"
+    )
+
+    private lazy var appLaunchCounter: LongCounter = {
+        meter.counterBuilder(name: "app.launches").build()
+    }()
+
     /// Start a new span (equivalent to Sentry transaction)
     /// - Parameters:
     ///   - name: Name of the span (e.g., "pdf.url.scraping")
@@ -76,30 +84,43 @@ class TelemetryService {
 
     /// Record app launch event with platform and version information
     func recordAppLaunch() {
-        // Create a zero-duration span for app launch
-        let span = tracer.spanBuilder(spanName: "app.launch")
-            .setSpanKind(spanKind: .internal)
-            .startSpan()
-
         // Gather platform information
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
         let osVersion = ProcessInfo.processInfo.operatingSystemVersionString
         let platform = "iOS"
 
-        // Add attributes to span
-        span.setAttribute(key: "platform", value: platform)
-        span.setAttribute(key: "app.version", value: appVersion)
-        span.setAttribute(key: "app.build", value: buildNumber)
-        span.setAttribute(key: "os.version", value: osVersion)
+        #if DEBUG
+        let environment = "debug"
+        #else
+        let environment = "production"
+        #endif
 
-        // Add event for semantic clarity
-        span.addEvent(name: "app.launched", attributes: [
+        // Create shared attributes for both span and metric
+        let attributes: [String: AttributeValue] = [
             "platform": AttributeValue.string(platform),
             "app.version": AttributeValue.string(appVersion),
             "app.build": AttributeValue.string(buildNumber),
-            "os.version": AttributeValue.string(osVersion)
-        ])
+            "os.version": AttributeValue.string(osVersion),
+            "environment": AttributeValue.string(environment)
+        ]
+
+        // Increment metrics counter
+        appLaunchCounter.add(value: 1, attributes: attributes)
+        DebugConfig.debugPrint("📊 Metrics counter incremented: app.launches = 1")
+
+        // Create a zero-duration span for app launch
+        let span = tracer.spanBuilder(spanName: "app.launch")
+            .setSpanKind(spanKind: .internal)
+            .startSpan()
+
+        // Add attributes to span
+        for (key, value) in attributes {
+            span.setAttribute(key: key, value: value)
+        }
+
+        // Add event for semantic clarity
+        span.addEvent(name: "app.launched", attributes: attributes)
 
         // Immediately end span (zero duration)
         span.end()
