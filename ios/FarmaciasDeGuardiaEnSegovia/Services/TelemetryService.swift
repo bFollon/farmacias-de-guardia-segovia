@@ -17,6 +17,7 @@
 
 import Foundation
 import OpenTelemetryApi
+import OpenTelemetrySdk
 
 /// Service for OpenTelemetry tracing and error recording
 /// Provides convenient methods for creating spans and capturing errors for Grafana
@@ -24,6 +25,9 @@ class TelemetryService {
     static let shared = TelemetryService()
 
     private init() {}
+
+    // Metric reader for manual flushing
+    var metricReader: MetricReader?
 
     private var tracer: Tracer {
         OpenTelemetry.instance.tracerProvider.get(
@@ -38,6 +42,10 @@ class TelemetryService {
 
     private lazy var appLaunchCounter: LongCounter = {
         meter.counterBuilder(name: "app.launches").build()
+    }()
+
+    private lazy var urlScrapingCounter: LongCounter = {
+        meter.counterBuilder(name: "pdf.urls.scraped").build()
     }()
 
     /// Start a new span (equivalent to Sentry transaction)
@@ -126,5 +134,45 @@ class TelemetryService {
         span.end()
 
         DebugConfig.debugPrint("📱 App launch recorded: \(platform) \(appVersion) (\(buildNumber)) on \(osVersion)")
+    }
+
+    /// Record URL scraping event with region and status
+    /// - Parameters:
+    ///   - region: Region identifier (e.g., "segovia-capital", "cuellar")
+    ///   - status: Scraping status ("success" or "failure")
+    func recordURLScraping(region: String, status: String) {
+        let platform = "iOS"
+
+        #if DEBUG
+        let environment = "debug"
+        #else
+        let environment = "production"
+        #endif
+
+        let attributes: [String: AttributeValue] = [
+            "region": AttributeValue.string(region),
+            "status": AttributeValue.string(status),
+            "platform": AttributeValue.string(platform),
+            "environment": AttributeValue.string(environment)
+        ]
+
+        urlScrapingCounter.add(value: 1, attributes: attributes)
+        DebugConfig.debugPrint("📊 URL scraping recorded: region=\(region), status=\(status)")
+    }
+
+    /// Force flush metrics immediately (useful after splash screen)
+    func forceFlushMetrics() {
+        guard let reader = metricReader else {
+            DebugConfig.debugPrint("⚠️ No metric reader available for flush")
+            return
+        }
+
+        DebugConfig.debugPrint("📤 Force flushing metrics...")
+        let result = reader.forceFlush()
+        if result == .success {
+            DebugConfig.debugPrint("✅ Metrics flushed successfully")
+        } else {
+            DebugConfig.debugPrint("❌ Metrics flush failed")
+        }
     }
 }

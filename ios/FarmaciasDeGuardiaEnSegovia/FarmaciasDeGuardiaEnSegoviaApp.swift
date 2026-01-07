@@ -86,6 +86,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
                 initializeApp()
                 showSplashScreen = false
 
+                // Force flush metrics after splash screen (immediate export of app launch + scraping metrics)
+                TelemetryService.shared.forceFlushMetrics()
+
                 // Show monitoring consent if user hasn't made a choice yet
                 if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
                     showMonitoringConsent = true
@@ -205,6 +208,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             )
             .setInterval(timeInterval: 60)
             .build()
+
+            // Store reference for manual flushing
+            TelemetryService.shared.metricReader = metricReader
 
             // Create meter provider with shared resource
             // IMPORTANT: Must register a view for metrics to be exported

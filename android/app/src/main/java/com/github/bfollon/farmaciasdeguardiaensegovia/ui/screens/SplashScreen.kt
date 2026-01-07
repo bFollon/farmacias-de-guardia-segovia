@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.R
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
@@ -186,6 +187,9 @@ fun SplashScreen(
 
         // Brief hold for smooth transition
         delay(200)
+
+        // Force flush metrics before navigation (immediate export of app launch + scraping metrics)
+        TelemetryService.forceFlushMetrics()
 
         // Navigate to main screen
         DebugConfig.debugPrint("SplashScreen: Navigating to main screen")

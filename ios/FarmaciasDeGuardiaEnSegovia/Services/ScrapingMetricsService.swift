@@ -66,14 +66,27 @@ class ScrapingMetricsService {
         let urlCount = scrapedData.count
         let success = urlCount == expectedCount && error == nil
 
+        // Get list of regions found and missing
+        let foundRegions = scrapedData.map { $0.regionName }
+        let expectedRegions = ["Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"]
+        let missingRegions = expectedRegions.filter { !foundRegions.contains($0) }
+
+        // Record counter metrics for each region
+        for data in scrapedData {
+            if let regionId = regionNameToId(data.regionName) {
+                TelemetryService.shared.recordURLScraping(region: regionId, status: "success")
+            }
+        }
+
+        for regionName in missingRegions {
+            if let regionId = regionNameToId(regionName) {
+                TelemetryService.shared.recordURLScraping(region: regionId, status: "failure")
+            }
+        }
+
         // Only record errors to Grafana (spans track all operations)
         if !success {
             DebugConfig.debugPrint("⚠️ Scraping issue detected: found \(urlCount)/\(expectedCount) URLs")
-
-            // Get list of regions found and missing
-            let foundRegions = scrapedData.map { $0.regionName }
-            let expectedRegions = ["Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"]
-            let missingRegions = expectedRegions.filter { !foundRegions.contains($0) }
 
             // Record error to Grafana (OpenTelemetry)
             recordError(
@@ -134,5 +147,21 @@ class ScrapingMetricsService {
     /// Check if metrics should be sent (user has opted in to monitoring)
     private func shouldSendMetrics() -> Bool {
         return MonitoringPreferencesService.shared.hasUserOptedIn()
+    }
+
+    /// Map region display name to region ID
+    private func regionNameToId(_ regionName: String) -> String? {
+        switch regionName {
+        case "Segovia Capital":
+            return "segovia-capital"
+        case "Cuéllar":
+            return "cuellar"
+        case "El Espinar":
+            return "el-espinar"
+        case "Segovia Rural":
+            return "segovia-rural"
+        default:
+            return nil
+        }
     }
 }

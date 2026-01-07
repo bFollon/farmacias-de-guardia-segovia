@@ -131,6 +131,9 @@ object PDFURLScrapingService {
             scrapingCompleted = true
             DebugConfig.debugPrint("$TAG: Scraping completed, ${scrapedURLs.size} URLs cached")
 
+            // Record metrics for each region
+            recordScrapingMetrics(scrapedData)
+
             // Finish span successfully
             span.setAttribute("urls_found", scrapedData.size.toLong())
             span.setAttribute("status", if (scrapedData.size == 4) "success" else "partial")
@@ -141,6 +144,10 @@ object PDFURLScrapingService {
 
         } catch (e: Exception) {
             DebugConfig.debugError("$TAG: Error scraping PDF URLs", e)
+
+            // Record failure metrics for all regions
+            recordScrapingMetrics(emptyList())
+
             span.setAttribute("error_message", e.message ?: "Unknown error")
             span.setAttribute("urls_found", 0L)
             span.setAttribute("status", "failed")
@@ -382,11 +389,50 @@ object PDFURLScrapingService {
             data.forEachIndexed { index, pdfData ->
                 DebugConfig.debugPrint("$TAG: ${index + 1}. ${pdfData.regionName}")
                 DebugConfig.debugPrint("$TAG:    URL: ${pdfData.pdfUrl}")
-                pdfData.lastUpdated?.let { 
+                pdfData.lastUpdated?.let {
                     DebugConfig.debugPrint("$TAG:    Last Updated: $it")
                 }
             }
         }
         DebugConfig.debugPrint("$TAG: ============================")
+    }
+
+    /**
+     * Record scraping metrics for each region
+     */
+    private fun recordScrapingMetrics(scrapedData: List<ScrapedPDFData>) {
+        // Expected regions
+        val expectedRegions = listOf("Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural")
+
+        // Get list of found and missing regions
+        val foundRegions = scrapedData.map { it.regionName }
+        val missingRegions = expectedRegions.filter { !foundRegions.contains(it) }
+
+        // Record success metrics for found regions
+        scrapedData.forEach { data ->
+            regionNameToId(data.regionName)?.let { regionId ->
+                TelemetryService.recordURLScraping(regionId, "success")
+            }
+        }
+
+        // Record failure metrics for missing regions
+        missingRegions.forEach { regionName ->
+            regionNameToId(regionName)?.let { regionId ->
+                TelemetryService.recordURLScraping(regionId, "failure")
+            }
+        }
+    }
+
+    /**
+     * Map region display name to region ID
+     */
+    private fun regionNameToId(regionName: String): String? {
+        return when (regionName) {
+            "Segovia Capital" -> "segovia-capital"
+            "Cuéllar" -> "cuellar"
+            "El Espinar" -> "el-espinar"
+            "Segovia Rural" -> "segovia-rural"
+            else -> null
+        }
     }
 }

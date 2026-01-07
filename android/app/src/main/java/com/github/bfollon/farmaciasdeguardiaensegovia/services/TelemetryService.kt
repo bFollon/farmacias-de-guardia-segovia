@@ -51,7 +51,9 @@ object TelemetryService {
     private var openTelemetry: OpenTelemetry? = null
     private var tracer: Tracer? = null
     private var meter: Meter? = null
+    private var metricReader: PeriodicMetricReader? = null
     private var appLaunchCounter: LongCounter? = null
+    private var urlScrapingCounter: LongCounter? = null
 
     /**
      * Whether the telemetry service has been initialized
@@ -141,8 +143,8 @@ object TelemetryService {
 
             DebugConfig.debugPrint("OTLP HTTP metrics exporter created successfully")
 
-            // Create periodic metric reader (default 60s interval)
-            val metricReader = PeriodicMetricReader.builder(metricsExporter).build()
+            // Create periodic metric reader (60s interval)
+            metricReader = PeriodicMetricReader.builder(metricsExporter).build()
 
             // Create meter provider with shared resource
             val meterProvider = SdkMeterProvider.builder()
@@ -156,9 +158,10 @@ object TelemetryService {
                 .setMeterProvider(meterProvider)
                 .build()
 
-            // Get meter and create counter
+            // Get meter and create counters
             meter = openTelemetry?.getMeter(INSTRUMENTATION_NAME)
             appLaunchCounter = meter?.counterBuilder("app.launches")?.build()
+            urlScrapingCounter = meter?.counterBuilder("pdf.urls.scraped")?.build()
 
             DebugConfig.debugPrint("OpenTelemetry (Grafana) metrics initialized (user opted in)")
 
@@ -288,6 +291,45 @@ object TelemetryService {
     }
 
     /**
+     * Record URL scraping event with region and status
+     * @param region Region identifier (e.g., "segovia-capital", "cuellar")
+     * @param status Scraping status ("success" or "failure")
+     */
+    fun recordURLScraping(region: String, status: String) {
+        val platform = "Android"
+        val environment = if (BuildConfig.DEBUG) "debug" else "production"
+
+        val attributes = Attributes.of(
+            AttributeKey.stringKey("region"), region,
+            AttributeKey.stringKey("status"), status,
+            AttributeKey.stringKey("platform"), platform,
+            AttributeKey.stringKey("environment"), environment
+        )
+
+        urlScrapingCounter?.add(1, attributes)
+        DebugConfig.debugPrint("📊 URL scraping recorded: region=$region, status=$status")
+    }
+
+    /**
+     * Force flush metrics immediately (useful after splash screen)
+     */
+    fun forceFlushMetrics() {
+        val reader = metricReader
+        if (reader == null) {
+            DebugConfig.debugPrint("⚠️ No metric reader available for flush")
+            return
+        }
+
+        DebugConfig.debugPrint("📤 Force flushing metrics...")
+        val result = reader.forceFlush()
+        if (result.isSuccess) {
+            DebugConfig.debugPrint("✅ Metrics flushed successfully")
+        } else {
+            DebugConfig.debugPrint("❌ Metrics flush failed")
+        }
+    }
+
+    /**
      * Shutdown the telemetry service gracefully
      */
     fun shutdown() {
@@ -298,7 +340,9 @@ object TelemetryService {
         openTelemetry = null
         tracer = null
         meter = null
+        metricReader = null
         appLaunchCounter = null
+        urlScrapingCounter = null
         DebugConfig.debugPrint("TelemetryService shutdown")
     }
 }
