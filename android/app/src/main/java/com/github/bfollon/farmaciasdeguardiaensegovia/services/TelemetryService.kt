@@ -205,9 +205,13 @@ object TelemetryService {
             .setSpanKind(SpanKind.INTERNAL)
             .startSpan()
 
+        // Determine environment
+        val environment = if (BuildConfig.DEBUG) "debug" else "production"
+
         // Add error attributes
         span.setAttribute("error.type", exception.javaClass.simpleName)
         span.setAttribute("error.message", exception.message ?: "Unknown error")
+        span.setAttribute("environment", environment)
 
         // Add custom attributes
         for ((key, value) in attributes) {

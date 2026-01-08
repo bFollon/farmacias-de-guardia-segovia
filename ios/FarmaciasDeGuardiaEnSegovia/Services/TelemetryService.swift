@@ -71,9 +71,17 @@ class TelemetryService {
             .setSpanKind(spanKind: .internal)
             .startSpan()
 
+        // Determine environment
+        #if DEBUG
+        let environment = "debug"
+        #else
+        let environment = "production"
+        #endif
+
         // Add error attributes
         span.setAttribute(key: "error.type", value: String(describing: type(of: error)))
         span.setAttribute(key: "error.message", value: error.localizedDescription)
+        span.setAttribute(key: "environment", value: environment)
 
         // Add custom attributes
         for (key, value) in attributes {

@@ -963,8 +963,8 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "debug",
-          "value": "debug"
+          "text": "production",
+          "value": "production"
         },
         "description": "Filter by environment",
         "includeAll": false,
