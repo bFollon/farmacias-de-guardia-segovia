@@ -23,8 +23,8 @@
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "tempo",
+        "uid": "P214B5B846CF3925F"
       },
       "fieldConfig": {
         "defaults": {
@@ -69,7 +69,7 @@
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
-            "max"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -81,18 +81,58 @@
       "pluginVersion": "12.3.1",
       "targets": [
         {
-          "expr": "sum(app_launches_total{environment=\"$environment\"})",
-          "legendFormat": "Total Launches",
-          "refId": "A"
+          "datasource": {
+            "type": "tempo",
+            "uid": "P214B5B846CF3925F"
+          },
+          "limit": 20,
+          "metricsQueryType": "range",
+          "query": "{resource.service.name=\"farmacias-guardia-segovia\" && name=\"app.launch\"} | count_over_time()",
+          "queryType": "traceql",
+          "refId": "A",
+          "serviceMapUseNativeHistograms": false,
+          "tableType": "traces"
         }
       ],
       "title": "Total Launches",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total launches",
+            "cumulative": {
+              "field": "count_over_time",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "count_over_time": true,
+              "cumulative sum(count_over_time)": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "count_over_time": "",
+              "cumulative sum(count_over_time)": "",
+              "time": ""
+            }
+          }
+        }
+      ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "tempo",
+        "uid": "P214B5B846CF3925F"
       },
       "fieldConfig": {
         "defaults": {
@@ -146,18 +186,54 @@
       "pluginVersion": "12.3.1",
       "targets": [
         {
-          "expr": "sum(app_launches_total{platform=\"iOS\", environment=\"$environment\"})",
-          "legendFormat": "iOS",
-          "refId": "A"
+          "datasource": {
+            "type": "tempo",
+            "uid": "P214B5B846CF3925F"
+          },
+          "limit": 20,
+          "metricsQueryType": "range",
+          "query": "{span.platform=\"iOS\" && resource.service.name=\"farmacias-guardia-segovia\" && name=\"app.launch\"} | count_over_time()",
+          "queryType": "traceql",
+          "refId": "A",
+          "serviceMapUseNativeHistograms": false,
+          "tableType": "traces"
         }
       ],
-      "title": "iOS Users",
+      "title": "iOS Launches",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "iOS Launches",
+            "cumulative": {
+              "field": "count_over_time",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "count_over_time": true,
+              "iOS Launches": false
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "type": "tempo",
+        "uid": "P214B5B846CF3925F"
       },
       "fieldConfig": {
         "defaults": {
@@ -211,12 +287,44 @@
       "pluginVersion": "12.3.1",
       "targets": [
         {
-          "expr": "sum(app_launches_total{platform=\"Android\", environment=\"$environment\"})",
-          "legendFormat": "Android",
+          "datasource": {
+            "type": "tempo",
+            "uid": "P214B5B846CF3925F"
+          },
+          "limit": 20,
+          "query": "{span.platform=\"Android\" && resource.service.name=\"farmacias-guardia-segovia\" && name=\"app.launch\"} | count_over_time()",
+          "queryType": "traceql",
           "refId": "A"
         }
       ],
-      "title": "Android Users",
+      "title": "Android Launches",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Android Launches",
+            "cumulative": {
+              "field": "count_over_time",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "count_over_time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
       "type": "stat"
     },
     {
@@ -870,12 +978,12 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Farmacias de Guardia - App Metrics",
   "uid": "farmacias-app-metrics",
-  "version": 7
+  "version": 19
 }
