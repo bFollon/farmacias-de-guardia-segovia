@@ -25,7 +25,7 @@ class ScheduleCacheService {
 
     /// Current cache format version. Increment when cache structure changes.
     /// Version 2: Removed schedule info from Pharmacy.additionalInfo for ZBS regions
-    private let currentCacheVersion = 2
+    private let currentCacheVersion = 3
 
     private let fileManager = FileManager.default
     private let cacheDirectory: URL

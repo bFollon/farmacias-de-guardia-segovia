@@ -29,10 +29,16 @@ import java.io.File
  * Dramatically reduces app startup time by avoiding PDF re-parsing
  */
 class ScheduleCacheService(private val context: Context) {
-    
+
+    /**
+     * Current cache format version. Increment when cache structure changes.
+     * Version 1: Initial cache implementation
+     */
+    private val CURRENT_CACHE_VERSION = 2
+
     private val cacheDir = File(context.filesDir, "schedules")
-    private val json = Json { 
-        ignoreUnknownKeys = true 
+    private val json = Json {
+        ignoreUnknownKeys = true
         encodeDefaults = false
     }
     
@@ -57,8 +63,15 @@ class ScheduleCacheService(private val context: Context) {
         
         try {
             val metadata = json.decodeFromString<CacheMetadata>(metadataFile.readText())
+
+            // Check cache version first
+            if (metadata.cacheVersion != CURRENT_CACHE_VERSION) {
+                DebugConfig.debugPrint("❌ Cache version mismatch for ${location.name} (expected: $CURRENT_CACHE_VERSION, found: ${metadata.cacheVersion})")
+                return false
+            }
+
             val pdfFile = File(context.filesDir, "pdfs/${location.associatedRegion.id}.pdf")
-            
+
             // Check if PDF file exists and hasn't been modified since cache was created
             if (!pdfFile.exists()) {
                 DebugConfig.debugPrint("📂 PDF file not found for ${location.associatedRegion.name}, cache invalid")
@@ -67,9 +80,9 @@ class ScheduleCacheService(private val context: Context) {
             
             val pdfLastModified = pdfFile.lastModified()
             val cacheIsValid = pdfLastModified <= metadata.pdfLastModified
-            
+
             if (cacheIsValid) {
-                DebugConfig.debugPrint("✅ Cache valid for ${location.name} (PDF: ${pdfLastModified}, Cache: ${metadata.pdfLastModified})")
+                DebugConfig.debugPrint("✅ Cache valid for ${location.name} (PDF: ${pdfLastModified}, Cache: ${metadata.pdfLastModified}, Version: ${metadata.cacheVersion})")
             } else {
                 DebugConfig.debugPrint("❌ Cache invalid for ${location.name} - PDF newer than cache")
             }
@@ -133,7 +146,8 @@ class ScheduleCacheService(private val context: Context) {
                 regionId = location.id,
                 scheduleCount = schedules.size,
                 cacheTimestamp = System.currentTimeMillis(),
-                pdfLastModified = if (pdfFile.exists()) pdfFile.lastModified() else System.currentTimeMillis()
+                pdfLastModified = if (pdfFile.exists()) pdfFile.lastModified() else System.currentTimeMillis(),
+                cacheVersion = CURRENT_CACHE_VERSION
             )
             
             val metadataFile = getMetadataFile(location)
@@ -239,6 +253,7 @@ class ScheduleCacheService(private val context: Context) {
         val regionId: String,
         val scheduleCount: Int,
         val cacheTimestamp: Long,
-        val pdfLastModified: Long
+        val pdfLastModified: Long,
+        val cacheVersion: Int = 1  // Default for backward compatibility with old caches
     )
 }
