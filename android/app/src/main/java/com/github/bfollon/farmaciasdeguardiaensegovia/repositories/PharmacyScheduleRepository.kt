@@ -265,10 +265,23 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * Clear cache for a specific region
      */
     suspend fun clearCacheForRegion(region: Region) {
-        schedulesCache = schedulesCache - DutyLocation.Companion.fromRegion(region)
+        // Get all locations for this region (includes all ZBS for Segovia Rural)   
+        val locationsToClear = region.toDutyLocationList()
+
+        // Clear from in-memory cache
+        locationsToClear.forEach { location ->
+            schedulesCache = schedulesCache - location
+        }
+
+        // Clear PDF cache
         pdfCacheManager.clearCache(region)
-        cacheService.clearRegionCache(DutyLocation.fromRegion(region))
-        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (including PDF cache)")
+
+        // Clear persistent cache for all locations
+        locationsToClear.forEach { location ->
+            cacheService.clearRegionCache(location)
+        }
+
+        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (${locationsToClear.size} locations, including PDF cache)")
     }
 
     /**
