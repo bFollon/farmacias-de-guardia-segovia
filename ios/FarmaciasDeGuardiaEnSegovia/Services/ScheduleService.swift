@@ -27,6 +27,21 @@ class ScheduleService {
         // Return in-memory cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[location.id], !forceRefresh {
             DebugConfig.debugPrint("ScheduleService: Using in-memory cached schedules for location \(location.name)")
+
+            // Record memory cache hit
+            TelemetryService.shared.recordCacheAccess(
+                region: location.associatedRegion,
+                cacheType: "memory",
+                result: "hit"
+            )
+
+            // Record schedule availability
+            TelemetryService.shared.recordScheduleLoad(
+                location: location,
+                schedulesCount: cached.count,
+                loadSource: "memory_cache"
+            )
+
             return cached
         }
 
@@ -34,11 +49,39 @@ class ScheduleService {
         if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
             DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for location \(location.name)")
             cachedSchedules[location.id] = persistedSchedules
+
+            // Record persistent cache hit
+            TelemetryService.shared.recordCacheAccess(
+                region: location.associatedRegion,
+                cacheType: "persistent",
+                result: "hit"
+            )
+
+            // Record schedule availability
+            TelemetryService.shared.recordScheduleLoad(
+                location: location,
+                schedulesCount: persistedSchedules.count,
+                loadSource: "persistent_cache"
+            )
+
             return persistedSchedules
         }
 
         // If we're about to parse (cache miss or invalid), clear the location's cache to avoid orphaned files
         if !forceRefresh {
+            // Record cache misses (memory was already tried and failed, persistent also failed)
+            TelemetryService.shared.recordCacheAccess(
+                region: location.associatedRegion,
+                cacheType: "memory",
+                result: "miss"
+            )
+
+            TelemetryService.shared.recordCacheAccess(
+                region: location.associatedRegion,
+                cacheType: "persistent",
+                result: "miss"
+            )
+
             cacheService.clearLocationCache(for: location)
         }
 
@@ -50,6 +93,23 @@ class ScheduleService {
         for (loc, schedules) in schedulesByLocation {
             cachedSchedules[loc.id] = schedules
             cacheService.saveSchedulesToCache(for: loc, schedules: schedules)
+
+            // Determine load source
+            let loadSource: String
+            if forceRefresh {
+                loadSource = "pdf_parse_fresh"
+            } else {
+                let wasPDFCached = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) != nil
+                loadSource = wasPDFCached ? "pdf_parse_cached" : "pdf_parse_fresh"
+            }
+
+            // Record schedule availability
+            TelemetryService.shared.recordScheduleLoad(
+                location: loc,
+                schedulesCount: schedules.count,
+                loadSource: loadSource
+            )
+
             DebugConfig.debugPrint("💾 ScheduleService: Cached \(schedules.count) schedules for \(loc.name)")
         }
 

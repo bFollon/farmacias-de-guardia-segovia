@@ -94,6 +94,21 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         // Return cached data if it exists and is fresh (unless force refresh)
         if (!location.associatedRegion.forceRefresh && cachedEntry != null) {
             DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${location.name} (${cachedEntry.size} schedules)")
+
+            // Record memory cache hit
+            com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordCacheAccess(
+                region = location.associatedRegion,
+                cacheType = "memory",
+                result = "hit"
+            )
+
+            // Record schedule availability
+            com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordScheduleLoad(
+                location = location,
+                schedulesCount = cachedEntry.size,
+                loadSource = "memory_cache"
+            )
+
             return cachedEntry
         }
 
@@ -101,10 +116,37 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         if (!location.associatedRegion.forceRefresh) {
             val cachedSchedules = cacheService.loadCachedSchedules(location)
             if (cachedSchedules != null && cachedSchedules.isNotEmpty() && cachedSchedules[location] != null) {
+                // Record persistent cache hit
+                com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordCacheAccess(
+                    region = location.associatedRegion,
+                    cacheType = "persistent",
+                    result = "hit"
+                )
+
                 // Store in memory cache as well
                 schedulesCache = schedulesCache.mergeWith(cachedSchedules) { _, b -> b } // Replace the existing schedules with the new ones
+
+                // Record schedule availability
+                com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordScheduleLoad(
+                    location = location,
+                    schedulesCount = cachedSchedules[location]!!.size,
+                    loadSource = "persistent_cache"
+                )
+
                 DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
                 return cachedSchedules[location]!!
+            } else {
+                // Record cache misses (both memory and persistent failed)
+                com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordCacheAccess(
+                    region = location.associatedRegion,
+                    cacheType = "memory",
+                    result = "miss"
+                )
+                com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordCacheAccess(
+                    region = location.associatedRegion,
+                    cacheType = "persistent",
+                    result = "miss"
+                )
             }
         }
 
@@ -131,6 +173,20 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
 
                 schedulesMap.forEach { (loadedLocation, schedules) ->
                     DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${loadedLocation.name}")
+
+                    // Determine load source
+                    val loadSource = when {
+                        location.associatedRegion.forceRefresh -> "pdf_parse_fresh"
+                        pdfCacheManager.hasCachedFile(location.associatedRegion) -> "pdf_parse_cached"
+                        else -> "pdf_parse_fresh"
+                    }
+
+                    // Record schedule availability
+                    com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordScheduleLoad(
+                        location = loadedLocation,
+                        schedulesCount = schedules.size,
+                        loadSource = loadSource
+                    )
                 }
 
             } else {

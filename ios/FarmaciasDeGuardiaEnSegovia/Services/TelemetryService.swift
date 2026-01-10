@@ -24,10 +24,25 @@ import OpenTelemetrySdk
 class TelemetryService {
     static let shared = TelemetryService()
 
-    private init() {}
+    private init() {
+        // Ensure instance ID is generated on initialization
+        _ = instanceId
+    }
 
     // Metric reader for manual flushing
     var metricReader: MetricReader?
+
+    // Instance ID for distinguishing devices in metrics
+    private lazy var instanceId: String = {
+        let key = "TelemetryServiceInstanceID"
+        if let existingId = UserDefaults.standard.string(forKey: key) {
+            return existingId
+        }
+        let newId = UUID().uuidString
+        UserDefaults.standard.set(newId, forKey: key)
+        DebugConfig.debugPrint("📊 Generated new telemetry instance ID: \(newId)")
+        return newId
+    }()
 
     private var tracer: Tracer {
         OpenTelemetry.instance.tracerProvider.get(
@@ -46,6 +61,18 @@ class TelemetryService {
 
     private lazy var urlScrapingCounter: LongCounter = {
         meter.counterBuilder(name: "pdf.urls.scraped").build()
+    }()
+
+    private lazy var scheduleLoadCounter: LongCounter = {
+        meter.counterBuilder(name: "schedule.load.completed").build()
+    }()
+
+    private lazy var cacheAccessCounter: LongCounter = {
+        meter.counterBuilder(name: "schedule.cache.access").build()
+    }()
+
+    private lazy var scheduleCountGauge: LongGauge = {
+        meter.gaugeBuilder(name: "schedule.count").ofLongs().build()
     }()
 
     /// Start a new span (equivalent to Sentry transaction)
@@ -182,5 +209,64 @@ class TelemetryService {
         } else {
             DebugConfig.debugPrint("❌ Metrics flush failed")
         }
+    }
+
+    /// Record schedule load completion with count and source
+    /// - Parameters:
+    ///   - location: The duty location loaded
+    ///   - schedulesCount: Number of schedules loaded
+    ///   - loadSource: Source of the schedules ("memory_cache", "persistent_cache", "pdf_parse_cached", "pdf_parse_fresh")
+    func recordScheduleLoad(location: DutyLocation, schedulesCount: Int, loadSource: String) {
+        let platform = "iOS"
+        #if DEBUG
+        let environment = "debug"
+        #else
+        let environment = "production"
+        #endif
+
+        let attributes: [String: AttributeValue] = [
+            "region_id": AttributeValue.string(location.associatedRegion.id),
+            "region_name": AttributeValue.string(location.associatedRegion.name),
+            "location_id": AttributeValue.string(location.id),
+            "location_name": AttributeValue.string(location.name),
+            "schedules_count": AttributeValue.int(schedulesCount),
+            "load_source": AttributeValue.string(loadSource),
+            "platform": AttributeValue.string(platform),
+            "environment": AttributeValue.string(environment),
+            "instance_id": AttributeValue.string(instanceId)
+        ]
+
+        // Record counter (tracks number of load operations)
+        scheduleLoadCounter.add(value: 1, attributes: attributes)
+
+        // Record gauge (tracks actual schedule count value for time series and alerting)
+        scheduleCountGauge.record(value: schedulesCount, attributes: attributes)
+
+        DebugConfig.debugPrint("📊 Schedule load recorded: \(location.name) - \(schedulesCount) schedules from \(loadSource) [instance: \(instanceId.prefix(8))...]")
+    }
+
+    /// Record cache access attempt
+    /// - Parameters:
+    ///   - region: The region being accessed
+    ///   - cacheType: Type of cache ("memory" or "persistent")
+    ///   - result: Result of the access ("hit" or "miss")
+    func recordCacheAccess(region: Region, cacheType: String, result: String) {
+        let platform = "iOS"
+        #if DEBUG
+        let environment = "debug"
+        #else
+        let environment = "production"
+        #endif
+
+        let attributes: [String: AttributeValue] = [
+            "region_id": AttributeValue.string(region.id),
+            "cache_type": AttributeValue.string(cacheType),
+            "result": AttributeValue.string(result),
+            "platform": AttributeValue.string(platform),
+            "environment": AttributeValue.string(environment)
+        ]
+
+        cacheAccessCounter.add(value: 1, attributes: attributes)
+        DebugConfig.debugPrint("📊 Cache access recorded: \(region.id) - \(cacheType) - \(result)")
     }
 }

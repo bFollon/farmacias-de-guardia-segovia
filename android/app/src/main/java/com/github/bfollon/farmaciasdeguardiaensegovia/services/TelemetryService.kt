@@ -47,6 +47,7 @@ import java.util.concurrent.TimeUnit
 object TelemetryService {
 
     private const val INSTRUMENTATION_NAME = "farmacias-guardia-segovia"
+    private const val INSTANCE_ID_KEY = "TelemetryServiceInstanceID"
 
     private var openTelemetry: OpenTelemetry? = null
     private var tracer: Tracer? = null
@@ -54,6 +55,11 @@ object TelemetryService {
     private var metricReader: PeriodicMetricReader? = null
     private var appLaunchCounter: LongCounter? = null
     private var urlScrapingCounter: LongCounter? = null
+    private var scheduleLoadCounter: LongCounter? = null
+    private var cacheAccessCounter: LongCounter? = null
+
+    // Instance ID for distinguishing devices in metrics
+    private var instanceId: String? = null
 
     /**
      * Whether the telemetry service has been initialized
@@ -76,6 +82,17 @@ object TelemetryService {
         if (!MonitoringPreferencesService.hasUserOptedIn()) {
             DebugConfig.debugPrint("OpenTelemetry (Grafana) monitoring disabled (user has not opted in)")
             return
+        }
+
+        // Initialize instance ID
+        val prefs = context.getSharedPreferences("telemetry_prefs", Context.MODE_PRIVATE)
+        instanceId = prefs.getString(INSTANCE_ID_KEY, null)
+        if (instanceId == null) {
+            instanceId = java.util.UUID.randomUUID().toString()
+            prefs.edit().putString(INSTANCE_ID_KEY, instanceId).apply()
+            DebugConfig.debugPrint("📊 Generated new telemetry instance ID: $instanceId")
+        } else {
+            DebugConfig.debugPrint("📊 Using existing telemetry instance ID: ${instanceId?.take(8)}...")
         }
 
         try {
@@ -162,6 +179,8 @@ object TelemetryService {
             meter = openTelemetry?.getMeter(INSTRUMENTATION_NAME)
             appLaunchCounter = meter?.counterBuilder("app.launches")?.build()
             urlScrapingCounter = meter?.counterBuilder("pdf.urls.scraped")?.build()
+            scheduleLoadCounter = meter?.counterBuilder("schedule.load.completed")?.build()
+            cacheAccessCounter = meter?.counterBuilder("schedule.cache.access")?.build()
 
             DebugConfig.debugPrint("OpenTelemetry (Grafana) metrics initialized (user opted in)")
 
@@ -334,6 +353,63 @@ object TelemetryService {
     }
 
     /**
+     * Record schedule load completion with count and source
+     * @param location The duty location loaded
+     * @param schedulesCount Number of schedules loaded
+     * @param loadSource Source of the schedules ("memory_cache", "persistent_cache", "pdf_parse_cached", "pdf_parse_fresh")
+     */
+    fun recordScheduleLoad(location: com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation, schedulesCount: Int, loadSource: String) {
+        val platform = "Android"
+        val environment = if (BuildConfig.DEBUG) "debug" else "production"
+
+        val attributes = Attributes.builder()
+            .put("region_id", location.associatedRegion.id)
+            .put("region_name", location.associatedRegion.name)
+            .put("location_id", location.id)
+            .put("location_name", location.name)
+            .put("schedules_count", schedulesCount.toLong())
+            .put("load_source", loadSource)
+            .put("platform", platform)
+            .put("environment", environment)
+            .apply {
+                instanceId?.let { put("instance_id", it) }
+            }
+            .build()
+
+        // Record counter (tracks number of load operations)
+        scheduleLoadCounter?.add(1, attributes)
+
+        // Note: Gauge recording on Android uses a different callback-based API
+        // For now, relying on counter with schedules_count attribute + instance_id for per-device tracking
+        // TODO: Implement callback-based gauge if needed for better time series queries
+
+        val instancePrefix = instanceId?.take(8) ?: "unknown"
+        DebugConfig.debugPrint("📊 Schedule load recorded: ${location.name} - $schedulesCount schedules from $loadSource [instance: $instancePrefix...]")
+    }
+
+    /**
+     * Record cache access attempt
+     * @param region The region being accessed
+     * @param cacheType Type of cache ("memory" or "persistent")
+     * @param result Result of the access ("hit" or "miss")
+     */
+    fun recordCacheAccess(region: com.github.bfollon.farmaciasdeguardiaensegovia.data.Region, cacheType: String, result: String) {
+        val platform = "Android"
+        val environment = if (BuildConfig.DEBUG) "debug" else "production"
+
+        val attributes = Attributes.of(
+            AttributeKey.stringKey("region_id"), region.id,
+            AttributeKey.stringKey("cache_type"), cacheType,
+            AttributeKey.stringKey("result"), result,
+            AttributeKey.stringKey("platform"), platform,
+            AttributeKey.stringKey("environment"), environment
+        )
+
+        cacheAccessCounter?.add(1, attributes)
+        DebugConfig.debugPrint("📊 Cache access recorded: ${region.id} - $cacheType - $result")
+    }
+
+    /**
      * Shutdown the telemetry service gracefully
      */
     fun shutdown() {
@@ -347,6 +423,9 @@ object TelemetryService {
         metricReader = null
         appLaunchCounter = null
         urlScrapingCounter = null
+        scheduleLoadCounter = null
+        cacheAccessCounter = null
+        instanceId = null
         DebugConfig.debugPrint("TelemetryService shutdown")
     }
 }
