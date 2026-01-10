@@ -20,7 +20,7 @@ import PDFKit
 
 class CuellarParser: PDFParsingStrategy {
     /// Current year being processed, incremented when January 1st is found
-    private var currentYear = 2024
+    private var currentYear = Calendar.current.component(.year, from: Date()) - 1
     
     // Lookup tables for Spanish names
     private let weekdays = [
