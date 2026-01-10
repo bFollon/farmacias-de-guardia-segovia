@@ -199,7 +199,7 @@ class ElEspinarParser : PDFParsingStrategy {
         DebugConfig.debugPrint("🏠 Pharmacy: $pharmacyKey")
         DebugConfig.debugPrint("📆 Current year: $year")
 
-        return dates.fold(Pair(emptyList(), year)) { (acc, year), date ->
+        return dates.toSet().fold(Pair(emptyList(), year)) { (acc, year), date ->
             val transientYear = if (date.matches(Regex("01[‐-]ene"))) {
                 DebugConfig.debugPrint("🎊 New year detected! Now processing year ${year + 1}")
                 year + 1

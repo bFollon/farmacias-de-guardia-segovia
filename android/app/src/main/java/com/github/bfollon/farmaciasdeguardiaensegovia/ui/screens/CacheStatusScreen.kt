@@ -55,6 +55,7 @@ fun CacheStatusScreen(
 ) {
     val cacheStatuses by viewModel.cacheStatuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
 
     Scaffold { innerPadding ->
         if (isLoading) {
@@ -99,6 +100,14 @@ fun CacheStatusScreen(
                 // Info Section
                 item {
                     CacheInfoCard()
+                }
+
+                // Force Refresh Button Section
+                item {
+                    ForceRefreshButton(
+                        isRefreshing = isRefreshing,
+                        onClick = { viewModel.refreshAllCaches() }
+                    )
                 }
             }
         }
@@ -367,6 +376,49 @@ private fun InfoColorRow(color: Color, text: String) {
         Text(
             text = text,
             style = MaterialTheme.typography.bodyLarge
+        )
+    }
+}
+
+/**
+ * Button to force refresh all PDF caches
+ */
+@Composable
+private fun ForceRefreshButton(
+    isRefreshing: Boolean,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        FilledTonalButton(
+            onClick = onClick,
+            enabled = !isRefreshing,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            if (isRefreshing) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    strokeWidth = 2.dp,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Actualizando todos los PDFs...")
+            } else {
+                Icon(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = null
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Forzar actualización de todos los PDFs")
+            }
+        }
+
+        Text(
+            text = "Esto descargará y procesará nuevamente todos los PDFs de guardias, actualizando la caché.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

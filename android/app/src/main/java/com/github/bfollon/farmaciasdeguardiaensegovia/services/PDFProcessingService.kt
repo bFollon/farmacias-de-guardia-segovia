@@ -39,10 +39,10 @@ class PDFProcessingService {
 
     // Registry of parsing strategies for each region
     private val parsingStrategies: Map<String, PDFParsingStrategy> = mapOf(
-        "segovia-capital" to SegoviaCapitalParser(),
-        "cuellar" to CuellarParser(),
-        "el-espinar" to ElEspinarParser(),
-        "segovia-rural" to SegoviaRuralParser()
+        Region.ID_SEGOVIA_CAPITAL to SegoviaCapitalParser(),
+        Region.ID_CUELLAR to CuellarParser(),
+        Region.ID_EL_ESPINAR to ElEspinarParser(),
+        Region.ID_SEGOVIA_RURAL to SegoviaRuralParser()
     )
 
     /**

@@ -142,10 +142,13 @@ fun AppNavigation() {
         composable("main") {
             MainScreen(
                 onRegionSelected = { region ->
-                    when (region) {
-                        Region.Companion.segoviaCapital, Region.Companion.cuellar, Region.Companion.elEspinar -> {
+                    DebugConfig.debugPrint("🔷 MainActivity: Region selected: ${region.name} (${region.id})")
+                    when (region.id) {
+                        Region.ID_SEGOVIA_CAPITAL, Region.ID_CUELLAR, Region.ID_EL_ESPINAR -> {
+                            DebugConfig.debugPrint("🔷 MainActivity: Setting selectedLocationId=${region.id}, showScheduleModal=true")
                             selectedLocationId = region.id
                             showScheduleModal = true
+                            DebugConfig.debugPrint("🔷 MainActivity: State updated - selectedLocationId=$selectedLocationId, showScheduleModal=$showScheduleModal")
                         }
 
                         else -> {
@@ -168,14 +171,17 @@ fun AppNavigation() {
     
     // Schedule Modal (state-based presentation)
     if (showScheduleModal && selectedLocationId != null) {
+        DebugConfig.debugPrint("🔷 MainActivity: Showing ScheduleScreen modal for locationId=$selectedLocationId")
         ModalBottomSheet(
             onDismissRequest = {
+                DebugConfig.debugPrint("🔷 MainActivity: ScheduleScreen modal dismissed")
                 showScheduleModal = false
                 selectedLocationId = null
             },
             sheetState = scheduleSheetState,
             containerColor = MaterialTheme.colorScheme.background,
         ) {
+            DebugConfig.debugPrint("🔷 MainActivity: Composing ScheduleScreen with locationId=$selectedLocationId")
             ScheduleScreen(
                 locationId = selectedLocationId!!,
                 onBack = {

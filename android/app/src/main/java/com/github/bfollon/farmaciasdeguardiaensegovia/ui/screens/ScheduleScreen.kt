@@ -80,7 +80,9 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
@@ -112,10 +114,14 @@ fun ScheduleScreen(
     onNavigateToCantalejoInfo: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
+    DebugConfig.debugPrint("🔷 ScheduleScreen: Composing with locationId=$locationId")
     val context = LocalContext.current
+    DebugConfig.debugPrint("🔷 ScheduleScreen: Creating ViewModel for locationId=$locationId")
     val viewModel: ScheduleViewModel = viewModel(key = locationId) {
-        ScheduleViewModel(context, locationId ?: "segovia-capital")
+        DebugConfig.debugPrint("🔷 ScheduleScreen: ViewModel factory lambda called for locationId=$locationId")
+        ScheduleViewModel(context, locationId ?: Region.ID_SEGOVIA_CAPITAL)
     }
+    DebugConfig.debugPrint("🔷 ScheduleScreen: ViewModel created, collecting uiState")
     val uiState by viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 

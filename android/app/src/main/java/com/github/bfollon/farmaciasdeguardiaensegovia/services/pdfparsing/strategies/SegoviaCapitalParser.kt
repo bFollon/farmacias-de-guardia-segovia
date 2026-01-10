@@ -65,7 +65,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             RegexOption.IGNORE_CASE
         )
 
-        val startingYear = PDFParsingUtils.getCurrentYear()
+        val startingYear = PDFParsingUtils.getCurrentYear() - 1
 
         val ADDRESS_REGEX = Regex(
             """^(?i)(?:$SPANISH_DAY_REGEX),\s*(?:\d{1,2})\s*de\s*(?:$SPANISH_MONTH_REGEX)\s+(.+?)(?:,\s*)?(\d+|S/N)\s+(.+?)(?:,\s*)?(\d+|S/N)$""",
@@ -134,7 +134,7 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
 
         return try {
             val pageCount = pdfDoc.numberOfPages
-            DebugConfig.debugPrint("📄 Processing $pageCount pages of El Espinar PDF...")
+            DebugConfig.debugPrint("📄 Processing $pageCount pages of Segovia Capital PDF...")
 
             val (allSchedules, _) = (1..pageCount).fold(Pair(emptyList<PharmacySchedule>(), startingYear)) { (acc, accYear), pageIndex ->
                 DebugConfig.debugPrint("📃 Processing page $pageIndex of $pageCount")

@@ -252,10 +252,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             } else {
                 // Load the region (actual loading for implemented regions, placeholder for others)
                 val success = when (region.id) {
-                    "segovia-capital" -> loadRegionPDF(region, "Segovia Capital")
-                    "cuellar" -> loadRegionPDF(region, "Cuéllar")
-                    "el-espinar" -> loadRegionPDF(region, "El Espinar")
-                    "segovia-rural" -> loadRegionPDF(region, "Segovia Rural")
+                    Region.ID_SEGOVIA_CAPITAL -> loadRegionPDF(region, "Segovia Capital")
+                    Region.ID_CUELLAR -> loadRegionPDF(region, "Cuéllar")
+                    Region.ID_EL_ESPINAR -> loadRegionPDF(region, "El Espinar")
+                    Region.ID_SEGOVIA_RURAL -> loadRegionPDF(region, "Segovia Rural")
                     else -> loadPlaceholderPDF(region)
                 }
 

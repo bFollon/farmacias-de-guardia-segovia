@@ -132,10 +132,12 @@ class PDFURLRepository private constructor(private val context: Context) {
      */
     private fun loadPersistedURLs(): Map<String, String> {
         val json = sharedPreferences.getString(SCRAPED_URLS_KEY, null) ?: return emptyMap()
-        
+
         return try {
             val data = this.json.decodeFromString<ScrapedURLData>(json)
-            DebugConfig.debugPrint("📂 PDFURLRepository: Loaded ${data.urls.size} persisted URLs")
+            val stackTrace = Thread.currentThread().stackTrace
+            val caller = stackTrace.getOrNull(3)?.let { "${it.className}.${it.methodName}:${it.lineNumber}" } ?: "unknown"
+            DebugConfig.debugPrint("📂 PDFURLRepository: Loaded ${data.urls.size} persisted URLs (called from: $caller)")
             data.urls
         } catch (e: Exception) {
             DebugConfig.debugError("Failed to load persisted URLs", e)

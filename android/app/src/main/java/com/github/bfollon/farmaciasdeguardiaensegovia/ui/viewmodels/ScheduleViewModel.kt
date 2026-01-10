@@ -25,6 +25,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,6 +73,7 @@ class ScheduleViewModel(
     val uiState: StateFlow<ScheduleUiState> = _uiState.asStateFlow()
     
     init {
+        DebugConfig.debugPrint("🔷 ScheduleViewModel: Initializing for location ${location?.name ?: "null"}")
         // Update the state with the current region and load its schedules
         _uiState.value = _uiState.value.copy(location = location)
         loadSchedules(location)
@@ -81,15 +83,19 @@ class ScheduleViewModel(
      * Load schedules for a specific region
      */
     fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false) {
+        DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Starting for ${location.name}, forceRefresh=$forceRefresh")
         viewModelScope.launch {
             try {
+                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Inside coroutine, setting isLoading=true")
                 _uiState.value = _uiState.value.copy(
                     isLoading = true,
                     error = null,
                     location = location
                 )
-                
+
+                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Calling scheduleService.loadSchedules...")
                 val schedules = scheduleService.loadSchedules(location, forceRefresh)
+                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Received ${schedules.size} schedules")
                 val currentDateTime = scheduleService.getCurrentDateTime()
 
                 // Find current schedule and active timespan

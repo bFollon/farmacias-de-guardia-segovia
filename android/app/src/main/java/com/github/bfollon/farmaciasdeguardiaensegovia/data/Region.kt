@@ -44,6 +44,12 @@ data class Region(
     val forceRefresh: Boolean = false
 ) {
     companion object {
+        // Region ID constants
+        const val ID_SEGOVIA_CAPITAL = "segovia-capital"
+        const val ID_CUELLAR = "cuellar"
+        const val ID_EL_ESPINAR = "el-espinar"
+        const val ID_SEGOVIA_RURAL = "segovia-rural"
+
         /**
          * Set the URL provider for regions
          * Must be called during app initialization before creating regions
@@ -59,80 +65,78 @@ data class Region(
         }
         
         /** The default region (Segovia Capital) */
-        val segoviaCapital: Region
-            get() {
-                val finalURL = getURL(
-                    "Segovia Capital",
-                    "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf"
+        val segoviaCapital: Region by lazy {
+            val finalURL = getURL(
+                "Segovia Capital",
+                "https://cofsegovia.com/wp-content/uploads/2025/05/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-DIA-2025.pdf"
+            )
+            Region(
+                id = ID_SEGOVIA_CAPITAL,
+                name = "Segovia Capital",
+                icon = "🏙",
+                pdfURL = finalURL,
+                metadata = RegionMetadata(
+                    has24HourPharmacies = false,
+                    notes = "Includes both day and night shifts"
                 )
-                return Region(
-                    id = "segovia-capital",
-                    name = "Segovia Capital",
-                    icon = "🏙",
-                    pdfURL = finalURL,
-                    metadata = RegionMetadata(
-                        has24HourPharmacies = false,
-                        notes = "Includes both day and night shifts"
-                    )
-                )
-            }
+            )
+        }
         
         /** Cuéllar region */
-        val cuellar: Region
-            get() {
-                val finalURL = getURL(
-                    "Cuéllar",
-                    "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf"
+        val cuellar: Region by lazy {
+            val finalURL = getURL(
+                "Cuéllar",
+                "https://cofsegovia.com/wp-content/uploads/2025/01/GUARDIAS-CUELLAR_2025.pdf"
+            )
+            Region(
+                id = ID_CUELLAR,
+                name = "Cuéllar",
+                icon = "🌳",
+                pdfURL = finalURL,
+                metadata = RegionMetadata(
+                    notes = "Servicios semanales excepto primera semana de septiembre"
                 )
-                return Region(
-                    id = "cuellar",
-                    name = "Cuéllar",
-                    icon = "🌳",
-                    pdfURL = finalURL,
-                    metadata = RegionMetadata(
-                        notes = "Servicios semanales excepto primera semana de septiembre"
-                    )
-                )
-            }
+            )
+        }
         
         /** El Espinar region */
-        val elEspinar: Region
-            get() {
-                val finalURL = getURL(
-                    "El Espinar",
-                    "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf"
+        val elEspinar: Region by lazy {
+            val finalURL = getURL(
+                "El Espinar",
+                "https://cofsegovia.com/wp-content/uploads/2025/01/Guardias-EL-ESPINAR_2025.pdf"
+            )
+            Region(
+                id = ID_EL_ESPINAR,
+                name = "El Espinar / San Rafael",
+                icon = "🏔️",
+                pdfURL = finalURL,
+                metadata = RegionMetadata(
+                    notes = "Servicios semanales"
                 )
-                return Region(
-                    id = "el-espinar",
-                    name = "El Espinar / San Rafael",
-                    icon = "🏔️",
-                    pdfURL = finalURL,
-                    metadata = RegionMetadata(
-                        notes = "Servicios semanales"
-                    )
-                )
-            }
+            )
+        }
         
         /** Segovia Rural region */
-        val segoviaRural: Region
-            get() {
-                val finalURL = getURL(
-                    "Segovia Rural",
-                    "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf"
+        val segoviaRural: Region by lazy {
+            val finalURL = getURL(
+                "Segovia Rural",
+                "https://cofsegovia.com/wp-content/uploads/2025/06/SERVICIOS-DE-URGENCIA-RURALES-2025.pdf"
+            )
+            Region(
+                id = ID_SEGOVIA_RURAL,
+                name = "Segovia Rural",
+                icon = "🚜",
+                pdfURL = finalURL,
+                metadata = RegionMetadata(
+                    notes = "Servicios de urgencia rurales"
                 )
-                return Region(
-                    id = "segovia-rural",
-                    name = "Segovia Rural",
-                    icon = "🚜",
-                    pdfURL = finalURL,
-                    metadata = RegionMetadata(
-                        notes = "Servicios de urgencia rurales"
-                    )
-                )
-            }
+            )
+        }
         
         /** List of all available regions */
-        val allRegions = listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)
+        val allRegions: List<Region> by lazy {
+            listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)
+        }
     }
 
     fun toDutyLocationList(): List<DutyLocation> = when(id) {
