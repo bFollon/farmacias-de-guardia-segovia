@@ -92,7 +92,10 @@ class ElEspinarParser: PDFParsingStrategy {
         DebugConfig.debugPrint("🏠 Address: \(address)")
         DebugConfig.debugPrint("📆 Current year: \(currentYear)")
         
-        for date in dates {
+        var seen = Set<String>()
+        let uniqueDates = dates.filter { seen.insert($0).inserted }
+        
+        for date in uniqueDates {
             // If this is January 1st, increment the year
             let pattern = #"01[‐-]ene"#
             if let regex = try? NSRegularExpression(pattern: pattern),
