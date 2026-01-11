@@ -265,7 +265,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * Clear cache for a specific region
      */
     suspend fun clearCacheForRegion(region: Region) {
-        // Get all locations for this region (includes all ZBS for Segovia Rural)   
+        // Get all locations for this region (includes all ZBS for Segovia Rural)
         val locationsToClear = region.toDutyLocationList()
 
         // Clear from in-memory cache
