@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DayScheduleView: View {
-    let schedule: PharmacySchedule
+    let schedule: PharmacySchedule?
     let location: DutyLocation
     @Binding var isPresentingInfo: Bool // Keep for backward compatibility
     @State private var isPresentingDayInfo: Bool = false
@@ -90,62 +90,93 @@ struct DayScheduleView: View {
                         .disabled(location.detailViewId == nil)
                     }
 
-                    if location.id == "segovia-capital" {
-                        // Show day/night shifts for Segovia Capital
-                        VStack(alignment: .leading, spacing: 12) {
-                            ScheduleHeaderView(timeSpan: .capitalDay, date: date, isPresentingInfo: $isPresentingDayInfo)
-                            if let pharmacy = schedule.dayShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalDay)
-                            }
-                        }
-                        .padding(.vertical)
-
-                        Divider()
-
-                        VStack(alignment: .leading, spacing: 12) {
-                            ScheduleHeaderView(timeSpan: .capitalNight, date: date, isPresentingInfo: $isPresentingNightInfo)
-                            if let pharmacy = schedule.nightShiftPharmacies.first {
-                                PharmacyView(pharmacy: pharmacy, activeShift: .capitalNight)
-                            }
-                        }
-                        .padding(.vertical)
-                    } else {
-                        // Show schedule header and pharmacies for other regions
-                        // Determine shift type from schedule.shifts (first available shift)
-                        if let firstShift = schedule.shifts.keys.first {
+                    if let schedule = schedule {
+                        // Schedule exists - show pharmacy information
+                        if location.id == "segovia-capital" {
+                            // Show day/night shifts for Segovia Capital
                             VStack(alignment: .leading, spacing: 12) {
-                                ScheduleHeaderView(timeSpan: firstShift, date: date, isPresentingInfo: $isPresentingInfo)
+                                ScheduleHeaderView(timeSpan: .capitalDay, date: date, isPresentingInfo: $isPresentingDayInfo)
+                                if let pharmacy = schedule.dayShiftPharmacies.first {
+                                    PharmacyView(pharmacy: pharmacy, activeShift: .capitalDay)
+                                } else {
+                                    NoPharmacyOnDutyCard(
+                                        message: "No hay farmacia de guardia asignada para el turno de día.",
+                                        additionalInfo: nil
+                                    )
+                                }
+                            }
+                            .padding(.vertical)
 
-                                if let pharmacies = schedule.shifts[firstShift], !pharmacies.isEmpty {
-                                    ForEach(pharmacies, id: \.name) { pharmacy in
-                                        PharmacyView(pharmacy: pharmacy, activeShift: firstShift)
+                            Divider()
+
+                            VStack(alignment: .leading, spacing: 12) {
+                                ScheduleHeaderView(timeSpan: .capitalNight, date: date, isPresentingInfo: $isPresentingNightInfo)
+                                if let pharmacy = schedule.nightShiftPharmacies.first {
+                                    PharmacyView(pharmacy: pharmacy, activeShift: .capitalNight)
+                                } else {
+                                    NoPharmacyOnDutyCard(
+                                        message: "No hay farmacia de guardia asignada para el turno de noche.",
+                                        additionalInfo: nil
+                                    )
+                                }
+                            }
+                            .padding(.vertical)
+                        } else {
+                            // Show schedule header and pharmacies for other regions
+                            // Determine shift type from schedule.shifts (first available shift)
+                            if let firstShift = schedule.shifts.keys.first {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    ScheduleHeaderView(timeSpan: firstShift, date: date, isPresentingInfo: $isPresentingInfo)
+
+                                    if let pharmacies = schedule.shifts[firstShift], !pharmacies.isEmpty {
+                                        ForEach(pharmacies, id: \.name) { pharmacy in
+                                            PharmacyView(pharmacy: pharmacy, activeShift: firstShift)
+                                        }
+                                    } else {
+                                        NoPharmacyOnDutyCard(
+                                            message: "No hay farmacia de guardia asignada para esta fecha.",
+                                            additionalInfo: nil
+                                        )
                                     }
                                 }
-                            }
-                        } else {
-                            // Fallback to legacy properties if shift data unavailable
-                            let pharmacies = schedule.dayShiftPharmacies
-                            if !pharmacies.isEmpty {
-                                // Use fullDay as default for non-capital regions
-                                ScheduleHeaderView(timeSpan: .fullDay, date: date, isPresentingInfo: $isPresentingInfo)
+                            } else {
+                                // Fallback to legacy properties if shift data unavailable
+                                let pharmacies = schedule.dayShiftPharmacies
+                                if !pharmacies.isEmpty {
+                                    // Use fullDay as default for non-capital regions
+                                    ScheduleHeaderView(timeSpan: .fullDay, date: date, isPresentingInfo: $isPresentingInfo)
 
-                                ForEach(pharmacies, id: \.name) { pharmacy in
-                                    PharmacyView(pharmacy: pharmacy, activeShift: .fullDay)
+                                    ForEach(pharmacies, id: \.name) { pharmacy in
+                                        PharmacyView(pharmacy: pharmacy, activeShift: .fullDay)
+                                    }
+                                } else {
+                                    NoPharmacyOnDutyCard(
+                                        message: "No hay farmacia de guardia asignada para esta fecha.",
+                                        additionalInfo: nil
+                                    )
                                 }
                             }
                         }
+                    } else {
+                        // No schedule found for this date - show inline empty card
+                        NoPharmacyOnDutyCard(
+                            message: !networkMonitor.isOnline
+                                ? "Sin conexión y sin datos almacenados para esta fecha."
+                                : "No hay farmacia de guardia programada para esta fecha.",
+                            additionalInfo: "Intente refrescar o seleccione una fecha diferente."
+                        )
                     }
                 }
                 
                 Divider()
                     .padding(.vertical)
-                
+
                 // Disclaimer and support section
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Aviso")
                         .font(.footnote)
                         .fontWeight(.semibold)
-                    
+
                     Text("La información mostrada puede no ser exacta. Por favor, consulte siempre la fuente oficial:")
                         .font(.footnote)
                         .foregroundColor(.secondary)
@@ -157,15 +188,15 @@ struct DayScheduleView: View {
                     }
                     .font(.footnote)
                     .disabled(isValidatingPDFLink)
-                    
+
                     let emailBody = AppConfig.EmailLinks.dayScheduleErrorBody(
                         date: formattedDate,
-                        dayPharmacyName: schedule.dayShiftPharmacies.first?.name ?? "",
-                        dayPharmacyAddress: schedule.dayShiftPharmacies.first?.address ?? "",
-                        nightPharmacyName: schedule.nightShiftPharmacies.first?.name ?? "",
-                        nightPharmacyAddress: schedule.nightShiftPharmacies.first?.address ?? ""
+                        dayPharmacyName: schedule?.dayShiftPharmacies.first?.name ?? "",
+                        dayPharmacyAddress: schedule?.dayShiftPharmacies.first?.address ?? "",
+                        nightPharmacyName: schedule?.nightShiftPharmacies.first?.name ?? "",
+                        nightPharmacyAddress: schedule?.nightShiftPharmacies.first?.address ?? ""
                     )
-                    
+
                     if let errorURL = AppConfig.EmailLinks.errorReport(body: emailBody) {
                         Link("¿Ha encontrado algún error? Repórtelo aquí",
                              destination: errorURL)

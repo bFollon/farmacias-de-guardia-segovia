@@ -25,7 +25,8 @@
       "WebFetch(domain:signoz.io)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:grafana.com)",
-      "Bash(git show:*)"
+      "Bash(git show:*)",
+      "Bash(xcrun agvtool:*)"
     ],
     "deny": [],
     "ask": []

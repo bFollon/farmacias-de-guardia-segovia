@@ -45,27 +45,25 @@ struct PDFViewScreen: View {
             Group {
                 if isLoading || isRefreshing {
                     LoadingView()
-                } else if let schedule = ScheduleService.findSchedule(for: selectedDate, in: schedules) {
-                    if Calendar.current.isDateInToday(selectedDate),
+                } else if Calendar.current.isDateInToday(selectedDate),
                        let current = ScheduleService.findCurrentSchedule(in: schedules, for: location.associatedRegion) {
-                        ScheduleContentView(
-                            schedule: current.0,
-                            activeShift: current.1,
-                            location: location,
-                            isPresentingInfo: $isPresentingInfo,
-                            formattedDateTime: ScheduleService.getCurrentDateTime(),
-                            cacheTimestamp: cacheTimestamp
-                        )
-                    } else {
-                        DayScheduleView(
-                            schedule: schedule,
-                            location: location,
-                            isPresentingInfo: $isPresentingInfo,
-                            date: selectedDate
-                        )
-                    }
+                    // Today's view with current schedule
+                    ScheduleContentView(
+                        schedule: current.0,
+                        activeShift: current.1,
+                        location: location,
+                        isPresentingInfo: $isPresentingInfo,
+                        formattedDateTime: ScheduleService.getCurrentDateTime(),
+                        cacheTimestamp: cacheTimestamp
+                    )
                 } else {
-                    NoScheduleView()
+                    // Selected date view - DayScheduleView handles nil schedule with inline card
+                    DayScheduleView(
+                        schedule: ScheduleService.findSchedule(for: selectedDate, in: schedules),
+                        location: location,
+                        isPresentingInfo: $isPresentingInfo,
+                        date: selectedDate
+                    )
                 }
             }
             .id(refreshTrigger) // Force refresh when trigger changes

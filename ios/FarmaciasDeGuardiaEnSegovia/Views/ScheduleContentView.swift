@@ -133,6 +133,12 @@ struct ScheduleContentView: View {
                             ForEach(pharmacies, id: \.name) { pharmacy in
                                 PharmacyView(pharmacy: pharmacy, activeShift: activeShift)
                             }
+                        } else {
+                            // No pharmacy assigned for current shift
+                            NoPharmacyOnDutyCard(
+                                message: "No hay farmacia de guardia asignada para el turno actual.",
+                                additionalInfo: "Por favor, consulte el calendario oficial o intente refrescar."
+                            )
                         }
                     }
 
@@ -149,7 +155,8 @@ struct ScheduleContentView: View {
 
                 Divider()
                     .padding(.vertical)
-                
+
+                // Disclaimer and support section
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Aviso")
                         .font(.footnote)
