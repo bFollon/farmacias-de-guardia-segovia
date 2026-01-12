@@ -42,7 +42,7 @@ import kotlin.collections.plus
 class CuellarParser : PDFParsingStrategy {
 
     /** Current year being processed, incremented when January 1st is found */
-    private val startingYear = PDFParsingUtils.getCurrentYear() - 1
+    private var startingYear: Int = -1
 
     override fun getStrategyName(): String = "CuellarParser"
 
@@ -56,6 +56,19 @@ class CuellarParser : PDFParsingStrategy {
         return try {
             val pageCount = pdfDoc.numberOfPages
             DebugConfig.debugPrint("📄 Processing $pageCount pages of Cuéllar PDF...")
+
+            // Detect year from first page if not already set
+            if (startingYear == -1) {
+                val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
+                val yearResult = YearDetectionService.detectYear(firstPageContent)
+                startingYear = yearResult.year
+
+                yearResult.warning?.let {
+                    DebugConfig.debugPrint("⚠️ Year detection warning: $it")
+                }
+
+                DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: ${yearResult.year}")
+            }
 
             // iText uses 1-based indexing
             val (allSchedules, _) = (1..pageCount).fold(Pair(emptyList<PharmacySchedule>(), startingYear)) { (acc, year), pageIndex ->

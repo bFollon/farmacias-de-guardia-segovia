@@ -20,7 +20,8 @@ import PDFKit
 
 class ElEspinarParser: PDFParsingStrategy {
     /// Current year being processed, incremented when January 1st is found
-    private var currentYear = Calendar.current.component(.year, from: Date()) - 1
+    /// Initialized from PDF year detection, then incremented during parsing
+    private var currentYear: Int = -1
     
     // Lookup tables for Spanish names
     private let weekdays = [
@@ -168,6 +169,18 @@ class ElEspinarParser: PDFParsingStrategy {
         let pageCount = pdfDocument.pageCount
 
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
+
+        // Detect year from first page if not already set
+        if currentYear == -1, let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string {
+            let yearResult = YearDetectionService.shared.detectYear(from: pageText)
+            currentYear = yearResult.year
+
+            if let warning = yearResult.warning {
+                DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
+            }
+
+            DebugConfig.debugPrint("📅 Detected starting year for El Espinar: \(currentYear)")
+        }
 
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex),

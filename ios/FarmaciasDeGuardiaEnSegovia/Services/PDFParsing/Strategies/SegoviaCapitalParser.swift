@@ -22,14 +22,27 @@ import PDFKit
 /// Wraps our new SegoviaPDFParser to maintain compatibility while we transition.
 public class SegoviaCapitalParser: PDFParsingStrategy {
     private let parser: SegoviaPDFParser
-    
+    private var detectedYear: Int?
+
     public init() {
         self.parser = SegoviaPDFParser()
     }
-    
+
     public func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
         var allSchedules: [PharmacySchedule] = []
-        
+
+        // Detect year from first page
+        if detectedYear == nil, let firstPage = pdf.page(at: 0), let pageText = firstPage.string {
+            let yearResult = YearDetectionService.shared.detectYear(from: pageText)
+            detectedYear = yearResult.year
+
+            if let warning = yearResult.warning {
+                DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
+            }
+
+            DebugConfig.debugPrint("📅 Detected starting year for Segovia Capital: \(yearResult.year)")
+        }
+
         // Process each page
         for pageIndex in 0..<pdf.pageCount {
             guard let page = pdf.page(at: pageIndex) else { continue }

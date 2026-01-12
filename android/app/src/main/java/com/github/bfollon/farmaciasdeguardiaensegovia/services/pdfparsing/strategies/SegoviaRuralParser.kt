@@ -50,6 +50,9 @@ import kotlin.collections.forEach
  */
 class SegoviaRuralParser : PDFParsingStrategy {
 
+    /** Detected base year from PDF for converting 2-digit years */
+    private var detectedBaseYear: Int? = null
+
     /**
      * Data class for pharmacy information
      */
@@ -378,6 +381,19 @@ class SegoviaRuralParser : PDFParsingStrategy {
             val pageCount = pdfDoc.numberOfPages
             println("📄 Processing $pageCount pages of Segovia Rural PDF...")
 
+            // Detect year from first page if not already set
+            if (detectedBaseYear == null) {
+                val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
+                val yearResult = YearDetectionService.detectYear(firstPageContent)
+                detectedBaseYear = yearResult.year
+
+                yearResult.warning?.let {
+                    DebugConfig.debugPrint("⚠️ Year detection warning: $it")
+                }
+
+                DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: ${yearResult.year}")
+            }
+
             val (allSchedules, firstLaGranjaOccurrence) = (1..pageCount).fold(
                 Pair(
                     emptyMap<DutyLocation, List<PharmacySchedule>>(),
@@ -474,8 +490,19 @@ class SegoviaRuralParser : PDFParsingStrategy {
         val yearStr = match.groupValues[3]
 
         val day = dayStr.toIntOrNull() ?: return null
-        val yearInt = yearStr.toIntOrNull() ?: return null
-        val year = 2000 + yearInt
+        val twoDigitYear = yearStr.toIntOrNull() ?: return null
+
+        // Use detected year as base, fall back to current year if not detected
+        val baseYear = detectedBaseYear ?: DutyDate.getCurrentYear()
+
+        // Convert 2-digit year to 4-digit using detected base year
+        // If base year ends in same 2 digits, use it; otherwise calculate offset
+        val baseLastTwo = baseYear % 100
+        val year = when {
+            baseLastTwo == twoDigitYear -> baseYear
+            twoDigitYear < baseLastTwo -> baseYear - (baseLastTwo - twoDigitYear)
+            else -> baseYear + (twoDigitYear - baseLastTwo)
+        }
 
         val monthName = when (monthAbbr) {
             "ene" -> "enero"
