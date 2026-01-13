@@ -173,9 +173,14 @@ object YearDetectionService {
         val searchText = text.take(500)
 
         // Pattern: Match dates like "01-dic", "31-dic", etc.
-        val decemberPattern = """\\b\\d{1,2}[‐-]dic\\b""".toRegex(RegexOption.IGNORE_CASE)
+        val decemberPattern = "\\b\\d{1,2}[‐-]dic\\b".toRegex(RegexOption.IGNORE_CASE)
 
-        return decemberPattern.containsMatchIn(searchText)
+        DebugConfig.debugPrint("🔎 Checking for December dates in first 500 chars...")
+        DebugConfig.debugPrint("📝 Search text preview: ${searchText.take(200)}")
+        val hasDecember = decemberPattern.containsMatchIn(searchText)
+        DebugConfig.debugPrint("📅 December pattern match: $hasDecember")
+
+        return hasDecember
     }
 
     /**

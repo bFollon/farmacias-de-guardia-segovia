@@ -173,8 +173,14 @@ public class YearDetectionService {
             return false
         }
 
+        DebugConfig.debugPrint("🔎 Checking for December dates in first 500 chars...")
+        DebugConfig.debugPrint("📝 Search text preview: \(String(searchText.prefix(200)))")
+
         let range = NSRange(searchText.startIndex..., in: searchText)
-        return regex.firstMatch(in: searchText, options: [], range: range) != nil
+        let hasDecember = regex.firstMatch(in: searchText, options: [], range: range) != nil
+        DebugConfig.debugPrint("📅 December pattern match: \(hasDecember)")
+
+        return hasDecember
     }
 
     /// Validate year is within reasonable range
