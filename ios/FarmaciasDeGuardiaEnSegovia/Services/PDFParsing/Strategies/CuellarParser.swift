@@ -83,7 +83,7 @@ class CuellarParser: PDFParsingStrategy {
         return months[month] ?? "Unknown"
     }
     
-    func parseSchedules(from pdfDocument: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
+    func parseSchedules(from pdfDocument: PDFDocument, pdfUrl: String? = nil) -> [DutyLocation: [PharmacySchedule]] {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
 
@@ -91,14 +91,14 @@ class CuellarParser: PDFParsingStrategy {
 
         // Detect year from first page if not already set
         if currentYear == -1, let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string {
-            let yearResult = YearDetectionService.shared.detectYear(from: pageText)
+            let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
             currentYear = yearResult.year
 
             if let warning = yearResult.warning {
                 DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
             }
 
-            DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: \(currentYear)")
+            DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: \(currentYear) (source: \(yearResult.source))")
         }
 
         for pageIndex in 0..<pageCount {

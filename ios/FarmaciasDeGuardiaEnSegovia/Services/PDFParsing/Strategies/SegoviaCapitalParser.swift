@@ -28,19 +28,19 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
         self.parser = SegoviaPDFParser()
     }
 
-    public func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
+    public func parseSchedules(from pdf: PDFDocument, pdfUrl: String? = nil) -> [DutyLocation: [PharmacySchedule]] {
         var allSchedules: [PharmacySchedule] = []
 
         // Detect year from first page
         if detectedYear == nil, let firstPage = pdf.page(at: 0), let pageText = firstPage.string {
-            let yearResult = YearDetectionService.shared.detectYear(from: pageText)
+            let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
             detectedYear = yearResult.year
 
             if let warning = yearResult.warning {
                 DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
             }
 
-            DebugConfig.debugPrint("📅 Detected starting year for Segovia Capital: \(yearResult.year)")
+            DebugConfig.debugPrint("📅 Detected starting year for Segovia Capital: \(yearResult.year) (source: \(yearResult.source))")
         }
 
         // Process each page

@@ -48,7 +48,10 @@ class ElEspinarParser : PDFParsingStrategy {
 
     override fun getStrategyName(): String = "ElEspinarParser"
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
 
         DebugConfig.debugPrint("\n=== El Espinar Pharmacy Schedules ===")
 

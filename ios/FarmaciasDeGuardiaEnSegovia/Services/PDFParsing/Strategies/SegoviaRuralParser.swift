@@ -442,7 +442,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     }
     
-    func parseSchedules(from pdfDocument: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
+    func parseSchedules(from pdfDocument: PDFDocument, pdfUrl: String? = nil) -> [DutyLocation: [PharmacySchedule]] {
         // Initialize result dictionary with all 8 ZBS locations
         var schedulesByLocation: [DutyLocation: [PharmacySchedule]] = [:]
 
@@ -460,14 +460,14 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
 
         // Detect year from first page if not already set
         if detectedBaseYear == nil, let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string {
-            let yearResult = YearDetectionService.shared.detectYear(from: pageText)
+            let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
             detectedBaseYear = yearResult.year
 
             if let warning = yearResult.warning {
                 DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
             }
 
-            DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: \(yearResult.year)")
+            DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: \(yearResult.year) (source: \(yearResult.source))")
         }
         
         for pageIndex in 0..<pageCount {

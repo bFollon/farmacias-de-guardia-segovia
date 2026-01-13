@@ -371,7 +371,10 @@ class SegoviaRuralParser : PDFParsingStrategy {
         )
     }
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         println("\n=== Segovia Rural PDF Parser - Line by Line Output ===")
 
         // Open PDF once and reuse across all pages
@@ -385,14 +388,14 @@ class SegoviaRuralParser : PDFParsingStrategy {
             // Detect year from first page if not already set
             if (detectedBaseYear == null) {
                 val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
-                val yearResult = YearDetectionService.detectYear(firstPageContent)
+                val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
                 detectedBaseYear = yearResult.year
 
                 yearResult.warning?.let {
                     DebugConfig.debugPrint("⚠️ Year detection warning: $it")
                 }
 
-                DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: ${yearResult.year}")
+                DebugConfig.debugPrint("📅 Detected year: ${yearResult.year} (source: ${yearResult.source})")
             }
 
             val (allSchedules, firstLaGranjaOccurrence) = (1..pageCount).fold(

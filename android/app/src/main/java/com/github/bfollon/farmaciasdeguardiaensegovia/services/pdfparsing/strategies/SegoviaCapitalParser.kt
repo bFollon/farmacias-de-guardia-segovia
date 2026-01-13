@@ -125,7 +125,10 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
 
     override fun getStrategyName(): String = "SegoviaCapitalParser"
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         DebugConfig.debugPrint("=== Segovia Capital Schedules ===")
 
         // MAJOR OPTIMIZATION: Open PDF once and reuse across all pages

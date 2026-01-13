@@ -47,7 +47,10 @@ class CuellarParser : PDFParsingStrategy {
 
     override fun getStrategyName(): String = "CuellarParser"
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         DebugConfig.debugPrint("\n=== Cuéllar Pharmacy Schedules ===")
 
         // Open PDF once and reuse across all pages
@@ -61,14 +64,14 @@ class CuellarParser : PDFParsingStrategy {
             // Detect year from first page if not already set
             if (startingYear == -1) {
                 val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
-                val yearResult = YearDetectionService.detectYear(firstPageContent)
+                val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
                 startingYear = yearResult.year
 
                 yearResult.warning?.let {
                     DebugConfig.debugPrint("⚠️ Year detection warning: $it")
                 }
 
-                DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: ${yearResult.year}")
+                DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: ${yearResult.year} (source: ${yearResult.source})")
             }
 
             // iText uses 1-based indexing

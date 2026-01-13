@@ -88,7 +88,7 @@ class PDFProcessingService {
 
             // Parse the schedules using the strategy
             DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
-            val scheduleMap = parsingStrategy.parseSchedules(pdfFile)
+            val scheduleMap = parsingStrategy.parseSchedules(pdfFile, region.pdfURL)
 
             scheduleMap.forEach { (location, schedules) ->
                 DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${location.name} PDF")

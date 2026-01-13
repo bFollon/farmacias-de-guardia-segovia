@@ -30,7 +30,9 @@ data class YearDetectionResult(
     val warning: String? = null
 ) {
     sealed class YearSource {
+        data class ExtractedFromURL(val original: String) : YearSource()
         data class ExtractedFromPDF(val original: String) : YearSource()
+        data class ExtractedFlexible(val original: String) : YearSource()
         object FallbackDecember : YearSource()
         object FallbackCurrent : YearSource()
         data class Invalid(val reason: String) : YearSource()
@@ -43,60 +45,94 @@ data class YearDetectionResult(
 object YearDetectionService {
 
     /**
-     * Detect year from full PDF text content
+     * Detect year from full PDF text content with multi-layer detection
      * @param text Raw PDF text content
+     * @param pdfUrl Optional PDF URL for URL-based detection
      * @return Validated year detection result
      */
-    fun detectYear(text: String): YearDetectionResult {
-        DebugConfig.debugPrint("🔍 YearDetectionService: Analyzing PDF text...")
-        DebugConfig.debugPrint("📝 Analyzing text (first 200 chars): ${text.take(200)}...")
-        DebugConfig.debugPrint("🔎 Using regex pattern: \\b(20[2-3]\\d)(?:\\s*-\\s*20[2-3]\\d)?\\b")
+    fun detectYear(text: String, pdfUrl: String? = null): YearDetectionResult {
+        DebugConfig.debugPrint("🔍 YearDetectionService: Multi-layer detection started")
+        DebugConfig.debugPrint("📋 PDF URL: ${pdfUrl ?: "none"}")
 
         val currentYear = getCurrentYear()
 
-        // Step 1: Try to extract year from PDF text
-        val extractedYearString = extractYearFromText(text)
-        if (extractedYearString != null) {
-            val extractedYear = extractedYearString.toIntOrNull()
-            if (extractedYear == null) {
-                DebugConfig.debugPrint("⚠️ Could not parse extracted year string: '$extractedYearString'")
-                return fallbackDetection(text, currentYear)
-            }
+        // STEP 1: Detect year using multi-layer approach
+        val detectedYear = detectYearFromSources(text, pdfUrl, currentYear)
+            ?: return createInvalidResult("No year could be detected from any source")
 
-            DebugConfig.debugPrint("✅ Found year in PDF: $extractedYear from '$extractedYearString'")
+        // STEP 2: Apply December adjustment to detected year (for ALL cases)
+        return applyDecemberAdjustment(
+            detectedYear.year,
+            detectedYear.originalString,
+            text,
+            detectedYear.source
+        )
+    }
 
-            // Validate extracted year
-            val (isValid, warning) = validateYear(extractedYear, currentYear)
-
-            if (isValid) {
-                // Step 2: Check if first dates are December - if so, adjust year
-                if (isFirstDateDecember(text)) {
-                    val adjustedYear = extractedYear - 1
-                    DebugConfig.debugPrint("📅 December detected at start of schedule, adjusting year from $extractedYear to $adjustedYear")
-
-                    return YearDetectionResult(
-                        year = adjustedYear,
-                        source = YearDetectionResult.YearSource.ExtractedFromPDF(extractedYearString),
-                        isValid = true,
-                        warning = "Found year $extractedYear in PDF, but adjusted to $adjustedYear due to December dates at start of schedule."
-                    )
+    /**
+     * Detect year from multiple sources (URL, text, fallback)
+     * Returns the detected year without December adjustment
+     */
+    private fun detectYearFromSources(text: String, pdfUrl: String?, currentYear: Int): DetectedYearInfo? {
+        // LAYER 1: Check PDF URL first
+        DebugConfig.debugPrint("\n[LAYER 1] Checking PDF URL...")
+        if (pdfUrl != null) {
+            extractYearFromURL(pdfUrl)?.let { yearString ->
+                val year = yearString.toIntOrNull()
+                if (year != null && validateYear(year, currentYear).first) {
+                    DebugConfig.debugPrint("✅ Found year in URL: $year")
+                    return DetectedYearInfo(year, yearString, YearDetectionResult.YearSource.ExtractedFromURL(yearString))
                 }
-
-                return YearDetectionResult(
-                    year = extractedYear,
-                    source = YearDetectionResult.YearSource.ExtractedFromPDF(extractedYearString),
-                    isValid = true,
-                    warning = warning
-                )
-            } else {
-                DebugConfig.debugPrint("⚠️ Extracted year $extractedYear is invalid: ${warning ?: "unknown reason"}")
-                // Fall through to fallback detection
             }
+            DebugConfig.debugPrint("❌ No year found in URL")
         }
 
-        // Step 3: Fallback detection if extraction failed or was invalid
-        DebugConfig.debugPrint("⚠️ No valid year found in PDF text, using fallback heuristic")
-        return fallbackDetection(text, currentYear)
+        // LAYER 2: Try standard text extraction
+        DebugConfig.debugPrint("\n[LAYER 2] Checking standard text pattern...")
+        extractYearFromText(text)?.let { yearString ->
+            val year = yearString.toIntOrNull()
+            if (year != null && validateYear(year, currentYear).first) {
+                DebugConfig.debugPrint("✅ Found year in text: $year")
+                return DetectedYearInfo(year, yearString, YearDetectionResult.YearSource.ExtractedFromPDF(yearString))
+            }
+        }
+        DebugConfig.debugPrint("❌ No year found with standard pattern")
+
+        // LAYER 3: Try flexible pattern
+        DebugConfig.debugPrint("\n[LAYER 3] Checking flexible text pattern...")
+        extractYearFlexible(text)?.let { yearString ->
+            val year = yearString.toIntOrNull()
+            if (year != null && validateYear(year, currentYear).first) {
+                DebugConfig.debugPrint("✅ Found year with flexible pattern: $year")
+                return DetectedYearInfo(year, yearString, YearDetectionResult.YearSource.ExtractedFlexible(yearString))
+            }
+        }
+        DebugConfig.debugPrint("❌ No year found with flexible pattern")
+
+        // LAYER 4: Fallback to current year
+        DebugConfig.debugPrint("\n[LAYER 4] Using current year as fallback...")
+        return DetectedYearInfo(currentYear, currentYear.toString(), YearDetectionResult.YearSource.FallbackCurrent)
+    }
+
+    /**
+     * Helper class to hold detected year information
+     */
+    private data class DetectedYearInfo(
+        val year: Int,
+        val originalString: String,
+        val source: YearDetectionResult.YearSource
+    )
+
+    /**
+     * Create an invalid result
+     */
+    private fun createInvalidResult(reason: String): YearDetectionResult {
+        return YearDetectionResult(
+            year = getCurrentYear(),
+            source = YearDetectionResult.YearSource.Invalid(reason),
+            isValid = false,
+            warning = reason
+        )
     }
 
     /**
@@ -171,30 +207,89 @@ object YearDetectionService {
         }
     }
 
+
     /**
-     * Fallback detection when no year found in PDF
-     * Uses heuristic: December dates likely indicate previous year's schedule
+     * Extract year from PDF URL using right-to-left priority
+     * Finds all 4-digit years in URL and returns the rightmost valid one
+     * Example: /2026/01/RURALES-2025.pdf -> finds [2026, 2025], returns 2025 (rightmost)
      */
-    private fun fallbackDetection(text: String, currentYear: Int): YearDetectionResult {
-        return if (isFirstDateDecember(text)) {
-            val year = currentYear - 1
-            DebugConfig.debugPrint("📅 December detected early in PDF, using year $year")
+    private fun extractYearFromURL(url: String): String? {
+        // Find all 4-digit year patterns in URL
+        val yearPattern = """(\d{4})""".toRegex()
+        val allYears = yearPattern.findAll(url)
+            .map { it.value }
+            .toList()
 
-            YearDetectionResult(
-                year = year,
-                source = YearDetectionResult.YearSource.FallbackDecember,
-                isValid = true,
-                warning = "No explicit year found in PDF. Inferred $year from December dates."
-            )
-        } else {
-            DebugConfig.debugPrint("📅 Using current year as fallback: $currentYear")
+        if (allYears.isEmpty()) {
+            return null
+        }
 
-            YearDetectionResult(
-                year = currentYear,
-                source = YearDetectionResult.YearSource.FallbackCurrent,
+        // Check years right-to-left (filename year has priority over path year)
+        allYears.reversed().forEach { year ->
+            if (isYearInValidRange(year)) {
+                DebugConfig.debugPrint("🔗 Found year in URL: $year (from right-to-left scan)")
+                return year
+            }
+        }
+
+        return null
+    }
+
+    /**
+     * Extract year using flexible pattern for malformed text
+     * Matches patterns like "2.025", "2-0-2-5", "2 0 2 5"
+     */
+    private fun extractYearFlexible(text: String): String? {
+        // Pattern: 2 + optional separator + 0 + optional separator + [2-3] + optional separator + digit
+        val flexiblePattern = """2\D?0\D?([2-3])\D?(\d)""".toRegex()
+
+        flexiblePattern.find(text)?.let { match ->
+            val decade = match.groups[1]?.value ?: return null
+            val year = match.groups[2]?.value ?: return null
+            val reconstructed = "20$decade$year"
+
+            return if (isYearInValidRange(reconstructed)) reconstructed else null
+        }
+
+        return null
+    }
+
+    /**
+     * Check if year string is in valid range (2020-2039)
+     */
+    private fun isYearInValidRange(yearString: String): Boolean {
+        val year = yearString.toIntOrNull() ?: return false
+        return year in 2020..2039
+    }
+
+    /**
+     * Apply December adjustment logic if needed
+     * If first dates are December, the PDF likely shows end-of-year schedules
+     */
+    private fun applyDecemberAdjustment(
+        year: Int,
+        originalString: String,
+        text: String,
+        source: YearDetectionResult.YearSource
+    ): YearDetectionResult {
+        if (isFirstDateDecember(text)) {
+            val adjustedYear = year - 1
+            DebugConfig.debugPrint("📅 December detected at start of schedule, adjusting year from $year to $adjustedYear")
+
+            // Update source to FallbackDecember when adjustment is applied
+            val adjustedSource = when (source) {
+                is YearDetectionResult.YearSource.FallbackCurrent -> YearDetectionResult.YearSource.FallbackDecember
+                else -> source
+            }
+
+            return YearDetectionResult(
+                year = adjustedYear,
+                source = adjustedSource,
                 isValid = true,
-                warning = "No explicit year found in PDF. Using current year $currentYear as default."
+                warning = "Found year $year, but adjusted to $adjustedYear due to December dates at start of schedule."
             )
         }
+
+        return YearDetectionResult(year = year, source = source, isValid = true)
     }
 }
