@@ -49,6 +49,8 @@ object YearDetectionService {
      */
     fun detectYear(text: String): YearDetectionResult {
         DebugConfig.debugPrint("🔍 YearDetectionService: Analyzing PDF text...")
+        DebugConfig.debugPrint("📝 Analyzing text (first 200 chars): ${text.take(200)}...")
+        DebugConfig.debugPrint("🔎 Using regex pattern: \\b(20[2-3]\\d)(?:\\s*-\\s*20[2-3]\\d)?\\b")
 
         val currentYear = getCurrentYear()
 
@@ -111,12 +113,19 @@ object YearDetectionService {
      * Handles both single years (2025) and spans (2024-2025), returning first year
      */
     private fun extractYearFromText(text: String): String? {
+        DebugConfig.debugPrint("🔎 Searching for year pattern in text...")
         // Pattern: Match 4-digit years (2020-2039)
         // Handles span format like "2024-2025" or "2024 - 2025" (with spaces) by capturing first year
-        val pattern = """\\b(20[2-3]\\d)(?:\\s*-\\s*20[2-3]\\d)?\\b""".toRegex()
+        val pattern = "\\b(20[2-3]\\d)(?:\\s*-\\s*20[2-3]\\d)?\\b".toRegex()
 
-        val match = pattern.find(text) ?: return null
-        return match.groups[1]?.value
+        val match = pattern.find(text)
+        if (match == null) {
+            DebugConfig.debugPrint("❌ No year pattern found in text")
+            return null
+        } else {
+            DebugConfig.debugPrint("✅ Found year match: '${match.value}' -> extracted: '${match.groups[1]?.value}'")
+            return match.groups[1]?.value
+        }
     }
 
     /**
