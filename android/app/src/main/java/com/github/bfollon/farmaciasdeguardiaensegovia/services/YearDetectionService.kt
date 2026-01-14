@@ -260,11 +260,13 @@ object YearDetectionService {
     }
 
     /**
-     * Check if year string is in valid range (2020-2039)
+     * Check if year string is in valid range (±20 years from current year)
+     * Future-proof: dynamically adjusts based on current year
      */
     private fun isYearInValidRange(yearString: String): Boolean {
         val year = yearString.toIntOrNull() ?: return false
-        return year in 2020..2039
+        val currentYear = getCurrentYear()
+        return year in (currentYear - 20)..(currentYear + 20)
     }
 
     /**

@@ -253,10 +253,12 @@ public class YearDetectionService {
         return isYearInValidRange(reconstructed) ? reconstructed : nil
     }
 
-    /// Check if year string is in valid range (2020-2039)
+    /// Check if year string is in valid range (±20 years from current year)
+    /// Future-proof: dynamically adjusts based on current year
     private func isYearInValidRange(_ yearString: String) -> Bool {
         guard let year = Int(yearString) else { return false }
-        return year >= 2020 && year <= 2039
+        let currentYear = getCurrentYear()
+        return year >= (currentYear - 20) && year <= (currentYear + 20)
     }
 
     /// Apply December adjustment if first date is December
