@@ -26,14 +26,18 @@ import java.io.File
  * Now using File instead of PDDocument for iText compatibility
  */
 interface PDFParsingStrategy {
-    
+
     /**
      * Parse schedules from a PDF file
      * @param pdfFile The PDF file to parse
+     * @param pdfUrl Optional PDF URL for URL-based year detection
      * @return List of parsed pharmacy schedules
      */
-    fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>>
-    
+    fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String? = null
+    ): Map<DutyLocation, List<PharmacySchedule>>
+
     /**
      * Get the name of this parsing strategy (for debugging)
      */

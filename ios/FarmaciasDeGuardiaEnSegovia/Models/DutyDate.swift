@@ -107,15 +107,10 @@ extension DutyDate {
             year = Int(String(dateString[yearRange]))
             DebugConfig.debugPrint("Found year in capture group: \(year ?? -1)")
         } else {
-            let currentYear = getCurrentYear()
-            // Temporary fix: Only January 1st and 2nd are from next year
-            if month.lowercased() == "enero" && (day == 1 || day == 2) {
-                year = currentYear + 1
-                DebugConfig.debugPrint("Applied temporary fix for January 1st/2nd: setting year to \(currentYear + 1)")
-            } else {
-                year = currentYear
-                DebugConfig.debugPrint("No year found, defaulting to \(currentYear)")
-            }
+            // No year in date string - use current year
+            // Year detection is now handled at parser level via YearDetectionService
+            year = getCurrentYear()
+            DebugConfig.debugPrint("No year found in date string, using current year: \(year ?? -1)")
         }
         
         DebugConfig.debugPrint("Parsed result: \(dayOfWeek), \(day) de \(month) \(year ?? 2025)")

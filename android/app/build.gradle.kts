@@ -13,8 +13,8 @@ android {
         applicationId = "com.github.bfollon.farmaciasdeguardiaensegovia"
         minSdk = 26
         targetSdk = 36
-        versionCode = 34
-        versionName = "1.2.3"
+        versionCode = 35
+        versionName = "1.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

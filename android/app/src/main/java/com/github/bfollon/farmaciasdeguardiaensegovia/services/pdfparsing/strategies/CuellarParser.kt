@@ -24,6 +24,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.YearDetectionService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
 import com.itextpdf.kernel.pdf.PdfDocument
@@ -41,12 +42,12 @@ import kotlin.collections.plus
  */
 class CuellarParser : PDFParsingStrategy {
 
-    /** Current year being processed, incremented when January 1st is found */
-    private val startingYear = PDFParsingUtils.getCurrentYear() - 1
-
     override fun getStrategyName(): String = "CuellarParser"
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         DebugConfig.debugPrint("\n=== Cuéllar Pharmacy Schedules ===")
 
         // Open PDF once and reuse across all pages
@@ -56,6 +57,17 @@ class CuellarParser : PDFParsingStrategy {
         return try {
             val pageCount = pdfDoc.numberOfPages
             DebugConfig.debugPrint("📄 Processing $pageCount pages of Cuéllar PDF...")
+
+            // Detect year from first page (always fresh detection on each parse)
+            val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
+            val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
+            val startingYear = yearResult.year
+
+            yearResult.warning?.let {
+                DebugConfig.debugPrint("⚠️ Year detection warning: $it")
+            }
+
+            DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: ${yearResult.year} (source: ${yearResult.source})")
 
             // iText uses 1-based indexing
             val (allSchedules, _) = (1..pageCount).fold(Pair(emptyList<PharmacySchedule>(), startingYear)) { (acc, year), pageIndex ->

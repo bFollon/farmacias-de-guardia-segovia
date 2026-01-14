@@ -108,13 +108,9 @@ data class DutyDate(
             
             var year: Int? = match.groups[3]?.value?.toInt()
             if (year == null) {
-                val currentYear = getCurrentYear()
-                // Only January 1st and 2nd are from next year for 2024->2025 transition
-                year = if (month.lowercase() == "enero" && (day == 1 || day == 2)) {
-                    currentYear + 1
-                } else {
-                    currentYear
-                }
+                // No year in date string - use current year
+                // Year detection is now handled at parser level via YearDetectionService
+                year = getCurrentYear()
             }
             
             return DutyDate(dayOfWeek = dayOfWeek, day = day, month = month, year = year)

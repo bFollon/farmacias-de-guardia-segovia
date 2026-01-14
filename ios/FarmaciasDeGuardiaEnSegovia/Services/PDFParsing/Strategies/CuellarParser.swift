@@ -19,9 +19,6 @@ import Foundation
 import PDFKit
 
 class CuellarParser: PDFParsingStrategy {
-    /// Current year being processed, incremented when January 1st is found
-    private var currentYear = Calendar.current.component(.year, from: Date()) - 1
-    
     // Lookup tables for Spanish names
     private let weekdays = [
         1: "Domingo",
@@ -82,11 +79,26 @@ class CuellarParser: PDFParsingStrategy {
         return months[month] ?? "Unknown"
     }
     
-    func parseSchedules(from pdfDocument: PDFDocument) -> [DutyLocation: [PharmacySchedule]] {
+    func parseSchedules(from pdfDocument: PDFDocument, pdfUrl: String? = nil) -> [DutyLocation: [PharmacySchedule]] {
         var schedules: [PharmacySchedule] = []
         let pageCount = pdfDocument.pageCount
 
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
+
+        // Detect year from first page (always fresh detection on each parse)
+        guard let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string else {
+            DebugConfig.debugPrint("❌ Could not get first page for year detection")
+            return [:]
+        }
+
+        let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
+        var currentYear = yearResult.year
+
+        if let warning = yearResult.warning {
+            DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
+        }
+
+        DebugConfig.debugPrint("📅 Detected starting year for Cuéllar: \(currentYear) (source: \(yearResult.source))")
 
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else {
@@ -109,7 +121,7 @@ class CuellarParser: PDFParsingStrategy {
             }
 
             // Process the table structure for this page
-            if let monthSchedules = processPageTable(lines: lines) {
+            if let monthSchedules = processPageTable(lines: lines, currentYear: &currentYear) {
                 schedules.append(contentsOf: monthSchedules)
             }
         }
@@ -127,7 +139,7 @@ class CuellarParser: PDFParsingStrategy {
     }
     
     /// Process the table structure for a single page
-    private func processPageTable(lines: [String]) -> [PharmacySchedule]? {
+    private func processPageTable(lines: [String], currentYear: inout Int) -> [PharmacySchedule]? {
         var schedules: [PharmacySchedule] = []
         var pendingDates: [String]? = nil
         
@@ -150,7 +162,7 @@ class CuellarParser: PDFParsingStrategy {
                 let pharmacy = line.trimmingCharacters(in: .whitespaces)
                 if !pharmacy.isEmpty && pharmacyInfo.keys.contains(pharmacy) {
                     DebugConfig.debugPrint("🏥 Found matching pharmacy: \(pharmacy)")
-                    processDateSet(dates: dates, pharmacy: pharmacy, into: &schedules)
+                    processDateSet(dates: dates, pharmacy: pharmacy, currentYear: &currentYear, into: &schedules)
                     pendingDates = nil
                     continue
                 } else {
@@ -167,7 +179,7 @@ class CuellarParser: PDFParsingStrategy {
                     pendingDates = dates
                     continue
                 }
-                processDateSet(dates: dates, pharmacy: pharmacy, into: &schedules)
+                processDateSet(dates: dates, pharmacy: pharmacy, currentYear: &currentYear, into: &schedules)
             }
         }
         
@@ -381,7 +393,7 @@ class CuellarParser: PDFParsingStrategy {
     
     
     /// Process a set of dates with a pharmacy
-    private func processDateSet(dates: [String], pharmacy: String, into schedules: inout [PharmacySchedule]) {
+    private func processDateSet(dates: [String], pharmacy: String, currentYear: inout Int, into schedules: inout [PharmacySchedule]) {
         DebugConfig.debugPrint("\n📋 Processing date set:")
         DebugConfig.debugPrint("📅 Dates: \(dates)")
         DebugConfig.debugPrint("🏥 Pharmacy: \(pharmacy)")
