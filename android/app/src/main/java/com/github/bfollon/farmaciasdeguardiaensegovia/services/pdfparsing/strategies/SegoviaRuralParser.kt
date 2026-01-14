@@ -51,9 +51,6 @@ import kotlin.collections.forEach
  */
 class SegoviaRuralParser : PDFParsingStrategy {
 
-    /** Detected base year from PDF for converting 2-digit years */
-    private var detectedBaseYear: Int? = null
-
     /**
      * Data class for pharmacy information
      */
@@ -385,18 +382,16 @@ class SegoviaRuralParser : PDFParsingStrategy {
             val pageCount = pdfDoc.numberOfPages
             println("📄 Processing $pageCount pages of Segovia Rural PDF...")
 
-            // Detect year from first page if not already set
-            if (detectedBaseYear == null) {
-                val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
-                val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
-                detectedBaseYear = yearResult.year
+            // Detect year from first page (always fresh detection on each parse)
+            val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
+            val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
+            val detectedBaseYear = yearResult.year
 
-                yearResult.warning?.let {
-                    DebugConfig.debugPrint("⚠️ Year detection warning: $it")
-                }
-
-                DebugConfig.debugPrint("📅 Detected year: ${yearResult.year} (source: ${yearResult.source})")
+            yearResult.warning?.let {
+                DebugConfig.debugPrint("⚠️ Year detection warning: $it")
             }
+
+            DebugConfig.debugPrint("📅 Detected year: ${yearResult.year} (source: ${yearResult.source})")
 
             val (allSchedules, firstLaGranjaOccurrence) = (1..pageCount).fold(
                 Pair(
@@ -418,7 +413,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
                     )
                 ) { (acc, maybeLaGranjaPharmacy), line ->
                     Pair(
-                        acc.accumulateWith(processLine(line)),
+                        acc.accumulateWith(processLine(line, detectedBaseYear)),
                         detectFirstLaGranjaPharmacy(line, maybeLaGranjaPharmacy)
                     )
                 }
@@ -444,13 +439,13 @@ class SegoviaRuralParser : PDFParsingStrategy {
         }
     }
 
-    private fun processLine(line: String): Map<ZBS, PharmacySchedule> {
+    private fun processLine(line: String, baseYear: Int): Map<ZBS, PharmacySchedule> {
 
         DebugConfig.debugPrint("Line: $line")
 
         val schedules = when {
             hasDate(line) -> {
-                val maybeDate = extractDate(line)
+                val maybeDate = extractDate(line, baseYear)
                 val pharmacies = extractPharmaciesByZBS(line)
 
                 maybeDate?.let { date ->
@@ -486,7 +481,7 @@ class SegoviaRuralParser : PDFParsingStrategy {
 
     private fun hasDate(line: String): Boolean = SPANISH_DATE_REGEX.containsMatchIn(line)
 
-    private fun extractDate(line: String): DutyDate? {
+    private fun extractDate(line: String, baseYear: Int): DutyDate? {
         val match = SPANISH_DATE_REGEX.find(line) ?: return null
 
         val dayStr = match.groupValues[1]
@@ -495,9 +490,6 @@ class SegoviaRuralParser : PDFParsingStrategy {
 
         val day = dayStr.toIntOrNull() ?: return null
         val twoDigitYear = yearStr.toIntOrNull() ?: return null
-
-        // Use detected year as base, fall back to current year if not detected
-        val baseYear = detectedBaseYear ?: DutyDate.getCurrentYear()
 
         // Convert 2-digit year to 4-digit using detected base year
         // If base year ends in same 2 digits, use it; otherwise calculate offset

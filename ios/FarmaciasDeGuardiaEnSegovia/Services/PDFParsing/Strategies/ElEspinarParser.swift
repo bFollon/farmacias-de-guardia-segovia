@@ -19,10 +19,6 @@ import Foundation
 import PDFKit
 
 class ElEspinarParser: PDFParsingStrategy {
-    /// Current year being processed, incremented when January 1st is found
-    /// Initialized from PDF year detection, then incremented during parsing
-    private var currentYear: Int = -1
-    
     // Lookup tables for Spanish names
     private let weekdays = [
         1: "Domingo",
@@ -87,7 +83,7 @@ class ElEspinarParser: PDFParsingStrategy {
     }
     
     /// Process a set of dates with a pharmacy
-    private func processDateSet(dates: [String], address: String, into schedules: inout [PharmacySchedule]) {
+    private func processDateSet(dates: [String], address: String, currentYear: inout Int, into schedules: inout [PharmacySchedule]) {
         DebugConfig.debugPrint("\n📋 Processing date set:")
         DebugConfig.debugPrint("📅 Dates: \(dates)")
         DebugConfig.debugPrint("🏠 Address: \(address)")
@@ -170,17 +166,20 @@ class ElEspinarParser: PDFParsingStrategy {
 
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages...")
 
-        // Detect year from first page if not already set
-        if currentYear == -1, let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string {
-            let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
-            currentYear = yearResult.year
-
-            if let warning = yearResult.warning {
-                DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
-            }
-
-            DebugConfig.debugPrint("📅 Detected starting year for El Espinar: \(currentYear) (source: \(yearResult.source))")
+        // Detect year from first page (always fresh detection on each parse)
+        guard let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string else {
+            DebugConfig.debugPrint("❌ Could not get first page for year detection")
+            return [:]
         }
+
+        let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
+        var currentYear = yearResult.year
+
+        if let warning = yearResult.warning {
+            DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
+        }
+
+        DebugConfig.debugPrint("📅 Detected starting year for El Espinar: \(currentYear) (source: \(yearResult.source))")
 
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex),
@@ -229,24 +228,24 @@ class ElEspinarParser: PDFParsingStrategy {
                     currentAddress = "AV. HONTANILLA 18"
                     // Process the dates we've collected with this pharmacy
                     if !dates.isEmpty {
-                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
+                        processDateSet(dates: dates, address: currentAddress!, currentYear: &currentYear, into: &schedules)
                         dates = []
                     }
                 } else if line.contains("MARQUES PERALES") {
                     currentAddress = "C/ MARQUES PERALES"
                     // Process the dates we've collected with this pharmacy
                     if !dates.isEmpty {
-                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
+                        processDateSet(dates: dates, address: currentAddress!, currentYear: &currentYear, into: &schedules)
                         dates = []
                     }
                 } else if line.hasSuffix("SAN RAFAEL") {
                     currentAddress = "SAN RAFAEL"
                     // Process both any previous dates and the current line dates
                     if !dates.isEmpty {
-                        processDateSet(dates: dates, address: currentAddress!, into: &schedules)
+                        processDateSet(dates: dates, address: currentAddress!, currentYear: &currentYear, into: &schedules)
                     }
                     if !lineDates.isEmpty {
-                        processDateSet(dates: lineDates, address: currentAddress!, into: &schedules)
+                        processDateSet(dates: lineDates, address: currentAddress!, currentYear: &currentYear, into: &schedules)
                     }
                     dates = []
                     currentAddress = nil
@@ -255,7 +254,7 @@ class ElEspinarParser: PDFParsingStrategy {
 
             // Process any remaining dates
             if !dates.isEmpty && currentAddress != nil {
-                processDateSet(dates: dates, address: currentAddress!, into: &schedules)
+                processDateSet(dates: dates, address: currentAddress!, currentYear: &currentYear, into: &schedules)
             }
         }
 

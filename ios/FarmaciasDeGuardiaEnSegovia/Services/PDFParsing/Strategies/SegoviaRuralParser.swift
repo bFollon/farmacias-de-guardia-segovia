@@ -19,9 +19,6 @@ import Foundation
 import PDFKit
 
 class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
-    /// Detected base year from PDF for converting 2-digit years
-    private var detectedBaseYear: Int?
-
     // ZBS Schedule types
     private enum ScheduleType {
         case fullDay     // 24h
@@ -273,7 +270,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
         )
     ]
     
-    private func parseDate(_ text: String) -> DutyDate? {
+    private func parseDate(_ text: String, baseYear: Int) -> DutyDate? {
         // Date format: "dd-mmm-yy"
         let components = text.components(separatedBy: "-")
         guard components.count == 3,
@@ -281,9 +278,6 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
               let twoDigitYear = Int(components[2]) else {
             return nil
         }
-
-        // Use detected year as base, fall back to current year if not detected
-        let baseYear = detectedBaseYear ?? DutyDate.getCurrentYear()
 
         // Convert 2-digit year to 4-digit using detected base year
         // If base year ends in same 2 digits, use it; otherwise calculate offset
@@ -458,18 +452,21 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
 
         DebugConfig.debugPrint("📄 Processing \(pageCount) pages of Segovia Rural PDF...")
 
-        // Detect year from first page if not already set
-        if detectedBaseYear == nil, let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string {
-            let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
-            detectedBaseYear = yearResult.year
-
-            if let warning = yearResult.warning {
-                DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
-            }
-
-            DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: \(yearResult.year) (source: \(yearResult.source))")
+        // Detect year from first page (always fresh detection on each parse)
+        guard let firstPage = pdfDocument.page(at: 0), let pageText = firstPage.string else {
+            DebugConfig.debugPrint("❌ Could not get first page for year detection")
+            return [:]
         }
-        
+
+        let yearResult = YearDetectionService.shared.detectYear(from: pageText, pdfUrl: pdfUrl)
+        let detectedBaseYear = yearResult.year
+
+        if let warning = yearResult.warning {
+            DebugConfig.debugPrint("⚠️ Year detection warning: \(warning)")
+        }
+
+        DebugConfig.debugPrint("📅 Detected base year for Segovia Rural: \(yearResult.year) (source: \(yearResult.source))")
+
         for pageIndex in 0..<pageCount {
             guard let page = pdfDocument.page(at: pageIndex) else { continue }
             
@@ -578,7 +575,7 @@ class SegoviaRuralParser: ColumnBasedPDFParser, PDFParsingStrategy {
                 
                 // Skip if there's no valid date
                 guard !sanitizedDateStr.isEmpty,
-                      let date = parseDate(sanitizedDateStr) else {
+                      let date = parseDate(sanitizedDateStr, baseYear: detectedBaseYear) else {
                     continue
                 }
                 
