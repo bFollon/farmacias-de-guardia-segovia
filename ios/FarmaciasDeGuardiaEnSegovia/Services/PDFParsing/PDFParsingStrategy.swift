@@ -22,8 +22,10 @@ import PDFKit
 /// Each region/location should implement its own strategy to handle its specific PDF format.
 public protocol PDFParsingStrategy {
     /// Parse a PDF document and extract pharmacy schedules organized by duty location
-    /// - Parameter pdf: The PDF document to parse
+    /// - Parameters:
+    ///   - pdf: The PDF document to parse
+    ///   - pdfUrl: Optional PDF URL for URL-based year detection
     /// - Returns: A dictionary mapping duty locations to their pharmacy schedules.
     ///           Main regions return 1 entry, Segovia Rural returns 8 entries (one per ZBS).
-    func parseSchedules(from pdf: PDFDocument) -> [DutyLocation: [PharmacySchedule]]
+    func parseSchedules(from pdf: PDFDocument, pdfUrl: String?) -> [DutyLocation: [PharmacySchedule]]
 }

@@ -101,7 +101,7 @@ public class PDFProcessingService {
         }
 
         DebugConfig.debugPrint("Loading schedules for \(region.name) from \(effectiveURL)")
-        let schedules = parser.parseSchedules(from: pdfDocument)
+        let schedules = parser.parseSchedules(from: pdfDocument, pdfUrl: region.pdfURL.absoluteString)
 
         // Finish span with results
         let totalSchedules = schedules.values.reduce(0) { $0 + $1.count }
@@ -132,6 +132,6 @@ public class PDFProcessingService {
         // For direct URL loading, use Segovia parser as default
         let parser = parsingStrategies["segovia-capital"] ?? SegoviaCapitalParser()
         DebugConfig.debugPrint("Loading schedules from \(url)")
-        return parser.parseSchedules(from: pdfDocument)
+        return parser.parseSchedules(from: pdfDocument, pdfUrl: url.absoluteString)
     }
 }

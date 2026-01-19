@@ -24,6 +24,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.YearDetectionService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.ColumnBasedPDFParser
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingStrategy
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.PDFParsingUtils
@@ -64,8 +65,6 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             """(?i)($SPANISH_DAY_REGEX),\s*(\d{1,2})\s*de\s*($SPANISH_MONTH_REGEX)""",
             RegexOption.IGNORE_CASE
         )
-
-        val startingYear = PDFParsingUtils.getCurrentYear() - 1
 
         val ADDRESS_REGEX = Regex(
             """^(?i)(?:$SPANISH_DAY_REGEX),\s*(?:\d{1,2})\s*de\s*(?:$SPANISH_MONTH_REGEX)\s+(.+?)(?:,\s*)?(\d+|S/N)\s+(.+?)(?:,\s*)?(\d+|S/N)$""",
@@ -125,7 +124,10 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
 
     override fun getStrategyName(): String = "SegoviaCapitalParser"
 
-    override fun parseSchedules(pdfFile: File): Map<DutyLocation, List<PharmacySchedule>> {
+    override fun parseSchedules(
+        pdfFile: File,
+        pdfUrl: String?
+    ): Map<DutyLocation, List<PharmacySchedule>> {
         DebugConfig.debugPrint("=== Segovia Capital Schedules ===")
 
         // MAJOR OPTIMIZATION: Open PDF once and reuse across all pages
@@ -135,6 +137,17 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
         return try {
             val pageCount = pdfDoc.numberOfPages
             DebugConfig.debugPrint("📄 Processing $pageCount pages of Segovia Capital PDF...")
+
+            // Detect year from first page (always fresh detection on each parse)
+            val firstPageContent = PdfTextExtractor.getTextFromPage(pdfDoc.getPage(1))
+            val yearResult = YearDetectionService.detectYear(firstPageContent, pdfUrl)
+            val startingYear = yearResult.year
+
+            yearResult.warning?.let {
+                DebugConfig.debugPrint("⚠️ Year detection warning: $it")
+            }
+
+            DebugConfig.debugPrint("📅 Detected starting year for Segovia Capital: ${yearResult.year} (source: ${yearResult.source})")
 
             val (allSchedules, _) = (1..pageCount).fold(Pair(emptyList<PharmacySchedule>(), startingYear)) { (acc, accYear), pageIndex ->
                 DebugConfig.debugPrint("📃 Processing page $pageIndex of $pageCount")
