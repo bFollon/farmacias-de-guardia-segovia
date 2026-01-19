@@ -44,6 +44,11 @@ class ScheduleService(context: Context) {
     suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): List<PharmacySchedule> {
         DebugConfig.debugPrint("ScheduleService: Loading schedules for ${location.associatedRegion.name} (forceRefresh: $forceRefresh)")
 
+        // Clear caches if force refresh is requested (enables full re-download and re-parse)
+        if (forceRefresh) {
+            clearCacheForRegion(location.associatedRegion)
+        }
+
         // Use the shared repository for loading
         val schedules = repository.loadSchedules(location)
 

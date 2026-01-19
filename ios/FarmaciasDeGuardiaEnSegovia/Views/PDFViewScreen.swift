@@ -81,11 +81,12 @@ struct PDFViewScreen: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        refreshCurrentView()
+                        refreshData()
                     }) {
                         Image(systemName: "arrow.clockwise.circle")
                             .imageScale(.large)
                     }
+                    .disabled(isRefreshing)
                 }
             }
             .sheet(isPresented: $isShowingDatePicker) {
