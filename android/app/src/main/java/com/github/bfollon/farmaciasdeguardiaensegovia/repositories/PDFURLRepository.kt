@@ -348,38 +348,28 @@ class PDFURLRepository private constructor(private val context: Context) {
     // MARK: - Initialization
     
     /**
-     * Initialize repository - scrape and validate URLs
+     * Initialize repository - always scrape for fresh URLs when online
      * Called during splash screen
      */
     suspend fun initializeURLs(): Boolean = withContext(Dispatchers.IO) {
         DebugConfig.debugPrint("🚀 PDFURLRepository: Initializing URLs...")
-        
+
         // Check if we're online
         if (!NetworkMonitor.isOnline()) {
-            DebugConfig.debugPrint("📡 PDFURLRepository: Offline, skipping initialization")
+            DebugConfig.debugPrint("📡 PDFURLRepository: Offline, using persisted/fallback URLs")
             return@withContext true // Success (will use persisted/fallback URLs)
         }
-        
-        // First, validate persisted URLs
-        val validPersistedURLs = validatePersistedURLs()
-        
-        // If all regions have valid persisted URLs, we're done
-        val allRegions = FALLBACK_URLS.keys
-        if (validPersistedURLs.keys.containsAll(allRegions)) {
-            DebugConfig.debugPrint("✅ PDFURLRepository: All persisted URLs are valid, no scraping needed")
-            return@withContext true
-        }
-        
-        // Otherwise, scrape fresh URLs
-        DebugConfig.debugPrint("🌐 PDFURLRepository: Some URLs are invalid, scraping fresh URLs...")
+
+        // Always scrape fresh URLs when online to ensure we have the latest PDFs
+        DebugConfig.debugPrint("🌐 PDFURLRepository: Scraping fresh URLs from website...")
         val scrapedURLs = scrapeURLs()
-        
+
         if (scrapedURLs.isEmpty()) {
-            DebugConfig.debugWarn("⚠️ PDFURLRepository: Scraping failed, will use fallback URLs")
-            return@withContext false
+            DebugConfig.debugWarn("⚠️ PDFURLRepository: Scraping failed, falling back to persisted/cached URLs")
+            return@withContext true // Still return true so app continues with cached URLs
         }
-        
-        DebugConfig.debugPrint("✅ PDFURLRepository: Initialization complete")
+
+        DebugConfig.debugPrint("✅ PDFURLRepository: Successfully scraped fresh URLs")
         return@withContext true
     }
     
