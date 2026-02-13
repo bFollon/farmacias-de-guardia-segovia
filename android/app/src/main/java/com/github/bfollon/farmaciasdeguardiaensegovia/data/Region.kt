@@ -137,6 +137,28 @@ data class Region(
         val allRegions: List<Region> by lazy {
             listOf(segoviaCapital, cuellar, elEspinar, segoviaRural)
         }
+
+        /**
+         * Translate PDFURLRepository display name to Region ID
+         * PDFURLRepository uses: "Segovia Capital", "Cuéllar", "El Espinar", "Segovia Rural"
+         * Returns Region ID constants like "segovia-capital", "cuellar", etc.
+         */
+        fun repositoryNameToId(displayName: String): String? {
+            return when (displayName) {
+                "Segovia Capital" -> ID_SEGOVIA_CAPITAL
+                "Cuéllar" -> ID_CUELLAR
+                "El Espinar" -> ID_EL_ESPINAR
+                "Segovia Rural" -> ID_SEGOVIA_RURAL
+                else -> null
+            }
+        }
+
+        /**
+         * Find Region by ID
+         */
+        fun fromId(regionId: String): Region? {
+            return allRegions.find { it.id == regionId }
+        }
     }
 
     fun toDutyLocationList(): List<DutyLocation> = when(id) {

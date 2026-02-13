@@ -19,6 +19,7 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.repositories
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
@@ -124,7 +125,23 @@ class PDFURLRepository private constructor(private val context: Context) {
         data class Updated(val oldUrl: String, val newUrl: String) : URLResolutionResult()
         data class Failed(val message: String) : URLResolutionResult()
     }
-    
+
+    /**
+     * Result of URL initialization with change detection
+     * Region IDs are normalized to Region.ID_* constants (e.g., "segovia-capital")
+     */
+    data class URLChangeResult(
+        val success: Boolean,
+        val changedRegionIds: List<String> = emptyList(),  // Region IDs, not display names
+        val urlChanges: Map<String, URLChange> = emptyMap()  // Key = region ID
+    )
+
+    data class URLChange(
+        val regionId: String,
+        val oldURL: String,
+        val newURL: String
+    )
+
     // MARK: - Persistence
     
     /**
@@ -346,19 +363,24 @@ class PDFURLRepository private constructor(private val context: Context) {
     }
     
     // MARK: - Initialization
-    
+
     /**
      * Initialize repository - always scrape for fresh URLs when online
+     * Detects URL changes and returns information about which regions changed
      * Called during splash screen
      */
-    suspend fun initializeURLs(): Boolean = withContext(Dispatchers.IO) {
+    suspend fun initializeURLs(): URLChangeResult = withContext(Dispatchers.IO) {
         DebugConfig.debugPrint("🚀 PDFURLRepository: Initializing URLs...")
 
         // Check if we're online
         if (!NetworkMonitor.isOnline()) {
             DebugConfig.debugPrint("📡 PDFURLRepository: Offline, using persisted/fallback URLs")
-            return@withContext true // Success (will use persisted/fallback URLs)
+            return@withContext URLChangeResult(success = true) // Success (will use persisted/fallback URLs)
         }
+
+        // Load previously persisted URLs before scraping
+        val oldURLs = loadPersistedURLs()
+        DebugConfig.debugPrint("📂 PDFURLRepository: Loaded ${oldURLs.size} old URLs for comparison")
 
         // Always scrape fresh URLs when online to ensure we have the latest PDFs
         DebugConfig.debugPrint("🌐 PDFURLRepository: Scraping fresh URLs from website...")
@@ -366,11 +388,48 @@ class PDFURLRepository private constructor(private val context: Context) {
 
         if (scrapedURLs.isEmpty()) {
             DebugConfig.debugWarn("⚠️ PDFURLRepository: Scraping failed, falling back to persisted/cached URLs")
-            return@withContext true // Still return true so app continues with cached URLs
+            return@withContext URLChangeResult(success = true) // Still return true so app continues with cached URLs
         }
 
-        DebugConfig.debugPrint("✅ PDFURLRepository: Successfully scraped fresh URLs")
-        return@withContext true
+        // Detect URL changes and translate to region IDs
+        val changedRegionIds = mutableListOf<String>()
+        val urlChanges = mutableMapOf<String, URLChange>()
+
+        for ((displayName, newURL) in scrapedURLs) {
+            val oldURL = oldURLs[displayName]
+
+            if (oldURL != null && oldURL != newURL) {
+                // URL changed - translate display name to region ID
+                val regionId = Region.repositoryNameToId(displayName)
+
+                if (regionId != null) {
+                    DebugConfig.debugPrint("🔄 PDFURLRepository: URL changed for $displayName (regionId: $regionId)")
+                    DebugConfig.debugPrint("   📄 Old: ${oldURL.substringAfterLast("/")}")
+                    DebugConfig.debugPrint("   📄 New: ${newURL.substringAfterLast("/")}")
+
+                    changedRegionIds.add(regionId)
+                    urlChanges[regionId] = URLChange(
+                        regionId = regionId,
+                        oldURL = oldURL,
+                        newURL = newURL
+                    )
+                } else {
+                    DebugConfig.debugWarn("⚠️ PDFURLRepository: Could not map display name '$displayName' to region ID")
+                }
+            }
+        }
+
+        if (changedRegionIds.isNotEmpty()) {
+            DebugConfig.debugPrint("✅ PDFURLRepository: Detected ${changedRegionIds.size} URL changes: $changedRegionIds")
+        } else {
+            DebugConfig.debugPrint("✅ PDFURLRepository: No URL changes detected")
+        }
+
+        return@withContext URLChangeResult(
+            success = true,
+            changedRegionIds = changedRegionIds,
+            urlChanges = urlChanges
+        )
     }
     
     // MARK: - Utilities

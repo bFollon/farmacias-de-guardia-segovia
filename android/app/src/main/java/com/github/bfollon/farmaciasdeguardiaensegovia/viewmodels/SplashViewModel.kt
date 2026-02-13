@@ -78,6 +78,9 @@ class SplashViewModel(private val context: Context) : ViewModel() {
     private val _isOffline = MutableStateFlow(false)
     val isOffline: StateFlow<Boolean> = _isOffline.asStateFlow()
 
+    private val _urlChangesDetected = MutableStateFlow<List<String>>(emptyList())
+    val urlChangesDetected: StateFlow<List<String>> = _urlChangesDetected.asStateFlow()
+
     // Sequential regions to load (in order) - will be populated after scraping
     private var regionsToLoad = emptyList<Region>()
 
@@ -113,9 +116,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                         withContext(Dispatchers.Main) {
                             _isOffline.value = false
                         }
-                        
+
                         // First, initialize PDF URL repository (scrape and validate URLs)
-                        initializeURLRepository()
+                        val changedRegions = initializeURLRepository()
+                        if (changedRegions.isNotEmpty()) {
+                            DebugConfig.debugPrint("SplashViewModel: Will reload ${changedRegions.size} regions due to URL changes")
+                        }
                     }
 
                     // Set up the URL provider for Region objects
@@ -181,27 +187,78 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
     /**
      * Initialize PDF URL repository - scrape, validate, and persist URLs
-     * This runs at startup before loading regions
+     * Detects URL changes and triggers cache invalidation for changed regions
+     * Returns list of changed region IDs
      */
-    private suspend fun initializeURLRepository() {
+    private suspend fun initializeURLRepository(): List<String> {
         try {
             DebugConfig.debugPrint("SplashViewModel: Initializing PDF URL repository...")
 
-            val success = urlRepository.initializeURLs()
+            val result = urlRepository.initializeURLs()
 
-            if (success) {
+            if (result.success) {
                 DebugConfig.debugPrint("SplashViewModel: ✅ PDF URL repository initialized successfully")
+
+                // Update state flow with changed region IDs
+                withContext(Dispatchers.Main) {
+                    _urlChangesDetected.value = result.changedRegionIds
+                }
+
+                // Handle URL changes (clear caches)
+                if (result.changedRegionIds.isNotEmpty()) {
+                    handleURLChanges(result.changedRegionIds, result.urlChanges)
+                }
+
+                return result.changedRegionIds
             } else {
                 DebugConfig.debugWarn("SplashViewModel: ⚠️ PDF URL repository initialization failed, using fallbacks")
+                return emptyList()
             }
 
         } catch (e: Exception) {
             if (e !is CancellationException) {
                 DebugConfig.debugError("SplashViewModel: Error during URL repository initialization", e)
             }
+            return emptyList()
         }
     }
-    
+
+    /**
+     * Handle URL changes by clearing caches for affected regions
+     * This ensures users get fresh data when PDFs are updated
+     */
+    private suspend fun handleURLChanges(
+        changedRegionIds: List<String>,
+        urlChanges: Map<String, PDFURLRepository.URLChange>
+    ) {
+        DebugConfig.debugPrint("SplashViewModel: 🗑️ Clearing caches for ${changedRegionIds.size} regions with URL changes")
+
+        for (regionId in changedRegionIds) {
+            try {
+                // Find Region object by ID
+                val region = Region.fromId(regionId)
+
+                if (region != null) {
+                    DebugConfig.debugPrint("SplashViewModel: Clearing cache for ${region.name}")
+
+                    // Clear all cache layers
+                    repository.clearCacheForRegion(region)
+
+                    // Log the change
+                    val change = urlChanges[regionId]
+                    if (change != null) {
+                        DebugConfig.debugPrint("   📄 Old PDF: ${change.oldURL.substringAfterLast("/")}")
+                        DebugConfig.debugPrint("   📄 New PDF: ${change.newURL.substringAfterLast("/")}")
+                    }
+                } else {
+                    DebugConfig.debugWarn("SplashViewModel: Could not find Region for ID: $regionId")
+                }
+            } catch (e: Exception) {
+                DebugConfig.debugError("SplashViewModel: Error clearing cache for $regionId", e)
+            }
+        }
+    }
+
     /**
      * Scrape PDF URLs from the stable cofsegovia.com page (legacy method, kept for demo)
      * This runs at startup to check for URL updates
