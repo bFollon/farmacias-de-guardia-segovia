@@ -127,3 +127,37 @@ extension Region {
         )
     }
 }
+
+extension Region {
+    /// Map display name to region ID (matches Android's Region.repositoryNameToId)
+    static func displayNameToId(_ displayName: String) -> String? {
+        switch displayName {
+        case "Segovia Capital":
+            return "segovia-capital"
+        case "Cuéllar":
+            return "cuellar"
+        case "El Espinar":
+            return "el-espinar"
+        case "Segovia Rural":
+            return "segovia-rural"
+        default:
+            return nil
+        }
+    }
+
+    /// Find region by ID
+    static func fromId(_ regionId: String) -> Region? {
+        switch regionId {
+        case "segovia-capital":
+            return .segoviaCapital
+        case "cuellar":
+            return .cuellar
+        case "el-espinar":
+            return .elEspinar
+        case "segovia-rural":
+            return .segoviaRural
+        default:
+            return nil
+        }
+    }
+}

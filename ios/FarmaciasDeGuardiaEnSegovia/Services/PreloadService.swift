@@ -17,6 +17,20 @@
 
 import Foundation
 
+/// Result of URL change detection
+struct URLChangeResult {
+    let success: Bool
+    let changedRegionIds: [String]
+    let urlChanges: [String: URLChange]  // Key = region ID
+}
+
+/// Details of a URL change
+struct URLChange {
+    let regionId: String
+    let oldURL: String
+    let newURL: String
+}
+
 /// Service responsible for preloading and caching PDFs during app startup
 class PreloadService: ObservableObject {
     static let shared = PreloadService()
@@ -39,20 +53,44 @@ class PreloadService: ObservableObject {
     /// This runs at startup to check for URL updates
     private func scrapePDFURLs() async {
         DebugConfig.debugPrint("PreloadService: Starting PDF URL scraping...")
-        
+
+        // Check if offline
+        if !NetworkMonitor.shared.isOnline {
+            DebugConfig.debugPrint("📡 PreloadService: Offline, skipping URL scraping and change detection")
+            // Still populate regions with cached/fallback URLs
+            regions = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+            return
+        }
+
+        // Load old URLs BEFORE scraping
+        let oldURLs = PDFURLScrapingService.shared.loadPersistedURLs()
+        DebugConfig.debugPrint("📂 PreloadService: Loaded \(oldURLs.count) old URLs for comparison")
+
+        // Scrape fresh URLs
         let scrapedData = await PDFURLScrapingService.shared.scrapePDFURLs()
-        
-        // Print the scraped data to console for debugging
+
+        // Build URL map: display name → URL
+        let newURLs = Dictionary(uniqueKeysWithValues: scrapedData.map { ($0.regionName, $0.pdfURL) })
+
+        // Detect changes
+        let changeResult = detectURLChanges(oldURLs: oldURLs, newURLs: newURLs)
+
+        // Invalidate caches for changed regions
+        if !changeResult.changedRegionIds.isEmpty {
+            await invalidateCachesForChangedURLs(changeResult: changeResult)
+        }
+
+        // Print scraped data (existing call)
         PDFURLScrapingService.shared.printScrapedData(scrapedData)
-        
-        // Now that scraping is complete, populate regions with scraped URLs
+
+        // Re-populate regions with scraped URLs (existing code)
         regions = [
             .segoviaCapital,
             .cuellar,
             .elEspinar,
             .segoviaRural
         ]
-        
+
         DebugConfig.debugPrint("PreloadService: PDF URL scraping completed, regions populated")
     }
     
@@ -141,10 +179,127 @@ class PreloadService: ObservableObject {
         }
     }
     
+    /// Detect changes between old and new PDF URLs
+    private func detectURLChanges(
+        oldURLs: [String: String],
+        newURLs: [String: URL]
+    ) -> URLChangeResult {
+        var changedRegionIds: [String] = []
+        var urlChanges: [String: URLChange] = [:]
+
+        for (displayName, newURL) in newURLs {
+            let newURLString = newURL.absoluteString
+
+            // Get old URL for this region
+            guard let oldURLString = oldURLs[displayName] else {
+                // First time scraping this region - not a change
+                DebugConfig.debugPrint("ℹ️ PreloadService: First time scraping \(displayName), no comparison available")
+                continue
+            }
+
+            // Check if URL changed
+            if oldURLString != newURLString {
+                // Translate display name to region ID
+                guard let regionId = Region.displayNameToId(displayName) else {
+                    DebugConfig.debugPrint("⚠️ PreloadService: Could not map display name '\(displayName)' to region ID")
+                    continue
+                }
+
+                DebugConfig.debugPrint("🔄 PreloadService: URL changed for \(displayName) (regionId: \(regionId))")
+                DebugConfig.debugPrint("   📄 Old: \((oldURLString as NSString).lastPathComponent)")
+                DebugConfig.debugPrint("   📄 New: \((newURLString as NSString).lastPathComponent)")
+
+                changedRegionIds.append(regionId)
+                urlChanges[regionId] = URLChange(
+                    regionId: regionId,
+                    oldURL: oldURLString,
+                    newURL: newURLString
+                )
+            }
+        }
+
+        if !changedRegionIds.isEmpty {
+            DebugConfig.debugPrint("✅ PreloadService: Detected \(changedRegionIds.count) URL changes: \(changedRegionIds)")
+        } else {
+            DebugConfig.debugPrint("✅ PreloadService: No URL changes detected")
+        }
+
+        return URLChangeResult(
+            success: true,
+            changedRegionIds: changedRegionIds,
+            urlChanges: urlChanges
+        )
+    }
+
+    /// Invalidate all caches for regions whose PDF URLs have changed
+    private func invalidateCachesForChangedURLs(changeResult: URLChangeResult) async {
+        DebugConfig.debugPrint("🗑️ PreloadService: Invalidating caches for \(changeResult.changedRegionIds.count) regions with URL changes")
+
+        for regionId in changeResult.changedRegionIds {
+            // Find the region
+            guard let region = Region.fromId(regionId) else {
+                DebugConfig.debugPrint("⚠️ PreloadService: Could not find region for ID: \(regionId)")
+                continue
+            }
+
+            DebugConfig.debugPrint("🗑️ PreloadService: Clearing caches for \(region.name) (URL changed)")
+
+            // Log the change details
+            if let change = changeResult.urlChanges[regionId] {
+                DebugConfig.debugPrint("   📄 Old PDF: \((change.oldURL as NSString).lastPathComponent)")
+                DebugConfig.debugPrint("   📄 New PDF: \((change.newURL as NSString).lastPathComponent)")
+            }
+
+            // Clear all three cache layers:
+
+            // 1. PDF Cache (PDFCacheManager)
+            PDFCacheManager.shared.clearCache(for: region)
+
+            // 2. Persistent Schedule Cache (ScheduleCacheService)
+            clearScheduleCacheForRegion(region)
+
+            // 3. Memory Cache (ScheduleService)
+            clearMemoryCacheForRegion(region)
+
+            DebugConfig.debugPrint("✅ PreloadService: Cleared all caches for \(region.name)")
+        }
+    }
+
+    /// Clear persistent schedule cache for a region
+    private func clearScheduleCacheForRegion(_ region: Region) {
+        // Clear main region cache
+        let mainLocation = DutyLocation.fromRegion(region)
+        ScheduleCacheService.shared.clearLocationCache(for: mainLocation)
+
+        // For Segovia Rural, also clear all ZBS caches
+        if region.id == "segovia-rural" {
+            for zbs in ZBS.availableZBS {
+                let zbsLocation = DutyLocation.fromZBS(zbs)
+                ScheduleCacheService.shared.clearLocationCache(for: zbsLocation)
+            }
+            DebugConfig.debugPrint("🗑️ PreloadService: Cleared \(ZBS.availableZBS.count) ZBS caches for Segovia Rural")
+        }
+    }
+
+    /// Clear memory cache for a region
+    private func clearMemoryCacheForRegion(_ region: Region) {
+        // Clear main region cache
+        let mainLocation = DutyLocation.fromRegion(region)
+        ScheduleService.clearCache(for: mainLocation)
+
+        // For Segovia Rural, also clear all ZBS caches
+        if region.id == "segovia-rural" {
+            for zbs in ZBS.availableZBS {
+                let zbsLocation = DutyLocation.fromZBS(zbs)
+                ScheduleService.clearCache(for: zbsLocation)
+            }
+        }
+    }
+
     /// Check if preloading is needed (if any region lacks cached data)
     func needsPreloading() async -> Bool {
         let allStatuses = await PDFCacheManager.shared.getCacheStatus()
-        
+
         for region in regions {
             let status = allStatuses.first { $0.region.id == region.id }
             if let status = status, !status.isCached {

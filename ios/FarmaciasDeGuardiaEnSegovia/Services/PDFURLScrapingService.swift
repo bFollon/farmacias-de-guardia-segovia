@@ -29,15 +29,26 @@ class PDFURLScrapingService {
     
     /// Cache for scraped PDF URLs by region name
     private var scrapedURLs: [String: URL] = [:]
-    
+
     /// Flag to track if scraping has completed
     private var scrapingCompleted = false
-    
+
+    /// UserDefaults for URL persistence
+    private let userDefaults = UserDefaults.standard
+    private let scrapedURLsKey = "PDFURLScrapingService.scrapedURLs"
+    private let lastScrapeKey = "PDFURLScrapingService.lastScrapeTimestamp"
+
     private init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10.0
         config.timeoutIntervalForResource = 10.0
         self.session = URLSession(configuration: config)
+    }
+
+    /// Persisted scraped URL data
+    private struct PersistedURLData: Codable {
+        let urls: [String: String]  // Display name → URL
+        let timestamp: TimeInterval
     }
     
     /// Scraped PDF URL data for each region
@@ -46,7 +57,47 @@ class PDFURLScrapingService {
         let pdfURL: URL
         let lastUpdated: String?
     }
-    
+
+    /// Load previously scraped URLs from UserDefaults
+    func loadPersistedURLs() -> [String: String] {
+        guard let data = userDefaults.data(forKey: scrapedURLsKey) else {
+            DebugConfig.debugPrint("📂 PDFURLScrapingService: No persisted URLs found (first run)")
+            return [:]
+        }
+
+        do {
+            let persistedData = try JSONDecoder().decode(PersistedURLData.self, from: data)
+            DebugConfig.debugPrint("📂 PDFURLScrapingService: Loaded \(persistedData.urls.count) persisted URLs")
+            return persistedData.urls
+        } catch {
+            DebugConfig.debugPrint("❌ PDFURLScrapingService: Failed to load persisted URLs: \(error)")
+            return [:]
+        }
+    }
+
+    /// Persist scraped URLs to UserDefaults
+    private func persistURLs(_ urls: [String: URL]) {
+        let urlStrings = urls.mapValues { $0.absoluteString }
+        let data = PersistedURLData(urls: urlStrings, timestamp: Date().timeIntervalSince1970)
+
+        do {
+            let encoded = try JSONEncoder().encode(data)
+            userDefaults.set(encoded, forKey: scrapedURLsKey)
+            userDefaults.set(Date().timeIntervalSince1970, forKey: lastScrapeKey)
+            DebugConfig.debugPrint("💾 PDFURLScrapingService: Persisted \(urls.count) URLs")
+        } catch {
+            DebugConfig.debugPrint("❌ PDFURLScrapingService: Failed to persist URLs: \(error)")
+        }
+    }
+
+    /// Persist scraped data after successful scraping
+    private func persistScrapedURLs(_ scrapedData: [ScrapedPDFData]) {
+        let urlMap = Dictionary(uniqueKeysWithValues: scrapedData.map {
+            ($0.regionName, $0.pdfURL)
+        })
+        persistURLs(urlMap)
+    }
+
     /// Scrape the cofsegovia.com page to extract current PDF URLs
     /// This runs asynchronously to avoid blocking the main thread
     func scrapePDFURLs() async -> [ScrapedPDFData] {
@@ -137,6 +188,11 @@ class PDFURLScrapingService {
             // Mark scraping as completed
             scrapingCompleted = true
             DebugConfig.debugPrint("PDFURLScrapingService: Scraping completed, \(scrapedURLs.count) URLs cached")
+
+            // Persist the scraped URLs for URL change detection
+            if !scrapedData.isEmpty {
+                persistScrapedURLs(scrapedData)
+            }
 
             // Record metrics with the scraped data
             recordMetrics(scrapedData: scrapedData, startTime: startTime, error: nil)
