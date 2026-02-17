@@ -398,19 +398,22 @@ class PDFURLRepository private constructor(private val context: Context) {
         for ((displayName, newURL) in scrapedURLs) {
             val oldURL = oldURLs[displayName]
 
-            if (oldURL != null && oldURL != newURL) {
+            // Check if URL changed (null counts as a change)
+            if (oldURL != newURL) {
                 // URL changed - translate display name to region ID
                 val regionId = Region.repositoryNameToId(displayName)
 
                 if (regionId != null) {
                     DebugConfig.debugPrint("🔄 PDFURLRepository: URL changed for $displayName (regionId: $regionId)")
-                    DebugConfig.debugPrint("   📄 Old: ${oldURL.substringAfterLast("/")}")
+                    if (oldURL != null) {
+                        DebugConfig.debugPrint("   📄 Old: ${oldURL.substringAfterLast("/")}")
+                    }
                     DebugConfig.debugPrint("   📄 New: ${newURL.substringAfterLast("/")}")
 
                     changedRegionIds.add(regionId)
                     urlChanges[regionId] = URLChange(
                         regionId = regionId,
-                        oldURL = oldURL,
+                        oldURL = oldURL ?: "",
                         newURL = newURL
                     )
                 } else {

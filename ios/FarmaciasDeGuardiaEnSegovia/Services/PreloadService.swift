@@ -189,15 +189,9 @@ class PreloadService: ObservableObject {
 
         for (displayName, newURL) in newURLs {
             let newURLString = newURL.absoluteString
+            let oldURLString = oldURLs[displayName]
 
-            // Get old URL for this region
-            guard let oldURLString = oldURLs[displayName] else {
-                // First time scraping this region - not a change
-                DebugConfig.debugPrint("ℹ️ PreloadService: First time scraping \(displayName), no comparison available")
-                continue
-            }
-
-            // Check if URL changed
+            // Check if URL changed (nil counts as a change)
             if oldURLString != newURLString {
                 // Translate display name to region ID
                 guard let regionId = Region.displayNameToId(displayName) else {
@@ -206,13 +200,15 @@ class PreloadService: ObservableObject {
                 }
 
                 DebugConfig.debugPrint("🔄 PreloadService: URL changed for \(displayName) (regionId: \(regionId))")
-                DebugConfig.debugPrint("   📄 Old: \((oldURLString as NSString).lastPathComponent)")
+                if let oldURLString = oldURLString {
+                    DebugConfig.debugPrint("   📄 Old: \((oldURLString as NSString).lastPathComponent)")
+                }
                 DebugConfig.debugPrint("   📄 New: \((newURLString as NSString).lastPathComponent)")
 
                 changedRegionIds.append(regionId)
                 urlChanges[regionId] = URLChange(
                     regionId: regionId,
-                    oldURL: oldURLString,
+                    oldURL: oldURLString ?? "",
                     newURL: newURLString
                 )
             }
