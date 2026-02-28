@@ -37,6 +37,14 @@ class PDFURLScrapingService {
     private let userDefaults = UserDefaults.standard
     private let scrapedURLsKey = "PDFURLScrapingService.scrapedURLs"
     private let lastScrapeKey = "PDFURLScrapingService.lastScrapeTimestamp"
+    private let lastScrapeSucceededKeyPrivate = "PDFURLScrapingService.lastScrapeSucceeded"
+
+    // MARK: - Public UserDefaults key constants (used by ConfidenceService)
+
+    /// UserDefaults key for the timestamp of the last scraping attempt.
+    static let lastScrapeTimestampKey = "PDFURLScrapingService.lastScrapeTimestamp"
+    /// UserDefaults key for whether the last scraping attempt succeeded.
+    static let lastScrapeSucceededKey = "PDFURLScrapingService.lastScrapeSucceeded"
 
     private init() {
         let config = URLSessionConfiguration.default
@@ -121,6 +129,7 @@ class PDFURLScrapingService {
                 DebugConfig.debugPrint("PDFURLScrapingService: Invalid URL")
                 scrapingError = error
                 recordMetrics(scrapedData: [], startTime: startTime, error: error)
+                userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
 
                 span.setAttribute(key: "error_message", value: "Invalid URL")
                 span.setAttribute(key: "urls_found", value: "0")
@@ -143,6 +152,7 @@ class PDFURLScrapingService {
                 DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \(statusCode)")
                 scrapingError = error
                 recordMetrics(scrapedData: [], startTime: startTime, error: error)
+                userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
 
                 span.setAttribute(key: "http_status", value: statusCode)
                 span.setAttribute(key: "error_message", value: "HTTP \(statusCode)")
@@ -159,6 +169,7 @@ class PDFURLScrapingService {
                 DebugConfig.debugPrint("PDFURLScrapingService: Failed to decode HTML content")
                 scrapingError = error
                 recordMetrics(scrapedData: [], startTime: startTime, error: error)
+                userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
 
                 span.setAttribute(key: "error_message", value: "Failed to decode HTML")
                 span.setAttribute(key: "urls_found", value: "0")
@@ -187,6 +198,7 @@ class PDFURLScrapingService {
 
             // Mark scraping as completed
             scrapingCompleted = true
+            userDefaults.set(true, forKey: lastScrapeSucceededKeyPrivate)
             DebugConfig.debugPrint("PDFURLScrapingService: Scraping completed, \(scrapedURLs.count) URLs cached")
 
             // Persist the scraped URLs for URL change detection
@@ -209,6 +221,7 @@ class PDFURLScrapingService {
             DebugConfig.debugPrint("PDFURLScrapingService: Error scraping PDF URLs: \(error)")
             scrapingError = ScrapingError.networkError(error.localizedDescription)
             recordMetrics(scrapedData: [], startTime: startTime, error: scrapingError)
+            userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
 
             // Finish span with error
             span.setAttribute(key: "error_message", value: error.localizedDescription)

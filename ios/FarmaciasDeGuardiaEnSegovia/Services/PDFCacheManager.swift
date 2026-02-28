@@ -116,6 +116,14 @@ class PDFCacheManager {
     // Version storage key
     private let versionStorageKey = "PDFCacheVersions"
     private let lastUpdateCheckKey = "PDFCacheLastUpdateCheck"
+
+    // MARK: - Public key helpers (used by ConfidenceService)
+
+    /// Returns the UserDefaults key used to track whether a pending PDF update exists for a region.
+    /// The flag is set to `true` when an update is detected and cleared when the download succeeds.
+    static func pendingUpdateKey(for region: Region) -> String {
+        "PDFCacheManager.pendingUpdate.\(region.id)"
+    }
     
     // MARK: - Storage Locations
     
@@ -512,15 +520,23 @@ class PDFCacheManager {
     /// Check a specific region and update if needed
     private func checkAndUpdateIfNeeded(region: Region, debugMode: Bool = false) async {
         let isCacheValid = await isCacheUpToDate(for: region, debugMode: debugMode)
-        
+        let pendingKey = PDFCacheManager.pendingUpdateKey(for: region)
+
         if !isCacheValid {
+            // Flag that an update is pending before we attempt the download
+            userDefaults.set(true, forKey: pendingKey)
             do {
                 let _ = try await downloadAndCache(region: region)
+                // Download succeeded – clear the pending flag
+                userDefaults.set(false, forKey: pendingKey)
                 DebugConfig.debugPrint("📥 PDFCacheManager: Updated PDF for \(region.name)")
             } catch {
+                // Download failed – leave the pending flag set so confidence is lowered
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
             }
         } else {
+            // Confirmed up to date – ensure the pending flag is cleared
+            userDefaults.set(false, forKey: pendingKey)
             DebugConfig.debugPrint("✅ PDFCacheManager: PDF for \(region.name) is up to date")
         }
     }
