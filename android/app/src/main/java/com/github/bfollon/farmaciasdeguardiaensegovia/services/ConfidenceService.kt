@@ -341,14 +341,37 @@ class ConfidenceService(private val context: Context) {
         val primaryYear = currentYear
         val primaryYearSchedules = schedules.filter { (it.date.year ?: currentYear) == primaryYear }
 
+        // Detect year-boundary spillover: January entries may actually be from the
+        // following year (e.g., a PDF covering Feb 2026 → Jan 2027 where January
+        // dates are mislabeled as the current year because the parser lacks year tracking).
+        // We detect this by looking for a gap > 1 day between the last January entry and
+        // the first non-January entry; a gap indicates the data wraps around the year boundary.
+        val januarySchedules = primaryYearSchedules.filter { DutyDate.monthToNumber(it.date.month) == 1 }
+        val nonJanuarySchedules = primaryYearSchedules.filter { (DutyDate.monthToNumber(it.date.month) ?: 0) >= 2 }
+
+        val effectiveSchedules = if (januarySchedules.isNotEmpty() && nonJanuarySchedules.isNotEmpty()) {
+            val lastJanTimestamp = januarySchedules.mapNotNull { it.date.toTimestamp() }.maxOrNull() ?: 0L
+            val firstNonJanTimestamp = nonJanuarySchedules.mapNotNull { it.date.toTimestamp() }.minOrNull() ?: 0L
+            val gapDays = TimeUnit.MILLISECONDS.toDays(firstNonJanTimestamp - lastJanTimestamp)
+
+            if (gapDays >= 2) {
+                DebugConfig.debugPrint("ConfidenceService: Detected year-boundary spillover — excluding ${januarySchedules.size} January entries")
+                nonJanuarySchedules
+            } else {
+                primaryYearSchedules
+            }
+        } else {
+            primaryYearSchedules
+        }
+
         // Count unique calendar dates (avoids double-counting multiple schedules per day)
-        val uniqueCount = primaryYearSchedules.mapNotNull { schedule ->
+        val uniqueCount = effectiveSchedules.mapNotNull { schedule ->
             val monthNum = DutyDate.monthToNumber(schedule.date.month) ?: return@mapNotNull null
             "$primaryYear-$monthNum-${schedule.date.day}"
         }.toSet().size
 
         // Find the first date and compute calendar days to Dec 31 of the primary year
-        val sorted = primaryYearSchedules.sortedBy { it.date.toTimestamp() ?: 0L }
+        val sorted = effectiveSchedules.sortedBy { it.date.toTimestamp() ?: 0L }
         val firstTimestamp = sorted.firstOrNull()?.date?.toTimestamp()
             ?: return Triple(primaryYear, uniqueCount, 0)
 

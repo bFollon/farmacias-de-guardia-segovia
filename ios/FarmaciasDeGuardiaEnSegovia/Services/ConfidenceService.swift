@@ -387,14 +387,35 @@ enum ConfidenceService {
         let primaryYear = currentYear
         let primaryYearSchedules = schedules.filter { ($0.date.year ?? currentYear) == primaryYear }
 
+        // Detect year-boundary spillover: January entries may actually be from the
+        // following year (e.g., a PDF covering Feb 2026 → Jan 2027 where January
+        // dates are mislabeled as the current year because the parser lacks year tracking).
+        // We detect this by looking for a gap > 1 day between the last January entry and
+        // the first non-January entry; a gap indicates the data wraps around the year boundary.
+        let januarySchedules = primaryYearSchedules.filter { DutyDate.monthToNumber($0.date.month) == 1 }
+        let nonJanuarySchedules = primaryYearSchedules.filter { (DutyDate.monthToNumber($0.date.month) ?? 0) >= 2 }
+
+        var effectiveSchedules = primaryYearSchedules
+
+        if !januarySchedules.isEmpty && !nonJanuarySchedules.isEmpty {
+            let lastJanTimestamp = januarySchedules.compactMap { $0.date.toTimestamp() }.max() ?? 0
+            let firstNonJanTimestamp = nonJanuarySchedules.compactMap { $0.date.toTimestamp() }.min() ?? 0
+            let gapDays = Int((firstNonJanTimestamp - lastJanTimestamp) / 86_400)
+
+            if gapDays >= 2 {
+                DebugConfig.debugPrint("ConfidenceService: Detected year-boundary spillover — excluding \(januarySchedules.count) January entries")
+                effectiveSchedules = nonJanuarySchedules
+            }
+        }
+
         // Count unique calendar dates (avoids double-counting multiple schedules per day)
-        let uniqueDates = Set(primaryYearSchedules.compactMap { schedule -> String? in
+        let uniqueDates = Set(effectiveSchedules.compactMap { schedule -> String? in
             guard let monthNum = DutyDate.monthToNumber(schedule.date.month) else { return nil }
             return "\(primaryYear)-\(monthNum)-\(schedule.date.day)"
         })
 
         // Find the first date and compute calendar days to Dec 31 of the primary year
-        let sorted = primaryYearSchedules.sorted {
+        let sorted = effectiveSchedules.sorted {
             ($0.date.toTimestamp() ?? 0) < ($1.date.toTimestamp() ?? 0)
         }
         guard let firstDate = sorted.first?.date,
