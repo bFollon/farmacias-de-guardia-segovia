@@ -463,7 +463,7 @@ private fun EmptyContent(isOffline: Boolean = false) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "¿Cree que es incorrecto? Pruebe a refrescar la información de las farmacias. Para ello, vaya a Ajustes → Ver Estado de la caché → Forzar actualización de todos los PDFs.",
+                    text = "¿Cree que es incorrecto? Pruebe a refrescar la información de las farmacias. Para ello, vaya a Ajustes -> Ver Estado de la caché -> Forzar actualización de todos los PDFs.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline,
                     textAlign = TextAlign.Center
