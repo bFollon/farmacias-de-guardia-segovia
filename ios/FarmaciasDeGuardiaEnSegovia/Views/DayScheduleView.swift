@@ -102,8 +102,7 @@ struct DayScheduleView: View {
                                     PharmacyView(pharmacy: pharmacy, activeShift: .capitalDay)
                                 } else {
                                     NoPharmacyOnDutyCard(
-                                        message: "No hay farmacia de guardia asignada para el turno de día.",
-                                        additionalInfo: nil
+                                        message: "No hay farmacia de guardia asignada para el turno de día."
                                     )
                                 }
                             }
@@ -117,8 +116,7 @@ struct DayScheduleView: View {
                                     PharmacyView(pharmacy: pharmacy, activeShift: .capitalNight)
                                 } else {
                                     NoPharmacyOnDutyCard(
-                                        message: "No hay farmacia de guardia asignada para el turno de noche.",
-                                        additionalInfo: nil
+                                        message: "No hay farmacia de guardia asignada para el turno de noche."
                                     )
                                 }
                             }
@@ -136,8 +134,7 @@ struct DayScheduleView: View {
                                         }
                                     } else {
                                         NoPharmacyOnDutyCard(
-                                            message: "No hay farmacia de guardia asignada para esta fecha.",
-                                            additionalInfo: nil
+                                            message: "No hay farmacia de guardia asignada para esta fecha."
                                         )
                                     }
                                 }
@@ -153,8 +150,7 @@ struct DayScheduleView: View {
                                     }
                                 } else {
                                     NoPharmacyOnDutyCard(
-                                        message: "No hay farmacia de guardia asignada para esta fecha.",
-                                        additionalInfo: nil
+                                        message: "No hay farmacia de guardia asignada para esta fecha."
                                     )
                                 }
                             }
@@ -164,8 +160,7 @@ struct DayScheduleView: View {
                         NoPharmacyOnDutyCard(
                             message: !networkMonitor.isOnline
                                 ? "Sin conexión y sin datos almacenados para esta fecha."
-                                : "No hay farmacia de guardia programada para esta fecha.",
-                            additionalInfo: "Intente refrescar o seleccione una fecha diferente."
+                                : "No hay farmacia de guardia programada para esta fecha."
                         )
                     }
                 }
