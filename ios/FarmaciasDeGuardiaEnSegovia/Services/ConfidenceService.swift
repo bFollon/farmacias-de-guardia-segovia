@@ -41,7 +41,7 @@ enum ConfidenceConfig {
     static let pendingUpdateDeduction: Double = 0.12
 
     // MARK: Criterion 4 – Schedule count vs expected
-    /// Expected count is derived from first schedule date → days remaining in that year.
+    /// Expected count is derived from the first unique date in the primary year → Dec 31.
     /// 70–93 % of expected.
     static let scheduleCountModerateDeduction: Double = 0.10
     /// 55–70 % of expected.
@@ -59,6 +59,12 @@ enum ConfidenceConfig {
     // MARK: Criterion 6 – Missing days near today (±3 days)
     static let missingDayDeduction: Double = 0.04
     static let missingDayWindowRadius: Int = 3   // days each side of today
+
+    // MARK: Rotation detection
+    /// Coverage ratio threshold (unique schedule dates / calendar days in year).
+    /// Locations below this are treated as rotation-based (e.g., Segovia Rural ZBS)
+    /// and criteria 4 & 6 are skipped since sparse daily coverage is expected by design.
+    static let rotationCoverageThreshold: Double = 0.70
 }
 
 // MARK: - Data Models
@@ -87,19 +93,32 @@ enum ConfidenceFactor {
     /// Localised Spanish label for the breakdown sheet.
     var localizedTitle: String {
         switch self {
-        case .scrapingFailed:
-            return "Comprobación de URLs fallida"
-        case .scrapingAge(let days, _):
-            if days == 0 { return "URLs verificadas recientemente" }
-            return "URLs no verificadas hace \(days) días"
-        case .pendingPDFUpdate:
-            return "Hay una actualización pendiente de los PDFs"
-        case .lowScheduleCount(let actual, let expected, _):
-            return "Pocos horarios (\(actual) de ~\(expected) esperados)"
-        case .noCurrentYearSchedules:
-            return "Sin horarios para el año actual"
-        case .missingDaysNearToday(let missing, _):
-            return "\(missing) día\(missing == 1 ? "" : "s") sin horario cerca de hoy"
+        case .scrapingFailed(let d):
+            return d > 0
+                ? "Fallo al verificar las URLs de los PDFs"
+                : "URLs verificadas correctamente"
+        case .scrapingAge(let days, let d):
+            if days == -1 { return d > 0 ? "Antigüedad de verificación desconocida" : "Sin historial de verificación" }
+            if days == 0  { return "URLs verificadas recientemente" }
+            return d > 0
+                ? "URLs sin verificar hace \(days) días"
+                : "URLs verificadas hace \(days) días"
+        case .pendingPDFUpdate(let d):
+            return d > 0
+                ? "Hay una actualización pendiente de los PDFs"
+                : "Todos los PDFs actualizados"
+        case .lowScheduleCount(let actual, let expected, let d):
+            return d > 0
+                ? "Pocos horarios (\(actual) de ~\(expected) esperados)"
+                : "Horarios correctos (\(actual) de ~\(expected) esperados)"
+        case .noCurrentYearSchedules(let d):
+            return d > 0
+                ? "Sin horarios para el año actual"
+                : "Horarios del año actual disponibles"
+        case .missingDaysNearToday(let missing, let d):
+            return d > 0
+                ? "\(missing) día\(missing == 1 ? "" : "s") sin horario cerca de hoy"
+                : "Horarios disponibles en fechas próximas"
         }
     }
 
@@ -153,15 +172,29 @@ enum ConfidenceService {
         factors.append(updateFactor)
         totalDeduction += updateFactor.deduction
 
+        // Pre-compute primary year stats shared by criteria 4 and 6.
+        // This finds the year with the most schedules (ignoring year-boundary weeks
+        // from adjacent PDFs) and counts unique calendar dates to avoid inflating the
+        // actual count when multiple PharmacySchedule entries exist per day.
+        let currentYear = Calendar.current.component(.year, from: Date())
+        let (primaryYear, uniqueDateCount, calendarDays) = computePrimaryYearStats(schedules, currentYear: currentYear)
+        let coverageRatio = calendarDays > 0 ? Double(uniqueDateCount) / Double(calendarDays) : 1.0
+        DebugConfig.debugPrint("ConfidenceService: primaryYear=\(primaryYear), uniqueDates=\(uniqueDateCount), calendarDays=\(calendarDays), coverage=\(String(format: "%.2f", coverageRatio))")
+
         // 4 & 5. Schedule count + current-year check
-        let (countFactor, yearFactor) = evaluateScheduleCount(schedules)
+        let (countFactor, yearFactor) = evaluateScheduleCount(
+            schedules,
+            uniqueDateCount: uniqueDateCount,
+            calendarDays: calendarDays,
+            coverageRatio: coverageRatio
+        )
         factors.append(countFactor)
         totalDeduction += countFactor.deduction
         factors.append(yearFactor)
         totalDeduction += yearFactor.deduction
 
         // 6. Missing days near today
-        let missingFactor = evaluateMissingDaysNearToday(schedules)
+        let missingFactor = evaluateMissingDaysNearToday(schedules, coverageRatio: coverageRatio)
         factors.append(missingFactor)
         totalDeduction += missingFactor.deduction
 
@@ -234,7 +267,10 @@ enum ConfidenceService {
     // MARK: Criteria 4 & 5 – Schedule count + current year
 
     private static func evaluateScheduleCount(
-        _ schedules: [PharmacySchedule]
+        _ schedules: [PharmacySchedule],
+        uniqueDateCount: Int,
+        calendarDays: Int,
+        coverageRatio: Double
     ) -> (ConfidenceFactor, ConfidenceFactor) {
         let currentYear = Calendar.current.component(.year, from: Date())
         let schedulesForCurrentYear = schedules.filter {
@@ -248,78 +284,61 @@ enum ConfidenceService {
             )
             // Count factor is implicitly 0 when there are no current-year schedules
             // (yearFactor already applies a severe penalty; avoid double-counting)
-            let countFactor = ConfidenceFactor.lowScheduleCount(actual: schedules.count, expected: 0, deduction: 0)
+            let countFactor = ConfidenceFactor.lowScheduleCount(actual: uniqueDateCount, expected: 0, deduction: 0)
             return (countFactor, yearFactor)
         }
 
-        // Criterion 4: compare actual count to expected count
-        let countFactor = evaluateCount(schedules)
         let yearFactor = ConfidenceFactor.noCurrentYearSchedules(deduction: 0)
-        return (countFactor, yearFactor)
-    }
 
-    private static func evaluateCount(_ schedules: [PharmacySchedule]) -> ConfidenceFactor {
-        guard !schedules.isEmpty else {
-            return .lowScheduleCount(
-                actual: 0,
-                expected: 0,
-                deduction: ConfidenceConfig.scheduleCountVeryLowDeduction
+        // Criterion 4: skip for rotation-based regions (e.g., Segovia Rural ZBS)
+        // where schedules only cover a fraction of calendar days by design.
+        // Use expected = actual so the display reads "X de ~X" instead of a misleading "X de ~365".
+        if coverageRatio < ConfidenceConfig.rotationCoverageThreshold {
+            let countFactor = ConfidenceFactor.lowScheduleCount(
+                actual: uniqueDateCount, expected: uniqueDateCount, deduction: 0
             )
+            return (countFactor, yearFactor)
         }
 
-        // Derive expected count from the first schedule date
-        let sorted = schedules.sorted {
-            ($0.date.toTimestamp() ?? 0) < ($1.date.toTimestamp() ?? 0)
-        }
-        guard let firstDate = sorted.first?.date,
-              let firstTimestamp = firstDate.toTimestamp() else {
-            return .lowScheduleCount(actual: schedules.count, expected: 0, deduction: 0)
-        }
-
-        let calendar = Calendar.current
-        let firstDay = Date(timeIntervalSince1970: firstTimestamp)
-        let year = calendar.component(.year, from: firstDay)
-
-        // Days from firstDay to Dec 31 of the same year (inclusive)
-        var dec31Components = DateComponents()
-        dec31Components.year = year
-        dec31Components.month = 12
-        dec31Components.day = 31
-        guard let dec31 = calendar.date(from: dec31Components),
-              let daysBetween = calendar.dateComponents([.day], from: firstDay, to: dec31).day else {
-            return .lowScheduleCount(actual: schedules.count, expected: 0, deduction: 0)
-        }
-        let expectedCount = daysBetween + 1  // inclusive
-
-        let actual = schedules.count
+        // Criterion 4: compare unique date count to expected calendar days
+        let actual = uniqueDateCount
+        let expectedCount = calendarDays
         let ratio = expectedCount > 0 ? Double(actual) / Double(expectedCount) : 1.0
 
+        let countFactor: ConfidenceFactor
         switch ratio {
         case ConfidenceConfig.scheduleCountModerateRatio...:
-            return .lowScheduleCount(actual: actual, expected: expectedCount, deduction: 0)
+            countFactor = .lowScheduleCount(actual: actual, expected: expectedCount, deduction: 0)
         case ConfidenceConfig.scheduleCountLowRatio..<ConfidenceConfig.scheduleCountModerateRatio:
-            return .lowScheduleCount(
+            countFactor = .lowScheduleCount(
                 actual: actual, expected: expectedCount,
                 deduction: ConfidenceConfig.scheduleCountModerateDeduction
             )
         case ConfidenceConfig.scheduleCountVeryLowRatio..<ConfidenceConfig.scheduleCountLowRatio:
-            return .lowScheduleCount(
+            countFactor = .lowScheduleCount(
                 actual: actual, expected: expectedCount,
                 deduction: ConfidenceConfig.scheduleCountLowDeduction
             )
         default:
-            return .lowScheduleCount(
+            countFactor = .lowScheduleCount(
                 actual: actual, expected: expectedCount,
                 deduction: ConfidenceConfig.scheduleCountVeryLowDeduction
             )
         }
+        return (countFactor, yearFactor)
     }
 
     // MARK: Criterion 6 – Missing days near today
 
     private static func evaluateMissingDaysNearToday(
-        _ schedules: [PharmacySchedule]
+        _ schedules: [PharmacySchedule],
+        coverageRatio: Double
     ) -> ConfidenceFactor {
+        // Rotation-based regions have sparse daily coverage by design — skip this criterion.
+        if coverageRatio < ConfidenceConfig.rotationCoverageThreshold {
+            return .missingDaysNearToday(missingDays: 0, deduction: 0)
+        }
+
         let calendar = Calendar.current
         let today = Date()
         let radius = ConfidenceConfig.missingDayWindowRadius
@@ -347,5 +366,55 @@ enum ConfidenceService {
 
         let deduction = Double(missingDays) * ConfidenceConfig.missingDayDeduction
         return .missingDaysNearToday(missingDays: missingDays, deduction: deduction)
+    }
+
+    // MARK: Primary Year Stats
+
+    /// Returns the primary year (year with the most schedules), the count of unique
+    /// calendar dates in that year, and the number of calendar days from the first
+    /// schedule date to December 31 of that year (inclusive).
+    ///
+    /// Using the modal year avoids year-boundary weeks from adjacent PDFs skewing the
+    /// expected count. Counting unique dates avoids inflating the actual count when
+    /// multiple PharmacySchedule entries exist for the same day (e.g., El Espinar where
+    /// each pharmacy generates a separate entry per date).
+    private static func computePrimaryYearStats(
+        _ schedules: [PharmacySchedule],
+        currentYear: Int
+    ) -> (primaryYear: Int, uniqueDateCount: Int, calendarDays: Int) {
+        // Use the current year directly; year-boundary entries from adjacent PDFs carry an
+        // explicit prior-year date and are naturally excluded by this filter.
+        let primaryYear = currentYear
+        let primaryYearSchedules = schedules.filter { ($0.date.year ?? currentYear) == primaryYear }
+
+        // Count unique calendar dates (avoids double-counting multiple schedules per day)
+        let uniqueDates = Set(primaryYearSchedules.compactMap { schedule -> String? in
+            guard let monthNum = DutyDate.monthToNumber(schedule.date.month) else { return nil }
+            return "\(primaryYear)-\(monthNum)-\(schedule.date.day)"
+        })
+
+        // Find the first date and compute calendar days to Dec 31 of the primary year
+        let sorted = primaryYearSchedules.sorted {
+            ($0.date.toTimestamp() ?? 0) < ($1.date.toTimestamp() ?? 0)
+        }
+        guard let firstDate = sorted.first?.date,
+              let firstTimestamp = firstDate.toTimestamp() else {
+            return (primaryYear, uniqueDates.count, 0)
+        }
+
+        let calendar = Calendar.current
+        let firstDay = calendar.startOfDay(for: Date(timeIntervalSince1970: firstTimestamp))
+
+        var dec31Components = DateComponents()
+        dec31Components.year = primaryYear
+        dec31Components.month = 12
+        dec31Components.day = 31
+        guard let dec31Raw = calendar.date(from: dec31Components) else {
+            return (primaryYear, uniqueDates.count, 0)
+        }
+        let dec31 = calendar.startOfDay(for: dec31Raw)
+
+        let calendarDays = (calendar.dateComponents([.day], from: firstDay, to: dec31).day ?? 0) + 1
+        return (primaryYear, uniqueDates.count, calendarDays)
     }
 }

@@ -32,17 +32,26 @@ sealed class ConfidenceFactor {
     abstract val localizedTitle: String
 
     data class ScrapingFailed(override val deduction: Double) : ConfidenceFactor() {
-        override val localizedTitle = "Comprobación de URLs fallida"
+        override val localizedTitle: String
+            get() = if (isIssue) "Fallo al verificar las URLs de los PDFs"
+                    else "URLs verificadas correctamente"
     }
 
     data class ScrapingAge(val days: Int, override val deduction: Double) : ConfidenceFactor() {
         override val localizedTitle: String
-            get() = if (days == 0) "URLs verificadas recientemente"
-                    else "URLs no verificadas hace $days días"
+            get() = when {
+                days == -1 && isIssue -> "Antigüedad de verificación desconocida"
+                days == -1            -> "Sin historial de verificación"
+                days == 0             -> "URLs verificadas recientemente"
+                isIssue               -> "URLs sin verificar hace $days días"
+                else                  -> "URLs verificadas hace $days días"
+            }
     }
 
     data class PendingPDFUpdate(override val deduction: Double) : ConfidenceFactor() {
-        override val localizedTitle = "Hay una actualización pendiente de los PDFs"
+        override val localizedTitle: String
+            get() = if (isIssue) "Hay una actualización pendiente de los PDFs"
+                    else "Todos los PDFs actualizados"
     }
 
     data class LowScheduleCount(
@@ -50,11 +59,15 @@ sealed class ConfidenceFactor {
         val expected: Int,
         override val deduction: Double
     ) : ConfidenceFactor() {
-        override val localizedTitle = "Pocos horarios ($actual de ~$expected esperados)"
+        override val localizedTitle: String
+            get() = if (isIssue) "Pocos horarios ($actual de ~$expected esperados)"
+                    else "Horarios correctos ($actual de ~$expected esperados)"
     }
 
     data class NoCurrentYearSchedules(override val deduction: Double) : ConfidenceFactor() {
-        override val localizedTitle = "Sin horarios para el año actual"
+        override val localizedTitle: String
+            get() = if (isIssue) "Sin horarios para el año actual"
+                    else "Horarios del año actual disponibles"
     }
 
     data class MissingDaysNearToday(
@@ -62,6 +75,9 @@ sealed class ConfidenceFactor {
         override val deduction: Double
     ) : ConfidenceFactor() {
         override val localizedTitle: String
-            get() = "$missingDays día${if (missingDays == 1) "" else "s"} sin horario cerca de hoy"
+            get() = if (isIssue)
+                "$missingDays día${if (missingDays == 1) "" else "s"} sin horario cerca de hoy"
+            else
+                "Horarios disponibles en fechas próximas"
     }
 }
