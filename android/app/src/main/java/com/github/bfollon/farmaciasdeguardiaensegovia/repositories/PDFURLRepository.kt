@@ -64,6 +64,7 @@ class PDFURLRepository private constructor(private val context: Context) {
         private const val PREFS_NAME = "pdf_url_repository"
         private const val SCRAPED_URLS_KEY = "scraped_urls"
         private const val LAST_SCRAPE_KEY = "last_scrape_timestamp"
+        private const val LAST_SCRAPE_SUCCEEDED_KEY = "last_scrape_succeeded"
         
         // Hardcoded fallback URLs
         private val FALLBACK_URLS = mapOf(
@@ -236,22 +237,47 @@ class PDFURLRepository private constructor(private val context: Context) {
      */
     suspend fun scrapeURLs(): Map<String, String> = withContext(Dispatchers.IO) {
         DebugConfig.debugPrint("🌐 PDFURLRepository: Starting fresh URL scraping...")
-        
+
         val scrapedData = PDFURLScrapingService.scrapePDFURLs()
-        
+
         if (scrapedData.isEmpty()) {
             DebugConfig.debugWarn("PDFURLRepository: Scraping returned no results")
+            sharedPreferences.edit()
+                .putLong(LAST_SCRAPE_KEY, System.currentTimeMillis())
+                .putBoolean(LAST_SCRAPE_SUCCEEDED_KEY, false)
+                .apply()
             return@withContext emptyMap()
         }
-        
+
         val urlMap = scrapedData.associate { it.regionName to it.pdfUrl }
-        
-        // Persist the scraped URLs
+
+        // Persist the scraped URLs and mark success
         persistURLs(urlMap)
-        
+        sharedPreferences.edit()
+            .putBoolean(LAST_SCRAPE_SUCCEEDED_KEY, true)
+            .apply()
+
         DebugConfig.debugPrint("✅ PDFURLRepository: Scraped and persisted ${urlMap.size} URLs")
         urlMap
     }
+
+    /**
+     * Returns the timestamp of the last scraping attempt, or 0 if never scraped.
+     * Used by ConfidenceService.
+     */
+    fun getLastScrapeTimestamp(): Long = sharedPreferences.getLong(LAST_SCRAPE_KEY, 0L)
+
+    /**
+     * Returns whether the scraping success/failure flag has ever been written.
+     * Used by ConfidenceService to distinguish "never scraped" from "scraped and failed".
+     */
+    fun hasLastScrapeSucceededValue(): Boolean = sharedPreferences.contains(LAST_SCRAPE_SUCCEEDED_KEY)
+
+    /**
+     * Returns whether the last scraping attempt succeeded.
+     * Only meaningful if [hasLastScrapeSucceededValue] returns true.
+     */
+    fun getLastScrapeSucceeded(): Boolean = sharedPreferences.getBoolean(LAST_SCRAPE_SUCCEEDED_KEY, false)
     
     /**
      * Validate all persisted URLs with HEAD requests

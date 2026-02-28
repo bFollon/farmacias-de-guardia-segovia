@@ -7,6 +7,7 @@ struct DayScheduleView: View {
     @State private var isPresentingDayInfo: Bool = false
     @State private var isPresentingNightInfo: Bool = false
     let date: Date
+    let confidenceResult: ConfidenceResult?
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
@@ -28,6 +29,7 @@ struct DayScheduleView: View {
     }
 
     var body: some View {
+        VStack(spacing: 0) {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 // Location name at the top (matching ZBS style)
@@ -206,7 +208,17 @@ struct DayScheduleView: View {
                 }
             }
             .padding()
+        } // end ScrollView
+
+        // Confidence indicator pinned below the scroll content
+        if let confidence = confidenceResult {
+            Divider()
+            ConfidenceIndicatorView(result: confidence)
+                .padding(.top, 6)
+                .padding(.bottom, 8)
+                .background(Color(UIColor.systemBackground))
         }
+        } // end outer VStack
         .overlay {
             if isValidatingPDFLink {
                 ZStack {

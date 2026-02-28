@@ -27,6 +27,7 @@ struct PDFViewScreen: View {
     @State private var isShowingDatePicker = false
     @State private var refreshTrigger = false // For triggering UI refresh
     @State private var cacheTimestamp: TimeInterval? = nil
+    @State private var confidenceResult: ConfidenceResult? = nil
     var url: URL
     var location: DutyLocation
     
@@ -54,7 +55,8 @@ struct PDFViewScreen: View {
                         location: location,
                         isPresentingInfo: $isPresentingInfo,
                         formattedDateTime: ScheduleService.getCurrentDateTime(),
-                        cacheTimestamp: cacheTimestamp
+                        cacheTimestamp: cacheTimestamp,
+                        confidenceResult: confidenceResult
                     )
                 } else {
                     // Selected date view - DayScheduleView handles nil schedule with inline card
@@ -62,7 +64,8 @@ struct PDFViewScreen: View {
                         schedule: ScheduleService.findSchedule(for: selectedDate, in: schedules),
                         location: location,
                         isPresentingInfo: $isPresentingInfo,
-                        date: selectedDate
+                        date: selectedDate,
+                        confidenceResult: confidenceResult
                     )
                 }
             }
@@ -134,9 +137,11 @@ struct PDFViewScreen: View {
         Task {
             let loadedSchedules = await ScheduleService.loadSchedules(for: location)
             let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let confidence = ConfidenceService.computeConfidence(for: location, schedules: loadedSchedules)
             await MainActor.run {
                 schedules = loadedSchedules
                 cacheTimestamp = timestamp
+                confidenceResult = confidence
                 isLoading = false
             }
         }
@@ -161,11 +166,13 @@ struct PDFViewScreen: View {
         Task {
             let refreshedSchedules = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
             let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let confidence = ConfidenceService.computeConfidence(for: location, schedules: refreshedSchedules)
 
             // Update UI on main thread
             await MainActor.run {
                 schedules = refreshedSchedules
                 cacheTimestamp = timestamp
+                confidenceResult = confidence
                 isRefreshing = false
             }
         }

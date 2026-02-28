@@ -60,6 +60,10 @@ class PDFCacheManager private constructor(private val context: Context) {
         private const val PREFS_NAME = "pdf_cache_manager"
         private const val VERSION_STORAGE_KEY = "pdf_versions"
         private const val LAST_UPDATE_CHECK_KEY = "last_update_check"
+        private const val PENDING_UPDATE_KEY_PREFIX = "pending_update_"
+
+        /** Returns the SharedPreferences key used to track pending updates for a region. */
+        fun pendingUpdateKey(region: Region): String = "$PENDING_UPDATE_KEY_PREFIX${region.id}"
         
         @Volatile
         private var INSTANCE: PDFCacheManager? = null
@@ -469,17 +473,33 @@ class PDFCacheManager private constructor(private val context: Context) {
      */
     private suspend fun checkAndUpdateIfNeeded(region: Region, debugMode: Boolean = false) {
         val isCacheValid = isCacheUpToDate(region, debugMode)
-        
+        val pendingKey = pendingUpdateKey(region)
+
         if (!isCacheValid) {
+            // Flag that an update is pending before we attempt the download
+            sharedPreferences.edit().putBoolean(pendingKey, true).apply()
             val file = downloadAndCache(region)
             if (file != null) {
+                // Download succeeded – clear the pending flag
+                sharedPreferences.edit().putBoolean(pendingKey, false).apply()
                 DebugConfig.debugPrint("📥 PDFCacheManager: Updated PDF for ${region.name}")
             } else {
+                // Download failed – leave the pending flag set so confidence is lowered
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for ${region.name}")
             }
         } else {
+            // Confirmed up to date – ensure the pending flag is cleared
+            sharedPreferences.edit().putBoolean(pendingKey, false).apply()
             DebugConfig.debugPrint("✅ PDFCacheManager: PDF for ${region.name} is up to date")
         }
+    }
+
+    /**
+     * Returns true if a pending PDF update was detected but not yet downloaded for [region].
+     * Used by ConfidenceService.
+     */
+    fun hasPendingUpdate(region: Region): Boolean {
+        return sharedPreferences.getBoolean(pendingUpdateKey(region), false)
     }
     
     /**

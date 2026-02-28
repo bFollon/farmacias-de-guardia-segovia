@@ -18,6 +18,7 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens
 
 import android.content.Intent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
@@ -70,6 +72,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -77,11 +82,14 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.ConfidenceFactor
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceResult
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
@@ -136,8 +144,13 @@ fun ScheduleScreen(
 
     Scaffold(
         bottomBar = {
-            if (uiState.downloadDate != null) {
-                LastUpdatedIndicator(downloadDate = uiState.downloadDate!!)
+            Column {
+                if (uiState.confidenceResult != null) {
+                    ConfidenceIndicator(result = uiState.confidenceResult!!)
+                }
+                if (uiState.downloadDate != null) {
+                    LastUpdatedIndicator(downloadDate = uiState.downloadDate!!)
+                }
             }
         }
     ) { innerPaddings ->
@@ -415,7 +428,7 @@ private fun EmptyContent(isOffline: Boolean = false) {
                     imageVector = Icons.Default.CloudOff,
                     contentDescription = "Sin conexión",
                     modifier = Modifier.size(64.dp),
-                    tint = androidx.compose.ui.graphics.Color(0xFFFFA726) // Amber warning color
+                    tint = Color(0xFFFFA726) // Amber warning color
                 )
                 Text(
                     text = "Sin conexión y sin datos almacenados",
@@ -664,6 +677,268 @@ private fun ScheduleContent(
                 onDismiss = { showNextShiftModal = false }
             )
         }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Confidence Indicator
+// ---------------------------------------------------------------------------
+
+private fun ConfidenceResult.barColor(): Color = when {
+    level >= ConfidenceConfig.GREEN_THRESHOLD  -> Color(0xFF4CAF50)
+    level >= ConfidenceConfig.YELLOW_THRESHOLD -> Color(0xFFFFC107)
+    else -> Color(0xFFF44336)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ConfidenceIndicator(result: ConfidenceResult) {
+    var showBreakdown by remember { mutableStateOf(false) }
+
+    val barColor = result.barColor()
+
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+        tonalElevation = 1.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Text(
+                text = "Confianza:",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+
+            // Progress bar
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(6.dp)
+            ) {
+                // Track
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(6.dp)
+                        .then(
+                            Modifier.padding(0.dp)
+                        ),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Canvas(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        drawRoundRect(
+                            color = barColor.copy(alpha = 0.2f),
+                            cornerRadius = CornerRadius(3.dp.toPx())
+                        )
+                        drawRoundRect(
+                            color = barColor,
+                            size = Size(
+                                width = size.width * result.level.toFloat(),
+                                height = size.height
+                            ),
+                            cornerRadius = CornerRadius(3.dp.toPx())
+                        )
+                    }
+                }
+            }
+
+            Text(
+                text = "${result.percentage}%",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+
+            IconButton(
+                onClick = { showBreakdown = true },
+                modifier = Modifier.size(20.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Error,
+                    contentDescription = "Información sobre confianza",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                    modifier = Modifier.size(14.dp)
+                )
+            }
+        }
+    }
+
+    if (showBreakdown) {
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
+        ModalBottomSheet(
+            onDismissRequest = { showBreakdown = false },
+            sheetState = sheetState
+        ) {
+            ConfidenceBreakdownSheet(result = result)
+        }
+    }
+}
+
+@Composable
+private fun ConfidenceBreakdownSheet(result: ConfidenceResult) {
+    val barColor = result.barColor()
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 8.dp)
+            .navigationBarsPadding(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Title
+        Text(
+            text = "Confianza en los datos",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold
+        )
+
+        // Score row
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "Nivel de confianza", style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = "${result.percentage}%",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = barColor
+            )
+        }
+
+        // Bar
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(10.dp)
+        ) {
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                drawRoundRect(
+                    color = barColor.copy(alpha = 0.2f),
+                    cornerRadius = CornerRadius(4.dp.toPx())
+                )
+                drawRoundRect(
+                    color = barColor,
+                    size = Size(
+                        width = size.width * result.level.toFloat(),
+                        height = size.height
+                    ),
+                    cornerRadius = CornerRadius(4.dp.toPx())
+                )
+            }
+        }
+
+        // Explanation
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            )
+        ) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Text(
+                    text = "¿Qué significa esto?",
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "Este indicador refleja la confianza que tenemos en que los datos mostrados sean precisos y estén actualizados. " +
+                        "Se calcula analizando distintos factores: si las URLs de los documentos se han verificado recientemente, " +
+                        "si existe alguna actualización pendiente de los PDFs, y si la cantidad de horarios disponibles es la esperada para la fecha actual.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        // Factor list
+        Text(
+            text = "Factores",
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
+        result.factors.forEach { factor ->
+            ConfidenceFactorRow(factor = factor)
+        }
+
+        // Legend
+        Text(
+            text = "Leyenda",
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
+        ConfidenceLegendRow(color = Color(0xFF4CAF50), label = "≥ ${(ConfidenceConfig.GREEN_THRESHOLD * 100).toInt()}% — Alta confianza")
+        ConfidenceLegendRow(color = Color(0xFFFFC107), label = "≥ ${(ConfidenceConfig.YELLOW_THRESHOLD * 100).toInt()}% — Confianza moderada")
+        ConfidenceLegendRow(color = Color(0xFFF44336), label = "< ${(ConfidenceConfig.YELLOW_THRESHOLD * 100).toInt()}% — Confianza baja")
+
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun ConfidenceFactorRow(factor: ConfidenceFactor) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 2.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Icon(
+            imageVector = if (factor.isIssue)
+                Icons.Default.Error
+            else
+                Icons.Default.Schedule,
+            contentDescription = null,
+            tint = if (factor.isIssue)
+                Color(0xFFFF9800)
+            else
+                Color(0xFF4CAF50),
+            modifier = Modifier.size(16.dp)
+        )
+        Text(
+            text = factor.localizedTitle,
+            style = MaterialTheme.typography.bodySmall,
+            color = if (factor.isIssue) MaterialTheme.colorScheme.onSurface
+                    else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f)
+        )
+        if (factor.isIssue) {
+            Text(
+                text = "-${(factor.deduction * 100).toInt()}%",
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFFF44336)
+            )
+        }
+    }
+}
+
+@Composable
+private fun ConfidenceLegendRow(color: androidx.compose.ui.graphics.Color, label: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 24.dp, height = 8.dp)
+                .then(Modifier.padding(0.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                drawRoundRect(color = color, cornerRadius = CornerRadius(3.dp.toPx()))
+            }
+        }
+        Text(text = label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
