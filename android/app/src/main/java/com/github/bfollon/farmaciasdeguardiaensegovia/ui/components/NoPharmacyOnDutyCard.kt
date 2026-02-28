@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.dp
 fun NoPharmacyOnDutyCard(
     modifier: Modifier = Modifier,
     message: String = "No hay farmacia de guardia programada para esta fecha.",
-    additionalInfo: String? = "Intente refrescar o seleccione una fecha diferente."
+    additionalInfo: String? = "¿Cree que es incorrecto? Pruebe a refrescar la información de las farmacias. Para ello, vaya a Ajustes → Ver Estado de la caché → Forzar actualización de todos los PDFs."
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),

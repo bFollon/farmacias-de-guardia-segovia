@@ -137,8 +137,7 @@ struct ScheduleContentView: View {
                         } else {
                             // No pharmacy assigned for current shift
                             NoPharmacyOnDutyCard(
-                                message: "No hay farmacia de guardia asignada para el turno actual.",
-                                additionalInfo: "Por favor, consulte el calendario oficial o intente refrescar."
+                                message: "No hay farmacia de guardia asignada para el turno actual."
                             )
                         }
                     }

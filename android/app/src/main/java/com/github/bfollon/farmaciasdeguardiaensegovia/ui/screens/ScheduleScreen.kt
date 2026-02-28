@@ -463,7 +463,7 @@ private fun EmptyContent(isOffline: Boolean = false) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "Intente refrescar o seleccione una fecha diferente",
+                    text = "¿Cree que es incorrecto? Pruebe a refrescar la información de las farmacias. Para ello, vaya a Ajustes → Ver Estado de la caché → Forzar actualización de todos los PDFs.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline,
                     textAlign = TextAlign.Center
@@ -1241,8 +1241,7 @@ private fun DatePickerDialog(
 @Composable
 private fun NoPharmacyOnDuty(location: DutyLocation?) =
     NoPharmacyOnDutyCard(
-        message = "No hay farmacia de guardia asignada para ${location?.name} en esta fecha.",
-        additionalInfo = "Por favor, consulte las farmacias de guardia de otras zonas cercanas o el calendario oficial."
+        message = "No hay farmacia de guardia asignada para ${location?.name} en esta fecha."
     )
 
 @OptIn(ExperimentalMaterial3Api::class)

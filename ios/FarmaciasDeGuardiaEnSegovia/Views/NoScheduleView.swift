@@ -56,7 +56,7 @@ struct NoScheduleView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
 
-                Text("Intente refrescar o seleccione una fecha diferente")
+                Text("¿Cree que es incorrecto? Pruebe a refrescar la información de las farmacias. Para ello, vaya a Ajustes → Ver Estado de la caché → Forzar actualización de todos los PDFs.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
