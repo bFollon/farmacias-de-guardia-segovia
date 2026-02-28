@@ -971,7 +971,7 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
             daysDiff < 7L -> "Actualizado hace $daysDiff días"
             else -> {
                 // For older updates, show absolute date
-                val formatter = SimpleDateFormat("d 'de' MMMM, yyyy", Locale("es", "ES"))
+                val formatter = SimpleDateFormat("d 'de' MMMM, yyyy", Locale.forLanguageTag("es-ES"))
                 "Actualizado el ${formatter.format(Date(downloadDate))}"
             }
         }
