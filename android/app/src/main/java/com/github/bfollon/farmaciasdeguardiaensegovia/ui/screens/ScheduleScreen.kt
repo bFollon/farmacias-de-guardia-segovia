@@ -81,6 +81,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.AppConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ConfidenceFactor
@@ -141,6 +144,15 @@ fun ScheduleScreen(
     var isOffline by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         isOffline = !NetworkMonitor.isOnline()
+    }
+
+    // Reload when returning to this screen if an external refresh (e.g. Cache Status force-update)
+    // has populated fresh data in the repository that this ViewModel hasn't reflected yet
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    LaunchedEffect(lifecycle) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.reloadIfDirty()
+        }
     }
 
     Scaffold(

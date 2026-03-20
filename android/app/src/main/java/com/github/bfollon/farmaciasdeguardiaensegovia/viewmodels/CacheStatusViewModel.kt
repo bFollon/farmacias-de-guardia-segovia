@@ -91,6 +91,9 @@ class CacheStatusViewModel(application: Application) : AndroidViewModel(applicat
                     // Clear the cache for this region first
                     scheduleService.clearCacheForRegion(region)
 
+                    // Signal open ScheduleScreens to reload when the user returns to them
+                    scheduleService.markRegionDirty(region)
+
                     // Load schedules which will trigger fresh PDF processing
                     val locations = region.toDutyLocationList()
                     for (location in locations) {

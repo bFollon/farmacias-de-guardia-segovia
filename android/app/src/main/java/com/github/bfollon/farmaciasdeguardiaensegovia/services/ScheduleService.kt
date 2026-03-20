@@ -190,6 +190,13 @@ class ScheduleService(context: Context) {
     fun getCacheStats(): String = repository.getCacheStats()
 
     /**
+     * Dirty-region tracking: lets ScheduleViewModels reload on resume after an external refresh
+     */
+    fun markRegionDirty(region: Region) = repository.markRegionDirty(region)
+    fun isRegionDirty(region: Region): Boolean = repository.isRegionDirty(region)
+    fun clearRegionDirty(region: Region) = repository.clearRegionDirty(region)
+
+    /**
      * Get current date and time formatted for display
      */
     fun getCurrentDateTime(): String {

@@ -130,6 +130,9 @@ struct PDFViewScreen: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             refreshCurrentView()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .pdfCacheForceRefreshed)) { _ in
+            loadPharmacies()
+        }
     }
     
     private func loadPharmacies() {

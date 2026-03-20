@@ -213,6 +213,19 @@ class ScheduleViewModel(
     fun refresh() {
         _uiState.value.location?.let { loadSchedules(it, forceRefresh = true) }
     }
+
+    /**
+     * Reload if an external refresh (e.g. force-update from Cache Status) has populated
+     * fresh data in the repository that this ViewModel hasn't picked up yet.
+     * Called on screen resume via lifecycle observer in ScheduleScreen.
+     */
+    fun reloadIfDirty() {
+        val loc = location ?: return
+        if (scheduleService.isRegionDirty(loc.associatedRegion)) {
+            scheduleService.clearRegionDirty(loc.associatedRegion)
+            loadSchedules(loc)
+        }
+    }
     
     /**
      * Clear error state

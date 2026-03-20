@@ -341,15 +341,20 @@ class PDFCacheManager private constructor(private val context: Context) {
             DebugConfig.debugPrint("🗑️ PDFCacheManager: Removed cached file for ${region.name}")
         }
         
-        // Remove version info for this region
+        // Remove version info and pending update flag for this region
         try {
             val versionsJson = sharedPreferences.getString(VERSION_STORAGE_KEY, null)
             if (versionsJson != null) {
                 val versions = json.decodeFromString<MutableMap<String, PDFVersion>>(versionsJson)
                 versions.remove(region.name)
-                
+
                 sharedPreferences.edit()
                     .putString(VERSION_STORAGE_KEY, json.encodeToString(versions))
+                    .remove(pendingUpdateKey(region))
+                    .apply()
+            } else {
+                sharedPreferences.edit()
+                    .remove(pendingUpdateKey(region))
                     .apply()
             }
         } catch (e: Exception) {

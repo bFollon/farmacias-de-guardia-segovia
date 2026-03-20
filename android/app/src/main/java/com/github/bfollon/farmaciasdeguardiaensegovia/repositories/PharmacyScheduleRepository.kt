@@ -65,6 +65,10 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
     // Cache for loaded schedules - keyed by region ID
     private var schedulesCache = mapOf<DutyLocation, List<PharmacySchedule>>()
 
+    // Regions externally refreshed but not yet reflected in an active ScheduleViewModel
+    @Volatile
+    private var dirtyRegionIds = setOf<String>()
+
     companion object {
         @Volatile
         private var INSTANCE: PharmacyScheduleRepository? = null
@@ -282,6 +286,20 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         }
 
         DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (${locationsToClear.size} locations, including PDF cache)")
+    }
+
+    /**
+     * Mark a region as externally refreshed so open ScheduleViewModels can reload on resume
+     */
+    fun markRegionDirty(region: Region) {
+        dirtyRegionIds = dirtyRegionIds + region.id
+        DebugConfig.debugPrint("PharmacyScheduleRepository: Marked ${region.name} as dirty")
+    }
+
+    fun isRegionDirty(region: Region): Boolean = region.id in dirtyRegionIds
+
+    fun clearRegionDirty(region: Region) {
+        dirtyRegionIds = dirtyRegionIds - region.id
     }
 
     /**

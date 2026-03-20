@@ -408,16 +408,19 @@ class PDFCacheManager {
             try? fileManager.removeItem(at: cachedURL)
             DebugConfig.debugPrint("🗑️ PDFCacheManager: Removed cached file for \(region.name)")
         }
-        
+
         // Remove version info for this region
         if let data = userDefaults.data(forKey: versionStorageKey),
            var versions = try? JSONDecoder().decode([String: PDFVersion].self, from: data) {
             versions.removeValue(forKey: region.name)
-            
+
             if let updatedData = try? JSONEncoder().encode(versions) {
                 userDefaults.set(updatedData, forKey: versionStorageKey)
             }
         }
+
+        // Clear pending-update flag so confidence is not degraded after a manual cache clear
+        userDefaults.removeObject(forKey: Self.pendingUpdateKey(for: region))
     }
     
     /// Force download for a region (bypasses cache check)

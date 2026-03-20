@@ -1,5 +1,10 @@
 import SwiftUI
 
+extension Notification.Name {
+    /// Posted after a manual "force update all PDFs" completes so open PDFViewScreens can reload.
+    static let pdfCacheForceRefreshed = Notification.Name("pdfCacheForceRefreshed")
+}
+
 struct CacheStatusView: View {
     @State private var cacheStatuses: [RegionCacheStatus] = []
     @State private var isLoading = true
@@ -127,6 +132,8 @@ struct CacheStatusView: View {
             await MainActor.run {
                 self.cacheStatuses = statuses
                 self.isRefreshing = false
+                // Notify open PDFViewScreens that fresh data is available
+                NotificationCenter.default.post(name: .pdfCacheForceRefreshed, object: nil)
             }
         }
     }
