@@ -39,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheStatusViewModel
+import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.RegionRefreshState
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -56,6 +57,8 @@ fun CacheStatusScreen(
     val cacheStatuses by viewModel.cacheStatuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
+    val refreshStates by viewModel.refreshStates.collectAsState()
+    val refreshedCount = refreshStates.values.count { it is RegionRefreshState.Completed }
 
     Scaffold { innerPadding ->
         if (isLoading) {
@@ -94,7 +97,7 @@ fun CacheStatusScreen(
 
                 // Region Status Cards
                 items(cacheStatuses) { status ->
-                    CacheStatusCard(status)
+                    CacheStatusCard(status, refreshStates[status.region.id])
                 }
 
                 // Info Section
@@ -106,6 +109,7 @@ fun CacheStatusScreen(
                 item {
                     ForceRefreshButton(
                         isRefreshing = isRefreshing,
+                        refreshedCount = refreshedCount,
                         onClick = { viewModel.refreshAllCaches() }
                     )
                 }
@@ -151,7 +155,7 @@ private fun CacheStatusHeader(cacheStatuses: List<RegionCacheStatus>) {
  * Card displaying cache status for a single region
  */
 @Composable
-private fun CacheStatusCard(status: RegionCacheStatus) {
+private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefreshState? = null) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -189,27 +193,85 @@ private fun CacheStatusCard(status: RegionCacheStatus) {
 
                 Spacer(Modifier.width(8.dp))
 
-                // Status badge
+                // Status badge — shows refresh progress when active, normal status otherwise
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = when {
-                            !status.isCached -> Icons.Default.Warning
-                            status.needsUpdate -> Icons.Default.Refresh
-                            else -> Icons.Default.CheckCircle
-                        },
-                        contentDescription = null,
-                        tint = status.statusColor,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Text(
-                        text = status.statusText,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Medium,
-                        color = status.statusColor
-                    )
+                    when (refreshState) {
+                        is RegionRefreshState.Pending -> {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = "Pendiente",
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        is RegionRefreshState.Refreshing -> {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(16.dp),
+                                strokeWidth = 2.dp
+                            )
+                            Text(
+                                text = "Procesando...",
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                        is RegionRefreshState.Completed -> {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = Color(0xFF66BB6A),
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = "Actualizado",
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.Medium,
+                                color = Color(0xFF66BB6A)
+                            )
+                        }
+                        is RegionRefreshState.Error -> {
+                            Icon(
+                                imageVector = Icons.Default.Warning,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.error,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = "Error",
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        }
+                        null -> {
+                            Icon(
+                                imageVector = when {
+                                    !status.isCached -> Icons.Default.Warning
+                                    status.needsUpdate -> Icons.Default.Refresh
+                                    else -> Icons.Default.CheckCircle
+                                },
+                                contentDescription = null,
+                                tint = status.statusColor,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = status.statusText,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontWeight = FontWeight.Medium,
+                                color = status.statusColor
+                            )
+                        }
+                    }
                 }
             }
 
@@ -386,6 +448,7 @@ private fun InfoColorRow(color: Color, text: String) {
 @Composable
 private fun ForceRefreshButton(
     isRefreshing: Boolean,
+    refreshedCount: Int,
     onClick: () -> Unit
 ) {
     Column(
@@ -404,7 +467,7 @@ private fun ForceRefreshButton(
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Actualizando todos los PDFs...")
+                Text("Actualizando PDFs... $refreshedCount/4")
             } else {
                 Icon(
                     imageVector = Icons.Default.Refresh,

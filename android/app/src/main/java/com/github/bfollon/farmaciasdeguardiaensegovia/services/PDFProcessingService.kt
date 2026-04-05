@@ -30,6 +30,8 @@ import io.opentelemetry.api.trace.StatusCode
 import java.io.File
 import kotlin.collections.component1
 import kotlin.collections.component2
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Android equivalent of iOS PDFProcessingService
@@ -86,9 +88,11 @@ class PDFProcessingService {
             val parsingStrategy = getParsingStrategy(region)
             DebugConfig.debugPrint("📋 Using parsing strategy: ${parsingStrategy::class.simpleName}")
 
-            // Parse the schedules using the strategy
+            // Parse the schedules using the strategy (CPU-intensive — run on IO dispatcher)
             DebugConfig.debugPrint("⚙️ Starting PDF parsing...")
-            val scheduleMap = parsingStrategy.parseSchedules(pdfFile, region.pdfURL)
+            val scheduleMap = withContext(Dispatchers.IO) {
+                parsingStrategy.parseSchedules(pdfFile, region.pdfURL)
+            }
 
             scheduleMap.forEach { (location, schedules) ->
                 DebugConfig.debugPrint("✅ PDFProcessingService: Successfully parsed ${schedules.size} schedules from ${location.name} PDF")

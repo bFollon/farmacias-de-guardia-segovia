@@ -30,6 +30,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+sealed class RegionRefreshState {
+    object Pending : RegionRefreshState()
+    object Refreshing : RegionRefreshState()
+    object Completed : RegionRefreshState()
+    data class Error(val message: String) : RegionRefreshState()
+}
+
 /**
  * ViewModel for CacheStatusScreen
  * Manages cache status data and loading state
@@ -47,6 +54,9 @@ class CacheStatusViewModel(application: Application) : AndroidViewModel(applicat
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
+    private val _refreshStates = MutableStateFlow<Map<String, RegionRefreshState>>(emptyMap())
+    val refreshStates: StateFlow<Map<String, RegionRefreshState>> = _refreshStates.asStateFlow()
     
     init {
         loadCacheStatus()
@@ -79,37 +89,36 @@ class CacheStatusViewModel(application: Application) : AndroidViewModel(applicat
      */
     fun refreshAllCaches() {
         viewModelScope.launch {
+            val allRegions = Region.allRegions
+
             _isRefreshing.value = true
+            _refreshStates.value = allRegions.associate { it.id to RegionRefreshState.Pending }
 
             try {
-                val allRegions = Region.allRegions
-
-                // Force refresh each region by clearing cache first, then loading
                 for (region in allRegions) {
                     DebugConfig.debugPrint("CacheStatusViewModel: Force refreshing cache for ${region.name}")
 
-                    // Clear the cache for this region first
-                    scheduleService.clearCacheForRegion(region)
+                    _refreshStates.value = _refreshStates.value + (region.id to RegionRefreshState.Refreshing)
 
-                    // Signal open ScheduleScreens to reload when the user returns to them
+                    scheduleService.clearCacheForRegion(region)
                     scheduleService.markRegionDirty(region)
 
-                    // Load schedules which will trigger fresh PDF processing
                     val locations = region.toDutyLocationList()
                     for (location in locations) {
                         scheduleService.loadSchedules(location, forceRefresh = false)
                     }
 
+                    _refreshStates.value = _refreshStates.value + (region.id to RegionRefreshState.Completed)
                     DebugConfig.debugPrint("CacheStatusViewModel: ✅ Force refreshed cache for ${region.name}")
                 }
 
-                // Reload cache status to reflect updates
                 loadCacheStatus()
 
             } catch (e: Exception) {
                 DebugConfig.debugError("CacheStatusViewModel: Error refreshing caches", e)
             } finally {
                 _isRefreshing.value = false
+                _refreshStates.value = emptyMap()
             }
         }
     }

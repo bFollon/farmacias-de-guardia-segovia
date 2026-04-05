@@ -9,7 +9,15 @@ struct CacheStatusView: View {
     @State private var cacheStatuses: [RegionCacheStatus] = []
     @State private var isLoading = true
     @State private var isRefreshing = false
+    @State private var refreshStates: [String: RefreshState] = [:]
     @Environment(\.dismiss) private var dismiss
+
+    private var refreshedCount: Int {
+        refreshStates.values.filter { state in
+            if case .completed = state { return true }
+            return false
+        }.count
+    }
     
     var body: some View {
         Group {
@@ -25,7 +33,7 @@ struct CacheStatusView: View {
                 List {
                     Section {
                         ForEach(cacheStatuses, id: \.region.id) { status in
-                            CacheStatusRow(status: status)
+                            CacheStatusRow(status: status, refreshState: refreshStates[status.region.id])
                         }
                     } header: {
                         VStack(alignment: .leading, spacing: 4) {
@@ -71,7 +79,7 @@ struct CacheStatusView: View {
                                 if isRefreshing {
                                     ProgressView()
                                         .padding(.trailing, 8)
-                                    Text("Actualizando todos los PDFs...")
+                                    Text("Actualizando PDFs... \(refreshedCount)/4")
                                 } else {
                                     Image(systemName: "arrow.clockwise")
                                     Text("Forzar actualización de todos los PDFs")
@@ -114,16 +122,25 @@ struct CacheStatusView: View {
     }
 
     private func refreshAllCaches() {
+        let allRegions: [Region] = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+
         isRefreshing = true
+        refreshStates = Dictionary(uniqueKeysWithValues: allRegions.map { ($0.id, RefreshState.pending) })
 
         Task {
-            let allRegions: [Region] = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
-
-            // Force re-parse all PDFs
+            // Force re-parse all PDFs, updating state per region
             for region in allRegions {
+                await MainActor.run {
+                    refreshStates[region.id] = .refreshing
+                }
+
                 let location = DutyLocation.fromRegion(region)
                 _ = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
                 DebugConfig.debugPrint("✅ Force refreshed cache for \(region.name)")
+
+                await MainActor.run {
+                    refreshStates[region.id] = .completed
+                }
             }
 
             // Reload cache status to reflect updates
@@ -132,6 +149,7 @@ struct CacheStatusView: View {
             await MainActor.run {
                 self.cacheStatuses = statuses
                 self.isRefreshing = false
+                self.refreshStates = [:]
                 // Notify open PDFViewScreens that fresh data is available
                 NotificationCenter.default.post(name: .pdfCacheForceRefreshed, object: nil)
             }
@@ -141,7 +159,8 @@ struct CacheStatusView: View {
 
 struct CacheStatusRow: View {
     let status: RegionCacheStatus
-    
+    var refreshState: RefreshState? = nil
+
     var body: some View {
         VStack(spacing: 12) {
             // Header with region and status
@@ -152,16 +171,51 @@ struct CacheStatusRow: View {
                     Text(status.region.name)
                         .font(.headline)
                 }
-                
+
                 Spacer()
-                
-                HStack(spacing: 6) {
-                    Image(systemName: status.statusIcon)
-                        .foregroundColor(status.statusColor)
-                    Text(status.statusText)
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .foregroundColor(status.statusColor)
+
+                if let state = refreshState {
+                    HStack(spacing: 6) {
+                        switch state {
+                        case .pending:
+                            Image(systemName: "clock")
+                                .foregroundColor(.gray)
+                            Text("Pendiente")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.gray)
+                        case .refreshing:
+                            ProgressView()
+                                .scaleEffect(0.8)
+                            Text("Procesando...")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.blue)
+                        case .completed:
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text("Actualizado")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.green)
+                        case .error:
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.red)
+                            Text("Error")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundColor(.red)
+                        }
+                    }
+                } else {
+                    HStack(spacing: 6) {
+                        Image(systemName: status.statusIcon)
+                            .foregroundColor(status.statusColor)
+                        Text(status.statusText)
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundColor(status.statusColor)
+                    }
                 }
             }
             
