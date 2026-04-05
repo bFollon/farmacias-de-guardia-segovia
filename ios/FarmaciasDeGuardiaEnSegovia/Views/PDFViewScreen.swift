@@ -28,6 +28,7 @@ struct PDFViewScreen: View {
     @State private var refreshTrigger = false // For triggering UI refresh
     @State private var cacheTimestamp: TimeInterval? = nil
     @State private var confidenceResult: ConfidenceResult? = nil
+    @State private var loadError: String? = nil
     var url: URL
     var location: DutyLocation
     
@@ -128,10 +129,24 @@ struct PDFViewScreen: View {
             loadPharmacies()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            refreshCurrentView()
+            if loadError != nil {
+                // Previous external-refresh load failed — retry automatically on foreground
+                loadError = nil
+                loadPharmacies()
+            } else {
+                refreshCurrentView()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .pdfCacheForceRefreshed)) { _ in
-            loadPharmacies()
+            loadPharmaciesFromExternalRefresh()
+        }
+        .alert("Error al actualizar", isPresented: Binding(
+            get: { loadError != nil },
+            set: { if !$0 { loadError = nil } }
+        )) {
+            Button("OK") { loadError = nil }
+        } message: {
+            Text(loadError ?? "")
         }
     }
     
@@ -161,6 +176,25 @@ struct PDFViewScreen: View {
         // The views will automatically re-evaluate ScheduleService.findCurrentSchedule
         // based on current time
         refreshTrigger.toggle()
+    }
+
+    private func loadPharmaciesFromExternalRefresh() {
+        isLoading = true
+        Task {
+            let loadedSchedules = await ScheduleService.loadSchedules(for: location)
+            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let confidence = ConfidenceService.computeConfidence(for: location, schedules: loadedSchedules)
+            await MainActor.run {
+                schedules = loadedSchedules
+                cacheTimestamp = timestamp
+                confidenceResult = confidence
+                isLoading = false
+                if loadedSchedules.isEmpty {
+                    // Download likely failed — show error; foreground handler will retry automatically
+                    loadError = "No se pudo obtener la información actualizada. Pulsa el botón de recarga para intentarlo de nuevo."
+                }
+            }
+        }
     }
 
     private func refreshData() {

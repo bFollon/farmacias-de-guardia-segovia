@@ -92,58 +92,8 @@ class ScheduleViewModel(
         DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Starting for ${location.name}, forceRefresh=$forceRefresh")
         viewModelScope.launch {
             try {
-                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Inside coroutine, setting isLoading=true")
-                _uiState.value = _uiState.value.copy(
-                    isLoading = true,
-                    error = null,
-                    location = location
-                )
-
-                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Calling scheduleService.loadSchedules...")
-                val schedules = scheduleService.loadSchedules(location, forceRefresh)
-                DebugConfig.debugPrint("🔷 ScheduleViewModel.loadSchedules: Received ${schedules.size} schedules")
-                val currentDateTime = scheduleService.getCurrentDateTime()
-
-                // Find current schedule and active timespan
-                val currentInfo = scheduleService.findCurrentSchedule(schedules)
-
-                // Find next schedule
-                val nextInfo = scheduleService.findNextSchedule(
-                    schedules,
-                    currentInfo?.first,
-                    currentInfo?.second
-                )
-
-                // Calculate minutes until current shift ends
-                val minutesUntilChange = currentInfo?.second?.let { timeSpan ->
-                    calculateMinutesUntilShiftEnd(timeSpan)
-                }
-
-                // Show warning only if shift is actively running now AND ending within 30 minutes
-                val showWarning = currentInfo?.second?.let { timeSpan ->
-                    timeSpan.isActiveNow() && minutesUntilChange != null && minutesUntilChange > 0 && minutesUntilChange <= 30
-                } ?: false
-
-                // Get download date for cache age indicator
-                val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
-
-                // Compute confidence
-                val confidenceResult = confidenceService.computeConfidence(location, schedules)
-
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    schedules = schedules,
-                    currentSchedule = currentInfo?.first,
-                    activeTimeSpan = currentInfo?.second,
-                    nextSchedule = nextInfo?.first,
-                    nextTimeSpan = nextInfo?.second,
-                    minutesUntilShiftChange = minutesUntilChange,
-                    showShiftTransitionWarning = showWarning,
-                    formattedDateTime = currentDateTime,
-                    downloadDate = downloadDate,
-                    confidenceResult = confidenceResult
-                )
-                
+                _uiState.value = _uiState.value.copy(isLoading = true, error = null, location = location)
+                executeLoad(location, forceRefresh)
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
@@ -151,6 +101,42 @@ class ScheduleViewModel(
                 )
             }
         }
+    }
+
+    /**
+     * Core loading logic shared by loadSchedules and reloadIfDirty.
+     * Fetches schedules, computes all derived state, and updates _uiState.
+     * Returns the fetched schedule list so callers can inspect the result.
+     */
+    private suspend fun executeLoad(location: DutyLocation, forceRefresh: Boolean): List<PharmacySchedule> {
+        DebugConfig.debugPrint("🔷 ScheduleViewModel.executeLoad: Calling scheduleService for ${location.name}")
+        val schedules = scheduleService.loadSchedules(location, forceRefresh)
+        DebugConfig.debugPrint("🔷 ScheduleViewModel.executeLoad: Received ${schedules.size} schedules")
+        val currentDateTime = scheduleService.getCurrentDateTime()
+
+        val currentInfo = scheduleService.findCurrentSchedule(schedules)
+        val nextInfo = scheduleService.findNextSchedule(schedules, currentInfo?.first, currentInfo?.second)
+        val minutesUntilChange = currentInfo?.second?.let { calculateMinutesUntilShiftEnd(it) }
+        val showWarning = currentInfo?.second?.let { timeSpan ->
+            timeSpan.isActiveNow() && minutesUntilChange != null && minutesUntilChange > 0 && minutesUntilChange <= 30
+        } ?: false
+        val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
+        val confidenceResult = confidenceService.computeConfidence(location, schedules)
+
+        _uiState.value = _uiState.value.copy(
+            isLoading = false,
+            schedules = schedules,
+            currentSchedule = currentInfo?.first,
+            activeTimeSpan = currentInfo?.second,
+            nextSchedule = nextInfo?.first,
+            nextTimeSpan = nextInfo?.second,
+            minutesUntilShiftChange = minutesUntilChange,
+            showShiftTransitionWarning = showWarning,
+            formattedDateTime = currentDateTime,
+            downloadDate = downloadDate,
+            confidenceResult = confidenceResult
+        )
+        return schedules
     }
     
     /**
@@ -218,12 +204,34 @@ class ScheduleViewModel(
      * Reload if an external refresh (e.g. force-update from Cache Status) has populated
      * fresh data in the repository that this ViewModel hasn't picked up yet.
      * Called on screen resume via lifecycle observer in ScheduleScreen.
+     *
+     * The dirty flag is only cleared on a successful (non-empty) load so that the next
+     * resume automatically retries if the download previously failed.
      */
     fun reloadIfDirty() {
         val loc = location ?: return
-        if (scheduleService.isRegionDirty(loc.associatedRegion)) {
-            scheduleService.clearRegionDirty(loc.associatedRegion)
-            loadSchedules(loc)
+        if (!scheduleService.isRegionDirty(loc.associatedRegion)) return
+
+        viewModelScope.launch {
+            try {
+                _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+                val schedules = executeLoad(loc, forceRefresh = false)
+                if (schedules.isEmpty()) {
+                    // Download likely failed — keep dirty so the next resume retries
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = "No se pudo obtener la información actualizada. Pulsa el botón de recarga para intentarlo de nuevo."
+                    )
+                } else {
+                    scheduleService.clearRegionDirty(loc.associatedRegion)
+                }
+            } catch (e: Exception) {
+                // Keep dirty flag for retry on next resume
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    error = "No se pudo obtener la información actualizada. Pulsa el botón de recarga para intentarlo de nuevo."
+                )
+            }
         }
     }
     
