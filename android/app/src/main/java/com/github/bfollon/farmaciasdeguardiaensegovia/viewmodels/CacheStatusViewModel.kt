@@ -112,7 +112,8 @@ class CacheStatusViewModel(application: Application) : AndroidViewModel(applicat
                     DebugConfig.debugPrint("CacheStatusViewModel: ✅ Force refreshed cache for ${region.name}")
                 }
 
-                loadCacheStatus()
+                // Update statuses in-place to avoid triggering the full-screen loading state
+                _cacheStatuses.value = pdfCacheManager.getCacheStatus()
 
             } catch (e: Exception) {
                 DebugConfig.debugError("CacheStatusViewModel: Error refreshing caches", e)
