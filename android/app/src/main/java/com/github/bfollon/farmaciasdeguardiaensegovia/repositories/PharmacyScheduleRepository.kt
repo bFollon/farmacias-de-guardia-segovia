@@ -50,6 +50,8 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.forEach
 import kotlin.collections.minus
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Repository for managing pharmacy schedules across the application
@@ -91,7 +93,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(location: DutyLocation): List<PharmacySchedule> {
+    suspend fun loadSchedules(location: DutyLocation): List<PharmacySchedule> = withContext(Dispatchers.IO) {
         // TODO decide how we want to manage this function, if region or location.
         val cachedEntry = schedulesCache[location]
 
@@ -113,7 +115,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 loadSource = "memory_cache"
             )
 
-            return cachedEntry
+            return@withContext cachedEntry
         }
 
         // Try to load from persistent cache (serialized file cache)
@@ -138,7 +140,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 )
 
                 DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
-                return cachedSchedules[location]!!
+                return@withContext cachedSchedules[location]!!
             } else {
                 // Record cache misses (both memory and persistent failed)
                 com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService.recordCacheAccess(
@@ -162,7 +164,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
 
             if (pdfFile == null) {
                 DebugConfig.debugError("PharmacyScheduleRepository: Failed to get PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
-                return emptyList()
+                return@withContext emptyList()
             }
 
             // Process the PDF file
@@ -197,14 +199,14 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${location.name}")
             }
 
-            return schedulesMap[location] ?: emptyList()
+            return@withContext schedulesMap[location] ?: emptyList()
 
         } catch (e: Exception) {
             DebugConfig.debugError(
                 "PharmacyScheduleRepository: Error loading schedules for ${location.name}",
                 e
             )
-            return emptyList()
+            return@withContext emptyList()
         }
     }
 
@@ -258,7 +260,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
     /**
      * Clear all cached schedules
      */
-    suspend fun clearAllCache() {
+    suspend fun clearAllCache() = withContext(Dispatchers.IO) {
         schedulesCache = emptyMap()
         pdfCacheManager.clearCache()
         cacheService.clearAllCache()
@@ -268,7 +270,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
     /**
      * Clear cache for a specific region
      */
-    suspend fun clearCacheForRegion(region: Region) {
+    suspend fun clearCacheForRegion(region: Region) = withContext(Dispatchers.IO) {
         // Get all locations for this region (includes all ZBS for Segovia Rural)
         val locationsToClear = region.toDutyLocationList()
 

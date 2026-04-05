@@ -26,6 +26,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyRe
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.LocationManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -123,7 +124,7 @@ class ClosestPharmacyViewModel(private val context: Context) : ViewModel() {
         
         try {
             // Add minimum delay to show the "finding pharmacies" step (same as iOS)
-            val searchDeferred = viewModelScope.async {
+            val searchDeferred = viewModelScope.async(Dispatchers.IO) {
                 closestPharmacyService.findClosestOnDutyPharmacy(location)
             }
             

@@ -109,7 +109,7 @@ object RoutingService {
      * Calculate driving route from user location to destination
      * Equivalent to iOS calculateDrivingRoute
      */
-    suspend fun calculateDrivingRoute(from: Location, to: Location): RouteResult? {
+    suspend fun calculateDrivingRoute(from: Location, to: Location): RouteResult? = withContext(Dispatchers.IO) {
         // Start performance span
         val span = TelemetryService.startSpan("route.calculate", SpanKind.CLIENT)
         span.setAttribute("origin", "${from.latitude},${from.longitude}")
@@ -126,10 +126,10 @@ object RoutingService {
             span.setAttribute("is_estimated", cachedResult.isEstimated)
             span.setStatus(StatusCode.OK)
             span.end()
-            return cachedResult
+            return@withContext cachedResult
         }
 
-        return try {
+        return@withContext try {
             // Try OSRM first for both driving and walking routes
             val drivingRoute = calculateOSRMRoute(from, to, DRIVING_PROFILE)
             val walkingRoute = calculateOSRMRoute(from, to, WALKING_PROFILE)
