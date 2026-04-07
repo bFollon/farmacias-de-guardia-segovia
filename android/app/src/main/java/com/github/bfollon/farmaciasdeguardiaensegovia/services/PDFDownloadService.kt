@@ -193,6 +193,7 @@ class PDFDownloadService(private val context: Context) {
         
         // All attempts failed
         println("PDFDownloadService: All download attempts failed")
+        lastException?.let { ErrorReportingService.captureError(it, mapOf("url" to url, "fileName" to fileName)) }
         lastException?.printStackTrace()
         null
     }

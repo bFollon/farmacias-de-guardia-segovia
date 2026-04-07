@@ -116,6 +116,7 @@ class ScheduleCacheService {
 
         } catch {
             DebugConfig.debugPrint("❌ ScheduleCacheService: Error loading cached schedules for \(location.name): \(error)")
+            ErrorReportingService.shared.captureError(error, context: ["location": location.name, "operation": "loadCachedSchedules"])
             // If cache is corrupted, delete it
             deleteCacheFiles(for: location)
             return nil
@@ -187,6 +188,7 @@ class ScheduleCacheService {
 
         } catch {
             DebugConfig.debugPrint("❌ ScheduleCacheService: Error saving schedules to cache for \(location.name): \(error)")
+            ErrorReportingService.shared.captureError(error, context: ["location": location.name, "operation": "saveSchedulesToCache"])
         }
     }
 
@@ -208,6 +210,7 @@ class ScheduleCacheService {
             DebugConfig.debugPrint("🗑️ ScheduleCacheService: Cleared all schedule caches")
         } catch {
             DebugConfig.debugPrint("❌ ScheduleCacheService: Error clearing all caches: \(error)")
+            ErrorReportingService.shared.captureError(error, context: ["operation": "clearAllScheduleCache"])
         }
     }
 

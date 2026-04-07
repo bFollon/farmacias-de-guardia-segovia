@@ -143,6 +143,7 @@ object RoutingService {
             result
         } catch (exception: Exception) {
             DebugConfig.debugPrint("❌ Route calculation failed: ${exception.message}")
+            ErrorReportingService.captureMessage("OSRM route calculation failed, falling back to straight-line: ${exception.message}")
             // Fall back to straight-line distance if routing fails
             val fallbackResult = calculateStraightLineEstimation(from, to)
             RouteCache.setCachedRoute(from, to, fallbackResult)

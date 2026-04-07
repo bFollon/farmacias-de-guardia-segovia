@@ -98,6 +98,7 @@ class GeocodingService {
                 let fallbackResult = await getCoordinates(for: pharmacy.address)
                 if fallbackResult == nil {
                     DebugConfig.debugPrint("❌ Fallback geocoding also failed for: \(pharmacy.name)")
+                    ErrorReportingService.shared.captureMessage("Geocoding completely failed for pharmacy: \(pharmacy.name), \(pharmacy.address)")
                 }
                 return fallbackResult
             }
@@ -107,6 +108,7 @@ class GeocodingService {
             let fallbackResult = await getCoordinates(for: pharmacy.address)
             if fallbackResult == nil {
                 DebugConfig.debugPrint("❌ Fallback geocoding also failed for: \(pharmacy.name)")
+                ErrorReportingService.shared.captureMessage("Geocoding completely failed for pharmacy: \(pharmacy.name), \(pharmacy.address)")
             }
             return fallbackResult
         }

@@ -137,6 +137,7 @@ class RoutingService {
             }
         } catch {
             DebugConfig.debugPrint("❌ Route calculation failed: \(error.localizedDescription)")
+            ErrorReportingService.shared.captureMessage("MKDirections route calculation failed, falling back to straight-line: \(error.localizedDescription)")
             let straightLineDistance = userLocation.distance(from: destination)
             DebugConfig.debugPrint("📏 Falling back to straight-line distance: \(String(format: "%.1f km", straightLineDistance / 1000))")
 

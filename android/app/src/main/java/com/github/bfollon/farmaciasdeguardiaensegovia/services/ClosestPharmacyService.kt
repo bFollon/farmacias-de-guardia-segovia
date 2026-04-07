@@ -345,6 +345,7 @@ class ClosestPharmacyService(private val context: Context) {
             }
         } catch (exception: Exception) {
             DebugConfig.debugPrint("❌ Failed to get schedules for ${dutyLocation.name}: ${exception.message}")
+            ErrorReportingService.captureError(exception, mapOf("location" to dutyLocation.name, "operation" to "getOnDutyPharmaciesForLocation"))
             emptyList()
         }
     }

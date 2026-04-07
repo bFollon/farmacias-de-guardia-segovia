@@ -42,6 +42,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFProcessingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
@@ -122,6 +123,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
 
             if (pdfFile == null) {
                 DebugConfig.debugError("PharmacyScheduleRepository: Failed to get PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
+                ErrorReportingService.captureMessage("Failed to get PDF for location ${location.name} (region: ${location.associatedRegion.name})")
                 return@withContext emptyList()
             }
 
@@ -150,6 +152,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 "PharmacyScheduleRepository: Error loading schedules for ${location.name}",
                 e
             )
+            ErrorReportingService.captureError(e, mapOf("location" to location.name, "operation" to "loadSchedules"))
             return@withContext emptyList()
         }
     }
@@ -197,6 +200,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 "PharmacyScheduleRepository: Error preloading schedules for ${region.name}",
                 e
             )
+            ErrorReportingService.captureError(e, mapOf("region" to region.name, "operation" to "preloadSchedules"))
             false
         }
     }

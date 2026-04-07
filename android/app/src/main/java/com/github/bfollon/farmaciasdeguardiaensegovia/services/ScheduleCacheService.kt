@@ -115,6 +115,7 @@ class ScheduleCacheService(private val context: Context) {
             
         } catch (e: Exception) {
             DebugConfig.debugError("Error loading cached schedules for ${location.name}", e)
+            ErrorReportingService.captureError(e, mapOf("location" to location.name, "operation" to "loadCachedSchedules"))
             // If cache is corrupted, delete it
             deleteCacheFiles(location)
             return null
@@ -160,6 +161,7 @@ class ScheduleCacheService(private val context: Context) {
             
         } catch (e: Exception) {
             DebugConfig.debugError("Error saving schedules to cache for ${location.name}", e)
+            ErrorReportingService.captureError(e, mapOf("location" to location.name, "operation" to "saveSchedulesToCache"))
         }
     }
     

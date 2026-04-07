@@ -149,6 +149,7 @@ class GeocodingService(private val context: Context) {
                     val fallbackResult = getCoordinates(pharmacy.address)
                     if (fallbackResult == null) {
                         DebugConfig.debugPrint("❌ Fallback geocoding also failed for: ${pharmacy.name}")
+                        ErrorReportingService.captureMessage("Geocoding completely failed for pharmacy: ${pharmacy.name}, ${pharmacy.address}")
                     }
                     fallbackResult
                 }
@@ -160,6 +161,7 @@ class GeocodingService(private val context: Context) {
                 val fallbackResult = getCoordinates(pharmacy.address)
                 if (fallbackResult == null) {
                     DebugConfig.debugPrint("❌ Fallback geocoding also failed for: ${pharmacy.name}")
+                    ErrorReportingService.captureMessage("Geocoding completely failed for pharmacy: ${pharmacy.name}, ${pharmacy.address}")
                 }
                 fallbackResult
             }

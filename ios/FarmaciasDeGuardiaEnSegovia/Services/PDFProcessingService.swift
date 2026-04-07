@@ -78,6 +78,7 @@ public class PDFProcessingService {
 
         guard let parser = parsingStrategies[region.id] else {
             DebugConfig.debugPrint("No parser found for region: \(region.name) (id: \(region.id))")
+            ErrorReportingService.shared.captureMessage("No parser registered for region \(region.name) (id: \(region.id))")
             return [:]
         }
 

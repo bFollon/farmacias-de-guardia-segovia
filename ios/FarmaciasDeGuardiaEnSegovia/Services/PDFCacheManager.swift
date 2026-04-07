@@ -146,6 +146,7 @@ class PDFCacheManager {
             try fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
             DebugConfig.debugPrint("📁 PDFCacheManager: Cache directory ready at \(cacheDirectory.path)")
         } catch {
+            ErrorReportingService.shared.captureError(error, context: ["operation": "createCacheDirectory"])
         }
     }
     
@@ -378,6 +379,7 @@ class PDFCacheManager {
                 return try await downloadAndCache(region: region)
             } catch {
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to download PDF for \(region.name): \(error)")
+                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "operation": "getEffectivePDFURL"])
                 // Fall back to remote URL
                 return region.remotePDFURL
             }
@@ -536,6 +538,7 @@ class PDFCacheManager {
             } catch {
                 // Download failed – leave the pending flag set so confidence is lowered
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
+                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "operation": "backgroundPDFUpdate"])
             }
         } else {
             // Confirmed up to date – ensure the pending flag is cleared
