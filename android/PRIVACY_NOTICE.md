@@ -6,7 +6,7 @@
 
 Farmacias de Guardia En Segovia ("we," "our," or "the app") is committed to protecting your privacy. This privacy notice explains how we handle information when you use our Android application.
 
-The app includes **optional** error reporting to help diagnose crashes and improve stability. **This is disabled by default and is only enabled if you explicitly opt in.**
+The app includes two **optional** data collection features to help improve the app: error reporting (to diagnose crashes) and product analytics (to understand how features are used). **Both are disabled by default and are only enabled if you explicitly opt in.**
 
 ## Information We Do NOT Collect
 
@@ -58,6 +58,40 @@ All error reporting data is collected **solely** for the following purposes:
 - Track users across apps or services
 - Attempt to identify real-world individuals
 
+## Information We Collect for Analytics
+
+**Analytics is optional.**  
+By default, the app does **not** send any analytics data. Analytics is enabled only if you explicitly choose to opt in.
+
+If enabled, the following anonymous usage information may be collected:
+
+### Usage Events
+- Named in-app events (e.g. app launch, region selected, schedule loaded, PDF viewed)
+- No personally identifiable information is attached to these events
+
+### App & Device Context
+- App version and build number
+- Device platform and operating system version
+
+### Approximate Location (Network-Derived)
+- Country, region, or city (inferred from network data by our server)
+
+This location information is **approximate only** and is inferred from the network request. We do **not** collect or transmit precise GPS-based location data for analytics purposes.
+
+## Purpose and Use of Analytics Data
+
+Analytics data is collected **solely** for the following purposes:
+
+- Understanding which features are used
+- Improving the app experience and prioritising development
+
+**We explicitly do not:**
+- Sell analytics data
+- Use analytics data for advertising or marketing
+- Build user profiles
+- Track users across apps or services
+- Attempt to identify real-world individuals
+
 ## Location Services
 
 The app may request access to your device's location only to:
@@ -72,13 +106,14 @@ The app may request access to your device's location only to:
 
 ## User Choices and Controls
 
-You can enable or disable error reporting at any time from within the app's settings.
+You can enable or disable both error reporting and analytics independently at any time from within the app's settings (Settings → Privacidad).
 
-- Error reporting is **off by default**
-- Opting in helps us identify crashes and bugs
-- Opting out has no impact on core app functionality
+- Both are **off by default**
+- Opting in to error reporting helps us identify crashes and bugs
+- Opting in to analytics helps us understand how the app is used
+- Opting out of either has no impact on core app functionality
 
-Your choice is respected immediately and does not affect your access to pharmacy schedules or location-based features.
+Your choices are respected immediately and do not affect your access to pharmacy schedules or location-based features.
 
 ## Data Storage
 
@@ -86,6 +121,7 @@ Your choice is respected immediately and does not affect your access to pharmacy
 - PDF parsing and caching occurs locally on your device only
 - No user data is stored on third-party servers
 - If you opt in to error reporting, limited diagnostic data is sent to a self-hosted server operated by the developer
+- If you opt in to analytics, anonymous usage events are sent to a self-hosted server operated by the developer
 
 ## Third-Party Services
 
@@ -94,6 +130,12 @@ Your choice is respected immediately and does not affect your access to pharmacy
 > Error reporting is used only if you have opted in.
 
 Error reports are sent to a **self-hosted Bugsink instance** operated by the developer at `errors.bfollon.dev`. This is not a third-party service — the data goes directly to the developer's own server and is not shared with any external company.
+
+### Analytics
+
+> Analytics is used only if you have opted in.
+
+Anonymous usage events are sent to a **self-hosted Aptabase instance** operated by the developer at `analytics.bfollon.dev`. This is not a third-party service — the data goes directly to the developer's own server and is not shared with any external company.
 
 ### Mapping Applications
 
@@ -109,6 +151,8 @@ We do not sell personal data.
 We do not share data for advertising, marketing, or profiling purposes.
 
 If you opt in to error reporting, limited diagnostic data is sent solely to the developer's own self-hosted server for the purpose of crash and error diagnosis.
+
+If you opt in to analytics, anonymous usage events are sent solely to the developer's own self-hosted server for the purpose of improving the app.
 
 ## Children's Privacy
 
@@ -132,4 +176,4 @@ This app serves pharmacy duty schedules for Segovia, Spain, and complies with ap
 ---
 
 **Summary:**  
-The app does not collect information that directly identifies you as a person. Error reporting is optional and disabled by default. If you choose to opt in, limited technical and diagnostic data (crash reports, device info) is sent solely to the developer's own self-hosted server to diagnose errors. This data is never sold, never used for advertising or profiling, and can be disabled at any time.
+The app does not collect information that directly identifies you as a person. Error reporting and analytics are both optional and disabled by default. If you choose to opt in, data is sent solely to the developer's own self-hosted servers — error data to diagnose crashes, analytics data to understand feature usage. Neither is ever sold, used for advertising or profiling, or shared with third parties. Both can be disabled at any time from Settings → Privacidad.
