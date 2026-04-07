@@ -18,6 +18,7 @@ kotlinxSerialization = "1.9.0"
 itext = "8.0.5"
 playServicesLocation = "21.3.0"
 sentry = "8.13.2"
+aptabase = "0.0.8"
 
 [libraries]
 androidx-compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
@@ -46,6 +47,7 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 sentry-android = { module = "io.sentry:sentry-android", version.ref = "sentry" }
+aptabase = { module = "com.github.aptabase:aptabase-kotlin", version.ref = "aptabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

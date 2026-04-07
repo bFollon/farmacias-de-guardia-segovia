@@ -33,6 +33,10 @@ class ScheduleService {
         // Try to load from persistent cache if not forcing refresh
         if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
             DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for location \(location.name)")
+            AnalyticsService.shared.track("schedules_loaded_from_cache", with: [
+                "region": location.associatedRegion.id,
+                "schedules_count": persistedSchedules.count
+            ])
             cachedSchedules[location.id] = persistedSchedules
             return persistedSchedules
         }
@@ -51,6 +55,24 @@ class ScheduleService {
             cachedSchedules[loc.id] = schedules
             cacheService.saveSchedulesToCache(for: loc, schedules: schedules)
             DebugConfig.debugPrint("💾 ScheduleService: Cached \(schedules.count) schedules for \(loc.name)")
+        }
+
+        // Analytics: schedule parse result (fires once per region parse)
+        let totalSchedules = schedulesByLocation.values.reduce(0) { $0 + $1.count }
+        if totalSchedules > 0 {
+            var props: [String: Any] = [
+                "region": location.associatedRegion.id,
+                "schedules_count": totalSchedules
+            ]
+            if location.associatedRegion.id == "segovia-rural" {
+                props["zbs_count"] = schedulesByLocation.count
+            }
+            AnalyticsService.shared.track("schedules_parsed", with: props)
+        } else {
+            AnalyticsService.shared.track("pdf_parse_failed", with: [
+                "region": location.associatedRegion.id,
+                "error": "no_schedules_parsed"
+            ])
         }
 
         // Extract and return schedules for the requested location

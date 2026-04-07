@@ -95,6 +95,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceResult
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
@@ -144,6 +145,7 @@ fun ScheduleScreen(
     var isOffline by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         isOffline = !NetworkMonitor.isOnline()
+        AnalyticsService.track("pdf_viewed", mapOf("region" to (locationId ?: "unknown")))
     }
 
     // Reload when returning to this screen if an external refresh (e.g. Cache Status force-update)

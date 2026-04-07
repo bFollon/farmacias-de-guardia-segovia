@@ -27,6 +27,10 @@ struct SettingsView: View {
     @State private var monitoringEnabled = MonitoringPreferencesService.shared.hasUserOptedIn()
     @State private var originalMonitoringValue = MonitoringPreferencesService.shared.hasUserOptedIn()
     @State private var showRestartNotice = false
+
+    // Analytics preferences
+    @State private var analyticsEnabled = MonitoringPreferencesService.shared.hasUserOptedInToAnalytics()
+    @State private var originalAnalyticsValue = MonitoringPreferencesService.shared.hasUserOptedInToAnalytics()
     
     var body: some View {
         NavigationView {
@@ -90,6 +94,25 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Toggle(isOn: $analyticsEnabled) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Analíticas de Uso")
+                                    .font(.headline)
+                                Text("Eventos de uso anónimos para mejorar la app")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .onChange(of: analyticsEnabled) { oldValue, newValue in
+                            MonitoringPreferencesService.shared.setAnalyticsEnabled(newValue)
+                            if !showRestartNotice {
+                                showRestartNotice = newValue != originalAnalyticsValue
+                            }
+                        }
+                    }
+                    .padding(.vertical, 4)
                 }
 
                 Section("Información") {

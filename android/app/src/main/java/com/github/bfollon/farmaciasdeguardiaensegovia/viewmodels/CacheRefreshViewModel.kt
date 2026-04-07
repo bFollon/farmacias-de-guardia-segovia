@@ -22,6 +22,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -61,6 +62,8 @@ class CacheRefreshViewModel(application: Application) : AndroidViewModel(applica
      * Start the refresh process for all regions
      */
     private fun startRefresh() {
+        AnalyticsService.track("cache_refresh_triggered", mapOf("region_count" to regions.size))
+
         viewModelScope.launch {
             // Check network status first
             val isOnline = NetworkMonitor.isOnline()

@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSGreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
@@ -112,7 +113,10 @@ fun ZBSSelectionScreen(
                     // First column
                     ZBSCard(
                         zbs = zbsList[rowIndex * 2],
-                        onClick = { onZBSSelected(zbsList[rowIndex * 2]) },
+                        onClick = {
+                            AnalyticsService.track("zbs_selected", mapOf("zbs" to zbsList[rowIndex * 2].id))
+                            onZBSSelected(zbsList[rowIndex * 2])
+                        },
                         modifier = Modifier.weight(1f)
                     )
 
@@ -120,7 +124,10 @@ fun ZBSSelectionScreen(
                     if (rowIndex * 2 + 1 < zbsList.size) {
                         ZBSCard(
                             zbs = zbsList[rowIndex * 2 + 1],
-                            onClick = { onZBSSelected(zbsList[rowIndex * 2 + 1]) },
+                            onClick = {
+                                AnalyticsService.track("zbs_selected", mapOf("zbs" to zbsList[rowIndex * 2 + 1].id))
+                                onZBSSelected(zbsList[rowIndex * 2 + 1])
+                            },
                             modifier = Modifier.weight(1f)
                         )
                     } else {

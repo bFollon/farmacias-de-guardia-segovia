@@ -80,6 +80,16 @@ class PreloadService: ObservableObject {
             await invalidateCachesForChangedURLs(changeResult: changeResult)
         }
 
+        // Analytics: scrape result
+        if scrapedData.isEmpty {
+            AnalyticsService.shared.track("pdf_url_scrape_failed", with: ["error": "no_urls_returned"])
+        } else {
+            AnalyticsService.shared.track("pdf_url_scrape_complete", with: [
+                "urls_found": scrapedData.count,
+                "urls_changed": !changeResult.changedRegionIds.isEmpty
+            ])
+        }
+
         // Print scraped data (existing call)
         PDFURLScrapingService.shared.printScrapedData(scrapedData)
 

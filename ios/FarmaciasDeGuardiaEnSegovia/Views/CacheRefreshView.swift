@@ -101,6 +101,8 @@ struct CacheRefreshView: View {
     }
     
     private func startRefresh() {
+        AnalyticsService.shared.track("cache_refresh_triggered", with: ["region_count": regions.count])
+
         // Initialize all regions as pending
         for region in regions {
             refreshStates[region.id] = .pending

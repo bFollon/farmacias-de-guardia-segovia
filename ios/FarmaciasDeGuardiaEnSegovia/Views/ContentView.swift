@@ -74,12 +74,16 @@ struct ContentView: View {
                             switch button.title {
                             case "Segovia Capital":
                                 selectedRegion = .segoviaCapital
+                                AnalyticsService.shared.track("region_selected", with: ["region": "segovia-capital"])
                             case "Cuéllar":
                                 selectedRegion = .cuellar
+                                AnalyticsService.shared.track("region_selected", with: ["region": "cuellar"])
                             case "El espinar / San Rafael":
                                 selectedRegion = .elEspinar
+                                AnalyticsService.shared.track("region_selected", with: ["region": "el-espinar"])
                             case "Segovia Rural":
                                 showingZBSSelection = true
+                                AnalyticsService.shared.track("region_selected", with: ["region": "segovia-rural"])
                             default:
                                 break
                             }

@@ -82,8 +82,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
                 initializeApp()
                 showSplashScreen = false
 
-                // Show monitoring consent if user hasn't made a choice yet
-                if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
+                // Show privacy consent if user hasn't made an analytics choice yet
+                // (this also triggers for existing users who pre-date analytics)
+                if !MonitoringPreferencesService.shared.hasUserMadeAnalyticsChoice() {
                     showMonitoringConsent = true
                 }
             }
@@ -103,6 +104,10 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
         // Track app launch for review prompts
         ReviewPromptService.shared.recordAppLaunch()
 
+        // Analytics: app launch event
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
+        AnalyticsService.shared.track("app_launch", with: ["version": version, "platform": "ios"])
+
         DebugConfig.debugPrint("✅ App initialization complete with cache maintenance")
     }
 }
@@ -119,8 +124,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize error reporting if user has opted in
+        // Initialize error reporting and analytics if user has opted in
         ErrorReportingService.shared.initialize()
+        AnalyticsService.shared.initialize()
 
         return true
     }

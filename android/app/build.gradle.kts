@@ -90,6 +90,9 @@ dependencies {
     // Error reporting
     implementation(libs.sentry.android)
 
+    // Analytics
+    implementation(libs.aptabase)
+
     // Window Size Classes for responsive layouts
     implementation(libs.androidx.compose.adaptive)
 

@@ -25,18 +25,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.LocalPharmacy
-import androidx.compose.material.icons.filled.LocationOff
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PhoneAndroid
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,8 +39,13 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -59,21 +58,28 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPrefere
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 /**
- * Modal view for obtaining user consent for monitoring and error tracking
- * Matches iOS MonitoringConsentView design
+ * Combined privacy consent modal covering both error reporting and analytics.
+ *
+ * Shown to all users whenever the analytics choice hasn't been made yet.
+ * The errors toggle is pre-filled from the existing saved preference;
+ * the analytics toggle starts off by default.
+ * Matches iOS MonitoringConsentView design.
  */
 @Composable
 fun MonitoringConsentScreen(
     onDismiss: () -> Unit
 ) {
-    // Semi-transparent background overlay
+    var errorsEnabled by remember {
+        mutableStateOf(MonitoringPreferencesService.hasUserOptedIn())
+    }
+    var analyticsEnabled by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black.copy(alpha = 0.4f)),
         contentAlignment = Alignment.Center
     ) {
-        // Centered popup card
         Card(
             modifier = Modifier
                 .padding(40.dp)
@@ -101,128 +107,60 @@ fun MonitoringConsentScreen(
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "Ayudenos a Mejorar la App",
+                        text = "Configuración de Privacidad",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     )
+                    Text(
+                        text = "Elige qué datos compartes con nosotros. Todo es anónimo y puedes cambiarlo en Ajustes.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
 
-                // Main Description
-                Text(
-                    text = "Permitir recopilacion de datos tecnicos anonimos para detectar errores?",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                HorizontalDivider()
+
+                // Errors toggle row
+                ConsentToggleRow(
+                    icon = Icons.Default.Warning,
+                    title = "Monitoreo de Errores",
+                    description = "Datos técnicos anónimos (info del dispositivo, errores y fallos) para detectar y corregir problemas.",
+                    checked = errorsEnabled,
+                    onCheckedChange = { errorsEnabled = it }
                 )
 
                 HorizontalDivider()
 
-                // What IS collected
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "Se recopila:",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
-
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        InfoRow(
-                            icon = Icons.Default.PhoneAndroid,
-                            text = "Info del dispositivo",
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        InfoRow(
-                            icon = Icons.Default.Warning,
-                            text = "Errores y fallos",
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
-                // What is NOT collected
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "NO se recopila:",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold
-                    )
-
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        InfoRow(
-                            icon = Icons.Default.Person,
-                            text = "Informacion personal",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                        InfoRow(
-                            icon = Icons.Default.LocationOff,
-                            text = "Ubicacion precisa",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                        InfoRow(
-                            icon = Icons.Default.LocalPharmacy,
-                            text = "Farmacias consultadas",
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                }
+                // Analytics toggle row
+                ConsentToggleRow(
+                    icon = Icons.Default.BarChart,
+                    title = "Analíticas de Uso",
+                    description = "Eventos de uso anónimos (pantallas visitadas, funciones usadas) para entender cómo mejorar la app.",
+                    checked = analyticsEnabled,
+                    onCheckedChange = { analyticsEnabled = it }
+                )
 
                 HorizontalDivider()
 
-                // Buttons
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                // Confirm button
+                Button(
+                    onClick = {
+                        MonitoringPreferencesService.setMonitoringEnabled(errorsEnabled)
+                        MonitoringPreferencesService.setAnalyticsEnabled(analyticsEnabled)
+                        onDismiss()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
                 ) {
-                    // Enable button (green)
-                    Button(
-                        onClick = {
-                            MonitoringPreferencesService.setMonitoringEnabled(true)
-                            onDismiss()
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4CAF50) // Green
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Check,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "Permitir",
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-
-                    // Decline button (gray)
-                    Button(
-                        onClick = {
-                            MonitoringPreferencesService.setMonitoringEnabled(false)
-                            onDismiss()
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Gray
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "No, Gracias",
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
+                    Text(
+                        text = "Confirmar",
+                        fontWeight = FontWeight.Medium
+                    )
                 }
 
                 // Footer note
@@ -238,29 +176,49 @@ fun MonitoringConsentScreen(
     }
 }
 
-/**
- * Helper composable for displaying an info row with icon and text
- */
 @Composable
-private fun InfoRow(
+private fun ConsentToggleRow(
     icon: ImageVector,
-    text: String,
-    color: Color
+    title: String,
+    description: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp),
-            tint = color
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface
+        Row(
+            modifier = Modifier.weight(1f),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.Top
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(20.dp)
+                    .padding(top = 2.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        Spacer(modifier = Modifier.width(12.dp))
+        Switch(
+            checked = checked,
+            onCheckedChange = onCheckedChange
         )
     }
 }
@@ -269,8 +227,6 @@ private fun InfoRow(
 @Composable
 fun MonitoringConsentScreenPreview() {
     FarmaciasDeGuardiaEnSegoviaTheme {
-        MonitoringConsentScreen(
-            onDismiss = {}
-        )
+        MonitoringConsentScreen(onDismiss = {})
     }
 }

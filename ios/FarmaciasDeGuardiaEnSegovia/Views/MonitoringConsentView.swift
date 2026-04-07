@@ -17,100 +17,88 @@
 
 import SwiftUI
 
-/// Modal view for obtaining user consent for monitoring and error tracking
+/// Combined privacy consent modal covering both error reporting and analytics.
+///
+/// Shown to all users whenever the analytics choice hasn't been made yet.
+/// The errors toggle is pre-filled from the existing saved preference;
+/// the analytics toggle starts off by default.
 struct MonitoringConsentView: View {
     @Binding var isPresented: Bool
+
+    @State private var errorsEnabled: Bool
+    @State private var analyticsEnabled: Bool = false
+
+    init(isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self._errorsEnabled = State(initialValue: MonitoringPreferencesService.shared.hasUserOptedIn())
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             // Header
             VStack(spacing: 8) {
-                Image(systemName: "chart.bar.fill")
+                Image(systemName: "hand.raised.fill")
                     .font(.system(size: 36))
                     .foregroundColor(.blue)
 
-                Text("Ayúdenos a Mejorar la App")
+                Text("Configuración de Privacidad")
                     .font(.title3)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+
+                Text("Elige qué datos compartes con nosotros. Todo es anónimo y puedes cambiarlo en Ajustes.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity)
 
-            // Main Description
-            Text("¿Permitir recopilación de datos técnicos anónimos para detectar errores?")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-                .fixedSize(horizontal: false, vertical: true)
+            Divider()
+
+            // Errors toggle
+            Toggle(isOn: $errorsEnabled) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Label("Monitoreo de Errores", systemImage: "exclamationmark.triangle.fill")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                    Text("Datos técnicos anónimos (info del dispositivo, errores y fallos) para detectar y corregir problemas.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .tint(.blue)
 
             Divider()
 
-            // What IS collected
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Se recopila:")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    InfoRow(icon: "iphone", text: "Info del dispositivo", color: .blue)
-                    InfoRow(icon: "exclamationmark.triangle", text: "Errores y fallos", color: .blue)
+            // Analytics toggle
+            Toggle(isOn: $analyticsEnabled) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Label("Analíticas de Uso", systemImage: "chart.bar.fill")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                    Text("Eventos de uso anónimos (pantallas visitadas, funciones usadas) para entender cómo mejorar la app.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
-
-            // What is NOT collected
-            VStack(alignment: .leading, spacing: 8) {
-                Text("NO se recopila:")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    InfoRow(icon: "person.fill.xmark", text: "Información personal", color: .red)
-                    InfoRow(icon: "location.slash", text: "Ubicación precisa", color: .red)
-                    InfoRow(icon: "pill.fill", text: "Farmacias consultadas", color: .red)
-                }
-            }
+            .tint(.blue)
 
             Divider()
 
-            // Buttons
-            VStack(spacing: 8) {
-                // Enable button (green)
-                Button(action: {
-                    MonitoringPreferencesService.shared.setMonitoringEnabled(true)
-                    isPresented = false
-                }) {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                        Text("Permitir")
-                            .fontWeight(.medium)
-                    }
+            // Confirm button
+            Button(action: confirm) {
+                Text("Confirmar")
+                    .fontWeight(.medium)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(Color.green)
+                    .background(Color.blue)
                     .cornerRadius(10)
-                }
-                .buttonStyle(PlainButtonStyle())
-
-                // Not now button (gray)
-                Button(action: {
-                    MonitoringPreferencesService.shared.setMonitoringEnabled(false)
-                    isPresented = false
-                }) {
-                    HStack {
-                        Image(systemName: "xmark.circle")
-                        Text("No, Gracias")
-                            .fontWeight(.medium)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color.gray)
-                    .cornerRadius(10)
-                }
-                .buttonStyle(PlainButtonStyle())
             }
+            .buttonStyle(PlainButtonStyle())
 
             // Footer note
             Text("Cambiar en Ajustes cuando quiera")
@@ -121,25 +109,11 @@ struct MonitoringConsentView: View {
         }
         .padding(20)
     }
-}
 
-/// Helper view for displaying an info row with icon and text
-private struct InfoRow: View {
-    let icon: String
-    let text: String
-    var color: Color = .blue
-
-    var body: some View {
-        HStack(alignment: .center, spacing: 8) {
-            Image(systemName: icon)
-                .foregroundColor(color)
-                .font(.caption)
-                .frame(width: 16)
-            Text(text)
-                .font(.caption)
-                .foregroundColor(.primary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
+    private func confirm() {
+        MonitoringPreferencesService.shared.setMonitoringEnabled(errorsEnabled)
+        MonitoringPreferencesService.shared.setAnalyticsEnabled(analyticsEnabled)
+        isPresented = false
     }
 }
 

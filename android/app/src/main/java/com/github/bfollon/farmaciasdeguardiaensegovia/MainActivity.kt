@@ -23,6 +23,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPreferencesService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheRefreshScreen
@@ -65,9 +66,16 @@ class MainActivity : ComponentActivity() {
         // Initialize monitoring preferences service
         MonitoringPreferencesService.initialize(this)
 
-        // Initialize error reporting if user has opted in
+        // Initialize error reporting and analytics if user has opted in
         ErrorReportingService.initialize(this)
-        
+        AnalyticsService.initialize(this)
+
+        // Analytics: app launch event
+        val version = try {
+            packageManager.getPackageInfo(packageName, 0).versionName ?: "unknown"
+        } catch (_: Exception) { "unknown" }
+        AnalyticsService.track("app_launch", mapOf("version" to version, "platform" to "android"))
+
         setContent {
             FarmaciasDeGuardiaEnSegoviaTheme {
                 AppNavigation()
@@ -124,8 +132,9 @@ fun AppNavigation() {
                     navController.navigate("main") {
                         popUpTo("splash") { inclusive = true }
                     }
-                    // Show monitoring consent if user hasn't made a choice yet
-                    if (!MonitoringPreferencesService.hasUserMadeChoice()) {
+                    // Show privacy consent if user hasn't made an analytics choice yet
+                    // (this also triggers for existing users who pre-date analytics)
+                    if (!MonitoringPreferencesService.hasUserMadeAnalyticsChoice()) {
                         showMonitoringConsent = true
                     }
                 }
@@ -136,6 +145,7 @@ fun AppNavigation() {
             MainScreen(
                 onRegionSelected = { region ->
                     DebugConfig.debugPrint("🔷 MainActivity: Region selected: ${region.name} (${region.id})")
+                    AnalyticsService.track("region_selected", mapOf("region" to region.id))
                     when (region.id) {
                         Region.ID_SEGOVIA_CAPITAL, Region.ID_CUELLAR, Region.ID_EL_ESPINAR -> {
                             DebugConfig.debugPrint("🔷 MainActivity: Setting selectedLocationId=${region.id}, showScheduleModal=true")

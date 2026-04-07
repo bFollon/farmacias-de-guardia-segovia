@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A2D01032F853E7E00BDDF9A /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2D01022F853E7E00BDDF9A /* Aptabase */; };
 		3A2DFFC02F84F8A100BDDF9A /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2DFFBF2F84F8A100BDDF9A /* Sentry */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A2DFFC02F84F8A100BDDF9A /* Sentry in Frameworks */,
+				3A2D01032F853E7E00BDDF9A /* Aptabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +130,7 @@
 			name = FarmaciasDeGuardiaEnSegovia;
 			packageProductDependencies = (
 				3A2DFFBF2F84F8A100BDDF9A /* Sentry */,
+				3A2D01022F853E7E00BDDF9A /* Aptabase */,
 			);
 			productName = FarmaciasDeGuardiaEnSegovia;
 			productReference = CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */;
@@ -207,6 +210,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				3A2D01012F853E7E00BDDF9A /* XCRemoteSwiftPackageReference "aptabase-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CE049B3F2DD6AABF00D1D560 /* Products */;
@@ -610,6 +614,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A2D01012F853E7E00BDDF9A /* XCRemoteSwiftPackageReference "aptabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aptabase/aptabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.11;
+			};
+		};
 		3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
@@ -623,6 +635,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A2D01022F853E7E00BDDF9A /* Aptabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A2D01012F853E7E00BDDF9A /* XCRemoteSwiftPackageReference "aptabase-swift" */;
+			productName = Aptabase;
+		};
 		3A2DFFBF2F84F8A100BDDF9A /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */;

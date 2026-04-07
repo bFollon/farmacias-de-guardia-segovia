@@ -28,6 +28,8 @@ class MonitoringPreferencesService {
     private enum UserDefaultsKeys {
         static let monitoringEnabled = "monitoring_enabled"
         static let choiceMade = "monitoring_choice_made"
+        static let analyticsEnabled = "analytics_enabled"
+        static let analyticsChoiceMade = "analytics_choice_made"
     }
 
     private static let userDefaults = UserDefaults.standard
@@ -57,6 +59,32 @@ class MonitoringPreferencesService {
         DebugConfig.debugPrint(enabled ?
             "✅ User opted IN to monitoring" :
             "⚠️ User opted OUT of monitoring")
+    }
+
+    // MARK: - Analytics Preferences
+
+    /// Returns true if user has explicitly opted in to analytics
+    func hasUserOptedInToAnalytics() -> Bool {
+        guard hasUserMadeAnalyticsChoice() else {
+            return false
+        }
+        return Self.userDefaults.bool(forKey: UserDefaultsKeys.analyticsEnabled)
+    }
+
+    /// Returns true if user has made any analytics choice (enable or decline)
+    func hasUserMadeAnalyticsChoice() -> Bool {
+        return Self.userDefaults.bool(forKey: UserDefaultsKeys.analyticsChoiceMade)
+    }
+
+    /// Saves user's analytics preference
+    /// - Parameter enabled: true to enable analytics, false to disable
+    func setAnalyticsEnabled(_ enabled: Bool) {
+        Self.userDefaults.set(enabled, forKey: UserDefaultsKeys.analyticsEnabled)
+        Self.userDefaults.set(true, forKey: UserDefaultsKeys.analyticsChoiceMade)
+
+        DebugConfig.debugPrint(enabled ?
+            "✅ User opted IN to analytics" :
+            "⚠️ User opted OUT of analytics")
     }
 
     // MARK: - Debug Helpers

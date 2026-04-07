@@ -35,6 +35,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -183,13 +184,16 @@ private fun MonitoringSection() {
     var isMonitoringEnabled by remember {
         mutableStateOf(MonitoringPreferencesService.hasUserOptedIn())
     }
+    var isAnalyticsEnabled by remember {
+        mutableStateOf(MonitoringPreferencesService.hasUserOptedInToAnalytics())
+    }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Section Header
         Text(
-            text = "Monitoreo",
+            text = "Privacidad",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
@@ -206,42 +210,30 @@ private fun MonitoringSection() {
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Toggle row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Speed,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            text = "Monitoreo de Errores",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
+                // Errors toggle row
+                PrivacyToggleRow(
+                    icon = { Icon(imageVector = Icons.Default.Speed, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+                    title = "Monitoreo de Errores",
+                    description = "Datos técnicos anónimos para detectar y corregir problemas.",
+                    checked = isMonitoringEnabled,
+                    onCheckedChange = { enabled ->
+                        isMonitoringEnabled = enabled
+                        MonitoringPreferencesService.setMonitoringEnabled(enabled)
                     }
+                )
 
-                    Switch(
-                        checked = isMonitoringEnabled,
-                        onCheckedChange = { enabled ->
-                            isMonitoringEnabled = enabled
-                            MonitoringPreferencesService.setMonitoringEnabled(enabled)
-                        }
-                    )
-                }
+                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
 
-                // Description text
-                Text(
-                    text = "Recopila datos tecnicos anonimos para mejorar la app.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                // Analytics toggle row
+                PrivacyToggleRow(
+                    icon = { Icon(imageVector = Icons.Default.BarChart, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+                    title = "Analíticas de Uso",
+                    description = "Eventos de uso anónimos para entender cómo mejorar la app.",
+                    checked = isAnalyticsEnabled,
+                    onCheckedChange = { enabled ->
+                        isAnalyticsEnabled = enabled
+                        MonitoringPreferencesService.setAnalyticsEnabled(enabled)
+                    }
                 )
 
                 // Restart note
@@ -253,6 +245,45 @@ private fun MonitoringSection() {
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun PrivacyToggleRow(
+    icon: @Composable () -> Unit,
+    title: String,
+    description: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier.weight(1f),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            icon()
+            Column {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        Switch(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
     }
 }
 

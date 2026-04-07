@@ -40,6 +40,7 @@ struct PharmacyView: View {
     }
     
     private func openInMaps(using app: MapApp) {
+        AnalyticsService.shared.track("open_in_maps_tapped", with: ["map_app": app.rawValue])
         let query = "\(pharmacy.name), \(pharmacy.address), Segovia, Spain"
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         

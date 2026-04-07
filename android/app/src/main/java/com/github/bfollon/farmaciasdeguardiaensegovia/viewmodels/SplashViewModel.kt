@@ -25,6 +25,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingDemo
@@ -199,6 +200,11 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             if (result.success) {
                 DebugConfig.debugPrint("SplashViewModel: ✅ PDF URL repository initialized successfully")
 
+                AnalyticsService.track("pdf_url_scrape_complete", mapOf(
+                    "urls_found" to result.changedRegionIds.size + (result.urlChanges.size - result.changedRegionIds.size).coerceAtLeast(0),
+                    "urls_changed" to result.changedRegionIds.isNotEmpty()
+                ))
+
                 // Update state flow with changed region IDs
                 withContext(Dispatchers.Main) {
                     _urlChangesDetected.value = result.changedRegionIds
@@ -212,12 +218,14 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 return result.changedRegionIds
             } else {
                 DebugConfig.debugWarn("SplashViewModel: ⚠️ PDF URL repository initialization failed, using fallbacks")
+                AnalyticsService.track("pdf_url_scrape_failed", mapOf("error" to "initialization_failed"))
                 return emptyList()
             }
 
         } catch (e: Exception) {
             if (e !is CancellationException) {
                 DebugConfig.debugError("SplashViewModel: Error during URL repository initialization", e)
+                AnalyticsService.track("pdf_url_scrape_failed", mapOf("error" to (e.message ?: "unknown")))
             }
             return emptyList()
         }

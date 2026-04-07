@@ -29,6 +29,8 @@ object MonitoringPreferencesService {
     private const val PREFS_NAME = "monitoring_preferences"
     private const val KEY_MONITORING_ENABLED = "monitoring_enabled"
     private const val KEY_CHOICE_MADE = "monitoring_choice_made"
+    private const val KEY_ANALYTICS_ENABLED = "analytics_enabled"
+    private const val KEY_ANALYTICS_CHOICE_MADE = "analytics_choice_made"
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -88,6 +90,52 @@ object MonitoringPreferencesService {
             DebugConfig.debugPrint("User opted IN to monitoring")
         } else {
             DebugConfig.debugPrint("User opted OUT of monitoring")
+        }
+    }
+
+    // Analytics preferences
+
+    /**
+     * Returns true if user has explicitly opted in to analytics
+     */
+    fun hasUserOptedInToAnalytics(): Boolean {
+        val prefs = sharedPreferences ?: run {
+            DebugConfig.debugWarn("MonitoringPreferencesService not initialized")
+            return false
+        }
+        if (!hasUserMadeAnalyticsChoice()) return false
+        return prefs.getBoolean(KEY_ANALYTICS_ENABLED, false)
+    }
+
+    /**
+     * Returns true if user has made any analytics choice (enable or decline)
+     */
+    fun hasUserMadeAnalyticsChoice(): Boolean {
+        val prefs = sharedPreferences ?: run {
+            DebugConfig.debugWarn("MonitoringPreferencesService not initialized")
+            return false
+        }
+        return prefs.getBoolean(KEY_ANALYTICS_CHOICE_MADE, false)
+    }
+
+    /**
+     * Saves user's analytics preference
+     * @param enabled true to enable analytics, false to disable
+     */
+    fun setAnalyticsEnabled(enabled: Boolean) {
+        val prefs = sharedPreferences ?: run {
+            DebugConfig.debugError("MonitoringPreferencesService not initialized")
+            return
+        }
+        prefs.edit().apply {
+            putBoolean(KEY_ANALYTICS_ENABLED, enabled)
+            putBoolean(KEY_ANALYTICS_CHOICE_MADE, true)
+            apply()
+        }
+        if (enabled) {
+            DebugConfig.debugPrint("User opted IN to analytics")
+        } else {
+            DebugConfig.debugPrint("User opted OUT of analytics")
         }
     }
 

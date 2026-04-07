@@ -42,6 +42,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFProcessingService
@@ -108,10 +109,15 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
         if (!location.associatedRegion.forceRefresh) {
             val cachedSchedules = cacheService.loadCachedSchedules(location)
             if (cachedSchedules != null && cachedSchedules.isNotEmpty() && cachedSchedules[location] != null) {
+                val locationSchedules = cachedSchedules[location]!!
+                AnalyticsService.track("schedules_loaded_from_cache", mapOf(
+                    "region" to location.associatedRegion.id,
+                    "schedules_count" to locationSchedules.size
+                ))
                 // Store in memory cache as well
                 schedulesCache = schedulesCache.mergeWith(cachedSchedules) { _, b -> b } // Replace the existing schedules with the new ones
                 DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
-                return@withContext cachedSchedules[location]!!
+                return@withContext locationSchedules
             }
         }
 
@@ -141,8 +147,21 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                     DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${loadedLocation.name}")
                 }
 
+                val totalSchedules = schedulesMap.values.sumOf { it.size }
+                val props = mutableMapOf<String, Any>(
+                    "region" to location.associatedRegion.id,
+                    "schedules_count" to totalSchedules
+                )
+                if (location.associatedRegion.id == "segovia-rural") {
+                    props["zbs_count"] = schedulesMap.size
+                }
+                AnalyticsService.track("schedules_parsed", props)
             } else {
                 DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${location.name}")
+                AnalyticsService.track("pdf_parse_failed", mapOf(
+                    "region" to location.associatedRegion.id,
+                    "error" to "no_schedules_parsed"
+                ))
             }
 
             return@withContext schedulesMap[location] ?: emptyList()

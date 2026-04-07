@@ -44,6 +44,7 @@ struct ZBSSelectionView: View {
                     ForEach(ZBS.availableZBS, id: \.id) { zbs in
                         Button(action: {
                             selectedZBS = zbs
+                            AnalyticsService.shared.track("zbs_selected", with: ["zbs": zbs.id])
                         }) {
                             VStack(spacing: 8) {
                                 Text(zbs.icon)

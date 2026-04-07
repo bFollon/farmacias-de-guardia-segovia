@@ -126,6 +126,7 @@ struct PDFViewScreen: View {
             }
         }
         .onAppear {
+            AnalyticsService.shared.track("pdf_viewed", with: ["region": location.associatedRegion.id])
             loadPharmacies()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
