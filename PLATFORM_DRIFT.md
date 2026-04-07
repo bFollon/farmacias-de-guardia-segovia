@@ -21,22 +21,21 @@ This document tracks implementation differences between iOS and Android platform
 
 ---
 
-## Monitoring & Telemetry
+## Error Reporting
 
-### OpenTelemetry Implementation
-- [x] **Both platforms use OpenTelemetry with Grafana stack**
-  - iOS: `opentelemetry-swift` (version 2.3.0+)
-  - Android: `io.opentelemetry:opentelemetry-*` (version 1.44.1)
+### Sentry SDK (Bugsink)
+- [x] **Both platforms use Sentry SDK reporting to self-hosted Bugsink instance**
+  - iOS: `sentry-cocoa` (via SPM)
+  - Android: `io.sentry:sentry-android`
+  - DSN configured in `Secrets.swift` / `Secrets.kt`
 
-### Instrumented Services
-- [x] **PDFURLScrapingService** - `pdf.url.scraping` span
-- [x] **GeocodingService** - `pharmacy.geocode` span
-- [x] **PDFProcessingService** - `pdf.parse` span
-- [x] **RoutingService** - `route.calculate` span
+### Error Capture Sites
+- [x] **PDFURLScrapingService** - captures HTTP failures and incomplete results
+- [x] **PDFProcessingService** - captures PDF load and parse failures
 
 ### User Consent Flow
 - [x] **Both platforms show consent dialog after splash screen**
-- [x] **Both platforms have monitoring toggle in Settings**
+- [x] **Both platforms have error reporting toggle in Settings**
 
 ---
 

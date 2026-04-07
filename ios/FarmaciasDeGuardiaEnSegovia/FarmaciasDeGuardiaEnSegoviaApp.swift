@@ -17,10 +17,6 @@
 
 import SwiftUI
 import StoreKit
-import OpenTelemetryApi
-import OpenTelemetrySdk
-import OpenTelemetryProtocolExporterCommon
-import OpenTelemetryProtocolExporterHttp
 
 @main
 struct FarmaciasDeGuardiaEnSegoviaApp: App {
@@ -86,9 +82,6 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
                 initializeApp()
                 showSplashScreen = false
 
-                // Force flush metrics after splash screen (immediate export of app launch + scraping metrics)
-                TelemetryService.shared.forceFlushMetrics()
-
                 // Show monitoring consent if user hasn't made a choice yet
                 if !MonitoringPreferencesService.shared.hasUserMadeChoice() {
                     showMonitoringConsent = true
@@ -126,113 +119,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize OpenTelemetry (Grafana) only if user has opted in
-        if MonitoringPreferencesService.shared.hasUserOptedIn() {
-            // Get app version and environment
-            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
-            #if DEBUG
-            let environment = "debug"
-            #else
-            let environment = "production"
-            #endif
-
-            // Create resource with automatic SDK detection (includes telemetry.sdk.name,
-            // telemetry.sdk.language, telemetry.sdk.version automatically)
-            let defaultResource = Resource()
-
-            // Merge with custom service attributes
-            let customResource = Resource(attributes: [
-                "service.name": AttributeValue.string("farmacias-guardia-segovia"),
-                "service.version": AttributeValue.string(appVersion),
-                "deployment.environment": AttributeValue.string(environment)
-            ])
-
-            let resources = defaultResource.merging(other: customResource)
-
-            // Configure OTLP HTTP exporter for Grafana
-            DebugConfig.debugPrint("🔧 Configuring Grafana OTLP HTTP exporter")
-            DebugConfig.debugPrint("🔧 Endpoint: \(Secrets.signozEndpoint)")
-            DebugConfig.debugPrint("🔧 Auth header: signoz-ingestion-key")
-
-            let otlpConfiguration = OtlpConfiguration(
-                timeout: TimeInterval(10),
-                headers: [("signoz-ingestion-key", Secrets.signozIngestionKey)]
-            )
-
-            guard let endpoint = URL(string: Secrets.signozEndpoint) else {
-                DebugConfig.debugPrint("❌ Invalid Grafana endpoint URL: \(Secrets.signozEndpoint)")
-                return true
-            }
-
-            let otlpExporter = OtlpHttpTraceExporter(
-                endpoint: endpoint,
-                config: otlpConfiguration
-            )
-
-            DebugConfig.debugPrint("🔧 OTLP HTTP exporter created successfully")
-
-            // Create span processor with immediate export
-            let spanProcessor = SimpleSpanProcessor(spanExporter: otlpExporter)
-
-            // Create tracer provider
-            let tracerProvider = TracerProviderBuilder()
-                .add(spanProcessor: spanProcessor)
-                .with(resource: resources)
-                .build()
-
-            // Register globally
-            OpenTelemetry.registerTracerProvider(tracerProvider: tracerProvider)
-
-            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) tracing initialized (user opted in)")
-
-            // Configure metrics exporter for Grafana
-            DebugConfig.debugPrint("🔧 Configuring Grafana OTLP HTTP metrics exporter")
-
-            guard let metricsEndpoint = URL(string: Secrets.signozEndpoint.replacingOccurrences(of: "/v1/traces", with: "/v1/metrics")) else {
-                DebugConfig.debugPrint("❌ Invalid Grafana metrics endpoint URL")
-                return true
-            }
-
-            DebugConfig.debugPrint("🔧 Metrics endpoint: \(metricsEndpoint)")
-
-            let metricsExporter = OtlpHttpMetricExporter(
-                endpoint: metricsEndpoint,
-                config: otlpConfiguration
-            )
-
-            DebugConfig.debugPrint("🔧 OTLP HTTP metrics exporter created successfully")
-
-            // Create periodic metric reader (60s interval)
-            let metricReader = PeriodicMetricReaderBuilder(
-                exporter: metricsExporter
-            )
-            .setInterval(timeInterval: 60)
-            .build()
-
-            // Store reference for manual flushing
-            TelemetryService.shared.metricReader = metricReader
-
-            // Create meter provider with shared resource
-            // IMPORTANT: Must register a view for metrics to be exported
-            let meterProvider = MeterProviderSdk.builder()
-                .setResource(resource: resources)
-                .registerMetricReader(reader: metricReader)
-                .registerView(
-                    selector: InstrumentSelector.builder().setInstrument(name: ".*").build(),
-                    view: View.builder().build()
-                )
-                .build()
-
-            // Register globally
-            OpenTelemetry.registerMeterProvider(meterProvider: meterProvider)
-
-            DebugConfig.debugPrint("✅ OpenTelemetry (Grafana) metrics initialized (user opted in)")
-
-            // Record app launch event
-            TelemetryService.shared.recordAppLaunch()
-        } else {
-            DebugConfig.debugPrint("⚠️ OpenTelemetry (Grafana) monitoring disabled (user has not opted in)")
-        }
+        // Initialize error reporting if user has opted in
+        ErrorReportingService.shared.initialize()
 
         return true
     }

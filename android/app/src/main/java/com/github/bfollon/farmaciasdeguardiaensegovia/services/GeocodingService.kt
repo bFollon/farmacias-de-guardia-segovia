@@ -22,8 +22,6 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
-import io.opentelemetry.api.trace.SpanKind
-import io.opentelemetry.api.trace.StatusCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -103,21 +101,12 @@ class GeocodingService(private val context: Context) {
      * Equivalent to iOS getCoordinatesForPharmacy
      */
     suspend fun getCoordinatesForPharmacy(pharmacy: Pharmacy): Location? {
-        // Start performance span
-        val span = TelemetryService.startSpan("pharmacy.geocode", SpanKind.CLIENT)
-        span.setAttribute("pharmacy_name", pharmacy.name)
-        span.setAttribute("address", pharmacy.address)
-
         val enhancedQuery = "${pharmacy.name}, ${pharmacy.address}, Segovia, España"
         val cacheKey = enhancedQuery
 
         // Check session cache first (fastest)
         sessionCache[cacheKey]?.let { cachedLocation ->
             DebugConfig.debugPrint("📍 Using session cache for pharmacy: ${pharmacy.name}")
-            span.setAttribute("source", "session_cache")
-            span.setAttribute("cache_hit", true)
-            span.setStatus(StatusCode.OK)
-            span.end()
             return cachedLocation
         }
 
@@ -125,10 +114,6 @@ class GeocodingService(private val context: Context) {
         CoordinateCache.getCoordinates(cacheKey)?.let { persistentLocation ->
             DebugConfig.debugPrint("📍 Using persistent cache for pharmacy: ${pharmacy.name}")
             sessionCache[cacheKey] = persistentLocation // Also cache in session
-            span.setAttribute("source", "persistent_cache")
-            span.setAttribute("cache_hit", true)
-            span.setStatus(StatusCode.OK)
-            span.end()
             return persistentLocation
         }
 
@@ -155,11 +140,6 @@ class GeocodingService(private val context: Context) {
                     CoordinateCache.setCoordinates(location, cacheKey)
 
                     DebugConfig.debugPrint("✅ Geocoded pharmacy ${pharmacy.name} -> ${location.latitude}, ${location.longitude}")
-                    span.setAttribute("source", "geocoder")
-                    span.setAttribute("cache_hit", false)
-                    span.setAttribute("used_fallback", false)
-                    span.setStatus(StatusCode.OK)
-                    span.end()
                     location
                 } else {
                     DebugConfig.debugPrint("❌ No coordinates found for pharmacy: $enhancedQuery")
@@ -167,21 +147,8 @@ class GeocodingService(private val context: Context) {
                     // Fallback to address-only geocoding
                     DebugConfig.debugPrint("🔄 Trying fallback geocoding with address only for: ${pharmacy.name}")
                     val fallbackResult = getCoordinates(pharmacy.address)
-                    if (fallbackResult != null) {
-                        DebugConfig.debugPrint("✅ Fallback geocoding succeeded for: ${pharmacy.name}")
-                        span.setAttribute("source", "geocoder_fallback")
-                        span.setAttribute("cache_hit", false)
-                        span.setAttribute("used_fallback", true)
-                        span.setStatus(StatusCode.OK)
-                        span.end()
-                    } else {
+                    if (fallbackResult == null) {
                         DebugConfig.debugPrint("❌ Fallback geocoding also failed for: ${pharmacy.name}")
-                        span.setAttribute("error_message", "No coordinates found")
-                        span.setAttribute("source", "failed")
-                        span.setAttribute("cache_hit", false)
-                        span.setAttribute("error.type", "not_found")
-                        span.setStatus(StatusCode.ERROR, "No coordinates found")
-                        span.end()
                     }
                     fallbackResult
                 }
@@ -191,22 +158,8 @@ class GeocodingService(private val context: Context) {
                 // Fallback to address-only geocoding
                 DebugConfig.debugPrint("🔄 Trying fallback geocoding with address only for: ${pharmacy.name}")
                 val fallbackResult = getCoordinates(pharmacy.address)
-                if (fallbackResult != null) {
-                    DebugConfig.debugPrint("✅ Fallback geocoding succeeded for: ${pharmacy.name}")
-                    span.setAttribute("source", "geocoder_fallback")
-                    span.setAttribute("cache_hit", false)
-                    span.setAttribute("used_fallback", true)
-                    span.setAttribute("initial_error", exception.message ?: "Unknown error")
-                    span.setStatus(StatusCode.OK)
-                    span.end()
-                } else {
+                if (fallbackResult == null) {
                     DebugConfig.debugPrint("❌ Fallback geocoding also failed for: ${pharmacy.name}")
-                    span.setAttribute("error_message", exception.message ?: "Unknown error")
-                    span.setAttribute("source", "failed")
-                    span.setAttribute("cache_hit", false)
-                    span.setAttribute("error.type", "unavailable")
-                    span.setStatus(StatusCode.ERROR, exception.message ?: "Unknown error")
-                    span.end()
                 }
                 fallbackResult
             }

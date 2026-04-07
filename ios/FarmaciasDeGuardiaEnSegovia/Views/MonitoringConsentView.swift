@@ -55,7 +55,6 @@ struct MonitoringConsentView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     InfoRow(icon: "iphone", text: "Info del dispositivo", color: .blue)
                     InfoRow(icon: "exclamationmark.triangle", text: "Errores y fallos", color: .blue)
-                    InfoRow(icon: "speedometer", text: "Métricas de rendimiento", color: .blue)
                 }
             }
 

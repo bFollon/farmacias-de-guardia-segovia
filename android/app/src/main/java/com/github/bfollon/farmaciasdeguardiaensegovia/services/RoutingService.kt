@@ -18,8 +18,6 @@
 package com.github.bfollon.farmaciasdeguardiaensegovia.services
 
 import android.location.Location
-import io.opentelemetry.api.trace.SpanKind
-import io.opentelemetry.api.trace.StatusCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
@@ -110,22 +108,11 @@ object RoutingService {
      * Equivalent to iOS calculateDrivingRoute
      */
     suspend fun calculateDrivingRoute(from: Location, to: Location): RouteResult? = withContext(Dispatchers.IO) {
-        // Start performance span
-        val span = TelemetryService.startSpan("route.calculate", SpanKind.CLIENT)
-        span.setAttribute("origin", "${from.latitude},${from.longitude}")
-        span.setAttribute("destination", "${to.latitude},${to.longitude}")
-
         DebugConfig.debugPrint("🗺️ Calculating routes from ${from.latitude},${from.longitude} to ${to.latitude},${to.longitude}")
 
         // Check cache first
         RouteCache.getCachedRoute(from, to)?.let { cachedResult ->
             DebugConfig.debugPrint("🚀 Using cached route result")
-            span.setAttribute("source", "cache")
-            span.setAttribute("distance", cachedResult.distance)
-            span.setAttribute("cache_hit", true)
-            span.setAttribute("is_estimated", cachedResult.isEstimated)
-            span.setStatus(StatusCode.OK)
-            span.end()
             return@withContext cachedResult
         }
 
@@ -143,31 +130,11 @@ object RoutingService {
                 )
                 DebugConfig.debugPrint("🚗 Driving: ${routeResult.formattedDistance}, ${routeResult.formattedTravelTime}")
                 DebugConfig.debugPrint("🚶 Walking: ${routeResult.formattedWalkingTime}")
-
-                // Finish span with OSRM result
-                span.setAttribute("source", "osrm")
-                span.setAttribute("is_estimated", false)
-                span.setAttribute("distance", drivingRoute.distance)
-                span.setAttribute("travel_time", drivingRoute.duration)
-                span.setAttribute("cache_hit", false)
-                span.setStatus(StatusCode.OK)
-                span.end()
-
                 routeResult
             } else {
                 // Fallback to straight-line estimation
                 DebugConfig.debugPrint("🔄 OSRM failed, falling back to straight-line estimation")
-                val fallback = calculateStraightLineEstimation(from, to)
-
-                // Finish span with fallback
-                span.setAttribute("source", "straight_line_fallback")
-                span.setAttribute("is_estimated", true)
-                span.setAttribute("distance", fallback.distance)
-                span.setAttribute("cache_hit", false)
-                span.setStatus(StatusCode.OK) // Still OK since we have fallback
-                span.end()
-
-                fallback
+                calculateStraightLineEstimation(from, to)
             }
 
             // Cache the result
@@ -178,19 +145,7 @@ object RoutingService {
             DebugConfig.debugPrint("❌ Route calculation failed: ${exception.message}")
             // Fall back to straight-line distance if routing fails
             val fallbackResult = calculateStraightLineEstimation(from, to)
-
-            // Cache fallback result too
             RouteCache.setCachedRoute(from, to, fallbackResult)
-
-            // Finish span with fallback
-            span.setAttribute("source", "straight_line_fallback")
-            span.setAttribute("is_estimated", true)
-            span.setAttribute("distance", fallbackResult.distance)
-            span.setAttribute("routing_error", exception.message ?: "Unknown error")
-            span.setAttribute("cache_hit", false)
-            span.setStatus(StatusCode.OK) // Still OK since we have fallback
-            span.end()
-
             fallbackResult
         }
     }

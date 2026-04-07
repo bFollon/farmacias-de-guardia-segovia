@@ -24,6 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FarmaciasDeGuardiaEnSegovia"
         android:usesCleartextTraffic="true">
+        <!-- Disable Sentry auto-init so we can gate it on user consent -->
+        <meta-data android:name="io.sentry.auto-init" android:value="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

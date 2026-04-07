@@ -37,7 +37,6 @@ import androidx.compose.material.icons.filled.LocalPharmacy
 import androidx.compose.material.icons.filled.LocationOff
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PhoneAndroid
-import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -96,7 +95,7 @@ fun MonitoringConsentScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Speed,
+                        imageVector = Icons.Default.Warning,
                         contentDescription = null,
                         modifier = Modifier.size(36.dp),
                         tint = MaterialTheme.colorScheme.primary
@@ -139,11 +138,6 @@ fun MonitoringConsentScreen(
                         InfoRow(
                             icon = Icons.Default.Warning,
                             text = "Errores y fallos",
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        InfoRow(
-                            icon = Icons.Default.Speed,
-                            text = "Metricas de rendimiento",
                             color = MaterialTheme.colorScheme.primary
                         )
                     }

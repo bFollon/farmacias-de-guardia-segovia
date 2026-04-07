@@ -87,11 +87,8 @@ dependencies {
     // Force modern androidx.fragment version (replaces ancient 1.0.0 from Play Services)
     implementation(libs.androidx.fragment.ktx)
 
-    // OpenTelemetry for monitoring
-    implementation(libs.opentelemetry.api)
-    implementation(libs.opentelemetry.sdk)
-    implementation(libs.opentelemetry.exporter.otlp)
-    implementation(libs.opentelemetry.semconv)
+    // Error reporting
+    implementation(libs.sentry.android)
 
     // Window Size Classes for responsive layouts
     implementation(libs.androidx.compose.adaptive)

@@ -23,7 +23,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPreferencesService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.TelemetryService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.AboutScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheRefreshScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.CacheStatusScreen
@@ -65,15 +65,8 @@ class MainActivity : ComponentActivity() {
         // Initialize monitoring preferences service
         MonitoringPreferencesService.initialize(this)
 
-        // Initialize telemetry service if user has opted in
-        if (MonitoringPreferencesService.hasUserOptedIn()) {
-            TelemetryService.initialize(this)
-
-            // Record app launch event (only if initialization succeeded)
-            if (TelemetryService.isInitialized) {
-                TelemetryService.recordAppLaunch(this)
-            }
-        }
+        // Initialize error reporting if user has opted in
+        ErrorReportingService.initialize(this)
         
         setContent {
             FarmaciasDeGuardiaEnSegoviaTheme {

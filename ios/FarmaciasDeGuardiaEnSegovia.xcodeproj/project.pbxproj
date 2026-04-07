@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A9EDFB52F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = 3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */; };
-		3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; };
-		3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A2DFFC02F84F8A100BDDF9A /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2DFFBF2F84F8A100BDDF9A /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,22 +27,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		3AD1AC482EFA1B5B00A6BFF7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3AD1AC472EFA1B5B00A6BFF7 /* NewRelic.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:SU7SUNGZJP:New Relic Inc"; lastKnownFileType = wrapper.xcframework; name = NewRelic.xcframework; path = ../../../NewRelic_XCFramework_Agent_7/NewRelic.xcframework; sourceTree = "<group>"; };
 		CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegovia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE049B502DD6AAC300D1D560 /* FarmaciasDeGuardiaEnSegoviaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegoviaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE049B5A2DD6AAC300D1D560 /* FarmaciasDeGuardiaEnSegoviaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarmaciasDeGuardiaEnSegoviaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,8 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD1AC462EFA1B5B00A6BFF7 /* NewRelic.xcframework in Frameworks */,
-				3A9EDFB52F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP in Frameworks */,
+				3A2DFFC02F84F8A100BDDF9A /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +83,6 @@
 		3AD1AC432EFA1B2C00A6BFF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AD1AC442EFA1B2C00A6BFF7 /* NewRelic.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,7 +116,6 @@
 				CE049B3A2DD6AABF00D1D560 /* Sources */,
 				CE049B3B2DD6AABF00D1D560 /* Frameworks */,
 				CE049B3C2DD6AABF00D1D560 /* Resources */,
-				3AD1AC482EFA1B5B00A6BFF7 /* Embed Frameworks */,
 				3AD1AC492EFA1CBA00A6BFF7 /* ShellScript */,
 			);
 			buildRules = (
@@ -147,7 +127,7 @@
 			);
 			name = FarmaciasDeGuardiaEnSegovia;
 			packageProductDependencies = (
-				3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */,
+				3A2DFFBF2F84F8A100BDDF9A /* Sentry */,
 			);
 			productName = FarmaciasDeGuardiaEnSegovia;
 			productReference = CE049B3E2DD6AABF00D1D560 /* FarmaciasDeGuardiaEnSegovia.app */;
@@ -226,7 +206,7 @@
 			mainGroup = CE049B352DD6AABF00D1D560;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */,
+				3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CE049B3F2DD6AABF00D1D560 /* Products */;
@@ -630,21 +610,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */ = {
+		3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/open-telemetry/opentelemetry-swift";
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.0;
+				minimumVersion = 9.9.0;
 			};
+			traits = (
+			);
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A9EDFB42F01FCB900920FCE /* OpenTelemetryProtocolExporterHTTP */ = {
+		3A2DFFBF2F84F8A100BDDF9A /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A9EDFAF2F00BCD000920FCE /* XCRemoteSwiftPackageReference "opentelemetry-swift" */;
-			productName = OpenTelemetryProtocolExporterHTTP;
+			package = 3A2DFFBE2F84F8A100BDDF9A /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
