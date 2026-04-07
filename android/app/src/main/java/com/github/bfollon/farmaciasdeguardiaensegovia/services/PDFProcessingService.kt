@@ -67,7 +67,7 @@ class PDFProcessingService {
 
         if (!pdfFile.exists() || pdfFile.length() == 0L) {
             DebugConfig.debugError("PDFProcessingService: PDF file does not exist or is empty")
-            ErrorReportingService.captureMessage("PDF file missing or empty for region ${region.name}")
+            ErrorReportingService.captureMessage("PDF file missing or empty for region ${region.name} (url: ${region.pdfURL})")
             return emptyMap()
         }
 
@@ -98,7 +98,7 @@ class PDFProcessingService {
                 "❌ PDFProcessingService: Error processing PDF for ${region.name}: ${e.message}",
                 e
             )
-            ErrorReportingService.captureError(e, mapOf("region" to region.name))
+            ErrorReportingService.captureError(e, mapOf("region" to region.name, "url" to region.pdfURL))
             emptyMap()
         }
     }

@@ -153,7 +153,7 @@ class PDFDownloadService(private val context: Context) {
                 
                 client.newCall(request).execute().use { response ->
                     if (!response.isSuccessful) {
-                        val error = "Download failed with code ${response.code}: ${response.message}"
+                        val error = "Download failed with code ${response.code}: ${response.message} (url: $url)"
                         println("PDFDownloadService: $error")
                         lastException = IOException(error)
                         continue // Try again

@@ -93,7 +93,7 @@ object PDFURLScrapingService {
 
             if (!response.isSuccessful) {
                 DebugConfig.debugError("$TAG: HTTP request failed: ${response.code}")
-                ErrorReportingService.captureMessage("PDF URL scraping failed: HTTP ${response.code}")
+                ErrorReportingService.captureMessage("PDF URL scraping failed: HTTP ${response.code} from $BASE_URL")
                 return@withContext emptyList()
             }
 
@@ -121,7 +121,7 @@ object PDFURLScrapingService {
             // Report partial results as an error
             if (scrapedData.size < 4) {
                 ErrorReportingService.captureMessage(
-                    "PDF URL scraping incomplete: found ${scrapedData.size}/4 URLs"
+                    "PDF URL scraping incomplete: found ${scrapedData.size}/4 URLs from $BASE_URL"
                 )
             }
 
@@ -129,7 +129,7 @@ object PDFURLScrapingService {
 
         } catch (e: Exception) {
             DebugConfig.debugError("$TAG: Error scraping PDF URLs", e)
-            ErrorReportingService.captureError(e, mapOf("source" to "PDFURLScrapingService"))
+            ErrorReportingService.captureError(e, mapOf("source" to "PDFURLScrapingService", "url" to BASE_URL))
             emptyList()
         }
     }

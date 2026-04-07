@@ -63,7 +63,7 @@ public class PDFProcessingService {
                 DebugConfig.debugPrint("✅ Force downloaded fresh PDF for \(region.name)")
             } catch {
                 DebugConfig.debugPrint("❌ Failed to force download PDF for \(region.name): \(error)")
-                ErrorReportingService.shared.captureError(error, context: ["region": region.name])
+                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "url": region.pdfURL.absoluteString])
                 effectiveURL = await region.getEffectivePDFURL()
             }
         } else {

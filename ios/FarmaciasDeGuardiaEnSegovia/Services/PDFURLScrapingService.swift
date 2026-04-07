@@ -132,7 +132,7 @@ class PDFURLScrapingService {
             guard let url = URL(string: baseURL) else {
                 DebugConfig.debugPrint("PDFURLScrapingService: Invalid URL")
                 userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
-                ErrorReportingService.shared.captureError(ScrapingError.networkError("Invalid URL"))
+                ErrorReportingService.shared.captureError(ScrapingError.networkError("Invalid URL"), context: ["url": baseURL])
                 return []
             }
 
@@ -146,14 +146,14 @@ class PDFURLScrapingService {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
                 DebugConfig.debugPrint("PDFURLScrapingService: HTTP request failed with status: \(statusCode)")
                 userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
-                ErrorReportingService.shared.captureMessage("PDF URL scraping failed: HTTP \(statusCode)")
+                ErrorReportingService.shared.captureMessage("PDF URL scraping failed: HTTP \(statusCode) from \(baseURL)")
                 return []
             }
 
             guard let htmlContent = String(data: data, encoding: .utf8) else {
                 DebugConfig.debugPrint("PDFURLScrapingService: Failed to decode HTML content")
                 userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
-                ErrorReportingService.shared.captureError(ScrapingError.networkError("Failed to decode HTML content"))
+                ErrorReportingService.shared.captureError(ScrapingError.networkError("Failed to decode HTML content"), context: ["url": baseURL])
                 return []
             }
 
@@ -184,7 +184,7 @@ class PDFURLScrapingService {
                 let error: Error = scrapedData.isEmpty
                     ? ScrapingError.noResults
                     : ScrapingError.incompleteResults(found: scrapedData.count, expected: 4)
-                ErrorReportingService.shared.captureError(error)
+                ErrorReportingService.shared.captureError(error, context: ["url": baseURL])
             }
 
             return scrapedData
@@ -192,7 +192,7 @@ class PDFURLScrapingService {
         } catch {
             DebugConfig.debugPrint("PDFURLScrapingService: Error scraping PDF URLs: \(error)")
             userDefaults.set(false, forKey: lastScrapeSucceededKeyPrivate)
-            ErrorReportingService.shared.captureError(error, context: ["source": "PDFURLScrapingService"])
+            ErrorReportingService.shared.captureError(error, context: ["source": "PDFURLScrapingService", "url": baseURL])
             return []
         }
     }

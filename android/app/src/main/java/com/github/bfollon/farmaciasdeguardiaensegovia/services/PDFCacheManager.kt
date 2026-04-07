@@ -491,7 +491,7 @@ class PDFCacheManager private constructor(private val context: Context) {
             } else {
                 // Download failed – leave the pending flag set so confidence is lowered
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for ${region.name}")
-                ErrorReportingService.captureMessage("Background PDF update failed for region ${region.name}")
+                ErrorReportingService.captureMessage("Background PDF update failed for region ${region.name} (url: ${region.pdfURL})")
             }
         } else {
             // Confirmed up to date – ensure the pending flag is cleared

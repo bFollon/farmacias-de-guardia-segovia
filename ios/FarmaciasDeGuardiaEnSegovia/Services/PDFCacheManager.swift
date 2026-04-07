@@ -146,7 +146,7 @@ class PDFCacheManager {
             try fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
             DebugConfig.debugPrint("📁 PDFCacheManager: Cache directory ready at \(cacheDirectory.path)")
         } catch {
-            ErrorReportingService.shared.captureError(error, context: ["operation": "createCacheDirectory"])
+            ErrorReportingService.shared.captureError(error, context: ["operation": "createCacheDirectory", "path": cacheDirectory.path])
         }
     }
     
@@ -230,8 +230,8 @@ class PDFCacheManager {
         
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
-            throw NSError(domain: "PDFCacheManager", code: 1, 
-                         userInfo: [NSLocalizedDescriptionKey: "Failed to get remote PDF info"])
+            throw NSError(domain: "PDFCacheManager", code: 1,
+                         userInfo: [NSLocalizedDescriptionKey: "Failed to get remote PDF info from \(url.absoluteString)"])
         }
         
         let lastModified = httpResponse.value(forHTTPHeaderField: "Last-Modified")
@@ -329,7 +329,7 @@ class PDFCacheManager {
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
             throw NSError(domain: "PDFCacheManager", code: 2,
-                         userInfo: [NSLocalizedDescriptionKey: "Failed to download PDF"])
+                         userInfo: [NSLocalizedDescriptionKey: "Failed to download PDF from \(url.absoluteString)"])
         }
         
         // Move downloaded file to cache location
@@ -379,7 +379,7 @@ class PDFCacheManager {
                 return try await downloadAndCache(region: region)
             } catch {
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to download PDF for \(region.name): \(error)")
-                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "operation": "getEffectivePDFURL"])
+                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "url": region.remotePDFURL.absoluteString, "operation": "getEffectivePDFURL"])
                 // Fall back to remote URL
                 return region.remotePDFURL
             }
@@ -538,7 +538,7 @@ class PDFCacheManager {
             } catch {
                 // Download failed – leave the pending flag set so confidence is lowered
                 DebugConfig.debugPrint("❌ PDFCacheManager: Failed to update PDF for \(region.name): \(error)")
-                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "operation": "backgroundPDFUpdate"])
+                ErrorReportingService.shared.captureError(error, context: ["region": region.name, "url": region.remotePDFURL.absoluteString, "operation": "backgroundPDFUpdate"])
             }
         } else {
             // Confirmed up to date – ensure the pending flag is cleared

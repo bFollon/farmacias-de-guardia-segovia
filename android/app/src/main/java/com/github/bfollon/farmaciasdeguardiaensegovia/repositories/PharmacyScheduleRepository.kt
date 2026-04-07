@@ -129,7 +129,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
 
             if (pdfFile == null) {
                 DebugConfig.debugError("PharmacyScheduleRepository: Failed to get PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
-                ErrorReportingService.captureMessage("Failed to get PDF for location ${location.name} (region: ${location.associatedRegion.name})")
+                ErrorReportingService.captureMessage("Failed to get PDF for location ${location.name} (region: ${location.associatedRegion.name}, url: ${location.associatedRegion.pdfURL})")
                 return@withContext emptyList()
             }
 
@@ -171,7 +171,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 "PharmacyScheduleRepository: Error loading schedules for ${location.name}",
                 e
             )
-            ErrorReportingService.captureError(e, mapOf("location" to location.name, "operation" to "loadSchedules"))
+            ErrorReportingService.captureError(e, mapOf("location" to location.name, "url" to location.associatedRegion.pdfURL, "operation" to "loadSchedules"))
             return@withContext emptyList()
         }
     }
@@ -219,7 +219,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 "PharmacyScheduleRepository: Error preloading schedules for ${region.name}",
                 e
             )
-            ErrorReportingService.captureError(e, mapOf("region" to region.name, "operation" to "preloadSchedules"))
+            ErrorReportingService.captureError(e, mapOf("region" to region.name, "url" to region.pdfURL, "operation" to "preloadSchedules"))
             false
         }
     }

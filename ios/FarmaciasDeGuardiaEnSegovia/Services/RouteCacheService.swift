@@ -184,7 +184,7 @@ class RouteCacheService {
             DebugConfig.debugPrint("🗺️ Loaded \(memoryCache.count) cached routes from disk")
         } catch {
             DebugConfig.debugPrint("❌ Failed to load route cache: \(error.localizedDescription)")
-            ErrorReportingService.shared.captureError(error, context: ["operation": "loadRouteCache"])
+            ErrorReportingService.shared.captureError(error, context: ["operation": "loadRouteCache", "path": cacheFile.path])
         }
     }
 
@@ -197,7 +197,7 @@ class RouteCacheService {
             DebugConfig.debugPrint("🗺️ Saved \(memoryCache.count) routes to cache")
         } catch {
             DebugConfig.debugPrint("❌ Failed to save route cache: \(error.localizedDescription)")
-            ErrorReportingService.shared.captureError(error, context: ["operation": "saveRouteCache"])
+            ErrorReportingService.shared.captureError(error, context: ["operation": "saveRouteCache", "path": cacheFile.path])
         }
     }
 }
