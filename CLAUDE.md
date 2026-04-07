@@ -300,6 +300,82 @@ When implementing features:
 - Complex multi-ZBS PDF with shared/separate schedules
 - Requires ZBS selection before viewing schedules
 
+## Analytics Integration
+
+### AnalyticsService (Aptabase)
+
+Product analytics via a self-hosted [Aptabase](https://aptabase.com) instance at `https://analytics.bfollon.dev` (Raspberry Pi 5 behind Cloudflare tunnel).
+
+**SDK versions:**
+- iOS: `AptabaseSwift` v0.3.11 (Swift Package Manager)
+- Android: `com.github.aptabase:aptabase-kotlin` v0.0.8 (JitPack)
+
+**Key files:**
+- iOS: `ios/FarmaciasDeGuardiaEnSegovia/Services/AnalyticsService.swift`
+- Android: `android/.../services/AnalyticsService.kt`
+
+**Consent gate pattern:**
+- `initialize()` is a no-op if the user has not opted in to analytics
+- iOS: Aptabase SDK silently no-ops when uninitialized
+- Android: an explicit `initialized` flag guards `track()` — always check `if (!initialized) return` before any SDK call
+- `initialize()` runs at app startup (before UI); consent modal fires after splash — so first-launch events are always skipped; events begin flowing from the second launch onward
+
+**Initialization (both platforms require `InitOptions(host:)` for self-hosted keys):**
+```swift
+// iOS
+Aptabase.shared.initialize(appKey: Secrets.aptabaseKey, with: InitOptions(host: Secrets.aptabaseHost))
+```
+```kotlin
+// Android — host is mandatory for A-SH- keys
+Aptabase.instance.initialize(context, Secrets.aptabaseKey, InitOptions(host = Secrets.aptabaseHost))
+```
+
+**Secrets (gitignored — never committed):**
+- `Secrets.aptabaseKey` — app key with `A-SH-` prefix (self-hosted)
+- `Secrets.aptabaseHost` — `"https://analytics.bfollon.dev"`
+
+### Consent Flow
+
+Analytics consent is independent of error-reporting consent. Both are surfaced in a single combined modal (`MonitoringConsentView` / `MonitoringConsentScreen`) with two separate toggles:
+- **Errores** — error reporting (pre-toggled on, matches prior behaviour)
+- **Analíticas** — product analytics (starts off)
+
+Consent is re-presented to existing users who have `monitoring_choice_made=true` but no `analytics_choice_made` key yet. The trigger checks `!hasUserMadeAnalyticsChoice()` (not the older `!hasUserMadeChoice()`).
+
+Both preferences are also independently editable in **Settings → Privacidad**.
+
+**Preference keys (`MonitoringPreferencesService`):**
+- `analytics_enabled` — whether analytics is opted in
+- `analytics_choice_made` — whether the user has seen the combined modal
+
+### Cloudflare Access Bypass
+
+The Aptabase server is behind Cloudflare Access. Both SDK event endpoints must be bypassed:
+- iOS SDK posts to `/api/v0/events` (plural)
+- Android SDK posts to `/api/v0/event` (singular)
+
+Both paths must have a bypass policy in Cloudflare Access, or events will be silently dropped.
+
+### Tracked Events
+
+| Event | Platform | Key props | Where |
+|---|---|---|---|
+| `app_launch` | iOS + Android | — | App startup |
+| `region_selected` | iOS + Android | `region` | Region selection |
+| `zbs_selected` | iOS + Android | `zbs` | ZBS selection (Segovia Rural) |
+| `schedules_loaded_from_cache` | iOS + Android | `region`, `schedules_count` | Persistent cache hit |
+| `schedules_parsed` | iOS + Android | `region`, `schedules_count`, `zbs_count`* | After PDF parse |
+| `pdf_parse_failed` | iOS + Android | `region`, `error` | Parse yields 0 schedules |
+| `pdf_url_scrape_complete` | iOS + Android | `scraped_count` | After URL scrape |
+| `pdf_url_scrape_failed` | iOS + Android | `error` | Scrape failure |
+| `pdf_viewed` | iOS + Android | `region` | PDF viewer opened |
+| `open_in_maps_tapped` | iOS only | `app` | Maps deep-link tapped |
+| `cache_refresh_triggered` | iOS + Android | — | Manual cache refresh |
+
+\* `zbs_count` only present for `region = "segovia-rural"`
+
+Memory cache hits are intentionally **not** tracked (too noisy; persistent cache hits are tracked instead).
+
 ## Git Commit Guidelines
 
 **DO NOT include Claude Code promotional text in commit messages.**
