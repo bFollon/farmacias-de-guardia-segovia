@@ -47,6 +47,13 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.blue, .green],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
                     .padding(.top)
 
                 Text("Seleccione su región para consultar las farmacias de guardia.")
