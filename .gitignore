@@ -11,3 +11,9 @@ android/app/build/generated/source/buildConfig/debug/com/bfollon/farmaciasdeGuar
 # Secrets files (ignore anywhere in project, any extension)
 **/Secrets.*
 Secrets.*
+# Added by code-review-graph
+.code-review-graph/
+
+# Claude Code local files
+.claude/.cozempic-init.lock
+.claude/settings.*.bak
