@@ -53,11 +53,11 @@ class ErrorReportingService {
     /// Capture an error and send it to Bugsink.
     /// Safe to call even if Sentry is not initialized.
     func captureError(_ error: Error, context: [String: Any] = [:]) {
-        let event = Event(error: error)
-        if !context.isEmpty {
-            event.context = ["context": context]
+        SentrySDK.capture(error: error) { scope in
+            if !context.isEmpty {
+                scope.setContext(value: context, key: "context")
+            }
         }
-        SentrySDK.capture(event: event)
         DebugConfig.debugPrint("ErrorReportingService: captured error: \(error.localizedDescription)")
     }
 
