@@ -23,6 +23,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PDFVersion
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
+import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -160,9 +161,9 @@ class PDFCacheManager private constructor(private val context: Context) {
     /**
      * Check remote PDF version without downloading the full file
      */
-    suspend fun checkRemoteVersion(region: Region): PDFVersion? = withContext(Dispatchers.IO) {
+    suspend fun checkRemoteVersion(region: Region, urlOverride: String? = null): PDFVersion? = withContext(Dispatchers.IO) {
         try {
-            val url = region.pdfURL
+            val url = urlOverride ?: region.pdfURL
             val request = Request.Builder()
                 .url(url)
                 .head() // HEAD request - only get headers
@@ -268,17 +269,17 @@ class PDFCacheManager private constructor(private val context: Context) {
     /**
      * Download and cache a PDF file
      */
-    suspend fun downloadAndCache(region: Region): File? = withContext(Dispatchers.IO) {
+    suspend fun downloadAndCache(region: Region, urlOverride: String? = null): File? = withContext(Dispatchers.IO) {
         try {
             val fileName = cacheFileName(region)
-            val url = region.pdfURL
-            
+            val url = urlOverride ?: region.pdfURL
+
             // Force download
             val file = pdfDownloadService.downloadPDF(url, fileName, forceDownload = true)
                 ?: return@withContext null
-            
+
             // Store version information
-            val remoteVersion = checkRemoteVersion(region)
+            val remoteVersion = checkRemoteVersion(region, urlOverride = urlOverride)
             if (remoteVersion != null) {
                 storeVersion(remoteVersion, region)
             }
@@ -313,13 +314,27 @@ class PDFCacheManager private constructor(private val context: Context) {
         
         // Online: check if we have a valid cached version
         val isCacheValid = isCacheUpToDate(region)
-        
-        return if (isCacheValid) {
+
+        val file = if (isCacheValid) {
             cachedFileURL(region) ?: downloadAndCache(region)
         } else {
-            // Cache is outdated or doesn't exist, download
             downloadAndCache(region)
         }
+
+        if (file != null) return file
+
+        // Download failed while online — the stored URL may be stale (e.g. year rollover).
+        // Trigger a re-scrape and retry once with the healed URL.
+        DebugConfig.debugWarn("PDFCacheManager: Download failed for ${region.name}, triggering URL re-scrape")
+        val urlRepository = PDFURLRepository.getInstance(context)
+        val healing = urlRepository.resolveURLWithHealing(region.name)
+        if (healing is PDFURLRepository.URLResolutionResult.Updated) {
+            DebugConfig.debugPrint("PDFCacheManager: Retrying download with healed URL for ${region.name}")
+            return downloadAndCache(region, urlOverride = healing.newUrl)
+        }
+
+        DebugConfig.debugWarn("PDFCacheManager: URL healing did not yield a new URL for ${region.name}")
+        return null
     }
     
     // MARK: - Cache Management
