@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
 import kotlinx.coroutines.Dispatchers
@@ -242,6 +243,7 @@ class PDFURLRepository private constructor(private val context: Context) {
 
         if (scrapedData.isEmpty()) {
             DebugConfig.debugWarn("PDFURLRepository: Scraping returned no results")
+            ErrorReportingService.captureMessage("PDF URL scraping returned 0 results — fallback URLs will be used")
             sharedPreferences.edit()
                 .putLong(LAST_SCRAPE_KEY, System.currentTimeMillis())
                 .putBoolean(LAST_SCRAPE_SUCCEEDED_KEY, false)

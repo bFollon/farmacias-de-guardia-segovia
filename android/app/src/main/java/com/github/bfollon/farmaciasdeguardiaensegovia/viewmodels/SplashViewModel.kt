@@ -27,6 +27,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLReposit
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PharmacyScheduleRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingDemo
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
@@ -118,14 +119,22 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                             _isOffline.value = false
                         }
 
-                        // First, initialize PDF URL repository (scrape and validate URLs)
+                        // Set up the URL provider before scraping so that Region lazy
+                        // delegates initialized inside handleURLChanges() pick up the
+                        // freshly-scraped URLs from SharedPreferences rather than the
+                        // hardcoded fallback URLs.
+                        Region.setURLProvider { regionName ->
+                            urlRepository.getURL(regionName)
+                        }
+
+                        // Initialize PDF URL repository (scrape and validate URLs)
                         val changedRegions = initializeURLRepository()
                         if (changedRegions.isNotEmpty()) {
                             DebugConfig.debugPrint("SplashViewModel: Will reload ${changedRegions.size} regions due to URL changes")
                         }
                     }
 
-                    // Set up the URL provider for Region objects
+                    // Ensure the URL provider is also set in the offline path.
                     Region.setURLProvider { regionName ->
                         urlRepository.getURL(regionName)
                     }
@@ -225,6 +234,7 @@ class SplashViewModel(private val context: Context) : ViewModel() {
         } catch (e: Exception) {
             if (e !is CancellationException) {
                 DebugConfig.debugError("SplashViewModel: Error during URL repository initialization", e)
+                ErrorReportingService.captureError(e, mapOf("source" to "pdf_url_scraping"))
                 AnalyticsService.track("pdf_url_scrape_failed", mapOf("error" to (e.message ?: "unknown")))
             }
             return emptyList()
