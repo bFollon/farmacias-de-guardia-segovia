@@ -324,16 +324,31 @@ class PDFCacheManager private constructor(private val context: Context) {
         if (file != null) return file
 
         // Download failed while online — the stored URL may be stale (e.g. year rollover).
-        // Trigger a re-scrape and retry once with the healed URL.
+        // Trigger a re-scrape and retry once with the healed URL. This is a one-shot retry:
+        // downloadAndCache does not call back into getEffectivePDFFile, so no loop is possible.
         DebugConfig.debugWarn("PDFCacheManager: Download failed for ${region.name}, triggering URL re-scrape")
         val urlRepository = PDFURLRepository.getInstance(context)
         val healing = urlRepository.resolveURLWithHealing(region.name)
-        if (healing is PDFURLRepository.URLResolutionResult.Updated) {
-            DebugConfig.debugPrint("PDFCacheManager: Retrying download with healed URL for ${region.name}")
-            return downloadAndCache(region, urlOverride = healing.newUrl)
+
+        // Resolve the URL to retry with, if any:
+        // - Updated: scraping found a genuinely new URL
+        // - Success: the repository URL is valid but differs from region.pdfURL (e.g. region
+        //   was lazily initialized before scraping completed and still has the old URL baked in)
+        // - Success with same URL as region.pdfURL: same URL just failed, retrying is pointless
+        // - Failed: nothing to retry with
+        val healedUrl = when (healing) {
+            is PDFURLRepository.URLResolutionResult.Updated -> healing.newUrl
+            is PDFURLRepository.URLResolutionResult.Success ->
+                healing.url.takeIf { it != region.pdfURL }
+            is PDFURLRepository.URLResolutionResult.Failed -> null
         }
 
-        DebugConfig.debugWarn("PDFCacheManager: URL healing did not yield a new URL for ${region.name}")
+        if (healedUrl != null) {
+            DebugConfig.debugPrint("PDFCacheManager: Retrying download with healed URL for ${region.name}")
+            return downloadAndCache(region, urlOverride = healedUrl)
+        }
+
+        DebugConfig.debugWarn("PDFCacheManager: URL healing did not yield a usable URL for ${region.name}")
         return null
     }
     
