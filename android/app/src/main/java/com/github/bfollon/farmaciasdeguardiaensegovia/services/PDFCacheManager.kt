@@ -208,8 +208,17 @@ class PDFCacheManager private constructor(private val context: Context) {
         }
         
         val remoteVersion = checkRemoteVersion(region) ?: run {
-            DebugConfig.debugPrint("❌ PDFCacheManager: Failed to check remote version, assuming cache is valid")
-            return true // If we can't check remote, assume cache is valid
+            // checkRemoteVersion returns null for both network errors and non-2xx responses
+            // (including 404). Distinguish the two: if we're offline we can't verify so we
+            // keep the cached file; if we're online the URL is broken and the cache should
+            // be considered invalid so a fresh download is attempted.
+            if (!NetworkMonitor.isOnline()) {
+                DebugConfig.debugPrint("📡 PDFCacheManager: Offline, cannot verify remote version for ${region.name} — assuming cache is valid")
+                return true
+            }
+            DebugConfig.debugWarn("❌ PDFCacheManager: Online but remote check failed for ${region.name} (URL may be stale) — treating cache as invalid")
+            ErrorReportingService.captureMessage("PDF remote version check failed while online for region ${region.name} (url: ${region.pdfURL})")
+            return false
         }
         
         if (debugMode) {
@@ -278,6 +287,7 @@ class PDFCacheManager private constructor(private val context: Context) {
             file
         } catch (e: Exception) {
             DebugConfig.debugError("Failed to download and cache PDF for ${region.name}", e)
+            ErrorReportingService.captureError(e, mapOf("region" to region.name, "url" to region.pdfURL, "operation" to "downloadAndCache"))
             null
         }
     }
