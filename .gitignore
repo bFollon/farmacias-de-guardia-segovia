@@ -17,3 +17,4 @@ Secrets.*
 # Claude Code local files
 .claude/.cozempic-init.lock
 .claude/settings.*.bak
+/BugReports
