@@ -18,3 +18,10 @@ Secrets.*
 .claude/.cozempic-init.lock
 .claude/settings.*.bak
 /BugReports
+
+
+# Claude local preferences
+.claude/settings.json
+.claude/settings.local.json
+.claude/*.bak
+.claude/*.lock
