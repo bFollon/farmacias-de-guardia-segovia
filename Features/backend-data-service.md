@@ -82,8 +82,8 @@ Fastify + TypeScript + Node ≥20, ESM, built with `tsc`, run under pm2 — same
 
 | Step | Status |
 |---|---|
-| Schema finalized | ⬜ |
-| Service scaffolded (Fastify + lowdb) | ⬜ |
+| Schema finalized | ✅ |
+| Service scaffolded (Fastify + lowdb) | ✅ (`server/`) |
 | Region parsers ported (see [[parser-port-typescript]]) | ⬜ |
 | Validation gate wired in (see [[parsing-validation-gate]]) | ⬜ |
 | Deployed to Pi / Cloudflare Tunnel | ⬜ |
