@@ -80,6 +80,24 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
             RegexOption.IGNORE_CASE
         )
 
+        /**
+         * Known address corrections for pharmacies whose PDF entry breaks [ADDRESS_REGEX]
+         * (e.g. a shopping-center name plus a parenthesized street), which causes the actual
+         * street to be dropped or mis-captured. Keyed by a diacritic/case-insensitive
+         * substring of the pharmacy name. See BugReports/51ea58394cef43af8ed4501716930a98.json.
+         */
+        private val ADDRESS_OVERRIDES: Map<String, String> = mapOf(
+            "MARTIN CANTERO" to "Calle Guadarrama, S/N, Segovia"
+        )
+
+        /** Replaces [address] with a known override for [name], if one matches; otherwise returns [address] unchanged. */
+        private fun overrideAddressIfKnown(name: String, address: String): String {
+            val normalizedName = java.text.Normalizer.normalize(name, java.text.Normalizer.Form.NFD)
+                .replace(Regex("\\p{Mn}+"), "")
+                .uppercase()
+            return ADDRESS_OVERRIDES.entries.firstOrNull { normalizedName.contains(it.key) }?.value ?: address
+        }
+
 
         // PERFORMANCE: Pre-compiled regex patterns (reused across instances)
         private val SEPARATOR_LINE_REGEX by lazy { Regex("^[\\s\\-_=]+$") }
@@ -306,13 +324,13 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
                         nightName != null && nightAddress != null && nightPhone != null -> {
                     val dayTimePharmacy = Pharmacy(
                         name = dayName,
-                        address = dayAddress,
+                        address = overrideAddressIfKnown(dayName, dayAddress),
                         phone = dayPhone,
                         additionalInfo = dayExtraInfo
                     )
                     val nightTimePharmacy = Pharmacy(
                         name = nightName,
-                        address = nightAddress,
+                        address = overrideAddressIfKnown(nightName, nightAddress),
                         phone = nightPhone,
                         additionalInfo = nightExtraInfo
                     )

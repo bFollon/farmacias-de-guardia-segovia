@@ -23,8 +23,32 @@ import PDFKit
 public class SegoviaCapitalParser: PDFParsingStrategy {
     private let parser: SegoviaPDFParser
 
+    /// Known address corrections for pharmacies whose PDF entry spans more lines than
+    /// the fixed 3-line column scan captures (name/address/phone), which causes the
+    /// actual street to be dropped (see BugReports/51ea58394cef43af8ed4501716930a98.json).
+    /// Keyed by a diacritic/case-insensitive substring of the pharmacy name.
+    private static let addressOverrides: [String: String] = [
+        "MARTIN CANTERO": "Calle Guadarrama, S/N, Segovia"
+    ]
+
     public init() {
         self.parser = SegoviaPDFParser()
+    }
+
+    /// Replaces the address of pharmacies matching a known override, leaving all other fields untouched.
+    private func applyAddressOverrides(_ pharmacies: [Pharmacy]) -> [Pharmacy] {
+        pharmacies.map { pharmacy in
+            let normalizedName = pharmacy.name.folding(options: .diacriticInsensitive, locale: nil).uppercased()
+            guard let correctedAddress = Self.addressOverrides.first(where: { normalizedName.contains($0.key) })?.value else {
+                return pharmacy
+            }
+            return Pharmacy(
+                name: pharmacy.name,
+                address: correctedAddress,
+                phone: pharmacy.phone,
+                additionalInfo: pharmacy.additionalInfo
+            )
+        }
     }
 
     public func parseSchedules(from pdf: PDFDocument, pdfUrl: String? = nil) -> [DutyLocation: [PharmacySchedule]] {
@@ -53,8 +77,8 @@ public class SegoviaCapitalParser: PDFParsingStrategy {
             let (dates, dayShiftLines, nightShiftLines) = parser.extractColumnTextFlattened(from: page)
             
             // Convert pharmacy lines to Pharmacy objects
-            let dayPharmacies = Pharmacy.parseBatch(from: dayShiftLines)
-            let nightPharmacies = Pharmacy.parseBatch(from: nightShiftLines)
+            let dayPharmacies = applyAddressOverrides(Pharmacy.parseBatch(from: dayShiftLines))
+            let nightPharmacies = applyAddressOverrides(Pharmacy.parseBatch(from: nightShiftLines))
             
             // Parse dates and remove duplicates while preserving order
             var seen = Set<TimeInterval>()
