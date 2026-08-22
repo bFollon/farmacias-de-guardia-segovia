@@ -295,8 +295,22 @@ class SegoviaCapitalParser : ColumnBasedPDFParser(), PDFParsingStrategy {
 
     fun isNewYears(day: Int, month: String) = (day == 1 && month == SPANISH_JANUARY)
 
+    /**
+     * FARMACIA MARTÍN CANTERO's street/number ("Calle Guadarrama S/N") is printed on the
+     * following phone/info line, not on the date line, so its date-line text ("CENTRO
+     * COMERCIAL LUZ DE CASTILLA") has no trailing number. [ADDRESS_REGEX] requires one
+     * street+number per shift on the date line, so without this it fails to match at all —
+     * silently dropping BOTH shifts for that day, including the other pharmacy sharing the
+     * row. Insert a synthetic "S/N" so the regex still matches; [overrideAddressIfKnown]
+     * then swaps in the real address once the Pharmacy is built.
+     */
+    private val CENTRO_COMERCIAL_MISSING_NUMBER_REGEX =
+        Regex("""CENTRO COMERCIAL LUZ DE CASTILLA(?!\s*,?\s*(?:\d+|S/N))""")
+
     fun extractAddresses(line: String): Pair<String, String>? {
-        return ADDRESS_REGEX.find(line)?.let { matchResult ->
+        val normalizedLine = CENTRO_COMERCIAL_MISSING_NUMBER_REGEX.replace(line) { "${it.value} S/N" }
+
+        return ADDRESS_REGEX.find(normalizedLine)?.let { matchResult ->
             val (_, dayShiftStreet, maybeDayShiftNumber, nightShiftStreet, maybeNightShiftNumber) = matchResult.groupValues
 
             val dayShiftAddress =
