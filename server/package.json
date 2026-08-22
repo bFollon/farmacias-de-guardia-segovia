@@ -1,0 +1,25 @@
+{
+  "name": "farmacias-data-service",
+  "version": "0.1.0",
+  "description": "Single source of truth for parsed Farmacias de Guardia Segovia pharmacy schedules. Serves pre-parsed JSON to the iOS/Android clients; see ../Features/backend-data-service.md.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test src/**/*.test.ts"
+  },
+  "dependencies": {
+    "fastify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
