@@ -1,6 +1,8 @@
 # Feature: Server-Based Schedule Migration — Plan
 
-## Status: Not started (spec phase)
+## Status: Phase 1 complete for segovia-capital (2026-08-23); Phase 2 in progress
+
+Not deployed anywhere yet — everything so far is local (`server/`), unpushed to any host. No client (iOS/Android) changes made; Phase 3 hasn't started.
 
 ## Problem
 
@@ -26,6 +28,8 @@ Server owns parsing (hybrid automated + validation gate); apps sync pre-parsed J
 2. Port `SegoviaCapitalParser` only, per [[parser-port-typescript]]'s MVP ordering, with fixture tests.
 3. Build [[parsing-validation-gate]]'s MVP checks and wire them into the refresh endpoint.
 4. Manually verify Segovia Capital JSON output against the current app's parsed output for several real dates — this is the trust-building step before any client depends on it. **If parsing proves as unreliable here as it did for InterSego, stop and fall back to the manual-authoring model before investing further.**
+
+**Phase 1 done for segovia-capital (2026-08-23).** All 4 steps complete: `server/` scaffolded and running locally (not deployed); `server/src/parsers/segoviaCapital.ts` ported from the Android Kotlin implementation with a fixture test against a real production PDF; the validation gate (`server/src/validation/gate.ts`) is wired into `POST /api/refresh/segovia-capital` and fails closed. Step 4's manual verification: parsing the real live PDF through the TS port produced schedule counts, date ranges, and per-pharmacy data that matched the Android client's on-device output exactly (256 schedules, 43 days with FARMACIA MARTÍN CANTERO, identical values for every spot-checked date) — parsing is proving reliable, no InterSego-style abandonment needed. The other three regions haven't been ported yet (Phase 2).
 
 ### Phase 2 — Remaining parsers + monitor
 

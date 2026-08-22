@@ -36,7 +36,7 @@ Same nodemailer + iCloud SMTP path as [[pdf-change-monitor]] — one summary ema
 
 | Step | Status |
 |---|---|
-| Validation rules defined per region | ⬜ |
-| Gate wired into `POST /api/refresh/:locationId` | ⬜ |
-| Failure-alert email template built | ⬜ |
+| Validation rules defined per region | 🟡 (segovia-capital only, `server/src/validation/regionConfig.ts`) |
+| Gate wired into `POST /api/refresh/:locationId` | ✅ (segovia-capital; other regions still 501) |
+| Failure-alert email template built | ⬜ (no monitor/alerting service exists yet — see [[pdf-change-monitor]]) |
 | Delta-bound thresholds tuned against real historical PDFs | ⬜ |

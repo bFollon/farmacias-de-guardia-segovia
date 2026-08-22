@@ -45,8 +45,8 @@ InterSego abandoned automated parsing specifically because parse failures were s
 
 | Step | Status |
 |---|---|
-| Fixture PDFs + expected JSON captured (all 4 regions) | ⬜ |
-| `SegoviaCapitalParser.ts` ported + passing fixture test | ⬜ |
+| Fixture PDFs + expected JSON captured (all 4 regions) | 🟡 (Segovia Capital only, `server/fixtures/segovia-capital.pdf`) |
+| `SegoviaCapitalParser.ts` ported + passing fixture test | ✅ (`server/src/parsers/segoviaCapital.ts`) |
 | `CuellarParser.ts` / `ElEspinarParser.ts` ported | ⬜ |
 | `SegoviaRuralParser.ts` ported (8 ZBS) | ⬜ |
 | CI wired to run fixture tests on parser changes | ⬜ |
