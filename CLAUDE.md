@@ -363,18 +363,19 @@ Both paths must have a bypass policy in Cloudflare Access, or events will be sil
 | `app_launch` | iOS + Android | — | App startup |
 | `region_selected` | iOS + Android | `region` | Region selection |
 | `zbs_selected` | iOS + Android | `zbs` | ZBS selection (Segovia Rural) |
-| `schedules_loaded_from_cache` | iOS + Android | `region`, `schedules_count` | Persistent cache hit |
-| `schedules_parsed` | iOS + Android | `region`, `schedules_count`, `zbs_count`* | After PDF parse |
-| `pdf_parse_failed` | iOS + Android | `region`, `error` | Parse yields 0 schedules |
-| `pdf_url_scrape_complete` | iOS + Android | `scraped_count` | After URL scrape |
+| `schedules_loaded_from_cache` | iOS + Android | `region`, `schedules_count` | Persistent disk-cache hit |
+| `schedules_synced` | iOS + Android | `location_id`, `region`, `schedules_count`, `version` | A location's schedule was fetched fresh from the sync server (conditional GET returned 200, not 304) |
+| `schedule_sync_failed` | iOS + Android | `location_id`, `error` (`network`\|`unauthorized`\|`not_found`\|`server_error`\|`decode_error`) | Sync attempt for a location failed; disk/bundle fallback was used instead |
+| `schedules_loaded_from_bundle` | iOS + Android | `location_id` | Bundled day-zero JSON was used because disk cache was empty/invalid and no sync data was available |
+| `pdf_url_scrape_complete` | iOS + Android | `scraped_count` | After URL scrape (feeds the separate "view official PDF" feature only) |
 | `pdf_url_scrape_failed` | iOS + Android | `error` | Scrape failure |
-| `pdf_viewed` | iOS + Android | `region` | PDF viewer opened |
+| `pdf_viewed` | iOS + Android | `region` | Schedule detail screen opened |
 | `open_in_maps_tapped` | iOS only | `app` | Maps deep-link tapped |
-| `cache_refresh_triggered` | iOS + Android | — | Manual cache refresh |
-
-\* `zbs_count` only present for `region = "segovia-rural"`
+| `cache_refresh_triggered` | iOS + Android | `location_count` | Manual "sync now" action |
 
 Memory cache hits are intentionally **not** tracked (too noisy; persistent cache hits are tracked instead).
+
+**Migrated off on-device PDF parsing (client-offline-sync)**: `schedules_parsed`/`pdf_parse_failed` were removed - parsing now happens server-side (see `server/`), and clients only sync pre-parsed JSON via `ScheduleSyncService`. `PDFProcessingService`, `PDFCacheManager`, `PDFDownloadService`, and all region-specific parser classes have been deleted from both apps; the "Strategy Pattern for PDF Processing" architecture section above describes the old on-device model and is being retired as part of this migration (see `Features/client-offline-sync.md` and `Features/migration-plan.md`).
 
 ## Git Commit Guidelines
 
