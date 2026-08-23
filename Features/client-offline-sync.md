@@ -1,5 +1,15 @@
 # Feature: Client Offline Sync
 
+## Handoff (2026-08-23)
+
+Server side is done and live — start here, don't re-derive it:
+
+- **Deployed and populated**: `http://homeserver.local:3765` (Pi, pm2, LAN-only for now — no Cloudflare Tunnel yet, deliberately deferred until the client side proves out locally). All 11 locations serving real parsed data at version 1.
+- **Two separate keys** (`API_KEY` for reads, `RELOAD_KEY` for admin — see this doc's own MVP section for where `API_KEY` goes: `UserDefaults`/`SharedPreferences`, per-location ETag). Ask the user for `API_KEY`; never ask for `RELOAD_KEY` — that one stays server-side.
+- Endpoints: `GET /api/locations` (manifest), `GET /api/schedules/:locationId` (supports `If-None-Match` → `304`). Both `Bearer $API_KEY`.
+- **Unresolved before writing code**: this doc's "No client-side parsing fallback" (Architecture decisions, below) directly contradicts `migration-plan.md` Phase 3 step 8, which calls for sync to be *additive* — on-device parsing kept as a fallback if sync fails or looks wrong. Get the user to pick one before implementing; don't silently follow either.
+- All 4 region parsers were ported to `server/src/parsers/` this session and found 2 confirmed live bugs in the process (Cuéllar's Aug/Sep transition week silently drops; Segovia Rural's "Cerezo de Abajo" keyword typo empties Riaza/Sepúlveda's schedule some weeks) — both fixed server-side only. Worth asking the user whether to backport those two fixes to the clients being touched now, since you'll have the relevant files open anyway.
+
 ## Problem
 
 iOS and Android each parse PDFs on-device and cache the result locally (`ScheduleCacheService.swift` / Android equivalent), keyed by PDF modification date. This means two devices can show different data if they happened to cache different PDF versions, and every device repeats parsing work that [[backend-data-service]] will now do once, centrally.
