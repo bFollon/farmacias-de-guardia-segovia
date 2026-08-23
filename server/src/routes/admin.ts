@@ -8,15 +8,51 @@ import { REGION_PARSERS } from "../parsers/index.js";
 import { isRuralZbsId, parseAllRuralZbs, RURAL_SOURCE_PDF_URL, RURAL_ZBS_IDS } from "../parsers/rural.js";
 import { REGION_VALIDATION_CONFIG } from "../validation/regionConfig.js";
 import { validateSchedules } from "../validation/gate.js";
-import type { PharmacySchedule } from "../types.js";
+import type { LocationSchedule, PharmacySchedule } from "../types.js";
 
-async function fetchPdf(url: string): Promise<{ bytes: Uint8Array; sha256: string } | { error: string }> {
+interface PdfHeadInfo {
+  lastModified?: string;
+  etag?: string;
+}
+
+/** Cheap change check: a HEAD request costs nothing next to downloading a ~1MB PDF, and
+ * cofsegovia.com sends both Last-Modified and ETag, so most refresh calls can skip the
+ * download entirely. Returns undefined if the request fails or the source sends neither
+ * header — callers should fall back to a full fetch when this happens. */
+async function headPdf(url: string): Promise<PdfHeadInfo | undefined> {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    if (!response.ok) return undefined;
+    const lastModified = response.headers.get("last-modified") ?? undefined;
+    const etag = response.headers.get("etag") ?? undefined;
+    if (!lastModified && !etag) return undefined;
+    return { lastModified, etag };
+  } catch {
+    return undefined;
+  }
+}
+
+function pdfUnchanged(head: PdfHeadInfo | undefined, previous: LocationSchedule | undefined): boolean {
+  if (!head || !previous) return false;
+  if (head.etag && head.etag === previous.sourcePdfEtag) return true;
+  if (head.lastModified && head.lastModified === previous.sourcePdfLastModified) return true;
+  return false;
+}
+
+async function fetchPdf(
+  url: string,
+): Promise<{ bytes: Uint8Array; sha256: string; lastModified?: string; etag?: string } | { error: string }> {
   const response = await fetch(url);
   if (!response.ok) {
     return { error: `Failed to fetch source PDF: ${response.status} ${response.statusText}` };
   }
   const bytes = new Uint8Array(await response.arrayBuffer());
-  return { bytes, sha256: createHash("sha256").update(bytes).digest("hex") };
+  return {
+    bytes,
+    sha256: createHash("sha256").update(bytes).digest("hex"),
+    lastModified: response.headers.get("last-modified") ?? undefined,
+    etag: response.headers.get("etag") ?? undefined,
+  };
 }
 
 async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
@@ -25,22 +61,28 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
     return reply.code(501).send({ error: `No parser registered yet for ${locationId}` });
   }
 
+  const previous = scheduleStore.get(locationId);
+
+  const head = await headPdf(parser.sourcePdfUrl);
+  if (pdfUnchanged(head, previous)) {
+    return { published: false, reason: "Source PDF unchanged (HEAD check, no download needed)", version: previous!.version };
+  }
+
   // No PDFURLScrapingService port yet — sourcePdfUrl is a static fallback, matching
   // PDFURLRepository's fallback-URL role on the clients. See backend-data-service.md.
   const pdf = await fetchPdf(parser.sourcePdfUrl);
   if ("error" in pdf) return reply.code(502).send({ error: pdf.error });
 
+  if (previous?.sourcePdfSha256 === pdf.sha256) {
+    return { published: false, reason: "Source PDF unchanged since last publish", version: previous.version };
+  }
+
   const schedules = await parser.parse(pdf.bytes, parser.sourcePdfUrl);
-  const previous = scheduleStore.get(locationId);
   const validationConfig = REGION_VALIDATION_CONFIG[locationId];
   const validation = validationConfig ? validateSchedules(schedules, validationConfig, previous) : { passed: true, failures: [] };
 
   if (!validation.passed) {
     return reply.code(422).send({ error: "Validation failed — keeping previously published data", failures: validation.failures });
-  }
-
-  if (previous?.sourcePdfSha256 === pdf.sha256) {
-    return { published: false, reason: "Source PDF unchanged since last publish", version: previous.version };
   }
 
   const nextVersion = (previous?.version ?? 0) + 1;
@@ -49,6 +91,8 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
     regionId: parser.regionId,
     sourcePdfUrl: parser.sourcePdfUrl,
     sourcePdfSha256: pdf.sha256,
+    sourcePdfLastModified: pdf.lastModified,
+    sourcePdfEtag: pdf.etag,
     parsedAt: new Date().toISOString(),
     version: nextVersion,
     schedules,
@@ -65,22 +109,29 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
  * publish 7 good + 1 stale, so this validates all 8 first and only writes files if all pass.
  */
 async function refreshRural(reply: FastifyReply) {
+  // All 8 ZBS share one source PDF, so one HEAD check (against any one ZBS's stored
+  // headers — they're always published together) covers all of them.
+  const previous = scheduleStore.get(RURAL_ZBS_IDS[0]);
+  const head = await headPdf(RURAL_SOURCE_PDF_URL);
+  if (pdfUnchanged(head, previous)) {
+    return { published: false, reason: "Source PDF unchanged (HEAD check, no download needed)" };
+  }
+
   const pdf = await fetchPdf(RURAL_SOURCE_PDF_URL);
   if ("error" in pdf) return reply.code(502).send({ error: pdf.error });
 
-  const schedulesByZbs = await parseAllRuralZbs(pdf.bytes, RURAL_SOURCE_PDF_URL);
-
-  const unchanged = RURAL_ZBS_IDS.every((id) => scheduleStore.get(id)?.sourcePdfSha256 === pdf.sha256);
-  if (unchanged) {
+  if (previous?.sourcePdfSha256 === pdf.sha256) {
     return { published: false, reason: "Source PDF unchanged since last publish" };
   }
+
+  const schedulesByZbs = await parseAllRuralZbs(pdf.bytes, RURAL_SOURCE_PDF_URL);
 
   const failuresByZbs: Record<string, string[]> = {};
   for (const zbsId of RURAL_ZBS_IDS) {
     const schedules: PharmacySchedule[] = schedulesByZbs[zbsId] ?? [];
-    const previous = scheduleStore.get(zbsId);
+    const zbsPrevious = scheduleStore.get(zbsId);
     const validationConfig = REGION_VALIDATION_CONFIG[zbsId];
-    const validation = validationConfig ? validateSchedules(schedules, validationConfig, previous) : { passed: true, failures: [] };
+    const validation = validationConfig ? validateSchedules(schedules, validationConfig, zbsPrevious) : { passed: true, failures: [] };
     if (!validation.passed) failuresByZbs[zbsId] = validation.failures;
   }
 
@@ -93,13 +144,15 @@ async function refreshRural(reply: FastifyReply) {
 
   const publishedVersions: Record<string, number> = {};
   for (const zbsId of RURAL_ZBS_IDS) {
-    const previous = scheduleStore.get(zbsId);
-    const nextVersion = (previous?.version ?? 0) + 1;
+    const zbsPrevious = scheduleStore.get(zbsId);
+    const nextVersion = (zbsPrevious?.version ?? 0) + 1;
     await publishLocationSchedule({
       locationId: zbsId,
       regionId: "segovia-rural",
       sourcePdfUrl: RURAL_SOURCE_PDF_URL,
       sourcePdfSha256: pdf.sha256,
+      sourcePdfLastModified: pdf.lastModified,
+      sourcePdfEtag: pdf.etag,
       parsedAt: new Date().toISOString(),
       version: nextVersion,
       schedules: schedulesByZbs[zbsId] ?? [],

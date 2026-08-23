@@ -32,6 +32,11 @@ export interface LocationSchedule {
   regionId: string;
   sourcePdfUrl: string;
   sourcePdfSha256: string;
+  /** Last-Modified and/or ETag from the source PDF's response headers, if the server sent
+   * them — lets refresh check for a change with a cheap HEAD instead of downloading the
+   * full PDF every time. Absent if the source didn't send either header. */
+  sourcePdfLastModified?: string;
+  sourcePdfEtag?: string;
   parsedAt: string;
   version: number;
   schedules: PharmacySchedule[];
