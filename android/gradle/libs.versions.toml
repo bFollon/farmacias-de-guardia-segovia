@@ -15,7 +15,6 @@ navigationCompose = "2.9.6"
 okhttp = "5.3.2"
 coroutines = "1.10.2"
 kotlinxSerialization = "1.9.0"
-itext = "8.0.5"
 playServicesLocation = "21.3.0"
 sentry = "8.13.2"
 aptabase = "0.0.8"
@@ -41,7 +40,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-material3-windowsSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
-itext-kernel = { group = "com.itextpdf", name = "kernel", version.ref = "itext" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }

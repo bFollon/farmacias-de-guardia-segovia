@@ -68,11 +68,8 @@ dependencies {
     
     // ViewModel support
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    
-        // PDF Processing
-    implementation(libs.itext.kernel)
-    
-    // HTTP client for PDF downloads and web scraping
+
+    // HTTP client for PDF URL scraping and schedule sync
     implementation(libs.okhttp)
 
     // Coroutines

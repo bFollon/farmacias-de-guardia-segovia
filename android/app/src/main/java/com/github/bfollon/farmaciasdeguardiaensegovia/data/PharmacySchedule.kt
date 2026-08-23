@@ -80,12 +80,11 @@ object PharmacyScheduleSerializer : KSerializer<PharmacySchedule> {
     override fun serialize(encoder: Encoder, value: PharmacySchedule) {
         val composite = encoder.beginStructure(descriptor)
         composite.encodeSerializableElement(descriptor, 0, DutyDate.serializer(), value.date)
-        
-        // Convert Map<DutyTimeSpan, List<Pharmacy>> to Map<String, List<Pharmacy>>
-        val stringKeyShifts = value.shifts.mapKeys { (key, _) -> 
-            "${key.startHour}:${String.format("%02d", key.startMinute)}-${key.endHour}:${String.format("%02d", key.endMinute)}"
-        }
-        
+
+        // Convert Map<DutyTimeSpan, List<Pharmacy>> to Map<String, List<Pharmacy>>, keyed by
+        // the server's semantic shift name (matches Record<string, Pharmacy[]> wire format).
+        val stringKeyShifts = value.shifts.mapKeys { (key, _) -> key.shiftKey }
+
         composite.encodeSerializableElement(
             descriptor, 1, 
             MapSerializer(String.serializer(), ListSerializer(Pharmacy.serializer())),
@@ -114,36 +113,13 @@ object PharmacyScheduleSerializer : KSerializer<PharmacySchedule> {
         
         require(date != null) { "Missing date" }
         require(stringKeyShifts != null) { "Missing shifts" }
-        
-        // Convert Map<String, List<Pharmacy>> back to Map<DutyTimeSpan, List<Pharmacy>>
-        val dutyTimeSpanShifts = stringKeyShifts.mapKeys { (stringKey, _) ->
-            parseDutyTimeSpanFromString(stringKey)
-        }
-        
+
+        // Convert Map<String, List<Pharmacy>> back to Map<DutyTimeSpan, List<Pharmacy>>.
+        // Unrecognized shift keys from the server are dropped, not treated as errors.
+        val dutyTimeSpanShifts = stringKeyShifts.mapNotNull { (stringKey, pharmacies) ->
+            DutyTimeSpan.fromShiftKey(stringKey)?.let { it to pharmacies }
+        }.toMap()
+
         return PharmacySchedule(date, dutyTimeSpanShifts)
-    }
-    
-    /**
-     * Parse a DutyTimeSpan from its string representation "HH:MM-HH:MM"
-     */
-    private fun parseDutyTimeSpanFromString(timeSpanString: String): DutyTimeSpan {
-        val parts = timeSpanString.split("-")
-        if (parts.size != 2) {
-            error("Invalid time span format: $timeSpanString")
-        }
-        
-        val startParts = parts[0].split(":")
-        val endParts = parts[1].split(":")
-        
-        if (startParts.size != 2 || endParts.size != 2) {
-            error("Invalid time format in: $timeSpanString")
-        }
-        
-        return DutyTimeSpan(
-            startHour = startParts[0].toInt(),
-            startMinute = startParts[1].toInt(),
-            endHour = endParts[0].toInt(),
-            endMinute = endParts[1].toInt()
-        )
     }
 }

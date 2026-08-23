@@ -147,5 +147,29 @@ data class DutyTimeSpan(
         /** Rural extended daytime shift (10:00 - 22:00) */
         val RuralExtendedDaytime =
             DutyTimeSpan(startHour = 10, startMinute = 0, endHour = 22, endMinute = 0)
+
+        /**
+         * Reverse lookup for decoding the server's semantic shift-name key back into a known
+         * instance. Returns null for a key the client doesn't recognize, rather than crashing.
+         */
+        fun fromShiftKey(key: String): DutyTimeSpan? = when (key) {
+            "capitalDay" -> CapitalDay
+            "capitalNight" -> CapitalNight
+            "fullDay" -> FullDay
+            "ruralDaytime" -> RuralDaytime
+            "ruralExtendedDaytime" -> RuralExtendedDaytime
+            else -> null
+        }
     }
+
+    /** The semantic shift-name key used by the server's `Shifts` JSON (`Record<string, Pharmacy[]>`). */
+    val shiftKey: String
+        get() = when (this) {
+            CapitalDay -> "capitalDay"
+            CapitalNight -> "capitalNight"
+            FullDay -> "fullDay"
+            RuralDaytime -> "ruralDaytime"
+            RuralExtendedDaytime -> "ruralExtendedDaytime"
+            else -> "unknown"
+        }
 }

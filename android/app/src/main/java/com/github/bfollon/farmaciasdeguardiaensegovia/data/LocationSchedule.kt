@@ -19,20 +19,26 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.data
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Envelope returned by `GET /api/schedules/:locationId` on the sync server.
+ * Mirrors `LocationSchedule` in `server/src/types.ts`.
+ */
 @Serializable
-data class Pharmacy(
-    val id: String,
-    val name: String,
-    val address: String,
-    val phone: String,
-    val additionalInfo: String? = null
-) {
-    /**
-     * Format phone number for display with spaces every 3 digits
-     */
-    val formattedPhone: String
-        get() {
-            val cleanNumber = phone.replace(" ", "")
-            return cleanNumber.chunked(3).joinToString(" ").trim()
-        }
-}
+data class LocationSchedule(
+    val locationId: String,
+    val regionId: String,
+    val sourcePdfUrl: String,
+    val sourcePdfSha256: String,
+    val sourcePdfLastModified: String? = null,
+    val sourcePdfEtag: String? = null,
+    val parsedAt: String,
+    val version: Int,
+    val schedules: List<PharmacySchedule>
+)
+
+/** A single entry in the manifest returned by `GET /api/locations`. */
+@Serializable
+data class LocationManifestEntry(
+    val locationId: String,
+    val version: Int
+)

@@ -44,10 +44,8 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFProcessingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
-import com.github.bfollon.farmaciasdeguardiaensegovia.utils.MapUtils.mergeWith
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncService
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.forEach
@@ -62,9 +60,8 @@ import kotlinx.coroutines.withContext
  */
 class PharmacyScheduleRepository private constructor(private val context: Context) {
 
-    private val pdfCacheManager = PDFCacheManager.getInstance(context)
-    private val pdfProcessingService = PDFProcessingService()
     private val cacheService = ScheduleCacheService(context)
+    private val scheduleSyncService = ScheduleSyncService.getInstance(context)
 
     // Cache for loaded schedules - keyed by region ID
     private var schedulesCache = mapOf<DutyLocation, List<PharmacySchedule>>()
@@ -95,85 +92,67 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * @param forceRefresh Whether to bypass cache and reload
      * @return List of pharmacy schedules for the region
      */
-    suspend fun loadSchedules(location: DutyLocation): List<PharmacySchedule> = withContext(Dispatchers.IO) {
-        // TODO decide how we want to manage this function, if region or location.
+    suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): List<PharmacySchedule> = withContext(Dispatchers.IO) {
         val cachedEntry = schedulesCache[location]
 
         // Return cached data if it exists and is fresh (unless force refresh)
-        if (!location.associatedRegion.forceRefresh && cachedEntry != null) {
+        if (!forceRefresh && cachedEntry != null) {
             DebugConfig.debugPrint("PharmacyScheduleRepository: Returning in-memory cached schedules for ${location.name} (${cachedEntry.size} schedules)")
             return@withContext cachedEntry
         }
 
-        // Try to load from persistent cache (serialized file cache)
-        if (!location.associatedRegion.forceRefresh) {
-            val cachedSchedules = cacheService.loadCachedSchedules(location)
-            if (cachedSchedules != null && cachedSchedules.isNotEmpty() && cachedSchedules[location] != null) {
-                val locationSchedules = cachedSchedules[location]!!
-                AnalyticsService.track("schedules_loaded_from_cache", mapOf(
-                    "region" to location.associatedRegion.id,
-                    "schedules_count" to locationSchedules.size
-                ))
-                // Store in memory cache as well
-                schedulesCache = schedulesCache.mergeWith(cachedSchedules) { _, b -> b } // Replace the existing schedules with the new ones
-                DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
-                return@withContext locationSchedules
-            }
+        // Best-effort sync: skipped entirely when offline, and never clears the existing disk
+        // cache on failure - a failing sync just leaves whatever's already there untouched.
+        val knownVersion = cacheService.cachedServerVersion(location)
+        val knownVersions = knownVersion?.let { mapOf(location.id to it) } ?: emptyMap()
+
+        val summary = scheduleSyncService.syncAll(listOf(location.id), knownVersions) { locationId, schedule ->
+            cacheService.saveSchedulesToCache(location, schedule.schedules, schedule.version)
+            AnalyticsService.track("schedules_synced", mapOf(
+                "location_id" to locationId,
+                "region" to location.associatedRegion.id,
+                "schedules_count" to schedule.schedules.size,
+                "version" to schedule.version
+            ))
+        }
+        summary.failed[location.id]?.let { error ->
+            AnalyticsService.track("schedule_sync_failed", mapOf(
+                "location_id" to location.id,
+                "error" to syncErrorLabel(error)
+            ))
         }
 
-        try {
-            DebugConfig.debugPrint("PharmacyScheduleRepository: Loading schedules from PDF for ${location.name}")
-
-            // Get the effective PDF file (cached or downloaded)
-            val pdfFile = pdfCacheManager.getEffectivePDFFile(location.associatedRegion)
-
-            if (pdfFile == null) {
-                DebugConfig.debugError("PharmacyScheduleRepository: Failed to get PDF for ${location.name}. Associated region ${location.associatedRegion.name}")
-                ErrorReportingService.captureMessage("Failed to get PDF for location ${location.name} (region: ${location.associatedRegion.name}, url: ${location.associatedRegion.pdfURL})")
-                return@withContext emptyList()
-            }
-
-            // Process the PDF file
-            val schedulesMap = pdfProcessingService.loadPharmacies(pdfFile, location.associatedRegion)
-
-            if (schedulesMap.isNotEmpty()) {
-                // Cache the results in memory
-                schedulesCache = schedulesCache.mergeWith(schedulesMap) { _, b -> b } // Replace the existing schedules with the new ones
-
-                // Save to persistent cache for next time
-                cacheService.saveSchedulesToCache(location, schedulesMap)
-
-                schedulesMap.forEach { (loadedLocation, schedules) ->
-                    DebugConfig.debugPrint("PharmacyScheduleRepository: Successfully loaded and cached ${schedules.size} schedules for ${loadedLocation.name}")
-                }
-
-                val totalSchedules = schedulesMap.values.sumOf { it.size }
-                val props = mutableMapOf<String, Any>(
-                    "region" to location.associatedRegion.id,
-                    "schedules_count" to totalSchedules
-                )
-                if (location.associatedRegion.id == "segovia-rural") {
-                    props["zbs_count"] = schedulesMap.size
-                }
-                AnalyticsService.track("schedules_parsed", props)
-            } else {
-                DebugConfig.debugWarn("PharmacyScheduleRepository: No schedules loaded from PDF for ${location.name}")
-                AnalyticsService.track("pdf_parse_failed", mapOf(
-                    "region" to location.associatedRegion.id,
-                    "error" to "no_schedules_parsed"
-                ))
-            }
-
-            return@withContext schedulesMap[location] ?: emptyList()
-
-        } catch (e: Exception) {
-            DebugConfig.debugError(
-                "PharmacyScheduleRepository: Error loading schedules for ${location.name}",
-                e
-            )
-            ErrorReportingService.captureError(e, mapOf("location" to location.name, "url" to location.associatedRegion.pdfURL, "operation" to "loadSchedules"))
-            return@withContext emptyList()
+        // Disk cache - whatever's there now, whether just refreshed above or from a prior session
+        val cachedSchedules = cacheService.loadCachedSchedules(location)
+        if (cachedSchedules != null && cachedSchedules.isNotEmpty()) {
+            AnalyticsService.track("schedules_loaded_from_cache", mapOf(
+                "region" to location.associatedRegion.id,
+                "schedules_count" to cachedSchedules.size
+            ))
+            schedulesCache = schedulesCache + (location to cachedSchedules)
+            DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
+            return@withContext cachedSchedules
         }
+
+        // Bundled day-zero JSON - only reached if disk cache is empty/invalid
+        val bundled = cacheService.loadBundledSchedules(location)
+        if (bundled != null) {
+            AnalyticsService.track("schedules_loaded_from_bundle", mapOf("location_id" to location.id))
+            schedulesCache = schedulesCache + (location to bundled.schedules)
+            DebugConfig.debugPrint("PharmacyScheduleRepository: Using bundled schedules for ${location.name}")
+            return@withContext bundled.schedules
+        }
+
+        DebugConfig.debugPrint("⚠️ PharmacyScheduleRepository: No data available for ${location.name} (no cache, no sync, no bundle)")
+        return@withContext emptyList()
+    }
+
+    private fun syncErrorLabel(error: ScheduleSyncService.SyncError): String = when (error) {
+        is ScheduleSyncService.SyncError.Unauthorized -> "unauthorized"
+        is ScheduleSyncService.SyncError.NotFound -> "not_found"
+        is ScheduleSyncService.SyncError.ServerError -> "server_error"
+        is ScheduleSyncService.SyncError.Network -> "network"
+        is ScheduleSyncService.SyncError.DecodeError -> "decode_error"
     }
 
     /**
@@ -229,9 +208,8 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun clearAllCache() = withContext(Dispatchers.IO) {
         schedulesCache = emptyMap()
-        pdfCacheManager.clearCache()
         cacheService.clearAllCache()
-        DebugConfig.debugPrint("PharmacyScheduleRepository: All caches cleared (including PDF cache)")
+        DebugConfig.debugPrint("PharmacyScheduleRepository: All caches cleared")
     }
 
     /**
@@ -246,15 +224,12 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             schedulesCache = schedulesCache - location
         }
 
-        // Clear PDF cache
-        pdfCacheManager.clearCache(region)
-
         // Clear persistent cache for all locations
         locationsToClear.forEach { location ->
             cacheService.clearRegionCache(location)
         }
 
-        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (${locationsToClear.size} locations, including PDF cache)")
+        DebugConfig.debugPrint("PharmacyScheduleRepository: Cleared cache for ${region.name} (${locationsToClear.size} locations)")
     }
 
     /**
