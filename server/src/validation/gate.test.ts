@@ -63,9 +63,9 @@ test("fails closed on a malformed phone number", () => {
   assert.ok(result.failures.some((f) => f.includes("Pharmacy shape sanity")));
 });
 
-test("fails closed on a name missing FARMACIA", () => {
+test("fails closed on an empty name", () => {
   const schedules = daily(4);
-  schedules[0] = schedule(1, "mayo", 2026, { capitalNight: [pharmacy({ name: "Not a pharmacy" })] });
+  schedules[0] = schedule(1, "mayo", 2026, { capitalNight: [pharmacy({ name: "" })] });
   const result = validateSchedules(schedules, CONFIG, undefined);
   assert.equal(result.passed, false);
   assert.ok(result.failures.some((f) => f.includes("Pharmacy shape sanity")));

@@ -16,6 +16,9 @@ export interface RegionValidationConfig {
   requiredShiftKeys: string[];
   /** Expected day-to-day cadence between consecutive parsed dates, in days (1 = daily). */
   expectedCadenceDays: number;
+  /** Some Segovia Rural ZBS genuinely only cover weekdays (or have a real hole near a
+   * calendar's end) in the source PDF, so gaps there are expected, not a parsing failure. */
+  skipDateContinuityCheck?: boolean;
   /** Max fractional change vs. the previous published version before flagging (0.5 = 50%). */
   maxDeltaFraction: number;
 }
@@ -89,8 +92,14 @@ function checkPharmacyShapeSanity(schedules: PharmacySchedule[], failures: strin
     for (const pharmacies of Object.values(schedule.shifts)) {
       for (const pharmacy of pharmacies) {
         const label = `${schedule.date.day} de ${schedule.date.month} (${pharmacy.name || "<empty>"})`;
-        if (!pharmacy.name.trim() || !pharmacy.name.toUpperCase().includes("FARMACIA")) {
-          bad.push(`${label}: name missing/invalid`);
+        // Not "must contain FARMACIA": Segovia Rural's hardcoded table legitimately has
+        // at least one entry ("Dr. Jesús Santos del Cura", Fuentidueña/Olombrada) that
+        // isn't named "Farmacia ...". Names in every region come from a trusted source
+        // (a hardcoded table, or — for Segovia Capital — a regex requiring "FARMACIA" to
+        // even recognize the line as a pharmacy in the first place), so a bare non-empty
+        // check is sufficient; this isn't guarding against unvalidated free text.
+        if (!pharmacy.name.trim()) {
+          bad.push(`${label}: empty name`);
         } else if (!pharmacy.address.trim()) {
           bad.push(`${label}: empty address`);
         } else if (
@@ -155,7 +164,7 @@ export function validateSchedules(
   const failures: string[] = [];
 
   checkNonEmpty(schedules, config, failures);
-  checkDateContinuity(schedules, config, failures);
+  if (!config.skipDateContinuityCheck) checkDateContinuity(schedules, config, failures);
   checkShiftCompleteness(schedules, config, failures);
   checkPharmacyShapeSanity(schedules, failures);
   checkDeltaBound(schedules, config, previous, failures);
