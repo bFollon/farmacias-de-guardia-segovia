@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cleartext (HTTP) is only allowed for the specific hosts that need it. Everything
+  else keeps the platform default (HTTPS-only).
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- LAN-only sync server, no Cloudflare Tunnel/HTTPS yet (see Features/client-offline-sync.md) -->
+        <domain includeSubdomains="false">homeserver.local</domain>
+        <!-- OSRM routing API (RoutingService.kt) only serves HTTP -->
+        <domain includeSubdomains="false">router.project-osrm.org</domain>
+    </domain-config>
+</network-security-config>

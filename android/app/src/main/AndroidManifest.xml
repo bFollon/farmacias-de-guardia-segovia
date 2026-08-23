@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FarmaciasDeGuardiaEnSegovia"
-        android:usesCleartextTraffic="true">
+        android:networkSecurityConfig="@xml/network_security_config">
         <!-- Disable Sentry auto-init so we can gate it on user consent -->
         <meta-data android:name="io.sentry.auto-init" android:value="false" />
         <activity
