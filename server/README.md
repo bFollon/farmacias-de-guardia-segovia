@@ -32,7 +32,7 @@ npm start
    echo "PORT=3000" >> .env
    echo "HOST=0.0.0.0" >> .env
    ```
-   pm2 doesn't load `.env` files itself — either `export $(cat .env | xargs)` before starting pm2, or add an `env` block to `ecosystem.config.cjs` (don't commit real secrets into that file).
+   `.env` is loaded automatically via `dotenv` (see `src/index.ts`'s first import), same pattern as InterSegoService/InterSegoMonitor — no need to export it into the shell or add it to `ecosystem.config.cjs` yourself.
 3. Start under pm2:
    ```bash
    pm2 start ecosystem.config.cjs

@@ -1,3 +1,8 @@
+// Loads .env into process.env before anything else runs — matches InterSego's pattern
+// (InterSegoService/src/index.ts, InterSegoMonitor/src/index.ts) so `.env` works the same
+// way under pm2 here as it does for the other services on this Pi. Must be the first
+// import: config.ts reads process.env at module-load time.
+import "dotenv/config";
 import { buildApp } from "./app.js";
 import { config } from "./config.js";
 
