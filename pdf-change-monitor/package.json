@@ -1,0 +1,28 @@
+{
+  "name": "pdf-change-monitor",
+  "version": "1.0.0",
+  "description": "Watches cofsegovia.com for pharmacy duty PDF changes and triggers the data service to re-parse",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "fastify": "^5.2.1",
+    "lowdb": "^7.0.1",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^9.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^6.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
