@@ -45,8 +45,8 @@ InterSego abandoned automated parsing specifically because parse failures were s
 
 | Step | Status |
 |---|---|
-| Fixture PDFs + expected JSON captured (all 4 regions) | 🟡 (Segovia Capital only, `server/fixtures/segovia-capital.pdf`) |
+| Fixture PDFs + expected JSON captured (all 4 regions) | 🟡 (3/4 — `server/fixtures/{segovia-capital,cuellar,el-espinar}.pdf`; rural PDF downloaded but not yet parsed) |
 | `SegoviaCapitalParser.ts` ported + passing fixture test | ✅ (`server/src/parsers/segoviaCapital.ts`) |
-| `CuellarParser.ts` / `ElEspinarParser.ts` ported | ⬜ |
+| `CuellarParser.ts` / `ElEspinarParser.ts` ported | ✅ (`server/src/parsers/{cuellar,elEspinar}.ts`, shared base in `weeklyRotation.ts`) — found and fixed 2 live bugs in the Kotlin originals along the way, see commit c72b9f4 |
 | `SegoviaRuralParser.ts` ported (8 ZBS) | ⬜ |
 | CI wired to run fixture tests on parser changes | ⬜ |
