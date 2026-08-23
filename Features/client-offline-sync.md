@@ -1,14 +1,10 @@
 # Feature: Client Offline Sync
 
-## Handoff (2026-08-23)
+## Status (2026-08-24): Complete, shipped on both platforms
 
-Server side is done and live — start here, don't re-derive it:
+Both iOS and Android are fully migrated to server sync. The "No client-side parsing fallback" question flagged below was resolved by the user: sync is the sole source of truth, on-device parsing was deleted in the same pass rather than kept as a fallback (this deviates from `migration-plan.md`'s original additive Phase 3 design — a deliberate, informed choice given the server was LAN-only/unproven at the time, not an oversight). See `migration-plan.md`'s top-of-file note for the full rationale.
 
-- **Deployed and populated**: `http://homeserver.local:3765` (Pi, pm2, LAN-only for now — no Cloudflare Tunnel yet, deliberately deferred until the client side proves out locally). All 11 locations serving real parsed data at version 1.
-- **Two separate keys** (`API_KEY` for reads, `RELOAD_KEY` for admin — see this doc's own MVP section for where `API_KEY` goes: `UserDefaults`/`SharedPreferences`, per-location ETag). Ask the user for `API_KEY`; never ask for `RELOAD_KEY` — that one stays server-side.
-- Endpoints: `GET /api/locations` (manifest), `GET /api/schedules/:locationId` (supports `If-None-Match` → `304`). Both `Bearer $API_KEY`.
-- **Unresolved before writing code**: this doc's "No client-side parsing fallback" (Architecture decisions, below) directly contradicts `migration-plan.md` Phase 3 step 8, which calls for sync to be *additive* — on-device parsing kept as a fallback if sync fails or looks wrong. Get the user to pick one before implementing; don't silently follow either.
-- All 4 region parsers were ported to `server/src/parsers/` this session and found 2 confirmed live bugs in the process (Cuéllar's Aug/Sep transition week silently drops; Segovia Rural's "Cerezo de Abajo" keyword typo empties Riaza/Sepúlveda's schedule some weeks) — both fixed server-side only. Worth asking the user whether to backport those two fixes to the clients being touched now, since you'll have the relevant files open anyway.
+Known bugs found in the on-device parsers during the server-side port (Cuéllar Aug/Sep week drop, Segovia Rural "Cerezo de Abajo" typo) were **not** backported to the clients — moot, since the buggy client parsers were deleted outright rather than patched.
 
 ## Problem
 
@@ -49,8 +45,8 @@ Once this ships, there is no "parse the PDF myself" fallback path left on-device
 
 | Step | Status |
 |---|---|
-| Manifest + per-location sync client added (iOS) | ⬜ |
-| Manifest + per-location sync client added (Android) | ⬜ |
-| `ScheduleCacheService` re-keyed to server `version` | ⬜ |
-| Bundled JSON generation added to release process | ⬜ |
-| On-device parsers deleted (both platforms) | ⬜ |
+| Manifest + per-location sync client added (iOS) | ✅ `ScheduleSyncService.swift` |
+| Manifest + per-location sync client added (Android) | ✅ `ScheduleSyncService.kt` |
+| `ScheduleCacheService` re-keyed to server `version` | ✅ (both platforms; cache format version bumped to force-invalidate pre-migration caches) |
+| Bundled JSON generation added to release process | ✅ `server/scripts/export-bundled-schedules.ts`, 11 files committed per platform (manual, run-before-release — no CI in this project) |
+| On-device parsers deleted (both platforms) | ✅ (`PDFProcessingService`, all parser strategies, `PDFCacheManager`, `PDFDownloadService`, itext-kernel dependency) |

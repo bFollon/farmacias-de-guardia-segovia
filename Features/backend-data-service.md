@@ -84,7 +84,7 @@ Fastify + TypeScript + Node ≥20, ESM, built with `tsc`, run under pm2 — same
 |---|---|
 | Schema finalized | ✅ |
 | Service scaffolded (Fastify + lowdb) | ✅ (`server/`) |
-| Region parsers ported (see [[parser-port-typescript]]) | ⬜ |
-| Validation gate wired in (see [[parsing-validation-gate]]) | ⬜ |
-| Deployed to Pi / Cloudflare Tunnel | ⬜ |
-| Client sync consuming it (see [[client-offline-sync]]) | ⬜ |
+| Region parsers ported (see [[parser-port-typescript]]) | ✅ |
+| Validation gate wired in (see [[parsing-validation-gate]]) | ✅ |
+| Deployed to Pi / Cloudflare Tunnel | ✅ Pi (pm2, `http://homeserver.local:3765`) / ⬜ Cloudflare Tunnel — deliberately deferred, LAN-only for now |
+| Client sync consuming it (see [[client-offline-sync]]) | ✅ (both iOS and Android) |

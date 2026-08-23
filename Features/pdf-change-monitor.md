@@ -39,8 +39,12 @@ InterSego's monitor needed a scoped `undici` Agent with certificate verification
 
 | Step | Status |
 |---|---|
-| Scraper ported for cofsegovia.com (4 regions) | ⬜ |
-| Hash-diff + persistence wired up | ⬜ |
-| Auto-trigger of `/api/refresh` on change | ⬜ |
-| Email notifier adapted | ⬜ |
-| Deployed as separate pm2 process | ⬜ |
+| Scraper ported for cofsegovia.com (4 regions) | ✅ (`pdf-change-monitor/src/scraper/index.ts`, ported from `PDFURLScrapingService.swift`) |
+| Hash-diff + persistence wired up | ✅ (`data/checksums.json` via lowdb) |
+| Auto-trigger of `/api/refresh` on change | ✅ (`src/refreshTrigger.ts`) |
+| Email notifier adapted | ✅ (iCloud SMTP via nodemailer, verified with a real delivered email) |
+| Deployed as separate pm2 process | ✅ (`pdf-change-monitor`, deployed 2026-08-23/24, cron `0 8,20 * * *`) |
+
+## Status (2026-08-24)
+
+Fully built, verified end-to-end (including a deliberately-induced auth failure and its fix), and deployed to the Pi as its own pm2 process. Nothing outstanding beyond letting it observe a real (non-simulated) PDF change per region — see `migration-plan.md`'s testing checklist.

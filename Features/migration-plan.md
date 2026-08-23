@@ -1,8 +1,10 @@
 # Feature: Server-Based Schedule Migration — Plan
 
-## Status: Phases 1-2 complete; Phases 3-4 done via a different path than originally planned (see note below); server deployed to the Pi
+## Status: Migration complete (2026-08-24)
 
-`server/` is deployed and populated (all 11 locations, `http://homeserver.local:3765`, LAN-only for now). `pdf-change-monitor/` is built and verified end-to-end but not yet deployed to the Pi. Both iOS and Android apps are fully migrated to server sync (see below).
+`server/` is deployed and populated (all 11 locations, `http://homeserver.local:3765`, LAN-only for now — Cloudflare Tunnel deliberately deferred). `pdf-change-monitor/` is deployed to the Pi as its own pm2 process, cron firing twice daily. Both iOS and Android apps are fully migrated to server sync, on-device PDF parsing deleted on both platforms. Phases 3-4 were done via a different path than originally planned — see note below.
+
+What's left is observational, not code: letting the monitor catch a real (non-simulated) PDF change per region, and an optional manual side-by-side comparison against the official PDFs. See the testing checklist at the bottom of this doc.
 
 **Deviation from the original Phase 3/4 sequencing**: this doc's steps 8-9 called for an *additive* dual-path rollout (sync alongside on-device parsing, with a monitoring period before cutover). The user explicitly chose to skip straight to [[client-offline-sync]]'s "no fallback" design instead — on-device parsing was deleted in the same pass that added sync, not kept as a safety net. This was a deliberate, informed choice (flagged and confirmed with the user given the server was LAN-only/unproven at the time), not an oversight. Both apps now depend entirely on the sync server; see `Features/client-offline-sync.md` for the full implementation record.
 
@@ -46,7 +48,7 @@ Server owns parsing (hybrid automated + validation gate); apps sync pre-parsed J
 
 Segovia Rural's La Granja ZBS also isn't a port of `detectFirstLaGranjaPharmacy()` (that function has an inverted-index bug and would likely pick the wrong pharmacy) — it's re-derived via majority vote across the whole document and was verified against **live data pulled from a real Android device** (2026-08-23 → Farmacia Cristina Mínguez Del Pozo), per commit 762c5e5.
 
-**Step 6 done (2026-08-23).** `pdf-change-monitor/` built, near-verbatim port of InterSego's `services/InterSegoMonitor` per this doc's own architecture notes, with the "trigger, don't just alert" deviation: on a detected change it calls `POST /api/refresh/:locationId` directly rather than only emailing. Verified end-to-end locally: live scraping of cofsegovia.com found all 4 region PDFs matching the server's static fallbacks exactly, SMTP (iCloud) verified, and a simulated PDF change correctly triggered a real refresh call against the deployed Pi server (published successfully) and delivered the summary email. Not yet deployed as a pm2 process on the Pi — that's the next step.
+**Step 6 done (2026-08-23), deployed (2026-08-24).** `pdf-change-monitor/` built, near-verbatim port of InterSego's `services/InterSegoMonitor` per this doc's own architecture notes, with the "trigger, don't just alert" deviation: on a detected change it calls `POST /api/refresh/:locationId` directly rather than only emailing. Verified end-to-end locally: live scraping of cofsegovia.com found all 4 region PDFs matching the server's static fallbacks exactly, SMTP (iCloud) verified, and a simulated PDF change correctly triggered a real refresh call against the deployed Pi server (published successfully) and delivered the summary email. Now running as its own pm2 process on the Pi (`pdf-change-monitor`), cron firing at 08:00/20:00 daily.
 
 ### Phase 3 — Client sync, additive
 
@@ -66,9 +68,9 @@ Segovia Rural's La Granja ZBS also isn't a port of `detectFirstLaGranjaPharmacy(
 
 ## Testing checklist (before Phase 4 cutover)
 
-- [ ] Fixture-based parser tests passing for all 4 regions
-- [ ] Validation gate has caught at least one deliberately-broken test case per rule
-- [ ] Monitor has correctly detected at least one real PDF change per region (not just synthetic)
-- [ ] Client sync tested offline (airplane mode from first install) and online (fresh data after a server-side change)
-- [ ] Divergence-logging from Phase 3 shows zero unexplained mismatches for one full cycle
-- [ ] Manual side-by-side comparison: app-displayed schedule vs. the actual official PDF, for a sample of dates across all 4 regions
+- [x] Fixture-based parser tests passing for all 4 regions
+- [x] Validation gate has caught at least one deliberately-broken test case per rule
+- [ ] Monitor has correctly detected at least one real PDF change per region (not just synthetic) — pending, will happen naturally as regions publish updates
+- [x] Client sync tested offline (airplane mode from first install) and online (fresh data after a server-side change) — verified live against the Pi via Simulator
+- [x] ~~Divergence-logging from Phase 3~~ — n/a, Phase 3's additive dual-path was skipped (see status note above); no divergence logging exists since there's no second data source to diverge from
+- [ ] Manual side-by-side comparison: app-displayed schedule vs. the actual official PDF, for a sample of dates across all 4 regions — optional, not yet done
