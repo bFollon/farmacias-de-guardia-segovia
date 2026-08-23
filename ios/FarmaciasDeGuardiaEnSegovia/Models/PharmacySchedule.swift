@@ -26,34 +26,32 @@ public struct PharmacySchedule: Codable {
         case date, shifts
     }
 
-    // Custom encoding to handle dictionary with DutyTimeSpan keys
+    // Custom encoding: server's wire format keys shifts by semantic name
+    // (Record<string, Pharmacy[]>), not by DutyTimeSpan's internal representation.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
 
-        // Convert dictionary to array of tuples for encoding
-        let shiftsArray = shifts.map { (key, value) in
-            ShiftEntry(timeSpan: key, pharmacies: value)
-        }
-        try container.encode(shiftsArray, forKey: .shifts)
+        let stringKeyedShifts = Dictionary(uniqueKeysWithValues: shifts.map { ($0.key.shiftKey, $0.value) })
+        try container.encode(stringKeyedShifts, forKey: .shifts)
     }
 
-    // Custom decoding to reconstruct dictionary from array
+    // Custom decoding: reconstruct the DutyTimeSpan-keyed dictionary from the server's
+    // string-keyed shifts. Unrecognized shift keys are dropped, not treated as errors.
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try container.decode(DutyDate.self, forKey: .date)
 
-        // Decode array and convert back to dictionary
-        let shiftsArray = try container.decode([ShiftEntry].self, forKey: .shifts)
-        shifts = Dictionary(uniqueKeysWithValues: shiftsArray.map { ($0.timeSpan, $0.pharmacies) })
+        let stringKeyedShifts = try container.decode([String: [Pharmacy]].self, forKey: .shifts)
+        shifts = Dictionary(uniqueKeysWithValues: stringKeyedShifts.compactMap { key, value -> (DutyTimeSpan, [Pharmacy])? in
+            guard let timeSpan = DutyTimeSpan(shiftKey: key) else {
+                DebugConfig.debugPrint("⚠️ PharmacySchedule: Unknown shift key from server: \(key)")
+                return nil
+            }
+            return (timeSpan, value)
+        })
     }
 
-    // Helper struct for encoding/decoding dictionary entries
-    private struct ShiftEntry: Codable {
-        let timeSpan: DutyTimeSpan
-        let pharmacies: [Pharmacy]
-    }
-    
     public init(date: DutyDate, shifts: [DutyTimeSpan: [Pharmacy]]) {
         self.date = date
         self.shifts = shifts

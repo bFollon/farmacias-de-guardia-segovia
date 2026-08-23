@@ -16,16 +16,23 @@
  */
 
 import Foundation
-import PDFKit
 
-/// Protocol defining the contract for PDF schedule parsing strategies.
-/// Each region/location should implement its own strategy to handle its specific PDF format.
-public protocol PDFParsingStrategy {
-    /// Parse a PDF document and extract pharmacy schedules organized by duty location
-    /// - Parameters:
-    ///   - pdf: The PDF document to parse
-    ///   - pdfUrl: Optional PDF URL for URL-based year detection
-    /// - Returns: A dictionary mapping duty locations to their pharmacy schedules.
-    ///           Main regions return 1 entry, Segovia Rural returns 8 entries (one per ZBS).
-    func parseSchedules(from pdf: PDFDocument, pdfUrl: String?) -> [DutyLocation: [PharmacySchedule]]
+/// Envelope returned by `GET /api/schedules/:locationId` on the sync server.
+/// Mirrors `LocationSchedule` in `server/src/types.ts`.
+public struct LocationSchedule: Codable {
+    public let locationId: String
+    public let regionId: String
+    public let sourcePdfUrl: String
+    public let sourcePdfSha256: String
+    public let sourcePdfLastModified: String?
+    public let sourcePdfEtag: String?
+    public let parsedAt: String
+    public let version: Int
+    public let schedules: [PharmacySchedule]
+}
+
+/// A single entry in the manifest returned by `GET /api/locations`.
+public struct LocationManifestEntry: Codable {
+    public let locationId: String
+    public let version: Int
 }

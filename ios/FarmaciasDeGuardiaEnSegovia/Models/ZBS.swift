@@ -49,7 +49,7 @@ extension ZBS {
         ZBS(id: "riaza-sepulveda", name: "Riaza / Sepúlveda", icon: "🏔️"),
         ZBS(id: "la-granja", name: "La Granja", icon: "🏰"),
         ZBS(id: "la-sierra", name: "La Sierra", icon: "⛰️"),
-        ZBS(id: "fuentidueña", name: "Fuentidueña", icon: "🏞️"),
+        ZBS(id: "fuentiduena", name: "Fuentidueña", icon: "🏞️"),
         ZBS(id: "carbonero", name: "Carbonero", icon: "🌲"),
         ZBS(id: "navas-asuncion", name: "Nava de la Asunción", icon: "🏘️"),
         ZBS(id: "villacastin", name: "Villacastín", icon: "🚂"),

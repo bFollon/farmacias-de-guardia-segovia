@@ -20,9 +20,13 @@ import Foundation
 class ScheduleService {
     // In-memory cache by location ID (session cache)
     static private var cachedSchedules: [String: [PharmacySchedule]] = [:]
-    static private let pdfService = PDFProcessingService()
     static private let cacheService = ScheduleCacheService.shared
+    static private let syncService = ScheduleSyncService.shared
 
+    /// Load flow: memory -> best-effort sync (if online) -> disk cache -> bundled day-zero JSON.
+    /// There is no on-device parsing fallback - the server is the sole source of truth. If sync
+    /// fails or the device is offline, this falls through to whatever's already on disk/bundled,
+    /// per Features/client-offline-sync.md.
     static func loadSchedules(for location: DutyLocation, forceRefresh: Bool = false) async -> [PharmacySchedule] {
         // Return in-memory cached schedules if available and not forcing refresh
         if let cached = cachedSchedules[location.id], !forceRefresh {
@@ -30,8 +34,29 @@ class ScheduleService {
             return cached
         }
 
-        // Try to load from persistent cache if not forcing refresh
-        if !forceRefresh, let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
+        // Best-effort sync: skipped entirely when offline, and never clears the existing disk
+        // cache on failure - a failing sync just leaves whatever's already there untouched.
+        let knownVersion = cacheService.cachedServerVersion(for: location)
+        let knownVersions: [String: Int] = knownVersion.map { [location.id: $0] } ?? [:]
+
+        let summary = await syncService.syncAll(locationIds: [location.id], knownVersions: knownVersions) { locationId, schedule in
+            cacheService.saveSchedulesToCache(for: location, schedules: schedule.schedules, version: schedule.version)
+            AnalyticsService.shared.track("schedules_synced", with: [
+                "location_id": locationId,
+                "region": location.associatedRegion.id,
+                "schedules_count": schedule.schedules.count,
+                "version": schedule.version
+            ])
+        }
+        if let syncError = summary.failed[location.id] {
+            AnalyticsService.shared.track("schedule_sync_failed", with: [
+                "location_id": location.id,
+                "error": syncErrorLabel(syncError)
+            ])
+        }
+
+        // Disk cache - whatever's there now, whether just refreshed above or from a prior session
+        if let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
             DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for location \(location.name)")
             AnalyticsService.shared.track("schedules_loaded_from_cache", with: [
                 "region": location.associatedRegion.id,
@@ -41,73 +66,28 @@ class ScheduleService {
             return persistedSchedules
         }
 
-        // If we're about to parse (cache miss or invalid), clear the location's cache to avoid orphaned files
-        if !forceRefresh {
-            cacheService.clearLocationCache(for: location)
-        }
-
-        // Load from PDF - this returns ALL locations for the region
-        DebugConfig.debugPrint("ScheduleService: Loading schedules from PDF for region \(location.associatedRegion.name)...")
-        let schedulesByLocation = await pdfService.loadPharmacies(for: location.associatedRegion, forceRefresh: forceRefresh)
-
-        // Cache ALL locations from the parse (important for Segovia Rural - parse once, cache all 8 ZBS)
-        for (loc, schedules) in schedulesByLocation {
-            cachedSchedules[loc.id] = schedules
-            cacheService.saveSchedulesToCache(for: loc, schedules: schedules)
-            DebugConfig.debugPrint("💾 ScheduleService: Cached \(schedules.count) schedules for \(loc.name)")
-        }
-
-        // Analytics: schedule parse result (fires once per region parse)
-        let totalSchedules = schedulesByLocation.values.reduce(0) { $0 + $1.count }
-        if totalSchedules > 0 {
-            var props: [String: Any] = [
-                "region": location.associatedRegion.id,
-                "schedules_count": totalSchedules
-            ]
-            if location.associatedRegion.id == "segovia-rural" {
-                props["zbs_count"] = schedulesByLocation.count
-            }
-            AnalyticsService.shared.track("schedules_parsed", with: props)
-        } else {
-            AnalyticsService.shared.track("pdf_parse_failed", with: [
-                "region": location.associatedRegion.id,
-                "error": "no_schedules_parsed"
+        // Bundled day-zero JSON - only reached if disk cache is empty/invalid
+        if let bundled = cacheService.loadBundledSchedules(for: location) {
+            DebugConfig.debugPrint("ScheduleService: Using bundled schedules for location \(location.name)")
+            AnalyticsService.shared.track("schedules_loaded_from_bundle", with: [
+                "location_id": location.id
             ])
+            cachedSchedules[location.id] = bundled.schedules
+            return bundled.schedules
         }
 
-        // Extract and return schedules for the requested location
-        let schedules = schedulesByLocation[location] ?? []
+        DebugConfig.debugPrint("⚠️ ScheduleService: No data available for \(location.name) (no cache, no sync, no bundle)")
+        return []
+    }
 
-        DebugConfig.debugPrint("ScheduleService: Successfully loaded \(schedules.count) schedules for \(location.name)")
-
-        // Print a sample schedule for verification
-        if let sampleSchedule = schedules.first {
-            DebugConfig.debugPrint("\nSample schedule for \(location.name):")
-            DebugConfig.debugPrint("Date: \(sampleSchedule.date)")
-
-            DebugConfig.debugPrint("\nDay Shift Pharmacies:")
-            for pharmacy in sampleSchedule.dayShiftPharmacies {
-                DebugConfig.debugPrint("- \(pharmacy.name)")
-                DebugConfig.debugPrint("  Address: \(pharmacy.address)")
-                DebugConfig.debugPrint("  Phone: \(pharmacy.formattedPhone)")
-                if let info = pharmacy.additionalInfo {
-                    DebugConfig.debugPrint("  Additional Info: \(info)")
-                }
-            }
-
-            DebugConfig.debugPrint("\nNight Shift Pharmacies:")
-            for pharmacy in sampleSchedule.nightShiftPharmacies {
-                DebugConfig.debugPrint("- \(pharmacy.name)")
-                DebugConfig.debugPrint("  Address: \(pharmacy.address)")
-                DebugConfig.debugPrint("  Phone: \(pharmacy.formattedPhone)")
-                if let info = pharmacy.additionalInfo {
-                    DebugConfig.debugPrint("  Additional Info: \(info)")
-                }
-            }
-            DebugConfig.debugPrint("")
+    private static func syncErrorLabel(_ error: ScheduleSyncService.SyncError) -> String {
+        switch error {
+        case .unauthorized: return "unauthorized"
+        case .notFound: return "not_found"
+        case .serverError: return "server_error"
+        case .network: return "network"
+        case .decodeError: return "decode_error"
         }
-
-        return schedules
     }
 
     // Keep backward compatibility for direct URL loading

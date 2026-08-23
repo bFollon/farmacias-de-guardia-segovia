@@ -78,4 +78,11 @@ public struct DutyLocation: Codable, Hashable, Identifiable {
             associatedRegionId: region.id
         )
     }
+
+    /// All 11 locations the sync server serves data for (3 main regions + 8 ZBS).
+    /// Segovia Rural itself is excluded - it has no direct schedule, only its ZBS do.
+    public static var allSyncable: [DutyLocation] {
+        let regions: [Region] = [.segoviaCapital, .cuellar, .elEspinar]
+        return regions.map { DutyLocation.fromRegion($0) } + ZBS.availableZBS.map { DutyLocation.fromZBS($0) }
+    }
 }
