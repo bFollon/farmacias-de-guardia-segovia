@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import type { FastifyInstance, FastifyReply } from "fastify";
-import { requireBearerAuth } from "../plugins/auth.js";
+import { requireReloadKey } from "../plugins/auth.js";
 import { isLocationId } from "../types.js";
 import { scheduleStore } from "../store.js";
 import { publishLocationSchedule } from "../publish.js";
@@ -164,14 +164,14 @@ async function refreshRural(reply: FastifyReply) {
 }
 
 export async function adminRoutes(app: FastifyInstance): Promise<void> {
-  app.post("/api/admin/reload", { preHandler: requireBearerAuth }, async () => {
+  app.post("/api/admin/reload", { preHandler: requireReloadKey }, async () => {
     const result = await scheduleStore.reload();
     return result;
   });
 
   app.post<{ Params: { locationId: string } }>(
     "/api/refresh/:locationId",
-    { preHandler: requireBearerAuth },
+    { preHandler: requireReloadKey },
     async (request, reply) => {
       const { locationId } = request.params;
 

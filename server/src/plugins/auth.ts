@@ -1,15 +1,30 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { config } from "../config.js";
 
-/**
- * Bearer-auth preHandler shared by every non-/health route. Matches the "shared
- * bearer token, no per-endpoint auth tiers" MVP decision in Features/backend-data-service.md.
- */
-export async function requireBearerAuth(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+function checkBearer(request: FastifyRequest, expected: string): boolean {
   const header = request.headers.authorization ?? "";
-  const token = header.startsWith("Bearer ") ? header.slice("Bearer ".length) : "";
+  if (!header.startsWith("Bearer ")) return false;
+  return Boolean(expected) && header.slice("Bearer ".length) === expected;
+}
 
-  if (!config.apiToken || token !== config.apiToken) {
+/**
+ * Prehandler for client-facing reads (GET /api/locations, GET /api/schedules/:id) — this
+ * token is safe to embed in the iOS/Android apps. Matches InterSegoService's requireApiKey.
+ */
+export async function requireApiKey(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+  if (!checkBearer(request, config.apiKey)) {
+    await reply.code(401).send({ error: "Unauthorized" });
+  }
+}
+
+/**
+ * Prehandler for admin-only operations (POST /api/refresh/:id, POST /api/admin/reload) —
+ * a separate key that never leaves the server, so extracting API_KEY from a shipped app
+ * doesn't grant the ability to trigger fetches against cofsegovia.com or force a
+ * republish. Matches InterSegoService's requireReloadKey.
+ */
+export async function requireReloadKey(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+  if (!checkBearer(request, config.reloadKey)) {
     await reply.code(401).send({ error: "Unauthorized" });
   }
 }

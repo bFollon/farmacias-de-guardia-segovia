@@ -1,12 +1,12 @@
 import type { FastifyInstance } from "fastify";
-import { requireBearerAuth } from "../plugins/auth.js";
+import { requireApiKey } from "../plugins/auth.js";
 import { isLocationId } from "../types.js";
 import { scheduleStore } from "../store.js";
 
 export async function schedulesRoutes(app: FastifyInstance): Promise<void> {
   app.get<{ Params: { locationId: string } }>(
     "/api/schedules/:locationId",
-    { preHandler: requireBearerAuth },
+    { preHandler: requireApiKey },
     async (request, reply) => {
       const { locationId } = request.params;
 
