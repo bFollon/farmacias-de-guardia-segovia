@@ -20,10 +20,10 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
-import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,17 +37,27 @@ sealed class RegionRefreshState {
     data class Error(val message: String) : RegionRefreshState()
 }
 
+data class LocationSyncStatus(
+    val location: DutyLocation,
+    val version: Int?,
+    val lastSyncedAt: Long?
+) {
+    val isSynced: Boolean get() = version != null
+}
+
 /**
- * ViewModel for CacheStatusScreen
- * Manages cache status data and loading state
+ * ViewModel for CacheStatusScreen.
+ * Manages per-location sync status data and loading state.
  */
 class CacheStatusViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val pdfCacheManager = PDFCacheManager.getInstance(application)
+    private val cacheService = ScheduleCacheService(application)
     private val scheduleService = ScheduleService(application)
 
-    private val _cacheStatuses = MutableStateFlow<List<RegionCacheStatus>>(emptyList())
-    val cacheStatuses: StateFlow<List<RegionCacheStatus>> = _cacheStatuses.asStateFlow()
+    private val allLocations: List<DutyLocation> = Region.allRegions.flatMap { it.toDutyLocationList() }
+
+    private val _statuses = MutableStateFlow<List<LocationSyncStatus>>(emptyList())
+    val statuses: StateFlow<List<LocationSyncStatus>> = _statuses.asStateFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -57,63 +67,61 @@ class CacheStatusViewModel(application: Application) : AndroidViewModel(applicat
 
     private val _refreshStates = MutableStateFlow<Map<String, RegionRefreshState>>(emptyMap())
     val refreshStates: StateFlow<Map<String, RegionRefreshState>> = _refreshStates.asStateFlow()
-    
+
     init {
-        loadCacheStatus()
+        loadStatus()
     }
-    
+
     /**
-     * Load cache status for all regions
+     * Load sync status for all locations
      */
-    fun loadCacheStatus() {
+    fun loadStatus() {
         viewModelScope.launch {
             _isLoading.value = true
-            
-            val statuses = pdfCacheManager.getCacheStatus()
-            
-            _cacheStatuses.value = statuses
+            _statuses.value = buildStatuses()
             _isLoading.value = false
         }
     }
-    
+
     /**
-     * Refresh cache status
+     * Refresh sync status
      */
     fun refresh() {
-        loadCacheStatus()
+        loadStatus()
+    }
+
+    private fun buildStatuses(): List<LocationSyncStatus> = allLocations.map { location ->
+        LocationSyncStatus(
+            location = location,
+            version = cacheService.cachedServerVersion(location),
+            lastSyncedAt = cacheService.getCacheTimestamp(location)
+        )
     }
 
     /**
-     * Force refresh all PDF caches
-     * Clears and reloads all region schedules
+     * Force sync all locations against the server
      */
     fun refreshAllCaches() {
         viewModelScope.launch {
-            val allRegions = Region.allRegions
-
             _isRefreshing.value = true
-            _refreshStates.value = allRegions.associate { it.id to RegionRefreshState.Pending }
+            _refreshStates.value = allLocations.associate { it.id to RegionRefreshState.Pending }
 
             try {
-                for (region in allRegions) {
-                    DebugConfig.debugPrint("CacheStatusViewModel: Force refreshing cache for ${region.name}")
+                for (location in allLocations) {
+                    DebugConfig.debugPrint("CacheStatusViewModel: Force syncing ${location.name}")
 
-                    _refreshStates.value = _refreshStates.value + (region.id to RegionRefreshState.Refreshing)
+                    _refreshStates.value = _refreshStates.value + (location.id to RegionRefreshState.Refreshing)
 
-                    scheduleService.clearCacheForRegion(region)
-                    scheduleService.markRegionDirty(region)
+                    scheduleService.markRegionDirty(location.associatedRegion)
+                    val schedules = scheduleService.loadSchedules(location, forceRefresh = true)
 
-                    val locations = region.toDutyLocationList()
-                    for (location in locations) {
-                        scheduleService.loadSchedules(location, forceRefresh = false)
-                    }
-
-                    _refreshStates.value = _refreshStates.value + (region.id to RegionRefreshState.Completed)
-                    DebugConfig.debugPrint("CacheStatusViewModel: ✅ Force refreshed cache for ${region.name}")
+                    _refreshStates.value = _refreshStates.value + (location.id to
+                        if (schedules.isNotEmpty()) RegionRefreshState.Completed else RegionRefreshState.Error("Sin datos"))
+                    DebugConfig.debugPrint("CacheStatusViewModel: ✅ Force synced ${location.name}")
                 }
 
                 // Update statuses in-place to avoid triggering the full-screen loading state
-                _cacheStatuses.value = pdfCacheManager.getCacheStatus()
+                _statuses.value = buildStatuses()
 
             } catch (e: Exception) {
                 DebugConfig.debugError("CacheStatusViewModel: Error refreshing caches", e)

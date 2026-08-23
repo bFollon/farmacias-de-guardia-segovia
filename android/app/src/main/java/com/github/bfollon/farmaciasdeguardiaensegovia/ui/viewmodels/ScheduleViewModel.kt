@@ -20,16 +20,13 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.ui.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.bfollon.farmaciasdeguardiaensegovia.data.ConfidenceFactor
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceResult
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.ConfidenceService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,12 +41,11 @@ class ScheduleViewModel(
     context: Context,
     locationId: String
 ) : ViewModel() {
-    
+
     private val scheduleService = ScheduleService(context)
-    private val pdfCacheManager = PDFCacheManager.getInstance(context)
+    private val cacheService = ScheduleCacheService(context)
     private val urlRepository = PDFURLRepository.getInstance(context)
-    private val confidenceService = ConfidenceService(context)
-    
+
     // Find the region by ID
     private val location = DutyLocation.Companion.fromId(locationId)
 
@@ -70,9 +66,7 @@ class ScheduleViewModel(
         val nextSchedule: PharmacySchedule? = null,
         val nextTimeSpan: DutyTimeSpan? = null,
         val minutesUntilShiftChange: Long? = null,
-        val showShiftTransitionWarning: Boolean = false,
-        // Confidence
-        val confidenceResult: ConfidenceResult? = null
+        val showShiftTransitionWarning: Boolean = false
     )
     
     private val _uiState = MutableStateFlow(ScheduleUiState())
@@ -120,8 +114,7 @@ class ScheduleViewModel(
         val showWarning = currentInfo?.second?.let { timeSpan ->
             timeSpan.isActiveNow() && minutesUntilChange != null && minutesUntilChange > 0 && minutesUntilChange <= 30
         } ?: false
-        val downloadDate = pdfCacheManager.getDownloadDate(location.associatedRegion)
-        val confidenceResult = confidenceService.computeConfidence(location, schedules)
+        val downloadDate = cacheService.getCacheTimestamp(location)
 
         _uiState.value = _uiState.value.copy(
             isLoading = false,
@@ -133,8 +126,7 @@ class ScheduleViewModel(
             minutesUntilShiftChange = minutesUntilChange,
             showShiftTransitionWarning = showWarning,
             formattedDateTime = currentDateTime,
-            downloadDate = downloadDate,
-            confidenceResult = confidenceResult
+            downloadDate = downloadDate
         )
         return schedules
     }

@@ -20,57 +20,51 @@ package com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFCacheManager
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /**
- * ViewModel for CacheRefreshScreen
- * Manages refresh progress and state for all regions
+ * ViewModel for CacheRefreshScreen.
+ * Manages sync progress and state for all locations.
  */
 class CacheRefreshViewModel(application: Application) : AndroidViewModel(application) {
-    
-    private val pdfCacheManager = PDFCacheManager.getInstance(application)
-    
+
+    private val cacheService = ScheduleCacheService(application)
+    private val syncService = ScheduleSyncService.getInstance(application)
+
     private val _refreshStates = MutableStateFlow<Map<String, UpdateProgressState>>(emptyMap())
     val refreshStates: StateFlow<Map<String, UpdateProgressState>> = _refreshStates.asStateFlow()
-    
+
     private val _isCompleted = MutableStateFlow(false)
     val isCompleted: StateFlow<Boolean> = _isCompleted.asStateFlow()
-    
+
     private val _wasOffline = MutableStateFlow(false)
     val wasOffline: StateFlow<Boolean> = _wasOffline.asStateFlow()
-    
-    private val regions = listOf(
-        Region.segoviaCapital,
-        Region.cuellar,
-        Region.elEspinar,
-        Region.segoviaRural
-    )
-    
+
+    val locations: List<DutyLocation> = Region.allRegions.flatMap { it.toDutyLocationList() }
+
     init {
         startRefresh()
     }
-    
+
     /**
-     * Start the refresh process for all regions
+     * Start the sync process for all locations
      */
     private fun startRefresh() {
-        AnalyticsService.track("cache_refresh_triggered", mapOf("region_count" to regions.size))
+        AnalyticsService.track("cache_refresh_triggered", mapOf("location_count" to locations.size))
 
         viewModelScope.launch {
-            // Check network status first
-            val isOnline = NetworkMonitor.isOnline()
-            
-            if (!isOnline) {
-                // Offline: Set all regions to error state immediately
-                val offlineStates = regions.associate { 
+            if (!NetworkMonitor.isOnline()) {
+                val offlineStates = locations.associate {
                     it.id to UpdateProgressState.Error("Sin conexión a Internet")
                 }
                 _refreshStates.value = offlineStates
@@ -78,28 +72,30 @@ class CacheRefreshViewModel(application: Application) : AndroidViewModel(applica
                 _isCompleted.value = true
                 return@launch
             }
-            
-            // Online: Initialize all regions as pending
-            val pendingStates = regions.associate { it.id to UpdateProgressState.Checking }
-            _refreshStates.value = pendingStates
-            
-            // Use PDFCacheManager's progress-based update check
-            pdfCacheManager.forceCheckForUpdatesWithProgress { region, state ->
-                // Update the state for this region
-                val currentStates = _refreshStates.value.toMutableMap()
-                currentStates[region.id] = state
-                _refreshStates.value = currentStates
+
+            _refreshStates.value = locations.associate { it.id to UpdateProgressState.Checking }
+
+            // Empty knownVersions forces a real conditional GET for every location, bypassing
+            // the manifest-version pre-check - this is an explicit "check everything now" action.
+            val summary = syncService.syncAll(locations.map { it.id }, emptyMap()) { locationId, schedule ->
+                val location = locations.first { it.id == locationId }
+                cacheService.saveSchedulesToCache(location, schedule.schedules, schedule.version)
+                _refreshStates.value = _refreshStates.value + (locationId to UpdateProgressState.Downloaded)
             }
-            
-            // Mark as completed
+
+            _refreshStates.value = _refreshStates.value + summary.unchanged.associateWith { UpdateProgressState.UpToDate }
+            _refreshStates.value = _refreshStates.value + summary.failed.mapValues {
+                UpdateProgressState.Error("Error de sincronización")
+            }
+
             _isCompleted.value = true
         }
     }
-    
+
     /**
-     * Get the refresh state for a specific region
+     * Get the refresh state for a specific location
      */
-    fun getStateForRegion(regionId: String): UpdateProgressState {
-        return _refreshStates.value[regionId] ?: UpdateProgressState.Checking
+    fun getStateForLocation(locationId: String): UpdateProgressState {
+        return _refreshStates.value[locationId] ?: UpdateProgressState.Checking
     }
 }

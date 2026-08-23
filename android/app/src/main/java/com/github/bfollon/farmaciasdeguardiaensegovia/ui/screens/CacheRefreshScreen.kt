@@ -36,13 +36,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyLocation
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.UpdateProgressState
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheRefreshViewModel
 
 /**
- * Cache Refresh Screen - Shows progress when checking for PDF updates
+ * Cache Refresh Screen - Shows progress when syncing with the server
  * Matches iOS CacheRefreshView design with Material 3
  * Displayed as a ModalBottomSheet
  */
@@ -54,13 +54,6 @@ fun CacheRefreshScreen(
     val refreshStates by viewModel.refreshStates.collectAsState()
     val isCompleted by viewModel.isCompleted.collectAsState()
     val wasOffline by viewModel.wasOffline.collectAsState()
-
-    val regions = listOf(
-        Region.segoviaCapital,
-        Region.cuellar,
-        Region.elEspinar,
-        Region.segoviaRural
-    )
 
     Scaffold { innerPadding ->
         Column(
@@ -78,17 +71,17 @@ fun CacheRefreshScreen(
                 // Section header
                 item {
                     Text(
-                        text = "Estado de Actualización",
+                        text = "Estado de Sincronización",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
 
-                // Region cards
-                items(regions) { region ->
-                    val state = refreshStates[region.id] ?: UpdateProgressState.Checking
-                    CacheRefreshCard(region, state)
+                // Location cards
+                items(viewModel.locations) { location ->
+                    val state = refreshStates[location.id] ?: UpdateProgressState.Checking
+                    CacheRefreshCard(location, state)
                 }
             }
 
@@ -104,7 +97,7 @@ fun CacheRefreshScreen(
  * Card showing refresh status for a single region
  */
 @Composable
-private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
+private fun CacheRefreshCard(location: DutyLocation, state: UpdateProgressState) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -125,11 +118,11 @@ private fun CacheRefreshCard(region: Region, state: UpdateProgressState) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = region.icon,
+                    text = location.icon,
                     style = MaterialTheme.typography.titleLarge
                 )
                 Text(
-                    text = region.name,
+                    text = location.name,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )

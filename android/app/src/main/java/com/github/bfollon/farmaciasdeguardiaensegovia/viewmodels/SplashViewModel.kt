@@ -29,9 +29,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingDemo
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingTest
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -431,30 +429,6 @@ class SplashViewModel(private val context: Context) : ViewModel() {
      * Get the scraped PDF URLs from the cofsegovia.com page
      */
     fun getScrapedPDFURLs(): List<PDFURLScrapingService.ScrapedPDFData> = _scrapedPDFURLs.value
-
-    /**
-     * Run the PDF URL scraping demo for testing purposes
-     */
-    fun runScrapingDemo() {
-        DebugConfig.debugPrint("SplashViewModel: Running PDF URL scraping demo...")
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                PDFURLScrapingDemo.runDemo()
-            }
-        }
-    }
-
-    /**
-     * Run the PDF URL scraping test with detailed HTML output
-     */
-    fun runScrapingTest() {
-        DebugConfig.debugPrint("SplashViewModel: Running PDF URL scraping test with HTML output...")
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                PDFURLScrapingTest.runTest()
-            }
-        }
-    }
 
     /**
      * Reset loading state (for testing or if user wants to refresh)

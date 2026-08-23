@@ -264,24 +264,6 @@ class PDFURLRepository private constructor(private val context: Context) {
     }
 
     /**
-     * Returns the timestamp of the last scraping attempt, or 0 if never scraped.
-     * Used by ConfidenceService.
-     */
-    fun getLastScrapeTimestamp(): Long = sharedPreferences.getLong(LAST_SCRAPE_KEY, 0L)
-
-    /**
-     * Returns whether the scraping success/failure flag has ever been written.
-     * Used by ConfidenceService to distinguish "never scraped" from "scraped and failed".
-     */
-    fun hasLastScrapeSucceededValue(): Boolean = sharedPreferences.contains(LAST_SCRAPE_SUCCEEDED_KEY)
-
-    /**
-     * Returns whether the last scraping attempt succeeded.
-     * Only meaningful if [hasLastScrapeSucceededValue] returns true.
-     */
-    fun getLastScrapeSucceeded(): Boolean = sharedPreferences.getBoolean(LAST_SCRAPE_SUCCEEDED_KEY, false)
-    
-    /**
      * Validate all persisted URLs with HEAD requests
      * Returns map of valid URLs
      */

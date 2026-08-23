@@ -36,16 +36,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.bfollon.farmaciasdeguardiaensegovia.data.RegionCacheStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.CacheStatusViewModel
+import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.LocationSyncStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.viewmodels.RegionRefreshState
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 /**
- * Cache Status Screen - Displays PDF cache status for all regions
+ * Cache Status Screen - Displays sync status for all locations
  * Matches iOS CacheStatusView design with Material 3
  * Displayed as a ModalBottomSheet
  */
@@ -54,7 +54,7 @@ fun CacheStatusScreen(
     onDismiss: () -> Unit,
     viewModel: CacheStatusViewModel = viewModel()
 ) {
-    val cacheStatuses by viewModel.cacheStatuses.collectAsState()
+    val statuses by viewModel.statuses.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
     val refreshStates by viewModel.refreshStates.collectAsState()
@@ -75,7 +75,7 @@ fun CacheStatusScreen(
                 ) {
                     CircularProgressIndicator()
                     Text(
-                        text = "Comprobando estado de la caché...",
+                        text = "Comprobando estado de la sincronización...",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -92,12 +92,12 @@ fun CacheStatusScreen(
             ) {
                 // Header Section
                 item {
-                    CacheStatusHeader(cacheStatuses)
+                    CacheStatusHeader()
                 }
 
-                // Region Status Cards
-                items(cacheStatuses) { status ->
-                    CacheStatusCard(status, refreshStates[status.region.id])
+                // Location Status Cards
+                items(statuses) { status ->
+                    CacheStatusCard(status, refreshStates[status.location.id])
                 }
 
                 // Info Section
@@ -110,6 +110,7 @@ fun CacheStatusScreen(
                     ForceRefreshButton(
                         isRefreshing = isRefreshing,
                         refreshedCount = refreshedCount,
+                        totalCount = statuses.size,
                         onClick = { viewModel.refreshAllCaches() }
                     )
                 }
@@ -120,42 +121,31 @@ fun CacheStatusScreen(
 }
 
 /**
- * Header showing last update check time
+ * Header for the sync status list
  */
 @Composable
-private fun CacheStatusHeader(cacheStatuses: List<RegionCacheStatus>) {
+private fun CacheStatusHeader() {
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(
-            text = "Estado de la caché de PDFs",
+            text = "Estado de sincronización",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
-
-        val lastChecked = cacheStatuses.firstOrNull()?.lastChecked
-        if (lastChecked != null) {
-            val formatter = SimpleDateFormat("d 'sept' yyyy, HH:mm", Locale.forLanguageTag("es-ES"))
-            Text(
-                text = "Última búsqueda de actualizaciones: ${formatter.format(Date(lastChecked))}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        } else {
-            Text(
-                text = "La caché nunca se ha comprobado para actualizaciones",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
+        Text(
+            text = "Los datos de guardias se sincronizan con el servidor y se guardan localmente para acceso sin conexión.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
 /**
- * Card displaying cache status for a single region
+ * Card displaying sync status for a single location
  */
 @Composable
-private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefreshState? = null) {
+private fun CacheStatusCard(status: LocationSyncStatus, refreshState: RegionRefreshState? = null) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -168,7 +158,7 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Header with region and status
+            // Header with location and status
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -181,11 +171,11 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = status.region.icon,
+                        text = status.location.icon,
                         style = MaterialTheme.typography.headlineSmall
                     )
                     Text(
-                        text = status.region.name,
+                        text = status.location.name,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -219,7 +209,7 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                                 strokeWidth = 2.dp
                             )
                             Text(
-                                text = "Procesando...",
+                                text = "Sincronizando...",
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Medium,
                                 color = MaterialTheme.colorScheme.primary
@@ -255,30 +245,25 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                         }
                         null -> {
                             Icon(
-                                imageVector = when {
-                                    !status.isCached -> Icons.Default.Warning
-                                    status.needsUpdate -> Icons.Default.Refresh
-                                    else -> Icons.Default.CheckCircle
-                                },
+                                imageVector = if (status.isSynced) Icons.Default.CheckCircle else Icons.Default.Warning,
                                 contentDescription = null,
-                                tint = status.statusColor,
+                                tint = if (status.isSynced) Color(0xFF66BB6A) else MaterialTheme.colorScheme.error,
                                 modifier = Modifier.size(20.dp)
                             )
                             Text(
-                                text = status.statusText,
+                                text = if (status.isSynced) "Sincronizado" else "Sin sincronizar",
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Medium,
-                                color = status.statusColor
+                                color = if (status.isSynced) Color(0xFF66BB6A) else MaterialTheme.colorScheme.error
                             )
                         }
                     }
                 }
             }
 
-            // Details (if cached)
-            if (status.isCached) {
-                HorizontalDivider()
-
+            // Details
+            HorizontalDivider()
+            if (status.isSynced) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
@@ -287,12 +272,14 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Descargado:",
+                            text = "Última sincronización:",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = status.formattedDownloadDate,
+                            text = status.lastSyncedAt?.let {
+                                SimpleDateFormat("d MMM yyyy, HH:mm", Locale.forLanguageTag("es-ES")).format(Date(it))
+                            } ?: "Nunca",
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium
                         )
@@ -303,41 +290,18 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Tamaño:",
+                            text = "Versión:",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = status.formattedFileSize,
+                            text = "${status.version}",
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium
                         )
                     }
-
-                    // Update available warning
-                    if (status.needsUpdate) {
-                        HorizontalDivider()
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Warning,
-                                contentDescription = null,
-                                tint = Color(0xFFFFA726), // Orange
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Text(
-                                text = "Hay una actualización disponible para este PDF",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = Color(0xFFFFA726)
-                            )
-                        }
-                    }
                 }
             } else {
-                // Not cached message
-                HorizontalDivider()
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -349,7 +313,7 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "PDF no descargado - se obtendrá cuando sea necesario",
+                        text = "Usando datos incluidos en la app - se sincronizará cuando haya conexión",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -364,57 +328,43 @@ private fun CacheStatusCard(status: RegionCacheStatus, refreshState: RegionRefre
  */
 @Composable
 private fun CacheInfoCard() {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = "Los PDFs se almacenan localmente para una carga más rápida y acceso sin conexión.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
         )
-
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-            )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Info,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        text = "Información de la caché",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "Información",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    InfoColorRow(
-                        color = Color(0xFF66BB6A),
-                        text = "Verde: PDF descargado y actualizado"
-                    )
-                    InfoColorRow(
-                        color = Color(0xFFFFA726),
-                        text = "Naranja: Actualización del PDF disponible"
-                    )
-                    InfoColorRow(
-                        color = Color(0xFFD32F2F),
-                        text = "Rojo: PDF no descargado"
-                    )
-                }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                InfoColorRow(
+                    color = Color(0xFF66BB6A),
+                    text = "Verde: Datos sincronizados con el servidor"
+                )
+                InfoColorRow(
+                    color = Color(0xFFD32F2F),
+                    text = "Rojo: Sin sincronizar (usando datos incluidos en la app)"
+                )
             }
         }
     }
@@ -443,12 +393,13 @@ private fun InfoColorRow(color: Color, text: String) {
 }
 
 /**
- * Button to force refresh all PDF caches
+ * Button to force sync all locations
  */
 @Composable
 private fun ForceRefreshButton(
     isRefreshing: Boolean,
     refreshedCount: Int,
+    totalCount: Int,
     onClick: () -> Unit
 ) {
     Column(
@@ -467,19 +418,19 @@ private fun ForceRefreshButton(
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Actualizando PDFs... $refreshedCount/4")
+                Text("Sincronizando... $refreshedCount/$totalCount")
             } else {
                 Icon(
                     imageVector = Icons.Default.Refresh,
                     contentDescription = null
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Forzar actualización de todos los PDFs")
+                Text("Forzar sincronización")
             }
         }
 
         Text(
-            text = "Esto descargará y procesará nuevamente todos los PDFs de guardias, actualizando la caché.",
+            text = "Esto comprobará el servidor y descargará cualquier dato actualizado.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
