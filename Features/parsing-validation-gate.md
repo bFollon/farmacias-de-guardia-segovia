@@ -36,7 +36,7 @@ Same nodemailer + iCloud SMTP path as [[pdf-change-monitor]] — one summary ema
 
 | Step | Status |
 |---|---|
-| Validation rules defined per region | 🟡 (segovia-capital, cuellar, el-espinar; rural not yet ported, `server/src/validation/regionConfig.ts`) |
-| Gate wired into `POST /api/refresh/:locationId` | ✅ (segovia-capital, cuellar, el-espinar; rural still 501) |
+| Validation rules defined per region | ✅ (all 11 locations, `server/src/validation/regionConfig.ts`) |
+| Gate wired into `POST /api/refresh/:locationId` | ✅ (all 11 locations; rural handled as a group — see `admin.ts`'s `refreshRural`, which validates all 8 ZBS before publishing any) |
 | Failure-alert email template built | ⬜ (no monitor/alerting service exists yet — see [[pdf-change-monitor]]) |
 | Delta-bound thresholds tuned against real historical PDFs | ⬜ |

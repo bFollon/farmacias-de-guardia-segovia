@@ -1,6 +1,6 @@
 # Feature: Server-Based Schedule Migration — Plan
 
-## Status: Phase 1 complete for segovia-capital (2026-08-23); Phase 2 in progress
+## Status: Phase 1 complete; Phase 2 parser porting complete (2026-08-23), monitor not started
 
 Not deployed anywhere yet — everything so far is local (`server/`), unpushed to any host. No client (iOS/Android) changes made; Phase 3 hasn't started.
 
@@ -36,6 +36,15 @@ Server owns parsing (hybrid automated + validation gate); apps sync pre-parsed J
 5. Port Cuéllar, El Espinar, Segovia Rural parsers.
 6. Build and deploy [[pdf-change-monitor]] as its own pm2 process, wired to auto-trigger refreshes.
 7. Let the full pipeline (monitor → parse → validate → publish) run unattended for at least one real PDF update cycle per region before touching client code — the whole point of this migration is trustworthy shared data, so the server side needs to earn that trust before clients start relying on it exclusively.
+
+**Step 5 done (2026-08-23).** All 4 region parsers ported (`server/src/parsers/{segoviaCapital,cuellar,elEspinar,segoviaRural}.ts`), 28 tests passing, all verified live against real production PDFs via `POST /api/refresh/:locationId` — every one of the 11 servable locations (3 town regions + 8 rural ZBS) now publishes successfully. Along the way this surfaced **3 live, currently-shipping bugs** in the Kotlin/Swift originals (not ported forward — fixed in the TS port instead, and flagged here for the client codebases):
+- El Espinar: a fold-logic ordering bug in `ElEspinarParser.kt` misattributes whole weeks to the wrong pharmacy (not just drops them) — see commit c72b9f4's description.
+- Cuéllar: the August/September month-boundary week silently disappears — `CuellarParser.kt`'s docstring claims to handle it, but the regex doesn't exist in the actual code.
+- Segovia Rural: both clients key Riaza/Sepúlveda's "Cerezo de Abajo" pharmacy as "CEREZO ABAJO" (missing "DE"), which never matches the real PDF text, dropping that ZBS's schedule for every week the town is on duty.
+
+Segovia Rural's La Granja ZBS also isn't a port of `detectFirstLaGranjaPharmacy()` (that function has an inverted-index bug and would likely pick the wrong pharmacy) — it's re-derived via majority vote across the whole document and was verified against **live data pulled from a real Android device** (2026-08-23 → Farmacia Cristina Mínguez Del Pozo), per commit 762c5e5.
+
+Step 6 (pdf-change-monitor) is **not started** — this is the next piece of Phase 2, and needs deployment infra (Pi access, pm2, SMTP credentials for the alert email) that wasn't set up in this session.
 
 ### Phase 3 — Client sync, additive
 

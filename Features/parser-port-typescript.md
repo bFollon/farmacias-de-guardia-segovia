@@ -45,8 +45,8 @@ InterSego abandoned automated parsing specifically because parse failures were s
 
 | Step | Status |
 |---|---|
-| Fixture PDFs + expected JSON captured (all 4 regions) | 🟡 (3/4 — `server/fixtures/{segovia-capital,cuellar,el-espinar}.pdf`; rural PDF downloaded but not yet parsed) |
+| Fixture PDFs + expected JSON captured (all 4 regions) | ✅ (`server/fixtures/{segovia-capital,cuellar,el-espinar,segovia-rural}.pdf`) |
 | `SegoviaCapitalParser.ts` ported + passing fixture test | ✅ (`server/src/parsers/segoviaCapital.ts`) |
 | `CuellarParser.ts` / `ElEspinarParser.ts` ported | ✅ (`server/src/parsers/{cuellar,elEspinar}.ts`, shared base in `weeklyRotation.ts`) — found and fixed 2 live bugs in the Kotlin originals along the way, see commit c72b9f4 |
-| `SegoviaRuralParser.ts` ported (8 ZBS) | ⬜ |
+| `SegoviaRuralParser.ts` ported (8 ZBS) | ✅ (`server/src/parsers/segoviaRural.ts` + `rural.ts`) — found and fixed a 3rd live bug (Cerezo de Abajo keyword typo); La Granja's rotation re-derived (not a port of the buggy Kotlin detector) and verified against live Android device data, see commit 762c5e5 |
 | CI wired to run fixture tests on parser changes | ⬜ |
