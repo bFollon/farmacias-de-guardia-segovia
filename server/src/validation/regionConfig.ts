@@ -9,4 +9,16 @@ export const REGION_VALIDATION_CONFIG: Record<string, RegionValidationConfig> = 
     expectedCadenceDays: 1,
     maxDeltaFraction: 0.5,
   },
+  cuellar: {
+    minScheduleCount: 20,
+    requiredShiftKeys: ["fullDay"],
+    expectedCadenceDays: 1,
+    maxDeltaFraction: 0.5,
+  },
+  "el-espinar": {
+    minScheduleCount: 20,
+    requiredShiftKeys: ["fullDay"],
+    expectedCadenceDays: 1,
+    maxDeltaFraction: 0.5,
+  },
 };

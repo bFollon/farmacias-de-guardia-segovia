@@ -77,7 +77,10 @@ function checkShiftCompleteness(schedules: PharmacySchedule[], config: RegionVal
   }
 }
 
-const SPANISH_PHONE_REGEX = /^\d{3} ?\d{6}$/;
+// Real source data groups digits inconsistently across regions — "921 427270" (3+6),
+// "921144794" (ungrouped), "921 181 171" (3+3+3) all appear — so validate digit count
+// after stripping spaces rather than a single fixed grouping.
+const SPANISH_PHONE_DIGITS_REGEX = /^\d{9}$/;
 
 function checkPharmacyShapeSanity(schedules: PharmacySchedule[], failures: string[]): void {
   const bad: string[] = [];
@@ -90,7 +93,10 @@ function checkPharmacyShapeSanity(schedules: PharmacySchedule[], failures: strin
           bad.push(`${label}: name missing/invalid`);
         } else if (!pharmacy.address.trim()) {
           bad.push(`${label}: empty address`);
-        } else if (!SPANISH_PHONE_REGEX.test(pharmacy.phone.trim())) {
+        } else if (
+          pharmacy.phone.trim() !== "No disponible" &&
+          !SPANISH_PHONE_DIGITS_REGEX.test(pharmacy.phone.replace(/\s/g, ""))
+        ) {
           bad.push(`${label}: phone "${pharmacy.phone}" doesn't match expected format`);
         }
       }
