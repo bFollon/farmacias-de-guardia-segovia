@@ -44,13 +44,12 @@ class ScheduleService(context: Context) {
     suspend fun loadSchedules(location: DutyLocation, forceRefresh: Boolean = false): List<PharmacySchedule> {
         DebugConfig.debugPrint("ScheduleService: Loading schedules for ${location.associatedRegion.name} (forceRefresh: $forceRefresh)")
 
-        // Clear caches if force refresh is requested (enables full re-download and re-parse)
-        if (forceRefresh) {
-            clearCacheForRegion(location.associatedRegion)
-        }
-
-        // Use the shared repository for loading
-        val schedules = repository.loadSchedules(location)
+        // Note: forceRefresh no longer proactively clears the disk cache first. Clearing before
+        // a sync attempt that might itself fail (offline, server unreachable) would destroy the
+        // last-known-good data this migration's whole offline story depends on - the repository's
+        // sync call always attempts a fresh check on its own, disk cache is only ever overwritten
+        // by a successful decode of new data.
+        val schedules = repository.loadSchedules(location, forceRefresh)
 
         DebugConfig.debugPrint("ScheduleService: Loaded ${schedules.size} schedules for ${location.associatedRegion.name}")
 
