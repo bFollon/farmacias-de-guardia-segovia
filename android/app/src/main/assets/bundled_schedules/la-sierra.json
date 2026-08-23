@@ -1,0 +1,2539 @@
+{
+  "locationId": "la-sierra",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.450Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "938377c3815282e02fadb4ed70d76e71",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b038d9da63806718011dfde833f6c742",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0440c4f788e68b06c0e3b2e9d67ccc29",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e89a4c281006e329dbc90bbb16f0c272",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "af703fccbb9ffaa8ced940c286c9cf96",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eec9752e98516aa31a92b50e9d2dec06",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ed91d251f63de10c5f6b7813bc13fcce",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c81f2da133eca88819e1aa9bfdce4c94",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6b4859e1551a36b6414a5c6cb9d2c5cb",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "08f37ae6a37aa9ae6b150bd63a9089ed",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f82d1f25f2b8cb02540fa6503f721d46",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c7bd62a747ee153bffcdff262454a35",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "98045d7a536f2a18c38c0dc5c7e7338d",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "00b2c818e1a3804a96bdcb11fc1d29bf",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "831950db0563b89b7c44b47bb27c9935",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f63b68d9d09df9475552ea97057d4392",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ff488afc4ba65c16e29a253e93df9f02",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "76d0fd90a2e243f5990f17166f37c461",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "57c818bde8485911a2c606db762ab1ac",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "02f11a18a53b5c5bba15f2caa783354c",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c9fb5e7f89d7044f11c977c36c402ea5",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "700ca5b8057c1ce81858b997b58c4a65",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6d6f1bcda794bdc5b4b064fd104c43f2",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e0311740ca7ec56f7cd83a9813368ecd",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6f7455804696c21b55bd746b589160a3",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5e395243da6a11c3bd0ff5b8b133c894",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2e2d326c0abee42f71acfcaf3ed4e1b3",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ac5bfff24b0b38650ba23ef5a130ee47",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e0dc81b4b5671a5ffcbc0b84a42a6b77",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "58292752f37db0ee142cd68dd9de0328",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1b59f15709d13d1a9a4e2152b9b7e47d",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "89cd2effd3649661b4c891bda5c14e46",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f3631326f77b1051aaca718458506fec",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2e1244eb036bf0af7716b86b467132f9",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c9586dfba50a7cac4f7607dc27173a1",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eecb98f80634808938b492376ac355d9",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c62a5ae75d23198e92565f44d09a272f",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6b8f967c81a4ee850811ecdac1ede5af",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0d57962f78e0668128770234db98cbe0",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7f75dcf4ce02a4c4d726e99e31917cae",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5a1be616356e7e65c9e1c3ec818b1af8",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "efffdda86371897d0303cccebef825fa",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0333d8ea8ad8d5f5d7bfa8c1f0f4a370",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a0b9282930399ffab3452f6ab4c2a1bd",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "879dd162d90b61d2f3757b874cee274a",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6323d296413e719da092cfb053e20a23",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "af81af7e9f9960c1901e9f2b0c4bb5b1",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "da0cf6ea10cbb9dbc18fd25e8b05d30a",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "807ecf677b8611fbfdf7000c0d4d5f73",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "50328d3089aaaac6385b5059c1623b60",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "89045ad98fa27d0fc8370bee9200a2ad",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e426164c2d345062da334a790ed0ed54",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9ebeb3572316de984433ca8af710266a",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "27e46870971c37aee910d480007141e2",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "33642681e1abd024bbf5ddaa20b00568",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1e71437ac77282e9929981ea153e9f21",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "91b493d4920f3d897349a3704c069b88",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "012f2dc6f271ba18e03ec07b86875d0e",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "394974a0fa4a7241c40c07dd5e86ba36",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "19537e0b834abb136036bf9765985fe5",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "67cc989cf4d0bc77248b04f609b4fced",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2860c7f77b43844c6914cb78f71e53ed",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c51668b632d1cb581e70db942b2624f0",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c507ecb4b6c944a677465548ce0df096",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "49bdeb453f001659cd67c9a672222a83",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3a958f02e14ec4073df68f6befdcb3e1",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "22180a4abfc5f0ca50a83b8a72737c1d",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2a9a5f7b461a744e47b2fb8fef9c49ab",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4b3001a2a557491d55f1286026650797",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "918a9e8ce603b72c7efb921f57f1a757",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "203e3cc7804e160af91622288e8557b4",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c816b7de411ba4c3d7b0b611100f0ae",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c6d5fd84a61dc28c21796274b05954b6",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b006a8d9f2a4a949444f655b88d35a24",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2047e4ca68aa5f1635a6dd53067f0cd2",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d79891de6e87a2597c5677a70485a112",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0e6af8680c7048c9e871beb0a8b2316a",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "79205039286d0324065ad9284ef6dba1",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "14c4de254f3618bb70d479dec9a73f45",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "42ee3a5cd579aa7df67f6b0457c61241",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "da55c6306b962da85e054031e9741ff9",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "855d8ea20ce5ed249c91293306f904f6",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "306480d95fce036cf2bb290e2622a8d1",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a29204629e72e55c07d07e5970a9a20c",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7a0d091a101cc00ffa8278d545829988",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "14c2e12d1fd5c5118f1cbc09e7648d2b",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7a7c0f054712b32b1b62000e9a07318f",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "99402cb15e0766591d2f8d3bb3947589",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "040770c0db2c4543045316e845cc0301",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9c2fa5ae685dc275bacd1bc81c76e321",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "468fd878074768cd4601d4e4e8829d3f",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "380994d26e4db93c4afc24cc19d97374",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9c58bb5af26d795947101f5b5252656b",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0f94b597e5886a3142ffea735c56d3f9",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1e1b0c8b9dce7ee13f1142fe3769e008",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "55a84e180f97f6c0b86615a7c5164925",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e82d36b87933b3b72c368d3cb43f004b",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "13c2390ddf1ec3867ee539f089800262",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d7948428e562ab52253be47b3ebbb089",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4e257484c5f93c2f3e0b3f3107233de0",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9e7f0c44aa26d22a8d37ecb0a7216016",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5309c2960fb6dcafe851af32adba75d2",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9f9a3a03f841e044e8ac6d130e0a3f52",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "089def04c6a1995f9b47ebafa5dbbed8",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8a53596a26efaf43c6329a9aaa540993",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "217ca1734b2558960116d0dc8076135f",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9079f8a95efbade5bd85ca3a7629b7af",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "83e2edc3c5f202fa768ae61e6c14d5ac",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1bdb262a487cba851dee1451b485a2fd",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "12f77dc81d4c64d6c63bf565aef116dd",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a238d9afa39ba3ba027f3aa0a61b716f",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dad35c59a599249a739f07416765f1e8",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cfd5ae1f9499d8a5ba62f40696c20a1d",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c5341e7569f9c445abd5057b96e40b40",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "10e14c4b8bb644192ff05a941be528e5",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7850dc219b924a580e656f5d6cca4d14",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c375f9f7441ff6e5ac4644d23fe3733",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6f2aaf3079b9d31bb36f223bf3cb350c",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0ea9e6856c42ae2887fc465358d64add",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7316b04e8e2bd36475307bd698db057d",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "311cb7757da1d724e8ebee474c10ae6a",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "38fb7faa837d11a2982fa95002ec68f3",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c2fe6ee13c486541dcb9edb4a1859af3",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e490816ad1ab052d9082cec0c2162090",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c72a1c5cef48b31319f15d7cdfc9b31f",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ee8e1272388743cad30984370b9a0abf",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e59c14eb2f8be8c21b6749758caf1a73",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "02017db30644e9ac244c0120c77caae8",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "14df776a359e697b09b8a81249d43eac",
+            "name": "Farmacia Ana Belén Tomero Díez",
+            "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+            "phone": "921507050",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "beacc9d5a5c0a74e165326e6ab416975",
+            "name": "Farmacia Martín Cuesta",
+            "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+            "phone": "921506113",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "aa720705b697511a378ac0706a296f9e",
+            "name": "Farmacia Lda. Mónica Carrasco Herrero",
+            "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+            "phone": "921506028",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7ae637acfb3fbc2c916ab8b4d13c0db0",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "07232f56f1036d1b4ee307181c0af409",
+            "name": "Farmacia Teresa Laporta Sánchez",
+            "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+            "phone": "921504134",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,3736 @@
+{
+  "locationId": "carbonero",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.455Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "de9c92f1d143b4bca06a9a070d62a1d9",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cdab1094d07ea5ac9d58481896070406",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9ba3fd468f1c99a63720f2d7332fe552",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c751a87513618f2aa5a716726c0d354c",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3c02c2631c0bbf351a41dc2f43294f6b",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eccffd757b54737b6b1b4dbc3d9900a6",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "045dcd7f411b152686f53dad1be5ffbe",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eb86dfe03d0ba16e7005a774e13037bf",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fc37b1e6ab77cfe493a6440d5c949e37",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0952d78f4965f188f8f27cb4e61af395",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5933cdb92c6a0a68d8efc269ea6a7e87",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f1bf39613e66d7bae4d0d4f987e04d6f",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f153573b4cb36f87166036dbf60e215e",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "22b472b12b5baa70aded3829a6b6572e",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6ba32b81c7418a3807ecab62a7919b0f",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6f0926a680e549e4c08d4577429d7b18",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "716d344a3d7cb218b133500edbd83fe7",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8861c0204c80a42d0c634aafc153e6e7",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "453dd9c8c586bb51167852d9e46723f3",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1702a9442bbae46b9dbff40b1f506f7a",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fff16bff5a451915cfa1000d4bbb4a75",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3421dd25486b7d475cc7de95ca539bc4",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "325cc78080451db20fa68bfead2c086e",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a04493e26184bc78935464a9bd0aa88a",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2ac7504ca77ba617948d792cccb7c98d",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d66896390fa6460ee377b88574646b1f",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a1548b4b43118d785ba4c4872a659b4e",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1d548c27dbd19f7c8ebc5fd4201b616a",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a19a701127f83d8e64122940b2b4a5ab",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "954f007a81770a2a1acb62a8644509f3",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c9090121692a8bff4d2f17b4d46d5371",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b82b77663e57bd5f567a1b0a9c86a68f",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cf8cf0416a07563c8f5b4bdfd21cc2db",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b86028ed37744514eea028fccff276aa",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3134cc5b6111b12171592f102b3b1668",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d287a3041fa533add3d8cd99f8dd790b",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f7367dcb10eafe30166292f9651ca520",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "744ec07008f3f818c0a16ce2b4a83d05",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "697fe1e816b95368f03ba22c6a105aff",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3071d6df18582046a0e0077c2cd849d8",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7c520a9d657ee76c87a67d6d0ac611f4",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "44bf49f287d7183aabb4a106643e3adb",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e8ba47342a18d4426f67580d0d40a324",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b815d743c72837f551342c4303323807",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cc6164962207f4720fa9a81e8e218675",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0754f47e0523f6fd75fb428fafda83df",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "52e97388888355b291b246dd7b439950",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e0a08b00ed0fd9ab09aa24d2fb25555b",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "60adaa36a3f0eddd75eedafa5b4dd302",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "74ffc7928793a9ba84ed02a4d7d40584",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0f5c91a20cffa131d9c2d6bced31f633",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1e9e190e7f42fb14b046b8b964aa6eb2",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5db2790f08f11b39cf81511526f80e26",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cb91b851c86ebc5814c4e2b441486b5a",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8c33ab84bc0788b2338a5efde1a3683b",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b7422b6832e060ee48ff063e0b9151d",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1efe73954a33a1468ffc3eb598872ef6",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3e93d43971e07d131772ffb171055a2f",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a8fdea9b0c652195e10b2f47d92f9917",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b01f229c4fc94391ec18f9b911369387",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "acabe5886240c4b4647e76bcae199b9e",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7b7054688b8f8a2a7cf64670c4e29f65",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f1d6554daecb5fce11aaba4418e48180",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "68227d4af31eeb9458cb5a73b48aa3fc",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bb519090b659af4ed1079ff0bc7c5928",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d5f333a9afa88047283318cda108a800",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2b2978c5af8639562ba2aee71409f963",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "be7f55e7a368ce6327d23faf7ad523d1",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "72d79d153fd4be91e0e16f897f79f932",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f9020b3b8e346469479f255927fd3d1c",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "12ad9d2970d3fbe8a8e6a390c50800a9",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "536bc825ffe6a45d84d56880fef5bd04",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b5b643f17dece78283de949d638ed214",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "80b72c986d1275ccaeea45e47ca07235",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7b5426abcf3a6bcde6d07382cd7cb6c4",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cd9e7cc9eb0b353fc484b7e53643910c",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "03f04f339504ff7bf58d8028a12f68cb",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "da32f815826d131237be527e90aace29",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5558111dee643159b5a47d465e29e00a",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e8b3c1668b79d505fc85ad224d9a1c6b",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b7548f3616bca481c800df2b76282f9c",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f03bd4185b1130df54d11d7b50f34528",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fc16ae29943a7308699792aa32eb7381",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3befe5f053876339e1cffb2d59fbb894",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "31f4cbf6e3dbd755986591a5aea98a0f",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "49ce611bf1845761552398eced264b0f",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bae7b74f99473659c608fc540ad8b2cd",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "46311d629428ec007acc89f4b1e11dc8",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9915555c63fbca8ba1e3fc5fcfdb3c4c",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e5b3b0ff8daeb04ff9b6df6016c11857",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ee8791df587be842b6b25677425a18b8",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "43b780994e1cbf107bfb16cf19749d07",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "15a74a0d8593540027e84ba6987e6f85",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3a672317132fcdf76dfe23138e0f3816",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "43cff6a63c6c5c4955db88317ff5d224",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eb4464cecebbbf8c4b242223b86f4aee",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e65dd0ecbe2c64f4bed661ed72013f61",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "22365571e62b66ee92b2912f7fe5d034",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d4797763d4d8a62340d6c71cf44b023b",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fc16c2429daebdb32582ef0f60ba81bd",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e2654ea967505e139691a3e4f3097d65",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "552f6bf09b570c53772ceccda7521e99",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "606456c149c8ea4c1a01254aac1234b9",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ae2523f502b60b447c24578e987dd7d0",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d6713c1cfccf6d6fd995b7b2d1d7897c",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e6db5c735645ce38b29dc54dc771021e",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cca35503ebc5ba56b62e50e967563c81",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ee3bbbe867ef14ed570c06ca73d7ec4c",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0cee839b18f3c5b5b2766e3fe82b5284",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "305e694ff2fb2eb3b65dbc544e3c9aca",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "355f372581574d7630b5cf7d68d42134",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f766d55c1d7d9433fd35de722829fe07",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e3acea5388873edb73aba5085f7c17b5",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a96103ae6bd56cbb9931f3628c6a1cb5",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6196f30bed4905ca83dd6dcdfb1d3342",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1de393724d31b6b0660c46a4a31f9b67",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9ba69951b59ce76cdb866215d48f86bf",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "20766d3b6b4208ce0bdcf70b6597457b",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ed92a6abfa56e597b6c0eddc19b824a1",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bb2359c8179a9d3d6bf35cbaf3b65279",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "675843f0081e99e56a67e7e3e5cece3a",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "409ba79b96dbe78c393556415091b022",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5418005ebf9f5192ac444aee39f29cc6",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9592214446493c9dfc4907a5df45a62d",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "03d7d815c22f83147044d103d9a744c7",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "231ab82af9960f100738269a7859c852",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "47311d6d6c59f9bec5d37434dd157805",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "15c621ac06a72c0c3aab3d81b3e0bad5",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7bfa362926e9843a336ca450e6c6ca20",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4c5bbe5c8f436288ffe6d7d0be0f601a",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "267bf3cb4997e8652822b3d7a92ba539",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e54a64a4025d11acc25d8759b22bf3c9",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cd1cf8f334171833a00fad0d746bb3cb",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dddc331d70ea56f9ab8d81d8d34f8ff6",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5bc9056e6def98cd4940b73b69bb6103",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b4844df041003f0aff431edb6deacb15",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e9f49309a130f0f8d393aac81b52de61",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e748851b84dcd23c4514fbfa296afe4f",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f08c3da014abe583ccec551e87eabc44",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ac10ec04a6586bf82cdf1b975cc2ab1e",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2e10914cf4409a89e21b8a667157d308",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3176aca31f4be26d824899558a5ed208",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ba4960ed4c41a8a7b732ac029837a502",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a66bcc0cea0fd80ffc219fa8db9bd565",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9dac48b11697a7d56e68fff950ffbd69",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9338f694162e49623c191804047d4913",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "33ea60818554cb6c58350f61d0a946a8",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b0c39d740b166e231b9b9d1697c06dd2",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4792d763fc6377b062b4eadc49ebd7bc",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cb7d484653cb9b27fca6dffa68a0c5ab",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ca0e1ef072e95401271dee66da3dcc41",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dcbb38a1216f4d9a220c0b27a2139caf",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c512c486819e0feeeda516ff8a8c78e4",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a623ac4d55cebde8f38c98d0b92f610e",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "484da52e63bda4b73ca57c0a1e4abe24",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3828f493f1c6657f8ad9865914ba8363",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bbd167ed110c045d891ab584117e27fb",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eac7de13569dbbe88bc7fa17a9d38897",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "37cd414c32d06e17c6ec585df9164ed5",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e9995558fc66f495ca244009eff21729",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b678d8fcad38fd1c39287fb379115b37",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f8ea11b56743ff353be223c08d00650b",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c5a330f28078bd815770d361663fdb5e",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "649daa7dd27bae04beeb1c27ab9ca4e9",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "06fd3c061e3d031b1804eb589772c472",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a53794cc84847fe1d8de29aeab9e63e2",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "789cab4eae6678185cfff4c8110fea46",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bd508d487b603f1216fe7e9696f3fea1",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4107a749db86968488e8df9d7456220e",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a67e638ee43d77c1193a0b51b8c137c7",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a45a00db7faa548eab0cdaf860892ba3",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "14a49f109a283e19c2ad30dd6326794c",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "34d67982f6ecf15640451d0165a051b2",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b9af195c7a099d7a21086c368139dc43",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ad42dfd64dfd2b6008e87863dc806d53",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "98d90750aad3c884a1d549f537440a27",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ad2b1222a58da1a0031d88fd1f657924",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ffa4fc1c641db1821bf56ec348181f4b",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8d53e21f1b7f1a0a85ad980112fc607e",
+            "name": "Farmacia Carbonero",
+            "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+            "phone": "921560427",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cad9ee6b097bb577259fc16c305f89cf",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f601cb25931ad67812b5b23c00ff7b58",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b8d5127fddc3fd4663146b1d550ea2bc",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "042ff8bd0ceb7d1b7c001d21952ada80",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2bdf71b0317153041e6619a2b07a3a36",
+            "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+            "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+            "phone": "921169250",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8cde0ea49f42405a2d82a2229dd8e176",
+            "name": "Farmacia Lda. Patricia Avellón Senovilla",
+            "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+            "phone": "921574392",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9120ed283cef76bdf7a0f64bd09481d1",
+            "name": "Farmacia Enrique Covisa Nager",
+            "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+            "phone": "921496025",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5ffba9c6c038ffb3c420ec5034802034",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "74c4077ea0ec84e8721c54220dcad539",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "72d8108d079b2f1af216e0eeeafe04ac",
+            "name": "Farmacia Miriam Chamorro García",
+            "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+            "phone": "921572445",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ade6c194412d72fcad7ea257fd0c483f",
+            "name": "Farmacia Matilde García García",
+            "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+            "phone": "921570026",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1c38193eddea83ec58d92431d103fc04",
+            "name": "Farmacia Isabel Frías López",
+            "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+            "phone": "921577273",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e07aa17dec44f2be5cec4a17bca128fe",
+            "name": "Farmacia Carmen I. Tomero Díez",
+            "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+            "phone": "921575109",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4e2586c726d13bbf4d9e1c0800c2ac4b",
+            "name": "Farmacia Maria Sol Benito Sanz",
+            "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+            "phone": "921574621",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9f04446751f6ca979f958e740648789b",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "39ca19c1d92786adf75a9c2f81b68a9d",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "25c4250a541635bdcca72c6bdb03d9dd",
+            "name": "Farmacia GILSANZ",
+            "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+            "phone": "921562159",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

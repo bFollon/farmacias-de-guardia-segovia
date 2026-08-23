@@ -1,0 +1,5108 @@
+{
+  "locationId": "cantalejo",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.468Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8221146a760a0ab80031678d99254e0f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3b14d8053295e85656d4273917b8b73c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "24ad6864971a018a0c12f2fe2ae9e711",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3e4d56136d6cc4ea039fcb8cd49747db",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cb81566b3ca586e6ae6f5870b7089524",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8affcffe2e10681cfffb04df1c77179b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eabf486e66fc7b5334f683e86abfd176",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "15b287a85a0be55c16acb65fdc893161",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ca567a44148ae3e1d6afb1d08211432b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "53615e8dc0303ea238324c85fcbe7a28",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ab1318090a33267fcd065017000d4b59",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4d055190f45f922957e29add67c1445b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f232891806c63c36d3b01aa96b86a2fd",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "34fb4a996065782188157e9998c122b8",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "20e0114b2f4b010051f182795dc6b149",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "fa35cb1fd10c9036163ef99e88368571",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ade6a8671b6853300ec56aca099c5aae",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b0502e031fecae025e82c8715e793a95",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7fc3ad90415bb5313d6be1c543052986",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "42f7d494a632d83866c36b4f21fa212d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f758f5ae1a24f8bd7f1cee19cfb74800",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c412e81af11bc2ba8c2542c8555c82e6",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ccc4ab149abb5393ad9a4ed594871366",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "1f5974c946bd1e33a03de1428752b6cf",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f645ad827a54beb8470413486b04f3bd",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2c08c0f91709afa8e43cd1b96491deb9",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "630ab3ee0b3d8a18207a153e86c083a6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "57a5b3a94505abf2d8f00ad48a46011a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fb59b265b0bc6fd60b5f2f0dad4d6d3f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3b68d5e53909872dbe93e177912b7386",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "100c2fab7bb879717703bce15f291460",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "63f622902c808fe9cb4cd56f7015df6d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e627944ce278b699e5e48b7924ce524c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c6f61275af3bd2b1df85f96e848ffb99",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4d4088bf1511f1f1950de3649ed4d224",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "522e648b86d3e5ea3b09b14c06645a8b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f4e3534c4ccd56e4675d0f43792f85cb",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "57f439de89e95484f8c01d20aee14f4e",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8ac642d6e4a5d2f2eeeb09b93d5d0f89",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e01dec2c82b126ef295f5a032d15f580",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5e439ec13f2700c195f2c4e663a64bbc",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "228743f908e1e183ab447ea0b9ce45ab",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "30c7319504441534932a3dcdc96e9adf",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "7a4eb643cf1e9d4fc115c9668a394ba4",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d2dc0e0b0fe19dee153198e24a91a044",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "65557d23e12bae9fb81f2f4432e1ad2b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4771c7761ed7e47314eb064dfbf6c023",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "07e2526e19af85b36c2201eecb2fa8a4",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "03b26754cb46e8a558af15d143bbf849",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "bf03fb2be851558062e77ee7c9e4fd6c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3982182cac0cda1c7a7523714d0d576b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "80f70133a911d90c034eb8c6a44e8cc7",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "93efea06cad8fd265639e194de13d3c3",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a6015df8053074931be0302047a5f7b4",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2e4566149f3026b5ebb0a80f6e5b470e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "110280feebc55c538fb8f9f0b6d54884",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3500f019eecfc93299ffa99520992af1",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4408f0372044402ccde2952591e67528",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3de0344690486bae04b34b92eacae1f8",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3274897902c919fbfb1fefac7f133494",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "38c867c079cfbc2cf91b7f65bb4b6f3f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "56f08a39aeab95ccf1c7b0cf3e4bdf15",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6a7b33f4359d530ab331893ae96f5d16",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f89ad497a9c38d5b9169c63407023107",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a0ef4f6b10fefcc8aec61c65c06b3414",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "64dde9d810dc906241617044da99fd30",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "56c005063b77cd27124effff11b08c7f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b572ad78b6aa6f8cca8b5b02a9494195",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "00a3ce6a58d93485d99bac9df0168cc8",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "921f3a19a49d68d6f655bd0303915439",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9460d6b73ba41918b88c49e9d5954494",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e555245d39b73d50f7edaaadf7ec2568",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dec0fed4a8d5bfb62d827c69a7da3034",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "cede2009278130c7f89cabc89a94938d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "28305357bd59130c37b10df2c6228db6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9424f1463bf842badc3030173add8e86",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "77bfdad2bf2faba7a33ce4d07d726ce4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6568f1e61f4b4de0caccb81aed8ab4f8",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b119aab8defc3f29888be02f0e6c8195",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "7fdd71e3595ed9c9e3f3e22a0b63da96",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9f7317db7b4cc6a8f31619f7669b93db",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "652e6b0d2a69815c4554b96bb0e616d2",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c28bc74935fa46a7c409056ef8b837c1",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "251211a3fe1bfae83cf911034f8f93c4",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0893b6ffcccb53564fa13a96f3bb1826",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c786a16a6dc3ac313f7f86fcae84418d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f61f0b7ca7e94aa9b6c570fcd49fe00c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "25d73cac746c05aaf88a2018afa36856",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cb1563f86025fdee26ddaf0c64f277db",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a84da931c20b48eb3ab400899fdfff90",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "985f653165a8b0e19540c25a7bcd7abc",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b9d799f2b6246c6251e53aa8bdd7b5fd",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c09d9115c8031c1d1434e5213d5f7b21",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "dfb76854e8b39c5b669feabfc2b50a46",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1999a766d0242bf7cce5f2e0e97cda35",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "85716043f92a580ffab3f977f2a0856c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "958e0807672515f04af476066c51f5cd",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "751cef12e2fe0da73fa756b67dbd3447",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "358c4a81fac5880ff65d4b5f2f78c6ac",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6f47917c8d860e85adab74a6326f9d47",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3b6a28b2a73efbc57816652923c0d26e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "73e3fb05070d07c04dbcb14fe4873e13",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9a847f9bbdedbba7b910bd3c5bff0f2f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c75d84281bfe30fe7f56949fbc4c1c9c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9266f2ef4072e7a45d3db96ecde0bb88",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "78d55ef1183310749774dbcd9b48f9b7",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "779edaa4e835dbab43a3185fd1c403de",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "0862c11ff0d9eefd8e20901c07a63ed5",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "33c037f1a2d50bf9fd34bb20e01b0f0c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a457f3c293132236185859f1a40632ac",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "93df6400cc8f60c814ae0c2482c31072",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b10557451c790bb95a40419034744507",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "eed110056759001b495819083dcda61e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "cba80cdca6d897ad80742df9a7c84feb",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2a65183fe675848a7227779825e1a0b0",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "be2bb7da7c11ce0c88bebc1e4a24d770",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b4a4aabfcc232bc2827d644014fac7cd",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8872c2893288641650e975f673b92311",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e3338214a83957cbb77749f77996c594",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f4f422f1748794282775d1cb815f016d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ec9340dfca7941f6ee256e55c6658c05",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9ec255d35c6147ff725f7d184c4bee3d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1821e9729644e9a1eae0e73b50f91c14",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6089ff305f9311686f4e15ab98d51570",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "045644ad23496a89fbacdc3b1edeee2b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "de65ac3cbac853779d64367a06f559dd",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d97e32e4a173258859dae06425db207e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "22bf4def7f0e6220efae0c7323e48acf",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "308fc869ad84171b3bf32dc0c9e60d44",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "ba5a162b547a941786f8badf6ed9f1e0",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "11c4b5b6dee62dc5e71bef611f18055d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2a389ef2b1e44f43e5cb1de1b0e5ff75",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bd7c12d96ea21f1a3e1a3f3fe0f73be4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6f20139b19e258e324d70598dfbf2b02",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5caa2111e2334523096dd47146e9681b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6ccb913d4a9020e005d0a2712cefd497",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3b198d84c9d372942ed0b5b580e2a954",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "5522d74b0594fcec1ed430fe81e675a0",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6cf9dd62e7a5d81b5e11875a9dfb37db",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2eb607df6f4a0c3fbe8636ca81a72251",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0c4f2ae78ba75dbd227f91e6ab7bb117",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "77f39eeaae5f7e4c639a71808b3fd825",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "74e04452a0a4ee5eced9136c26464850",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8e4d9060f1d3b88491eec2c72048ed4c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0c730150d27681d1fcd2519e90c21f3a",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f931578cf32ad4a2ae42d10048c543c9",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ef079d97954720a3fe2c08bec769a7f0",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9fbe08103325c8cb7557b0f2c92c4208",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1c6b40713ff91a3eb4103e3bbf3dba31",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "342cc942ca6f4c7ac2808914f51cc656",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4449683f5b3bcb21ade78ddb11463983",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9f0d82b5910479c61fc16f7d78201aa7",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7a4190ff1ccc9032dbd5a32eec389468",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6d0974c452c3f5ccbb3b8e92676ffec8",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a311c243d4db0beff60044394b26183d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "01041ac25c9c53ef2f5c93876a9200ce",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d25bebd1b9f52417c91e81e52d40461c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "ae30023d5839fe7be126911483aab8be",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3f23a843b15a103d6eab12d88adb8094",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2a5a0027e8f0878773fe170acaff8e2f",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e61a6c4ac01f1aa4a2a6e3ffef3096a2",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "ebf32023e46126d29148f6b978e0bbef",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "90221aac5e025d954f0c732ecf60a1b6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "86dfbcbb393e57b1c7a54cb4d934a11a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "361ba1a8dc2498153d1e3a043a0e5781",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6531d89f7cbc08b9ba2833506dad522c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "29d03fdf7976aaf246259b22827280fb",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "60ce41d30c147f5087af9a52283d62a1",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "229d92ea1481ab755546f7b848f65ad9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "642735cbaffe5a4b90eb78b4bf2ee7bd",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "baaceb4b1e7a4ac6f6fc86fc3d9e13a6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "315c57063b855e166a208ba438da4229",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "77946a0a170248260b5d7c2ba3a5aa4b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d88e36339838ca571c985a46c2e1d182",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7b4c9017f2b4fdc3a48663fd8d9e2a7c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e8cce2937933de84c055134216811722",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b92f6cde1c5b242e2a3be106b49a8bb9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "439c370dcde4eb8a5e3cd595e9373b1f",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4f4d5eaab61c6374cdf8c4f4cf3b6c24",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "0fbb7bd63c3b2ee174ffb388f0f0967c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b38e22d32deabee4deca6569096610ae",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6ee7cb15c40a7da7d191ba2d184c5a72",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ab81982fa04e5fd2b10f3a16af0727d7",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e45973b3b8e75365b2f4367c2c940e69",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4c4070295cc35c6a57103266a7304aae",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e5ff3af9ec376d165482e74bd4be8ea3",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ad296f28f86b1a1a948bd74b94ce2007",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e884b3bcae9bed805c5058922a069cd7",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "74cb7f50eb83691d2c1e18013fdd097f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d1ffbbefd40f1f77330b118d8c8a94bd",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cd0a4b881cc24cf40060a82a76efe763",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8961edf90300b43f3ecdc9912ae3161a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3c7664826f500b590f85114b111da685",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "5333e1c29c522ef070a5378aa6c434db",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2e3a9224d44684abb0c009fdf3255f49",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "850af617e15447dc710fbc1344aeb12b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "762d61a47e9a733c37c10e285bfbe105",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4733d15f31e12d75c779112bbe561994",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "584afa4e42146560a95b3fe6f41ed3b9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "cbdf40cf26b1ed457137c4954022e3c7",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c3463b4af8c5f752dfce31c5160a1b91",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f3f880a3e4c52e8e3025de2e827c2553",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "de98df62a3dbb5e20a8eeb62d47ad88a",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3622e1508064ff6a1412eff100219777",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e5e0515d903587afcc2272f233bb7207",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9d2c7b4210d098c6a878b70029530050",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6a32b6ac96fd23de82d012bc1d14bc33",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "45934d7c54e80b570bff3c75d8c6677f",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "09e526c32772dc819ecba12038dcc4e7",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "1a7d96e98e8958857bd7404bcc57958b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b7fd1b03a52fe9be0dec03e7fed765c0",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c3df052c3d9f83ca343511907337b9fd",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "af058db28c6b409d8f9c62372c495902",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4f0f1c818891631551b28d6159fdef6a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "92e80663684cb1b559f3c78bdc5d7152",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "fc78e0beb05eeb09e326dbcbffe1dc29",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7b35504a409c5e2446815423fa95884f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d9ec70d8a22ff21a67d785af1b5c93a5",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3d9a8a393feb46768b194d6276a501d0",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "096c1d9356525371b5cb87ee0760b9e1",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6327fce2af56b23351c34e276892f385",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "7f209e57b5309592df113db8bfabacca",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8076c050d13c87dc2af2dabf3f32c6b3",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "91db9246037b0994ddb2f3c480590c45",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ef284f3f98ba0d28fa024c0533dd8a01",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "97b9345bbeb3643a8e3f19bf6deaab7b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "49d5115c6f49612831f29779b41dc7b2",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "58d4eb937309117c794a8c539d1a4c1a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bbfc6bfdd66200190bb07fc0b99e77d2",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "312cc1c77ae68cc7175c3549cbaac0ce",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8c43661832e3ae1b6ca25c7c74cdd30e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "dc7b8bb65ef42f2cb1867d3d154648d9",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5367da89810972bc29c572315c2da83d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b75b66dadb5c78cac6a187949d146976",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "718c4c4c2cd08de0ebf1bb558da0c315",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8e1be08a7577aa5c17ac5d56bf37da7c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "038202c3cb0ddf33c936f7a67382e0e3",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "ee08c81abfe8cbac20ebe2b1698dcd55",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fc73bb87aac82b77e99b3dfcc4dc630d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "5fbf27b85045008a3745eeb931b8aa4e",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d92c7a523f6b7c4b943e6283022d9a02",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2411171024f3dea681287102878810a1",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b09eabaa8b21ee152f63d95df3dbf650",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9c85a4aa5fc46e887fb9c41685d85958",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d7372abb300e660a0e4c148889d4fdf9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "5c1757b2ae7b2c0529eaf09b37541e2d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3f2be37a8247f841aa33864be66dd5fd",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c017f99f7575add66c82cc3c0fc0c93c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "200a1c09f5116f682937e90c8be65a66",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "19e7fcf3f8c537ef82b423704302775a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0e44330b27f793901f449218115de6f9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "66b5a3de1eada29b7ded156354021151",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6a9d577d944129399970d06d6126ea89",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "31a3b88a763510257cfe3b23d6d66385",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "20870894f4f969280f87e3ce3c296bf6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e966aa9209f382d8abd015c202d58f8b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f267b33708b52aaa322669ba8b51a064",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a41431eeefd260de4a86758b5ec86e65",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "94a44d9d62e59fbef5001a69bce2de70",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "511bfa3ef78fef81da186ddb369cc117",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a8a740ea198a546980367c9b8586228d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b63a87224344043ed18cae66f879e99e",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "76523c28e12ff4d9d89baf9f4b1837f4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "3e1a3ffe51def459977fb4fff293c159",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "182794883a315e1411274d7a816d3fd3",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8e5a46cf8a0ed07ba0ca2c3afbb0d477",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e204da6d407a17a0236a70608f0019a4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "0118e9de19cd50d6d7e7b2ef7966fcd0",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a3a92181243b98728089b581f8d1053f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "056a095c3e8aca36a4560e6df2ccdd00",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1aba229bb897046ef54e5ef4a27c0569",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "985aa7308b68a270ed5f36bde67fb497",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "76082c12c55a05985417b8d0e1d20d05",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c4a47c682f6e03968d54586e7f206291",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b0d819f985c30cf88f907c9851422208",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f9f2dfb7cfe3bb20bbd4b6a573b3164e",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "916611562573db30cf524e309af14924",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f6048a359dba4621ea4a1f10d1b5610c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6bcba582d4953d9c521bef999565bb12",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "56b8c8fa3d450abf391bf1e20708d479",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7384ef1d4842d3f492e092d2c134e8ec",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d72f1f5f01cdd2c83a4753ba08446dde",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "585d9875812fd88a2234f342a2c8c541",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a7c8988c0ba1bca5ce9a70b6c378c7a9",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4f7bd3255481d605bde29cbcb28cc40f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a32601059266f5dc0942b96bfd16c4c5",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ef642ef6eeaac6f50fb9130854dc004f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "cd86cfae94b31282a98ef56ede665eac",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dfb03d6a5ba9adec5f6cee0dbd3f1f42",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4287ad48c977e5156e72f3585e587375",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ca66628527b1671f21128cdb1e06c91f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "fe617e08d3446c9fd3a2a77986f841c2",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3f35908defdebd326cc9d9951d1921fc",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "894d2dca87bb4041ff9b18acd27a9725",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d5e5dd8c65e75e07692b56eb51161a87",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6f9923feba526ea5f51c3240a71623d1",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "321242fc653e26cd9a50c88415e33428",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "da44dca3501b30d73c926b35a29340af",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "29b1858809e0f98eafebfa492f080fd6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "422f2a6bb9a07d28c480e02630ad43eb",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7cb1c34f2078f60cad11f9b5e7e864d7",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "db919bbb1b1d78a00909cb9c9bcc65b4",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "60a12d1d993eaa39699205d5c3f8b10e",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "54d6aa78189373b0f3f8270f951d2928",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "96e8b561aeb8bd811e4be43a54a5975a",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "8beb3462848d73cfa1ae952c11f04703",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b7ce29cbc8c2437c0d37b953c9dabd6f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "beeafae40ccec491a890c24811fc1d5a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b4ab50ee6c14f8117b4ff5e7feaba6e7",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "42070346385105de7556f400c65d9888",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7266fc833e5292e09ab9481f39411525",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "7bdad8938fb0e437e05947025a0ffc07",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c85b47f79f860aa90a2fdb3c9d2a1472",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f3ce8acf4c8af866d3f682c3d41dbf3c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c64a891b85ce203924845188be549439",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "61dc700338ff1e22065b02d2393d28f2",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9791af6ec56c1d88167d2c82b71446d9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "647a857202d31a5a658b44d57d48c3a0",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "01f57a564ea75512b4f7b27204fde63c",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "94382bb462bffb68c50b21d224b3b496",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "645d234210c36b18ae7baec15c7cbf36",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "dd0fff2023dfcad2fb6737e285d96e3b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "63dd04e119a1a74217271f6928e7a080",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c2081825c796b6e20ff118df482b885c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "22ed30c3c8c3615922dd467ce6b8791f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9b0c63223d48069f8d15fbce23a6ac16",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "156cc4d0f6f98c208bd609f6aceb0e41",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "4717d68e198b8069153b981f4899461a",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dff7bce72ffc25789e787ca4bed08dfa",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "025208772e6a78ba150f05ff3c4b389f",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "197ec919ed4660c78fbb162c2d9d96b6",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "c182e6b7306563f5774a949acdd7e7d0",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "70d4d0c5485f3b04fa56de1d9173c62b",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6d72a2022819eac781dee9dc6895dc58",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "48441ce993f759112a61847ca967bec5",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6cf17e4ecb334e3a3bd2ab68e6c3a75e",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f0eed11dd1a16f19b02e9e051305a7c7",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "336d8069be0c16c5eca02b2b79bf218c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "057e73c5ca91e2868c6517a48c750b9a",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a695b1a513ee2fa9c67330d2528ca29b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7c99e0448a27748a27d591a08a2776a4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "e06ecc64d5eca992cf1bc0116c8eda75",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ffd1aec51e2b83e4629555add7459e6d",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "191b6aaeb0e33df25fa6b65f250b95a1",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cfc65414b414856e1159ebc640e224c1",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "7265177633771c432a783f29de712b92",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f04c6a2a0ddac15f594dd355bcedb3a1",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2574a2ec52e104747d669ea951d568bc",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a281c0d08cd8b6765f341d3c0eed8139",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "554c3c50ed6a8de0d6983e1e1e09cf3c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7a1367152f77e3dbdf0acf15a2a0c7bc",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2ac7182694cdc8399ed0e511d4fb6a12",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "983e1b97e0f92456dfcedce5b3f84080",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d8115c5e8b2910840095f3cfaea3286d",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "25f719b41c997ad53b253656bce13fd0",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "67915530de3d53f85a5a322371fe8470",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fff98d447ef2c2c02ab1094967639937",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "ecdb3f0666aef30257e2bd1f6ab37fff",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a1da6838d984aacb36b17cc9ea7b6759",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "a48bd47858826afe4d050ffca40e51e9",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "be644e16e1eea43f1b4ddcac153504d5",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d0f6f451d836f58c07e8e49502d79164",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ea65b3bac327236c39187efee05771e4",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f0aae0fcfb5da4caf129fe7122cab3f5",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "429874220679c60fe5052633313b1252",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "0b79636f040e6c579a870c09f5fb7c36",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bd52cddce302a7272833f85ba31d7e95",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "21caec78d69aa8ff92c0c999cbb5259c",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "512be722a7b8c2ddfceda3af12d518cc",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2a3ada3b0429026fc033e7e5752620d6",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bd56d9b76926c5fcf28f572c89db0ca2",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "50ac81625338780487e31219febe76b8",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ed52f8d58f5a620ec0d6af99ca7bc262",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "25538d014c1bd9148ff2d5524a86c09b",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ac0bd8c502c63967b8a4349b6c0f5db3",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f7d58976858715e197b5251da55e2f56",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "42f0b3780e25b9594304b51e4c2e09d9",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "421d5266475b6cc100d45a6de2f05043",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bb52cec9d2c2add76c3906688ef21f38",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "f861a66bdc3c92eaf96c3ed90fb92141",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c89cc0b3d74c30628704c3cac1a88f64",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "d38647af053718a0905dc951568a65fe",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ce79a4bac1b5ab3c8c79c0d2b7e48c29",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "6dd5f1e9c12f260f934f181e05679101",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8c867ac8e862d9ecb4dde5b435273076",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9f598572077e7538a823876f06e62835",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cac11b507ce1890e1e3a9f19d3152ef2",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "9ccfdb73d747d1ffb5a3f627f36c2df6",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "acf5c0fc8672faddf36eb7f9b6621f8f",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "2c19c7a0fb00add4069a103222583c89",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "218b62e85538473bf1636ba49b78f4df",
+            "name": "Farmacia en Cantalejo",
+            "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+            "phone": "921520053",
+            "additionalInfo": null
+          },
+          {
+            "id": "b07c26ed852048065ac30a55408292cc",
+            "name": "Farmacia Carmen Bautista",
+            "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+            "phone": "921520005",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

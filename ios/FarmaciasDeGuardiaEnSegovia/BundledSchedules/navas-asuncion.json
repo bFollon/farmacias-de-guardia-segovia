@@ -1,0 +1,3736 @@
+{
+  "locationId": "navas-asuncion",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.459Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7a0399a2c918252b3e572f3ab43f8ad7",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fb661bf3e4268d13d9575ce42648a744",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "72dc0826df5d2b1454cf1e91ced99e35",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4892ff85c5c2a8e04ad8729377735fdd",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "66dcfc02e1097fc9e0405bf469684b18",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "08fc8d277e5750651155551d84dcebd9",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1782bd1f2c7e7fdd004555dc8a1fe709",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1ac665d67f5ab030eb568c0d3031749e",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ff0caad1180697bc291e4d5dca3e1273",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c51efe19313a0bbd3cbc1815fc490344",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5ac223b8560298ffd4f98c45cac2ec08",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "34ed00e7a9d712e83fe857c482f5a478",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9119398d569fb347cc7b5382dcf8e546",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ecfeec6ce2a54c1c060a74216616d5c6",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1a1ead4926f74c9cfd5ec09132cca5d9",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d39e8e6952ea95c586e65ac70256a750",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "034a1dd315df1ce13001c33369240d6b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "704be44017974688758697876a715339",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ef1211071538e1c053659dc4f39fd426",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c11c2c158e09f46275eb515d92d91fb2",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8002d1b66d5b4e01c1067456b61bf245",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "573848a7b9bf1652a248a592bf58b491",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b1024d93dd92bdd46317e50966eb5f66",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fcd07ae595b0109b3fbc4a3fd8174aa7",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c9ed1a6a4fb56a93e1e38022c4f01a5",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7cdecbc6341ce1b048086c97ca38f8cb",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0ef5547561e40a03ef9ce31e5cdde54b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "38b6a5c55c4819ab58a1c78612fe6d5a",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b9cc9ca89d98f14625d90beb556869af",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f7c62e2540d2a698ed0a1a663cfcc94e",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "701ab6defb31116413aa5043bd845fb7",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1a4408ab6fe543cb03a7cb3447c9b0ef",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7e0826a1001b15d22d22dc64c44e96d3",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "09a6b892841e4ba2a109e96a79d30bca",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "26d5b32f0f262e4b099f553c21f646f2",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "16e7750b82aee5e7a9be98c6139ca582",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "670069348a82b50c47124833c3f40512",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "73aff2b56e1af4e7bc8c16cc897dacbc",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "85ad2bd1b7dd9d3a964bd5ba627fbfe9",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c86beb568f4591517c39e1dfd7eb1722",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9adeeae017ac9e731ae744c8e404f501",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "843e66fada66700315cd32b1e49cc5be",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8a275aae5ce3e6eab2d99afb82dd7831",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2823352b13f075a57c14d9707f5642ed",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "41a1f3f2694d74d9011de8f8723d4e4c",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cfe5e8fdfee5de8365b66129f6bf915b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "df15877cc2e165b6d9c9ae1da035574b",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4cbfb941394a01242c5ee1c3e4be2542",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ca2c572a1bed15fa0db69d94a64e56c6",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "66b237a8cf55badf87224d7cca708049",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7af09e0eedcdf1035711e5908fef530b",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e884bf4768de29eba8ae36ac9d6735d8",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "48a3ed2e287849c66efe94d91b09fc39",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1499cc24e53e8465feeff8cff66769f0",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bcd78321273aa556da945735e3561896",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f9ba7c6eedf0475de0ba14f56c9a8634",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "17fda6d0fc41c8619e2b1eb91eedd6b1",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b133c0cbe5e1c4a766aaf61fb7bf929",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "39b4f8e52c76c64b82bad6fe0b2cd7da",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cc06adea25d3ccda94461093ab835b84",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0452cdbdc4bebe9df04f6e490e22eaeb",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0733f0e409f720a402afd27709eaccf5",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a50391662cd318ab0be561a20f01a565",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "63e2246cd4fa5719c45638ffab884fad",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4924816623c85d79dfab1e3e81163e09",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5e80de8a75459e6ed53b2b9beb4de52b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9ce157017cfd8788af0a241f5cf78d82",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c7c5bebac420cc09c8ff4a8565beb363",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "889195f781072f21cd49ad2284dae391",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "35b405c87bd034e0085bc4f00320d575",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e9847e5b30b90ebb8bbf0a9a4af64f9f",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "176fb25443c7ad11a1d67986dbfcfcbd",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "48ece6d5f97d7e68fc56f377f2832d23",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7d5698d929ef7d3f3e25102924c0f2d1",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9fbd8295099f66f2f8128c014d3f137d",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "969d355c3b985c23979601566d95d372",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b9c116f33c541908fe3809c7eedc43c",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "52324dc99377aee91b485f8f2c97097e",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "422c49f9350be22d0a68b893a073ac23",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7f5d30738681f98be5400c129ccf2228",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f729041028e22dfef5739f56cd423c9c",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bfbe27cb48b392cb62aefddb5989992d",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6e0c09b6a5b48cc7b018d45acfa39d9d",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "334abe1f530faf8c1e229c4601fb9bd7",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "05abadd2ffe60fe291d57196a17bdbf1",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "736b4c363c3019ec0273b29337a70a66",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "58950b29564d9aedce1b540f113517cb",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "82221f2cd90d3f1270c2fcd310daa771",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1ad91d839358fbf1381cac40ef3c3843",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7c78dca76e033c6d8b237565bb80af5c",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "47c5c3768d121c352a9e4dcb858b37ba",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c3fe4a93f25faef19a048692776c41f0",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "dee6375b003ebde035d0ae017c039bc0",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2a936a5a5676cf22cd1cebb1c1644d01",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2d39db42251bb1e1fd5d4dadb78200a9",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "695df3f9a1f349304bc435b7f5a998ac",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1e82b37e08da90b5c484cc9ccc030b6b",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1237af00fa3af5dda36796163e8fb6fc",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e36ce985b29dc06d2bdef6ef76eb52e1",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f5d2509a67dd8add74f1ab5065777c4a",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1d59c6aba43ecb1c94774371bce372ec",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5237d2851328bcf530be54ec4169e420",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "501d24df4869c62bab2fe35688762e1d",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3b86eed9979e904e4538b853a0e8d5e7",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8ea1e8b726632009008a51ef056a76ad",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3ec8f147fbc0d0a43c47212d8d9f6f78",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "74b3246e6fd0ef1e236d01627b8013e8",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b42166b8fee62dc4e51f4b182dc4a1f",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a376c51691c0aa23361b9e57c268e21e",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3651682c491fdd038d74159c94954621",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4d3b031231bc204287105356d17b5ff1",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "592aea0523290108715e813874622315",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "58bdaca3c9fcf44c12cf45b5d4302f87",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "12832220ebac8570784feef1a87de347",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f8c4780363d27cd95ad94d90333b8c0c",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d694c28860bf08b060bffa9cf3720c4d",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d0a1cfc7525cdaa45f3e652952de685e",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0087c26be096cca9cb0221911d622fc1",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "890ba940f27d1cb708f36f954f200d3f",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8e88484553e72ab1a02adae4feb25041",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c8e38b5a13f77494024df641f21ff01e",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6ebd90d45880eae87a271893e0cf29da",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "795de0a49f99e46edbc7f9ff21cdb811",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "864dbf6e3dd8e4e97e75d9737e2a7d17",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "32cb37c6a61a7ae1b85c9d3ff42698af",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "cfbb382cb0c738dcde2b7b22993c6dcf",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "67418106c067dca5a521fabf77e2654b",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "919280a150e78878e2c06176656e47e7",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "18e02b7269c56dcec5ba43a4f5d4a7fa",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "6170c8ca85bbf3ff1520fab4575096fe",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "682f8c764795029e90078e53c10ac1c9",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a9e4f6eab5573fdb332684f3dd775a09",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "458beb3e2d44b7b48eb46f11194ebe14",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "5e63ddcf76cf9ddb392abeaf53cbec61",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "21e2ecedd36bff7fc0f3e15e3ecf46f8",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2ec8e9fcafe4018654d9498086c30005",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b826caacac01f778601bd795b01f049",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7610801cb04380e492376cd34438d912",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0547e1c31b1e0bea2a67f116057adad3",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fd1ce25461521cd5604ee0111091c908",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "8b09f9fbf699a12bacef9193219e40bf",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "14a7fc9ebe360c8f773f8ddbc228fc33",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "48a52b13a0b8afada4ad6be3f80dffc5",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "2c865c8cd18f40a9c0faead5238a6a8b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7f416c01deb1cbced2d9f98e522cd78a",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "3156cea311d572692948d45c4d12a3ac",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a20f365b308da3e227f4440f1d9ef30e",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9180dde1cf902b9582036d53f95e8343",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4dc13771bedfa6bb39ab897a35e67a21",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c687123d7a2f0a2869aa3309aa7166c5",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "07a931a2a6d4bda82f861cc487713877",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "fc12e34645c793364460014154052fc3",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "21447cd1774633ec10339cb12a99314a",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7ea745f352f83efc9c90ac7e3f04231a",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d4efe7f06c2d0a4f6809a1fb846718f6",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "15386560215c7bc4832ce0383a707c09",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7ee638a962531eae21f3bc71cc18a235",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7e9d9a558c8618b7000dd1d29195fcf8",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b69c2fdd862bf9bf88330645d7ce579f",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7fe1893d1e14526701f876b389cd4c4d",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d9893b00b0e1f9d7a34a96d90f5004a9",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "31a5475201529e33ecb0ce2b02548f78",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "37e0a004d540a17174c014c1d7b529bc",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bd347323d34212f9bf070bd9282812da",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ce528bf225253ef7e07f208f63db1996",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "189aa60e812fda2ca800f6d9e9737a8f",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c701a9920d7b8d01a32df79150530b86",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "ec27e8b21eda40ae1c92d58fc5ba4f2c",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "baee09ac824262e20e56cdc2d673869b",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "514150907b48cb038ab43b738062738b",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "b3d8c2a3888f65db5b365eeb1cfb49ba",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "d780e03b0364bc4311c3cb1390fd1705",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c70866b10b453a0f34749618dad625eb",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "0987357c0c4f9f212ca49f060bd53d7b",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "f99821d9e5791577c7579acd39789f6a",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "749a93f0e4b8540bb17073a6db5f15c9",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "986145b26864549e48e22460d0f08d25",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "27dbbcefdcd002ebb6296496493767f1",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "a91e42fc41e1e371167c7f59047e21dd",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "e7849a5f2e640a7e201773a961287745",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "303a0d5cc3b85747a4f77e730518b728",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "1be2d63d5c0d45d65f638fa3f9223102",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "84ff8914aeb47fef629eb3f810f0c2fb",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "09cc6a3954ed839eb1be34a62fd01c7a",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "bfa9fc3c9feb001be9d00113504a1513",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "632540120e1111cfde186472e148ecc9",
+            "name": "Farmacia Pilar Tribiño Mendiola",
+            "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+            "phone": "921594013",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "21d13e85fbf30613fdf12eab7a44f1d4",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "45f1b913179dd3333bc53fb1f7e0e141",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "7185b7dfaa98a8dd245c6947849d3101",
+            "name": "Farmacia María Dolores Gómez Roán",
+            "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+            "phone": "921594727",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "4c6d9f6f89ff4cb70230d1167c0a7661",
+            "name": "Farmacia Lda Amparo Maroto Gomez",
+            "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+            "phone": "921596259",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "c5e2d6059d4fc88979efd98f2b11c1b3",
+            "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+            "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+            "phone": "921591585",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "36e3511547d85d473f79e63dce88e918",
+            "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+            "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+            "phone": "921580533",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "9bcb93d99f76ec52d4b228cf3b7be6e4",
+            "name": "Farmacia Lcdo Casado Rata Coral",
+            "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+            "phone": "921566012",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "07befb4e64c5e48296c6ca9173dde9d1",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "777e37298ffb4aaf27c9525ed9e0b83a",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralDaytime": [
+          {
+            "id": "88c0ff2d6282349e9d6f56d5859397cf",
+            "name": "Farmacia Ana Isabel Maroto Arenas",
+            "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+            "phone": "921586677",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

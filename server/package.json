@@ -12,7 +12,8 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node --import tsx --test src/parsers/*.test.ts src/validation/*.test.ts"
+    "test": "node --import tsx --test src/parsers/*.test.ts src/validation/*.test.ts",
+    "export-bundled-schedules": "tsx scripts/export-bundled-schedules.ts"
   },
   "dependencies": {
     "dotenv": "^16.6.1",

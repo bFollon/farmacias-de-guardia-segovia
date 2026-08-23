@@ -1,0 +1,3736 @@
+{
+  "locationId": "la-granja",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.447Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "28ab5cacc90f188584261da51ac2f199",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9e9d3ba45794d6ef30d896453966f0b9",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "882aff6ac4fba87db15d7d864173309b",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "160d07237a3addbf98725e72daf3a2e7",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3b4fa37ef636d53dccfb547030f9d120",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ff46c1f2abe293799f00f5c193191ac7",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d3ca049f09899efa741d36860ab284ad",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "45ea4d341feceea17be046eb7072020a",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f1f6ee39d894dcb77371972bd9449d1b",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "59f3540342a0dd64331b04543f9f34d1",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "75cad0378319fd2f35faa394a1fdcc75",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "247b2ff0b4669de33c106c9a41f71dad",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5dee250e5017794f505a59621543e00c",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "358ff558a1c3a66b442d074c3ee87036",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1a5c6f9d9224ab090b6ca667236e1374",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "be0555e56701cd4b9081d0477917ee6d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c2fedd1c67eb77b4f5fe1a358a9eca49",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "24feafd704ed9ead1902c3235bb7ff52",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "106e7688952feaf89bc124d1bac0b9f2",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d916a3326ad36939d776617953f7d2b1",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9e52d854a6853ee407367ecaa6477ebd",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c31755dd854a64c5ac22e6f576dcc6e7",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "daa31e91cb232561e420a45828c96768",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6d6de7a421cf3c05cc77345158975312",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5dad48edebc4452db7b481f119cc4268",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a91510e976123c505760c8e7ffb74622",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c97358f580dff27ef1c62060491744de",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3cde3dc2307ed22a5c98da74f8f6c9ff",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2dc995855f2d0c060d4adcf95ea1ef70",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0d078b81cd7b29f97df5100b8979b185",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ba18c00c8f4053f160b4a8c0db7c763f",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d96ff0ef079f262593e2375723ebbb13",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "eb9360d7136114cc05a0a2725629c966",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "fa5333aca1bb9db4ec95ce4a17aac3a4",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ea6175f7aea9e14bf916f74cd0440bdc",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "593e8265be408690e793f2f0b7666b70",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b7470273e4de13460d15a759ba1da267",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2911bbba2c8792a40905a5b17a462c44",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ea37ce1f1f094849b77798b029e68f54",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "aed029e57e64964fa2cb6311c7a814f0",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3b356f73a4618a68c3bd1313ed9db069",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "01109e82705a55126dc156641da7f0fe",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5dd452368b191948530fc8cbcb17b5a5",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f75a90852279d9cc78d5aaaa617d481d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "113651b7684372bff7928d7943af12fe",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "dbefe060c4c5349259ffd7a17809ddd3",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "aad5050a5286e46e8f1136a7d9f2c2d7",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "64c317b8282ca3d697e7a58cd1429918",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c3dd2d0e0cb7b92238c5abf23f836f3b",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9cef432c47ab240cbc2d99a4ed10a9c9",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "cf13e39f88a084dd387967196db0e034",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d7f0693974395cde740d2ebfa1f9a509",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b3181fdf5e3164dc0a49724517a9858c",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "bf50d0c72c3a7789a92e6695677290f8",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f2ef5ae40a6173b16fb806ec4ef146a3",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "48f3a4a64ab773b6ffcbe74d9d4c8845",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "448c59a7817a8f797ceacadc3688ffdd",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "02b85d3ca18703285b9e2ad5a3b401d2",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f4b45303881981eedb9f56a5e8a4514b",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c0bf43d6b30b5d8312d879be4d8c75e0",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1ce0ec240f3ed32dacd8177b1d6c2f27",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5d35cbf5df1580395cf4e5b663b1f637",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "57f931abc4764038c9003f5c2030505e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "47e7f6da078c1e1e634ce2d92b3cb6bf",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a5c3bdf0d7a32dc3c5100a53ce2e6209",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "71934b2c5fff14dc65b4991682459b95",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "90eace32674d322b4b858e07d822764a",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8ba835407839ec4bf56e2f7daf855f85",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7a109b5a8b131129f4f8c153160d4418",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2b12f807e3f755376252bd2c00bcdfc6",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8a4faf28e081a73905a337259a1c4aca",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d43354207d3e7bf6931ba4308d465bbd",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "43c7e9c8e36b079c21cca83e390fdbab",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8b1c56ebdd04f7e47d6c1d43fca63659",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f48bac6e7584dffa490712ff38301248",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4741ec85de2a2de67fe51bf1c028d031",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7eb72b94748d170cf97241b705a7fd9a",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "29a16d5c966d71252c060eed0d3d21ee",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "41b8d5507f82e98057853ebabdb16da6",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d1cbaa32e3cc7fec4b240cf7dfce2a01",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "bb75351dde0e124548bbea95938eafb0",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "25e1778c679ed56ec47f1faf813515da",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "666c859f624755e6b436481935e4f113",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d2b427b2b8b9eed8ccfbcd87664a7e9d",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5a32ea371748315082dd152ddf475668",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8d3a24fb393ad5a29d0e8a0c5960c103",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7751ecbc2a351769ab1c20bb3c54a610",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0de8011f4a67b4eac15e0e53d7b3d52c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "67a4f2aa65ae737a16145c0abcc15e8d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "efe5d27e89359c145cd8d09bdced630f",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "39fe238e6a72baace58090b4191fe978",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "07a1642ae99f39e64f68ccad7b6aeb67",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1617eb9163038681f7a506b104a41aae",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a43274915057dbb04c57e1da4a4a678d",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c957188ca2fb2794cbdd19a88eed47a2",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6ce83c57a46a9ffa187867ccda3d17b0",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "dd587eb33bedd344fd37f4f9375c10c4",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6dddb1ccaae85e17d98808330ae537eb",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1bb5e345fffdd9baf949ba11d867e91a",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "52f9d1a0af4a474e8d5e85c472d64bc0",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8113c0ea98097a9977aa8a00b1bf24ec",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "38a4aa6f23c2a3066e82c627af571f5a",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e73cf845b2219c575405c058f11f7676",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2222102596383e67bc212becfdca6433",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8bb34b1bd45dd13af7e25f1c8e282aae",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "850971255d5544cba467406c5b17e01a",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0af8a6aeb39f34506cd1386253fcb99a",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "489601dbb253a2a1d77880d27830481c",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ab27b91562737ed2f5d51d698514cca0",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c2ce77d881102d03b0d915cd02f1385b",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4a7b681cf2cf432aa307661cfc49bd43",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "dfaa797a044f0175c594dc764fa8091f",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4de539ec0e46c750cf766b7c2e7e556e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "61a3b23ea4d78fd8657078f8e76fbfe6",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d8fbacc25613673357144fe6cc3fb6ab",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4719660557a9492bc82d54d4a31188a5",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "48b63d00c04726727d74964959ec7052",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4401510c1531918c6652649f7b34fe5d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "21af09fde4ad69fba290b2e242b6ccdd",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "96f8d6ae9fa82e96758705edb86d8d15",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "99c65fedf50b4bbc27cba40f78cc3eb3",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7f9f62b64ce8bcceb66832fbf42e12c9",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d8f4495b4a614784ca66c3a48e8d75a1",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d0ce89ed06443db1baff9a1deb712c48",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "69284615798193daa732d4fa8381ef1e",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7c9bad35e2336c4875466eee4ac0bd3e",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9e3b3a407d7f9bf8dd595fcc5329b83e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7eeb59ea2ca0f0482eee6d8fc84acee7",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "953a72ee239fe3425522b925b17d964e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "47f9a0c96e1acabbe8741738baa79665",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1e838bb062212896d10c0199c8fa1956",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c3c990467a5a90d7f4a14189146c7e1e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "42e2a5139cf63d0bc56d1a4b0a1b571b",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3c08f461d9d56d232405c9fdb1c48191",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e300d28c9619550b446f353ec5ce9963",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "94ac628d58c95229677a546f20fff4b9",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "fb372e484a06898d3683d86d1d663510",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ccb34bf4243ebc3a45b5afde43d29545",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2577b64bb5a7fdaf6189e92bccb77ab4",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e8e490727805e57609cdb820e81e517f",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "054a3f7459aca7cd46a2c60cbf4ada8a",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "648a457198619f72ea81bf0da1736bf8",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3ad044bc12ee7a207a5eb56312c73e5c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c195b484477394d632fbcb6f9a2380a9",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7845ada9af6556d19228ba7fa7a715fc",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a414cf07c79c4bb9198291d9b6d5be5e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9996b1e081212c07fcc55f5983389d0e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4ca32943efafcc2c9be7f579f19dcd47",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e04c631d9b160d9e3af1925ddeccecb1",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0b4e48642d11fed808bdf49388976af1",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "edaf67150eeb5915283d9f0651337623",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "99dc34f449b292adf678550fb551be22",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d8df9e781f9e3824e84236fb68db5e03",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3da30140181771d6da6191c3715bfea8",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "585e271be0856c0e2ef73082a4652aa0",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e47e6fdf31ba287e83e96f9d3c84b4c5",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c64212b95c387f36226cdd66b41ce18c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "89948ad4d201574a390e7cca2eb79e27",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b9979722387b14a7aae6fbed97bbab5d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9be73b014067a7f6c40a04763291f3d6",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "184419c1805e029376bb8db25c5a1ffa",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b9b93ec8d8c1bcdc7b1a6aa7064dfdab",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7d343d3523f424cf9828417c5e300778",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "84bf6a0fade3f50ab398bc930dc66e94",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3906a5d470a2b24ea363a0fc465e36d7",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "562055acd85ecc1a39b4aa97acc58109",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4baab24c3f58ccffa37c70e3671f8736",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a265a213f2fc6e07adb4a66b6e03a600",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ec7ba930add5824cd658ce46309b5574",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a3907796309ee5d4c5427f7047e2bd24",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "fb7b55be7cb47348b1b0c77f536ca57d",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0ef0b96edce11064314155553f506a4e",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "efb526429208335fd888959ca07814dd",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a498169cd90e652bbd3b1ad3653f768c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a1f71e9ca9f7a1e651f1c66479d7b697",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c9051d6f404c0c3f354e01ad37bfbbdb",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7685cc97e4c07aa9e5cd4df9ff3b65ed",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "89e5e1e518847bb1ef476ef3c1118587",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0aa686fbf60d25e39996c2ef5309aa44",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5005110f4a9688de525f847eca20d3d5",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4aa10ad48b0135bfb8c4b3f6e6c0e697",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "058305effb3ce0070a274386b3bbf86b",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "08faaf255ac98c760088fe8ba2faa8b9",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1d0de2255d07a7de0e3040d5de9eb950",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8efca49c9354f046201d0b7c2ef6c455",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ce1d241d8f6275d91bcccb9d36b4a7fe",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "83be7e0db60b64731589b695a08ddb2b",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d6409e15d63a88c5ef26772254f7204c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5876a9c04db42eb52ae5fed71586333c",
+            "name": "Farmacia Almudena Martínez Pardo del Valle",
+            "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921472391",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "61b09bebf1d39201776bc5e896ae2e35",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2036232e1ac17072a5ab55175575745f",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "86d4102959757575f920e86aaa088531",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b6a48c6a70b51cd2ff850650162b0da0",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2401b164f99ca5ea6bc190ddffec3249",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "cb700123a73ac8bda15cebf0eadb0a9f",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "bbf2ead8f422bcf6d7240facde73d1bd",
+            "name": "Farmacia Cristina Mínguez Del Pozo",
+            "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+            "phone": "921470038",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,7061 @@
+{
+  "locationId": "cuellar",
+  "regionId": "cuellar",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/01/GUARDIAS-CUELLAR_2026.pdf",
+  "sourcePdfSha256": "4d8da3744dd34734591e347521a01427e16cc517849eb351c183b10427f646a9",
+  "sourcePdfLastModified": "Wed, 07 Jan 2026 10:07:31 GMT",
+  "sourcePdfEtag": "\"695e3063-6e108\"",
+  "parsedAt": "2026-08-23T13:51:05.581Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2025
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ab9e12ee34d4213c2b936852532bd366",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2025
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ce46d03b699cd805ab37461ff93df7e6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2025
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "77ae8e914a317a207d7f90360aec2f81",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bbad54bfbe5113ed86df2dd0e882f51f",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8afbfff1d543729964e4412db0f90b5b",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1b3de5910d6b7b7100aee329940d828d",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "60379713914017902ae94226360a93b9",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0cbf6535182de200ebd93b895f2d9105",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a53f134142ac8820e82cc24fad6bfafa",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9f9953643c2795f72c6a1a9d3632f818",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ec98b9210e94f97abdb62f65f20d99bf",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bc2ff3e5d4259a5c338b6ae5cfe9b07f",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "713ba3ad20d8aa93266b76f2f072ae23",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "01d8823f91f6013604d695685f43079f",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "892d0d8e92f7ffa619b04792e140a35b",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "78fa9bd0050891c6e5cd3b57bf58dcfc",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "daae76ba2933cfb128aaa0476e4421c5",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1ecbcbb6a600aedad793a5f09ae1dffa",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "236a40d15911bab175b7ccc0dd8d73b2",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a5398359bded7ff62f39a0c397deebe",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0756a2afdd72242794db8935c6120740",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "eb349d42a568925fac5ddbacc9374c7c",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2a3dcefe3fee358ffeb49286564fe3ba",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a9c55e3f12f724475dd2c0c47e4c09b3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "52d784f5b17f34a6017a27ede6d70d78",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a6a125ce6f92ff25170a16cacb83b96",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5659e88ec9c9425b90142496fc96718d",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "43a608071e7d394ea889a57926d55875",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "50fca0a3a59f6b5d0b71dfc07a83f35d",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c2dbed3f02bb5722016ce1d0605611e5",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9cb91549cb4872e30552ce0f631379bf",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cf778f61f454eeb81db499bb7b398d7f",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e7349e0edeb99e9e87b9564ce39a1dc9",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6cd3aa78686c9563a1bd46e22c0bb8be",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1d1274e323fb4713f7248dd429a32d7f",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "08ca48a24bb4a1a494ae891435b6f3de",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "92b42cbf94c1227dc680e3b2af7b642d",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9b3451f8e9c39b716c13f718efa71d36",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a12409595246e7d6becf64def1d56b9b",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8d05703c9b2aba7f7abbd9891782d422",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2691400b33f9da0d64ad9065ee5ea342",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ff9398c43ea8f682313c823b997d6dfd",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fd8415a5fe74d5eaf95fc6fcfde5b5d3",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "91e0409a1ebc334a22a5768b5b1e858f",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "af6ac14d30264f170132049ec7ecade1",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "da230a185807fc84684634da7f6edb62",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2ef26fd8876519684536a0b6df6660d1",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7f29cf1edcc9262da729b9ef3d77fd27",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "26e7e00bfefc40b97c4af187bd2093f6",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d31420209d7a5e07be35f31d14347df3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6141bd2a364ecafe5b5cceb4791ff9d8",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8696e507bb089e60cef90e134f0fd501",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8ec453b16565960f731425243dbecef5",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3cef655291271f4f3c6f258e7364e2af",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4bc8fb85112ae07e9a111eae588260ae",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fdf467fb214f8948e900cc0b34486aa5",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a6a20076a45b0b29fb5c34e7b9ce6fd",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8c922520cc192c1c016ec08d351e9519",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f047fa403ac5a0d5130293cc514656b6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f52a45c1ae334f7c7b39967c81270231",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "274040e3e731203529ce845f4cfa17b1",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "77eaae95165d718810903738b081faf7",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c6fa518c02c6fb221c1f9ce9c9cce8a5",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6354f81af193d3738b419fb68369014a",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ec0147535acc00c9e9b01c60ab29ed09",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aa9e64446a5f94647e8587d79c81f86a",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2c8ee9d6e4a76c6933bd570dd58978f6",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bdb03b47ba032440845ff075801d45af",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a0045c64ecd295fe61e7779f39b79db4",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "147805ce7b022efdd8ee8c6573ed7ce9",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9d4b0cfb895cb4c8c7a78a009c1dd771",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "09b8ac867120b3d01e129ddf9b5a8980",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "809f6912d0b8b4b51c3325ea9185cfc3",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8079eedac1cc74ac62939fcc6f4be45d",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c76fbd5e06b29005f82b6b9793adab19",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fa01389969e64eb4b44574c2e323c11b",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e2b09f777331a8920d6d99cc1d486423",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e156d73dac2f05c0384a8924836ab8e2",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "27dc571b78e1c957d6d0933bd7906b06",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f869fcada99c6dfca26543c83c457b40",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "184a6332f4eb3a04520ba9e94995a1ae",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "93a8678a0e98eaeca6596d1e789c499c",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "54c249c576833c4f8d09c925c2073e01",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d6fab7006ce24573c55c9617eada31c1",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d3b834d05930af03909a1feb25ee1df8",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4c9d534d1c6d3150b01f24855429d168",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "706a0b35a1914f781df0190fef81a149",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7e9a9f158f1cb51df0bc0e73b7f476fa",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6499a4e42dd408cb170dbe4e13ae1b89",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "da6a61be7f1d764dfe9bd68de88e850d",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "65d38425afc850114413f3b9077a3ace",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f84d53c406c0ea44c32838d8e7702199",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 31,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c67142a5db5222896a4340aeb411637e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 1,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2387753427654fb6b161b879e787b4a0",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 2,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6cfa5420683ca28fc5034db920cd7b69",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 3,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e3c9c64f793820bf691e7982d6230b0a",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 4,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4774039d88d0effcf54a2d1c1ed2f11b",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 5,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4dcc0f8fcf8bcb7bd7c01703aa7bf7be",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 6,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3162db0c240416dd983e205ef7373c3",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 7,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "64163b17a8e4965a70a7bb88cd925c61",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 8,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "11a82c57d01ee9dfdb88f5ab956e6a57",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 9,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d081c4e193b11a4e76c9afa0af4b44ab",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 10,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7bb893aef8fbc66d1d5c7936e9040e29",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 11,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c86199183ff5930593a9ec2ea488ba56",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 12,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cd911d843bcba7ee6036e908a7aef73c",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d30502928ccf94a9bd88a96794592b22",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2dfb25795a67e4e36afb2045c9563e00",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67671d05cb8ae9184d52655034235a9d",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9b57101438a054409e89edc867e3fbe9",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6106567fcc54fd0a34a758d2a76c90b8",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "70a6d6a57be1faa1e9d5870b4becb966",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c78175d6f026dbf1dc26e6a2af8dbb8c",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "75fffa699a091f081051d324724c6aae",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "01f38ca8f03487a48719cbaa91b83ca1",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1ff26ad6cacb868a8276cf5c5d8601d2",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a7e50ee411335bee687ed527b39a82ee",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "316d23793a80a5a8157dea51fae5d0e9",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9570ebf01e0463f5e5443dc958397970",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "18b2912d6bf72c3339ec3ecc5d506dbc",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "93dbcd248434e9a9de3618fa089fd295",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cc3ce08fb177f12f9852357c590fd37c",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f7ca31ee6b5ad94d019da5c7ba14ea71",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "82120da86b3031d862cf45c19f57bc02",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "48c76dc87c702495e1f1a2bcb3c0da19",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "04a26b3498a4b26f6660f5f0480b8744",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3c9b06f7d802a823434131059e3f7fa",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f87f29959060a2b106d7a25ce36a184e",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67b5568e9eeb88a92c7ff97e75401857",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2e6b49d2b0f2a14976a7c1a6bb653477",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bdbb31dd0060f3172e3d6bdcf1f48c49",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e2ee5f022401831b5c91794211649609",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "704b5676621130fa42dee6170e384611",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "74be499feb6eb9df1c200e932a9fd087",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3f043690751a832ce294d4f2cbd26b04",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d4b8852fbd1b73f002d46036f8678318",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5476466818d6b3362ddb805268ff62e5",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b2fd74734441329e4f4c1bb517ec6b5e",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "39c8a06c2a1dad5c0f7856eb480bc86c",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5d98798f0c04d215936a5ae5d083b477",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3ddf0c68947aab983ff860d02f72f725",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "16b054d4d4336636b0135065a1643d08",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "72afb129c15522d1bfcda197b8f17d2d",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "956b24ebe31bb71fd4d0645fe4534016",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "03bc44d4eda726c06ade1cb564e98c15",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0bcc771729962b1fc081a2b3a969e951",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3c4f54637f285d589d6da256cedf08b5",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2f97d826386bdb3e03e01adcaa68aad1",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 25,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a36fdbdd9d2def3ee18e2ca8bc4be287",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 26,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a5d148f6d26fd673bc5b36e822f5ddea",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 27,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "134e6a3287af6a2a012d31ae8588688e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 28,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aa1a7ed6ca64207b2fab0e5400a106b2",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 29,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0576b5c3425b139a0136cd75dd36f1b4",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 30,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2176c2f78078594eade26215144d8403",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 31,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "41000f46fe1f549ecc9585bf3d00f782",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 1,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9b7430d3d318a8d98cbe7df3b2a51b5d",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 2,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0e05a7ffd7062383cf66561ea5bbaa50",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 3,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "44f859755cfc7933d41c9c0008b8d391",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 4,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c10f140a7ab1f8b92935193017752c1c",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 5,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "127249d942fe2aef8265cf4c814526bf",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 6,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ffce1a0cadfae5de21a5dff373ea6028",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 7,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "05cd23e278866e8f8726328061bd9631",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 8,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fd1f09396de3720b621930803ce1bdc7",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 9,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aa472d848c7f971f7cbcb48f069b0bc5",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 10,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "94a0585e8a4175d07fcbee18a7c9336b",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 11,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "867bb025b21e4c5b2da5d14ab15d8e0a",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 12,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a0fe927bb819c86b24c8818c05cfbc9e",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 13,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5bafcce9a15b8803248cfec4566d14a3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 14,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7bceba68e7db1b47e5c4d3f174ddb86b",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 15,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7e74de3f4076bb702bf70c4ed414f417",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 16,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4ccbb346ab7f7be62fe3735227811226",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 17,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "77be03d5fc9dc88feb86f043486d9157",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 18,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "106c6df9dfad0948da294bee59cab24a",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 19,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bf4fa30a24ff2d2e9bd0fed8816cbdf7",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 20,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7a21f277f9838b3c3349fc5eaca1a103",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 21,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "39ba9f7a9393a031ee5b88093297ccfd",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 22,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0aa75866d3448fc8c66f5a8b8513b2d1",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 23,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ef5594fc4c3605ae9df010d67063e614",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 24,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6b2bef6d4bb5a06192e18f7ba58903f2",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 25,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4c0eb4d9909d8b84c82282b8d50d25c7",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 26,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "771943e652503bc4eaa87935d7508a27",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 27,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cb406bd94baf69535bcf8a703842b335",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 28,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "07c6714df1496ff24010c0a2a586851e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 29,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "92ef8b885140791c8edd8d3404f9482d",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 30,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "38be846948a7f1f90d6d1e00b2f058b4",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 1,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e904b71946a167b8733e465efa89eba6",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 2,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d7e7b0801c69ec1e54e9246100afb386",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 3,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f9f87e827db47bdcfd2c30b7f85f2e6f",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 4,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "106b5b38769f8b4003c0d28f8fe8e396",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 5,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "253bd4eb837b52bae37dbe168c75ea69",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 6,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1bde3a9885f0c786773a153f96071c22",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 7,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b7e006fcc5e3865edc63da3a001d3e60",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 8,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e958710eadb6958921b36d5263891255",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 9,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "058584d7a3cb682605efb74ebe1eaf13",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 10,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ba36fe1f12b9dd5de4bd412f4b28f358",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 11,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "da86bcf28ee6c705f57d85602b6de5c5",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 12,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6a766e0757b7f1e5a0da6da5cfb01f56",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4b5ee1ee4c3000fb4f2ef3c753f09803",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "caaf1b6f0a2f51d9d4358a260815d1e3",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "84c133232c95aa33c57d6ace50425a0f",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "07845aa611c8e5ff9b4fa165fca2d0a8",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4e6b3191d17581563881dc6b80393c26",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ab97ec12bb7bcb36a2987bdad7f155a9",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e20fb2ff0463266105b836e6b7769355",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5b667e8f7bd3e2af635f02f5ad567ea8",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f1b256f3c45f947aa133f4ac959d5f45",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "30c9d8e4a06908a6a165ff6bd237e7b0",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c7ab1eb9b35789779265e6614a392290",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6e354aae0c40258d95bdf7bac7749638",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a8710f5aa07496286d7b06c3093cbc1c",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d9c8aff4dece6b52be4c9d7d95efdd4b",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3b00e09e336bd69651cbacc6f0784679",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5679a2148af672abc6fe61f1a5df2b45",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ee7585d6c77e8e52bfcce48b22bbaa1e",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ba3ecaba833dc620444c448625034fd6",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "978830f89fc31235412bc8169dde985e",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a223a51342d46653398ed1bacdfbb6d7",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c0f5dc8c87f07847521de0de247ebc8f",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fa4d446c1019f5e8b4cfeff48f1ce6b6",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e160b10aa97fe6acaadc160d6188f979",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5889bab2b2e61233cd8096ff963f2d2e",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ca34c98da614216c197145b1e778c7a0",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "51344fbdb5149f638b8ee2556e128358",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7969d021a931bbdbe58c1d7aa0619ded",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6465b20f9e26ac3aad1b62cb9a3a48b",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "45e67940910352e14380a3b938a504ae",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7012537c289fb82a9f9e467d1e5d6ab1",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fbf3ab7f2a6a357a883ee29dc1eecbab",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8767cdb38cde040808efe9feef4b70ec",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5c91e5f8285d5919ec8cf4b0941c08ba",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "64578967c5d4c7c2240c18cea4ee3ed3",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6f3e98ed2365fcd7bea5b5101696653",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "85ffab87b7500ef7f2602a944a5f2085",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f09dc74facb7cf6c4c4739084a480b13",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "90a809c76eb394e55ee2dea71b218b20",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f8d37e9c06ff8e228e9253a88814f20d",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7392689288411e159784b12af001488f",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "087d3d6ca99143f83aac3e3e4aa181f6",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "65f0e616ea2dcebaa3f9998844702675",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "59f4dea68892a031d6bc912b2e1c249b",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "28519b7fc5c9b15596013e42a26224d1",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "095368b2870ad9d76eeb8955b5db442b",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "22c5d599b48656638f7bf9dc3bfb96b5",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1c1e809ac5a582fad27f46d930d00308",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e23dc042dfb8e7cf210921484f0fc9e9",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5f51c22b9a3903737bf9c4be8d97e202",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "338ed12aefdd0a7ab376532b4254a07e",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "964a0a6e934435a933fae398abab03b6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a8a2e8576420cd4e2ed3fd724498af6a",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7b3f271c51f1614b3139dd720d6ee670",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b8cb23ace2889d1672b3ef47c24709c7",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "86305edd4a51d1d5f40c65531b704259",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1a7740a239756f28db51d9258b082b2d",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1b3ba6a0c2d0432ada9bcb710071afee",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "31e28c9a1702e0b93e54a304524c5072",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fc3024206ef030035baac0bc0a0a1489",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "61c4d1b6970bed305f5afa990ee7e4cd",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "beffa88b79d29c3eea06bf9edc53e8ed",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7d1462fbb97b20d5356ec09dc78d8be0",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f73775925dc7032ed8e4a9fd9fe7677f",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bd77472c50039c66af601614a1c51a33",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d5567c5425ed13f4e683e44f55537dbd",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5fba684014087901a661a72399bdb12d",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5bb8a1fd14e5414bdfe4ab2a999b6f63",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ebd34492f23c5a29172f9ea3e35e8767",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "184508e94b9d37adac052f8e50d239f6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3f083db3cee0efbc95e7d5387ae0bd70",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dd5a6458034354aca90eba4fefd4c44b",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "98954ec09dba9e264e46cca8eaf60b3a",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b4a5606b1df97a476fcc662525e0992e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "555535c2bc813b793b24e77493171552",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d4e2727b5a6942f23622079aeeed77aa",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "07bfd464c549d4b6258133ec84bed475",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "32110fcd8a323cc107b214352db83aab",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d52e24c78b0b3d7f5b97cacf5c3bd57f",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "70ee69b8fca62a9a859092f4b4a303b2",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b60fe98802f21dba0ac718168a44b0aa",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "50b87da5526badd4f32db63280bb7365",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c8aa7af3a47e98a48d2ecf084c521446",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "02d22c04e115666ac73438842d60f7aa",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3b61e79895380fe06f5540a5f7d3092",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "886641aa7fa332d9a938a7f84da0c07a",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5dcd756b5829c5d14c85fc98b11a3d95",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e6e3d1b0448643b5bee1f0fcdee51260",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3cb7af852cebd68fcaaca49f5094017",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7a67e3dc62553b7ecfd44058cda836a0",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d6e03854cd60d470837d81f53c66f07e",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "402dd02b7af038407b57432ebb454d25",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3fdbef5ea90282583a41a473d7b23ab6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c342656a8a77001651a90aa7128b4f44",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7877e550ee859cb481d9d4df55098b41",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d546ba7b4a8a6ef334b9c769f19fa079",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "73657dc6bb310a43ab0dfd9b16586710",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67916c01a8d4a3e0b963b7a5584fb8fe",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "99afaedaf37fe8c23540f947967fe14b",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8614e8a731c54483baa05feffd37dd9a",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9572bf660a4c1eba0083c8d3eac79a24",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "69a06ea2d76ece1c18e8ee84f2a6e862",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e79d388fb2920fdc9a6e034511296f7d",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "82cc284df0c4d181faded9199886a3ed",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f60d0411f3e53756e19cf8327ab73de9",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c2e8cd6b34ccf0144529d5b152d70e47",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2ae1bf19fcc4168dfc0eb4692fe42351",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a03cd529050cfb0e3c343ee496f5db69",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f3034ed06c66c316ad7b7c4c17fe13f8",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b46bdd8e62a7c4e17866ea5843e80c6f",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "45dc9bfc5ce18aba7eefaa5191913ed5",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c08527502655c934be0bf95765078de9",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a058705b7e8da5e3b6fe15a6b075bfc",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c27087d39f6135a2434b2f7fb195def8",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4f1b2bdd00652dd04440f0352fa58fb3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3f19b1a29330cb3f1e4ea41061930443",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c288c91c123970c1e4604833e1c97a3d",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0aa1fa816172dc2f7bb75870a7179a35",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d699b043b39a4bd6f329805f4bcec29f",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cfc0cb031297c430e312a99886e56bbf",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8ae116e5619e4aeddc4c0376ab796997",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1ae2847b8a6e4d6efab9dbb6654481f6",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "802b47f37eed02ac6817b14eaec58ee2",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3db13904fde38c4ba74c10bd6c43a996",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "18be8942bc3412177266e485628f2cb4",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0d3970dd69197ae70d1e596a0f946878",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "214a03d3a6f69e3fb1a52096e2766a56",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c0908583fe688f4ed91969e91960284e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f3bc5458cb12890981a704e0cd4873b4",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "55cb37b70e3d55c9b0f7de30ef7423eb",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a3c0a00cd7898789e8d100591746dc98",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0ce5ee8dd6b09c8fd3531c6833b0e15b",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a8613c239d48808d112c71519216e3e6",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4907b4c25e080cab3b0d52ea4871500c",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4984140a479b73cf31b6440321242393",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e30e20cc2211e76601261d980c0fa7b1",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c1d9f234fa566d576d598eb67171232e",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4eceece716d67c7252208eb87fd6b838",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "213486eb205e305bc82103c38adab653",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cb04a0060a79962780f0dbd999c81dab",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2d1956d1f6ab823ca5068891fd3ca5f8",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "33fb541f41c980bc99216f571c87020d",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "57d2e34a49c8bd1157a0dfaa978a4f31",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "be801888b935e0e4c75d78e011c9258c",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6ccb654a4f971d56a6c290340e42e6db",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "34b358f112487e64b15b3d3f0f4fd5d3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5c94c7f9af8e9c0466d462bb4a8c18f8",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4f1f3f25dc23c786e134e5d628aa47a1",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4339365f406bdc7c07f133c515adc0cb",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "34a5a87712663e1de1809f8f12f084bc",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3cb8822bcd69835c176000df224a420e",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "97d805147536a925b7e9d527fa78664b",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e2ec16f033e2f84e1d15c45a4b21beac",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b35fa478257928d35cbf652d738b1b11",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "347ee82811f0a4e3ce0a6bceb6d4c130",
+            "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+            "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+            "phone": "921140606",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b02a76d9970e81fa361d8322aa50bc8e",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c7f1001bb85773e5a3a8efcadf580eb3",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3d870e5dc3c95b0baa9dee768f77d12c",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e1409ef54d155b7635496ba9cd332b9b",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "26ddfead7ce56fc8d5c63c279874e159",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e5caac688777d270fe74bfa388b849e7",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "123fe45ad8a103088dca74e2edad4149",
+            "name": "Farmacia Fernando Redondo",
+            "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+            "phone": "No disponible",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fb4a232523c6cb26ef4d32647b159cd5",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6cfe339dc84ec68d80603ab33e12f79",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "75616d8f416e5373b2fd410ebaa63ad0",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0d4a8d6e904059eb12df93627d4b5f88",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "52ab4420750b05af4c7348baa2fe3b34",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "086e38a75aa643be1212995d8107c0ed",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "13130678bc5561df80869bd0490f90ed",
+            "name": "Farmacia San Andrés",
+            "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+            "phone": "921144794",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "62e7e82705d4ba8dae8860e29c782e31",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c595003a60f1b098e18506f3fd54d7ca",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "40b2ea7410014b30fd5601635ed65aa2",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "46e7b07bf766d9d2991619e841db9217",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "662fc0d439ab4b54b5cb5a3852d44b28",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ffcb1cfc2b4ac09eecd34957c356187d",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2beebe78054d8eaab0ec7413eacfa6f3",
+            "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+            "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+            "phone": "921144812",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

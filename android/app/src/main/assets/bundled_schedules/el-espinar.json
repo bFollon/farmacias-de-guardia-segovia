@@ -1,0 +1,7688 @@
+{
+  "locationId": "el-espinar",
+  "regionId": "el-espinar",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/01/Guardias-EL-ESPINAR_2026.pdf",
+  "sourcePdfSha256": "5d58899c62a3bdf43e9e0e40d31c152df76b60e01f6215154a3be5f4ff448e25",
+  "sourcePdfLastModified": "Wed, 07 Jan 2026 10:07:40 GMT",
+  "sourcePdfEtag": "\"695e306c-22375\"",
+  "parsedAt": "2026-08-23T13:51:11.067Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2025
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a8ef26549dd412d816416fa5044e93f",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "63f89af625dfa864f0aa11a5a1a69ee7",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "75ee6e6e6ddeb8f500fc1e2288f4c75c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b7d7c28932a1eaffc178217232d1b873",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a45ce539fbdb345781cbc7eacd629eb8",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ef0f6f1cfd63b6e028b04156c394ca88",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3d94b03ca8336623f198a114307692e3",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "996150119b933f9f6286b6287e228634",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "06a7f63db90e81bc735406b48d32c75f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5ee3f23a5450506c5ca7131eeda3a7b4",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "648f7aa1c92def59388a66e08097f232",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4568c68c50e8ab2e5f0e7eca1b998fc8",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0d446c555d001f35e40115b23d7df608",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "125b4d0332773c779924a0c84a4a81c2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "580de9eaf2f07f14c7690c7df4688c22",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "94785341de5616049a69d5f591ee1028",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3316ecd503462512357540bb408f2ddf",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7e3e8a7523eb1e5a613fde78f5ca8d93",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d9dcf96571fd04951378469c0249ce2f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dbf8146e2d5e731ce157ede60048595c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "74989a7bea455ad83a1757ba31b28dd9",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2813b31a4d48ef2a544889573b89f4e5",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "55ba658e1a2d6126d73dfd9c3a230e47",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "eeecd20884cbb0f5b4d615bda972b333",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6b0de37b3783f463e265b0ec0de4d26c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1be256e7090444ca6f551056e50565f9",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d25ced06d7ad58a529064c9762c083b2",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "149130c68b917a5707a7479cd1ba4e94",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "58276497b19b6ecc4384574f9b813bb6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "de8630998e90caaea7eac7382e07499d",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2af95aa08ad02727c50f846406aeb0aa",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "enero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3ca994abef098ba58fa2a4b9b421bd6f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bdca8db0e26ffed9da594b54602cb4c7",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "53f0b00075ce7a880ffe26178fb832d5",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b7d782a1a928aacf88eca1bcaca361cc",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "be9a52628377163fd7a88746197fea98",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "407088d0b64ffe9bce2b8632c6c0d2d9",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "115a3d6d1e5d46dde2ad130589ed24cb",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aecb89388b916eb132460b4c7c50dbe2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7ce83c1103986c3c42a08bef4ac6c17c",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d8420fabd21a6d4ce7e5888115f74f34",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4b0ef01c192a0ac0a3959d2a3cece67a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3bae678e2ded309f4def29e7b7fa07fd",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "acd65932409ae0f035ba2c0dff95c52e",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "857a5e6c02e8ed6a19e8fbf8dd4df6cc",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "44fc2a14bd9aa3575546b35b6c763d76",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e81ca72b50d17479627f36d8831e0580",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a073ad601894139203349962c59ba32",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c5aa3cf07f2dcef5731cbee6ec6f1ae7",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fb8154c6ae49ac54a02ff6455e3a2895",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4545a1b714e07fc8f222a8279ecfdb3d",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1e3f60743724c04eb54310a8ff1f042d",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a4f6c213d5949074e1819bddc7a7769f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a10b03c4d9493e343f7e5962869777e6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ed6e4e134c333af48b723a265c358048",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "53e591ca7e6c66512d74bd55416cee21",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "29eb8d39ddf2728bf02fc090a08ca9ca",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9e95a62a786f851887629ac41351ea1f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1bd0e55f18d1f354165101120ba4cb98",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "febrero",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "710f352928fbeec166cb57504e242047",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5de3e16eb4e0467ef0e15f1dabdf1446",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "92563cb2df2c28380c77d1cb23d946a6",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bf2eec199fb3977d5065f588d02eacf5",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a0b698590b71f1cdb1aab0f4669f920d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "501131447a2b0d3838b9f10ef24a60db",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "28d7d4570f43daf984ac2097dc5a0575",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "775c35bef10c4fd16ccd9cfcdeb6c97d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ed6432ec3bc82f5a882b29e3891effa0",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3fe31f2a7dce51ea56666fab45257da5",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "85f5a468288488ddf7cee15764c77620",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cab7435cd03153cbeb65ec79e5f88dbe",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "03af3506c00599d97e8b3940e408e994",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "521615d918db9f963ab3977ee0e95c4e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "228a446592064767541e42007f608a6e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2b512e09b5fc1b9affb2f95806bce035",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3581b4f639caabc17a43631033f47fc0",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5ab0ae3287a2b49501f0bddd9bd40833",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2800d826203ee1aaabcad4232aebc11b",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5eceda7f7efa4cb4286c167533a9c4b2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fd2f519d546cfdbaf46d81a5311e169a",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1ebb0239cb624307f28dbdddf9b1b7fa",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b1ea77e80479c1835a53470a388e7929",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ccbfca2e0a6b231bfe3267931520deff",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8f03239bc785214a1f4a2e0468b5bbca",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dcedb1579b5a211ea31899b16b1d618e",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f554c46a7f01539dcec3fb086fd10f4a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0d64bfe793309803c12e9e8a4200ea26",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dbcbc4dbec7f92f52981d3c02c0ea5e0",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8cfb0df0afb0e14b8d370a35e76d432d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a5b4b8bf0127a2513303db77cf4e59a1",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 31,
+        "month": "marzo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7c8d48e0dfd085ad9b8c2db5337962eb",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 1,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3045a2bbf6e05c4ae89a7ac7c8b0e2a6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 2,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "42af4e9bbeba0810d903ff4697e223f6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 3,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aae0ba2e0d7701e93791abbb9d789421",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 4,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "449e01c03c3a31f2744e998897852ddd",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 5,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dd51d504b60337e03ae39543cfe6ac56",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 6,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ac674bfd2115dc9a1dd3f7bf0c8e1d9f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 7,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "db9dfe77b3f9a6ac3a58961b0ad54796",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 8,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "01651165c55bfb7fa0dc489affd2b5de",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 9,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "159f019b02045166c7ca2f0a3fb52110",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 10,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2afe6274cac857c5b312604e3bf18a78",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 11,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "62ff0570184ba4045574e5c96e45595e",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 12,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "354424c97feab36327818c6ddc623925",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5af1b52f9b9c5f06eb425b4e7224ed81",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2c5933b9193684a614dfaada66549159",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1de3e92d2d14995e90a7f94b67cbd15b",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "eb1f36608f1a362f8ce29dec03d3fa02",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "412cc63f48e052159dcda233e868dccd",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "edf6e94189fcf1c823f219e8a42c0b2f",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a70969025ed50c7aef47b965b2357abb",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "514deb99b294136aa3c0f7c8bd5f5571",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7dd1a63b06b662128deb0bf3ac721b96",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "91b638fa6bd9de337bf108a839e513db",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d81b22d6fda8afac080c38f169075df7",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7ea451725185be06b58e1769c82b142b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b0c2f23e893bf697726243c38ee62ac3",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e0fa9a5654561b5e38baaf3ed9abec2d",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c0f78c2a2125333c8a32d122e30e81cd",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7104d30e43454e29a06a37e9c491cdce",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a144906325d715b8db1768b9ca1bc062",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "abril",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bc87c1c9902185f38491765123fd471f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "475a71169708a49e8fcfe08a90e49143",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9cc4441da0a1c243ca67dcb27dd94691",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "36a757831c74645323e28ef3a8335df2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e89050b86081cdd8f76afed57901b8de",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9559897a27ff0658470a6c4e7df798c0",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "537ef76b0851436c83a6d3cfef71e786",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "504c8299d6bd742d27ce072f0119b49c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "52883792b10dd9092585b5e78d888d97",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e9bbe6dba4b1a864dfb6c40881e19fee",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "04e24af48d56d7ee5a3c02bd50507d2a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e4dd2adccf3d64f4487a803b198f652b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ae424496a4ca257c1c60cfcd0feec1d4",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "04a88f594972d0a7998d56757d9580f9",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "54a04885dec0022e71a8274a9d35837e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "51800f05143002dca8fa1dc583192cec",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ba6aa1e51f27f374f2ce234fe1f433df",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a618dc5faaaa01ebb2df655cb304892e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "19fba741de5064e85e79aa555fcde29b",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9add46d178f5bba70d1dc80612959b41",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5916de0c70a07e5d6512e18a0f2bbd77",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fa84423b6ce1825dfa20316029bf4d5c",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8905fb9c7830c889580edbd6a1bb76f2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7be9de449817ca2d8058f3d197ad574f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a3a7ca0e7973c93dddda89ad2ae4c81",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 25,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f84e001477d0a1cf50c8222d7f289ee9",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 26,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bd7bd606a96f95590ee8e6c6be03b463",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 27,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0ac1cc34eb2f5293dd22764a3039d627",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 28,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bc14eb32fd37d6dcca72e7baf7c9c333",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 29,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4e68d3abb21164e6504f8ba6b520b612",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 30,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "37c4ad840eb2278c894e2067c6eb163e",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 31,
+        "month": "mayo",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "894c600fa6681cfedefe7c34aadb4e4c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 1,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "99ade6c51a0ee83803573199ab94587e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 2,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d1709dd2d7a9ad05aea0d2d494933544",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 3,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0a3f11aefd145dbd63214f5df49a6d96",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 4,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "764791a24c111bee72d9445da0f0ddc2",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 5,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ff54df8a65b7d6bc9ba0d5f0a486471a",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 6,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a77468dc8639c4bc3724f827a7449032",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 7,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dc87ed048d296948b1d767d6e059d0f8",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 8,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8fa80d361ff617d68085f4b4b2950794",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 9,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ac36a476efe96b2269406274a282692b",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 10,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9724350b76288e46c4bdf4f92e7a0de8",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 11,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "edcfe96bb897dcee5a47f8ee18242f76",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 12,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "22ce68ce3be7e25a4b7bd057cf8bc559",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 13,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2fd8dc0f7a1386d0c299871cc5c4f85f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 14,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "da5c6343fe777d0850aaca18cd59e096",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 15,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1b46f7da72d9928c96c8503d2a2e6fac",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 16,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cb6734efc24d0d276eaa3a2827577f75",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 17,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "21ddb8d88aecb4613edb6809f6dea987",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 18,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "16b8383be484419ec13467831b9538a1",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 19,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3d04d5ad1b023fd3bbb6e85b23836497",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 20,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4efd657406ea34dfffd9a28a17f67315",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 21,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "34729124a4ea4e3c0c9b96bd5fb25a26",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 22,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3c123493713f018d810cd3b1f90b61e9",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 23,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4836adeae1681753651415aa2d4f9982",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 24,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d2be81d0b979a275017c17c7af4837b4",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 25,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a4fa0e844c7b5af4ffbded1d0c1bd19b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 26,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ad01b821c4d5005eb99e53924844b753",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 27,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d552b203f1791dd954b3217e7da85fa0",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 28,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "889f88b7a082610fb8aff2563c8703bb",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 29,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e47a9e42008474fbd64a1066747061a3",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 30,
+        "month": "junio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a2703d8af2e2d610fb61e0cd92082ab6",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 1,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "080389602fa8068ee1c22c4e6f21405f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 2,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7b8bc3c05a2a7f01209005a537e16eaa",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 3,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a5f4e8ed90e9ac96877586358cbf448a",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 4,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8d6c17c463c740f14fc80504e3aacf24",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 5,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b7e7a5fe9f613d868b3a0fe2110d1992",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 6,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8e50146ce96ef64ad9d1fe6750ce0664",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 7,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5e756ffce53c26f229000ef06d0256bf",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 8,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9ccafaf61b3a68e4fd9237dcee05b974",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 9,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "95b3b413c8c0be749271d7daee556c39",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 10,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "493ebbb3ddaa76c8035344a68d2432ba",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 11,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0fb297342b37fc2f98e9b07b035e8a93",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 12,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4ff780c938e3ef91939a677882ade67b",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "970a7c59fa5db02f7ee420fd4bfcf687",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9c154e064c16bcdf4eec7f69f65b22c0",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "135a9a48c68a4b6b7b42892f03d03ea9",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ad35efff1b0a9596c8dba7d454c4e478",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "03acb0bdd682eb894418d242a22b7146",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c196d5d8861db9f800ca8ff62b544605",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6ef52d1cbba48792c8e0c68d6df33c9a",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "be41e6756c818d9203c0222956cf09bc",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8e11176daa1f933141f0fcd56191f40e",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7cc86a28cc508a5e5a9435b4a66f1cde",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5f83ca95355c5618d935383f0fe802ca",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2fa026deb9d6437d62dad316bdb6d837",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ad90614ca16240d89457297c9cc65f63",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2ab3b2e320b968272f8239f4a381a0c2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1b53e60137607fc69ca54b0d8cd85fc6",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0a97ae69c867723bec3d763dac43e6f5",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e500230bea48ffe0b77adaee4085c10b",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "00efe8fbfa6633f6e33ec2e8ae190fde",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67a272dd013262c2947cc8a867a2bd00",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bcb268d3d1b905caa04a45ce0f299cc3",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9ae65521c891f9b2edfb7ee5041e3f0d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "50bee2b96e3ab5695a985e04cf909948",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2f36eddc407c24285911f53f8accba0b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b27634ee26919dead7cfa98b5d677568",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "896bef8a0753315c64354f394e2b0d8f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "337bcdb137f67db65d795b57ec3d2421",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "de5b3c41db8114f1c9b5ba90c7914813",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ee6ac8175f8175278d6fb1108bdc6be1",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f5e15c3c0968662689544ab40a899f4d",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "71bda80070f3a54a8f9418fdb12d420c",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8bbf0f0987739284a505eb26f10e9261",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3ecdd8f2cc57e3419ec5e2499d97eed6",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a108b83e9c464f8e17bf12962782875",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a0dc8b5bc6792c3732cb84a3bf5bac2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ec09f543f1ca4e4439a4b3278a2ffc5c",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "919469e4fb26252b5a58f0b514f59ffb",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "56d9183e0865926574263de7c70ad8de",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a981f2aa367724af2fc17ba04b7ab5e5",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f4d645e9681d728735f7ba7b1a426f8d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "75e1be4a333ab5e6a4f24bed5fc4427b",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ae97163d90536e9417ce9a28c8126084",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a82a3772b5f856e6557c7e44aa1ea4cf",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cad50f9f56e1d9be4f1053fb09bf4552",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ed21637b0040edc05513fad3f24a2264",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c8af4e464ad850535adad7393ae2af18",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7dc100fd7fd1476139b210840eb16a25",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "435e572182dfa6ab317caf0df9a9d072",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8124679f03b0438722d45cc72a0e1f2b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "109e38727a4d45bcbe7c7ec3d53b8970",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1f3d4afd8a5d3311e08ba2f5ad0c9cdc",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "363e9b758e7c2f23e37f7aa4b4be2e24",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4af03d2f81d6834194fd58153bba3644",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "932e375223822e5bd5a39353bc5776fd",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c3ab670d3a1245aeb314f6e8e6ace21f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "106ce5aefb2e9581cfc814ee1d390a2f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "11c0eca64b641a35a8f886edf337ae3a",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "839ef4f2de86319e51261cc84e8683a7",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7afff3e6d9c89a2fb6ea00e2ad364655",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "22b060eef953101868b24453b77be5dd",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "562dd72a1fcef04f13186f01785986de",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8d1f4264a2515c2edc5892eb300d229b",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9447b442089c1e4852ccf19d8db19596",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9d3d75aec67ac8ef16a9dac6a597cd50",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "267cb0ed423f46def3da4a51c8ee7810",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8044a768d39f5b5c53199f14ca20cf2f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3f7f1ec299aa11747138a90607d3c37e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "84a84d2d6b6f8d4eac7a7b0e61e7eca5",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "44190b6ecf256dcc83f78fa53065ff9e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3d65d8757cf47ffb9082844ce7e29507",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f7c34437348185017a104ea8ca48979b",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "650cc82fd72b0c33c36d0882b84aa42f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bec66bae1540bcf107e74874caff7c97",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "233ae7316ae2863f85b0012048a6b0b5",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ed2761032ccfa33261ec39d965ee18ce",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3c7d9502f5ea6123cc9a3252e3b612b",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "91dfc0af1caddd43296d4e13ce675a04",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a8c89a04f4f58a5d0d5d4b96615f2cec",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "365f4d2e2e69ba397f88f860a892ab3a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f159fb8ae4f4b3afc126d1023596377c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c3ff3a3c489092a1b7653bd277f37156",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5aaf9ca66f4ad939d9870d9248db599e",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "786bb769f14788a304f13cdce712894a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4d3161b302d45a46dd4ada131c607b62",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2eeb4cc768d9cf697a42aade61abc2d2",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f01c8472557e13d33b195b970c9a4576",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bd775b429aa850a908a704cc2e61d6f5",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5b6d24c3af20bb491cc6cf454c0334a1",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6c9d77e09ffbb2ea65b972334a396a9",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6a03ecd5807459936b121e91a502bf0",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "137e3e46b72ee18ad148f0aeb8fe2326",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "879c15474c0564b2ed375e078918d582",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "422ed1dc3969c1c29406cfc8f90801f4",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2ffcfb6d9888a80413138c20f54685c0",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7b03b7bc79a0591ae04337d6a9d98d27",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a20f35a150cf3c491f3518d9e4432b2e",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8a775eb55b5ffec40b7e4d23d7345677",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "982a42985b5b460ae6efb46548f9bd10",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c47d71d78deffc42c5503cda041c6c65",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2631c858c71f61dd2955e7e95ce4c8fa",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "57dafd97bec132a9169395a6a1e7f8b1",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7b842cc863360f9214220165429340a9",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67f5b5e68097f41a11ce833769f93893",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3d278135bb1602fb0a5cc52c0b01118c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "390089c3a2824b8806fdf49689657e3a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b0d1d6cb8f5fae897ea91932d7ce405c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4c0cb349248aa1344113d48a1ab555a9",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d054dbb478d3c072b4f4ecabb342c35c",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "13cc9bcb2b046c68e70dc9a86c2ff784",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d9247e817b30cf84d74e39e50f06a940",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bc97971fdbcc93726ad06713d7ee2363",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bee3c9db6f4a7063b0497d4078eed7e3",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7a4c6a684de570eb9b540c23c09351d3",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0041aae0c87b5e05d6f9e41a193d5f1f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f9308c8c3aee50bb7ef9b5d4b1a62e73",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "15dfd909acbe5160298bad379bf877d8",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "09ac061a0e74ca6836e626221ebae0ff",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2a2d9307a23bcfd0736b9f6072790c8f",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b2d2cec2135a8325372a0501f840dc87",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3078a39bf94519adf421d38ac2d4f772",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b9a5a38b7c6609cbde818a99c1f70016",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "38d5a9ba81e5d5df355c2a09b3fb4b34",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4e886c52bc3384dcaf3655f8477994f2",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5be5af5d4a271bc61dbb49705a34cbc8",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "055b61579b29cbc613cbced0833cd116",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7f21da54dd758a7339e9dbc7262e3484",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e48b3624af125d4919e2abff1c10ec3a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a2ee85001d604d5521707330ffefb27",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b852a24f49e33101534b6668db7dbd52",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b3e285bf2d5a7f0c5b32d09c21a64d39",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1bb03c72798538950ffb63e9ccc04332",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "58689f677de94e0742648076930fb9c4",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "23a2e4f60b63ea57356e75db55a601ba",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "aa736b4bcee7a37adac40309ec0a2d26",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6aa7d95064d9823e8f709bb5f60b2f81",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "58703fa01f87ffd350e5e971afd397a3",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "efb03f64b53fcc917669c9afeda59480",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7fc99e9c3189391602f1fdc7e8271ea7",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "db27608ee5317cd1925d619ba327329b",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6f105a39930ceafe6a797ea91b16950",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "51d3321c59fa9e4b4e69eb6beddbdf86",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1a3ccc5fe4a077049971d04ef4f56d2d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ae56b208029ea2e4b3637e4737094a31",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c14bd7136d09b83d141f1b3c6b52f6cd",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fb895d6fc2ae866af6ece63f8157fc6f",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3dce54490b22e5cd6b6edf43d4d4454f",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0ecb8f8729e915c7cb41c4bfebe2aa37",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cb15b9d83421e33db7dc03c2f14e41b5",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9b7fa5100bcd012852f4c8bc9fcda0f5",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "32f5244ce9252edb5860109f8c49cf0d",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "585228460f1c8b66abe70964cf2cc54e",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4b8b785acf6e9793f58922cd8d8caaa5",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "61aab25e53358e7bc9aa10d8e4c5b024",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3793ae9d5138afc47f1032c927765ef8",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "00342dfc9faaf47e5aaf3d207d922711",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b285cc3ba501f53c57437024ac0765c2",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4b5fe1617d0971113ea042ac450c2276",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3b400423c528c0006c17dc061f024f96",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dbf4f79ebc5a100c3366d67657ee13f9",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3a7772e503b26099131a659861f63406",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e62e63c36800ca392479c6f55e920ac0",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f75aa9e2cea198b1d9238ded3ef7bae5",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7139ddba61b320ebc83a290a8ca2911a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5177163c6706376be699b34389e76fa1",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9b93b3f8dc1e233c4ade086f00f83570",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "68e9c577937dc64b6593054116832f20",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5a71b4270fc1c331e9c98ded5d89151a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bea1b8ed9aca5c9da30d25f682d02137",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "408793afd63502d99c3a35590467c79a",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "67231fd7cf6d33d6cdca7e9a9830861f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cab1d8266ec900d962143e56ed2318ea",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0b9b696995040db8df5d5cad07a886e0",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1009b783db492c65540994a1f843c427",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5ce60bed0850ce8da27ba4f81fdb5726",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cdf3cfd02ea13179b70040238e6efa94",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e24915541eb33ea6ad93872104aad944",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "612558cd1e69bff7dc1219ce214028cf",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "360d2afc9fe887f5d0ea229914290907",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1d6768ffea98043f0195b3026ddd9900",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "38918aee8bcd848ac5ff829eb1f1c4b6",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "86a768b40318b81f9b3f404e59804302",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f51e10571be97d7357f02a426930b7c1",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "317b51ab7f2c97d3c8927df0830eeb2d",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 11,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "39dd636fbfec8cb4503c6b597b0cfc6d",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 12,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b73ae4441b98ada8ee3738298d61d83e",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 13,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a3f7e5ee2e1e954217187fc7b8344139",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 14,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fdb104d7861f70b0d4c7d86d2b116bfa",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 15,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "228094f7fd054add2e2cbb6e0079ddc1",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 16,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f315c9bcb15c4a7d48d73e3c7b910567",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 17,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f2b96f33189d366f95f005d3bbbb4654",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 18,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5cabbe7d16745f18fdb4b8ad9650dc51",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 19,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a4bdb8dcc77866cbeab1207c452b9d1f",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 20,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "faf015598c8887debed4f73902acbf2a",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 21,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "61e68e1f80871e9e3dfa79dc52cab3b6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 22,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "73739252d6ce7ce1892574ed9bd669d6",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 23,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "782429742e44e216b4c1f143aa594282",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 24,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "deddde84248e5f52a7a649914ccc34fe",
+            "name": "Farmacia San Rafael",
+            "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+            "phone": "921 171 105",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 25,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "fbcb5f66c76897110788cf57b7e1878e",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 26,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0bf517a8a91b25073fcf1b28eed4bb95",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 27,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b35be4e68a531e61cdd0d62207af5f5e",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 28,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d1ecd52ee74a832eb3dbfd517b4fdf18",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 29,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8e6bd874bd3066c9c9b0e6cee382e1cf",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 30,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9223f0a21045a78729195d2b40e29879",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 31,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "dc2202a26186c4c8ee831b4c78e823a4",
+            "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+            "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+            "phone": "921 181 011",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 1,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "328accab2d0a17d156a84ac23f1e5b4c",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 2,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bbeee17e1af539a7198fd6cd0aa79828",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 3,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f561f934e11eadb3b31e7a662e42a190",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 4,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "18317640e6bf55a165ff02d3246879a1",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 5,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "3433227ef15c035ddf62f3a02a556477",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 6,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "64e98551bec58609af3ac92079836091",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 7,
+        "month": "febrero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b667f2b7b8a1558c44bf20e13f9798ad",
+            "name": "Farmacia Lda M J. Bartolomé Sánchez",
+            "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+            "phone": "921 181 171",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}

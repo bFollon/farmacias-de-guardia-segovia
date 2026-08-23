@@ -1,0 +1,3778 @@
+{
+  "locationId": "riaza-sepulveda",
+  "regionId": "segovia-rural",
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
+  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
+  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
+  "parsedAt": "2026-08-23T13:49:04.442Z",
+  "version": 1,
+  "schedules": [
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 13,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4579efa6f3704bf048d162674bafe8e4",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 14,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "79731b52d10bb747bb762ad448f61e87",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 15,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5a0a72c0cc42a53ae0fc32aedff67df6",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 16,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a99c79b7be0f9e9db390185a1e68b70b",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 17,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "83aa55b0e6c4a2cc1de6812e8551ade1",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 18,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0e42d9f84310fb30317dcb42177800cf",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 19,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c24df41df8b455206e55fb60703ae0a7",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 20,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "abe55a931b1f1c20cfd96908109a335d",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 21,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4f1c07f692b5ac5b7ebd882dc4a777f7",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 22,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "0cbd07dcea2f4e8cf1d3a88253ba8fe5",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 23,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8e09f724475fe7a46c9687553b4a534b",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 24,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "65cb83216c828b1cc1d64384b2507215",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 25,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ade7b5bfe50d419597fe44d7e4ab4fcd",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 26,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a24207d4ffe615601691ee16cec9b516",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 27,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "26de2a5d09ff7d3a15524c07e6bc4d22",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 28,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6d0f1bc35467876c744820a58929e675",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 29,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0b29baf989f325b85ff2a49e678af9d6",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 30,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7fc0cc39b0ad168b08a91d96f5f9506f",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 31,
+        "month": "julio",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "873f9cfca72b8bc4aacfce19c26651b6",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 1,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3ffa3016a85aa570a1fcbeb3c2c63ca3",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 2,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f9b7f91c08661582a4a6f0fca06f6fd1",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 3,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1a5e058790468da2ba065793a67a74bf",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 4,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a8098940fc6a509b17bd35b72a38549d",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 5,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "03a7578a32a0abe1e5fd1da124d76dac",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 6,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "93a0478d859a0a7765db6fda7dd219fa",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 7,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8c0bc6b010ab1a47464e5d8a120af4ec",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 8,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "4281792925784d59b15d2a8aed3b1696",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 9,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6141f7e2a5b4472642d8ea929640a95b",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 10,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "05144165250482a7dd7635b17dfd295b",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "04823e9eb2fc9437d0ffc5d60e0a1466",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 11,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "18ad63d17dedff59e3689e783cb0bfa6",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "43b48785459062a847266a07d1db7fa8",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 12,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "47cda5210847b8558482f10557354373",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "600b75ec418e7256d1bf3bd0bccf84d1",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 13,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ab4d4d2f48b1ec454f4b5f430627afa2",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "aec1f125d92acf16ca4c859842d50f8b",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 14,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "078eb1677a4d5c98d3dc370676577ed6",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "ac287ea6c4f4a2bc982fcc31c71f62a6",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 15,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f4177a248e14a2510be5eb7883b43bca",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "387191adb9625500539b386b272f9fef",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 16,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "13916a532460578a3afe80b8ec9aef71",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "35b567c68688cdd17363721b5cc5086e",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 17,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6527c8958118237d9033196c506f53a6",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 18,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1d50e809adda0b26fe46a95b46e72253",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 19,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "84f026e2bab175a04ce4b33254872b18",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 20,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a77e75d6f4e64c8e6b3dee1ac7a54d45",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 21,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8260dda017f059f858dd8a3780220bd0",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 22,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "17a448b8a6bda1e39fe509045a7933d6",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 23,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7697a1b7f392eda71057e9541178925d",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 24,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "50c6bba67da788e0241d74c501d86bf5",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 25,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8420b286eb6fdd958c1843765ac0f078",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 26,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f4f202a7615a2e1baa35e89e29a53492",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 27,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "68b0f05d805f24475121c3fd974afbcb",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 28,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "bfa0f95dfc5c94facf3df2e5268e0bb5",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 29,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c598b847dddaa3fcd855f931b2ae90c6",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 30,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9a965095daade7a0828fe6ef26db8503",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 31,
+        "month": "agosto",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2bae42ff05b63df492469ed50f28a7f5",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "706c9aa767497df4cdd277cba49dd31f",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0596836441c90811865dd2acee06692b",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6f823fedff9ed2995e80c60db2720ed2",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "60e0fb055c86a3755703bdbac346f9fa",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "cea9d5c199b974ad3d53bd457e7270b6",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1a85f71cfc453aac5bea53a226fda21f",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cbeb61bbb5bdf84474b6715824eed199",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1341ecf88155dcd7dcb5844a681e7a02",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "414ef3737ce2e19b32f2d1f16fd65b59",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1d8d31f873b7b3bfcf9032e1037244df",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b56ac8fb8508ef4976e7b72243d40413",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "2e714927c971b8e5afe0d39b2bc58704",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8256acc9ad37202c237ca760f1c0ff62",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "e7aa46f568b5f4d143007bca1d32e72b",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5abfab21ebc194fc91ab223301fe1caf",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "4bbf7b27bd423b062da04ab763c9261e",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a881b9dd9dfd72f7110d7ed7f6a7ed94",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "743fc284a31f4de8b7b7dcb346946e86",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "31ded87d4b168bfc096f1be584a45056",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "887fcf0d2e489a4d36ed5f12817306d2",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4c118ff99bb78929ee867f84eb5657a7",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "51e358cde85d4eb53777f65cac065f19",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0918e6e42fbb9ef36819f43768817e61",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "67f100a677ca9f27e27306d3acac2b7c",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8ce7993882c0167a6547df0f374fa52e",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b9a06c577546f4e0eaf0909f6495e47c",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a3ce3c4c4a83e748bc921cc38cf0beea",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "78f9634116ff9c731793edf758656d34",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "4309d97735ec2dd859521616ec8cf5c5",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "00d14d61d6cb0e906fa3e2a32726b542",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2ec8350491d1c86f392e2468ec3f7ebb",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "339045220205803a18d077a8fa70386e",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5d12b29bf8dab3e69ce4826d99d91f51",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ea5fcaf98fcaa71c57ff34f84b4a2c3f",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0f4672a05e4054e0735fe6b27111297d",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "bc29a5082dff2475cb2561b41893f205",
+            "name": "Farmacia Mario Caballero Serrano",
+            "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+            "phone": "921557110",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "septiembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "33215639755433ecec04e8c5ece7e622",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 1,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e2c12efec5caf6215525de22968b203a",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 2,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f6ae3e16c483a4ba58b47187cc7c16d4",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 3,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "45fa64f69bdaaa58ac3753b0bf3466a2",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 4,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "02579ffaf5833cb5f4f959396fde36b1",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 5,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "6450cf0cc25dffc2d2a831cd9520e7bc",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "a09ea7f72dcf25a3cd40db0c3eb413d5",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 6,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f62c136dae6c0897a2ca00ec93362f30",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "11b9f2afa65645e850f767f856ba1e1e",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 7,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "b6f63abb7099b73f59d4ada2a6fc9657",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "8a7f587a387fb1e630fe0664bcb5a7f7",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 8,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8383a7ffbbab0731670931e83ad3feb3",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "3baca1077451c32bf4c1750d659ea793",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 9,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "50ee1369e67f1e31bb52b49a7d07d6b3",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "623fcc7fd4fa65ac7bdaa78361cfe074",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 10,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9d57ae758c283c8c54e6a205acb92792",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "f65aebf096f11855f031d5ff41395ded",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 11,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cb90a670b731c7bd4854827dfd9070b6",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "35fe540171d4c2eba87c31da447244ba",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 12,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d8d7721b87f09cc7a3e4d49bcb6f7a4d",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "fc03238d2cfb20275111a1ab7015c38d",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 13,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ee26031eb56b52dc20e9c8d18ca38532",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 14,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5e898e93e92c60cd5d14f27ae9381c12",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 15,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "351a1710568bc1b014b74f5f4fa029ca",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 16,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ca3e27b674a950bb1decc07c6cab8767",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 17,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ed5f8f91dbff730c03e2bf0cc08a3fc5",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 18,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9f3307c198232fc370cbdacd5713b586",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 19,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "15c7d421e8374909f3a2ef902f16aefe",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 20,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "5c99af9e3af72ad24a307dd459bbf948",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 21,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "ef70219438f8719810c2cdb388f2120f",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 22,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "f40ccca65978c3377e11a21884c0d8d5",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 23,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a9f4b80d49afb43bdfb426f462228fe5",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 24,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d01168f3c9f28019babb58d55dc5ee24",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 25,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "796d33e13dc45241e4ca5cd8f88a231c",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 26,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "912a1b269cd30bb397db757743811b4c",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 27,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "243ad9ef2fec5d6d72fc7388b5682601",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 28,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "ea37285a01758ffd4a0f0b1493c6859c",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 29,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "d8a7336cadd58cfff7ed067e2b24d08c",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 30,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8f26d61ae5300dd7ffef414de11285f1",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 31,
+        "month": "octubre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "0bac58f8bf239e3fbf39dd7f7f86e112",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 1,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2b58c8e5606cf8d19d2059d16bfb711f",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 2,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c785da5184c49dc3365835d666428698",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 3,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "713d953109021c5c653da48f3752f808",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1532cd3be95e4f366913f0ffda632fcf",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 4,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "785e055ce6fe4b9cad7a3dba0e901a2b",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "821467b9fcf408ac394d759097642e7e",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 5,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7c3582ac52b370ffcaf272e28dce17a5",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "47b1e8cd0f857c3a015c4f18d1084b05",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 6,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d0563426eb765e0e350aaf432ce9ef8e",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "eadc7ba5cee42ab55886920d537e14b9",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 7,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8481575a9506725adebeb5f1584c0996",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "7dcbca17ec10058036576de6ff8abd02",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 8,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "662c0a6f180b6f8f5506cc0b72327b9d",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "152d161033146256395be40e1a163983",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 9,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "2bc444ee2146e805334b80932447c09a",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 10,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "1a24f52f80a3b53c18a6e140b9095688",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 11,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "eccdf262789bf8edeaa5a621bedbd287",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 12,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3c5f39c45a634bd64fae559b71a12e36",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 13,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "5bb1a7c44abf93aa7e3e08c2256442d9",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 14,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "bd27d14ce485d527e17ba4aea4afbeaf",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 15,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e97685663ec8d9b793a5f0835330f2b3",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 16,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7b9055bf5b7f8d6e4373b0f3fbbd529d",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 17,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "fbd39fd3106781efe3c3142ea8a493fa",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 18,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "b72a6c873f0aca9abec684ba95e9ddea",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 19,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "9009284924a0ffb597fb161c9855f41d",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 20,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "01b39aed4c1d4262ce0d8fb87f3ae895",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 21,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "6ba10808efed67fb057e6a612d976345",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 22,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7c1ed5d37f71409730a93045b084ee2d",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 23,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d6864b9604ce9801501e515026920ecf",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 24,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9858cd89dbea3a53a71cea2105ddfbc8",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 25,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "824a546a429f6784f8c15ba7f0e452e2",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 26,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "de620896e7dc8e6b470b6872556bbefc",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 27,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "75ccc08da4be0bfb28fd1599529592a3",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 28,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "03490acc8862bc49a61fca1d53eb4d8f",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 29,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "372600803d50a7c4f997e1ddebe108a7",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 30,
+        "month": "noviembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "be3a010c894a6837f3b7a5135fcde6f6",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "10f28d10590ec41e939a77942b29504d",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 1,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "2adc9e8de9f907989837aea80ac0e309",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "128a2a9f334bb3da29efe717aa2c4d00",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 2,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1211dd6eafe28d10575a69c7795f198d",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "c17d269e33ab310b9e879ae83854d57a",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 3,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "839e8e4139f4b022658d74e221d1d444",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1deab7e1431ac8539dc099d8c9a6731b",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 4,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "805598a01f2c7a726b5986a0dfcf3847",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "7a13b04e33ef8083150ec7c8e89d377c",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 5,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "8349c0e5fee2766e095e3dd3829d3b20",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "0dedde005bbe603ddfabde313f252471",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 6,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "afa196e77660c5f51122ab02b2ac7fb9",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "4831f893823792d345bd370d0f7225fd",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 7,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "618c11ba3861dc4ea74be6f806d30f28",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "fe69fe7e321f7118ac33fd210bae2bfb",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 8,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "cebe9d7a63b625edeea0f0b6214e72c2",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "98dcd5f8d9e055eeb9147b2d5ba09b70",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 9,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "14c62c8e40e0bb73973cf269e4ec0ef2",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 10,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "a07b06b33c406de770c9820349c1dee4",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 11,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "33d8dd0b71fe8a14c912c72da9880e4f",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 12,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "02fa56b4332605b98cbb4a06264e102b",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 13,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "e647afcc0085ad5cb67682c1fa1982b3",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 14,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "95473476fbd5be9d3e0978806b6eb3e7",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 15,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8a8020ba05ca6cd615ec29cbe221bae9",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 16,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "12c36b32cd88857bdbe02478b8485c4c",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 17,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "903029c0431d4425c5d4b7f1ebd2f704",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 18,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c524a736f771c352a522ea7c8bb7080e",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 19,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "aef71336de19bc945d4b568d45ce6c3e",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 20,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "de06660512750f7b82eff491be79b069",
+            "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+            "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+            "phone": "921543849",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 21,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "d3b723c9674da2ad9334f86c8dd0011f",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 22,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a26de6b2beae716bf09e3aa8a143e0d2",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 23,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a9b33f1c5ae8729aaca6c0cf69447e3a",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 24,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "089fb60628e4f1b8d1ef5b0003dcb494",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 25,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "89087fc2332d7cef7bb3c7feea48f77e",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 26,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "1c7d15c178323c3f4d7b14b0c59d02ca",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 27,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "9e35c16942157d4b1762081d052b671a",
+            "name": "Farmacia César Fernando Gutiérrez Miguel",
+            "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+            "phone": "921550131",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 28,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "7b58301c4b39ee8a3b2f687315c54f10",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "4071ab7c22f0e5dc314790ae6ea60ad6",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 29,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "a4bada938a7f5502afec548f2116b8fd",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "c90f5e4d1708b3828f86c489e9597488",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 30,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e977823f18ca8d499bcb5a03e2315961",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1029162f5d9b761aaa07d218a0619c14",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 31,
+        "month": "diciembre",
+        "year": 2026
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "c878b89def8a6fc34993cce57dc1a9d5",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "e1a2cb8c74caf9edef93c4ff44393501",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 1,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "32839e17b3a667684f784bbdf460e123",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "51095c7ea0b7b8e7958a97982004ebbc",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 2,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "180a80b66049a3bec0db6398a207ae54",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "58af81a071eaceb3118f6d6803d2f671",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 3,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "fullDay": [
+          {
+            "id": "e8318863140cf89aad9421b4e50bc5f6",
+            "name": "Farmacia Francisco Ruiz Carrasco",
+            "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+            "phone": "921540018",
+            "additionalInfo": null
+          },
+          {
+            "id": "1064d0e15824c9802523cc0a29135e1c",
+            "name": "Farmacia Irigoyen",
+            "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+            "phone": "975350208",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "lunes",
+        "day": 4,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "44221f54c2fbc184f80873ab4cc1f14a",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "martes",
+        "day": 5,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "c05c5cd5036d1b6f659feb2bde844b22",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "miércoles",
+        "day": 6,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "8287a560d43168a8a33d60eb2c881871",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "jueves",
+        "day": 7,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "00b81d2305dd380c78ae7e80d153ff6d",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "viernes",
+        "day": 8,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "f525d0dae6d54c2d2229b16c40b638c3",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "sábado",
+        "day": 9,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "7f964a29c68c47c3130e37fa4b67f939",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    },
+    {
+      "date": {
+        "dayOfWeek": "domingo",
+        "day": 10,
+        "month": "enero",
+        "year": 2027
+      },
+      "shifts": {
+        "ruralExtendedDaytime": [
+          {
+            "id": "3851e4e7a724319fa7d7eeac864210d8",
+            "name": "Farmacia Luis de la Peña Buquerin",
+            "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+            "phone": "921553003",
+            "additionalInfo": null
+          }
+        ]
+      }
+    }
+  ]
+}
