@@ -1,12 +1,20 @@
 import SwiftUI
 
 extension Notification.Name {
-    /// Posted after a manual "force update all PDFs" completes so open PDFViewScreens can reload.
+    /// Posted after a manual "force sync all" completes so open schedule screens can reload.
     static let pdfCacheForceRefreshed = Notification.Name("pdfCacheForceRefreshed")
 }
 
+struct LocationSyncStatus {
+    let location: DutyLocation
+    let version: Int?
+    let lastSyncedAt: Date?
+
+    var isSynced: Bool { version != nil }
+}
+
 struct CacheStatusView: View {
-    @State private var cacheStatuses: [RegionCacheStatus] = []
+    @State private var statuses: [LocationSyncStatus] = []
     @State private var isLoading = true
     @State private var isRefreshing = false
     @State private var refreshStates: [String: RefreshState] = [:]
@@ -18,13 +26,13 @@ struct CacheStatusView: View {
             return false
         }.count
     }
-    
+
     var body: some View {
         Group {
             if isLoading {
                 VStack {
                     ProgressView()
-                    Text("Comprobando estado de la caché...")
+                    Text("Comprobando estado de la sincronización...")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.top, 8)
@@ -32,69 +40,55 @@ struct CacheStatusView: View {
             } else {
                 List {
                     Section {
-                        ForEach(cacheStatuses, id: \.region.id) { status in
-                            CacheStatusRow(status: status, refreshState: refreshStates[status.region.id])
+                        ForEach(statuses, id: \.location.id) { status in
+                            LocationSyncStatusRow(status: status, refreshState: refreshStates[status.location.id])
                         }
                     } header: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Estado de la caché de PDFs")
-                            if let lastChecked = cacheStatuses.first?.lastChecked {
-                                Text("Última búsqueda de actualizaciones: \(lastChecked.formatted(date: .abbreviated, time: .shortened))")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .textCase(nil)
-                            } else {
-                                Text("La caché nunca se ha comprobado para actualizaciones")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                    .textCase(nil)
-                            }
-                        }
+                        Text("Estado de sincronización")
                     } footer: {
-                        Text("Los PDFs se almacenan localmente para una carga más rápida y acceso sin conexión.")
+                        Text("Los datos de guardias se sincronizan con el servidor y se guardan localmente para acceso sin conexión.")
                     }
-                    
+
                     Section {
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
                                 Image(systemName: "info.circle.fill")
                                     .foregroundColor(.blue)
-                                Text("Información de la caché")
+                                Text("Información")
                                     .font(.headline)
                             }
 
-                            Text("• Verde: PDF descargado y actualizado")
-                            Text("• Naranja: Actualización del PDF disponible")
-                            Text("• Rojo: PDF no descargado")
+                            Text("• Verde: Datos sincronizados con el servidor")
+                            Text("• Rojo: Sin sincronizar (usando datos incluidos en la app)")
                         }
                         .padding(.vertical, 8)
                     }
 
                     Section {
                         Button(action: {
-                            refreshAllCaches()
+                            refreshAll()
                         }) {
                             HStack {
                                 Spacer()
                                 if isRefreshing {
                                     ProgressView()
                                         .padding(.trailing, 8)
-                                    Text("Actualizando PDFs... \(refreshedCount)/4")
+                                    Text("Sincronizando... \(refreshedCount)/\(DutyLocation.allSyncable.count)")
                                 } else {
                                     Image(systemName: "arrow.clockwise")
-                                    Text("Forzar actualización de todos los PDFs")
+                                    Text("Forzar sincronización")
                                 }
                                 Spacer()
                             }
                         }
                         .disabled(isRefreshing)
                     } footer: {
-                        Text("Esto descargará y procesará nuevamente todos los PDFs de guardias, actualizando la caché.")
+                        Text("Esto comprobará el servidor y descargará cualquier dato actualizado.")
                     }
                 }
             }
         }
-        .navigationTitle("Estado de la caché")
+        .navigationTitle("Estado de sincronización")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -104,71 +98,82 @@ struct CacheStatusView: View {
             }
         }
         .onAppear {
-            loadCacheStatus()
+            loadStatus()
         }
     }
-    
-    private func loadCacheStatus() {
+
+    private func loadStatus() {
         isLoading = true
-
         Task {
-            let statuses = await PDFCacheManager.shared.getCacheStatus()
-
+            let statuses = buildStatuses()
             await MainActor.run {
-                self.cacheStatuses = statuses
+                self.statuses = statuses
                 self.isLoading = false
             }
         }
     }
 
-    private func refreshAllCaches() {
-        let allRegions: [Region] = [.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
+    private func buildStatuses() -> [LocationSyncStatus] {
+        let cache = ScheduleCacheService.shared
+        return DutyLocation.allSyncable.map { location in
+            let version = cache.cachedServerVersion(for: location)
+            let timestamp = cache.getCacheTimestamp(for: location)
+            return LocationSyncStatus(
+                location: location,
+                version: version,
+                lastSyncedAt: timestamp.map { Date(timeIntervalSince1970: $0) }
+            )
+        }
+    }
+
+    private func refreshAll() {
+        let locations = DutyLocation.allSyncable
 
         isRefreshing = true
-        refreshStates = Dictionary(uniqueKeysWithValues: allRegions.map { ($0.id, RefreshState.pending) })
+        refreshStates = Dictionary(uniqueKeysWithValues: locations.map { ($0.id, RefreshState.pending) })
 
         Task {
-            // Force re-parse all PDFs, updating state per region
-            for region in allRegions {
+            for location in locations {
                 await MainActor.run {
-                    refreshStates[region.id] = .refreshing
+                    refreshStates[location.id] = .refreshing
                 }
 
-                let location = DutyLocation.fromRegion(region)
                 _ = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
-                DebugConfig.debugPrint("✅ Force refreshed cache for \(region.name)")
+                DebugConfig.debugPrint("✅ Force synced \(location.name)")
 
                 await MainActor.run {
-                    refreshStates[region.id] = .completed
+                    refreshStates[location.id] = .completed
                 }
             }
 
-            // Reload cache status to reflect updates
-            let statuses = await PDFCacheManager.shared.getCacheStatus()
-
+            let statuses = buildStatuses()
             await MainActor.run {
-                self.cacheStatuses = statuses
+                self.statuses = statuses
                 self.isRefreshing = false
                 self.refreshStates = [:]
-                // Notify open PDFViewScreens that fresh data is available
+                // Notify open schedule screens that fresh data is available
                 NotificationCenter.default.post(name: .pdfCacheForceRefreshed, object: nil)
             }
         }
     }
 }
 
-struct CacheStatusRow: View {
-    let status: RegionCacheStatus
+struct LocationSyncStatusRow: View {
+    let status: LocationSyncStatus
     var refreshState: RefreshState? = nil
+
+    private var formattedLastSynced: String {
+        guard let date = status.lastSyncedAt else { return "Nunca" }
+        return date.formatted(date: .abbreviated, time: .shortened)
+    }
 
     var body: some View {
         VStack(spacing: 12) {
-            // Header with region and status
             HStack {
                 HStack(spacing: 8) {
-                    Text(status.region.icon)
+                    Text(status.location.icon)
                         .font(.title2)
-                    Text(status.region.name)
+                    Text(status.location.name)
                         .font(.headline)
                 }
 
@@ -187,7 +192,7 @@ struct CacheStatusRow: View {
                         case .refreshing:
                             ProgressView()
                                 .scaleEffect(0.8)
-                            Text("Procesando...")
+                            Text("Sincronizando...")
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundColor(.blue)
@@ -209,58 +214,44 @@ struct CacheStatusRow: View {
                     }
                 } else {
                     HStack(spacing: 6) {
-                        Image(systemName: status.statusIcon)
-                            .foregroundColor(status.statusColor)
-                        Text(status.statusText)
+                        Image(systemName: status.isSynced ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
+                            .foregroundColor(status.isSynced ? .green : .red)
+                        Text(status.isSynced ? "Sincronizado" : "Sin sincronizar")
                             .font(.caption)
                             .fontWeight(.medium)
-                            .foregroundColor(status.statusColor)
+                            .foregroundColor(status.isSynced ? .green : .red)
                     }
                 }
             }
-            
-            // Details
-            if status.isCached {
+
+            if status.isSynced {
                 VStack(spacing: 6) {
                     HStack {
-                        Text("Descargado:")
+                        Text("Última sincronización:")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Text(status.formattedDownloadDate)
+                        Text(formattedLastSynced)
                             .font(.caption)
                             .fontWeight(.medium)
                     }
-                    
+
                     HStack {
-                        Text("Tamaño:")
+                        Text("Versión:")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Text(status.formattedFileSize)
+                        Text("\(status.version ?? 0)")
                             .font(.caption)
                             .fontWeight(.medium)
-                    }
-                    
-                    if status.needsUpdate {
-                        HStack {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
-                                .font(.caption)
-                            Text("Hay una actualización disponible para este PDF")
-                                .font(.caption)
-                                .foregroundColor(.orange)
-                            Spacer()
-                        }
-                        .padding(.top, 4)
                     }
                 }
             } else {
                 HStack {
-                    Image(systemName: "arrow.down.circle")
+                    Image(systemName: "shippingbox")
                         .foregroundColor(.blue)
                         .font(.caption)
-                    Text("PDF no descargado - se obtendrá cuando sea necesario")
+                    Text("Usando datos incluidos en la app - se sincronizará cuando haya conexión")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Spacer()

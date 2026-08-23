@@ -24,7 +24,6 @@ struct ScheduleContentView: View {
     @Binding var isPresentingInfo: Bool
     let formattedDateTime: String
     let cacheTimestamp: TimeInterval?
-    let confidenceResult: ConfidenceResult?
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
@@ -194,14 +193,9 @@ struct ScheduleContentView: View {
                 .padding()
             }
 
-            // Confidence + cache freshness indicators at bottom (fixed footer outside ScrollView)
-            if confidenceResult != nil || cacheTimestamp != nil {
+            // Cache freshness indicator at bottom (fixed footer outside ScrollView)
+            if cacheTimestamp != nil {
                 Divider()
-                if let confidence = confidenceResult {
-                    ConfidenceIndicatorView(result: confidence)
-                        .padding(.top, 6)
-                        .background(Color(UIColor.systemBackground))
-                }
                 if let cacheTimestamp = cacheTimestamp {
                     CacheFreshnessFooter(cacheTimestamp: cacheTimestamp)
                         .background(Color(UIColor.systemBackground))

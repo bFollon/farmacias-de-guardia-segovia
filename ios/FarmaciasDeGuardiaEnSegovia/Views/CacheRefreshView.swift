@@ -21,23 +21,23 @@ struct CacheRefreshView: View {
     @State private var refreshStates: [String: RefreshState] = [:]
     @State private var isCompleted = false
     @Environment(\.dismiss) private var dismiss
-    
-    let regions = [Region.segoviaCapital, .cuellar, .elEspinar, .segoviaRural]
-    
+
+    let locations = DutyLocation.allSyncable
+
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                regionsList
-                
+                locationsList
+
                 if isCompleted {
                     completionView
                         .background(Color(UIColor.systemGroupedBackground))
                 }
-                
+
                 Spacer()
             }
             .background(Color(UIColor.systemGroupedBackground))
-            .navigationTitle("Actualizar caché")
+            .navigationTitle("Sincronizar datos")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -52,28 +52,28 @@ struct CacheRefreshView: View {
             startRefresh()
         }
     }
-    
-    private var regionsList: some View {
+
+    private var locationsList: some View {
         List {
             Section {
-                ForEach(regions, id: \.id) { region in
+                ForEach(locations, id: \.id) { location in
                     CacheRefreshRow(
-                        region: region,
-                        state: refreshStates[region.id] ?? .pending
+                        location: location,
+                        state: refreshStates[location.id] ?? .pending
                     )
                 }
             } header: {
-                Text("Estado de Actualización")
+                Text("Estado de Sincronización")
             }
         }
     }
-    
+
     private var headerView: some View {
         VStack(spacing: 16) {
-            Text("Actualizando caché de PDFs")
+            Text("Sincronizando datos de guardias")
                 .font(.headline)
-            
-            Text("Comprobando actualizaciones para cada región...")
+
+            Text("Comprobando actualizaciones para cada ubicación...")
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -82,74 +82,74 @@ struct CacheRefreshView: View {
         .opacity(isCompleted ? 0 : 1)
         .animation(.easeInOut(duration: 0.3), value: isCompleted)
     }
-    
+
     private var completionView: some View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 48))
                 .foregroundColor(.green)
-            
-            Text("¡Actualización Completada!")
+
+            Text("¡Sincronización Completada!")
                 .font(.headline)
-            
-            Text("Todos los PDFs han sido comprobados")
+
+            Text("Todas las ubicaciones han sido comprobadas")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
     }
-    
-    private func startRefresh() {
-        AnalyticsService.shared.track("cache_refresh_triggered", with: ["region_count": regions.count])
 
-        // Initialize all regions as pending
-        for region in regions {
-            refreshStates[region.id] = .pending
+    private func startRefresh() {
+        AnalyticsService.shared.track("cache_refresh_triggered", with: ["location_count": locations.count])
+
+        // Initialize all locations as pending
+        for location in locations {
+            refreshStates[location.id] = .pending
         }
-        
+
         // Clear coordinate caches at the start of refresh
         GeocodingService.clearAllCaches()
-        
+
+        for location in locations {
+            refreshStates[location.id] = .refreshing
+        }
+
         Task {
-            // Use the existing forceCheckForUpdates logic but with visual progress
-            await PDFCacheManager.shared.forceCheckForUpdatesWithProgress { region, state in
-                await MainActor.run {
-                    switch state {
-                    case .checking:
-                        refreshStates[region.id] = .refreshing
-                    case .upToDate:
-                        refreshStates[region.id] = .completed
-                    case .downloading:
-                        refreshStates[region.id] = .refreshing
-                    case .downloaded:
-                        refreshStates[region.id] = .completed
-                    case .error(let message):
-                        refreshStates[region.id] = .error(message)
-                    }
-                }
+            let cacheService = ScheduleCacheService.shared
+            let syncService = ScheduleSyncService.shared
+
+            // Empty knownVersions forces a real conditional GET for every location, bypassing
+            // the manifest-version pre-check - this is an explicit "check everything now" action.
+            let summary = await syncService.syncAll(locationIds: locations.map(\.id), knownVersions: [:]) { locationId, schedule in
+                guard let location = locations.first(where: { $0.id == locationId }) else { return }
+                cacheService.saveSchedulesToCache(for: location, schedules: schedule.schedules, version: schedule.version)
             }
-            
+
             await MainActor.run {
+                for location in locations {
+                    refreshStates[location.id] = summary.failed[location.id] != nil ? .error("Error de sincronización") : .completed
+                }
                 isCompleted = true
+                NotificationCenter.default.post(name: .pdfCacheForceRefreshed, object: nil)
             }
         }
     }
 }
 
 struct CacheRefreshRow: View {
-    let region: Region
+    let location: DutyLocation
     let state: RefreshState
-    
+
     var body: some View {
         HStack(spacing: 12) {
             HStack(spacing: 8) {
-                Text(region.icon)
+                Text(location.icon)
                     .font(.title2)
-                Text(region.name)
+                Text(location.name)
                     .font(.headline)
             }
-            
+
             Spacer()
             
             HStack(spacing: 8) {
