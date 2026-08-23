@@ -25,7 +25,10 @@ class ScheduleCacheService {
 
     /// Current cache format version. Increment when cache structure changes.
     /// Version 2: Removed schedule info from Pharmacy.additionalInfo for ZBS regions
-    private let currentCacheVersion = 3
+    /// Version 4: Switched from PDF-modification-date validity to server-version validity
+    /// (client-offline-sync migration) - old caches don't decode into the new Pharmacy/
+    /// PharmacySchedule shapes anyway, so the version bump forces them to be discarded.
+    private let currentCacheVersion = 4
 
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
@@ -46,7 +49,10 @@ class ScheduleCacheService {
 
     // MARK: - Cache Validation
 
-    /// Check if cached schedules exist and are still valid for a location
+    /// Check if cached schedules exist and are in the current cache format.
+    /// Staleness relative to the server is handled separately, by ScheduleSyncService's
+    /// manifest-version pre-check before this cache is ever read - this only guards against
+    /// a format mismatch (e.g. a pre-migration cache that won't decode into current models).
     func isCacheValid(for location: DutyLocation) -> Bool {
         let cacheFile = getCacheFile(for: location)
         let metadataFile = getMetadataFile(for: location)
@@ -60,38 +66,30 @@ class ScheduleCacheService {
             let metadataData = try Data(contentsOf: metadataFile)
             let metadata = try decoder.decode(CacheMetadata.self, from: metadataData)
 
-            // Check cache version first
             if metadata.cacheVersion != currentCacheVersion {
                 DebugConfig.debugPrint("❌ ScheduleCacheService: Cache version mismatch for \(location.name) (expected: \(currentCacheVersion), found: \(metadata.cacheVersion))")
                 return false
             }
 
-            // Check if PDF file exists (use associated region for PDF cache)
-            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) else {
-                DebugConfig.debugPrint("📂 ScheduleCacheService: PDF file not found for \(location.name), cache invalid")
-                return false
-            }
-
-            // Get PDF modification date
-            let attributes = try fileManager.attributesOfItem(atPath: pdfURL.path)
-            guard let pdfModificationDate = attributes[.modificationDate] as? Date else {
-                return false
-            }
-
-            let pdfLastModified = pdfModificationDate.timeIntervalSince1970
-            let cacheIsValid = pdfLastModified <= metadata.pdfLastModified
-
-            if cacheIsValid {
-                DebugConfig.debugPrint("✅ ScheduleCacheService: Cache valid for \(location.name) (PDF: \(Int(pdfLastModified)), Cache: \(Int(metadata.pdfLastModified)), Version: \(metadata.cacheVersion))")
-            } else {
-                DebugConfig.debugPrint("❌ ScheduleCacheService: Cache invalid for \(location.name) - PDF newer than cache")
-            }
-
-            return cacheIsValid
-
+            return true
         } catch {
             DebugConfig.debugPrint("❌ ScheduleCacheService: Error checking cache validity for \(location.name): \(error)")
             return false
+        }
+    }
+
+    /// The server `version` currently on disk for a location, or `nil` if there's no valid
+    /// cache. Used by ScheduleSyncService to decide whether a location needs re-fetching,
+    /// without it needing to know anything about the on-disk cache format.
+    func cachedServerVersion(for location: DutyLocation) -> Int? {
+        guard isCacheValid(for: location) else { return nil }
+        let metadataFile = getMetadataFile(for: location)
+        do {
+            let metadataData = try Data(contentsOf: metadataFile)
+            let metadata = try decoder.decode(CacheMetadata.self, from: metadataData)
+            return metadata.serverVersion
+        } catch {
+            return nil
         }
     }
 
@@ -142,12 +140,11 @@ class ScheduleCacheService {
 
     // MARK: - Cache Saving
 
-    /// Save parsed schedules to cache
-    func saveSchedulesToCache(for location: DutyLocation, schedules: [PharmacySchedule]) {
+    /// Save synced schedules to cache, tagged with the server `version` they came from.
+    func saveSchedulesToCache(for location: DutyLocation, schedules: [PharmacySchedule], version: Int) {
         do {
             let startTime = Date()
 
-            // Create cache data
             let cachedData = CachedSchedules(
                 locationId: location.id,
                 locationName: location.name,
@@ -155,25 +152,15 @@ class ScheduleCacheService {
                 cacheTimestamp: Date().timeIntervalSince1970
             )
 
-            // Save schedules to cache file
             let cacheFile = getCacheFile(for: location)
             let data = try encoder.encode(cachedData)
             try data.write(to: cacheFile)
-
-            // Save metadata (use associated region for PDF cache)
-            guard let pdfURL = PDFCacheManager.shared.cachedFileURL(for: location.associatedRegion) else {
-                DebugConfig.debugPrint("⚠️ ScheduleCacheService: No PDF file found for \(location.name), using current timestamp")
-                return
-            }
-
-            let attributes = try fileManager.attributesOfItem(atPath: pdfURL.path)
-            let pdfModificationDate = (attributes[.modificationDate] as? Date) ?? Date()
 
             let metadata = CacheMetadata(
                 locationId: location.id,
                 scheduleCount: schedules.count,
                 cacheTimestamp: Date().timeIntervalSince1970,
-                pdfLastModified: pdfModificationDate.timeIntervalSince1970,
+                serverVersion: version,
                 cacheVersion: currentCacheVersion
             )
 
@@ -184,7 +171,7 @@ class ScheduleCacheService {
             let saveTime = Date().timeIntervalSince(startTime) * 1000 // Convert to ms
             let cacheSize = data.count / 1024 // KB
 
-            DebugConfig.debugPrint("💾 ScheduleCacheService: Cached \(schedules.count) schedules for \(location.name) in \(Int(saveTime))ms (\(cacheSize)KB)")
+            DebugConfig.debugPrint("💾 ScheduleCacheService: Cached \(schedules.count) schedules for \(location.name) (version \(version)) in \(Int(saveTime))ms (\(cacheSize)KB)")
 
         } catch {
             DebugConfig.debugPrint("❌ ScheduleCacheService: Error saving schedules to cache for \(location.name): \(error)")
@@ -253,6 +240,33 @@ class ScheduleCacheService {
         return stats
     }
 
+    // MARK: - Bundled Day-Zero Data
+
+    /// Loads the app-bundled schedule JSON for a location - the pre-first-sync fallback,
+    /// shipped in the app bundle and never touched again after install. Disk cache (populated
+    /// by a successful sync) always takes precedence over this; it's only consulted when the
+    /// disk cache is empty/invalid. See Features/client-offline-sync.md.
+    func loadBundledSchedules(for location: DutyLocation) -> LocationSchedule? {
+        // Note: the BundledSchedules/ folder is a synchronized Xcode group, which flattens
+        // its contents into the app bundle root at build time - there's no subdirectory to
+        // look under at runtime, despite the source-tree layout suggesting otherwise.
+        guard let url = Bundle.main.url(forResource: location.id, withExtension: "json") else {
+            DebugConfig.debugPrint("📦 ScheduleCacheService: No bundled schedule found for \(location.name)")
+            return nil
+        }
+
+        do {
+            let data = try Data(contentsOf: url)
+            let locationSchedule = try decoder.decode(LocationSchedule.self, from: data)
+            DebugConfig.debugPrint("📦 ScheduleCacheService: Loaded bundled schedule for \(location.name) (\(locationSchedule.schedules.count) schedules)")
+            return locationSchedule
+        } catch {
+            DebugConfig.debugPrint("❌ ScheduleCacheService: Error decoding bundled schedule for \(location.name): \(error)")
+            ErrorReportingService.shared.captureError(error, context: ["location": location.name, "operation": "loadBundledSchedules"])
+            return nil
+        }
+    }
+
     // MARK: - Private Helper Methods
 
     private func getCacheFile(for location: DutyLocation) -> URL {
@@ -290,26 +304,6 @@ private struct CacheMetadata: Codable {
     let locationId: String
     let scheduleCount: Int
     let cacheTimestamp: TimeInterval
-    let pdfLastModified: TimeInterval
+    let serverVersion: Int
     let cacheVersion: Int
-
-    // For backward compatibility with old cache files
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        // locationId was added later, use "unknown" as fallback for old caches
-        locationId = try container.decodeIfPresent(String.self, forKey: .locationId) ?? "unknown"
-        scheduleCount = try container.decode(Int.self, forKey: .scheduleCount)
-        cacheTimestamp = try container.decode(TimeInterval.self, forKey: .cacheTimestamp)
-        pdfLastModified = try container.decode(TimeInterval.self, forKey: .pdfLastModified)
-        // cacheVersion was added in version 2, default to 1 for old caches
-        cacheVersion = try container.decodeIfPresent(Int.self, forKey: .cacheVersion) ?? 1
-    }
-
-    init(locationId: String, scheduleCount: Int, cacheTimestamp: TimeInterval, pdfLastModified: TimeInterval, cacheVersion: Int) {
-        self.locationId = locationId
-        self.scheduleCount = scheduleCount
-        self.cacheTimestamp = cacheTimestamp
-        self.pdfLastModified = pdfLastModified
-        self.cacheVersion = cacheVersion
-    }
 }
