@@ -23,7 +23,7 @@ export const REGION_VALIDATION_CONFIG: Record<string, RegionValidationConfig> = 
   },
   // Segovia Rural's 8 ZBS: which pharmacy (and therefore which shift key) is on duty
   // varies day to day, so requiredShiftKeys is left empty — there's no single key
-  // guaranteed present on every date. la-sierra/fuentidueña/villacastin only cover
+  // guaranteed present on every date. la-sierra/fuentiduena/villacastin only cover
   // weekdays in the real PDF and riaza-sepulveda has a genuine end-of-calendar hole, so
   // date continuity is skipped for those (see segoviaRural.ts and its fixture test).
   "riaza-sepulveda": {
@@ -46,7 +46,7 @@ export const REGION_VALIDATION_CONFIG: Record<string, RegionValidationConfig> = 
     maxDeltaFraction: 0.5,
     skipDateContinuityCheck: true,
   },
-  "fuentidueña": {
+  "fuentiduena": {
     minScheduleCount: 20,
     requiredShiftKeys: ["ruralDaytime"],
     expectedCadenceDays: 1,

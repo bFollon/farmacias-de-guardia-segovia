@@ -13,7 +13,7 @@ export const RURAL_ZBS_IDS = [
   "riaza-sepulveda",
   "la-granja",
   "la-sierra",
-  "fuentidueña",
+  "fuentiduena",
   "carbonero",
   "navas-asuncion",
   "villacastin",

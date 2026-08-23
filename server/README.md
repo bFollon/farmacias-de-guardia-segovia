@@ -44,7 +44,7 @@ npm start
 4. `data/schedules/*.json` is where published schedules live — it's gitignored, so it survives `git pull` but won't exist on a fresh clone. That's fine: there's no real state to protect, everything there is reproducible by re-running step 5.
 5. **Nothing is populated on first boot.** There's no [[pdf-change-monitor]] yet to auto-trigger parses, so call refresh once per location by hand, using `$RELOAD_KEY`:
    ```bash
-   for loc in segovia-capital cuellar el-espinar riaza-sepulveda la-granja la-sierra fuentidueña carbonero navas-asuncion villacastin cantalejo; do
+   for loc in segovia-capital cuellar el-espinar riaza-sepulveda la-granja la-sierra fuentiduena carbonero navas-asuncion villacastin cantalejo; do
      curl -s -X POST -H "Authorization: Bearer $RELOAD_KEY" "http://localhost:3000/api/refresh/$loc"
      echo
    done

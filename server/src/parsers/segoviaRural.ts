@@ -38,7 +38,7 @@ const REAL_ZBS_PHARMACY_INFO: Record<string, Record<string, RuralPharmacyInfo>> 
     "NAVAFRÍA": { name: "Farmacia Martín Cuesta", address: "C. la Reina, 0, 40161 Navafría, Segovia", phone: "921506113", shiftKey: "ruralDaytime" },
     TORREVAL: { name: "Farmacia Lda. Mónica Carrasco Herrero", address: "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia", phone: "921506028", shiftKey: "ruralDaytime" },
   },
-  "fuentidueña": {
+  "fuentiduena": {
     HONTALBILLA: { name: "Farmacia Lcdo Burgos Burgos Isabel", address: "Plaza Mayor, 1, 40353 Hontalbilla, Segovia", phone: "921148190", shiftKey: "ruralDaytime" },
     TORRECILLA: { name: "Farmacia Lcdo Gallego Esteban Fernando", address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia", phone: "No disponible", shiftKey: "ruralDaytime" },
     TORRECELLA: { name: "Farmacia Lcdo Gallego Esteban Fernando", address: "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia", phone: "No disponible", shiftKey: "ruralDaytime" },

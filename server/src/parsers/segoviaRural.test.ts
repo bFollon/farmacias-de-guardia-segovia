@@ -35,7 +35,7 @@ test("all 8 ZBS locations are present with the expected schedule counts", async 
     {
       "riaza-sepulveda": 182, // 196 minus the source PDF's genuine 11-24 ene 2027 gap (see below)
       "la-sierra": 133, // weekday-only ZBS — no weekend coverage in the real PDF
-      "fuentidueña": 133,
+      "fuentiduena": 133,
       carbonero: 196,
       "navas-asuncion": 196,
       villacastin: 144,
