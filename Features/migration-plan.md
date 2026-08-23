@@ -1,8 +1,10 @@
 # Feature: Server-Based Schedule Migration — Plan
 
-## Status: Phase 1 complete; Phase 2 parser porting complete (2026-08-23), monitor not started
+## Status: Phases 1-2 complete; Phases 3-4 done via a different path than originally planned (see note below); server deployed to the Pi
 
-Not deployed anywhere yet — everything so far is local (`server/`), unpushed to any host. No client (iOS/Android) changes made; Phase 3 hasn't started.
+`server/` is deployed and populated (all 11 locations, `http://homeserver.local:3765`, LAN-only for now). `pdf-change-monitor/` is built and verified end-to-end but not yet deployed to the Pi. Both iOS and Android apps are fully migrated to server sync (see below).
+
+**Deviation from the original Phase 3/4 sequencing**: this doc's steps 8-9 called for an *additive* dual-path rollout (sync alongside on-device parsing, with a monitoring period before cutover). The user explicitly chose to skip straight to [[client-offline-sync]]'s "no fallback" design instead — on-device parsing was deleted in the same pass that added sync, not kept as a safety net. This was a deliberate, informed choice (flagged and confirmed with the user given the server was LAN-only/unproven at the time), not an oversight. Both apps now depend entirely on the sync server; see `Features/client-offline-sync.md` for the full implementation record.
 
 ## Problem
 
@@ -44,7 +46,7 @@ Server owns parsing (hybrid automated + validation gate); apps sync pre-parsed J
 
 Segovia Rural's La Granja ZBS also isn't a port of `detectFirstLaGranjaPharmacy()` (that function has an inverted-index bug and would likely pick the wrong pharmacy) — it's re-derived via majority vote across the whole document and was verified against **live data pulled from a real Android device** (2026-08-23 → Farmacia Cristina Mínguez Del Pozo), per commit 762c5e5.
 
-Step 6 (pdf-change-monitor) is **not started** — this is the next piece of Phase 2, and needs deployment infra (Pi access, pm2, SMTP credentials for the alert email) that wasn't set up in this session.
+**Step 6 done (2026-08-23).** `pdf-change-monitor/` built, near-verbatim port of InterSego's `services/InterSegoMonitor` per this doc's own architecture notes, with the "trigger, don't just alert" deviation: on a detected change it calls `POST /api/refresh/:locationId` directly rather than only emailing. Verified end-to-end locally: live scraping of cofsegovia.com found all 4 region PDFs matching the server's static fallbacks exactly, SMTP (iCloud) verified, and a simulated PDF change correctly triggered a real refresh call against the deployed Pi server (published successfully) and delivered the summary email. Not yet deployed as a pm2 process on the Pi — that's the next step.
 
 ### Phase 3 — Client sync, additive
 
