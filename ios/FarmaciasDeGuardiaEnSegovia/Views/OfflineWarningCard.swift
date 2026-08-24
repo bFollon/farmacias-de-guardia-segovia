@@ -23,13 +23,15 @@ import SwiftUI
  * Matches Android OfflineWarningCard style
  */
 struct OfflineWarningCard: View {
+    var message: String = "Sin conexión - usando datos almacenados"
+
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundColor(Color.orange)
                 .frame(width: 20)
 
-            Text("Sin conexión - usando datos almacenados")
+            Text(message)
                 .font(.subheadline)
                 .foregroundColor(Color.orange)
                 .lineLimit(2)

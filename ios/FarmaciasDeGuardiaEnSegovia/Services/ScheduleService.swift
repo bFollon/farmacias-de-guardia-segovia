@@ -48,14 +48,45 @@ class ScheduleService {
                 "version": schedule.version
             ])
         }
-        if let syncError = summary.failed[location.id] {
-            AnalyticsService.shared.track("schedule_sync_failed", with: [
-                "location_id": location.id,
-                "error": syncErrorLabel(syncError)
-            ])
+        updateSyncStatus(with: summary, locationId: location.id)
+
+        return loadFromDiskOrBundle(for: location)
+    }
+
+    /// Sync every location in a single batched request (one manifest fetch total, not one per
+    /// location) and load each from whatever ends up on disk/bundle. Exists specifically for
+    /// startup preload: calling `loadSchedules(for:)` once per location there used to mean one
+    /// manifest fetch - and one timeout, one Bugsink report - per location. With 11 locations
+    /// and an unreachable server that meant up to 11 sequential ~10s timeouts before the splash
+    /// screen would ever let go of the user, plus 11 near-duplicate error reports for the same
+    /// root cause. Batching collapses all of that into a single attempt.
+    static func preloadAll(locations: [DutyLocation]) async -> [(DutyLocation, [PharmacySchedule])] {
+        let locationsById = Dictionary(uniqueKeysWithValues: locations.map { ($0.id, $0) })
+        var knownVersions: [String: Int] = [:]
+        for location in locations {
+            if let version = cacheService.cachedServerVersion(for: location) {
+                knownVersions[location.id] = version
+            }
         }
 
-        // Disk cache - whatever's there now, whether just refreshed above or from a prior session
+        let summary = await syncService.syncAll(locationIds: locations.map(\.id), knownVersions: knownVersions) { locationId, schedule in
+            guard let location = locationsById[locationId] else { return }
+            cacheService.saveSchedulesToCache(for: location, schedules: schedule.schedules, version: schedule.version)
+            AnalyticsService.shared.track("schedules_synced", with: [
+                "location_id": locationId,
+                "region": location.associatedRegion.id,
+                "schedules_count": schedule.schedules.count,
+                "version": schedule.version
+            ])
+        }
+        updateSyncStatus(with: summary, locationId: nil)
+
+        return locations.map { location in (location, loadFromDiskOrBundle(for: location)) }
+    }
+
+    /// Shared tail of the load flow: disk cache, then bundled day-zero JSON. Assumes any sync
+    /// attempt (or lack thereof) has already happened - this never touches the network.
+    private static func loadFromDiskOrBundle(for location: DutyLocation) -> [PharmacySchedule] {
         if let persistedSchedules = cacheService.loadCachedSchedules(for: location) {
             DebugConfig.debugPrint("ScheduleService: Using persisted cached schedules for location \(location.name)")
             AnalyticsService.shared.track("schedules_loaded_from_cache", with: [
@@ -78,6 +109,34 @@ class ScheduleService {
 
         DebugConfig.debugPrint("⚠️ ScheduleService: No data available for \(location.name) (no cache, no sync, no bundle)")
         return []
+    }
+
+    /// Updates `ScheduleSyncStatus` and fires `schedule_sync_failed` from a sync attempt's
+    /// outcome. `locationId` is only used to tag the analytics event for a single-location
+    /// sync; pass `nil` for a batched preload (a manifest failure there isn't any one
+    /// location's fault, so it's tagged "all" instead of picking one arbitrarily).
+    private static func updateSyncStatus(with summary: ScheduleSyncService.SyncSummary, locationId: String?) {
+        if let manifestFailure = summary.manifestFailure {
+            // Manifest fetch failed before any per-location sync was attempted (e.g. the
+            // device is online but can't reach homeserver.local - off the LAN, server down).
+            ScheduleSyncStatus.shared.reportFailure()
+            AnalyticsService.shared.track("schedule_sync_failed", with: [
+                "location_id": locationId ?? "all",
+                "error": syncErrorLabel(manifestFailure)
+            ])
+        } else if !summary.failed.isEmpty {
+            ScheduleSyncStatus.shared.reportFailure()
+            for (failedLocationId, syncError) in summary.failed {
+                AnalyticsService.shared.track("schedule_sync_failed", with: [
+                    "location_id": failedLocationId,
+                    "error": syncErrorLabel(syncError)
+                ])
+            }
+        } else if !summary.skippedOffline {
+            // Every requested location either got fresh data or was already up to date -
+            // either way the server was reachable, so clear any previously-reported failure.
+            ScheduleSyncStatus.shared.reportSuccess()
+        }
     }
 
     private static func syncErrorLabel(_ error: ScheduleSyncService.SyncError) -> String {

@@ -27,6 +27,7 @@ struct ScheduleContentView: View {
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
+    @ObservedObject private var syncStatus = ScheduleSyncStatus.shared
 
     // PDF link validation
     @State private var isValidatingPDFLink = false
@@ -65,9 +66,13 @@ struct ScheduleContentView: View {
                     }
                     .padding(.bottom, 20)
 
-                    // Offline warning (if not connected)
+                    // Offline warning (if not connected), or "couldn't reach the server" if
+                    // online but the sync server itself is unreachable.
                     if !networkMonitor.isOnline {
                         OfflineWarningCard()
+                            .padding(.bottom, 12)
+                    } else if syncStatus.isServerUnreachable {
+                        OfflineWarningCard(message: "No se pudo conectar con el servidor - usando datos almacenados")
                             .padding(.bottom, 12)
                     }
 

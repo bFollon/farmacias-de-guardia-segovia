@@ -26,6 +26,7 @@ struct ContentView: View {
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
+    @ObservedObject private var syncStatus = ScheduleSyncStatus.shared
 
     var body: some View {
         NavigationView {
@@ -62,9 +63,13 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
 
-                // Offline warning (if not connected)
+                // Offline warning (if not connected), or a "couldn't reach the server" warning
+                // if the device is online but the sync server itself is unreachable.
                 if !networkMonitor.isOnline {
                     OfflineWarningCard()
+                        .padding(.horizontal)
+                } else if syncStatus.isServerUnreachable {
+                    OfflineWarningCard(message: "No se pudo conectar con el servidor - usando datos almacenados")
                         .padding(.horizontal)
                 }
 

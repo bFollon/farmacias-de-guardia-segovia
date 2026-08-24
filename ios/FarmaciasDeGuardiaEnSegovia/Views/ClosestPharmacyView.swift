@@ -235,6 +235,7 @@ struct ClosestPharmacyResultView: View {
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
+    @ObservedObject private var syncStatus = ScheduleSyncStatus.shared
 
     var body: some View {
         NavigationView {
@@ -262,9 +263,13 @@ struct ClosestPharmacyResultView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.top)
 
-                    // Offline warning (if not connected)
+                    // Offline warning (if not connected), or "couldn't reach the server" if
+                    // online but the sync server itself is unreachable.
                     if !networkMonitor.isOnline {
                         OfflineWarningCard()
+                            .padding(.horizontal)
+                    } else if syncStatus.isServerUnreachable {
+                        OfflineWarningCard(message: "No se pudo conectar con el servidor - usando datos almacenados")
                             .padding(.horizontal)
                     }
 
@@ -472,7 +477,7 @@ struct ClosestPharmacyResultView: View {
                 let location = result.zbs != nil ?
                     DutyLocation.fromZBS(result.zbs!, region: result.region) :
                     DutyLocation.fromRegion(result.region)
-                cacheTimestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+                cacheTimestamp = ScheduleSyncService.shared.lastChecked(for: location.id)
             }
         }
     }

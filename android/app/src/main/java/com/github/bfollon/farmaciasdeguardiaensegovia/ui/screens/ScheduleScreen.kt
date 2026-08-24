@@ -94,10 +94,12 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.CantalejoDisclaimerCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NextShiftModalBottomSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.NoPharmacyOnDutyCard
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.PharmacyCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftHeaderCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ShiftInfoCard
@@ -242,6 +244,24 @@ fun ScheduleScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 4.dp)
                     )
+                }
+
+                // Offline warning (if not connected), or "couldn't reach the server" if online
+                // but the sync server itself is unreachable - only relevant once we actually
+                // have data to show; the fully-empty case has its own messaging below.
+                if (uiState.schedules.isNotEmpty()) {
+                    if (isOffline) {
+                        OfflineWarningCard(
+                            modifier = Modifier.padding(horizontal = Spacing.Base, vertical = 4.dp),
+                            isClickable = false
+                        )
+                    } else if (ScheduleSyncStatus.isServerUnreachable) {
+                        OfflineWarningCard(
+                            modifier = Modifier.padding(horizontal = Spacing.Base, vertical = 4.dp),
+                            isClickable = false,
+                            message = "No se pudo conectar con el servidor - usando datos almacenados"
+                        )
+                    }
                 }
 
                 // Main content
@@ -690,8 +710,10 @@ private fun ScheduleContent(
 }
 
 /**
- * Subtle sticky indicator showing when the cached data was last updated
- * Shows relative time for recent updates, absolute date for older ones
+ * Subtle sticky indicator showing when the app last successfully checked in with the sync
+ * server - whether or not that check found new data. Distinct from "when the data changed":
+ * a schedule can be legitimately unchanged for weeks, which would otherwise leave this stuck
+ * on an old date even though the app confirms it's current every day.
  * Positioned as a sticky bottom bar using Material3 BottomAppBar
  */
 @Composable
@@ -705,20 +727,20 @@ private fun LastUpdatedIndicator(downloadDate: Long) {
             daysDiff == 0L -> {
                 val hoursDiff = TimeUnit.MILLISECONDS.toHours(diff)
                 if (hoursDiff == 0L) {
-                    "Actualizado hace menos de una hora"
+                    "Comprobado hace menos de una hora"
                 } else if (hoursDiff == 1L) {
-                    "Actualizado hace 1 hora"
+                    "Comprobado hace 1 hora"
                 } else {
-                    "Actualizado hace $hoursDiff horas"
+                    "Comprobado hace $hoursDiff horas"
                 }
             }
 
-            daysDiff == 1L -> "Actualizado ayer"
-            daysDiff < 7L -> "Actualizado hace $daysDiff días"
+            daysDiff == 1L -> "Comprobado ayer"
+            daysDiff < 7L -> "Comprobado hace $daysDiff días"
             else -> {
                 // For older updates, show absolute date
                 val formatter = SimpleDateFormat("d 'de' MMMM, yyyy", Locale.forLanguageTag("es-ES"))
-                "Actualizado el ${formatter.format(Date(downloadDate))}"
+                "Comprobado el ${formatter.format(Date(downloadDate))}"
             }
         }
     }

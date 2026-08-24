@@ -46,6 +46,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.forEach
@@ -115,14 +116,46 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
                 "version" to schedule.version
             ))
         }
-        summary.failed[location.id]?.let { error ->
-            AnalyticsService.track("schedule_sync_failed", mapOf(
-                "location_id" to location.id,
-                "error" to syncErrorLabel(error)
+        updateSyncStatus(summary, locationId = location.id)
+
+        return@withContext loadFromDiskOrBundle(location)
+    }
+
+    /**
+     * Sync every given location in a single batched request (one manifest fetch total, not one
+     * per location) and load each from whatever ends up on disk/bundle.
+     *
+     * Exists specifically for preload paths: calling [loadSchedules] once per location used to
+     * mean one manifest fetch - and one timeout, one Bugsink report - per location. For Segovia
+     * Rural alone that's 8 ZBS locations behind a single PDF; across the whole app, 11. With an
+     * unreachable server that meant a stack of sequential ~10s timeouts before the splash screen
+     * would let go of the user, plus a near-duplicate error report per location for the same
+     * root cause. Batching collapses all of that into a single attempt.
+     */
+    suspend fun preloadAll(locations: List<DutyLocation>): Map<DutyLocation, List<PharmacySchedule>> = withContext(Dispatchers.IO) {
+        val locationsById = locations.associateBy { it.id }
+        val knownVersions = locations.mapNotNull { location ->
+            cacheService.cachedServerVersion(location)?.let { location.id to it }
+        }.toMap()
+
+        val summary = scheduleSyncService.syncAll(locations.map { it.id }, knownVersions) { locationId, schedule ->
+            val location = locationsById[locationId] ?: return@syncAll
+            cacheService.saveSchedulesToCache(location, schedule.schedules, schedule.version)
+            AnalyticsService.track("schedules_synced", mapOf(
+                "location_id" to locationId,
+                "region" to location.associatedRegion.id,
+                "schedules_count" to schedule.schedules.size,
+                "version" to schedule.version
             ))
         }
+        updateSyncStatus(summary, locationId = null)
 
-        // Disk cache - whatever's there now, whether just refreshed above or from a prior session
+        locations.associateWith { loadFromDiskOrBundle(it) }
+    }
+
+    /** Shared tail of the load flow: disk cache, then bundled day-zero JSON. Assumes any sync
+     * attempt (or lack thereof) has already happened - this never touches the network. */
+    private fun loadFromDiskOrBundle(location: DutyLocation): List<PharmacySchedule> {
         val cachedSchedules = cacheService.loadCachedSchedules(location)
         if (cachedSchedules != null && cachedSchedules.isNotEmpty()) {
             AnalyticsService.track("schedules_loaded_from_cache", mapOf(
@@ -131,7 +164,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             ))
             schedulesCache = schedulesCache + (location to cachedSchedules)
             DebugConfig.debugPrint("PharmacyScheduleRepository: Loaded ${cachedSchedules.size} schedules from persistent cache for ${location.name}")
-            return@withContext cachedSchedules
+            return cachedSchedules
         }
 
         // Bundled day-zero JSON - only reached if disk cache is empty/invalid
@@ -140,11 +173,42 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             AnalyticsService.track("schedules_loaded_from_bundle", mapOf("location_id" to location.id))
             schedulesCache = schedulesCache + (location to bundled.schedules)
             DebugConfig.debugPrint("PharmacyScheduleRepository: Using bundled schedules for ${location.name}")
-            return@withContext bundled.schedules
+            return bundled.schedules
         }
 
         DebugConfig.debugPrint("⚠️ PharmacyScheduleRepository: No data available for ${location.name} (no cache, no sync, no bundle)")
-        return@withContext emptyList()
+        return emptyList()
+    }
+
+    /**
+     * Updates [ScheduleSyncStatus] and fires `schedule_sync_failed` from a sync attempt's
+     * outcome. [locationId] is only used to tag the analytics event for a single-location sync;
+     * pass `null` for a batched preload (a manifest failure there isn't any one location's
+     * fault, so it's tagged "all" instead of picking one arbitrarily).
+     */
+    private fun updateSyncStatus(summary: ScheduleSyncService.SyncSummary, locationId: String?) {
+        val manifestFailure = summary.manifestFailure
+        if (manifestFailure != null) {
+            // Manifest fetch failed before any per-location sync was attempted (e.g. the
+            // device is online but can't reach homeserver.local - off the LAN, server down).
+            ScheduleSyncStatus.reportFailure()
+            AnalyticsService.track("schedule_sync_failed", mapOf(
+                "location_id" to (locationId ?: "all"),
+                "error" to syncErrorLabel(manifestFailure)
+            ))
+        } else if (summary.failed.isNotEmpty()) {
+            ScheduleSyncStatus.reportFailure()
+            summary.failed.forEach { (failedLocationId, syncError) ->
+                AnalyticsService.track("schedule_sync_failed", mapOf(
+                    "location_id" to failedLocationId,
+                    "error" to syncErrorLabel(syncError)
+                ))
+            }
+        } else if (!summary.skippedOffline) {
+            // Every requested location either got fresh data or was already up to date -
+            // either way the server was reachable, so clear any previously-reported failure.
+            ScheduleSyncStatus.reportSuccess()
+        }
     }
 
     private fun syncErrorLabel(error: ScheduleSyncService.SyncError): String = when (error) {
@@ -190,9 +254,10 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      */
     suspend fun preloadSchedules(region: Region): Boolean {
         return try {
-            region.toDutyLocationList().all {
-                loadSchedules(it).isNotEmpty()
-            }
+            // One batched sync call for every location in this region (matters most for
+            // Segovia Rural's 8 ZBS behind a single PDF) instead of one manifest fetch per
+            // location - see preloadAll's doc comment.
+            preloadAll(region.toDutyLocationList()).values.all { it.isNotEmpty() }
         } catch (e: Exception) {
             DebugConfig.debugError(
                 "PharmacyScheduleRepository: Error preloading schedules for ${region.name}",

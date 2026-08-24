@@ -38,12 +38,14 @@ import androidx.compose.ui.unit.sp
  * @param modifier Modifier for the card
  * @param isClickable Whether the card should be clickable (for dialog trigger)
  * @param onClick Callback when card is clicked (only used if isClickable = true)
+ * @param message Text to show - defaults to the device-offline message
  */
 @Composable
 fun OfflineWarningCard(
     modifier: Modifier = Modifier,
     isClickable: Boolean = true,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    message: String = "Sin conexión - usando datos almacenados"
 ) {
     Card(
         modifier = modifier
@@ -74,7 +76,7 @@ fun OfflineWarningCard(
             )
 
             Text(
-                text = "Sin conexión - usando datos almacenados",
+                text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color(0xFFFFA726),
             )

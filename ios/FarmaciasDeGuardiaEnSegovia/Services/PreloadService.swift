@@ -72,23 +72,32 @@ class PreloadService: ObservableObject {
             loadingProgress = "Inicializando..."
         }
 
+        await MainActor.run {
+            loadingProgress = "Sincronizando..."
+        }
+
+        // One batched sync call for every location, instead of one call (and one manifest
+        // fetch) per location - see ScheduleService.preloadAll's doc comment for why: with an
+        // unreachable server, per-location fetches meant up to 11 sequential timeouts stacking
+        // up before this screen would let go of the user, plus a near-duplicate Bugsink report
+        // for each one.
+        let results = await ScheduleService.preloadAll(locations: locations)
+
         var completedCount = 0
-
-        for location in locations {
-            await MainActor.run {
-                loadingProgress = "Cargando \(location.name)..."
-            }
-
-            DebugConfig.debugPrint("📥 Preloading: \(location.name)")
-
-            let schedules = await ScheduleService.loadSchedules(for: location, forceRefresh: false)
-
+        for (location, schedules) in results {
             DebugConfig.debugPrint("✅ Successfully preloaded \(schedules.count) schedules for: \(location.name)")
 
             completedCount += 1
             await MainActor.run {
+                loadingProgress = "Cargando \(location.name)..."
                 completedRegions = completedCount
             }
+
+            // Purely cosmetic: the actual sync already happened in one batched call above, so
+            // without this the splash screen's region icons would all light up in the same
+            // frame instead of the progressive reveal they're designed to show (matches
+            // Android's equivalent 200ms stagger in SplashViewModel.loadRegionsSequentially).
+            try? await Task.sleep(nanoseconds: 150_000_000)
         }
 
         // Perform coordinate cache maintenance
