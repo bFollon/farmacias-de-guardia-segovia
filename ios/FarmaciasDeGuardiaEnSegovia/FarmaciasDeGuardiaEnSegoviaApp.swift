@@ -24,6 +24,7 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     @State private var showSplashScreen = true
     @State private var isPreloading = false
     @State private var showMonitoringConsent = false
+    @State private var showWhatsNew = false
 
     var body: some Scene {
         WindowGroup {
@@ -45,6 +46,22 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
 
                                 // Centered popup
                                 MonitoringConsentView(isPresented: $showMonitoringConsent)
+                                    .frame(maxWidth: 500)
+                                    .background(Color(uiColor: .systemBackground))
+                                    .cornerRadius(16)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                    )
+                                    .shadow(radius: 20)
+                                    .padding(40)
+                            }
+                        } else if showWhatsNew {
+                            ZStack {
+                                Color.black.opacity(0.4)
+                                    .ignoresSafeArea()
+
+                                WhatsNewView(isPresented: $showWhatsNew)
                                     .frame(maxWidth: 500)
                                     .background(Color(uiColor: .systemBackground))
                                     .cornerRadius(16)
@@ -86,6 +103,9 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
                 // (this also triggers for existing users who pre-date analytics)
                 if !MonitoringPreferencesService.shared.hasUserMadeAnalyticsChoice() {
                     showMonitoringConsent = true
+                }
+                if WhatsNewService.shouldShow() {
+                    showWhatsNew = true
                 }
             }
         }

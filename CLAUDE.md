@@ -390,6 +390,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 
 Keep commit messages clean and professional without AI tool attribution.
 
+## Release Content: "Novedades" (What's New)
+
+`WhatsNewService` (iOS: `Services/WhatsNewService.swift`, Android: `services/WhatsNewService.kt`) shows a one-time modal after an app update via `WhatsNewView`/`WhatsNewScreen`, ported from InterSego's equivalent feature. Version-*range*-aware, not latest-only: each `WhatsNewEntry` carries the SemVer `version` it shipped in; `entriesToShow()` filters to entries with `version > lastSeenVersion` and `<= currentVersion` via a numeric MAJOR.MINOR.PATCH comparator (not string comparison), so a user who skips versions sees everything they missed — capped to the most recent 5 entries so a long-dormant install doesn't get a wall of old announcements. No analytics events are fired for this feature (matches InterSego).
+
+**As part of a release commit** (or the PR before it), decide whether the release has anything worth announcing to users — a new screen, feature, or mode significant enough that a returning user would want a heads-up (roughly: Minor/Major-worthy changes). If so, add a `WhatsNewEntry` tagged with the new version to **both** platforms' `WhatsNewService.entries`. Skip it for pure bug-fix/Patch releases or internal-only changes. `entries` is append-only — never edit or remove past entries.
+
 ## Project Context Notes
 
 - **"Vibe coded"**: Built primarily with AI assistance (see README.md)

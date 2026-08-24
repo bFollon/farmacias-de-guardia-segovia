@@ -34,7 +34,10 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.MonitoringConse
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ScheduleScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SettingsScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.SplashScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.WhatsNewScreen
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ZBSSelectionScreen
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.WhatsNewService
+import androidx.compose.ui.platform.LocalContext
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 
 class MainActivity : ComponentActivity() {
@@ -88,7 +91,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    
+    val context = LocalContext.current
+
     // State management for ZBS Selection modal
     var showZBSSelectionModal by remember { mutableStateOf(false) }
     val zbsSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -121,6 +125,9 @@ fun AppNavigation() {
     // State management for Monitoring Consent overlay
     var showMonitoringConsent by remember { mutableStateOf(false) }
 
+    // State management for What's New overlay (shown after Monitoring Consent, if any)
+    var showWhatsNew by remember { mutableStateOf(false) }
+
     NavHost(
         navController = navController,
         startDestination = "splash"
@@ -136,6 +143,9 @@ fun AppNavigation() {
                     // (this also triggers for existing users who pre-date analytics)
                     if (!MonitoringPreferencesService.hasUserMadeAnalyticsChoice()) {
                         showMonitoringConsent = true
+                    }
+                    if (WhatsNewService.shouldShow(context)) {
+                        showWhatsNew = true
                     }
                 }
             )
@@ -319,6 +329,13 @@ fun AppNavigation() {
         MonitoringConsentScreen(
             onDismiss = {
                 showMonitoringConsent = false
+            }
+        )
+    } else if (showWhatsNew) {
+        // What's New Overlay (shown after Monitoring Consent, if there's anything unseen)
+        WhatsNewScreen(
+            onDismiss = {
+                showWhatsNew = false
             }
         )
     }
