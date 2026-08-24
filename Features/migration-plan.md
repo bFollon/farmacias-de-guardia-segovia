@@ -2,7 +2,7 @@
 
 ## Status: Migration complete (2026-08-24)
 
-`server/` is deployed and populated (all 11 locations, `http://homeserver.local:3765`, LAN-only for now — Cloudflare Tunnel deliberately deferred). `pdf-change-monitor/` is deployed to the Pi as its own pm2 process, cron firing twice daily. Both iOS and Android apps are fully migrated to server sync, on-device PDF parsing deleted on both platforms. Phases 3-4 were done via a different path than originally planned — see note below.
+`server/` is deployed and populated (all 11 locations), reachable both on the Pi's LAN (`http://localhost:3765`) and publicly via Cloudflare Tunnel at `https://pharmacies-api.bfollon.dev` (added 2026-08-24 to the existing `bfollon.dev-server-tunnel` as a published application route). Both clients now point at the public URL - the `homeserver.local` cleartext-HTTP exceptions (iOS `Info.plist`, Android `network_security_config.xml`) have been removed since traffic goes over real HTTPS now. `pdf-change-monitor/` is deployed to the Pi as its own pm2 process, cron firing twice daily. Both iOS and Android apps are fully migrated to server sync, on-device PDF parsing deleted on both platforms. Phases 3-4 were done via a different path than originally planned - see note below.
 
 What's left is observational, not code: letting the monitor catch a real (non-simulated) PDF change per region, and an optional manual side-by-side comparison against the official PDFs. See the testing checklist at the bottom of this doc.
 

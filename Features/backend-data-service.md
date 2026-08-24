@@ -86,5 +86,5 @@ Fastify + TypeScript + Node ≥20, ESM, built with `tsc`, run under pm2 — same
 | Service scaffolded (Fastify + lowdb) | ✅ (`server/`) |
 | Region parsers ported (see [[parser-port-typescript]]) | ✅ |
 | Validation gate wired in (see [[parsing-validation-gate]]) | ✅ |
-| Deployed to Pi / Cloudflare Tunnel | ✅ Pi (pm2, `http://homeserver.local:3765`) / ⬜ Cloudflare Tunnel — deliberately deferred, LAN-only for now |
+| Deployed to Pi / Cloudflare Tunnel | ✅ Pi (pm2, `http://localhost:3765`) / ✅ Cloudflare Tunnel (`https://pharmacies-api.bfollon.dev`, added to the existing `bfollon.dev-server-tunnel` as a published application route, 2026-08-24) |
 | Client sync consuming it (see [[client-offline-sync]]) | ✅ (both iOS and Android) |
