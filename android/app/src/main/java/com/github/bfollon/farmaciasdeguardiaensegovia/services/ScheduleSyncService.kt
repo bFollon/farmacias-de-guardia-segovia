@@ -75,6 +75,7 @@ class ScheduleSyncService private constructor(context: Context) {
     companion object {
         private const val PREFS_NAME = "schedule_sync_service"
         private const val ETAGS_KEY = "etags"
+        private const val LAST_CHECKED_PREFIX = "last_checked_"
 
         @Volatile
         private var INSTANCE: ScheduleSyncService? = null
@@ -180,6 +181,7 @@ class ScheduleSyncService private constructor(context: Context) {
 
             if (knownVersions[locationId] == manifestVersion) {
                 summary.unchanged.add(locationId)
+                storeLastChecked(locationId)
                 continue
             }
 
@@ -193,6 +195,7 @@ class ScheduleSyncService private constructor(context: Context) {
                     DebugConfig.debugPrint("➖ ScheduleSyncService: $locationId unchanged (304)")
                     summary.unchanged.add(locationId)
                 }
+                storeLastChecked(locationId)
             } catch (e: SyncError) {
                 DebugConfig.debugError("ScheduleSyncService: Sync failed for $locationId", e)
                 ErrorReportingService.captureError(e, mapOf("locationId" to locationId, "operation" to "syncAll"))
@@ -258,5 +261,23 @@ class ScheduleSyncService private constructor(context: Context) {
         }
         val encoded = json.encodeToString(MapSerializer(String.serializer(), String.serializer()), current)
         sharedPreferences.edit().putString(ETAGS_KEY, encoded).apply()
+    }
+
+    // MARK: - Per-location "last checked" tracking
+
+    /**
+     * When a location was last successfully confirmed against the server - whether that
+     * confirmation found new data or just verified the cached version is still current
+     * (a manifest-version match or a 304). Distinct from the cache's own timestamp, which
+     * only moves when the underlying data actually changes and can go stale for weeks at a
+     * time even though the app is checking in successfully every day.
+     */
+    fun lastChecked(locationId: String): Long? {
+        val value = sharedPreferences.getLong(LAST_CHECKED_PREFIX + locationId, 0L)
+        return if (value == 0L) null else value
+    }
+
+    private fun storeLastChecked(locationId: String) {
+        sharedPreferences.edit().putLong(LAST_CHECKED_PREFIX + locationId, System.currentTimeMillis()).apply()
     }
 }

@@ -18,8 +18,10 @@
 import SwiftUI
 
 /**
- * Subtle footnote indicator showing when the cached data was last updated
- * Shows relative time for recent updates, absolute date for older ones
+ * Subtle footnote indicator showing when the app last successfully checked in with the
+ * sync server - whether or not that check found new data. Distinct from "when the data
+ * changed": a schedule can be legitimately unchanged for weeks, which would otherwise leave
+ * this stuck on an old date even though the app confirms it's current every day.
  * Positioned at the very bottom of the schedule like a footnote
  * Matches Android LastUpdatedIndicator
  */
@@ -35,21 +37,21 @@ struct CacheFreshnessFooter: View {
         case 0:
             let hoursDiff = Int(diff / (60 * 60))
             if hoursDiff == 0 {
-                return "Actualizado hace menos de una hora"
+                return "Comprobado hace menos de una hora"
             } else if hoursDiff == 1 {
-                return "Actualizado hace 1 hora"
+                return "Comprobado hace 1 hora"
             } else {
-                return "Actualizado hace \(hoursDiff) horas"
+                return "Comprobado hace \(hoursDiff) horas"
             }
         case 1:
-            return "Actualizado ayer"
+            return "Comprobado ayer"
         case 2..<7:
-            return "Actualizado hace \(daysDiff) días"
+            return "Comprobado hace \(daysDiff) días"
         default:
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "es_ES")
             formatter.dateFormat = "d 'de' MMMM, yyyy"
-            return "Actualizado el \(formatter.string(from: Date(timeIntervalSince1970: cacheTimestamp)))"
+            return "Comprobado el \(formatter.string(from: Date(timeIntervalSince1970: cacheTimestamp)))"
         }
     }
 

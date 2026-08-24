@@ -158,6 +158,7 @@ class ScheduleSyncService {
 
             if knownVersions[locationId] == manifestVersion {
                 summary.unchanged.append(locationId)
+                storeLastChecked(for: locationId)
                 continue
             }
 
@@ -170,6 +171,7 @@ class ScheduleSyncService {
                     DebugConfig.debugPrint("➖ ScheduleSyncService: \(locationId) unchanged (304)")
                     summary.unchanged.append(locationId)
                 }
+                storeLastChecked(for: locationId)
             } catch let error as SyncError {
                 DebugConfig.debugPrint("❌ ScheduleSyncService: Sync failed for \(locationId): \(error)")
                 ErrorReportingService.shared.captureError(error, context: ["locationId": locationId, "operation": "syncAll"])
@@ -224,5 +226,25 @@ class ScheduleSyncService {
             return
         }
         userDefaults.set(etag, forKey: etagKey(for: locationId))
+    }
+
+    // MARK: - Per-location "last checked" tracking
+
+    /// When a location was last successfully confirmed against the server - whether that
+    /// confirmation found new data or just verified the cached version is still current
+    /// (a manifest-version match or a 304). Distinct from the cache's own timestamp, which
+    /// only moves when the underlying data actually changes and can go stale for weeks at a
+    /// time even though the app is checking in successfully every day.
+    func lastChecked(for locationId: String) -> TimeInterval? {
+        let value = userDefaults.double(forKey: lastCheckedKey(for: locationId))
+        return value == 0 ? nil : value
+    }
+
+    private func lastCheckedKey(for locationId: String) -> String {
+        "schedule_last_checked_\(locationId)"
+    }
+
+    private func storeLastChecked(for locationId: String) {
+        userDefaults.set(Date().timeIntervalSince1970, forKey: lastCheckedKey(for: locationId))
     }
 }

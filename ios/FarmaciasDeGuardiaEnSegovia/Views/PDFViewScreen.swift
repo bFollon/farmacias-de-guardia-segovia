@@ -152,7 +152,7 @@ struct PDFViewScreen: View {
         isLoading = true
         Task {
             let loadedSchedules = await ScheduleService.loadSchedules(for: location)
-            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let timestamp = ScheduleSyncService.shared.lastChecked(for: location.id)
             await MainActor.run {
                 schedules = loadedSchedules
                 cacheTimestamp = timestamp
@@ -178,7 +178,7 @@ struct PDFViewScreen: View {
         isLoading = true
         Task {
             let loadedSchedules = await ScheduleService.loadSchedules(for: location)
-            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let timestamp = ScheduleSyncService.shared.lastChecked(for: location.id)
             await MainActor.run {
                 schedules = loadedSchedules
                 cacheTimestamp = timestamp
@@ -196,7 +196,7 @@ struct PDFViewScreen: View {
 
         Task {
             let refreshedSchedules = await ScheduleService.loadSchedules(for: location, forceRefresh: true)
-            let timestamp = ScheduleCacheService.shared.getCacheTimestamp(for: location)
+            let timestamp = ScheduleSyncService.shared.lastChecked(for: location.id)
 
             // Update UI on main thread
             await MainActor.run {

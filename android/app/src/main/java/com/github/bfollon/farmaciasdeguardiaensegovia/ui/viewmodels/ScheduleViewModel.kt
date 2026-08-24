@@ -26,8 +26,8 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.PharmacySchedule
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.repositories.PDFURLRepository
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -43,7 +43,7 @@ class ScheduleViewModel(
 ) : ViewModel() {
 
     private val scheduleService = ScheduleService(context)
-    private val cacheService = ScheduleCacheService(context)
+    private val syncService = ScheduleSyncService.getInstance(context)
     private val urlRepository = PDFURLRepository.getInstance(context)
 
     // Find the region by ID
@@ -114,7 +114,7 @@ class ScheduleViewModel(
         val showWarning = currentInfo?.second?.let { timeSpan ->
             timeSpan.isActiveNow() && minutesUntilChange != null && minutesUntilChange > 0 && minutesUntilChange <= 30
         } ?: false
-        val downloadDate = cacheService.getCacheTimestamp(location)
+        val downloadDate = syncService.lastChecked(location.id)
 
         _uiState.value = _uiState.value.copy(
             isLoading = false,
