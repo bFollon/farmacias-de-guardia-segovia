@@ -59,7 +59,7 @@ object WhatsNewService {
             icon = Icons.Filled.Sync,
             title = "Información más fiable",
             body = "Los horarios de guardia ahora se procesan una sola vez en nuestro servidor y se sincronizan con todos los dispositivos, en lugar de que cada móvil interprete el PDF oficial por su cuenta. Así todo el mundo ve siempre los mismos datos, sin errores de lectura puntuales. Como siempre, el servicio sigue y seguirá siendo gratuito y sin anuncios. Gracias por usarlo.",
-            version = "1.9.0",
+            version = "2.0.0",
         ),
     )
 
