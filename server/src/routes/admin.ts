@@ -6,6 +6,7 @@ import { scheduleStore } from "../store.js";
 import { publishLocationSchedule } from "../publish.js";
 import { REGION_PARSERS } from "../parsers/index.js";
 import { isRuralZbsId, parseAllRuralZbs, RURAL_SOURCE_PDF_URL, RURAL_ZBS_IDS } from "../parsers/rural.js";
+import { resolvePdfUrl, type RegionId } from "../scraping/pdfUrlScraper.js";
 import { REGION_VALIDATION_CONFIG } from "../validation/regionConfig.js";
 import { validateSchedules } from "../validation/gate.js";
 import type { LocationSchedule, PharmacySchedule } from "../types.js";
@@ -63,21 +64,24 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
 
   const previous = scheduleStore.get(locationId);
 
-  const head = await headPdf(parser.sourcePdfUrl);
+  // Scrapes cofsegovia.com's listing page for the current URL first, falling back to
+  // parser.sourcePdfUrl (a static fallback, matching PDFURLRepository's fallback-URL role
+  // on the clients) if scraping fails or doesn't cover this region.
+  const sourcePdfUrl = await resolvePdfUrl(parser.regionId as RegionId, parser.sourcePdfUrl);
+
+  const head = await headPdf(sourcePdfUrl);
   if (pdfUnchanged(head, previous)) {
     return { published: false, reason: "Source PDF unchanged (HEAD check, no download needed)", version: previous!.version };
   }
 
-  // No PDFURLScrapingService port yet — sourcePdfUrl is a static fallback, matching
-  // PDFURLRepository's fallback-URL role on the clients. See backend-data-service.md.
-  const pdf = await fetchPdf(parser.sourcePdfUrl);
+  const pdf = await fetchPdf(sourcePdfUrl);
   if ("error" in pdf) return reply.code(502).send({ error: pdf.error });
 
   if (previous?.sourcePdfSha256 === pdf.sha256) {
     return { published: false, reason: "Source PDF unchanged since last publish", version: previous.version };
   }
 
-  const schedules = await parser.parse(pdf.bytes, parser.sourcePdfUrl);
+  const schedules = await parser.parse(pdf.bytes, sourcePdfUrl);
   const validationConfig = REGION_VALIDATION_CONFIG[locationId];
   const validation = validationConfig ? validateSchedules(schedules, validationConfig, previous) : { passed: true, failures: [] };
 
@@ -89,7 +93,7 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
   await publishLocationSchedule({
     locationId,
     regionId: parser.regionId,
-    sourcePdfUrl: parser.sourcePdfUrl,
+    sourcePdfUrl,
     sourcePdfSha256: pdf.sha256,
     sourcePdfLastModified: pdf.lastModified,
     sourcePdfEtag: pdf.etag,
@@ -112,19 +116,26 @@ async function refreshRural(reply: FastifyReply) {
   // All 8 ZBS share one source PDF, so one HEAD check (against any one ZBS's stored
   // headers — they're always published together) covers all of them.
   const previous = scheduleStore.get(RURAL_ZBS_IDS[0]);
-  const head = await headPdf(RURAL_SOURCE_PDF_URL);
+
+  // Scrapes cofsegovia.com's listing page for the current URL first, falling back to
+  // RURAL_SOURCE_PDF_URL if scraping fails or doesn't cover this region. Segovia Rural's
+  // filename encodes year/month, so it rotates monthly on cofsegovia.com — the static
+  // fallback alone would 404 as soon as the old month's file is removed.
+  const sourcePdfUrl = await resolvePdfUrl("segovia-rural", RURAL_SOURCE_PDF_URL);
+
+  const head = await headPdf(sourcePdfUrl);
   if (pdfUnchanged(head, previous)) {
     return { published: false, reason: "Source PDF unchanged (HEAD check, no download needed)" };
   }
 
-  const pdf = await fetchPdf(RURAL_SOURCE_PDF_URL);
+  const pdf = await fetchPdf(sourcePdfUrl);
   if ("error" in pdf) return reply.code(502).send({ error: pdf.error });
 
   if (previous?.sourcePdfSha256 === pdf.sha256) {
     return { published: false, reason: "Source PDF unchanged since last publish" };
   }
 
-  const schedulesByZbs = await parseAllRuralZbs(pdf.bytes, RURAL_SOURCE_PDF_URL);
+  const schedulesByZbs = await parseAllRuralZbs(pdf.bytes, sourcePdfUrl);
 
   const failuresByZbs: Record<string, string[]> = {};
   for (const zbsId of RURAL_ZBS_IDS) {
@@ -149,7 +160,7 @@ async function refreshRural(reply: FastifyReply) {
     await publishLocationSchedule({
       locationId: zbsId,
       regionId: "segovia-rural",
-      sourcePdfUrl: RURAL_SOURCE_PDF_URL,
+      sourcePdfUrl,
       sourcePdfSha256: pdf.sha256,
       sourcePdfLastModified: pdf.lastModified,
       sourcePdfEtag: pdf.etag,
