@@ -156,10 +156,18 @@ function checkDeltaBound(
   }
 }
 
+export interface ValidateOptions {
+  /** Skips only the delta-bound check — for an operator-confirmed refresh where the swing
+   * is known to be legitimate (e.g. the source PDF's date range grew), not a parsing bug.
+   * Every other check still runs, so a genuinely broken parse still fails closed. */
+  skipDeltaCheck?: boolean;
+}
+
 export function validateSchedules(
   schedules: PharmacySchedule[],
   config: RegionValidationConfig,
   previous: LocationSchedule | undefined,
+  options?: ValidateOptions,
 ): ValidationResult {
   const failures: string[] = [];
 
@@ -167,7 +175,7 @@ export function validateSchedules(
   if (!config.skipDateContinuityCheck) checkDateContinuity(schedules, config, failures);
   checkShiftCompleteness(schedules, config, failures);
   checkPharmacyShapeSanity(schedules, failures);
-  checkDeltaBound(schedules, config, previous, failures);
+  if (!options?.skipDeltaCheck) checkDeltaBound(schedules, config, previous, failures);
 
   return { passed: failures.length === 0, failures };
 }

@@ -56,7 +56,7 @@ async function fetchPdf(
   };
 }
 
-async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
+async function refreshSingleRegion(locationId: string, reply: FastifyReply, force: boolean) {
   const parser = REGION_PARSERS[locationId];
   if (!parser) {
     return reply.code(501).send({ error: `No parser registered yet for ${locationId}` });
@@ -83,7 +83,9 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
 
   const schedules = await parser.parse(pdf.bytes, sourcePdfUrl);
   const validationConfig = REGION_VALIDATION_CONFIG[locationId];
-  const validation = validationConfig ? validateSchedules(schedules, validationConfig, previous) : { passed: true, failures: [] };
+  const validation = validationConfig
+    ? validateSchedules(schedules, validationConfig, previous, { skipDeltaCheck: force })
+    : { passed: true, failures: [] };
 
   if (!validation.passed) {
     return reply.code(422).send({ error: "Validation failed — keeping previously published data", failures: validation.failures });
@@ -112,7 +114,7 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply) {
  * must pass validation before ANY of them publish — a partial failure must not silently
  * publish 7 good + 1 stale, so this validates all 8 first and only writes files if all pass.
  */
-async function refreshRural(reply: FastifyReply) {
+async function refreshRural(reply: FastifyReply, force: boolean) {
   // All 8 ZBS share one source PDF, so one HEAD check (against any one ZBS's stored
   // headers — they're always published together) covers all of them.
   const previous = scheduleStore.get(RURAL_ZBS_IDS[0]);
@@ -142,7 +144,9 @@ async function refreshRural(reply: FastifyReply) {
     const schedules: PharmacySchedule[] = schedulesByZbs[zbsId] ?? [];
     const zbsPrevious = scheduleStore.get(zbsId);
     const validationConfig = REGION_VALIDATION_CONFIG[zbsId];
-    const validation = validationConfig ? validateSchedules(schedules, validationConfig, zbsPrevious) : { passed: true, failures: [] };
+    const validation = validationConfig
+      ? validateSchedules(schedules, validationConfig, zbsPrevious, { skipDeltaCheck: force })
+      : { passed: true, failures: [] };
     if (!validation.passed) failuresByZbs[zbsId] = validation.failures;
   }
 
@@ -180,18 +184,22 @@ export async function adminRoutes(app: FastifyInstance): Promise<void> {
     return result;
   });
 
-  app.post<{ Params: { locationId: string } }>(
+  app.post<{ Params: { locationId: string }; Querystring: { force?: string } }>(
     "/api/refresh/:locationId",
     { preHandler: requireReloadKey },
     async (request, reply) => {
       const { locationId } = request.params;
+      // Operator override for a refresh already blocked by the delta-bound check, once
+      // they've confirmed the swing is a legitimate source change (e.g. the PDF's date
+      // range grew) rather than a parsing bug — every other validation check still runs.
+      const force = request.query.force === "true";
 
       if (!isLocationId(locationId)) {
         return reply.code(404).send({ error: `Unknown locationId: ${locationId}` });
       }
 
-      if (isRuralZbsId(locationId)) return refreshRural(reply);
-      return refreshSingleRegion(locationId, reply);
+      if (isRuralZbsId(locationId)) return refreshRural(reply, force);
+      return refreshSingleRegion(locationId, reply, force);
     },
   );
 }
