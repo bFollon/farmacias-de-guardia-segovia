@@ -127,6 +127,27 @@ function countDistinctPharmacies(schedules: PharmacySchedule[]): number {
   return names.size;
 }
 
+/** Previous schedules clipped to [newMin, newMax] — the new parse's own date window. A
+ * source PDF that legitimately narrows its date range (e.g. a full year shrinking to a
+ * rolling few-month window) should be compared against the same narrower slice of the old
+ * data, not the old data's full length, or a shrinking window looks identical to dropped
+ * days. Falls back to the full previous set when there's no date overlap at all (e.g. the
+ * new parse covers a different year entirely), so that case still fails closed. */
+function previousInNewRange(schedules: PharmacySchedule[], previous: LocationSchedule): PharmacySchedule[] {
+  const newDates = schedules.map((s) => toJsDate(s.date)).filter((d): d is Date => d !== undefined);
+  if (newDates.length === 0) return previous.schedules;
+
+  const newMin = Math.min(...newDates.map((d) => d.getTime()));
+  const newMax = Math.max(...newDates.map((d) => d.getTime()));
+
+  const clipped = previous.schedules.filter((s) => {
+    const d = toJsDate(s.date);
+    return d !== undefined && d.getTime() >= newMin && d.getTime() <= newMax;
+  });
+
+  return clipped.length > 0 ? clipped : previous.schedules;
+}
+
 function checkDeltaBound(
   schedules: PharmacySchedule[],
   config: RegionValidationConfig,
@@ -135,15 +156,17 @@ function checkDeltaBound(
 ): void {
   if (!previous || previous.schedules.length === 0) return; // first publish — nothing to compare against
 
-  const scheduleDelta = Math.abs(schedules.length - previous.schedules.length) / previous.schedules.length;
+  const baseline = previousInNewRange(schedules, previous);
+
+  const scheduleDelta = Math.abs(schedules.length - baseline.length) / baseline.length;
   if (scheduleDelta > config.maxDeltaFraction) {
     failures.push(
       `Delta bound: schedule count changed by ${(scheduleDelta * 100).toFixed(0)}% ` +
-        `(${previous.schedules.length} -> ${schedules.length}, max is ${config.maxDeltaFraction * 100}%)`,
+        `(${baseline.length} -> ${schedules.length}, max is ${config.maxDeltaFraction * 100}%)`,
     );
   }
 
-  const previousPharmacyCount = countDistinctPharmacies(previous.schedules);
+  const previousPharmacyCount = countDistinctPharmacies(baseline);
   const newPharmacyCount = countDistinctPharmacies(schedules);
   if (previousPharmacyCount > 0) {
     const pharmacyDelta = Math.abs(newPharmacyCount - previousPharmacyCount) / previousPharmacyCount;

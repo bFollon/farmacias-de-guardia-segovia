@@ -84,7 +84,9 @@ test("passes when there is no previous version to delta against (first publish)"
   assert.equal(result.passed, true);
 });
 
-test("fails closed when schedule count swings more than the delta bound vs. the previous version", () => {
+test("fails closed when schedule count swings more than the delta bound within the same date window", () => {
+  // Same overall span (day 1-20) as the previous version, so this isn't explained by the
+  // source PDF's date range narrowing — it's a genuine hole in an otherwise-unchanged window.
   const previous: LocationSchedule = {
     locationId: "segovia-capital",
     regionId: "segovia-capital",
@@ -94,7 +96,8 @@ test("fails closed when schedule count swings more than the delta bound vs. the 
     version: 1,
     schedules: daily(20),
   };
-  const result = validateSchedules(daily(5), CONFIG, previous);
+  const sparse = [1, 5, 10, 15, 20].map((day) => schedule(day));
+  const result = validateSchedules(sparse, CONFIG, previous);
   assert.equal(result.passed, false);
   assert.ok(result.failures.some((f) => f.includes("Delta bound")));
 });
@@ -111,4 +114,51 @@ test("passes when the change vs. the previous version is within the delta bound"
   };
   const result = validateSchedules(daily(12), CONFIG, previous);
   assert.equal(result.passed, true);
+});
+
+test("passes when the source PDF's date window legitimately narrows (rolling window vs. full year)", () => {
+  // Previous covers a full year (Jan-Dec); new parse only covers the last 20 days of it.
+  // Raw counts would swing ~94% (365 -> 20), well past the 50% bound, but every day the
+  // new parse claims to cover is actually present, so it must not be flagged.
+  const previous: LocationSchedule = {
+    locationId: "segovia-rural",
+    regionId: "segovia-rural",
+    sourcePdfUrl: "https://example.com/prev.pdf",
+    sourcePdfSha256: "prev",
+    parsedAt: new Date().toISOString(),
+    version: 1,
+    schedules: Array.from({ length: 365 }, (_, i) => {
+      const date = new Date(Date.UTC(2026, 0, 1 + i));
+      const months = [
+        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+      ];
+      return schedule(date.getUTCDate(), months[date.getUTCMonth()], date.getUTCFullYear());
+    }),
+  };
+  const newSchedules = Array.from({ length: 20 }, (_, i) => schedule(i + 1, "diciembre", 2026));
+  const result = validateSchedules(newSchedules, CONFIG, previous);
+  assert.equal(result.passed, true);
+});
+
+test("fails closed when days go missing inside the overlapping window, even if the source's date range also narrowed", () => {
+  // New parse's own window is Dec 1-20, but only 10 of those days actually appear —
+  // a genuine parsing regression that a naive full-length delta could mask by
+  // coincidence, and that the range-clipped baseline must still catch.
+  const previous: LocationSchedule = {
+    locationId: "segovia-rural",
+    regionId: "segovia-rural",
+    sourcePdfUrl: "https://example.com/prev.pdf",
+    sourcePdfSha256: "prev",
+    parsedAt: new Date().toISOString(),
+    version: 1,
+    schedules: Array.from({ length: 20 }, (_, i) => schedule(i + 1, "diciembre", 2026)),
+  };
+  const newSchedules = [
+    ...Array.from({ length: 2 }, (_, i) => schedule(i + 1, "diciembre", 2026)),
+    ...Array.from({ length: 2 }, (_, i) => schedule(i + 19, "diciembre", 2026)),
+  ];
+  const result = validateSchedules(newSchedules, CONFIG, previous);
+  assert.equal(result.passed, false);
+  assert.ok(result.failures.some((f) => f.includes("Delta bound")));
 });
