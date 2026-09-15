@@ -95,6 +95,8 @@ The `schedules_count` prop is the total number of `PharmacySchedule` objects pro
 | `cache_refresh_triggered` | `region: String` | `CacheRefreshView.swift` |
 | `pdf_viewed` | `region: String` | `PDFViewScreen.swift` |
 | `zbs_selected` | `zbs: String` | `ZBSSelectionView.swift` |
+| `laliga_blocking_banner_tapped` | — | `ContentView.swift` / `MainScreen.kt` — tapping the LaLiga-blocking banner |
+| `laliga_blocking_link_tapped` | — | `LaLigaBlockingDetailSheet` / `LaLigaBlockingBanner.kt` — tapping the hayahora.futbol link |
 
 ---
 

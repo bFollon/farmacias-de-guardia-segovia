@@ -72,6 +72,7 @@ PDFProcessingService (coordinator)
 
 4. **UI Indicators**:
    - **OfflineWarningCard**: Orange warning shown when offline
+   - **LaLigaBlockingBanner**: Distinct orange/soccer-ball warning shown instead of the generic "server unreachable" state when our own sync server (`pharmacies-api.bfollon.dev`, behind a Cloudflare Tunnel) appears unreachable specifically because of LaLiga's court-authorized IP blocking during football matches. `LaLigaBlockingService` (iOS: actor singleton, Android: object) is fed by `ScheduleService.updateSyncStatus`/`PharmacyScheduleRepository.updateSyncStatus` whenever the manifest fetch (`ScheduleSyncService.fetchManifest`) fails; on failure, if the device is online, it resolves our own server hostname via DNS (`getaddrinfo` on iOS, `InetAddress.getAllByName` on Android) and compares it against `https://hayahora.futbol/estado/blocked-any.txt` (fetched directly, bypassing our own server) — an exact IP match is high-confidence evidence, an empty blocklist is evidence against, and an unresolvable hostname falls back to correlation (blocklist merely non-empty). Result cached 2 min. Exposed via a new `isLikelyLaLigaBlocked` published property on `ScheduleSyncStatus`; wired into `ContentView.swift`/`MainScreen.kt` as a higher-priority branch above the generic unreachable message. Tap opens a detail sheet explaining the December 2024 Spanish court ruling and linking to hayahora.futbol. Ported from InterSego's identical feature — see InterSego's `docs/LALIGA_BLOCKING_BANNER_RUNBOOK.md` for the original design rationale.
    - **CacheFreshnessFooter**: Shows cache age timestamp
    - **Enhanced Empty States**: Different messages for offline vs normal empty states
    - **Loading Overlays**: Smart loading indicators only shown when needed
@@ -372,6 +373,8 @@ Both paths must have a bypass policy in Cloudflare Access, or events will be sil
 | `pdf_viewed` | iOS + Android | `region` | Schedule detail screen opened |
 | `open_in_maps_tapped` | iOS only | `app` | Maps deep-link tapped |
 | `cache_refresh_triggered` | iOS + Android | `location_count` | Manual "sync now" action |
+| `laliga_blocking_banner_tapped` | iOS + Android | — | LaLiga-blocking banner tapped on the home screen |
+| `laliga_blocking_link_tapped` | iOS + Android | — | hayahora.futbol link tapped inside the LaLiga-blocking detail sheet |
 
 Memory cache hits are intentionally **not** tracked (too noisy; persistent cache hits are tracked instead).
 

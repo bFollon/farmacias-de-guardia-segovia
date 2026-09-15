@@ -37,9 +37,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -55,8 +57,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ClosestPharmacyButton
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.LaLigaBlockingBanner
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.LaLigaBlockingDetailSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
@@ -74,6 +80,7 @@ fun MainScreen(
     // Check network status on screen load
     var isOffline by remember { mutableStateOf(false) }
     var showOfflineDialog by remember { mutableStateOf(false) }
+    var showLaLigaDetail by remember { mutableStateOf(false) }
 
     val spacerSeparation = 0.05f
 
@@ -149,7 +156,9 @@ fun MainScreen(
 
             Spacer(modifier = Modifier.weight(spacerSeparation))
 
-            // Offline warning card (appears below subtitle when offline)
+            // Offline warning card (appears below subtitle when offline), or a LaLiga-blocking-
+            // specific warning if the device is online but our own server appears blocked
+            // during a football match.
             if (isOffline) {
                 OfflineWarningCard(
                     modifier = Modifier.padding(horizontal = Spacing.Base),
@@ -157,6 +166,24 @@ fun MainScreen(
                     onClick = { showOfflineDialog = true }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
+            } else if (ScheduleSyncStatus.isLikelyLaLigaBlocked) {
+                LaLigaBlockingBanner(
+                    modifier = Modifier.padding(horizontal = Spacing.Base),
+                    onClick = {
+                        AnalyticsService.track("laliga_blocking_banner_tapped")
+                        showLaLigaDetail = true
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
+            if (showLaLigaDetail) {
+                ModalBottomSheet(
+                    onDismissRequest = { showLaLigaDetail = false },
+                    sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+                ) {
+                    LaLigaBlockingDetailSheet()
+                }
             }
 
             Spacer(modifier = Modifier.weight(spacerSeparation))

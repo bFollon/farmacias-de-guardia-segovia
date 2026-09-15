@@ -23,6 +23,7 @@ struct ContentView: View {
     @State private var showingZBSSelection = false
     @State private var showingSettings = false
     @State private var showingAbout = false
+    @State private var showingLaLigaDetail = false
 
     // Observe network status
     @ObservedObject private var networkMonitor = NetworkMonitor.shared
@@ -63,11 +64,18 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
 
-                // Offline warning (if not connected), or a "couldn't reach the server" warning
-                // if the device is online but the sync server itself is unreachable.
+                // Offline warning (if not connected), a LaLiga-blocking-specific warning (if the
+                // device is online but our own server appears blocked during a football match),
+                // or a generic "couldn't reach the server" warning otherwise.
                 if !networkMonitor.isOnline {
                     OfflineWarningCard()
                         .padding(.horizontal)
+                } else if syncStatus.isLikelyLaLigaBlocked {
+                    LaLigaBlockingBanner(onTap: {
+                        AnalyticsService.shared.track("laliga_blocking_banner_tapped")
+                        showingLaLigaDetail = true
+                    })
+                    .padding(.horizontal)
                 } else if syncStatus.isServerUnreachable {
                     OfflineWarningCard(message: "No se pudo conectar con el servidor - usando datos almacenados")
                         .padding(.horizontal)
@@ -150,6 +158,9 @@ struct ContentView: View {
             .navigationBarHidden(true)
             .sheet(isPresented: $showingAbout) {
                 AboutView()
+            }
+            .sheet(isPresented: $showingLaLigaDetail) {
+                LaLigaBlockingDetailSheet()
             }
         }
         .sheet(item: $selectedRegion) { region in

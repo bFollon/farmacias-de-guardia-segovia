@@ -48,7 +48,7 @@ class ScheduleService {
                 "version": schedule.version
             ])
         }
-        updateSyncStatus(with: summary, locationId: location.id)
+        await updateSyncStatus(with: summary, locationId: location.id)
 
         return loadFromDiskOrBundle(for: location)
     }
@@ -79,7 +79,7 @@ class ScheduleService {
                 "version": schedule.version
             ])
         }
-        updateSyncStatus(with: summary, locationId: nil)
+        await updateSyncStatus(with: summary, locationId: nil)
 
         return locations.map { location in (location, loadFromDiskOrBundle(for: location)) }
     }
@@ -115,11 +115,13 @@ class ScheduleService {
     /// outcome. `locationId` is only used to tag the analytics event for a single-location
     /// sync; pass `nil` for a batched preload (a manifest failure there isn't any one
     /// location's fault, so it's tagged "all" instead of picking one arbitrarily).
-    private static func updateSyncStatus(with summary: ScheduleSyncService.SyncSummary, locationId: String?) {
+    private static func updateSyncStatus(with summary: ScheduleSyncService.SyncSummary, locationId: String?) async {
         if let manifestFailure = summary.manifestFailure {
             // Manifest fetch failed before any per-location sync was attempted (e.g. the
             // device is online but can't reach homeserver.local - off the LAN, server down).
             ScheduleSyncStatus.shared.reportFailure()
+            let laLigaSuspected = await LaLigaBlockingService.shared.onServerUnreachable()
+            ScheduleSyncStatus.shared.reportLaLigaBlocking(laLigaSuspected)
             AnalyticsService.shared.track("schedule_sync_failed", with: [
                 "location_id": locationId ?? "all",
                 "error": syncErrorLabel(manifestFailure)
@@ -136,6 +138,7 @@ class ScheduleService {
             // Every requested location either got fresh data or was already up to date -
             // either way the server was reachable, so clear any previously-reported failure.
             ScheduleSyncStatus.shared.reportSuccess()
+            await LaLigaBlockingService.shared.onServerReachable()
         }
     }
 

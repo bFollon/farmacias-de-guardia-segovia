@@ -26,14 +26,24 @@ class ScheduleSyncStatus: ObservableObject {
     static let shared = ScheduleSyncStatus()
 
     @Published private(set) var isServerUnreachable: Bool = false
+    @Published private(set) var isLikelyLaLigaBlocked: Bool = false
 
     private init() {}
 
     func reportSuccess() {
-        DispatchQueue.main.async { self.isServerUnreachable = false }
+        DispatchQueue.main.async {
+            self.isServerUnreachable = false
+            self.isLikelyLaLigaBlocked = false
+        }
     }
 
     func reportFailure() {
         DispatchQueue.main.async { self.isServerUnreachable = true }
+    }
+
+    /// Set alongside `reportFailure()` when the manifest fetch itself failed — see
+    /// `LaLigaBlockingService`.
+    func reportLaLigaBlocking(_ suspected: Bool) {
+        DispatchQueue.main.async { self.isLikelyLaLigaBlocked = suspected }
     }
 }

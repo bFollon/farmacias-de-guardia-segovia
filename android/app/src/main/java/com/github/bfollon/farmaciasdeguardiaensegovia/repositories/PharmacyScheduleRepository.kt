@@ -44,6 +44,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.LaLigaBlockingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleCacheService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
@@ -186,12 +187,14 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
      * pass `null` for a batched preload (a manifest failure there isn't any one location's
      * fault, so it's tagged "all" instead of picking one arbitrarily).
      */
-    private fun updateSyncStatus(summary: ScheduleSyncService.SyncSummary, locationId: String?) {
+    private suspend fun updateSyncStatus(summary: ScheduleSyncService.SyncSummary, locationId: String?) {
         val manifestFailure = summary.manifestFailure
         if (manifestFailure != null) {
             // Manifest fetch failed before any per-location sync was attempted (e.g. the
             // device is online but can't reach homeserver.local - off the LAN, server down).
             ScheduleSyncStatus.reportFailure()
+            val laLigaSuspected = LaLigaBlockingService.onServerUnreachable()
+            ScheduleSyncStatus.reportLaLigaBlocking(laLigaSuspected)
             AnalyticsService.track("schedule_sync_failed", mapOf(
                 "location_id" to (locationId ?: "all"),
                 "error" to syncErrorLabel(manifestFailure)
@@ -208,6 +211,7 @@ class PharmacyScheduleRepository private constructor(private val context: Contex
             // Every requested location either got fresh data or was already up to date -
             // either way the server was reachable, so clear any previously-reported failure.
             ScheduleSyncStatus.reportSuccess()
+            LaLigaBlockingService.onServerReachable()
         }
     }
 

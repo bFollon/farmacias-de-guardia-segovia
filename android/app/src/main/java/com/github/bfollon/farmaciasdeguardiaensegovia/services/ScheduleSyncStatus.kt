@@ -32,11 +32,20 @@ object ScheduleSyncStatus {
     var isServerUnreachable by mutableStateOf(false)
         private set
 
+    var isLikelyLaLigaBlocked by mutableStateOf(false)
+        private set
+
     fun reportSuccess() {
         isServerUnreachable = false
+        isLikelyLaLigaBlocked = false
     }
 
     fun reportFailure() {
         isServerUnreachable = true
+    }
+
+    /** Set alongside [reportFailure] when the manifest fetch itself failed — see [LaLigaBlockingService]. */
+    fun reportLaLigaBlocking(suspected: Boolean) {
+        isLikelyLaLigaBlocked = suspected
     }
 }
