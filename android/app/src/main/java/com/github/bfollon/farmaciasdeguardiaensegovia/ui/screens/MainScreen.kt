@@ -156,9 +156,11 @@ fun MainScreen(
 
             Spacer(modifier = Modifier.weight(spacerSeparation))
 
-            // Offline warning card (appears below subtitle when offline), or a LaLiga-blocking-
+            // Offline warning card (appears below subtitle when offline), a LaLiga-blocking-
             // specific warning if the device is online but our own server appears blocked
-            // during a football match.
+            // during a football match, or a generic "couldn't reach the server" warning
+            // otherwise (matches iOS's ContentView.swift three-way branch - previously this
+            // screen only ever showed the offline card, never the generic-unreachable one).
             if (isOffline) {
                 OfflineWarningCard(
                     modifier = Modifier.padding(horizontal = Spacing.Base),
@@ -173,6 +175,13 @@ fun MainScreen(
                         AnalyticsService.track("laliga_blocking_banner_tapped")
                         showLaLigaDetail = true
                     }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            } else if (ScheduleSyncStatus.isServerUnreachable) {
+                OfflineWarningCard(
+                    modifier = Modifier.padding(horizontal = Spacing.Base),
+                    isClickable = false,
+                    message = "No se pudo conectar con el servidor - usando datos almacenados"
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
