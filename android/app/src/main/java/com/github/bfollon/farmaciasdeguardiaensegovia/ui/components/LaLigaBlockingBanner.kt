@@ -91,7 +91,6 @@ fun LaLigaBlockingBanner(
  */
 @Composable
 fun LaLigaBlockingDetailSheet() {
-    val context = LocalContext.current
     val color = Color(0xFFFFA726)
 
     Column(
@@ -140,15 +139,42 @@ fun LaLigaBlockingDetailSheet() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
-        Text(
-            text = "Más información en hayahora.futbol →",
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.clickable {
-                AnalyticsService.track("laliga_blocking_link_tapped")
-                context.startActivity(Intent(Intent.ACTION_VIEW, "https://hayahora.futbol".toUri()))
-            },
-        )
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            LaLigaBlockingLink(
+                text = "Seguimiento en directo de los bloqueos: hayahora.futbol →",
+                url = "https://hayahora.futbol",
+                destination = "hayahora",
+            )
+            LaLigaBlockingLink(
+                text = "Comunicado de LaLiga sobre el bloqueo a clientes de Cloudflare →",
+                url = "https://www.laliga.com/noticias/laliga-pone-un-buzon-a-disposicion-de-los-clientes-de-cloudflare-afectados-por-los-bloqueos",
+                destination = "laliga_statement",
+            )
+            LaLigaBlockingLink(
+                text = "Análisis técnico independiente del bloqueo (OONI) →",
+                url = "https://ooni.org/post/2026-laliga-collateral/",
+                destination = "ooni_report",
+            )
+            LaLigaBlockingLink(
+                text = "El caso de Vercel, afectado por el mismo bloqueo →",
+                url = "https://vercel.com/blog/update-on-spain-and-laliga-blocks-of-the-internet",
+                destination = "vercel_blog",
+            )
+        }
     }
+}
+
+@Composable
+private fun LaLigaBlockingLink(text: String, url: String, destination: String) {
+    val context = LocalContext.current
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodyMedium,
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.clickable {
+            AnalyticsService.track("laliga_blocking_link_tapped", mapOf("destination" to destination))
+            context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+        },
+    )
 }
