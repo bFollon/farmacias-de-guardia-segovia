@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.bfollon.farmaciasdeguardiaensegovia.R
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.BouncingBallLoader
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.OfflineWarningCard
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.FarmaciasDeGuardiaEnSegoviaTheme
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
@@ -238,15 +239,7 @@ fun SplashScreen(
                         .alpha(progressAlpha)
                         .padding(bottom = Spacing.XXLarge)
                 ) {
-                    LinearProgressIndicator(
-                        progress = { progress.value },
-                        modifier = Modifier
-                            .width(200.dp)
-                            .height(4.dp)
-                            .clip(RoundedCornerShape(2.dp)),
-                        color = Color(0xFF007AFF),
-                        trackColor = Color(0xFF007AFF).copy(alpha = 0.2f)
-                    )
+                    BouncingBallLoader(color = Color(0xFF007AFF))
                 }
 
                 // Region icons with animated emoji progression

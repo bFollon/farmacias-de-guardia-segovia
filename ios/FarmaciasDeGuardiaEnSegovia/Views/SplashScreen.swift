@@ -65,9 +65,7 @@ struct SplashScreen: View {
             
             // Loading indicator with icon progression
             VStack(spacing: 16) {
-                ProgressView()
-                    .scaleEffect(1.2)
-                    .tint(.blue)
+                BouncingBallLoader(color: .blue)
                     .opacity(preloadService.isLoading ? 1.0 : 0.0)
                     .animation(.easeInOut(duration: 0.3), value: preloadService.isLoading)
 
