@@ -27,6 +27,7 @@ class ScheduleSyncStatus: ObservableObject {
 
     @Published private(set) var isServerUnreachable: Bool = false
     @Published private(set) var isLikelyLaLigaBlocked: Bool = false
+    @Published private(set) var isFetchingManifest: Bool = false
 
     private init() {}
 
@@ -39,6 +40,12 @@ class ScheduleSyncStatus: ObservableObject {
 
     func reportFailure() {
         DispatchQueue.main.async { self.isServerUnreachable = true }
+    }
+
+    /// Set true right around the manifest fetch call itself — `reportSuccess`/`reportFailure`
+    /// only fire once the whole sync batch settles, too late to drive a "currently fetching" UI.
+    func reportFetchingManifest(_ fetching: Bool) {
+        DispatchQueue.main.async { self.isFetchingManifest = fetching }
     }
 
     /// Set alongside `reportFailure()` when the manifest fetch itself failed — see

@@ -135,17 +135,21 @@ class ScheduleSyncService {
         }
 
         let manifest: [LocationManifestEntry]
+        ScheduleSyncStatus.shared.reportFetchingManifest(true)
         do {
             manifest = try await fetchManifest()
         } catch let error as SyncError {
+            ScheduleSyncStatus.shared.reportFetchingManifest(false)
             DebugConfig.debugPrint("❌ ScheduleSyncService: Manifest fetch failed: \(error)")
             ErrorReportingService.shared.captureError(error, context: ["operation": "fetchManifest"])
             summary.manifestFailure = error
             return summary
         } catch {
+            ScheduleSyncStatus.shared.reportFetchingManifest(false)
             summary.manifestFailure = .network(error)
             return summary
         }
+        ScheduleSyncStatus.shared.reportFetchingManifest(false)
 
         DebugConfig.debugPrint("✅ ScheduleSyncService: Fetched manifest (\(manifest.count) locations)")
         let manifestVersions = Dictionary(uniqueKeysWithValues: manifest.map { ($0.locationId, $0.version) })

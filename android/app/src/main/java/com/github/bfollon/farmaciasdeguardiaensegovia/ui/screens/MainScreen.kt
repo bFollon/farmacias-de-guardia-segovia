@@ -60,6 +60,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
+import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.BouncingBallLoader
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.ClosestPharmacyButton
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.LaLigaBlockingBanner
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.components.LaLigaBlockingDetailSheet
@@ -112,8 +113,12 @@ fun MainScreen(
             // Top bar with settings button
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = if (ScheduleSyncStatus.isFetchingManifest) Arrangement.SpaceBetween else Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                if (ScheduleSyncStatus.isFetchingManifest) {
+                    BouncingBallLoader(modifier = Modifier.padding(start = Spacing.Base))
+                }
                 IconButton(
                     onClick = onSettingsClick
                 ) {

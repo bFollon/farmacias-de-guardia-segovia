@@ -33,6 +33,9 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 20) {
                 HStack {
+                    if syncStatus.isFetchingManifest {
+                        BouncingBallLoader()
+                    }
                     Spacer()
                     Button(action: {
                         showingSettings = true

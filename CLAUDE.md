@@ -76,6 +76,7 @@ PDFProcessingService (coordinator)
    - **CacheFreshnessFooter**: Shows cache age timestamp
    - **Enhanced Empty States**: Different messages for offline vs normal empty states
    - **Loading Overlays**: Smart loading indicators only shown when needed
+   - **BouncingBallLoader**: Dependency-free (no Lottie) top-left indicator shown only while `ScheduleSyncService.syncAll`'s manifest fetch (`fetchManifest()`) is actually in flight — a phone glyph and a cloud glyph flank a track a ball bounces along, with squash-and-stretch (flatten in direction of travel, bulge perpendicular — a wall bounce, not a floor drop) timed to each turnaround. Driven by a new `isFetchingManifest` boolean on `ScheduleSyncStatus`, set true/false right around the `fetchManifest()` call inside `syncAll` via `reportFetchingManifest(_:)` — `reportSuccess`/`reportFailure` only fire once the whole sync batch settles, too late for a "currently fetching" UI. iOS: `Views/BouncingBallLoader.swift`, SwiftUI `keyframeAnimator` (iOS 17+) with parallel `x`/`scaleX`/`scaleY` `KeyframeTrack`s, `iphone`/`cloud.fill` SF Symbols, wired into `ContentView.swift`'s top gear-icon `HStack`. Android: `ui/components/BouncingBallLoader.kt`, `rememberInfiniteTransition`+`animateFloat` driving a `Canvas` draw with `Icons.Filled.PhoneAndroid`/`Icons.Filled.Cloud`, wired into `MainScreen.kt`'s top settings `Row`. Ported from InterSego's identical feature.
 
 **Cache Maintenance:**
 - Automatic cleanup on app startup (`FarmaciasDeGuardiaEnSegoviaApp.swift:65-76`)
