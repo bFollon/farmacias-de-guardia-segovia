@@ -77,6 +77,7 @@ fun SplashScreen(
     val isLoading by splashViewModel.isLoading.collectAsState()
     val currentLoadingRegion by splashViewModel.currentLoadingRegion.collectAsState()
     val isOffline by splashViewModel.isOffline.collectAsState()
+    val hasError by splashViewModel.hasError.collectAsState()
 
     // Animation states
     var logoVisible by remember { mutableStateOf(false) }
@@ -239,7 +240,7 @@ fun SplashScreen(
                         .alpha(progressAlpha)
                         .padding(bottom = Spacing.XXLarge)
                 ) {
-                    BouncingBallLoader(color = Color(0xFF007AFF))
+                    BouncingBallLoader(color = Color(0xFF007AFF), hasError = hasError)
                 }
 
                 // Region icons with animated emoji progression

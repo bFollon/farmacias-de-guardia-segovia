@@ -25,6 +25,10 @@ class PreloadService: ObservableObject {
     @Published var loadingProgress: String = ""
     @Published var completedRegions = 0
     @Published var totalRegions = 0
+    /// Set right before `isLoading` goes false, so the splash's loader can show a red X instead
+    /// of just fading out. True when offline (the sync never actually attempted the network) or
+    /// when `ScheduleSyncStatus` recorded a real fetch failure during this preload.
+    @Published private(set) var hasError = false
 
     private init() {}
 
@@ -59,6 +63,7 @@ class PreloadService: ObservableObject {
 
         await MainActor.run {
             isLoading = true
+            hasError = false
             totalRegions = locations.count
             completedRegions = 0
         }
@@ -108,7 +113,14 @@ class PreloadService: ObservableObject {
 
         DebugConfig.debugPrint("🎉 Preload completed!")
 
+        // Determine failure before letting go of isLoading — offline means the sync never
+        // even attempted the network (ScheduleSyncService.syncAll's skippedOffline path never
+        // touches ScheduleSyncStatus), so it needs its own check alongside isServerUnreachable.
+        let offline = !NetworkMonitor.shared.isOnline
+        let serverUnreachable = await MainActor.run { ScheduleSyncStatus.shared.isServerUnreachable }
+
         await MainActor.run {
+            hasError = offline || serverUnreachable
             isLoading = false
             loadingProgress = "Completado"
         }

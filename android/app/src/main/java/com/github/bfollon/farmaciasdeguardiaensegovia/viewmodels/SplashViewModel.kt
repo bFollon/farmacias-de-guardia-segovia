@@ -30,6 +30,7 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ErrorReportingService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.PDFURLScrapingService
+import com.github.bfollon.farmaciasdeguardiaensegovia.services.ScheduleSyncStatus
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -77,6 +78,14 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
     private val _isOffline = MutableStateFlow(false)
     val isOffline: StateFlow<Boolean> = _isOffline.asStateFlow()
+
+    /**
+     * Set right before [_isLoading] goes false, so the splash's loader can show a red X instead
+     * of just disappearing. True when offline (sync never actually attempted the network) or
+     * when [ScheduleSyncStatus] recorded a real fetch failure during this load.
+     */
+    private val _hasError = MutableStateFlow(false)
+    val hasError: StateFlow<Boolean> = _hasError.asStateFlow()
 
     private val _urlChangesDetected = MutableStateFlow<List<String>>(emptyList())
     val urlChangesDetected: StateFlow<List<String>> = _urlChangesDetected.asStateFlow()
@@ -156,6 +165,10 @@ class SplashViewModel(private val context: Context) : ViewModel() {
             } finally {
                 // ALWAYS mark as complete, even on error - this ensures awaitLoadingCompletion() never hangs
                 withContext(Dispatchers.Main) {
+                    // _isOffline was already set above (offline never attempts the network, so
+                    // ScheduleSyncStatus is never touched for that case); isServerUnreachable
+                    // covers a real fetch that timed out/failed while online.
+                    _hasError.value = _isOffline.value || ScheduleSyncStatus.isServerUnreachable
                     _loadingProgress.value = 1f
                     _isLoading.value = false
                 }

@@ -46,11 +46,14 @@ import kotlin.math.min
 /**
  * Small indeterminate indicator shown while the app is contacting the server: a dot bouncing back
  * and forth along a track, with a brief squash at each end, flanked by a phone and a cloud glyph.
+ * When [hasError] is true, the ball is replaced with a blinking red X centered on the track, so a
+ * fetch timeout/failure (or being fully offline) reads as distinct from "still loading".
  */
 @Composable
 fun BouncingBallLoader(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary,
+    hasError: Boolean = false,
 ) {
     val transition = rememberInfiniteTransition(label = "bouncingBall")
     val progress by transition.animateFloat(
@@ -68,6 +71,19 @@ fun BouncingBallLoader(
     val edgeProximity = min(progress, 1f - progress)
     val squashWindow = 0.12f
     val squash = 1f - (edgeProximity / squashWindow).coerceIn(0f, 1f)
+
+    val errorTransition = rememberInfiniteTransition(label = "bouncingBallError")
+    val errorAlpha by errorTransition.animateFloat(
+        initialValue = 0.25f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 450, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = "bouncingBallErrorAlpha",
+    )
+
+    val errorColor = MaterialTheme.colorScheme.error
 
     Row(
         modifier = modifier,
@@ -94,12 +110,35 @@ fun BouncingBallLoader(
                 cap = StrokeCap.Round,
             )
 
-            val ballX = trackInset + (size.width - 2 * trackInset) * progress
-            // Flatten along the direction of travel (horizontal) and bulge perpendicular
-            // (vertical) — matches a ball bouncing off a wall it's moving into, not one
-            // dropping onto a floor.
-            scale(scaleX = 1f - squash * 0.12f, scaleY = 1f + squash * 0.12f, pivot = Offset(ballX, trackY)) {
-                drawCircle(color = color, radius = ballRadius, center = Offset(ballX, trackY))
+            if (hasError) {
+                // Drawn by hand (not Icons.Default.Close) so the stroke can be made bold
+                // enough to actually read at this size.
+                val crossRadius = ballRadius + 1.dp.toPx()
+                val crossCenter = Offset(size.width / 2f, trackY)
+                val crossColor = errorColor.copy(alpha = errorAlpha)
+                val crossStroke = 2.5.dp.toPx()
+                drawLine(
+                    color = crossColor,
+                    start = Offset(crossCenter.x - crossRadius, crossCenter.y - crossRadius),
+                    end = Offset(crossCenter.x + crossRadius, crossCenter.y + crossRadius),
+                    strokeWidth = crossStroke,
+                    cap = StrokeCap.Round,
+                )
+                drawLine(
+                    color = crossColor,
+                    start = Offset(crossCenter.x - crossRadius, crossCenter.y + crossRadius),
+                    end = Offset(crossCenter.x + crossRadius, crossCenter.y - crossRadius),
+                    strokeWidth = crossStroke,
+                    cap = StrokeCap.Round,
+                )
+            } else {
+                val ballX = trackInset + (size.width - 2 * trackInset) * progress
+                // Flatten along the direction of travel (horizontal) and bulge perpendicular
+                // (vertical) — matches a ball bouncing off a wall it's moving into, not one
+                // dropping onto a floor.
+                scale(scaleX = 1f - squash * 0.12f, scaleY = 1f + squash * 0.12f, pivot = Offset(ballX, trackY)) {
+                    drawCircle(color = color, radius = ballRadius, center = Offset(ballX, trackY))
+                }
             }
         }
 

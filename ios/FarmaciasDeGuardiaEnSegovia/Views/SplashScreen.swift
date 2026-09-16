@@ -65,8 +65,12 @@ struct SplashScreen: View {
             
             // Loading indicator with icon progression
             VStack(spacing: 16) {
-                BouncingBallLoader(color: .blue)
-                    .opacity(preloadService.isLoading ? 1.0 : 0.0)
+                // Stay visible through hasError too — isLoading flips false as soon as preload
+                // settles (success or failure), but the splash itself keeps showing for a
+                // minimum duration afterward (see FarmaciasDeGuardiaEnSegoviaApp.swift), and the
+                // red X should be visible for that whole remaining window, not fade out early.
+                BouncingBallLoader(color: .blue, hasError: preloadService.hasError)
+                    .opacity((preloadService.isLoading || preloadService.hasError) ? 1.0 : 0.0)
                     .animation(.easeInOut(duration: 0.3), value: preloadService.isLoading)
 
                 // Show 4 PDF icons (representing the 4 PDFs being downloaded)
