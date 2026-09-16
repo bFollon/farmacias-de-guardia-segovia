@@ -118,9 +118,21 @@ class PreloadService: ObservableObject {
         // touches ScheduleSyncStatus), so it needs its own check alongside isServerUnreachable.
         let offline = !NetworkMonitor.shared.isOnline
         let serverUnreachable = await MainActor.run { ScheduleSyncStatus.shared.isServerUnreachable }
+        let failed = offline || serverUnreachable
+
+        await MainActor.run { hasError = failed }
+
+        if failed {
+            // The app's own minimum-splash-duration floor (see
+            // FarmaciasDeGuardiaEnSegoviaApp.swift) is measured from when loading started, so a
+            // real network timeout that already ran past it leaves zero guaranteed time for the
+            // red X to actually be seen before the splash dismisses. Hold here instead, keeping
+            // isLoading true (and therefore the splash visible) for a beat regardless of how
+            // long the failure itself took.
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+        }
 
         await MainActor.run {
-            hasError = offline || serverUnreachable
             isLoading = false
             loadingProgress = "Completado"
         }

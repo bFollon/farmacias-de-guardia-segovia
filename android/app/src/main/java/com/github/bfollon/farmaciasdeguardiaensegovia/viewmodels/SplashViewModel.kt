@@ -164,11 +164,23 @@ class SplashViewModel(private val context: Context) : ViewModel() {
                 }
             } finally {
                 // ALWAYS mark as complete, even on error - this ensures awaitLoadingCompletion() never hangs
+                // _isOffline was already set above (offline never attempts the network, so
+                // ScheduleSyncStatus is never touched for that case); isServerUnreachable
+                // covers a real fetch that timed out/failed while online.
+                val failed = _isOffline.value || ScheduleSyncStatus.isServerUnreachable
+                withContext(Dispatchers.Main) { _hasError.value = failed }
+
+                if (failed) {
+                    // SplashScreen.kt's own minimum-splash-time floor is measured from when
+                    // loading started, so a real network timeout that already ran past it
+                    // leaves zero guaranteed time for the red X to actually be seen before
+                    // navigation. Hold here instead, keeping _isLoading true (which
+                    // awaitLoadingCompletion() is suspended on) for a beat regardless of how
+                    // long the failure itself took.
+                    delay(1500)
+                }
+
                 withContext(Dispatchers.Main) {
-                    // _isOffline was already set above (offline never attempts the network, so
-                    // ScheduleSyncStatus is never touched for that case); isServerUnreachable
-                    // covers a real fetch that timed out/failed while online.
-                    _hasError.value = _isOffline.value || ScheduleSyncStatus.isServerUnreachable
                     _loadingProgress.value = 1f
                     _isLoading.value = false
                 }
@@ -366,9 +378,12 @@ class SplashViewModel(private val context: Context) : ViewModel() {
 
         withContext(Dispatchers.Main) {
             _currentLoadingRegion.value = null
-            _isLoading.value = false
             DebugConfig.debugPrint("SplashViewModel: All regions loaded sequentially!")
         }
+        // _isLoading is left true here — startBackgroundLoading()'s finally block clears it,
+        // after computing hasError and holding briefly on failure. Clearing it here too let
+        // awaitLoadingCompletion() (a separate coroutine watching this StateFlow) unblock the
+        // instant this function returned, bypassing that hold entirely.
     }
 
     /**
