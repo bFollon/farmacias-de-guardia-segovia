@@ -157,21 +157,17 @@ class ScheduleSyncService private constructor(context: Context) {
             return summary
         }
 
-        ScheduleSyncStatus.reportFetchingManifest(true)
         val manifest = try {
             fetchManifest()
         } catch (e: SyncError) {
-            ScheduleSyncStatus.reportFetchingManifest(false)
             DebugConfig.debugError("ScheduleSyncService: Manifest fetch failed", e)
             ErrorReportingService.captureError(e, mapOf("operation" to "fetchManifest"))
             summary.manifestFailure = e
             return summary
         } catch (e: Exception) {
-            ScheduleSyncStatus.reportFetchingManifest(false)
             summary.manifestFailure = SyncError.Network(e)
             return summary
         }
-        ScheduleSyncStatus.reportFetchingManifest(false)
 
         DebugConfig.debugPrint("✅ ScheduleSyncService: Fetched manifest (${manifest.size} locations)")
         val manifestVersions = manifest.associate { it.locationId to it.version }

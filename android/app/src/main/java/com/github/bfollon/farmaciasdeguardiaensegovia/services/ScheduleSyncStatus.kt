@@ -35,9 +35,6 @@ object ScheduleSyncStatus {
     var isLikelyLaLigaBlocked by mutableStateOf(false)
         private set
 
-    var isFetchingManifest by mutableStateOf(false)
-        private set
-
     fun reportSuccess() {
         isServerUnreachable = false
         isLikelyLaLigaBlocked = false
@@ -50,13 +47,5 @@ object ScheduleSyncStatus {
     /** Set alongside [reportFailure] when the manifest fetch itself failed — see [LaLigaBlockingService]. */
     fun reportLaLigaBlocking(suspected: Boolean) {
         isLikelyLaLigaBlocked = suspected
-    }
-
-    /**
-     * Set true right around the manifest fetch call itself — [reportSuccess]/[reportFailure]
-     * only fire once the whole sync batch settles, too late to drive a "currently fetching" UI.
-     */
-    fun reportFetchingManifest(fetching: Boolean) {
-        isFetchingManifest = fetching
     }
 }
