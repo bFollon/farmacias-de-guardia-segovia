@@ -381,18 +381,26 @@ Memory cache hits are intentionally **not** tracked (too noisy; persistent cache
 
 **Migrated off on-device PDF parsing (client-offline-sync)**: `schedules_parsed`/`pdf_parse_failed` were removed - parsing now happens server-side (see `server/`), and clients only sync pre-parsed JSON via `ScheduleSyncService`. `PDFProcessingService`, `PDFCacheManager`, `PDFDownloadService`, and all region-specific parser classes have been deleted from both apps; the "Strategy Pattern for PDF Processing" architecture section above describes the old on-device model and is being retired as part of this migration (see `Features/client-offline-sync.md` and `Features/migration-plan.md`).
 
-## Git Commit Guidelines
+## App Release Versioning
 
-**DO NOT include Claude Code promotional text in commit messages.**
+App-store-facing version numbers are tracked per platform:
 
-Never add the following to any commits:
-```
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+- **Android**: `versionCode` (integer, +1 per release) and `versionName` (SemVer, e.g. `"2.0.0"`) in `android/app/build.gradle.kts`
+- **iOS**: `MARKETING_VERSION` (SemVer, e.g. `2.0.0`) in `ios/FarmaciasDeGuardiaEnSegovia.xcodeproj/project.pbxproj` (appears twice — Debug + Release build configs, must match); `CURRENT_PROJECT_VERSION` (build number) stays `1` and is not bumped per release
 
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
+Unlike InterSego (a sibling project where Android/iOS version numbers are allowed to drift by design), this repo keeps both platforms on the **same** SemVer number per release — bump Android and iOS to the identical `X.Y.Z` together.
 
-Keep commit messages clean and professional without AI tool attribution.
+**These are real [SemVer](https://semver.org/) numbers (`MAJOR.MINOR.PATCH`), not just an incrementing counter:**
+- **Patch** — bug fixes only, no new user-facing capability.
+- **Minor** — new backward-compatible functionality (new screen, new feature, new mode). This is the default for "a PR worth shipping" that adds something.
+- **Major** — reserved for a breaking change, or when explicitly requested by the user for a given release regardless of what SemVer alone would say (e.g. a milestone worth marking). Don't infer "big feature" as sufficient reason on its own — ask if unsure whether a release warrants major.
+
+**When to bump:** after merging a PR (or set of PRs) worth shipping, as a dedicated release commit — bump both platforms together (Android `versionCode` +1 too), commit message `chore(release): bump to X.Y.Z for <short reason>` (matches this repo's existing history, e.g. `chore(release): bump to 2.0.0 for the server-sync migration`). Don't bump mid-feature-PR unless that PR's own commit already includes it.
+
+**Release process, in order:**
+1. **Look for new features since the last release.** Run `git log <last-release-commit>..HEAD --oneline` (the previous release commit matches `chore(release): bump to ...` or `chore(release): release ...`) to see everything that shipped. Don't rely on memory of the conversation — a release can bundle work from earlier sessions too.
+2. **Decide whether "Novedades" needs a new entry.** Skim those commits for anything a returning user would want a heads-up about — a new screen, feature, or mode (roughly: Minor/Major-worthy changes). If so, add a `WhatsNewEntry` tagged with the new version to **both** platforms' `WhatsNewService.entries` (`android/.../services/WhatsNewService.kt` and `ios/FarmaciasDeGuardiaEnSegovia/Services/WhatsNewService.swift`) — `entries` is append-only, never edit or remove past entries. Skip it for pure bug-fix/Patch releases or internal-only changes. See "Release Content: Novedades" below for how the version-range filtering works.
+3. **Bump the version numbers** on both platforms as described above, in the same commit as any new `WhatsNewEntry`.
 
 ## Release Content: "Novedades" (What's New)
 
