@@ -97,7 +97,7 @@ fun BouncingBallLoader(
             modifier = Modifier.size(14.dp),
         )
 
-        Canvas(modifier = Modifier.size(width = 64.dp, height = 16.dp)) {
+        Canvas(modifier = Modifier.size(width = 64.dp, height = 13.dp)) {
             val ballRadius = size.height / 2f - 2.dp.toPx()
             val trackInset = ballRadius + 2.dp.toPx()
             val trackY = size.height / 2f
