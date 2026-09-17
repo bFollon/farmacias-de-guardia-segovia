@@ -53,6 +53,12 @@ enum WhatsNewService {
             body: "Los horarios de guardia ahora se procesan una sola vez en nuestro servidor y se sincronizan con todos los dispositivos, en lugar de que cada móvil interprete el PDF oficial por su cuenta. Así todo el mundo ve siempre los mismos datos, sin errores de lectura puntuales. Como siempre, el servicio sigue y seguirá siendo gratuito y sin anuncios. Gracias por usarlo.",
             version: "2.0.0"
         ),
+        WhatsNewEntry(
+            icon: "soccerball",
+            title: "Aviso de bloqueo por LaLiga",
+            body: "Si nuestro servidor no responde durante un partido de fútbol, ahora te lo decimos: puede deberse al bloqueo de IPs ordenado judicialmente por LaLiga contra la piratería, que a veces afecta a servicios que nada tienen que ver con el fútbol pirata. Toca el aviso para más información.",
+            version: "2.1.0"
+        ),
     ]
 
     /// Entries the user hasn't seen yet: `version > lastSeenVersion` and `version <= currentVersion`,
