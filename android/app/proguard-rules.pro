@@ -16,33 +16,6 @@
 -keepattributes EnclosingMethod
 
 # ================================
-# iText PDF Library Rules
-# ================================
-
-# Don't warn about optional dependencies that iText can work without
--dontwarn com.itextpdf.bouncycastle.**
--dontwarn com.itextpdf.bouncycastlefips.**
--dontwarn org.slf4j.**
--dontwarn javax.xml.crypto.**
-
-# Sharpen - iText's C# to Java conversion tool (not needed at runtime)
--dontwarn sharpen.**
-
-# Jackson JSON library - optional iText dependency
--dontwarn com.fasterxml.jackson.**
-
-# Java AWT - desktop graphics library not available on Android
--dontwarn java.awt.**
--dontwarn javax.imageio.**
-
-# Keep all iText classes - they use reflection extensively
--keep class com.itextpdf.** { *; }
--keepclassmembers class com.itextpdf.** { *; }
-
-# Keep iText factory classes that are loaded dynamically
--keep class * implements com.itextpdf.commons.bouncycastle.IBouncyCastleFactory { *; }
-
-# ================================
 # Kotlinx Serialization Rules
 # ================================
 
@@ -78,22 +51,6 @@
 -keep class * implements kotlinx.serialization.KSerializer { *; }
 
 # ================================
-# App-Specific Data Classes
-# ================================
-
-# Keep all data models that are serialized/deserialized
--keep class com.github.bfollon.farmaciasdeguardiaensegovia.data.** { *; }
--keepclassmembers class com.github.bfollon.farmaciasdeguardiaensegovia.data.** { *; }
-
-# ================================
-# PDF Parser Strategy Classes
-# ================================
-
-# Keep all PDF parser implementations - loaded dynamically via strategy pattern
--keep class com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.** { *; }
--keepclassmembers class com.github.bfollon.farmaciasdeguardiaensegovia.services.pdfparsing.** { *; }
-
-# ================================
 # Location Services (Google Play Services)
 # ================================
 
@@ -110,14 +67,6 @@
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
-
-# ================================
-# Jetpack Compose
-# ================================
-
-# Keep Compose classes that use reflection
--keep class androidx.compose.** { *; }
--keepclassmembers class androidx.compose.** { *; }
 
 # ================================
 # Kotlin Reflection
@@ -145,7 +94,5 @@
 # Sentry Rules
 # ================================
 
-# Keep Sentry classes - they use reflection for stack trace symbolication
--keep class io.sentry.** { *; }
--keepclassmembers class io.sentry.** { *; }
+# The Sentry AAR ships its own consumer ProGuard rules; only suppress warnings here
 -dontwarn io.sentry.**
