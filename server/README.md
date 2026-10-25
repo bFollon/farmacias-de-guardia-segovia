@@ -61,3 +61,13 @@ npm start
 | GET | `/api/schedules/:locationId` | `API_KEY` | full schedule JSON; supports `If-None-Match` → `304` |
 | POST | `/api/refresh/:locationId` | `RELOAD_KEY` | fetch (HEAD-checked first) + parse + validate + publish (fails closed) |
 | POST | `/api/admin/reload` | `RELOAD_KEY` | re-read `data/schedules/*.json` from disk |
+| POST | `/api/admin/apply-catalog` | `RELOAD_KEY` | re-apply `catalog/pharmacies.json` to the published schedules, bumping `version` only for locations whose coordinates changed |
+
+## Pharmacy coordinates catalog
+
+`catalog/pharmacies.json` is a hand-maintained list of every pharmacy that appears in the schedules, with `latitude`/`longitude` filled in by hand (`null` until then). Publishing a schedule (a refresh, or `apply-catalog`) merges those coordinates into every matching pharmacy entry as optional `latitude`/`longitude` fields. Older app builds ignore the extra keys, so the endpoints and payload shape stay backward compatible.
+
+- **Matching** is on name + address, ignoring case, accents and whitespace (the per-entry `id` is a hash that changes on every parse, so it can't be used).
+- **Editing:** fill in the coordinates, then `POST /api/admin/apply-catalog` with `RELOAD_KEY`. No restart needed; the catalog is re-read on every publish. Run it on the Pi after deploying a catalog change too.
+- **Missing pharmacies:** refresh and `apply-catalog` responses (and the server log) list pharmacies with no coordinates under `uncataloged`. A pharmacy renamed in the source PDF shows up there until you add its new name/address.
+- **Typo guard:** coordinates outside the province of Segovia are ignored with a warning (the usual cause is a dropped minus sign on the longitude).
