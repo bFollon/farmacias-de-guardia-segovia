@@ -34,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.RouteCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.screens.ClosestPharmacyResultBottomSheet
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.IOSBlue
@@ -55,7 +54,6 @@ fun ClosestPharmacyButton(
     
     // Initialize caches
     LaunchedEffect(Unit) {
-        CoordinateCache.initialize(context)
         RouteCache.initialize(context)
     }
     

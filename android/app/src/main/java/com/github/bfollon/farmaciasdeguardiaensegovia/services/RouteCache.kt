@@ -26,7 +26,7 @@ import kotlin.math.roundToInt
 
 /**
  * Manages persistent route caching for driving/walking routes
- * Similar to CoordinateCache but for OSRM route results
+ * Caches OSRM route results
  */
 object RouteCache {
     

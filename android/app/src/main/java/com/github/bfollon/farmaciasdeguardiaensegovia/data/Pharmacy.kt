@@ -25,7 +25,11 @@ data class Pharmacy(
     val name: String,
     val address: String,
     val phone: String,
-    val additionalInfo: String? = null
+    val additionalInfo: String? = null,
+    // From the server's pharmacy catalog. Absent for pharmacies the catalog doesn't cover
+    // yet, and in schedules cached by older app versions.
+    val latitude: Double? = null,
+    val longitude: Double? = null
 ) {
     /**
      * Format phone number for display with spaces every 3 digits

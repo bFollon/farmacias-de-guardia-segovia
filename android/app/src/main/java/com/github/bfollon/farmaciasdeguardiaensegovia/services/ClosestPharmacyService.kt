@@ -24,9 +24,6 @@ import com.github.bfollon.farmaciasdeguardiaensegovia.data.DutyTimeSpan
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.ZBS
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -123,7 +120,7 @@ class ClosestPharmacyService(private val context: Context) {
             override val message: String = "No hay farmacias de guardia disponibles en este momento"
         }
         
-        object GeocodingFailed : ClosestPharmacyError() {
+        object PharmacyLocationsUnavailable : ClosestPharmacyError() {
             override val message: String = "No se pudo determinar la ubicación de las farmacias"
         }
         
@@ -198,31 +195,28 @@ class ClosestPharmacyService(private val context: Context) {
         
         DebugConfig.debugPrint("📊 Total on-duty pharmacies found: ${allOnDutyPharmacies.size}")
         
-        // Geocode all pharmacy addresses concurrently
-        val geocodingService = GeocodingService(context)
-        val pharmacyCoordinates = mutableListOf<PharmacyWithCoordinates>()
-        
-        coroutineScope {
-            val geocodingJobs = allOnDutyPharmacies.map { pharmacyContext ->
-                async {
-                    val coordinates = geocodingService.getCoordinatesForPharmacy(pharmacyContext.pharmacy)
-                    if (coordinates != null) {
-                        PharmacyWithCoordinates(pharmacyContext, coordinates)
-                    } else {
-                        null
-                    }
-                }
+        // Coordinates come from the server's pharmacy catalog; a pharmacy without them can't be routed to
+        val pharmacyCoordinates = allOnDutyPharmacies.mapNotNull { pharmacyContext ->
+            val pharmacy = pharmacyContext.pharmacy
+            val latitude = pharmacy.latitude
+            val longitude = pharmacy.longitude
+            if (latitude == null || longitude == null) {
+                DebugConfig.debugPrint("   ❌ No catalog coordinates for: ${pharmacy.name} (${pharmacy.address})")
+                return@mapNotNull null
             }
-            
-            pharmacyCoordinates.addAll(geocodingJobs.awaitAll().filterNotNull())
+            val location = Location("catalog").apply {
+                this.latitude = latitude
+                this.longitude = longitude
+            }
+            PharmacyWithCoordinates(pharmacyContext, location)
         }
-        
+
         if (pharmacyCoordinates.isEmpty()) {
-            DebugConfig.debugPrint("❌ Could not geocode any pharmacy addresses")
-            throw ClosestPharmacyError.GeocodingFailed
+            DebugConfig.debugPrint("❌ No on-duty pharmacy has catalog coordinates")
+            throw ClosestPharmacyError.PharmacyLocationsUnavailable
         }
-        
-        DebugConfig.debugPrint("🗺️ Successfully geocoded ${pharmacyCoordinates.size} pharmacies")
+
+        DebugConfig.debugPrint("🗺️ ${pharmacyCoordinates.size} of ${allOnDutyPharmacies.size} on-duty pharmacies have coordinates")
         
         // Calculate driving routes to all pharmacies
         val routeResults = mutableListOf<Pair<ClosestPharmacyResult, Double>>()
@@ -268,7 +262,7 @@ class ClosestPharmacyService(private val context: Context) {
         }
         
         val closest = routeResults.firstOrNull()?.first
-            ?: throw ClosestPharmacyError.GeocodingFailed
+            ?: throw ClosestPharmacyError.PharmacyLocationsUnavailable
         
         DebugConfig.debugPrint("🎯 DRIVING WINNER: ${closest.pharmacy.name} at ${closest.formattedDistance}, ${closest.formattedTravelTime} from ${closest.regionDisplayName}")
         

@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.coordinatesGeoUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.ClosestPharmacyResult
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import java.net.URLEncoder
@@ -387,19 +388,21 @@ fun ClosestPharmacyResultBottomSheet(
  * Open pharmacy location in maps app
  */
 private fun openInMaps(context: Context, result: ClosestPharmacyResult) {
-    // Use enhanced query with pharmacy name (same as iOS)
-    val query = "${result.pharmacy.name}, ${result.pharmacy.address}, Segovia, Spain"
-    val encodedQuery = URLEncoder.encode(query, "UTF-8")
+    // Catalog coordinates when the pharmacy has them, else a text search by name + address (same as iOS)
+    val uri = result.pharmacy.coordinatesGeoUri() ?: run {
+        val query = "${result.pharmacy.name}, ${result.pharmacy.address}, Segovia, Spain"
+        "geo:0,0?q=${URLEncoder.encode(query, "UTF-8")}".toUri()
+    }
 
     // Try to open in Google Maps first, fallback to generic maps intent
-    val googleMapsIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
+    val googleMapsIntent = Intent(Intent.ACTION_VIEW, uri)
     googleMapsIntent.setPackage("com.google.android.apps.maps")
 
     if (googleMapsIntent.resolveActivity(context.packageManager) != null) {
         context.startActivity(googleMapsIntent)
     } else {
         // Fallback to generic maps intent
-        val genericMapsIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
+        val genericMapsIntent = Intent(Intent.ACTION_VIEW, uri)
         context.startActivity(genericMapsIntent)
     }
 }

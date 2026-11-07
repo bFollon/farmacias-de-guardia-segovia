@@ -39,6 +39,31 @@ enum MapApp: String, CaseIterable {
         }
     }
     
+    /// Deep link that opens this app on the pharmacy. Uses the catalog coordinates when the
+    /// pharmacy has them, so the pin lands exactly where it was placed; otherwise falls back
+    /// to a text search for name + address and lets the maps app resolve it.
+    func url(for pharmacy: Pharmacy) -> URL? {
+        let allowed = CharacterSet.urlQueryAllowed
+
+        if let latitude = pharmacy.latitude, let longitude = pharmacy.longitude {
+            let label = pharmacy.name.trimmingCharacters(in: .whitespaces)
+                .addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+            switch self {
+            case .apple: return URL(string: "maps://?ll=\(latitude),\(longitude)&q=\(label)")
+            case .google: return URL(string: "comgooglemaps://?q=\(latitude),\(longitude)")
+            case .waze: return URL(string: "waze://?ll=\(latitude),\(longitude)&navigate=yes")
+            }
+        }
+
+        let query = "\(pharmacy.name), \(pharmacy.address), Segovia, Spain"
+            .addingPercentEncoding(withAllowedCharacters: allowed) ?? ""
+        switch self {
+        case .apple: return URL(string: "maps://?q=\(query)")
+        case .google: return URL(string: "comgooglemaps://?q=\(query)")
+        case .waze: return URL(string: "waze://?q=\(query)")
+        }
+    }
+
     static func availableApps() -> [MapApp] {
         return MapApp.allCases.filter { app in
             guard let url = URL(string: app.urlScheme) else { return false }
