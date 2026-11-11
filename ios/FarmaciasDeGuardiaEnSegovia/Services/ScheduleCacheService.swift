@@ -28,7 +28,10 @@ class ScheduleCacheService {
     /// Version 4: Switched from PDF-modification-date validity to server-version validity
     /// (client-offline-sync migration) - old caches don't decode into the new Pharmacy/
     /// PharmacySchedule shapes anyway, so the version bump forces them to be discarded.
-    private let currentCacheVersion = 4
+    /// Version 5: Pharmacy gained latitude/longitude. A cache written by an older build at the
+    /// same server version silently lacks them, and the version-equality check in
+    /// ScheduleSyncService would never refetch it - so those caches must be discarded.
+    private let currentCacheVersion = 5
 
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
