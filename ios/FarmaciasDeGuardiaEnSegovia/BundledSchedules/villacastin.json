@@ -1,1438 +1,13 @@
 {
   "locationId": "villacastin",
   "regionId": "segovia-rural",
-  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
-  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
-  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
-  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
-  "parsedAt": "2026-08-23T13:49:04.464Z",
-  "version": 1,
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/10/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "029122d2a2a5fa019a01bcae5b67c60a989f5f8819d51b054c413be984cbe4b2",
+  "sourcePdfLastModified": "Fri, 23 Oct 2026 08:41:59 GMT",
+  "sourcePdfEtag": "\"6adb1dd7-163c1b\"",
+  "parsedAt": "2026-10-23T18:00:07.838Z",
+  "version": 6,
   "schedules": [
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 13,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "cb1768bba279fbb17eb3e5d9c4da2d6f",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 14,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c9be2fac7953af18ce86e45935034b53",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 15,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1b1d4f385ec5cd57a91e655fdd659a9f",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 16,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "2af3b20b205ea9da9a9b3005d927853b",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 17,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1183a6f17563cb4a411b428a416d22c1",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 18,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c489b657cc20fee0446db7ae3a8b7bbb",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 19,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "784526b79be62c8b553ee278cd721c53",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 20,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "91b2ae6e722b97ad20a609fcecdf6377",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 21,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e4b38f0b2f7eaca8eefe946fdf387e79",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 22,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1fe1b0ab19ecbaa4be0fff7b3cae6737",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 23,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "f1514d84fce8e05526d68f09ccf51b2c",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 24,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "73bbc1f3f6275af9f8c14727d0ca7804",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 27,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "03c4f1586df78d032907079932a062c3",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 28,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4131797579dc62381aa4ce19426c9654",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 29,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "96cb5d1e2b7a7be762c2f67c732b4b54",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 30,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "7359f3259c66beb1841a38b3d8cd01e5",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 31,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "dd66bc8155204d3f0bba05aa68d4fd1d",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 3,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b2b38829460a67eaeb1242c4075e51d0",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 4,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e1de6f5378843a04726cb54099aa9e4e",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 5,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "16300546733af5970007dff8e44a6c45",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 6,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "43c63596aa51040831140abbdb6383e8",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 7,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "33300c488db1aade326e50c43b356045",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 10,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b58f7c4dc86cad119fb2145381b77337",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 11,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "9b9cd9aa97e1c9e9076a46c0444d4cd0",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 12,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "20c56541e9e978d5bbede449000657f9",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 13,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ff1eaf5a612fc2e0294e179084aa8a23",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 14,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "f56850ece78567f6051b7eb269f434d2",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 16,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "22d2a0a71f625c1c4ea3e81e0500db7f",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 17,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "f5c5d9b5c46f1b73e077c377f7dbe1c2",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 18,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "cf6d7b33ef762380478377f1f9dffaa1",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 19,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "32845e2090c37e6e77142def4d8093f8",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 20,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e930223d1e834722fe231876dcd3d2eb",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 21,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "5adbce195b9e840edc5a2720612b0c48",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 24,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6838505343964b1bfe2d8b1c5e493f39",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 25,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "765d70d0f625fb18959c7063f3e93d7c",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 26,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "5491501ed668e9e5a390e956ddfcef30",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 27,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "bba07323b5608e04cda4aadf78ae7e20",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 28,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c61000b5c09836cea6d34bd05fbea360",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 31,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6151ef8f032476dc9ffed77865a88fdf",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 1,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "04399b2610e516dca11dcbe428aa62f1",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 2,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "fc3f39fd2060b4999dbb989e01444a36",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 3,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "7f25528aa4b2474f419f0947aecde203",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 4,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "f5326c889475e82a550736ec49a19848",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 7,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "921f2c650721a4498e42e26bee94a08c",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 8,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "45ba4519d4b128d024ea5e3b63e3ccbb",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 9,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "38807c756f2f531195b22644bcde566b",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 10,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "d75473b1eadd1d344f344dfe003453aa",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 11,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "8b07aaa353023487f687a8ad1ac5e720",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 12,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "dff3e66c4f0518c2a08c17c2503350ce",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 14,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "996e76729b1fb74999cf79b5dbcf2cdb",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 15,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1014010146f20086d088f26725f12e42",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 16,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c236d4bb7873fe5e809413e14f17b62f",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 17,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "9006dcae93fb1fba9a3803908fd2c9e5",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 18,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "a37328e6619b6662f01b1802ac74a4be",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 21,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4ab835241d0e97dd51e85a7f86d43e61",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 22,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "06f491943f3e17045160eeda42990171",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 23,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "3cab6cf52d34f7521ce6d15db7a4f0fe",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 24,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b21ce4b7d82fca630395a09430c598a6",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 25,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "93fde7492dba143751b6a41446b895a5",
-            "name": "Farmacia Noelia Guerra García",
-            "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
-            "phone": "921192126",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 28,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "9ec6086b7f8bef2fd410f026eccd2dac",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 29,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4267e27ac43c2364615bc5305aec16d4",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 30,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "a80cd39244acd2a3f15ecbc185334c40",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 1,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e421c8fa2417a097390d984846fa6f8f",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 2,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6450ed64f8e433137110a518c8e07ef1",
-            "name": "Farmacia María José Martín Barguilla",
-            "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
-            "phone": "921193128",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 5,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b3d079cc7de577e6edc713b3b39de285",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 6,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1fff060df63fe336fb2cf5982b3dafe2",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 7,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "7f389c1ab5d052643bc2b62cb236e9e9",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 8,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "0199d51bd8a4ad6fd7bdece24127ef01",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 9,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "835ab51ac604401bd004f460a126bcdf",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 10,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "0a997267049f1f8ab62a9e3936a60063",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 11,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ec10e4cdb8bd09e015ee07e263836b4a",
-            "name": "Farmacia Cristina Herradón Gil-Gallardo",
-            "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
-            "phone": "921198173",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 13,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "2954cf9f909f258ecb68c76bdc885fa9",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 14,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "42b43525cd626dbe93aeebd6834925c6",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 15,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "2af88e5d3d72a1570005775481349d26",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 16,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "82680cfc160772fb6fb4b4219349898e",
-            "name": "Farmacia María A. Reviriego Morcuende",
-            "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
-            "phone": "921198297",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
     {
       "date": {
         "dayOfWeek": "lunes",
@@ -1447,7 +22,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1466,7 +43,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1485,7 +64,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1504,7 +85,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1523,7 +106,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1542,7 +127,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1561,7 +148,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1580,7 +169,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1599,7 +190,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1618,7 +211,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1637,7 +232,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1656,7 +253,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1675,7 +274,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1694,7 +295,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1713,7 +316,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1732,7 +337,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -1751,7 +358,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -1770,7 +379,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -1789,7 +400,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -1808,7 +421,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -1827,7 +442,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -1846,7 +463,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1865,7 +484,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1884,7 +505,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1903,7 +526,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1922,7 +547,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -1941,7 +568,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1960,7 +589,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1979,7 +610,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -1998,7 +631,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2017,7 +652,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2036,7 +673,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2055,7 +694,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2074,7 +715,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2093,7 +736,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2112,7 +757,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2131,7 +778,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2150,7 +799,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2169,7 +820,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2188,7 +841,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2207,7 +862,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2226,7 +883,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2245,7 +904,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2264,7 +925,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2283,7 +946,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2302,7 +967,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2321,7 +988,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2340,7 +1009,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2359,7 +1030,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2378,7 +1051,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2397,7 +1072,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2416,7 +1093,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2435,7 +1114,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2454,7 +1135,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2473,7 +1156,9 @@
             "name": "Farmacia Cristina Herradón Gil-Gallardo",
             "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
             "phone": "921198173",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.780688,
+            "longitude": -4.411562
           }
         ]
       }
@@ -2492,7 +1177,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2511,7 +1198,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2530,7 +1219,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2549,7 +1240,9 @@
             "name": "Farmacia María A. Reviriego Morcuende",
             "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
             "phone": "921198297",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.806938,
+            "longitude": -4.335562
           }
         ]
       }
@@ -2568,7 +1261,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2587,7 +1282,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2606,7 +1303,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2625,7 +1324,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2644,7 +1345,9 @@
             "name": "Farmacia Noelia Guerra García",
             "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
             "phone": "921192126",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.808813,
+            "longitude": -4.509563
           }
         ]
       }
@@ -2663,7 +1366,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2682,7 +1387,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2701,7 +1408,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2720,7 +1429,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
@@ -2739,7 +1450,9 @@
             "name": "Farmacia María José Martín Barguilla",
             "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
             "phone": "921193128",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.758687,
+            "longitude": -4.329937
           }
         ]
       }
