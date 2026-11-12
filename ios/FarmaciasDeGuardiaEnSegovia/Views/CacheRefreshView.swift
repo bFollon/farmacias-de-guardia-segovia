@@ -108,9 +108,6 @@ struct CacheRefreshView: View {
             refreshStates[location.id] = .pending
         }
 
-        // Clear coordinate caches at the start of refresh
-        GeocodingService.clearAllCaches()
-
         for location in locations {
             refreshStates[location.id] = .refreshing
         }

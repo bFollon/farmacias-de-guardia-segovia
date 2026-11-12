@@ -6,7 +6,7 @@
   "sourcePdfLastModified": "Wed, 07 Jan 2026 10:07:31 GMT",
   "sourcePdfEtag": "\"695e3063-6e108\"",
   "parsedAt": "2026-08-23T13:51:05.581Z",
-  "version": 1,
+  "version": 2,
   "schedules": [
     {
       "date": {
@@ -22,7 +22,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -41,7 +43,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -60,7 +64,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -79,7 +85,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -98,7 +106,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -117,7 +127,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -136,7 +148,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -155,7 +169,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -174,7 +190,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -193,7 +211,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -212,7 +232,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -231,7 +253,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -250,7 +274,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -269,7 +295,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -288,7 +316,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -307,7 +337,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -326,7 +358,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -345,7 +379,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -364,7 +400,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -383,7 +421,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -402,7 +442,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -421,7 +463,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -440,7 +484,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -459,7 +505,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -478,7 +526,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -497,7 +547,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -516,7 +568,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -535,7 +589,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -554,7 +610,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -573,7 +631,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -592,7 +652,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -611,7 +673,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -630,7 +694,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -649,7 +715,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -668,7 +736,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -687,7 +757,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -706,7 +778,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -725,7 +799,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -744,7 +820,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -763,7 +841,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -782,7 +862,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -801,7 +883,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -820,7 +904,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -839,7 +925,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -858,7 +946,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -877,7 +967,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -896,7 +988,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -915,7 +1009,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -934,7 +1030,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -953,7 +1051,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -972,7 +1072,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -991,7 +1093,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1010,7 +1114,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1029,7 +1135,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1048,7 +1156,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1067,7 +1177,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1086,7 +1198,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1105,7 +1219,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1124,7 +1240,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1143,7 +1261,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1162,7 +1282,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1181,7 +1303,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1200,7 +1324,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1219,7 +1345,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1238,7 +1366,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1257,7 +1387,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1276,7 +1408,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1295,7 +1429,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1314,7 +1450,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1333,7 +1471,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1352,7 +1492,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1371,7 +1513,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1390,7 +1534,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1409,7 +1555,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1428,7 +1576,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1447,7 +1597,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1466,7 +1618,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1485,7 +1639,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1504,7 +1660,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1523,7 +1681,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1542,7 +1702,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1561,7 +1723,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1580,7 +1744,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1599,7 +1765,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -1618,7 +1786,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1637,7 +1807,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1656,7 +1828,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1675,7 +1849,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1694,7 +1870,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1713,7 +1891,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1732,7 +1912,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -1751,7 +1933,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1770,7 +1954,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1789,7 +1975,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1808,7 +1996,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1827,7 +2017,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1846,7 +2038,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1865,7 +2059,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -1884,7 +2080,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1903,7 +2101,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1922,7 +2122,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1941,7 +2143,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1960,7 +2164,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1979,7 +2185,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -1998,7 +2206,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2017,7 +2227,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2036,7 +2248,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2055,7 +2269,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2074,7 +2290,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2093,7 +2311,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2112,7 +2332,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2131,7 +2353,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2150,7 +2374,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2169,7 +2395,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2188,7 +2416,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2207,7 +2437,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2226,7 +2458,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2245,7 +2479,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2264,7 +2500,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2283,7 +2521,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2302,7 +2542,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2321,7 +2563,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2340,7 +2584,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2359,7 +2605,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2378,7 +2626,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2397,7 +2647,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2416,7 +2668,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2435,7 +2689,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2454,7 +2710,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2473,7 +2731,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2492,7 +2752,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2511,7 +2773,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2530,7 +2794,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2549,7 +2815,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2568,7 +2836,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2587,7 +2857,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2606,7 +2878,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2625,7 +2899,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2644,7 +2920,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2663,7 +2941,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -2682,7 +2962,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2701,7 +2983,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2720,7 +3004,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2739,7 +3025,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2758,7 +3046,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2777,7 +3067,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2796,7 +3088,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -2815,7 +3109,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2834,7 +3130,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2853,7 +3151,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2872,7 +3172,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2891,7 +3193,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2910,7 +3214,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2929,7 +3235,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -2948,7 +3256,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2967,7 +3277,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -2986,7 +3298,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3005,7 +3319,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3024,7 +3340,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3043,7 +3361,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3062,7 +3382,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3081,7 +3403,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3100,7 +3424,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3119,7 +3445,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3138,7 +3466,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3157,7 +3487,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3176,7 +3508,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3195,7 +3529,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3214,7 +3550,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3233,7 +3571,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3252,7 +3592,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3271,7 +3613,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3290,7 +3634,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3309,7 +3655,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3328,7 +3676,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3347,7 +3697,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3366,7 +3718,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3385,7 +3739,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3404,7 +3760,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3423,7 +3781,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3442,7 +3802,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3461,7 +3823,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3480,7 +3844,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3499,7 +3865,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3518,7 +3886,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3537,7 +3907,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3556,7 +3928,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3575,7 +3949,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3594,7 +3970,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -3613,7 +3991,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3632,7 +4012,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3651,7 +4033,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3670,7 +4054,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3689,7 +4075,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3708,7 +4096,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3727,7 +4117,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -3746,7 +4138,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3765,7 +4159,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3784,7 +4180,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3803,7 +4201,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3822,7 +4222,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3841,7 +4243,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3860,7 +4264,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -3879,7 +4285,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3898,7 +4306,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3917,7 +4327,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3936,7 +4348,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3955,7 +4369,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3974,7 +4390,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -3993,7 +4411,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4012,7 +4432,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4031,7 +4453,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4050,7 +4474,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4069,7 +4495,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4088,7 +4516,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4107,7 +4537,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4126,7 +4558,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4145,7 +4579,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4164,7 +4600,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4183,7 +4621,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4202,7 +4642,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4221,7 +4663,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4240,7 +4684,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4259,7 +4705,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4278,7 +4726,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4297,7 +4747,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4316,7 +4768,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4335,7 +4789,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4354,7 +4810,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4373,7 +4831,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4392,7 +4852,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4411,7 +4873,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4430,7 +4894,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4449,7 +4915,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4468,7 +4936,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4487,7 +4957,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4506,7 +4978,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4525,7 +4999,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4544,7 +5020,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4563,7 +5041,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4582,7 +5062,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4601,7 +5083,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4620,7 +5104,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4639,7 +5125,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4658,7 +5146,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4677,7 +5167,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4696,7 +5188,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4715,7 +5209,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4734,7 +5230,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4753,7 +5251,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -4772,7 +5272,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4791,7 +5293,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -4810,7 +5314,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4829,7 +5335,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4848,7 +5356,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4867,7 +5377,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4886,7 +5398,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4905,7 +5419,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4924,7 +5440,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -4943,7 +5461,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4962,7 +5482,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -4981,7 +5503,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5000,7 +5524,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5019,7 +5545,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5038,7 +5566,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5057,7 +5587,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5076,7 +5608,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5095,7 +5629,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5114,7 +5650,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5133,7 +5671,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5152,7 +5692,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5171,7 +5713,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5190,7 +5734,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5209,7 +5755,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5228,7 +5776,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5247,7 +5797,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5266,7 +5818,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5285,7 +5839,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5304,7 +5860,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5323,7 +5881,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5342,7 +5902,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5361,7 +5923,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5380,7 +5944,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5399,7 +5965,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5418,7 +5986,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5437,7 +6007,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5456,7 +6028,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5475,7 +6049,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5494,7 +6070,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5513,7 +6091,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5532,7 +6112,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5551,7 +6133,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5570,7 +6154,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5589,7 +6175,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -5608,7 +6196,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5627,7 +6217,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5646,7 +6238,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5665,7 +6259,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5684,7 +6280,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5703,7 +6301,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5722,7 +6322,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -5741,7 +6343,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5760,7 +6364,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5779,7 +6385,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5798,7 +6406,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5817,7 +6427,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5836,7 +6448,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5855,7 +6469,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -5874,7 +6490,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5893,7 +6511,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5912,7 +6532,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5931,7 +6553,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5950,7 +6574,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5969,7 +6595,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -5988,7 +6616,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6007,7 +6637,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6026,7 +6658,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6045,7 +6679,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6064,7 +6700,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6083,7 +6721,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6102,7 +6742,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6121,7 +6763,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6140,7 +6784,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6159,7 +6805,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6178,7 +6826,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6197,7 +6847,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6216,7 +6868,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6235,7 +6889,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6254,7 +6910,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6273,7 +6931,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6292,7 +6952,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6311,7 +6973,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6330,7 +6994,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6349,7 +7015,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6368,7 +7036,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6387,7 +7057,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6406,7 +7078,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6425,7 +7099,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6444,7 +7120,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6463,7 +7141,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6482,7 +7162,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6501,7 +7183,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6520,7 +7204,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6539,7 +7225,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6558,7 +7246,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6577,7 +7267,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6596,7 +7288,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6615,7 +7309,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6634,7 +7330,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6653,7 +7351,9 @@
             "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
             "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
             "phone": "921140606",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.400188,
+            "longitude": -4.313812
           }
         ]
       }
@@ -6672,7 +7372,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6691,7 +7393,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6710,7 +7414,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6729,7 +7435,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6748,7 +7456,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6767,7 +7477,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6786,7 +7498,9 @@
             "name": "Farmacia Fernando Redondo",
             "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.396562,
+            "longitude": -4.307563
           }
         ]
       }
@@ -6805,7 +7519,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6824,7 +7540,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6843,7 +7561,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6862,7 +7582,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6881,7 +7603,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6900,7 +7624,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6919,7 +7645,9 @@
             "name": "Farmacia San Andrés",
             "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
             "phone": "921144794",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.404312,
+            "longitude": -4.318812
           }
         ]
       }
@@ -6938,7 +7666,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6957,7 +7687,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6976,7 +7708,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -6995,7 +7729,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -7014,7 +7750,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -7033,7 +7771,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }
@@ -7052,7 +7792,9 @@
             "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
             "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
             "phone": "921144812",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.398938,
+            "longitude": -4.310562
           }
         ]
       }

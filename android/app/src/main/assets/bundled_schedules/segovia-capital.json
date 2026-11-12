@@ -1,3037 +1,13 @@
 {
   "locationId": "segovia-capital",
   "regionId": "segovia-capital",
-  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/06/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-2026.pdf",
-  "sourcePdfSha256": "dcd579fde0fceeb504d9279951d508df54aefe4858313d9c63e6430f2d4e6436",
-  "sourcePdfLastModified": "Tue, 02 Jun 2026 11:10:51 GMT",
-  "sourcePdfEtag": "\"6a1eba3b-134671\"",
-  "parsedAt": "2026-08-23T13:51:00.364Z",
-  "version": 1,
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/09/CALENDARIO-GUARDIAS-SEGOVIA-CAPITAL-2026.pdf",
+  "sourcePdfSha256": "ce6c5b205e66a821d305653281f693a54e3a0b41afae423e651268cb93e7a609",
+  "sourcePdfLastModified": "Tue, 15 Sep 2026 07:35:53 GMT",
+  "sourcePdfEtag": "\"6aa8f559-134729\"",
+  "parsedAt": "2026-09-15T18:00:11.211Z",
+  "version": 3,
   "schedules": [
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 21,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "408bee83766c60a2b46e5abe6fc5f8f6",
-            "name": "FARMACIA MATEOS RODRÍGUEZ ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1d5d71defab8ddf3770cd873700535ce",
-            "name": "FARMACIA MATEOS RODRÍGUEZ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 22,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ef80bf5615e658f19481d02194948ed6",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "7ccb75e82ad96561997d1095a584793a",
-            "name": "FARMACIA HERRERO ISERN",
-            "address": "CARRETERA . VILLACASTIN, 10",
-            "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 23,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "9fc56175d4d4f0d97dc0d984e92800d1",
-            "name": "FARMACIA FERNANDEZ OLALLA ",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "6c7e035365afd5f90e20c09f7dddc2ef",
-            "name": "FARMACIA FERNANDEZ OLALLA",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 24,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b0c607b61369b7b59d5448a5671d8e52",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e5c47b0a2e75506b0d31218eada9c923",
-            "name": "FARMACIA RUJAS GÓMEZ",
-            "address": "LARGA, 5",
-            "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 25,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c0292f660ab2c55097c720207e804a3d",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "72f0a4bbf127c321f94a09b350e20f33",
-            "name": "FARMACIA GILARRANZ LUENGO",
-            "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
-            "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 26,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "6f6e12c1941e4030d6d7e1c1b01182da",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c934d50ef96f9d95fc901c8d68b79449",
-            "name": "FARMACIA CUÉLLAR BASTERRECHEA",
-            "address": "SANTA CATALINA, 18",
-            "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 27,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "3d64421605fbe4dba520becd5669f9bd",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "a56c98b5e691088416d9f901f9cdc5b2",
-            "name": "FARMACIA DE ANTONIO PALOMO",
-            "address": "PLAZA DE ESPRONCEDA  S/N",
-            "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 28,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c3dca8b8f487aa5126ccde58f3d3f40b",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c960e91b6e77187bdd83fd1314e0839e",
-            "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
-            "address": "AVDA. DE LA CONSTITUCION, 5",
-            "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 29,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a2af72a766c69e35c57bbdce4d09f939",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b9be512a767147d20a89537a0bec6bc4",
-            "name": "FARMACIA MARTÍN CANTERO",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 30,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "f650ac2628c320e3826121e9d660235a",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e173e228f9e2e8210977ff5751a62f6f",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 31,
-        "month": "mayo",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "3e0faa10cda44fe440edc8f7acf89f18",
-            "name": "FARMACIA ANTÓN ELÓSEGUI ",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "dffa34b77303d74a2ceee1a1779843f9",
-            "name": "FARMACIA ANTÓN ELÓSEGUI",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 1,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "5be49cbea03a361575d2517587270a03",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "8c3729c6921a50fdd09804f2085a6026",
-            "name": "FARMACIA GARCÍA GONZÁLEZ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 2,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "3f95251c5839eee03687b8ad4c6390b0",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c88e873932ffcaa33cb2e2ec39eb8220",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 3,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "673459941f6a252946e2652ee8d8b1cc",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "cda73af0d73d7dc4f7caaff651dc9482",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 4,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "156f632538df088b55091f21b0e301e7",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "20525f32c26641786b8a9419f130f86a",
-            "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
-            "address": "AVDA. MARQUES DE LOZOYA, 13",
-            "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 5,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "e792487ed3bc09d1024f78e7e6941e44",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1fa896ff5486cc21d863594df44df42b",
-            "name": "FARMACIA SANZ DE PABLOS",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 6,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a99a508ea0dc3851438224aea4e3bb17",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c3bd87ee343dcff05cdfc54cb90151d8",
-            "name": "FARMACIA PEREZ SOPEÑA",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 7,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ec0bc04813ee4cd245337b9a01f64721",
-            "name": "FARMACIA LOPEZ CUERDO ",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "7234b6e12e96caba355dd98b86dc3a7a",
-            "name": "FARMACIA LOPEZ CUERDO",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 8,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "5a889ee61d1d7982e5b072e79ca3c447",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "933eb091978a4fae17c63b4f066a4df3",
-            "name": "FARMACIA RUANO VAZQUEZ",
-            "address": "MUERTE Y VIDA, 2",
-            "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 9,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "af0f645d1f4b2a386dbf6251c80788d7",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "d2e43f338c8eb189a7960eae0074e324",
-            "name": "FARMACIA SANTIAGO GARCIA",
-            "address": "CERVANTES, 27",
-            "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 10,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "900788e92146dd0f560c7aeb322a2a03",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "5a6b066f10fc7e17c7e469b9c6172ec0",
-            "name": "FARMACIA PALOMO COLLAZO",
-            "address": "JOSE ZORRILLA, 41",
-            "phone": "921 412252",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 11,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "115ef2746f3f4652f35b16b643999787",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "236eeabec2af1006f56407cf202fd1c2",
-            "name": "FARMACIA TAMAYO SANTAMARÍA",
-            "address": "SANTO TOMAS, 5",
-            "phone": "921 435006",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 12,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "fe3d93761af6a607ca9ecb1b8987a028",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "43dbca9cabcfc9dea4132309c48d14d7",
-            "name": "FARMACIA BENAVENT ATIENZA",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 13,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "391e4ee1eab0b5c5ea052badbc257418",
-            "name": "FARMACIA MATEOS RODRÍGUEZ ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "aaab0660dd5ab527e257da4f8e7116e3",
-            "name": "FARMACIA MATEOS RODRÍGUEZ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 14,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "6560492a381216cda215e3abb6feae7f",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "3a473eccea1877786abc8c7aa5659c48",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 15,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "2b43445d2ced6675cfdbc7778a1d6a69",
-            "name": "FARMACIA FERNANDEZ OLALLA ",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e5442c0d52b509e539991f64fba9bb4f",
-            "name": "FARMACIA FERNANDEZ OLALLA",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 16,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "d5f01e34e29cd1bb49da13229bbe666d",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1c33381e2414a26e181f40eb77fad7df",
-            "name": "FARMACIA RUJAS GÓMEZ",
-            "address": "LARGA, 5",
-            "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 17,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "7abf7bf49e97dafa6a30bcd94fac8914",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "2534d4a08d640f5adc828715886cb0fc",
-            "name": "FARMACIA GILARRANZ LUENGO",
-            "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
-            "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 18,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "cd6450afe704fe26f3f04eef656ae9cf",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "df51428e7fdae5405c381239169b8f98",
-            "name": "FARMACIA CUÉLLAR BASTERRECHEA",
-            "address": "SANTA CATALINA, 18",
-            "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 19,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "038bd1e58d2f55d706fb36f51da95ee5",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "61c8b6b6efb892b88032e603a8d46ae3",
-            "name": "FARMACIA DE ANTONIO PALOMO",
-            "address": "PLAZA DE ESPRONCEDA  S/N",
-            "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 20,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "93d55e234f04c11ff153a98882d9d37e",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "08aa6c5ea18c5d6f52a466cd2ae05175",
-            "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
-            "address": "AVDA. DE LA CONSTITUCION, 5",
-            "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 21,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "26c92847d6ee97e3a0a0f90fa9e4c065",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b3cb0cdd11b8f7acc3cdbd0edbc7e872",
-            "name": "FARMACIA MARTÍN CANTERO",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 22,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "daf75a07b4804c383b60b4866b8f34ec",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "3ab808e8e818d7f0ccd44f2979e74ced",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 23,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c82548b050a526fe8fbafdc001e83f47",
-            "name": "FARMACIA ANTÓN ELÓSEGUI ",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "bbbc2431219b09d8851145f837e2f5e5",
-            "name": "FARMACIA ANTÓN ELÓSEGUI",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 24,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "944e7392f347f1341fff1a6d4f3bca17",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "38c44cae7e1a18c3517c548bb531ae2d",
-            "name": "FARMACIA GARCÍA GONZÁLEZ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 25,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "234dea683210b8eca60f111a2e27c9b2",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "14af725606eae97c6a8ececf9c55d715",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 26,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "7fa13deb56f4c2020969111380b29f8a",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "3e8e405b54995de4e6fc17ccad20ce68",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 27,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "f733294f12a68420691e4c00a1f1715f",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "f5b82b2aab1d4f2a45cfdeecf86b9a0c",
-            "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
-            "address": "AVDA. MARQUES DE LOZOYA, 13",
-            "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 28,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "1c52e5108d6157635e33bb8e2f870b7b",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b7250a4e6d2b07e4e740fd1f32aa7f70",
-            "name": "FARMACIA SANZ DE PABLOS",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 29,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "36b4d7882eaa91a5f9a0caa6e246239f",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e4ad1995ca4cbb8345e69c4c8ead6048",
-            "name": "FARMACIA PEREZ SOPEÑA",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 30,
-        "month": "junio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "eea9f3de68c290a93ce5f3cd7c4e58fe",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "ffa520cf4b3033fbd2b330febdb91c76",
-            "name": "FARMACIA LOPEZ CUERDO",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 1,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "6a1766d483e3537c9a00a804b9480860",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "76357f93006e9d2aeeac670d650e00b1",
-            "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
-            "address": "AVDA. MARQUES DE LOZOYA, 13",
-            "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 2,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "fb66cf61249fbf658a1f97fa5922fdb4",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "0592fa00eafa8fb0682ba4d2a4dac1c2",
-            "name": "FARMACIA SANTIAGO GARCIA",
-            "address": "CERVANTES, 27",
-            "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 3,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "64d49824b109bd65f7b126d2a596c0f2",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e018e20a181ccfa80a8b54ad85ee518b",
-            "name": "FARMACIA PALOMO COLLAZO",
-            "address": "JOSE ZORRILLA, 41",
-            "phone": "921 412252",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 4,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "bfbde9e2b53ec3115026e307fe170fa8",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1157b3d6af552dc2abd2e9c724b43ee4",
-            "name": "FARMACIA TAMAYO SANTAMARÍA",
-            "address": "SANTO TOMAS, 5",
-            "phone": "921 435006",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 5,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ea5f30108f331004a42d7bcd79a78a8e",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "65a50ebf4584fa8516c37d4de3be1799",
-            "name": "FARMACIA BENAVENT ATIENZA",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 6,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "e695fdab8e6d9b252aeb9ed94a346e03",
-            "name": "FARMACIA MATEOS RODRÍGUEZ ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "cbca2e1338957edd42949c28d66b07a4",
-            "name": "FARMACIA MATEOS RODRÍGUEZ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 7,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "abb74f397cdad3470ac6d8afe977124f",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "ac403c670055311d8c106cc0c4916218",
-            "name": "FARMACIA HERRERO ISERN",
-            "address": "CARRETERA . VILLACASTIN, 10",
-            "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 8,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a573581ebe959d8d99be774b6559a7b0",
-            "name": "FARMACIA FERNANDEZ OLALLA ",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "52a9b9362424480ad64544a9b0b8e8c3",
-            "name": "FARMACIA FERNANDEZ OLALLA",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 9,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a16b49c7766f2b9f1758595ecf6381b6",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "816fed0b82e503a8bdc3d6ba71d049ef",
-            "name": "FARMACIA RUJAS GÓMEZ",
-            "address": "LARGA, 5",
-            "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 10,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "da8ea5ecbcf9bf4b49f1dcfd3bd82002",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "bf8a0a2e4cdbb2c4e9180febb432acae",
-            "name": "FARMACIA GILARRANZ LUENGO",
-            "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
-            "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 11,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "62d39f369bb65733659a9d0f9606787d",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "9da8967a77e53371eeed3b6eff522ea3",
-            "name": "FARMACIA CUÉLLAR BASTERRECHEA",
-            "address": "SANTA CATALINA, 18",
-            "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 12,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ed656ab599d0cda9e0366553a92eec0f",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "d64a6144b16a20ff7f71bd0ad723e166",
-            "name": "FARMACIA DE ANTONIO PALOMO",
-            "address": "PLAZA DE ESPRONCEDA  S/N",
-            "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 13,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "08ac50dfcaba7f4f1a740224b354442c",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "81a4c17646e36773bf7bba492a5c7a28",
-            "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
-            "address": "AVDA. DE LA CONSTITUCION, 5",
-            "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 14,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c32dd4af8c5b553408a5081f9af1eb9e",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1bedce5bbed4523326c10021a99fbd4d",
-            "name": "FARMACIA MARTÍN CANTERO",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 15,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ca66ee08fc41018b4ac2f1bb0f48669b",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1e8cfa52e1d60ba13897fc8f181abb0c",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 16,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "40fd81590b29921f188bcea4b3e5317c",
-            "name": "FARMACIA ANTÓN ELÓSEGUI ",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "90827c5c62151400d00fc1c36fdc1862",
-            "name": "FARMACIA ANTÓN ELÓSEGUI",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 17,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "11ebbf91320e51373accf52518f78005",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "9f39dea5c39b8a63d70a1f0f76c3d9fa",
-            "name": "FARMACIA GARCÍA GONZÁLEZ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 18,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "5655b8a4c4d63c57cf43b476ec9b58ab",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "0c486ac5793e368644d7b17df3a3dc31",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 19,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "3201ec3a1aa6ca89bd204a57860e4b4d",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "5c14b33db3e9852a115745c7f723c7f7",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 20,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "4896845d1455001d34d400f95005fe1f",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "0dd84fe2043b6a8ec43aee3543b523dc",
-            "name": "FARMACIA RUANO VAZQUEZ",
-            "address": "MUERTE Y VIDA, 2",
-            "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 21,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c35e064c5d7c66c072af6171f3fff821",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "d2f4952c653eaac50ea5ca296917cfd4",
-            "name": "FARMACIA SANZ DE PABLOS",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 22,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "9e99dae058e1fd662fdb5e561c7fa7d3",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "46dc3a55b6e3750965044585a7845093",
-            "name": "FARMACIA PEREZ SOPEÑA",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 23,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a8b8ec9a5ae20383c2eb000a0c213bcb",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "132c5913a745f0ef32652c7e6ad879ba",
-            "name": "FARMACIA LOPEZ CUERDO",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 24,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c6455f02998376bcb2bf2ecfc82930ae",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e428f7dfafdf23bd82280c79633476c5",
-            "name": "FARMACIA RUANO VAZQUEZ",
-            "address": "MUERTE Y VIDA, 2",
-            "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 25,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "70c7e3424d73c39ba3daed6c9b36d844",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1c2c320557d6d0097dff2ad2fda24cb6",
-            "name": "FARMACIA SANTIAGO GARCIA",
-            "address": "CERVANTES, 27",
-            "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 26,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a91096ac1fa37ac690610e3a6f2e440f",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "2e650ecbff2414c4ea06aa0a5ac28b3c",
-            "name": "FARMACIA PALOMO COLLAZO",
-            "address": "JOSE ZORRILLA, 41",
-            "phone": "921 412252",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 27,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "f80d234747fc263b9fe038ea13021b1b",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c5e73344d2be954797c34b66a3616f90",
-            "name": "FARMACIA TAMAYO SANTAMARÍA",
-            "address": "SANTO TOMAS, 5",
-            "phone": "921 435006",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 28,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "e014a2c772016944fb2529aac68ab5c0",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "7ba1c28d4ac103ad12e17525528d5468",
-            "name": "FARMACIA BENAVENT ATIENZA",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 29,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "2e2715a6776463917c95a817a1ce800b",
-            "name": "FARMACIA MATEOS RODRÍGUEZ ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "fec6edf153050f10601c55f6ccfce98e",
-            "name": "FARMACIA MATEOS RODRÍGUEZ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 30,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "404b4634e570f2ae1505e32b23161f16",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "5b2b79ba19e8b07cb746b5fa69f4449a",
-            "name": "FARMACIA HERRERO ISERN",
-            "address": "CARRETERA . VILLACASTIN, 10",
-            "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 31,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "120f2e668781e2ce664cee03fd23d97a",
-            "name": "FARMACIA FERNANDEZ OLALLA ",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "2c4fcaf5fb7a53f96a5c952068737b85",
-            "name": "FARMACIA FERNANDEZ OLALLA",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 1,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "05890784f3f2e3d56e24fadec5c1b195",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "032c127db2e1313ed2fe008e00923953",
-            "name": "FARMACIA RUJAS GÓMEZ",
-            "address": "LARGA, 5",
-            "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 2,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "7ba7eaebee80bf43c82ec6f7fadcb631",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1c9e046c4e0798b65cba8fc7d61a7f13",
-            "name": "FARMACIA GILARRANZ LUENGO",
-            "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
-            "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 3,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "e4f5206b0dbf3c5e7416a657818799c6",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "4424a673209d90eb1876102623774626",
-            "name": "FARMACIA CUÉLLAR BASTERRECHEA",
-            "address": "SANTA CATALINA, 18",
-            "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 4,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "d6c663da25b131b3c024bae812e548b5",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "2dbfc6ae2d936debca58d03a239e9b82",
-            "name": "FARMACIA DE ANTONIO PALOMO",
-            "address": "PLAZA DE ESPRONCEDA  S/N",
-            "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 5,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b38703f7c55d989e8d7320a51e157cb1",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "9604d747e52cbf41659e67e88c8ece38",
-            "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
-            "address": "AVDA. DE LA CONSTITUCION, 5",
-            "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 6,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "deed136f41ace85fb59a759dacd91343",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "4b8f17a9db7b18e88cdecfb7d836cda1",
-            "name": "FARMACIA MARTÍN CANTERO",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 7,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "68fa6f551c967b9ff077a44eab9683fe",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "86b65abcf6fd31df2d897ab913008141",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 8,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "54b9b8e45e123f916abcd0cf863bad17",
-            "name": "FARMACIA ANTÓN ELÓSEGUI ",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "5a8a7ca53c480b48b2011541dfd5404d",
-            "name": "FARMACIA ANTÓN ELÓSEGUI",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 9,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c15dfb2f5d93f9526470ae36f1a5a3a7",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b6e1fdbb9c62c194529aa98c0dfad57b",
-            "name": "FARMACIA GARCÍA GONZÁLEZ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 10,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "a03472d572e2cef45aa6c8692861640e",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b213cd22db9f7fd1c5afa0706d144c40",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 11,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "8dc3a1c2e4c549b70ab7719ac8e86799",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "4eea6e1a6b615ff29bc899cc30477e44",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 12,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "5439514a21753d529e770c5361c1d900",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "4be52829819b5622b4f7008e247c09f2",
-            "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
-            "address": "AVDA. MARQUES DE LOZOYA, 13",
-            "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 13,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "db6ed00341a7fb8582313d5bc07d96d6",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e34434de55ee8c646a50c6174a1f7918",
-            "name": "FARMACIA SANZ DE PABLOS",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 14,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "4952298e046ba79ef0429a7fc1b88790",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "f1824771a9b81e38f08a44a9d6c99795",
-            "name": "FARMACIA PEREZ SOPEÑA",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 15,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "89364961b753a3449d09062a5a3b9b95",
-            "name": "FARMACIA LOPEZ CUERDO ",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "85d6e03b1267967d9a8d79975a804635",
-            "name": "FARMACIA LOPEZ CUERDO",
-            "address": "CORPUS, 1",
-            "phone": "921 462254",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 16,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "c34775b42b2549b9d82e7c8f78e19b4e",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "1191963ba0e5fa105371b22064706a14",
-            "name": "FARMACIA RUANO VAZQUEZ",
-            "address": "MUERTE Y VIDA, 2",
-            "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 17,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b82ac288c32d77c75ecba1a0242ba514",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "59cece6039ad18cd991e98d18e743030",
-            "name": "FARMACIA SANTIAGO GARCIA",
-            "address": "CERVANTES, 27",
-            "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 18,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "ca271e5c155c919a81d6f5a8e80c3150",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "b5078dba712b1f5fdf71d9b5a3d4850f",
-            "name": "FARMACIA PALOMO COLLAZO",
-            "address": "JOSE ZORRILLA, 41",
-            "phone": "921 412252",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 19,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "d1fd9b3ebc5ec716576956abd0701b74",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "fbb20480823664ec5c414ac77ba65e86",
-            "name": "FARMACIA TAMAYO SANTAMARÍA",
-            "address": "SANTO TOMAS, 5",
-            "phone": "921 435006",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 20,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "787616d4671a71288ae1874892fb10e5",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "345d8d8a64496532efd5e6b4e42b4810",
-            "name": "FARMACIA BENAVENT ATIENZA",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 21,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "03b9181be32088a32920c2320423af92",
-            "name": "FARMACIA MATEOS RODRÍGUEZ ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "9c6b3bb03f350c79f003445b30a4867f",
-            "name": "FARMACIA MATEOS RODRÍGUEZ",
-            "address": "SAN FRANCISCO, 9",
-            "phone": "921 428220",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 22,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b533c199059a48ad60649e272e1f1155",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "f8ba5c9ad8355f99dc8f69f6a717826f",
-            "name": "FARMACIA HERRERO ISERN",
-            "address": "CARRETERA . VILLACASTIN, 10",
-            "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 23,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "4eff04ef3ef89c2ab6f0f8e6d5898c13",
-            "name": "FARMACIA FERNANDEZ OLALLA ",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "77916dbe0feeadecf46418fb4eb130b0",
-            "name": "FARMACIA FERNANDEZ OLALLA",
-            "address": "VICENTE ALEIXANDRE, 13",
-            "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 24,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b5b735d8034221760f6cba67bd746d6e",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "6ee31ae58219a7e22f1a62383619a8ba",
-            "name": "FARMACIA RUJAS GÓMEZ",
-            "address": "LARGA, 5",
-            "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 25,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "34acea850ae2b5ddf89db4b3f945b96b",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "cfbe10497ee4db9f335a460ede197b4d",
-            "name": "FARMACIA GILARRANZ LUENGO",
-            "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
-            "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 26,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "adbca1ce1d6ca7c7e757b51ca1c979d2",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "c0b5135bccaf672c21d68908e52aaa98",
-            "name": "FARMACIA CUÉLLAR BASTERRECHEA",
-            "address": "SANTA CATALINA, 18",
-            "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 27,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "005e5b0af781990b52f795b1afb14c61",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "8ea8a6660127deda2c6ec281c8625735",
-            "name": "FARMACIA DE ANTONIO PALOMO",
-            "address": "PLAZA DE ESPRONCEDA  S/N",
-            "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 28,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "e270bae5b70d92bacf05327987e81429",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "5ac4fbccbda43be3fc30aa805b4b13e8",
-            "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
-            "address": "AVDA. DE LA CONSTITUCION, 5",
-            "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 29,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "b774b86fe1cdb49b8ed1062a30d30f89",
-            "name": "FARMACIA MARTÍN CANTERO ",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "fdf189faf63e377d6ef5d7c9ccb974ac",
-            "name": "FARMACIA MARTÍN CANTERO",
-            "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "domingo",
-        "day": 30,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "977550ea096c73ea492982aa31751954",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "cdf768440c9b34675d334507dd41ea54",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 31,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "147df81591b59c7fef2632d5ccfdf200",
-            "name": "FARMACIA ANTÓN ELÓSEGUI ",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "9d7f7bcaf44c2c26abc65c5956bc9dcd",
-            "name": "FARMACIA ANTÓN ELÓSEGUI",
-            "address": "PLAZA SAN JOSÉ, 1",
-            "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 1,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "503d6960d459015ae376b8e53b8a14fb",
-            "name": "FARMACIA GARCÍA GONZÁLEZ ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "83f5062ca6756458fd8c6641e3250b78",
-            "name": "FARMACIA GARCÍA GONZÁLEZ",
-            "address": "JUAN BRAVO, 31",
-            "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 2,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "06dd65eda8a204968218845e3c3945da",
-            "name": "FARMACIA SERRANO VELASCO ",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "e6e0ac1d83df37a7de1115978d3f089a",
-            "name": "FARMACIA SERRANO VELASCO",
-            "address": "CRONISTA LECEA, 6",
-            "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 3,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "4706515d69318b6ba7d1ed2caacbf09d",
-            "name": "FARMACIA BENAVENT ATIENZA ",
-            "address": "JOSE ZORRILLA, 117",
-            "phone": "921 422141",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "4e40d2a2673defb65d3d7948efb4aab3",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 4,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "5626e8bcf2aeff9bcece4f0741da71af",
-            "name": "FARMACIA PEREZ SOPEÑA ",
-            "address": "EZEQUIEL GONZALEZ, 21",
-            "phone": "921 466015",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "d20e3096c69917c5489bd8999351532c",
-            "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
-            "address": "AVDA. MARQUES DE LOZOYA, 13",
-            "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "sábado",
-        "day": 5,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "capitalDay": [
-          {
-            "id": "8db49dd8a1efb5bec940c22a1d5b65e2",
-            "name": "FARMACIA SANZ DE PABLOS ",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ],
-        "capitalNight": [
-          {
-            "id": "699ca6d2720f1d4ba06621313a140460",
-            "name": "FARMACIA SANZ DE PABLOS",
-            "address": "PASEO CONDE SEPULVEDA, 33",
-            "phone": "921 435749",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
     {
       "date": {
         "dayOfWeek": "domingo",
@@ -3046,7 +22,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -3055,7 +33,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -3074,7 +54,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3083,7 +65,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -3102,7 +86,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -3111,7 +97,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -3129,8 +117,10 @@
             "id": "29e8734cd0cbef3a41c5ad53c91d64bb",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3139,7 +129,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -3158,7 +150,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -3167,7 +161,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -3186,7 +182,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -3195,7 +193,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -3214,7 +214,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -3223,7 +225,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -3242,7 +246,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -3251,7 +257,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -3270,7 +278,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3279,7 +289,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -3298,7 +310,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -3307,7 +321,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -3326,7 +342,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -3335,7 +353,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -3353,8 +373,10 @@
             "id": "081226aca16d30be808ea1b6905ed2bf",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3363,7 +385,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -3382,7 +406,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -3391,7 +417,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -3410,7 +438,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -3419,7 +449,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -3437,8 +469,10 @@
             "id": "7dd923bcfec3540325c6fea1e318a465",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3447,7 +481,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -3465,8 +501,10 @@
             "id": "921345512532fdbef5741ffed65b62ef",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3474,8 +512,10 @@
             "id": "f6b954871434c2f58f81e621bf87e6e1",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -3494,7 +534,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3503,7 +545,9 @@
             "name": "FARMACIA USEROS HERNÁNDEZ",
             "address": "STA, TERESA DE JESUS, 24",
             "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -3522,7 +566,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -3531,7 +577,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -3550,7 +598,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -3559,7 +609,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -3578,7 +630,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -3587,7 +641,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -3606,16 +662,20 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
           {
-            "id": "9f7a8d80bd0639e6a576f4e9acbbd38d",
-            "name": "FARMACIA POSTIGO RUBIO",
-            "address": "VIA ROMA, 30",
-            "phone": "921 432583",
-            "additionalInfo": null
+            "id": "42fffd3dc06a5ed1dc89369677e6f5e8",
+            "name": "FARMACIA USEROS HERNÁNDEZ",
+            "address": "STA, TERESA DE JESUS, 24",
+            "phone": "921 421849",
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -3634,7 +694,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -3643,7 +705,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -3662,7 +726,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3671,7 +737,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -3690,7 +758,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -3699,7 +769,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -3717,8 +789,10 @@
             "id": "660771f8bc558d7027994b6d7156cd76",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3727,7 +801,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -3746,7 +822,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -3755,7 +833,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -3774,7 +854,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -3783,7 +865,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -3802,7 +886,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3811,7 +897,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -3830,7 +918,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -3839,7 +929,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -3858,7 +950,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -3867,7 +961,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -3886,7 +982,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -3895,7 +993,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -3914,7 +1014,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -3923,7 +1025,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -3942,7 +1046,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -3951,7 +1057,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -3969,8 +1077,10 @@
             "id": "9fb1576f7157441b32b5cb3e80730e5e",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -3979,7 +1089,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -3998,7 +1110,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -4007,7 +1121,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -4025,8 +1141,10 @@
             "id": "b295ad2313cb3c0f5e217fbad53a5129",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4035,7 +1153,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -4054,7 +1174,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4063,7 +1185,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -4082,7 +1206,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -4091,7 +1217,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -4109,8 +1237,10 @@
             "id": "cec28abfc8a3f5294c855ce50c1e2a78",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4118,8 +1248,10 @@
             "id": "d8c2158f2956f8eaba4b410d1587e79a",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -4138,7 +1270,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4147,7 +1281,9 @@
             "name": "FARMACIA USEROS HERNÁNDEZ",
             "address": "STA, TERESA DE JESUS, 24",
             "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -4166,7 +1302,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -4175,7 +1313,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -4194,7 +1334,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4203,7 +1345,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -4222,7 +1366,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -4231,7 +1377,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -4250,7 +1398,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4259,7 +1409,9 @@
             "name": "FARMACIA POSTIGO RUBIO",
             "address": "VIA ROMA, 30",
             "phone": "921 432583",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -4277,8 +1429,10 @@
             "id": "a2db60492fae0534e7da97a4eb416d29",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4287,7 +1441,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -4306,7 +1462,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4315,7 +1473,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -4334,7 +1494,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -4343,7 +1505,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -4362,7 +1526,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -4371,7 +1537,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -4390,7 +1558,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -4399,7 +1569,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -4418,7 +1590,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4427,7 +1601,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -4446,7 +1622,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4455,7 +1633,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -4474,7 +1654,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4483,7 +1665,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -4502,7 +1686,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -4511,7 +1697,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -4530,7 +1718,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -4539,7 +1729,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -4557,8 +1749,10 @@
             "id": "99e6bc8b80bcec398ad8edb2623f23c4",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4567,7 +1761,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -4586,7 +1782,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -4595,7 +1793,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -4613,8 +1813,10 @@
             "id": "a74702e6dd62c7fa20686062a8184a24",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4623,7 +1825,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -4642,7 +1846,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4651,7 +1857,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -4670,7 +1878,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -4679,7 +1889,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -4698,7 +1910,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -4707,7 +1921,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -4726,7 +1942,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4735,7 +1953,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -4753,8 +1973,10 @@
             "id": "d5e7fb223fa78bbadc354a58d0bedbda",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4762,8 +1984,10 @@
             "id": "339694c6ad9df9f48f695916a2259ecc",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -4782,16 +2006,20 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
           {
-            "id": "156561e3944fbb154afd56ad462a39b4",
-            "name": "FARMACIA USEROS HERNÁNDEZ",
-            "address": "STA, TERESA DE JESUS, 24",
-            "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "id": "97f0c90b9d2f5b36b34b5d2a9a940f36",
+            "name": "FARMACIA POSTIGO RUBIO",
+            "address": "VIA ROMA, 30",
+            "phone": "921 432583",
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -4810,7 +2038,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -4819,7 +2049,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -4838,7 +2070,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -4847,7 +2081,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -4866,7 +2102,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -4875,7 +2113,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -4893,8 +2133,10 @@
             "id": "7ba089c7bb422c9fdf6e7050c2e8a015",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -4903,7 +2145,9 @@
             "name": "FARMACIA POSTIGO RUBIO",
             "address": "VIA ROMA, 30",
             "phone": "921 432583",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -4922,7 +2166,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -4931,7 +2177,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -4950,7 +2198,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -4959,7 +2209,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -4978,7 +2230,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -4987,7 +2241,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -5006,7 +2262,9 @@
             "name": "FARMACIA LOPEZ CUERDO ",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ],
         "capitalNight": [
@@ -5015,7 +2273,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -5034,7 +2294,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -5043,7 +2305,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -5062,7 +2326,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5071,7 +2337,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -5090,7 +2358,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -5099,7 +2369,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -5117,8 +2389,10 @@
             "id": "8773aba63db662a9e684a93e02506e46",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5127,7 +2401,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -5146,7 +2422,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5155,7 +2433,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -5174,7 +2454,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -5183,7 +2465,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -5202,7 +2486,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5211,7 +2497,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -5230,7 +2518,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -5239,7 +2529,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -5258,7 +2550,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5267,7 +2561,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -5286,7 +2582,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -5295,7 +2593,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -5314,7 +2614,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5323,7 +2625,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -5342,7 +2646,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -5351,7 +2657,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -5369,8 +2677,10 @@
             "id": "0d3229d77e7ec5ff6d63989a499ae618",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5379,7 +2689,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -5397,8 +2709,10 @@
             "id": "985706c06e4f3c39f5c61a6f66f91765",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5406,8 +2720,10 @@
             "id": "24a96c19a7c4f462ed5b609afb8c8ec5",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -5426,7 +2742,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5435,7 +2753,9 @@
             "name": "FARMACIA USEROS HERNÁNDEZ",
             "address": "STA, TERESA DE JESUS, 24",
             "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -5454,7 +2774,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -5463,7 +2785,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -5482,7 +2806,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -5491,7 +2817,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -5510,7 +2838,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -5519,7 +2849,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -5538,7 +2870,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -5547,7 +2881,9 @@
             "name": "FARMACIA POSTIGO RUBIO",
             "address": "VIA ROMA, 30",
             "phone": "921 432583",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -5566,7 +2902,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5575,7 +2913,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -5594,7 +2934,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5603,7 +2945,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -5622,7 +2966,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -5631,7 +2977,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -5650,7 +2998,9 @@
             "name": "FARMACIA LOPEZ CUERDO ",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ],
         "capitalNight": [
@@ -5659,7 +3009,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -5678,7 +3030,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -5687,7 +3041,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -5705,8 +3061,10 @@
             "id": "bffc9e8bf3ce4d895933c3d85ef080c0",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5715,7 +3073,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -5734,7 +3094,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5743,7 +3105,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -5762,7 +3126,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -5771,7 +3137,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -5790,7 +3158,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5799,7 +3169,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -5818,7 +3190,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -5827,7 +3201,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -5846,7 +3222,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -5855,7 +3233,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -5874,7 +3254,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -5883,7 +3265,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -5902,7 +3286,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -5911,7 +3297,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -5929,8 +3317,10 @@
             "id": "69f06eb6fb76f6afe5c7ca12c67f2ec0",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5939,7 +3329,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -5958,7 +3350,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -5967,7 +3361,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -5985,8 +3381,10 @@
             "id": "96a2e6e450afda3dab9c3e7b98aa8d72",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -5995,7 +3393,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -6014,7 +3414,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -6023,7 +3425,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -6041,8 +3445,10 @@
             "id": "a6b7ef66c50019a9c5d3823433136e49",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6050,8 +3456,10 @@
             "id": "d1c46023356ab0ad3234f6d83736ebd8",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -6070,7 +3478,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6079,7 +3489,9 @@
             "name": "FARMACIA USEROS HERNÁNDEZ",
             "address": "STA, TERESA DE JESUS, 24",
             "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -6098,7 +3510,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -6107,7 +3521,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -6126,7 +3542,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6135,7 +3553,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -6154,7 +3574,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -6163,7 +3585,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -6182,7 +3606,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6191,7 +3617,9 @@
             "name": "FARMACIA POSTIGO RUBIO",
             "address": "VIA ROMA, 30",
             "phone": "921 432583",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -6210,7 +3638,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6219,7 +3649,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -6238,7 +3670,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6247,7 +3681,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -6266,7 +3702,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -6275,7 +3713,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -6293,8 +3733,10 @@
             "id": "a1284ea440ab3e18242db1054dbbefd5",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6303,7 +3745,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -6322,7 +3766,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6331,7 +3777,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -6350,7 +3798,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -6359,7 +3809,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -6377,8 +3829,10 @@
             "id": "b693ef808037a360d9fbc397a64a1faa",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6387,7 +3841,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -6406,7 +3862,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -6415,7 +3873,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -6434,7 +3894,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -6443,7 +3905,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -6462,7 +3926,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -6471,7 +3937,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -6490,7 +3958,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6499,7 +3969,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -6518,7 +3990,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -6527,7 +4001,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }
@@ -6546,7 +4022,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6555,7 +4033,9 @@
             "name": "FARMACIA RUJAS GÓMEZ",
             "address": "LARGA, 5",
             "phone": "921 441043",
-            "additionalInfo": "(Junto c/ Coronel Rexach)"
+            "additionalInfo": "(Junto c/ Coronel Rexach)",
+            "latitude": 40.945312,
+            "longitude": -4.112813
           }
         ]
       }
@@ -6574,7 +4054,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6583,7 +4065,9 @@
             "name": "FARMACIA GILARRANZ LUENGO",
             "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
             "phone": "921 413045",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.932812,
+            "longitude": -4.099812
           }
         ]
       }
@@ -6601,8 +4085,10 @@
             "id": "2477391822c09a52d4ed83d51b52cf0b",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6611,7 +4097,9 @@
             "name": "FARMACIA CUÉLLAR BASTERRECHEA",
             "address": "SANTA CATALINA, 18",
             "phone": "921 434291",
-            "additionalInfo": "(Junto Pza de S. Lorenzo)"
+            "additionalInfo": "(Junto Pza de S. Lorenzo)",
+            "latitude": 40.952437,
+            "longitude": -4.113313
           }
         ]
       }
@@ -6630,7 +4118,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -6639,7 +4129,9 @@
             "name": "FARMACIA DE ANTONIO PALOMO",
             "address": "PLAZA DE ESPRONCEDA  S/N",
             "phone": "921 437319",
-            "additionalInfo": "(Nueva Sg. junto Mercadona)"
+            "additionalInfo": "(Nueva Sg. junto Mercadona)",
+            "latitude": 40.930188,
+            "longitude": -4.098687
           }
         ]
       }
@@ -6658,7 +4150,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -6667,7 +4161,9 @@
             "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
             "address": "AVDA. DE LA CONSTITUCION, 5",
             "phone": "921 433836",
-            "additionalInfo": "(Junto nuevo Campus Univ.)"
+            "additionalInfo": "(Junto nuevo Campus Univ.)",
+            "latitude": 40.941187,
+            "longitude": -4.113188
           }
         ]
       }
@@ -6685,8 +4181,10 @@
             "id": "21edac47733e6f2c168b08b6eeb26b0d",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6694,8 +4192,10 @@
             "id": "1f297e88931d29510e63b13d76eefa57",
             "name": "FARMACIA MARTÍN CANTERO",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ]
       }
@@ -6714,7 +4214,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6723,7 +4225,9 @@
             "name": "FARMACIA USEROS HERNÁNDEZ",
             "address": "STA, TERESA DE JESUS, 24",
             "phone": "921 421849",
-            "additionalInfo": "(Barrio El Carmen)"
+            "additionalInfo": "(Barrio El Carmen)",
+            "latitude": 40.943687,
+            "longitude": -4.106188
           }
         ]
       }
@@ -6742,7 +4246,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI ",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ],
         "capitalNight": [
@@ -6751,7 +4257,9 @@
             "name": "FARMACIA ANTÓN ELÓSEGUI",
             "address": "PLAZA SAN JOSÉ, 1",
             "phone": "921 423641",
-            "additionalInfo": "(Barrio San José)"
+            "additionalInfo": "(Barrio San José)",
+            "latitude": 40.937687,
+            "longitude": -4.108688
           }
         ]
       }
@@ -6770,7 +4278,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6779,7 +4289,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ]
       }
@@ -6798,7 +4310,9 @@
             "name": "FARMACIA SERRANO VELASCO ",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ],
         "capitalNight": [
@@ -6807,7 +4321,9 @@
             "name": "FARMACIA SERRANO VELASCO",
             "address": "CRONISTA LECEA, 6",
             "phone": "921 460325",
-            "additionalInfo": "(Junto Plaza Mayor)"
+            "additionalInfo": "(Junto Plaza Mayor)",
+            "latitude": 40.950312,
+            "longitude": -4.123062
           }
         ]
       }
@@ -6826,7 +4342,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -6835,7 +4353,9 @@
             "name": "FARMACIA POSTIGO RUBIO",
             "address": "VIA ROMA, 30",
             "phone": "921 432583",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.953187,
+            "longitude": -4.108813
           }
         ]
       }
@@ -6853,8 +4373,10 @@
             "id": "2d3743a76581877d2034365ec6fda171",
             "name": "FARMACIA MARTÍN CANTERO ",
             "address": "Calle Guadarrama, S/N, Segovia",
-            "phone": "921 427270",
-            "additionalInfo": "(Calle Guadarrama S/N)"
+            "phone": "683 396809",
+            "additionalInfo": "(Calle Guadarrama S/N)",
+            "latitude": 40.921813,
+            "longitude": -4.112438
           }
         ],
         "capitalNight": [
@@ -6863,7 +4385,9 @@
             "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
             "address": "AVDA. MARQUES DE LOZOYA, 13",
             "phone": "921 434858",
-            "additionalInfo": "(Bº La Albuera)"
+            "additionalInfo": "(Bº La Albuera)",
+            "latitude": 40.946187,
+            "longitude": -4.103438
           }
         ]
       }
@@ -6882,7 +4406,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6891,7 +4417,9 @@
             "name": "FARMACIA SANZ DE PABLOS",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ]
       }
@@ -6910,7 +4438,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -6919,7 +4449,9 @@
             "name": "FARMACIA PEREZ SOPEÑA",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ]
       }
@@ -6938,7 +4470,9 @@
             "name": "FARMACIA LOPEZ CUERDO ",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ],
         "capitalNight": [
@@ -6947,7 +4481,9 @@
             "name": "FARMACIA LOPEZ CUERDO",
             "address": "CORPUS, 1",
             "phone": "921 462254",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.949438,
+            "longitude": -4.123438
           }
         ]
       }
@@ -6966,7 +4502,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -6975,7 +4513,9 @@
             "name": "FARMACIA RUANO VAZQUEZ",
             "address": "MUERTE Y VIDA, 2",
             "phone": "921 428918",
-            "additionalInfo": "(Frente Academia Artilleria)"
+            "additionalInfo": "(Frente Academia Artilleria)",
+            "latitude": 40.945688,
+            "longitude": -4.117438
           }
         ]
       }
@@ -6994,7 +4534,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -7003,7 +4545,9 @@
             "name": "FARMACIA SANTIAGO GARCIA",
             "address": "CERVANTES, 27",
             "phone": "921 462787",
-            "additionalInfo": "(Junto Acueducto)"
+            "additionalInfo": "(Junto Acueducto)",
+            "latitude": 40.947938,
+            "longitude": -4.118813
           }
         ]
       }
@@ -7022,7 +4566,9 @@
             "name": "FARMACIA PEREZ SOPEÑA ",
             "address": "EZEQUIEL GONZALEZ, 21",
             "phone": "921 466015",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.945688,
+            "longitude": -4.122188
           }
         ],
         "capitalNight": [
@@ -7031,7 +4577,9 @@
             "name": "FARMACIA PALOMO COLLAZO",
             "address": "JOSE ZORRILLA, 41",
             "phone": "921 412252",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.942312,
+            "longitude": -4.115562
           }
         ]
       }
@@ -7050,7 +4598,9 @@
             "name": "FARMACIA SANZ DE PABLOS ",
             "address": "PASEO CONDE SEPULVEDA, 33",
             "phone": "921 435749",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.939187,
+            "longitude": -4.115313
           }
         ],
         "capitalNight": [
@@ -7059,7 +4609,9 @@
             "name": "FARMACIA TAMAYO SANTAMARÍA",
             "address": "SANTO TOMAS, 5",
             "phone": "921 435006",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.943188,
+            "longitude": -4.118188
           }
         ]
       }
@@ -7078,7 +4630,9 @@
             "name": "FARMACIA BENAVENT ATIENZA ",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ],
         "capitalNight": [
@@ -7087,7 +4641,9 @@
             "name": "FARMACIA BENAVENT ATIENZA",
             "address": "JOSE ZORRILLA, 117",
             "phone": "921 422141",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.937687,
+            "longitude": -4.113563
           }
         ]
       }
@@ -7106,7 +4662,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ],
         "capitalNight": [
@@ -7115,7 +4673,9 @@
             "name": "FARMACIA MATEOS RODRÍGUEZ",
             "address": "SAN FRANCISCO, 9",
             "phone": "921 428220",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 40.947312,
+            "longitude": -4.117937
           }
         ]
       }
@@ -7134,7 +4694,9 @@
             "name": "FARMACIA GARCÍA GONZÁLEZ ",
             "address": "JUAN BRAVO, 31",
             "phone": "921 463165",
-            "additionalInfo": "(Junto Casa de los Picos)"
+            "additionalInfo": "(Junto Casa de los Picos)",
+            "latitude": 40.948063,
+            "longitude": -4.120688
           }
         ],
         "capitalNight": [
@@ -7143,7 +4705,9 @@
             "name": "FARMACIA HERRERO ISERN",
             "address": "CARRETERA . VILLACASTIN, 10",
             "phone": "921 427938",
-            "additionalInfo": "(Frente Estación Ferrocarril)"
+            "additionalInfo": "(Frente Estación Ferrocarril)",
+            "latitude": 40.933438,
+            "longitude": -4.114438
           }
         ]
       }
@@ -7162,7 +4726,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA ",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ],
         "capitalNight": [
@@ -7171,7 +4737,9 @@
             "name": "FARMACIA FERNANDEZ OLALLA",
             "address": "VICENTE ALEIXANDRE, 13",
             "phone": "921 442366",
-            "additionalInfo": "(Nueva Segovia)"
+            "additionalInfo": "(Nueva Segovia)",
+            "latitude": 40.930688,
+            "longitude": -4.101437
           }
         ]
       }

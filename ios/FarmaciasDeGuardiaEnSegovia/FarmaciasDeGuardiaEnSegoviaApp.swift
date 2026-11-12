@@ -112,9 +112,6 @@ struct FarmaciasDeGuardiaEnSegoviaApp: App {
     }
     
     private func initializeApp() {
-        // Perform coordinate cache maintenance (already done in preload)
-        GeocodingService.performMaintenanceCleanup()
-
         // Clean up expired validation and route caches
         PDFURLValidator.shared.clearExpiredCache()
 

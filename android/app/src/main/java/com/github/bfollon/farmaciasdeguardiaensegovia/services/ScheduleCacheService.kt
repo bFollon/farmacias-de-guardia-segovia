@@ -38,8 +38,11 @@ class ScheduleCacheService(private val context: Context) {
      * from multi-location to single-location cache entries (client-offline-sync migration) -
      * old caches don't decode into the new Pharmacy/PharmacySchedule shapes anyway, so the
      * version bump forces them to be discarded.
+     * Version 4: Pharmacy gained latitude/longitude. A cache written by an older build at the
+     * same server version silently lacks them, and the version-equality check in the sync
+     * would never refetch it - so those caches must be discarded.
      */
-    private val CURRENT_CACHE_VERSION = 3
+    private val CURRENT_CACHE_VERSION = 4
 
     private val cacheDir = File(context.filesDir, "schedules")
     private val json = Json {

@@ -41,20 +41,7 @@ struct PharmacyView: View {
     
     private func openInMaps(using app: MapApp) {
         AnalyticsService.shared.track("open_in_maps_tapped", with: ["map_app": app.rawValue])
-        let query = "\(pharmacy.name), \(pharmacy.address), Segovia, Spain"
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        var urlString: String
-        switch app {
-        case .apple:
-            urlString = "maps://?q=\(query)"
-        case .google:
-            urlString = "comgooglemaps://?q=\(query)"
-        case .waze:
-            urlString = "waze://?q=\(query)"
-        }
-        
-        if let url = URL(string: urlString) {
+        if let url = app.url(for: pharmacy) {
             UIApplication.shared.open(url)
         }
     }

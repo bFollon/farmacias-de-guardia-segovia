@@ -1,0 +1,499 @@
+[
+  {
+    "name": "Farmacia Carmen Bautista",
+    "address": "C. Inge Martín Gil, 10, 40320 Cantalejo, Segovia",
+    "locationId": "cantalejo",
+    "latitude": 41.258313,
+    "longitude": -3.928312
+  },
+  {
+    "name": "Farmacia en Cantalejo",
+    "address": "C. Frontón, 15, 40320 Cantalejo, Segovia",
+    "locationId": "cantalejo",
+    "latitude": 41.257188,
+    "longitude": -3.926562
+  },
+  {
+    "name": "Farmacia Carbonero",
+    "address": "Pl. Pósito Real, 1, 40270 Carbonero el Mayor, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.122063,
+    "longitude": -4.264563
+  },
+  {
+    "name": "Farmacia Carmen I. Tomero Díez",
+    "address": "Pl. Mayor, 2, 40280 Navalmanzano, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.214562,
+    "longitude": -4.256813
+  },
+  {
+    "name": "Farmacia Enrique Covisa Nager",
+    "address": "Pl. Mayor, 17, 40360 Cantimpalos, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.074438,
+    "longitude": -4.158313
+  },
+  {
+    "name": "Farmacia GILSANZ",
+    "address": "Pl. Mayor, 40291 Escarabajosa de Cabezas, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.104187,
+    "longitude": -4.194438
+  },
+  {
+    "name": "Farmacia Isabel Frías López",
+    "address": "C. Real, 16-18, 40250 Mozoncillo, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.146562,
+    "longitude": -4.186188
+  },
+  {
+    "name": "Farmacia Lda. Patricia Avellón Senovilla",
+    "address": "C. Santillana, 3, 40260 Fuentepelayo, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.220437,
+    "longitude": -4.175187
+  },
+  {
+    "name": "Farmacia Maria Sol Benito Sanz",
+    "address": "C/ Caño, 7, 40293 Zarzuela del Pinar (Segovia)",
+    "locationId": "carbonero",
+    "latitude": 41.26087827861269,
+    "longitude": -4.18402844798964
+  },
+  {
+    "name": "Farmacia Matilde García García",
+    "address": "C. de la Cruz, 6, 40350 Escalona del Prado, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.166187,
+    "longitude": -4.123438
+  },
+  {
+    "name": "Farmacia Miriam Chamorro García",
+    "address": "Av. del Escultor D. Florentino Trapero, 5, 40340 Aguilafuente, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.226562,
+    "longitude": -4.113188
+  },
+  {
+    "name": "Farmacia Mª Antonia Sacristán Rodríguez",
+    "address": "C. Rincón, 3, 40352 Lastras de Cuéllar, Segovia",
+    "locationId": "carbonero",
+    "latitude": 41.298063,
+    "longitude": -4.104313
+  },
+  {
+    "name": "Farmacia Fernando Redondo",
+    "address": "Av. Camilo Jose Cela, 46, 40200 Cuéllar, Segovia",
+    "locationId": "cuellar",
+    "latitude": 41.396562,
+    "longitude": -4.307563
+  },
+  {
+    "name": "Farmacia Ldo. César Cabrerizo Izquierdo",
+    "address": "Calle Sta. Marina, 5, 40200 Cuéllar, Segovia",
+    "locationId": "cuellar",
+    "latitude": 41.400188,
+    "longitude": -4.313812
+  },
+  {
+    "name": "Farmacia Ldo. Fco. Javier Alcaraz García de la Barrera",
+    "address": "C. Resina, 14, 40200 Cuéllar, Segovia",
+    "locationId": "cuellar",
+    "latitude": 41.398938,
+    "longitude": -4.310562
+  },
+  {
+    "name": "Farmacia San Andrés",
+    "address": "Ctra. Bahabón, 9, 40200 Cuéllar, Segovia",
+    "locationId": "cuellar",
+    "latitude": 41.404312,
+    "longitude": -4.318812
+  },
+  {
+    "name": "FARMACIA ANA MARÍA APARICIO HERNAN",
+    "address": "Av. Hontanilla, 18, 40400 El Espinar, Segovia",
+    "locationId": "el-espinar",
+    "latitude": 40.717187,
+    "longitude": -4.246188
+  },
+  {
+    "name": "Farmacia Lda M J. Bartolomé Sánchez",
+    "address": "C. Marqués de Perales, 2, 40400 El Espinar, Segovia",
+    "locationId": "el-espinar",
+    "latitude": 40.719062,
+    "longitude": -4.247563
+  },
+  {
+    "name": "Farmacia San Rafael",
+    "address": "Tr.ª Alto del León, 19, 40410 San Rafael, Segovia",
+    "locationId": "el-espinar",
+    "latitude": 40.713187,
+    "longitude": -4.187188
+  },
+  {
+    "name": "Dr. Jesús Santos del Cura",
+    "address": "C. Real, 3, 40220 Olombrada, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.415437,
+    "longitude": -4.159563
+  },
+  {
+    "name": "Farmacia Fuentidueña",
+    "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.443188,
+    "longitude": -3.981812
+  },
+  {
+    "name": "Farmacia Gloria Hernando Bayón",
+    "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.492437,
+    "longitude": -3.961562
+  },
+  {
+    "name": "Farmacia Lcdo Burgos Burgos Isabel",
+    "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.345938,
+    "longitude": -4.122438
+  },
+  {
+    "name": "Farmacia Lcdo Gallego Esteban Fernando",
+    "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.37411699524201,
+    "longitude": -4.039258640265552
+  },
+  {
+    "name": "Farmacia Paloma María Prieto Pérez",
+    "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
+    "locationId": "fuentiduena",
+    "latitude": 41.424813,
+    "longitude": -4.060938
+  },
+  {
+    "name": "Farmacia Almudena Martínez Pardo del Valle",
+    "address": "Plaza los de Dolores, 7, 40100 Real Sitio de San Ildefonso, Segovia",
+    "locationId": "la-granja",
+    "latitude": 40.900437,
+    "longitude": -4.005813
+  },
+  {
+    "name": "Farmacia Cristina Mínguez Del Pozo",
+    "address": "C. Valenciana, 3, BAJO, 40100 Real Sitio de San Ildefonso, Segovia",
+    "locationId": "la-granja",
+    "latitude": 40.899938,
+    "longitude": -4.006438
+  },
+  {
+    "name": "Farmacia Ana Belén Tomero Díez",
+    "address": "Calle Pl., 18, 40165 Prádena, Segovia",
+    "locationId": "la-sierra",
+    "latitude": 41.138062,
+    "longitude": -3.688062
+  },
+  {
+    "name": "Farmacia Lda. Mónica Carrasco Herrero",
+    "address": "Travesia la Fragua, 16, 40171 Torre Val de San Pedro, Segovia",
+    "locationId": "la-sierra",
+    "latitude": 41.073063,
+    "longitude": -3.870688
+  },
+  {
+    "name": "Farmacia Martín Cuesta",
+    "address": "C. la Reina, 0, 40161 Navafría, Segovia",
+    "locationId": "la-sierra",
+    "latitude": 41.055437,
+    "longitude": -3.825187
+  },
+  {
+    "name": "Farmacia Teresa Laporta Sánchez",
+    "address": "Pl. Mayor, 3, 40164 Arcones, Segovia",
+    "locationId": "la-sierra",
+    "latitude": 41.118313,
+    "longitude": -3.724312
+  },
+  {
+    "name": "Farmacia Ana Isabel Maroto Arenas",
+    "address": "Pl. Arco, 2, 40480 Coca, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.216687,
+    "longitude": -4.521687
+  },
+  {
+    "name": "Farmacia Cubero. Gdo. Sergio Cubero de Blas",
+    "address": "C. Libertad, 1, 40470 Navas de Oro, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.196187,
+    "longitude": -4.438313
+  },
+  {
+    "name": "Farmacia Lcdo Casado Rata Coral",
+    "address": "Pl. Mayor, 8, 40430 Bernardos, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.128438,
+    "longitude": -4.350187
+  },
+  {
+    "name": "Farmacia Lda Amparo Maroto Gomez",
+    "address": "Pl. Iglesia, 5, 40460 Santiuste de San Juan Bautista, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.157313,
+    "longitude": -4.571312
+  },
+  {
+    "name": "Farmacia Ldo. Vicente Rebollo Antolín Javier",
+    "address": "C. de Elías Vírseda, 3, 40450 Nava de la Asunción, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.155437,
+    "longitude": -4.487438
+  },
+  {
+    "name": "Farmacia María Dolores Gómez Roán",
+    "address": "Calle Ayuntamiento, 12, 40447 Nieva, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.081812,
+    "longitude": -4.426187
+  },
+  {
+    "name": "Farmacia Pilar Tribiño Mendiola",
+    "address": "Pl. Mayor, 11, 40440 Santa María la Real de Nieva, Segovia",
+    "locationId": "navas-asuncion",
+    "latitude": 41.070313,
+    "longitude": -4.406063
+  },
+  {
+    "name": "Farmacia César Fernando Gutiérrez Miguel",
+    "address": "C. Ricardo Provencio, 16, 40500 Riaza, Segovia",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.278688,
+    "longitude": -3.478062
+  },
+  {
+    "name": "Farmacia Francisco Ruiz Carrasco",
+    "address": "Pl. España, 16, 40300 Sepúlveda, Segovia",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.297062,
+    "longitude": -3.748313
+  },
+  {
+    "name": "Farmacia Irigoyen",
+    "address": "C. Escuelas, 5, 42330 San Esteban de Gormaz, Soria",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.573313,
+    "longitude": -3.201812
+  },
+  {
+    "name": "Farmacia Lcda Mª del Pilar Villas Miguel",
+    "address": "C. Bayona, 21, 40560 Boceguillas, Segovia",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.337188,
+    "longitude": -3.640688
+  },
+  {
+    "name": "Farmacia Luis de la Peña Buquerin",
+    "address": "Plaza Mayor, 12, 40520 Ayllón, Segovia",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.419438,
+    "longitude": -3.376687
+  },
+  {
+    "name": "Farmacia Mario Caballero Serrano",
+    "address": "C. Real, 2, 40591 Cerezo de Abajo, Segovia",
+    "locationId": "riaza-sepulveda",
+    "latitude": 41.218188,
+    "longitude": -3.590813
+  },
+  {
+    "name": "FARMACIA ANTÓN ELÓSEGUI",
+    "address": "PLAZA SAN JOSÉ, 1",
+    "locationId": "segovia-capital",
+    "latitude": 40.937687,
+    "longitude": -4.108688
+  },
+  {
+    "name": "FARMACIA BENAVENT ATIENZA",
+    "address": "JOSE ZORRILLA, 117",
+    "locationId": "segovia-capital",
+    "latitude": 40.937687,
+    "longitude": -4.113563
+  },
+  {
+    "name": "FARMACIA CUÉLLAR BASTERRECHEA",
+    "address": "SANTA CATALINA, 18",
+    "locationId": "segovia-capital",
+    "latitude": 40.952437,
+    "longitude": -4.113313
+  },
+  {
+    "name": "FARMACIA DE ANTONIO PALOMO",
+    "address": "PLAZA DE ESPRONCEDA S/N",
+    "locationId": "segovia-capital",
+    "latitude": 40.930188,
+    "longitude": -4.098687
+  },
+  {
+    "name": "FARMACIA DE ELÍAS HERNÁNDEZ",
+    "address": "AVDA. DE LA CONSTITUCION, 5",
+    "locationId": "segovia-capital",
+    "latitude": 40.941187,
+    "longitude": -4.113188
+  },
+  {
+    "name": "FARMACIA FERNANDEZ OLALLA",
+    "address": "VICENTE ALEIXANDRE, 13",
+    "locationId": "segovia-capital",
+    "latitude": 40.930688,
+    "longitude": -4.101437
+  },
+  {
+    "name": "FARMACIA GARCÍA GONZÁLEZ",
+    "address": "JUAN BRAVO, 31",
+    "locationId": "segovia-capital",
+    "latitude": 40.948063,
+    "longitude": -4.120688
+  },
+  {
+    "name": "FARMACIA GILARRANZ LUENGO",
+    "address": "PLAZA TIRSO DE MOLINA, 3-, 4",
+    "locationId": "segovia-capital",
+    "latitude": 40.932812,
+    "longitude": -4.099812
+  },
+  {
+    "name": "FARMACIA HERRERO ISERN",
+    "address": "CARRETERA . VILLACASTIN, 10",
+    "locationId": "segovia-capital",
+    "latitude": 40.933438,
+    "longitude": -4.114438
+  },
+  {
+    "name": "FARMACIA LOPEZ CUERDO",
+    "address": "CORPUS, 1",
+    "locationId": "segovia-capital",
+    "latitude": 40.949438,
+    "longitude": -4.123438
+  },
+  {
+    "name": "FARMACIA MARTÍN CANTERO",
+    "address": "Calle Guadarrama, S/N, Segovia",
+    "locationId": "segovia-capital",
+    "latitude": 40.921813,
+    "longitude": -4.112438
+  },
+  {
+    "name": "FARMACIA MATEOS RODRÍGUEZ",
+    "address": "SAN FRANCISCO, 9",
+    "locationId": "segovia-capital",
+    "latitude": 40.947312,
+    "longitude": -4.117937
+  },
+  {
+    "name": "FARMACIA PALOMO COLLAZO",
+    "address": "JOSE ZORRILLA, 41",
+    "locationId": "segovia-capital",
+    "latitude": 40.942312,
+    "longitude": -4.115562
+  },
+  {
+    "name": "FARMACIA PEREZ SOPEÑA",
+    "address": "EZEQUIEL GONZALEZ, 21",
+    "locationId": "segovia-capital",
+    "latitude": 40.945688,
+    "longitude": -4.122188
+  },
+  {
+    "name": "FARMACIA POSTIGO RUBIO",
+    "address": "VIA ROMA, 30",
+    "locationId": "segovia-capital",
+    "latitude": 40.953187,
+    "longitude": -4.108813
+  },
+  {
+    "name": "FARMACIA RODRÍGUEZ DEL FRESNO",
+    "address": "AVDA. MARQUES DE LOZOYA, 13",
+    "locationId": "segovia-capital",
+    "latitude": 40.946187,
+    "longitude": -4.103438
+  },
+  {
+    "name": "FARMACIA RUANO VAZQUEZ",
+    "address": "MUERTE Y VIDA, 2",
+    "locationId": "segovia-capital",
+    "latitude": 40.945688,
+    "longitude": -4.117438
+  },
+  {
+    "name": "FARMACIA RUJAS GÓMEZ",
+    "address": "LARGA, 5",
+    "locationId": "segovia-capital",
+    "latitude": 40.945312,
+    "longitude": -4.112813
+  },
+  {
+    "name": "FARMACIA SANTIAGO GARCIA",
+    "address": "CERVANTES, 27",
+    "locationId": "segovia-capital",
+    "latitude": 40.947938,
+    "longitude": -4.118813
+  },
+  {
+    "name": "FARMACIA SANZ DE PABLOS",
+    "address": "PASEO CONDE SEPULVEDA, 33",
+    "locationId": "segovia-capital",
+    "latitude": 40.939187,
+    "longitude": -4.115313
+  },
+  {
+    "name": "FARMACIA SERRANO VELASCO",
+    "address": "CRONISTA LECEA, 6",
+    "locationId": "segovia-capital",
+    "latitude": 40.950312,
+    "longitude": -4.123062
+  },
+  {
+    "name": "FARMACIA TAMAYO SANTAMARÍA",
+    "address": "SANTO TOMAS, 5",
+    "locationId": "segovia-capital",
+    "latitude": 40.943188,
+    "longitude": -4.118188
+  },
+  {
+    "name": "FARMACIA USEROS HERNÁNDEZ",
+    "address": "STA, TERESA DE JESUS, 24",
+    "locationId": "segovia-capital",
+    "latitude": 40.943687,
+    "longitude": -4.106188
+  },
+  {
+    "name": "Farmacia Cristina Herradón Gil-Gallardo",
+    "address": "Calle Iglesia, 18, 40150 Villacastín, Segovia",
+    "locationId": "villacastin",
+    "latitude": 40.780688,
+    "longitude": -4.411562
+  },
+  {
+    "name": "Farmacia María A. Reviriego Morcuende",
+    "address": "Av. San Antonio, 2, 40152 Zarzuela del Monte, Segovia",
+    "locationId": "villacastin",
+    "latitude": 40.806938,
+    "longitude": -4.335562
+  },
+  {
+    "name": "Farmacia María José Martín Barguilla",
+    "address": "C. Diana, 21, 40408 Navas de San Antonio, Segovia",
+    "locationId": "villacastin",
+    "latitude": 40.758687,
+    "longitude": -4.329937
+  },
+  {
+    "name": "Farmacia Noelia Guerra García",
+    "address": "Calle Vilorio, 8, 05291 Maello, Ávila",
+    "locationId": "villacastin",
+    "latitude": 40.808813,
+    "longitude": -4.509563
+  }
+]

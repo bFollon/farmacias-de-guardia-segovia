@@ -81,7 +81,6 @@ PDFProcessingService (coordinator)
 **Cache Maintenance:**
 - Automatic cleanup on app startup (`FarmaciasDeGuardiaEnSegoviaApp.swift:65-76`)
 - PDF URL validation cache: cleared on app start
-- Coordinate cache: maintenance via GeocodingService
 
 ### Region Data Model
 
@@ -171,9 +170,18 @@ Main methods:
 ### ClosestPharmacyService (Location-Based Routing)
 **iOS**: `ios/FarmaciasDeGuardiaEnSegovia/Services/ClosestPharmacyService.swift`
 
-- Geocoding with caching: `GeocodingService` + `CoordinateCache`
+- Pharmacy coordinates: read from the synced `Pharmacy.latitude`/`longitude` (see "Pharmacy Coordinates Catalog" below). There is no on-device geocoding; an on-duty pharmacy without coordinates is skipped in the search, and if none have any the search throws `pharmacyLocationsUnavailable`
 - Route caching: `RouteCacheService` stores Apple/Google Maps routing data
 - Platform-agnostic routing: Supports Apple Maps and Google Maps
+
+### Pharmacy Coordinates Catalog
+
+Pharmacy coordinates are hand-maintained on the server, not geocoded on the device (`GeocodingService`/`CoordinateCache` were removed from both apps).
+
+- **Source of truth:** `server/catalog/pharmacies.json` — one entry per pharmacy (name, address, `locationId`, `latitude`, `longitude`), 71 at the time of writing. Matching against the parsed schedules is on name + address, normalized (case, accents and whitespace ignored) — the per-entry `id` is a hash that changes every parse, so it can't be the key.
+- **Publishing:** `publishLocationSchedule` (`server/src/publish.ts`) merges the coordinates into every pharmacy entry as optional `latitude`/`longitude`, so the endpoints and payload shape stay backward compatible: older app builds ignore the extra keys. Refresh responses and the server log list pharmacies missing from the catalog under `uncataloged` — a pharmacy renamed in the source PDF shows up there until its new name/address is added.
+- **Editing:** fill in `latitude`/`longitude`, or put a Plus Code in an entry's `plusCode` and run `npm run resolve-plus-codes` in `server/` (decodes it in place and removes the key). Then `POST /api/admin/apply-catalog` (`RELOAD_KEY`) republishes with a `version` bump only for locations whose coordinates changed. Coordinates outside the province of Segovia are ignored with a warning (usually a dropped minus sign). Re-export the bundled day-zero JSON (`npm run export-bundled-schedules`) after catalog changes so first launch has coordinates too.
+- **Clients:** `Pharmacy` has optional `latitude`/`longitude` (nullable with defaults, so schedules cached by older builds still decode). "Open in maps" uses them when present — iOS `MapApp.url(for:)`, Android `Pharmacy.coordinatesGeoUri()` — and falls back to the old text query (name + address) when absent.
 
 ### Debug Configuration
 
@@ -281,6 +289,7 @@ When implementing features:
   - `address: String`
   - `phone: String?`
   - `formattedPhone: String` (computed)
+  - `latitude: Double?`, `longitude: Double?` (from the server's coordinates catalog)
 - **DutyDate**: Date representation with Spanish month parsing
 - **DutyTimeSpan**: Shift types (`.capitalDay`, `.capitalNight`, `.fullDay`)
 - **ZBSSchedule**: Segovia Rural specific - healthcare area schedules

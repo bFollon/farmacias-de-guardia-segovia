@@ -18,7 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Region
-import com.github.bfollon.farmaciasdeguardiaensegovia.services.CoordinateCache
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.DebugConfig
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.MonitoringPreferencesService
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.NetworkMonitor
@@ -59,11 +58,9 @@ class MainActivity : ComponentActivity() {
         NetworkMonitor.initialize(this)
 
         // Initialize caches and cleanup expired entries
-        CoordinateCache.initialize(this)
         RouteCache.initialize(this)
 
         // Cleanup expired cache entries on app start
-        CoordinateCache.cleanupExpiredEntries()
         RouteCache.cleanupExpiredEntries()
 
         // Initialize monitoring preferences service

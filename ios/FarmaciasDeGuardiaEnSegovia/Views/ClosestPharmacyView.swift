@@ -483,21 +483,7 @@ struct ClosestPharmacyResultView: View {
     }
     
     private func openInMaps(using app: MapApp) {
-        // Use enhanced query with pharmacy name (same as PharmacyView.swift)
-        let query = "\(result.pharmacy.name), \(result.pharmacy.address), Segovia, Spain"
-        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        var urlString: String
-        switch app {
-        case .apple:
-            urlString = "maps://?q=\(encodedQuery)"
-        case .google:
-            urlString = "comgooglemaps://?q=\(encodedQuery)"
-        case .waze:
-            urlString = "waze://?q=\(encodedQuery)"
-        }
-        
-        if let url = URL(string: urlString) {
+        if let url = app.url(for: result.pharmacy) {
             openURL(url)
         }
     }

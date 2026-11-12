@@ -10,6 +10,8 @@ export const config = {
    * a republish. Matches InterSegoService's RELOAD_KEY. */
   reloadKey: process.env.RELOAD_KEY ?? "",
   dataDir: process.env.DATA_DIR ?? new URL("../data/schedules", import.meta.url).pathname,
+  /** Hand-maintained pharmacy coordinates, merged into schedules at publish time. */
+  catalogPath: process.env.CATALOG_PATH ?? new URL("../catalog/pharmacies.json", import.meta.url).pathname,
 };
 
 if (process.env.NODE_ENV === "production") {

@@ -24,6 +24,10 @@ public struct Pharmacy: Identifiable, Codable {
     public let address: String
     public let phone: String
     public let additionalInfo: String?
+    /// From the server's pharmacy catalog. Absent for pharmacies the catalog doesn't cover
+    /// yet, and in schedules cached by older app versions.
+    public let latitude: Double?
+    public let longitude: Double?
 
     public var formattedPhone: String {
         let cleanNumber = phone.replacingOccurrences(of: " ", with: "")
@@ -41,31 +45,22 @@ public struct Pharmacy: Identifiable, Codable {
         return result.trimmingCharacters(in: .whitespaces)
     }
 
-    public init(id: String, name: String, address: String, phone: String, additionalInfo: String?) {
+    public init(id: String, name: String, address: String, phone: String, additionalInfo: String?, latitude: Double? = nil, longitude: Double? = nil) {
         self.id = id
         self.name = name
         self.address = address
         self.phone = phone
         self.additionalInfo = additionalInfo
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }
 
 // MARK: - Location Extensions
 extension Pharmacy {
-    /// Calculate distance from user location to this pharmacy
-    func distance(from userLocation: CLLocation) async -> CLLocationDistance? {
-        guard let pharmacyLocation = await GeocodingService.getCoordinatesForPharmacy(self) else {
-            DebugConfig.debugPrint("❌ Could not geocode pharmacy address: \(self.address)")
-            return nil
-        }
-        
-        let distance = userLocation.distance(from: pharmacyLocation)
-        DebugConfig.debugPrint("📏 Distance to \(self.name): \(Int(distance))m")
-        return distance
-    }
-    
-    /// Get coordinates for this pharmacy
-    func coordinates() async -> CLLocation? {
-        return await GeocodingService.getCoordinatesForPharmacy(self)
+    /// The pharmacy's position, or nil when the server's catalog has no coordinates for it.
+    var location: CLLocation? {
+        guard let latitude, let longitude else { return nil }
+        return CLLocation(latitude: latitude, longitude: longitude)
     }
 }

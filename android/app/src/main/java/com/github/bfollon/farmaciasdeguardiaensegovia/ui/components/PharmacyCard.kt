@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.data.Pharmacy
+import com.github.bfollon.farmaciasdeguardiaensegovia.data.coordinatesGeoUri
 import com.github.bfollon.farmaciasdeguardiaensegovia.services.AnalyticsService
 import com.github.bfollon.farmaciasdeguardiaensegovia.ui.theme.Spacing
 import java.net.URLEncoder
@@ -162,8 +163,9 @@ fun PharmacyCard(
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
                         AnalyticsService.track("open_in_maps_tapped")
-                        val encodedQuery = buildMapsQuery(pharmacy.name, pharmacy.address)
-                        val intent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$encodedQuery".toUri())
+                        val uri = pharmacy.coordinatesGeoUri()
+                            ?: "geo:0,0?q=${buildMapsQuery(pharmacy.name, pharmacy.address)}".toUri()
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
                         context.startActivity(intent)
                     }
                 )

@@ -3,7 +3,7 @@ import type { FastifyInstance, FastifyReply } from "fastify";
 import { requireReloadKey } from "../plugins/auth.js";
 import { isLocationId } from "../types.js";
 import { scheduleStore } from "../store.js";
-import { publishLocationSchedule } from "../publish.js";
+import { applyCatalogToPublished, publishLocationSchedule } from "../publish.js";
 import { REGION_PARSERS } from "../parsers/index.js";
 import { isRuralZbsId, parseAllRuralZbs, RURAL_SOURCE_PDF_URL, RURAL_ZBS_IDS } from "../parsers/rural.js";
 import { resolvePdfUrl, type RegionId } from "../scraping/pdfUrlScraper.js";
@@ -92,7 +92,7 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply, forc
   }
 
   const nextVersion = (previous?.version ?? 0) + 1;
-  await publishLocationSchedule({
+  const { uncataloged } = await publishLocationSchedule({
     locationId,
     regionId: parser.regionId,
     sourcePdfUrl,
@@ -104,7 +104,7 @@ async function refreshSingleRegion(locationId: string, reply: FastifyReply, forc
     schedules,
   });
 
-  return { published: true, version: nextVersion, scheduleCount: schedules.length };
+  return { published: true, version: nextVersion, scheduleCount: schedules.length, uncataloged };
 }
 
 /**
@@ -158,10 +158,11 @@ async function refreshRural(reply: FastifyReply, force: boolean) {
   }
 
   const publishedVersions: Record<string, number> = {};
+  const uncataloged = new Set<string>();
   for (const zbsId of RURAL_ZBS_IDS) {
     const zbsPrevious = scheduleStore.get(zbsId);
     const nextVersion = (zbsPrevious?.version ?? 0) + 1;
-    await publishLocationSchedule({
+    const published = await publishLocationSchedule({
       locationId: zbsId,
       regionId: "segovia-rural",
       sourcePdfUrl,
@@ -173,9 +174,10 @@ async function refreshRural(reply: FastifyReply, force: boolean) {
       schedules: schedulesByZbs[zbsId] ?? [],
     });
     publishedVersions[zbsId] = nextVersion;
+    for (const pharmacy of published.uncataloged) uncataloged.add(pharmacy);
   }
 
-  return { published: true, versions: publishedVersions };
+  return { published: true, versions: publishedVersions, uncataloged: [...uncataloged].sort() };
 }
 
 export async function adminRoutes(app: FastifyInstance): Promise<void> {
@@ -183,6 +185,11 @@ export async function adminRoutes(app: FastifyInstance): Promise<void> {
     const result = await scheduleStore.reload();
     return result;
   });
+
+  // Re-applies catalog/pharmacies.json to the already-published schedules (bumping `version`
+  // only where coordinates changed), so a coordinate edit reaches clients without waiting
+  // for the source PDFs to change.
+  app.post("/api/admin/apply-catalog", { preHandler: requireReloadKey }, async () => applyCatalogToPublished());
 
   app.post<{ Params: { locationId: string }; Querystring: { force?: string } }>(
     "/api/refresh/:locationId",

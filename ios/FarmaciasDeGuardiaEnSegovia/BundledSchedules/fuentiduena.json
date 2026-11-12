@@ -1,1324 +1,13 @@
 {
   "locationId": "fuentiduena",
   "regionId": "segovia-rural",
-  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/08/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
-  "sourcePdfSha256": "3a2453696ee6622a5c53a9fb9b882d6281c94cc426aab5737279b89ef814567f",
-  "sourcePdfLastModified": "Thu, 06 Aug 2026 09:03:07 GMT",
-  "sourcePdfEtag": "\"6a744dcb-163bf1\"",
-  "parsedAt": "2026-08-23T13:49:04.452Z",
-  "version": 1,
+  "sourcePdfUrl": "https://cofsegovia.com/wp-content/uploads/2026/10/SERVICIOS-DE-URGENCIA-RURALES-2026.pdf",
+  "sourcePdfSha256": "029122d2a2a5fa019a01bcae5b67c60a989f5f8819d51b054c413be984cbe4b2",
+  "sourcePdfLastModified": "Fri, 23 Oct 2026 08:41:59 GMT",
+  "sourcePdfEtag": "\"6adb1dd7-163c1b\"",
+  "parsedAt": "2026-10-23T18:00:07.816Z",
+  "version": 6,
   "schedules": [
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 13,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "0e1239a8071369ceab8d5818b7c979f4",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 14,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c2cd4f8ac26e6715117cda2cd668d114",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 15,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "5655594dbe43d6b522ea2674988bf769",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 16,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "68910a837d479ba2975aace9a0a4ee23",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 17,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "15eaf382c0db4b92e79404d161922bd4",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 20,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "042ce5c2ba0f1e25f747f2ff71dd6270",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 21,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "eef179976497c28cd2d7b6181d011fa0",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 22,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "9e03d720a220b6bff02f9f0becfaa016",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 23,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "982d21f84b312b41fe483f84a5b97f02",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 24,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "29b26c9bb8ea61067307ec4e79a2a643",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 27,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "2212ead8d399236de08b407f37d9b8c5",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 28,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "140816d195472a2b4e4f570010d9e7ad",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 29,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "bf540f2379799257ed1ed1ba885216d6",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 30,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "26cb1a78d46447261beba5caf3a78d2a",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 31,
-        "month": "julio",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b2668af87f2cf4a0400e86c0c1b04132",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 3,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "fc37d2eab3f22871d068964bca34ae50",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 4,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "1b528bf2a5c629715bee5c9fb3e4d344",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 5,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "035590b8a14d776849d4a6bbab19cb02",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 6,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4ea24f20a82069d4d5a0b7a10d76c723",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 7,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e6bf3f9058066106e6283e5ec8358726",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 10,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "5b6ec69aeb03fc2ed39c43e571c6a5b1",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 11,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c4c60a8bde99ba833a7190a42fbab596",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 12,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4cd0f15a3bc4a88ca4625f098ac69981",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 13,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "d6c20cb00d8aac844ed612f00a9cadf3",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 14,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "646e57b6f45c15f8d3dfbc093b68dba3",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 17,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ebaa04690aadb9d7dafefb0663f24e2e",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 18,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "288f2ef87b75d29fa6ba63abcf723a1b",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 19,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "7d68d398838b7de883e45732c6f4b850",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 20,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "8a3c99dda4984f7747035bf899c24d20",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 21,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "3d23189c33b5ec063aa53bda0cd96c1c",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 24,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "bf05d3742e7b09d882ea93d220d1cb51",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 25,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ec60dfa125e3c0548ebb670b74bbf5b6",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 26,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "717f884e6dfceea7cc3a2781f5fdd4e8",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 27,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "532621387c0b24926d30939a2d75d06c",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 28,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e8511799e58ea4fa96bd06de7289374c",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 31,
-        "month": "agosto",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "662c2932d9f72b0911f037a3ceb7fcef",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 1,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "99c12936f88b620c831a0ed10d2b4528",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 2,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c089d2844ef900680832142c7a8331c8",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 3,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4b7881a17b3dc1672c13cc5359cbdffd",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 4,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "3b3f3d3699590066738bec3d2a7881c7",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 7,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e4e829075858078d47bce3e35feb0720",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 8,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e27b1d28764d383be93170cafe064e26",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 9,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "2dfce7a9b0c6e7366c47237611e7e790",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 10,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6411600df901232a63a8a200776fac74",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 11,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6cb7f50ef07cf49b2bb406446447d337",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 14,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "01c42f8f11ae772414aef0e317562f20",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 15,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "36109e8e3ebb0b9ee298ebf53bc20e27",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 16,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "769142a14b1c472c97e5e2391f202e9f",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 17,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "a5d5ac6c4b0faeaef85cab9de04f97dd",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 18,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "54efa4d70940fd33114fd7934c60ed32",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 21,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "3844ce1a78cf93502954f568c1885caf",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 22,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b9dc9bbdb61dc690d249d8b0a95e5fa6",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 23,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "b79418ae96df926dd83fde83df42e822",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 24,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "0b2a00d70c32913293766aa3905fcada",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 25,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "25f6a132171c5c538e8dd2ff4ea59f43",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 28,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "4f0a89478846c478cab15466df5ab908",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 29,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ed8aff4422bac887fd14e8cef5bf502b",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 30,
-        "month": "septiembre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "273ed59613f3d948bda2e4e3a6de8100",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 1,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "6cccb69e5d27d6987344ba8c437e088b",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 2,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e9f6a2a201531044c2a9ebafc911007b",
-            "name": "Dr. Jesús Santos del Cura",
-            "address": "C. Real, 3, 40220 Olombrada, Segovia",
-            "phone": "921164327",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "lunes",
-        "day": 5,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "ed57ea5bd190dcbd6e8d806ac9fe4dff",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 6,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "a3b24f9afbd56fadcfe9c5777479f096",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 7,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "9d288772b3335fb79089b3e1dbdd18cd",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 8,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "e4ad0a4d3ee05a25df7377a2b16e4d97",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 9,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "44ca15a50c235e9f3e4de3da26bb63da",
-            "name": "Farmacia Paloma María Prieto Pérez",
-            "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "martes",
-        "day": 13,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "816afa133f2cd37f952391f313613c41",
-            "name": "Farmacia Fuentidueña",
-            "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
-            "phone": "921533630",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "miércoles",
-        "day": 14,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "43ae03a0e6d2a9e24207dac513350181",
-            "name": "Farmacia Gloria Hernando Bayón",
-            "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
-            "phone": "921527501",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "jueves",
-        "day": 15,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "5f94ddd46e0f6fb99df4bab793e7866f",
-            "name": "Farmacia Lcdo Burgos Burgos Isabel",
-            "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
-            "phone": "921148190",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
-    {
-      "date": {
-        "dayOfWeek": "viernes",
-        "day": 16,
-        "month": "octubre",
-        "year": 2026
-      },
-      "shifts": {
-        "ruralDaytime": [
-          {
-            "id": "c4f1c7afbdc2943a3eb18a812497ce85",
-            "name": "Farmacia Lcdo Gallego Esteban Fernando",
-            "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
-            "phone": "No disponible",
-            "additionalInfo": null
-          }
-        ]
-      }
-    },
     {
       "date": {
         "dayOfWeek": "lunes",
@@ -1333,7 +22,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1352,7 +43,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1371,7 +64,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1390,7 +85,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1409,7 +106,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -1428,7 +127,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -1447,7 +148,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1466,7 +169,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1485,7 +190,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1504,7 +211,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1523,7 +232,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -1542,7 +253,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1561,7 +274,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1580,7 +295,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1599,7 +316,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1618,7 +337,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -1637,7 +358,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -1656,7 +379,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1675,7 +400,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1694,7 +421,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1713,7 +442,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1732,7 +463,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -1751,7 +484,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -1770,7 +505,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1789,7 +526,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1808,7 +547,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1827,7 +568,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1846,7 +589,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -1865,7 +610,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -1884,7 +631,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -1903,7 +652,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1922,7 +673,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -1941,7 +694,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -1960,7 +715,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -1979,7 +736,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -1998,7 +757,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2017,7 +778,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -2036,7 +799,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -2055,7 +820,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -2074,7 +841,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -2093,7 +862,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -2112,7 +883,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2131,7 +904,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -2150,7 +925,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -2169,7 +946,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -2188,7 +967,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -2207,7 +988,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2226,7 +1009,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -2245,7 +1030,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -2264,7 +1051,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -2283,7 +1072,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -2302,7 +1093,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2321,7 +1114,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -2340,7 +1135,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -2359,7 +1156,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -2378,7 +1177,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -2397,7 +1198,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2416,7 +1219,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }
@@ -2435,7 +1240,9 @@
             "name": "Farmacia Lcdo Burgos Burgos Isabel",
             "address": "Plaza Mayor, 1, 40353 Hontalbilla, Segovia",
             "phone": "921148190",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.345938,
+            "longitude": -4.122438
           }
         ]
       }
@@ -2454,7 +1261,9 @@
             "name": "Farmacia Lcdo Gallego Esteban Fernando",
             "address": "C. Povedas, 6, 40359 Torrecilla del Pinar, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.37411699524201,
+            "longitude": -4.039258640265552
           }
         ]
       }
@@ -2473,7 +1282,9 @@
             "name": "Farmacia Paloma María Prieto Pérez",
             "address": "S N, Plaza Mercado, 0, 40355 Fuentesaúco de Fuentidueña, Segovia",
             "phone": "No disponible",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.424813,
+            "longitude": -4.060938
           }
         ]
       }
@@ -2492,7 +1303,9 @@
             "name": "Dr. Jesús Santos del Cura",
             "address": "C. Real, 3, 40220 Olombrada, Segovia",
             "phone": "921164327",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.415437,
+            "longitude": -4.159563
           }
         ]
       }
@@ -2511,7 +1324,9 @@
             "name": "Farmacia Fuentidueña",
             "address": "C. Real, 40, 40357 Fuentidueña, Segovia",
             "phone": "921533630",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.443188,
+            "longitude": -3.981812
           }
         ]
       }
@@ -2530,7 +1345,9 @@
             "name": "Farmacia Gloria Hernando Bayón",
             "address": "C. Manuel Sanz Burgoa, 14, 40237 Sacramenia, Segovia",
             "phone": "921527501",
-            "additionalInfo": null
+            "additionalInfo": null,
+            "latitude": 41.492437,
+            "longitude": -3.961562
           }
         ]
       }

@@ -17,6 +17,11 @@ export interface Pharmacy {
   address: string;
   phone: string;
   additionalInfo: string | null;
+  /** Merged in from catalog/pharmacies.json at publish time; omitted when the catalog has no
+   * coordinates for this pharmacy. Optional so older app builds, which don't know these
+   * keys, keep decoding the payload unchanged. */
+  latitude?: number;
+  longitude?: number;
 }
 
 /** Keyed by DutyTimeSpan name, e.g. "capitalDay", "capitalNight", "fullDay". */

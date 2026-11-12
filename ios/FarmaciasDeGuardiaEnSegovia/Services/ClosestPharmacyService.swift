@@ -82,14 +82,14 @@ class ClosestPharmacyService {
     
     enum ClosestPharmacyError: LocalizedError {
         case noPharmaciesOnDuty
-        case geocodingFailed
+        case pharmacyLocationsUnavailable
         case noLocationPermission
-        
+
         var errorDescription: String? {
             switch self {
             case .noPharmaciesOnDuty:
                 return "No hay farmacias de guardia disponibles en este momento"
-            case .geocodingFailed:
+            case .pharmacyLocationsUnavailable:
                 return "No se pudo determinar la ubicación de las farmacias"
             case .noLocationPermission:
                 return "Se necesita acceso a la ubicación para encontrar la farmacia más cercana"
@@ -214,17 +214,14 @@ class ClosestPharmacyService {
         // Calculate driving routes and find the closest
         var routeResults: [(result: ClosestPharmacyResult, distance: CLLocationDistance)] = []
         
-        // Get coordinates for all pharmacies first
+        // Coordinates come from the server's pharmacy catalog; a pharmacy without them can't be routed to
         var pharmacyCoordinates: [(pharmacy: Pharmacy, region: Region, zbs: ZBS?, timeSpan: DutyTimeSpan, coordinates: CLLocation)] = []
-        
+
         for (pharmacy, region, zbs, timeSpan) in allOnDutyPharmacies {
-            DebugConfig.debugPrint("� Getting coordinates for: \(pharmacy.name)")
-            
-            if let coordinates = await GeocodingService.getCoordinatesForPharmacy(pharmacy) {
+            if let coordinates = pharmacy.location {
                 pharmacyCoordinates.append((pharmacy, region, zbs, timeSpan, coordinates))
-                DebugConfig.debugPrint("   ✅ Coordinates obtained for \(pharmacy.name)")
             } else {
-                DebugConfig.debugPrint("   ❌ Could not get coordinates for: \(pharmacy.name)")
+                DebugConfig.debugPrint("   ❌ No catalog coordinates for: \(pharmacy.name) (\(pharmacy.address))")
             }
         }
         
@@ -261,7 +258,7 @@ class ClosestPharmacyService {
         
         guard let closest = routeResults.first else {
             DebugConfig.debugPrint("❌ Could not calculate routes to any pharmacies")
-            throw ClosestPharmacyError.geocodingFailed
+            throw ClosestPharmacyError.pharmacyLocationsUnavailable
         }
         
         DebugConfig.debugPrint("🎯 DRIVING WINNER: \(closest.result.pharmacy.name) at \(closest.result.formattedDistance), \(closest.result.formattedTravelTime) from \(closest.result.regionDisplayName)")

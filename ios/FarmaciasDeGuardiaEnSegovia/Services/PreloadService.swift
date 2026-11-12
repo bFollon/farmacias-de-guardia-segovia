@@ -105,11 +105,9 @@ class PreloadService: ObservableObject {
             try? await Task.sleep(nanoseconds: 150_000_000)
         }
 
-        // Perform coordinate cache maintenance
         await MainActor.run {
             loadingProgress = "Finalizando..."
         }
-        GeocodingService.performMaintenanceCleanup()
 
         DebugConfig.debugPrint("🎉 Preload completed!")
 
